@@ -13,10 +13,6 @@
             <!--wichtig-->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:h2:./testDB.h2" /> <!-- Datenbank name -->
-
-
-
-
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="none" />-->
             <property name="show_sql" value="true"/>
