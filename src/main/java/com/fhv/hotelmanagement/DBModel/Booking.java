@@ -1,9 +1,10 @@
-package com.fhv.hotelmanagement.DBmodel;
+package com.fhv.hotelmanagement.DBModel;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "booking")
@@ -19,6 +20,8 @@ public class Booking {
     private String BillingPostalCode;
     private String BillingCity;
     private String BillingCountry;
+    private ArrayList<BookedRoomCategory> bookedRoomCategories;
+    private ArrayList<BookedRoom> bookedRooms;
 
     @Id
     @Column (name = "booking_number")
@@ -119,5 +122,23 @@ public class Booking {
 
     public void setBillingCountry(String billingCountry) {
         BillingCountry = billingCountry;
+    }
+
+    @OneToMany (mappedBy = "booking_number")
+    public ArrayList<BookedRoomCategory> getBookedRoomCategories() {
+        return bookedRoomCategories;
+    }
+
+    public void setBookedRoomCategories(ArrayList<BookedRoomCategory> bookedRoomCategories) {
+        this.bookedRoomCategories = bookedRoomCategories;
+    }
+
+    @OneToMany (mappedBy = "booking_number")
+    public ArrayList<BookedRoom> getBookedRooms() {
+        return bookedRooms;
+    }
+
+    public void setBookedRooms(ArrayList<BookedRoom> bookedRooms) {
+        this.bookedRooms = bookedRooms;
     }
 }

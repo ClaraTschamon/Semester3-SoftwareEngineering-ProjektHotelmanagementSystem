@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DBmodel;
+package com.fhv.hotelmanagement.DBModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

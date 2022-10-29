@@ -1,11 +1,9 @@
-package com.fhv.hotelmanagement.DBmodel;
+package com.fhv.hotelmanagement.DBModel;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "customer")
@@ -24,6 +22,7 @@ public class Customer {
     private String country;
     private String creditCardNumber;
     private Boolean saved;
+    private ArrayList<Booking> bookings;
 
     @Id
     @Column (name = "customer_number")
@@ -150,5 +149,14 @@ public class Customer {
 
     public void setSaved(Boolean saved) {
         this.saved = saved;
+    }
+
+    @OneToMany (mappedBy = "customer_number")
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
