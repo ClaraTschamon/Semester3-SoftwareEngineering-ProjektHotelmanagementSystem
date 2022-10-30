@@ -25,7 +25,7 @@ public class Customer {
     private ArrayList<Booking> bookings;
 
     @Id
-    @Column (name = "customer_number")
+    @Column(name = "customer_number")
     public int getNumber() {
         return number;
     }
@@ -34,7 +34,7 @@ public class Customer {
         this.number = number;
     }
 
-    @Column (name = "customer_first_name")
+    @Column(name = "customer_first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -43,7 +43,7 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    @Column (name = "customer_last_name")
+    @Column(name = "customer_last_name")
     public String getLastName() {
         return lastName;
     }
@@ -52,7 +52,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    @Column (name = "customer_date_of_birth")
+    @Column(name = "customer_date_of_birth")
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -61,7 +61,7 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @Column (name = "customer_nationality")
+    @Column(name = "customer_nationality")
     public String getNationality() {
         return nationality;
     }
@@ -70,7 +70,7 @@ public class Customer {
         this.nationality = nationality;
     }
 
-    @Column (name = "customer_phone_number")
+    @Column(name = "customer_phone_number")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -79,7 +79,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    @Column (name = "customer_email_address")
+    @Column(name = "customer_email_address")
     public String getEmail() {
         return email;
     }
@@ -88,7 +88,7 @@ public class Customer {
         this.email = email;
     }
 
-    @Column (name = "customer_street")
+    @Column(name = "customer_street")
     public String getStreet() {
         return street;
     }
@@ -97,7 +97,7 @@ public class Customer {
         this.street = street;
     }
 
-    @Column (name = "customer_house_number")
+    @Column(name = "customer_house_number")
     public String getHouseNumber() {
         return houseNumber;
     }
@@ -106,7 +106,7 @@ public class Customer {
         this.houseNumber = houseNumber;
     }
 
-    @Column (name = "customer_postal_code")
+    @Column(name = "customer_postal_code")
     public String getPostalCode() {
         return postalCode;
     }
@@ -115,7 +115,7 @@ public class Customer {
         this.postalCode = postalCode;
     }
 
-    @Column (name = "customer_city")
+    @Column(name = "customer_city")
     public String getCity() {
         return city;
     }
@@ -124,7 +124,7 @@ public class Customer {
         this.city = city;
     }
 
-    @Column (name = "customer_country")
+    @Column(name = "customer_country")
     public String getCountry() {
         return country;
     }
@@ -133,7 +133,7 @@ public class Customer {
         this.country = country;
     }
 
-    @Column (name = "customer_credit_card_number")
+    @Column(name = "customer_credit_card_number")
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
@@ -142,7 +142,7 @@ public class Customer {
         this.creditCardNumber = creditCardNumber;
     }
 
-    @Column (name = "saved")
+    @Column(name = "saved")
     public Boolean getSaved() {
         return saved;
     }
@@ -151,7 +151,7 @@ public class Customer {
         this.saved = saved;
     }
 
-    @OneToMany (mappedBy = "customer_number")
+    @OneToMany(mappedBy = "customer_number")
     public ArrayList<Booking> getBookings() {
         return bookings;
     }

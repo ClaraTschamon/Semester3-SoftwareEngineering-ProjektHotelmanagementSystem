@@ -14,7 +14,7 @@ public class RoomCategory {
     private BigDecimal pricePerNight;
 
     @Id
-    @Column (name = "room_category_name")
+    @Column(name = "room_category_name")
     public String getName() {
         return name;
     }
@@ -23,7 +23,7 @@ public class RoomCategory {
         this.name = name;
     }
 
-    @Column (name = "price_per_night")
+    @Column(name = "price_per_night")
     public BigDecimal getPricePerNight() {
         return pricePerNight;
     }

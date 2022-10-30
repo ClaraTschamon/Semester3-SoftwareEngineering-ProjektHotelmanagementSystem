@@ -27,4 +27,5 @@ public class Room {
     public void setCategory(RoomCategory category) {
         this.category = category;
     }
+
 }

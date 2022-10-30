@@ -24,7 +24,7 @@ public class Booking {
     private ArrayList<BookedRoom> bookedRooms;
 
     @Id
-    @Column (name = "booking_number")
+    @Column(name = "booking_number")
     public int getNumber() {
         return number;
     }
@@ -34,7 +34,7 @@ public class Booking {
     }
 
     @ManyToOne
-    @JoinColumn (name = "customer_number")
+    @JoinColumn(name = "customer_number")
     public Customer getCustomer() {
         return customer;
     }
@@ -43,7 +43,7 @@ public class Booking {
         this.customer = customer;
     }
 
-    @Column (name = "arrival_date")
+    @Column(name = "arrival_date")
     public LocalDate getArrivalDate() {
         return arrivalDate;
     }
@@ -52,7 +52,7 @@ public class Booking {
         this.arrivalDate = arrivalDate;
     }
 
-    @Column (name = "check_in_datetime")
+    @Column(name = "check_in_datetime")
     public LocalDateTime getCheckInDatetime() {
         return checkInDatetime;
     }
@@ -61,7 +61,7 @@ public class Booking {
         this.checkInDatetime = checkInDatetime;
     }
 
-    @Column (name = "departure_date")
+    @Column(name = "departure_date")
     public LocalDate getDepartureDate() {
         return departureDate;
     }
@@ -70,7 +70,7 @@ public class Booking {
         this.departureDate = departureDate;
     }
 
-    @Column (name = "check_out_datetime")
+    @Column(name = "check_out_datetime")
     public LocalDateTime getCheckOutDatetime() {
         return checkOutDatetime;
     }
@@ -79,7 +79,7 @@ public class Booking {
         this.checkOutDatetime = checkOutDatetime;
     }
 
-    @Column (name = "billing_street")
+    @Column(name = "billing_street")
     public String getBillingStreet() {
         return billingStreet;
     }
@@ -88,7 +88,7 @@ public class Booking {
         this.billingStreet = billingStreet;
     }
 
-    @Column (name = "billing_house_number")
+    @Column(name = "billing_house_number")
     public String getBillingHouseNumber() {
         return billingHouseNumber;
     }
@@ -97,7 +97,7 @@ public class Booking {
         this.billingHouseNumber = billingHouseNumber;
     }
 
-    @Column (name = "billing_postal_code")
+    @Column(name = "billing_postal_code")
     public String getBillingPostalCode() {
         return BillingPostalCode;
     }
@@ -106,7 +106,7 @@ public class Booking {
         BillingPostalCode = billingPostalCode;
     }
 
-    @Column (name = "billing_city")
+    @Column(name = "billing_city")
     public String getBillingCity() {
         return BillingCity;
     }
@@ -115,7 +115,7 @@ public class Booking {
         BillingCity = billingCity;
     }
 
-    @Column (name = "billing_country")
+    @Column(name = "billing_country")
     public String getBillingCountry() {
         return BillingCountry;
     }
@@ -124,7 +124,7 @@ public class Booking {
         BillingCountry = billingCountry;
     }
 
-    @OneToMany (mappedBy = "booking_number")
+    @OneToMany(mappedBy = "booking_number")
     public ArrayList<BookedRoomCategory> getBookedRoomCategories() {
         return bookedRoomCategories;
     }
@@ -133,7 +133,7 @@ public class Booking {
         this.bookedRoomCategories = bookedRoomCategories;
     }
 
-    @OneToMany (mappedBy = "booking_number")
+    @OneToMany(mappedBy = "booking_number")
     public ArrayList<BookedRoom> getBookedRooms() {
         return bookedRooms;
     }

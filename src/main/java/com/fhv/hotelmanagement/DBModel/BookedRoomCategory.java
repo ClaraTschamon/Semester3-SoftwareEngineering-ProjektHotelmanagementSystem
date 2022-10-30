@@ -14,7 +14,7 @@ public class BookedRoomCategory {
 
     @Id
     @ManyToOne
-    @JoinColumn (name = "booking_number")
+    @JoinColumn(name = "booking_number")
     public Booking getBooking() {
         return booking;
     }
@@ -25,7 +25,7 @@ public class BookedRoomCategory {
 
     @Id
     @ManyToOne
-    @JoinColumn (name = "room_category_name")
+    @JoinColumn(name = "room_category_name")
     public RoomCategory getRoomCategory() {
         return roomCategory;
     }
@@ -34,7 +34,7 @@ public class BookedRoomCategory {
         this.roomCategory = roomCategory;
     }
 
-    @Column (name = "booking_price_per_night")
+    @Column(name = "booking_price_per_night")
     public BigDecimal getPricePerNight() {
         return pricePerNight;
     }
@@ -43,7 +43,7 @@ public class BookedRoomCategory {
         this.pricePerNight = pricePerNight;
     }
 
-    @Column (name = "amount_room_category")
+    @Column(name = "amount_room_category")
     public int getAmount() {
         return amount;
     }
