@@ -25,7 +25,7 @@ public class BookedRoom {
 
     @Id
     @ManyToOne
-    @JoinColumn (name = "room_number")
+    @JoinColumn(name = "room_number")
     public Room getRoom() {
         return room;
     }
@@ -34,7 +34,7 @@ public class BookedRoom {
         this.room = room;
     }
 
-    @Column (name = "from_date")
+    @Column(name = "from_date")
     public LocalDate getFromDate() {
         return fromDate;
     }
@@ -43,7 +43,7 @@ public class BookedRoom {
         this.fromDate = fromDate;
     }
 
-    @Column (name = "to_date")
+    @Column(name = "to_date")
     public LocalDate getToDate() {
         return toDate;
     }
