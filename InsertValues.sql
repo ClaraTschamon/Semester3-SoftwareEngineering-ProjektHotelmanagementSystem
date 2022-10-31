@@ -1,6 +1,5 @@
 //Testdaten so schreiben, dass man kein Hartkodiertes Datum
 //hat, sondern immer das aktuelle Datum eingefügt wird.
-//z.B. mit Date (?)
 DELETE FROM ROOM
 WHERE TRUE;
 DELETE FROM ROOM_CATEGORY

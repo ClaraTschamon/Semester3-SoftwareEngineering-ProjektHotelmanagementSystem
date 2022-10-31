@@ -9,6 +9,6 @@ public class BrokerBookedRoom extends BaseBroker<BookedRoom>{
     @Override
     public List<BookedRoom> getAll() {
         EntityManager entityManager = factory.createEntityManager();
-        return (List<BookedRoom>) entityManager.createQuery("from booked_room").getResultList();
+        return (List<BookedRoom>) entityManager.createQuery("from BookedRoom").getResultList();
     }
 }

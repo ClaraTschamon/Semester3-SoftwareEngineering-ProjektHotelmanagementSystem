@@ -1,54 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DdlMappings">
-    <mapping uuid="3e3e21ba-6d92-476e-b6e0-9bfadacf6a6d" name="DDL data source Mapping">
-      <data-sources ddl="eec699f3-d9b2-414a-b205-5edd155f7a3f" />
+    <mapping uuid="3657ccc5-0b12-4a2a-91f7-615766f6a984" name="DDL Mapping">
+      <data-sources db="2e91c201-09b0-4b77-b9aa-539c8fd9c73a" ddl="b2d1177a-9ba3-43db-ada2-a673d91caeb3" />
     </mapping>
-    <mapping uuid="9cf3127b-f91d-4fae-8ba5-f27020f68b6c" name="HotelmanagementDB Mapping">
-      <data-sources db="2e91c201-09b0-4b77-b9aa-539c8fd9c73a" ddl="1aaee795-eb0b-466d-a796-c300de0f6436" />
-    </mapping>
-<<<<<<< Updated upstream
-  </component>
-  <component name="SqlDataSourceStorage">
-    <option name="dataSources">
-      <list>
-        <State>
-          <option name="id" value="1aaee795-eb0b-466d-a796-c300de0f6436" />
-          <option name="name" value="HotelmanagementDB (DDL)" />
-          <option name="languageId" value="H2" />
-          <option name="urls">
-            <array>
-              <option value="file://$PROJECT_DIR$/HotelmanagementDDL.sql" />
-            </array>
-          </option>
-        </State>
-      </list>
-    </option>
-=======
-    <mapping uuid="3e3e21ba-6d92-476e-b6e0-9bfadacf6a6d" name="DDL data source Mapping">
-      <data-sources ddl="eec699f3-d9b2-414a-b205-5edd155f7a3f" />
-    </mapping>
-    <mapping uuid="9cf3127b-f91d-4fae-8ba5-f27020f68b6c" name="HotelmanagementDB Mapping">
-      <data-sources db="2e91c201-09b0-4b77-b9aa-539c8fd9c73a" ddl="1aaee795-eb0b-466d-a796-c300de0f6436" />
-    </mapping>
-    <mapping uuid="3e3e21ba-6d92-476e-b6e0-9bfadacf6a6d" name="DDL data source Mapping">
-      <data-sources ddl="eec699f3-d9b2-414a-b205-5edd155f7a3f" />
-    </mapping>
-    <mapping uuid="9cf3127b-f91d-4fae-8ba5-f27020f68b6c" name="HotelmanagementDB Mapping">
-      <data-sources db="2e91c201-09b0-4b77-b9aa-539c8fd9c73a" ddl="1aaee795-eb0b-466d-a796-c300de0f6436" />
-    </mapping>
-    <mapping uuid="3e3e21ba-6d92-476e-b6e0-9bfadacf6a6d" name="DDL data source Mapping">
-      <data-sources ddl="eec699f3-d9b2-414a-b205-5edd155f7a3f" />
-    </mapping>
-    <mapping uuid="9cf3127b-f91d-4fae-8ba5-f27020f68b6c" name="HotelmanagementDB Mapping">
-      <data-sources db="2e91c201-09b0-4b77-b9aa-539c8fd9c73a" ddl="1aaee795-eb0b-466d-a796-c300de0f6436" />
-    </mapping>
-    <mapping uuid="3e3e21ba-6d92-476e-b6e0-9bfadacf6a6d" name="DDL data source Mapping">
-      <data-sources ddl="eec699f3-d9b2-414a-b205-5edd155f7a3f" />
-    </mapping>
-    <mapping uuid="9cf3127b-f91d-4fae-8ba5-f27020f68b6c" name="HotelmanagementDB Mapping">
-      <data-sources db="2e91c201-09b0-4b77-b9aa-539c8fd9c73a" ddl="1aaee795-eb0b-466d-a796-c300de0f6436" />
-    </mapping>
->>>>>>> Stashed changes
   </component>
 </project>

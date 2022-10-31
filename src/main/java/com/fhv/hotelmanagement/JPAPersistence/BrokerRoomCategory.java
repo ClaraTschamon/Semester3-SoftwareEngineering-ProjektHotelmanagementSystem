@@ -10,6 +10,6 @@ public class BrokerRoomCategory extends BaseBroker<RoomCategory> {
 
     public List<RoomCategory> getAll() {
         EntityManager entityManager = factory.createEntityManager();
-        return (List<RoomCategory>) entityManager.createQuery("from room_category").getResultList();
+        return (List<RoomCategory>) entityManager.createQuery("from RoomCategory").getResultList();
     }
 }

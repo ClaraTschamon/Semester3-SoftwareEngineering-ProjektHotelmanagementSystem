@@ -10,6 +10,6 @@ public class BrokerCustomer extends BaseBroker<Customer>{
     @Override
     public List<Customer> getAll() {
         EntityManager entityManager = factory.createEntityManager();
-        return (List<Customer>) entityManager.createQuery("from customer").getResultList();
+        return (List<Customer>) entityManager.createQuery("from Customer").getResultList();
     }
 }
