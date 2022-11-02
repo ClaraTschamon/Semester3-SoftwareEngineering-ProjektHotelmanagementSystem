@@ -27,19 +27,22 @@ public class MainApplication extends Application {
         double width = Double.parseDouble(properties.getProperty("window.width"));
         double height = Double.parseDouble(properties.getProperty("window.height"));
 
-        URL fxmlURL = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\fhv\\hotelmanagement\\FXML\\main-view.fxml").toUri().toURL();
+        URL fxmlURL = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\fhv\\hotelmanagement\\FXML\\Walk-In.fxml").toUri().toURL();
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
         Scene scene = new Scene(fxmlLoader.load(), width, height);
         stage.setTitle("Sunway Hotel");
         stage.setScene(scene);
         stage.show();
 
+        /*
         //TestDB
         DBFacade dbf = new DBFacade();
         List<RoomCategory> roomCategories = dbf.getAllRoomCategories();
         for(RoomCategory r : roomCategories){
             System.out.println(r.toString());
         }
+
+         */
     }
 
     public static void main(String[] args) {
