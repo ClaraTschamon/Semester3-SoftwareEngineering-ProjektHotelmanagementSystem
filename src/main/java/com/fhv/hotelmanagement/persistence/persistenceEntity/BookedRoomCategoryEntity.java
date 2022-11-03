@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DBModel;
+package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
@@ -6,31 +6,42 @@ import java.math.BigDecimal;
 
 @Entity
 @Table (name = "booked_room_category")
-public class BookedRoomCategory {
-    private Booking booking;
-    private RoomCategory roomCategory;
+public class BookedRoomCategoryEntity {
+
+    private BookingEntity booking;
+    private RoomCategoryEntity roomCategory;
     private BigDecimal pricePerNight;
     private int amount;
+
+    public BookedRoomCategoryEntity(){};
+
+    public BookedRoomCategoryEntity(BookingEntity booking, RoomCategoryEntity roomCategory,
+                                    BigDecimal pricePerNight, int amount) {
+        this.booking = booking;
+        this.roomCategory = roomCategory;
+        this.pricePerNight = pricePerNight;
+        this.amount = amount;
+    }
 
     @Id
     @ManyToOne
     @JoinColumn(name = "booking_number")
-    public Booking getBooking() {
+    public BookingEntity getBooking() {
         return booking;
     }
 
-    public void setBooking(Booking booking) {
+    public void setBooking(BookingEntity booking) {
         this.booking = booking;
     }
 
     @Id
     @ManyToOne
     @JoinColumn(name = "room_category_name")
-    public RoomCategory getRoomCategory() {
+    public RoomCategoryEntity getRoomCategory() {
         return roomCategory;
     }
 
-    public void setRoomCategory(RoomCategory roomCategory) {
+    public void setRoomCategory(RoomCategoryEntity roomCategory) {
         this.roomCategory = roomCategory;
     }
 

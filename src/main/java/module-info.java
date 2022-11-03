@@ -9,8 +9,8 @@ module com.fhv.hotelmanagement {
     requires org.hibernate.commons.annotations;
     requires net.bytebuddy;
 
-    exports com.fhv.hotelmanagement.controller;
-    opens com.fhv.hotelmanagement.controller to javafx.fxml;
+    exports com.fhv.hotelmanagement.controller.viewController;
+    opens com.fhv.hotelmanagement.controller.viewController to javafx.fxml;
     exports com.fhv.hotelmanagement;
     opens com.fhv.hotelmanagement to javafx.fxml;
 }

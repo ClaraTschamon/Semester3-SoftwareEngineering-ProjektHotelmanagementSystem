@@ -1,8 +1,12 @@
 package com.fhv.hotelmanagement.domainModel;
 
+import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
+
 import java.time.LocalDate;
 
 public class Customer {
+
+    private CustomerEntity entity;
     private int number;
     private String firstName;
     private String lastName;
@@ -14,17 +18,23 @@ public class Customer {
     private String creditCardNumber;
     private Boolean saved;
 
-    public Customer(int number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
-                    String phoneNumber, String email, Address address, String creditCardNumber, Boolean saved) {
-        this.number = number;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.nationality = nationality;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.creditCardNumber = creditCardNumber;
-        this.saved = saved;
+    //bookings Liste??
+
+    public Customer(CustomerEntity entity) {
+        this.entity = entity;
+        this.number = entity.getNumber();
+        this.firstName = entity.getFirstName();
+        this.lastName = entity.getLastName();
+        this.dateOfBirth = entity.getDateOfBirth();
+        this.nationality = entity.getNationality();
+        this.phoneNumber = entity.getPhoneNumber();
+        this.email = entity.getEmail();
+        this.address = new Address(entity.getStreet(), entity.getHouseNumber(), entity.getPostalCode(), entity.getCity(), entity.getCountry());
+        this.creditCardNumber = entity.getCreditCardNumber();
+        this.saved = entity.getSaved();
+    }
+
+    public CustomerEntity getEntity(){
+        return entity;
     }
 }

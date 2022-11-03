@@ -1,17 +1,28 @@
 package com.fhv.hotelmanagement.domainModel;
 
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
+
 import java.math.BigDecimal;
 
 public class BookedRoomCategory {
-    private Booking booking;
-    private RoomCategory roomCategory;
+
+    private BookedRoomCategoryEntity entity;
+    private BookingEntity booking;
+    private RoomCategoryEntity roomCategory;
     private BigDecimal pricePerNight;
     private int amount;
 
-    public BookedRoomCategory(Booking booking, RoomCategory roomCategory, BigDecimal pricePerNight, int amount) {
-        this.booking = booking;
-        this.roomCategory = roomCategory;
-        this.pricePerNight = pricePerNight;
-        this.amount = amount;
+    public BookedRoomCategory(BookedRoomCategoryEntity entity) {
+        this.entity = entity;
+        this.booking = entity.getBooking();
+        this.roomCategory = entity.getRoomCategory();
+        this.pricePerNight = entity.getPricePerNight();
+        this.amount = entity.getAmount();
+    }
+
+    public BookedRoomCategoryEntity getEntity(){
+        return entity;
     }
 }

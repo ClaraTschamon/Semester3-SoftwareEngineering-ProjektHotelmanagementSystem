@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DBModel;
+package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "customer")
-public class Customer {
+public class CustomerEntity {
     private int number;
     private String firstName;
     private String lastName;
@@ -22,7 +22,31 @@ public class Customer {
     private String country;
     private String creditCardNumber;
     private Boolean saved;
-    private ArrayList<Booking> bookings;
+    private ArrayList<BookingEntity> bookings;
+
+    public CustomerEntity(){};
+
+    public CustomerEntity(int number, String firstName, String lastName,
+                          LocalDate dateOfBirth, String nationality, String phoneNumber,
+                          String email, String street, String houseNumber, String postalCode,
+                          String city, String country, String creditCardNumber, Boolean saved,
+                          ArrayList<BookingEntity> bookings) {
+        this.number = number;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+        this.creditCardNumber = creditCardNumber;
+        this.saved = saved;
+        this.bookings = bookings;
+    }
 
     @Id
     @Column(name = "customer_number")
@@ -152,11 +176,11 @@ public class Customer {
     }
 
     @OneToMany(mappedBy = "customer_number")
-    public ArrayList<Booking> getBookings() {
+    public ArrayList<BookingEntity> getBookings() {
         return bookings;
     }
 
-    public void setBookings(ArrayList<Booking> bookings) {
+    public void setBookings(ArrayList<BookingEntity> bookings) {
         this.bookings = bookings;
     }
 }

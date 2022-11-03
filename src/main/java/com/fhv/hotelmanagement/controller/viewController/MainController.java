@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.controller;
+package com.fhv.hotelmanagement.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import javafx.fxml.FXML;

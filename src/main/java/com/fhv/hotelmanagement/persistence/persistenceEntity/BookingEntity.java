@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DBModel;
+package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "booking")
-public class Booking {
+public class BookingEntity {
     private int number;
-    private Customer customer;
+    private CustomerEntity customer;
     private LocalDate arrivalDate;
     private LocalDateTime checkInDatetime;
     private LocalDate departureDate;
@@ -20,8 +20,32 @@ public class Booking {
     private String BillingPostalCode;
     private String BillingCity;
     private String BillingCountry;
-    private ArrayList<BookedRoomCategory> bookedRoomCategories;
-    private ArrayList<BookedRoom> bookedRooms;
+    private ArrayList<BookedRoomCategoryEntity> bookedRoomCategories;
+    private ArrayList<BookedRoomEntity> bookedRooms;
+
+    public BookingEntity(){};
+
+    public BookingEntity(int number, CustomerEntity customer, LocalDate arrivalDate,
+                         LocalDateTime checkInDatetime, LocalDate departureDate,
+                         LocalDateTime checkOutDatetime, String billingStreet,
+                         String billingHouseNumber, String billingPostalCode,
+                         String billingCity, String billingCountry,
+                         ArrayList<BookedRoomCategoryEntity> bookedRoomCategories,
+                         ArrayList<BookedRoomEntity> bookedRooms) {
+        this.number = number;
+        this.customer = customer;
+        this.arrivalDate = arrivalDate;
+        this.checkInDatetime = checkInDatetime;
+        this.departureDate = departureDate;
+        this.checkOutDatetime = checkOutDatetime;
+        this.billingStreet = billingStreet;
+        this.billingHouseNumber = billingHouseNumber;
+        BillingPostalCode = billingPostalCode;
+        BillingCity = billingCity;
+        BillingCountry = billingCountry;
+        this.bookedRoomCategories = bookedRoomCategories;
+        this.bookedRooms = bookedRooms;
+    }
 
     @Id
     @Column(name = "booking_number")
@@ -35,11 +59,11 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "customer_number")
-    public Customer getCustomer() {
+    public CustomerEntity getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerEntity customer) {
         this.customer = customer;
     }
 
@@ -125,20 +149,20 @@ public class Booking {
     }
 
     @OneToMany(mappedBy = "booking_number")
-    public ArrayList<BookedRoomCategory> getBookedRoomCategories() {
+    public ArrayList<BookedRoomCategoryEntity> getBookedRoomCategories() {
         return bookedRoomCategories;
     }
 
-    public void setBookedRoomCategories(ArrayList<BookedRoomCategory> bookedRoomCategories) {
+    public void setBookedRoomCategories(ArrayList<BookedRoomCategoryEntity> bookedRoomCategories) {
         this.bookedRoomCategories = bookedRoomCategories;
     }
 
     @OneToMany(mappedBy = "booking_number")
-    public ArrayList<BookedRoom> getBookedRooms() {
+    public ArrayList<BookedRoomEntity> getBookedRooms() {
         return bookedRooms;
     }
 
-    public void setBookedRooms(ArrayList<BookedRoom> bookedRooms) {
+    public void setBookedRooms(ArrayList<BookedRoomEntity> bookedRooms) {
         this.bookedRooms = bookedRooms;
     }
 }
