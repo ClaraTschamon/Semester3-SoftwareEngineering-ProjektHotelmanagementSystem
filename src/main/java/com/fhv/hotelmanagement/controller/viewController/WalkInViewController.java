@@ -14,7 +14,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class WalkInController {
+public class WalkInViewController {
 
     @FXML
     private Text chooseRoom;
@@ -38,7 +38,7 @@ public class WalkInController {
     @FXML
     private void onNextButtonClicked(ActionEvent e){
         try{
-            loadPage("Walk-In2.0");
+            loadPage("Walk-In2");
         }catch(IOException exc){
             System.out.println(exc.getMessage());
         }
@@ -58,6 +58,5 @@ public class WalkInController {
         stage.setTitle("Sunway Hotel");
         stage.setScene(scene);
         stage.show();
-
     }
 }

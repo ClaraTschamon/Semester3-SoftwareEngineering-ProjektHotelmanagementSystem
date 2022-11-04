@@ -44,7 +44,7 @@ public class CustomerEntity {
         this.city = city;
         this.country = country;
         this.creditCardNumber = creditCardNumber;
-        this.saved = saved;
+        this.saved = saved; //für was steht saved??
         this.bookings = bookings;
     }
 
