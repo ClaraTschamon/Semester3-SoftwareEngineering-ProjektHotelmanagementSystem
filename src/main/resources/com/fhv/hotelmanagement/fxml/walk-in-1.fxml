@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
+                    <children>
+                        <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walk-In ">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Text>
+                        <Text fill="#c9c9c9" layoutX="96.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" &lt; Gast anlegen">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Text>
+                        <Text fill="#c9c9c9" layoutX="270.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt; Zahlung auswählen">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Text>
+                    </children>
+                    <effect>
+                        <InnerShadow height="8.0" radius="1.5" width="0.0">
+                            <input>
+                                <DropShadow />
+                            </input>
+                        </InnerShadow>
+                    </effect>
+                </AnchorPane>
+                <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anreise/Abreise" wrappingWidth="234.994140625">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
+                <Text layoutX="60.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anresiedatum">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreisedatum" wrappingWidth="101.19140625">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <Text layoutX="545.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer auswählen">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
+                <Text layoutX="545.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerkategorie">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <Text layoutX="550.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmernummer">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <Button fx:id="WeiterButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#Weiter_zu_WalkIn2" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="AbbrechenButton" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#WalkIn_Abbrechen" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <DatePicker layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Anreisedatum" />
+                <DatePicker layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
+                <Text layoutX="60.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
+                <ComboBox editable="true" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Zimmerkategorie" />
+                <ComboBox editable="true" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" promptText="Zimmernummer" />
+                <ComboBox editable="true" layoutX="545.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0" promptText="Zimmerpreise" />
+                <Text layoutX="545.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreise">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <RadioButton layoutX="60.0" layoutY="425.0" mnemonicParsing="false" text="Vollpension">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </RadioButton>
+                <RadioButton layoutX="60.0" layoutY="455.0" mnemonicParsing="false" text="Halppension">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </RadioButton>
+                <RadioButton layoutX="60.0" layoutY="515.0" mnemonicParsing="false" text="Ohne Package">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </RadioButton>
+                <RadioButton layoutX="60.0" layoutY="485.0" mnemonicParsing="false" text="Nur Frühstück">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </RadioButton>
+            </children></AnchorPane>
+    </center>
+</BorderPane>
