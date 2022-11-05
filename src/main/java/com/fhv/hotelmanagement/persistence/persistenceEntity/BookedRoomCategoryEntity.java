@@ -25,7 +25,7 @@ public class BookedRoomCategoryEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "booking_number")
+    @JoinColumn(name="booking_number")
     public BookingEntity getBooking() {
         return booking;
     }

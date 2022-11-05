@@ -1,6 +1,5 @@
 package com.fhv.hotelmanagement.controller.useCaseController;
 
-public class WalkIn1UseCaseController {
-
+public class WalkIn3CaseUseCaseController {
 
 }

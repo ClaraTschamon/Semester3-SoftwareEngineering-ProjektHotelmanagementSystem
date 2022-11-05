@@ -37,7 +37,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.fhv.hotelmanagement'
-    mainClass = 'com.fhv.hotelmanagement.HelloApplication'
+    mainClass = 'com.fhv.hotelmanagement.MainApplication'
 }
 
 javafx {

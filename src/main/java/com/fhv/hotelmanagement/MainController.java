@@ -1,20 +1,44 @@
-package com.fhv.hotelmanagement.controller;
+package com.fhv.hotelmanagement;
 
 import com.fhv.hotelmanagement.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable {
     @FXML
-    private BorderPane bp;
+    private AnchorPane contentArea;
+
+
+    public void loadIntoContentArea(String resourceToLoad) throws IOException, URISyntaxException {
+        Parent fxml = FXMLLoader.load(MainApplication.class.getResource("fxml/home.fxml"));
+        if (contentArea.getChildren() != null) {
+            contentArea.getChildren().removeAll();
+        }
+        contentArea.getChildren().setAll(fxml);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            loadIntoContentArea("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /*
     @FXML
