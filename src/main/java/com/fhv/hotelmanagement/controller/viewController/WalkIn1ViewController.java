@@ -14,7 +14,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class WalkInViewController {
+public class WalkIn1ViewController {
 
     @FXML
     private Text chooseRoom;

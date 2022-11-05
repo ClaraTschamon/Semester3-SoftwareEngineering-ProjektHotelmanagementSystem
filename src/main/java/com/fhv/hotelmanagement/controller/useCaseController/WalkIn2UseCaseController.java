@@ -7,8 +7,7 @@ import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 
 import java.util.Optional;
 
-public class CreateCustomerUseCaseController {
-
+public class WalkIn2UseCaseController {
     public Customer getCustomer(int number) throws CustomerDoesNotExistException {
 
         Optional<Customer> customer = PersistenceFacade.instance().getCustomer(number);

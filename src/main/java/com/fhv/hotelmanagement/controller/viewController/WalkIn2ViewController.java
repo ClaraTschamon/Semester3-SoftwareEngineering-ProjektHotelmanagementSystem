@@ -1,8 +1,6 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.CreateCustomerUseCaseController;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -10,7 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class CreateCustomerViewController {
+public class WalkIn2ViewController {
 
     //TODO: customer date of birth wird nicht abgefragt! umändern oder aus datenbank löschen?
     //TODO: country wird nicht abgefragt... ändern oder feld aus datenbank löschen??
@@ -103,6 +101,7 @@ public class CreateCustomerViewController {
         //      (ausprobieren ob es nicht automatisch gelöscht wird)
         //home menü laden
 
+        /*
         CreateCustomerUseCaseController useCaseController = new CreateCustomerUseCaseController();
 
         CustomerEntity customerEntity = new CustomerEntity(number, firstName.getText(), lastName.getText(),
@@ -112,5 +111,7 @@ public class CreateCustomerViewController {
         number++;
 
         useCaseController.storeCustomer(customerEntity);
+
+         */
     }
 }

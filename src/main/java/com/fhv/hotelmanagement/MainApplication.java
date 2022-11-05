@@ -52,23 +52,6 @@ public class MainApplication extends Application {
         return configProperties;
     }
 
-//    public void load(String page) throws IOException {
-//
-//        InputStream input = new FileInputStream("src/main/resources/com/fhv/hotelmanagement/configurations/config.properties");
-//        Properties properties = new Properties();
-//        properties.load(input);
-//        double width = Double.parseDouble(properties.getProperty("window.width"));
-//        double height = Double.parseDouble(properties.getProperty("window.height"));
-//
-//        URL fxmlURL = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\fhv\\hotelmanagement\\fxml\\" + page + ".fxml").toUri().toURL();
-//        fxmlLoader = new FXMLLoader(fxmlURL);
-//        Parent root1 = (Parent) fxmlLoader.load();
-//        Stage stage = new Stage();
-//        stage.setTitle("Title");
-//        stage.setScene(new Scene(root1));
-//        stage.show();
-//    }
-
     public static void main(String[] args) {
         launch();
     }
