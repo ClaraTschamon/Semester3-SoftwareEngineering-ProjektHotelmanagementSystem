@@ -15,4 +15,5 @@ module com.fhv.hotelmanagement {
     opens com.fhv.hotelmanagement to javafx.fxml;
     exports com.fhv.hotelmanagement.controller;
     opens com.fhv.hotelmanagement.controller to javafx.fxml;
+    exports com.fhv.hotelmanagement.persistence.persistenceEntity;
 }

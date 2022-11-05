@@ -31,14 +31,14 @@ CREATE TABLE customer(
     customer_city VARCHAR(255),
     customer_country VARCHAR(255),
     customer_credit_card_number VARCHAR(255),
-    saved VARCHAR(255)
+    saved BOOLEAN
 );
 
 CREATE TABLE booking(
     booking_number INTEGER PRIMARY KEY,
     customer_number INTEGER,
     FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
-    arrival_dat DATE NOT NULL,
+    arrival_date DATE NOT NULL,
     check_in_datetime DATETIME, //Zeitstempel wann man eingecheckt hat
     departure_date DATE,
     check_out_datetime DATETIME,
