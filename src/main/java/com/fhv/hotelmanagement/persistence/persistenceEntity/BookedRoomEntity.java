@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DBModel;
+package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
@@ -6,31 +6,41 @@ import java.time.LocalDate;
 
 @Entity
 @Table (name = "booked_room")
-public class BookedRoom {
-    private Booking booking;
-    private Room room;
+public class BookedRoomEntity {
+    private BookingEntity booking;
+    private RoomEntity room;
     private LocalDate fromDate;
     private LocalDate toDate;
+
+    public BookedRoomEntity(){};
+
+    public BookedRoomEntity(BookingEntity booking, RoomEntity room,
+                            LocalDate fromDate, LocalDate toDate) {
+        this.booking = booking;
+        this.room = room;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
 
     @Id
     @ManyToOne
     @JoinColumn(name = "booking_number")
-    public Booking getBooking() {
+    public BookingEntity getBooking() {
         return booking;
     }
 
-    public void setBooking(Booking booking) {
+    public void setBooking(BookingEntity booking) {
         this.booking = booking;
     }
 
     @Id
     @ManyToOne
     @JoinColumn(name = "room_number")
-    public Room getRoom() {
+    public RoomEntity getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(RoomEntity room) {
         this.room = room;
     }
 

@@ -1,12 +1,19 @@
-package com.fhv.hotelmanagement.DBModel;
+package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table (name = "room")
-public class Room {
+public class RoomEntity {
     private int number;
-    private RoomCategory category;
+    private RoomCategoryEntity category;
+
+    public RoomEntity(){};
+
+    public RoomEntity(int number, RoomCategoryEntity category) {
+        this.number = number;
+        this.category = category;
+    }
 
     @Id
     @Column (name = "room_number")
@@ -20,11 +27,11 @@ public class Room {
 
     @ManyToOne
     @JoinColumn (name = "room_category_name")
-    public RoomCategory getCategory() {
+    public RoomCategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(RoomCategory category) {
+    public void setCategory(RoomCategoryEntity category) {
         this.category = category;
     }
 

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.controller.viewController.CreateCustomerViewController">
+
+<!--SideBar-->
+<left>
+    <VBox prefHeight="792.0" prefWidth="150.0" style="-fx-background-color: #21273D;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Sunway.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </ImageView>
+            <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Rechnungen.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="45.0" right="45.0" top="25.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservierungen" textAlignment="CENTER" wrappingWidth="140.0" />
+            <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Buchungen.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="45.0" right="45.0" top="30.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchungen" textAlignment="CENTER" wrappingWidth="140.0" />
+            <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Rechnung.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" top="30.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungen" textAlignment="CENTER" wrappingWidth="140.0" />
+            <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Kunden.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="45.0" right="45.0" top="30.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Kunden" textAlignment="CENTER" wrappingWidth="140.0" />
+            <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Zimmer.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="45.0" right="45.0" top="40.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer" textAlignment="CENTER" wrappingWidth="140.0" />
+            <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Bilder/Journale.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="45.0" right="45.0" top="30.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal" textAlignment="CENTER" wrappingWidth="140.0" />
+         </children>
+    </VBox>
+</left>
+
+<center>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
+               <children>
+                  <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walk-In &lt;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="120.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Gast anlegen">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#c9c9c9" layoutX="270.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt; Zahlung auswählen">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+               <effect>
+                  <InnerShadow height="8.0" radius="1.5" width="0.0">
+                     <input>
+                        <DropShadow />
+                     </input>
+                  </InnerShadow>
+               </effect>
+            </AnchorPane>
+            <TextField layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Datenbank durchsuchen" fx:id="searchDatabase">
+               <opaqueInsets>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </opaqueInsets>
+            </TextField>
+            <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gast anlegen" wrappingWidth="234.994140625">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="60.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" fx:id="firstName" />
+            <TextField layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" fx:id="lastName" />
+            <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationalität" wrappingWidth="74.19140625">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="74.19140625">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="60.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0" fx:id="nationality" />
+            <Text layoutX="60.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail Adresse" wrappingWidth="137.19140625">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="60.0" layoutY="435.0" prefHeight="40.0" prefWidth="300.0" fx:id="phoneNumber" />
+            <Text layoutX="60.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer" wrappingWidth="137.19140625">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="60.0" layoutY="505.0" prefHeight="40.0" prefWidth="300.0" fx:id="email" />
+            <Text layoutX="545.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wohnadresse">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TextField layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="240.0" fx:id="street" />
+            <Text layoutX="545.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="790.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr." wrappingWidth="39.1083984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="790.0" layoutY="200.0" prefHeight="40.0" prefWidth="55.0" fx:id="houseNumber" />
+            <Text layoutX="550.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="240.0" fx:id="city" />
+            <TextField layoutX="790.0" layoutY="270.0" prefHeight="40.0" prefWidth="55.0" fx:id="postalCode" />
+            <Text layoutX="790.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ" wrappingWidth="39.1083984375">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE" onAction="#onNextButtonClicked">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE" onAction="#onCancelButtonClicked">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Zurück" textFill="WHITE" onAction="#onBackButtonClicked">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+</center>
+</BorderPane>
