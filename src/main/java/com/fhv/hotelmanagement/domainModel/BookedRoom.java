@@ -23,4 +23,8 @@ public class BookedRoom {
     public BookedRoomEntity getEntity(){
         return entity;
     }
+
+    public Room getRoom() {
+        return room;
+    }
 }

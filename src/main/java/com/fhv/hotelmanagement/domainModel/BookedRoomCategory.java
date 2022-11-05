@@ -10,19 +10,23 @@ public class BookedRoomCategory {
 
     private BookedRoomCategoryEntity entity;
     private BookingEntity booking;
-    private RoomCategoryEntity roomCategory;
+    private RoomCategory roomCategory;
     private BigDecimal pricePerNight;
     private int amount;
 
     public BookedRoomCategory(BookedRoomCategoryEntity entity) {
         this.entity = entity;
         this.booking = entity.getBooking();
-        this.roomCategory = entity.getRoomCategory();
+        this.roomCategory = new RoomCategory(entity.getRoomCategory());
         this.pricePerNight = entity.getPricePerNight();
         this.amount = entity.getAmount();
     }
 
     public BookedRoomCategoryEntity getEntity(){
         return entity;
+    }
+
+    public RoomCategory getRoomCategory() {
+        return roomCategory;
     }
 }

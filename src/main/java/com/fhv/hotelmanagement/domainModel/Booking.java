@@ -1,9 +1,6 @@
 package com.fhv.hotelmanagement.domainModel;
 
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,8 +17,8 @@ public class Booking {
     private LocalDate departureDate;
     private LocalDateTime checkOutDatetime;
     private Address billingAddress;
-    private ArrayList<BookedRoomCategory> bookedRoomCategories; //sollte eine HashMap sein
-    private ArrayList<BookedRoom> bookedRooms; //sollte eine HashMap sein
+    private HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories;
+    private HashMap<Room, BookedRoom> bookedRooms;
 
     public Booking(BookingEntity entity) {
         this.number = entity.getNumber();
@@ -31,8 +28,17 @@ public class Booking {
         this.departureDate = entity.getDepartureDate();
         this.checkOutDatetime = entity.getCheckOutDatetime();
         this.billingAddress = new Address(entity.getBillingStreet(), entity.getBillingHouseNumber(), entity.getBillingPostalCode(), entity.getBillingCity(), entity.getBillingCountry());
-        //this.bookedRoomCategories = entity.getBookedRoomCategories();
-        //this.bookedRooms = entity.getBookedRooms();
+
+        this.bookedRoomCategories = new HashMap<>();
+        for (BookedRoomCategoryEntity e : entity.getBookedRoomCategories()) {
+            BookedRoomCategory c = new BookedRoomCategory(e);
+            this.bookedRoomCategories.put(c.getRoomCategory(), c);
+        }
+        this.bookedRooms = new HashMap<>();
+        for (BookedRoomEntity e : entity.getBookedRooms()) {
+            BookedRoom r = new BookedRoom(e);
+            this.bookedRooms.put(r.getRoom(), r);
+        }
     }
 
     public BookingEntity getEntity(){
