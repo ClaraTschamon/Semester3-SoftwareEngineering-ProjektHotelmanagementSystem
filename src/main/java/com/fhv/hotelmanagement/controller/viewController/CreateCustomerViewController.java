@@ -64,13 +64,13 @@ public class CreateCustomerViewController {
 
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
-        mainApplication.load("Walk-In3");
+//        mainApplication.load("Walk-In3");
     }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
         //load previous Page
-        mainApplication.load("Walk-In1");
+//        mainApplication.load("Walk-In1");
 
     }
 
@@ -85,7 +85,7 @@ public class CreateCustomerViewController {
     //Payment Page (Walk-In3)
     @FXML
     private void onBackButtonClickedPayment(ActionEvent e) throws IOException {
-        mainApplication.load("Walk-In2");
+//        mainApplication.load("Walk-In2");
     }
 
 
