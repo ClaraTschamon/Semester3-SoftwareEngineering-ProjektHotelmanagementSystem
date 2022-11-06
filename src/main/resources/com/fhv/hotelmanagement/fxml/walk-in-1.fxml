@@ -46,12 +46,7 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <Text layoutX="60.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anresiedatum">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Text>
-                <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreisedatum" wrappingWidth="101.19140625">
+                <Text layoutX="60.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreisedatum" wrappingWidth="101.19140625">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -71,19 +66,18 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Button fx:id="WeiterButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#Weiter_zu_WalkIn2" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
+                <Button fx:id="WeiterButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="AbbrechenButton" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#WalkIn_Abbrechen" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
+                <Button fx:id="AbbrechenButton" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <DatePicker layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Anreisedatum" />
-                <DatePicker layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
-                <Text layoutX="60.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
+                <DatePicker layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
+                <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -96,22 +90,22 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <RadioButton layoutX="60.0" layoutY="425.0" mnemonicParsing="false" text="Vollpension">
+                <RadioButton layoutX="60.0" layoutY="373.0" mnemonicParsing="false" text="Vollpension">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="455.0" mnemonicParsing="false" text="Halppension">
+                <RadioButton layoutX="60.0" layoutY="403.0" mnemonicParsing="false" text="Halppension">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="515.0" mnemonicParsing="false" text="Ohne Package">
+                <RadioButton layoutX="60.0" layoutY="463.0" mnemonicParsing="false" text="Ohne Package">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="485.0" mnemonicParsing="false" text="Nur Frühstück">
+                <RadioButton layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück">
                     <font>
                         <Font size="13.0" />
                     </font>

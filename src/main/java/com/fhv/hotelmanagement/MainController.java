@@ -22,10 +22,8 @@ public class MainController implements Initializable {
 
 
     public void loadIntoContentArea(String resourceToLoad) throws IOException, URISyntaxException {
-        Parent fxml = FXMLLoader.load(MainApplication.class.getResource("fxml/home.fxml"));
-        if (contentArea.getChildren() != null) {
-            contentArea.getChildren().removeAll();
-        }
+        Parent fxml = FXMLLoader.load(MainApplication.class.getResource("fxml/"+ resourceToLoad + ".fxml"));
+        contentArea.getChildren().clear();
         contentArea.getChildren().setAll(fxml);
     }
 
