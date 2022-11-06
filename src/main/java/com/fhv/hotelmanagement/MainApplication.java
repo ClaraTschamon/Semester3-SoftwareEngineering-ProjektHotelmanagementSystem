@@ -20,27 +20,41 @@ import java.util.Properties;
 
 public class MainApplication extends Application {
     Stage stage;
-    FXMLLoader fxmlLoader;
+    static FXMLLoader fxmlLoader;
     Scene scene;
     Properties configProperties;
+
+    MainController mainController;
+
+
 
 
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
+        this.mainController = new MainController();
         loadMainView();
     }
+
+    public static MainController getMainController() throws IOException {
+
+        return fxmlLoader.getController();
+
+    }
+
 
     private void loadMainView() throws IOException {
         double width = Double.parseDouble(getConfigProperties().getProperty("window.width"));
         double height = Double.parseDouble(getConfigProperties().getProperty("window.height"));
 
         URL mainViewURL = MainApplication.class.getResource("fxml/main-view.fxml");
-        FXMLLoader mainViewLoader = new FXMLLoader(mainViewURL);
-        scene = new Scene(mainViewLoader.load(), width, height);
+        fxmlLoader = new FXMLLoader(mainViewURL);
+        scene = new Scene(fxmlLoader.load(), width, height);
         stage.setTitle("Sunway Hotel");
         stage.setScene(scene);
         stage.show();
+
+
     }
 
     private Properties getConfigProperties() throws IOException {
