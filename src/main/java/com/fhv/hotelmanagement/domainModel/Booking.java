@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Booking {
 
     private BookingEntity entity;
-    private int number;
+    private Integer number;
     private Customer customer;
     private LocalDate arrivalDate;
     private LocalDateTime checkInDatetime;
@@ -19,6 +19,8 @@ public class Booking {
     private Address billingAddress;
     private HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories;
     private HashMap<Room, BookedRoom> bookedRooms;
+
+    public Booking() {}
 
     public Booking(BookingEntity entity) {
         this.number = entity.getNumber();
@@ -43,5 +45,77 @@ public class Booking {
 
     public BookingEntity getEntity(){
         return entity;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(LocalDate arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public LocalDateTime getCheckInDatetime() {
+        return checkInDatetime;
+    }
+
+    public void setCheckInDatetime(LocalDateTime checkInDatetime) {
+        this.checkInDatetime = checkInDatetime;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public LocalDateTime getCheckOutDatetime() {
+        return checkOutDatetime;
+    }
+
+    public void setCheckOutDatetime(LocalDateTime checkOutDatetime) {
+        this.checkOutDatetime = checkOutDatetime;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public HashMap<RoomCategory, BookedRoomCategory> getBookedRoomCategories() {
+        return bookedRoomCategories;
+    }
+
+    public void setBookedRoomCategories(HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories) {
+        this.bookedRoomCategories = bookedRoomCategories;
+    }
+
+    public HashMap<Room, BookedRoom> getBookedRooms() {
+        return bookedRooms;
+    }
+
+    public void setBookedRooms(HashMap<Room, BookedRoom> bookedRooms) {
+        this.bookedRooms = bookedRooms;
     }
 }

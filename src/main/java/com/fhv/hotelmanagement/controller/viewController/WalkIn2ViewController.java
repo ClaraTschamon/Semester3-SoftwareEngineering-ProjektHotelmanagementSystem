@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -16,8 +17,6 @@ public class WalkIn2ViewController {
     //TODO: verfügernummer und ablaufdatum der kreditkarte fehlt in datenbank
 
     private static int number;
-    //MainController mainController = new MainController();
-    MainApplication mainApplication = new MainApplication();
 
     @FXML
     private TextField searchDatabase;
@@ -59,12 +58,16 @@ public class WalkIn2ViewController {
 
     @FXML
     private TextField billingPostalCode;
+    private WalkInUseCaseController useCaseController;
 
 
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
+            // TODO fill all attributes
             MainApplication.getMainController().loadIntoContentArea("walk-in-3");
+            WalkIn3ViewController walkIn3ViewController = MainApplication.getMainController().getCurrentFXMLLoader().getController();
+            walkIn3ViewController.setUseCaseController(useCaseController);
         }catch(IOException | URISyntaxException exc){
             System.out.println(exc.getMessage());
         }
@@ -91,6 +94,9 @@ public class WalkIn2ViewController {
         //alle Daten aus TextFields löschen? --> muss ausprobiert werden!
     }
 
+    public void setUseCaseController(WalkInUseCaseController useCaseController) {
+        this.useCaseController = useCaseController;
+    }
 
 
     //Payment Page (Walk-In3)

@@ -60,17 +60,17 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Button fx:id="WeiterButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
+                <Button fx:id="NextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="AbbrechenButton" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
+                <Button fx:id="CancelButton" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <DatePicker layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
+                <DatePicker fx:id="departureDate" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
                 <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
                     <font>
                         <Font name="System Bold" size="18.0" />

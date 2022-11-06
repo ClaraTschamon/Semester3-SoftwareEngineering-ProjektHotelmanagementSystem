@@ -38,7 +38,6 @@ public class MainApplication extends Application {
 
     public static MainController getMainController() throws IOException {
         return fxmlLoader.getController();
-
     }
 
 

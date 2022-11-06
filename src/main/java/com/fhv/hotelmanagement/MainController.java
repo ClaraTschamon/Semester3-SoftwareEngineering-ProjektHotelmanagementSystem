@@ -1,28 +1,25 @@
 package com.fhv.hotelmanagement;
 
-import com.fhv.hotelmanagement.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
     private AnchorPane contentArea;
+    private FXMLLoader currentFXMLLoader;
 
 
     public void loadIntoContentArea(String resourceToLoad) throws IOException, URISyntaxException {
-        Parent fxml = FXMLLoader.load(MainApplication.class.getResource("fxml/"+ resourceToLoad + ".fxml"));
+        currentFXMLLoader = new FXMLLoader(MainApplication.class.getResource("fxml/"+ resourceToLoad + ".fxml"));
+        Parent fxml = currentFXMLLoader.load();
         contentArea.getChildren().clear();
         contentArea.getChildren().setAll(fxml);
     }
@@ -36,6 +33,10 @@ public class MainController implements Initializable {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public FXMLLoader getCurrentFXMLLoader() {
+        return currentFXMLLoader;
     }
 
     /*
