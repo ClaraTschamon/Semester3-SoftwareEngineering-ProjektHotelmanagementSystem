@@ -19,4 +19,8 @@ public class RoomCategory {
     public RoomCategoryEntity getEntity(){
         return entity;
     }
+
+    public String getName(){
+        return name;
+    }
 }

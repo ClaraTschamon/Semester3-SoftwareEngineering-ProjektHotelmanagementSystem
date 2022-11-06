@@ -17,4 +17,12 @@ public class Room {
     public RoomEntity getEntity(){
         return entity;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public RoomCategory getCategory(){
+        return category;
+    }
 }

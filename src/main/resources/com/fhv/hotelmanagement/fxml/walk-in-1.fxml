@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.controller.viewController.WalkIn1ViewController">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -76,9 +78,20 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <ComboBox editable="true" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
-                <ComboBox editable="true" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
-                <ComboBox editable="true" layoutX="545.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0" />
+                <ComboBox fx:id = "roomCategoryDropdown" editable="true" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
+                <ComboBox fx:id="roomNumberDropdown" editable="true" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
+                <ComboBox fx:id="roomPriceDD" editable="true" layoutX="545.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Normalpreis"/>
+                            <String fx:value="Sonderpreis"/>
+                            <String fx:value="Preis-0"/>
+                        </FXCollections>
+                    </items>
+                    <value>
+                        <String fx:value="Normalpreis"/> <!--default value!-->
+                    </value>
+                </ComboBox>
                 <Text layoutX="545.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreise">
                     <font>
                         <Font size="14.0" />
