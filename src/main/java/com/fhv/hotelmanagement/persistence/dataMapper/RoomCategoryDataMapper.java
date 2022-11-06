@@ -6,8 +6,12 @@ import com.fhv.hotelmanagement.domainModel.RoomCategory;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +33,16 @@ public class RoomCategoryDataMapper {
             return Optional.of(roomCategory);
         }
         return Optional.empty();
+    }
+
+    //TODO: generisch in persistence facade
+    public static ArrayList<RoomCategory> getAll(){
+        ArrayList<RoomCategoryEntity> entities = (ArrayList<RoomCategoryEntity>) PersistenceFacade.instance().entityManager.createQuery("from RoomCategoryEntity").getResultList();
+        ArrayList<RoomCategory> roomCategories = new ArrayList<>();
+        for(RoomCategoryEntity e : entities){
+            roomCategories.add(new RoomCategory(e));
+        }
+        return roomCategories;
     }
 
     //create
