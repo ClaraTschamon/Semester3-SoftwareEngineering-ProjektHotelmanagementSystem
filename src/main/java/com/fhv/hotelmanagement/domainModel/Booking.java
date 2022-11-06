@@ -32,14 +32,18 @@ public class Booking {
         this.billingAddress = new Address(entity.getBillingStreet(), entity.getBillingHouseNumber(), entity.getBillingPostalCode(), entity.getBillingCity(), entity.getBillingCountry());
 
         this.bookedRoomCategories = new HashMap<>();
-        for (BookedRoomCategoryEntity e : entity.getBookedRoomCategories()) {
-            BookedRoomCategory c = new BookedRoomCategory(e);
-            this.bookedRoomCategories.put(c.getRoomCategory(), c);
+        if(entity.getBookedRoomCategories() != null) {
+            for (BookedRoomCategoryEntity e : entity.getBookedRoomCategories()) {
+                BookedRoomCategory c = new BookedRoomCategory(e);
+                this.bookedRoomCategories.put(c.getRoomCategory(), c);
+            }
         }
         this.bookedRooms = new HashMap<>();
-        for (BookedRoomEntity e : entity.getBookedRooms()) {
-            BookedRoom r = new BookedRoom(e);
-            this.bookedRooms.put(r.getRoom(), r);
+        if(entity.getBookedRooms() != null) {
+            for (BookedRoomEntity e : entity.getBookedRooms()) {
+                BookedRoom r = new BookedRoom(e);
+                this.bookedRooms.put(r.getRoom(), r);
+            }
         }
     }
 
