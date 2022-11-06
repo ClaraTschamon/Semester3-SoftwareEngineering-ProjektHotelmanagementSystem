@@ -24,6 +24,8 @@ public class WalkIn3ViewController {
     @FXML
     public void onSaveButtonClicked(ActionEvent e) throws IOException, URISyntaxException {
         // TODO fill all attributes
+
+
         useCaseController.save();
         MainApplication.getMainController().loadIntoContentArea("home");
     }
