@@ -7,6 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class WalkIn2ViewController {
 
@@ -62,19 +63,31 @@ public class WalkIn2ViewController {
 
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
-//        mainApplication.load("Walk-In3");
+        try{
+            MainApplication.getMainController().loadIntoContentArea("walk-in-3");
+        }catch(IOException | URISyntaxException exc){
+            System.out.println(exc.getMessage());
+        }
     }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
-        //load previous Page
+        try{
+            MainApplication.getMainController().loadIntoContentArea("walk-in-1");
+        }catch(IOException | URISyntaxException exc){
+            System.out.println(exc.getMessage());
+        }
 //        mainApplication.load("Walk-In1");
 
     }
 
     @FXML
     private void onCancelButtonClicked(ActionEvent e){
-        //load HomePage
+        try{
+            MainApplication.getMainController().loadIntoContentArea("home");
+        }catch(IOException | URISyntaxException exc){
+            System.out.println(exc.getMessage());
+        }
         //alle Daten aus TextFields löschen? --> muss ausprobiert werden!
     }
 
