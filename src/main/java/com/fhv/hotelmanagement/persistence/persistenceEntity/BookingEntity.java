@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(name = "booking")
@@ -20,8 +21,8 @@ public class BookingEntity {
     private String BillingPostalCode;
     private String BillingCity;
     private String BillingCountry;
-    private ArrayList<BookedRoomCategoryEntity> bookedRoomCategories;
-    private ArrayList<BookedRoomEntity> bookedRooms;
+    private Set<BookedRoomCategoryEntity> bookedRoomCategories;
+    private Set<BookedRoomEntity> bookedRooms;
 
     public BookingEntity(){};
 
@@ -30,8 +31,8 @@ public class BookingEntity {
                          LocalDateTime checkOutDatetime, String billingStreet,
                          String billingHouseNumber, String billingPostalCode,
                          String billingCity, String billingCountry,
-                         ArrayList<BookedRoomCategoryEntity> bookedRoomCategories,
-                         ArrayList<BookedRoomEntity> bookedRooms) {
+                         Set<BookedRoomCategoryEntity> bookedRoomCategories,
+                         Set<BookedRoomEntity> bookedRooms) {
         this.number = number;
         this.customer = customer;
         this.arrivalDate = arrivalDate;
@@ -148,21 +149,29 @@ public class BookingEntity {
         BillingCountry = billingCountry;
     }
 
-    @OneToMany(mappedBy = "booking_number")
-    public ArrayList<BookedRoomCategoryEntity> getBookedRoomCategories() {
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public Set<BookedRoomCategoryEntity> getBookedRoomCategories() {
         return bookedRoomCategories;
     }
 
-    public void setBookedRoomCategories(ArrayList<BookedRoomCategoryEntity> bookedRoomCategories) {
+    public void setBookedRoomCategories(Set<BookedRoomCategoryEntity> bookedRoomCategories) {
         this.bookedRoomCategories = bookedRoomCategories;
     }
 
-    @OneToMany(mappedBy = "booking_number")
-    public ArrayList<BookedRoomEntity> getBookedRooms() {
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public Set<BookedRoomEntity> getBookedRooms() {
         return bookedRooms;
     }
 
-    public void setBookedRooms(ArrayList<BookedRoomEntity> bookedRooms) {
+    public void setBookedRooms(Set<BookedRoomEntity> bookedRooms) {
         this.bookedRooms = bookedRooms;
     }
 }

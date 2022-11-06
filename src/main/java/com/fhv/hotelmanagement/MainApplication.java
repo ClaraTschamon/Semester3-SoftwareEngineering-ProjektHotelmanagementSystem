@@ -22,47 +22,34 @@ public class MainApplication extends Application {
     Stage stage;
     FXMLLoader fxmlLoader;
     Scene scene;
+    Properties configProperties;
 
 
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-
-        /*
-        InputStream input = new FileInputStream("src/main/resources/com/fhv/hotelmanagement/configurations/config.properties");
-        //Pfad nicht hartkodiert!!! Mit getResource machen()
-        Properties properties = new Properties();
-        properties.load(input);
-        double width = Double.parseDouble(properties.getProperty("window.width"));
-        double height = Double.parseDouble(properties.getProperty("window.height"));
-
-        URL fxmlURL = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\fhv\\hotelmanagement\\FXML\\Walk-In2.fxml").toUri().toURL();
-        FXMLLoader fxmlLoader = new FXMLLoader(fxmlURL);
-        Scene scene = new Scene(fxmlLoader.load(), width, height);
-        stage.setTitle("Walk-In");
-        stage.setScene(scene);
-        stage.show();
-
-         */
-        load("Walk-In2");
-
+        loadMainView();
     }
 
-    public void load(String page) throws IOException {
+    private void loadMainView() throws IOException {
+        double width = Double.parseDouble(getConfigProperties().getProperty("window.width"));
+        double height = Double.parseDouble(getConfigProperties().getProperty("window.height"));
 
-        InputStream input = new FileInputStream("src/main/resources/com/fhv/hotelmanagement/configurations/config.properties");
-        Properties properties = new Properties();
-        properties.load(input);
-        double width = Double.parseDouble(properties.getProperty("window.width"));
-        double height = Double.parseDouble(properties.getProperty("window.height"));
-
-        URL fxmlURL = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\com\\fhv\\hotelmanagement\\fxml\\" + page + ".fxml").toUri().toURL();
-        fxmlLoader = new FXMLLoader(fxmlURL);
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Title");
-        stage.setScene(new Scene(root1));
+        URL mainViewURL = MainApplication.class.getResource("fxml/main-view.fxml");
+        FXMLLoader mainViewLoader = new FXMLLoader(mainViewURL);
+        scene = new Scene(mainViewLoader.load(), width, height);
+        stage.setTitle("Sunway Hotel");
+        stage.setScene(scene);
         stage.show();
+    }
+
+    private Properties getConfigProperties() throws IOException {
+        if (configProperties == null) {
+            InputStream propertiesInput = MainApplication.class.getResourceAsStream("configurations/config.properties");
+            configProperties = new Properties();
+            configProperties.load(propertiesInput);
+        }
+        return configProperties;
     }
 
     public static void main(String[] args) {

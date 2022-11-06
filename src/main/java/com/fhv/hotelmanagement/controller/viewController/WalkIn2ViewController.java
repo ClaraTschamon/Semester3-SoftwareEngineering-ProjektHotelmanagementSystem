@@ -1,8 +1,6 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.CreateCustomerUseCaseController;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -10,7 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class CreateCustomerViewController {
+public class WalkIn2ViewController {
 
     //TODO: customer date of birth wird nicht abgefragt! umändern oder aus datenbank löschen?
     //TODO: country wird nicht abgefragt... ändern oder feld aus datenbank löschen??
@@ -64,13 +62,13 @@ public class CreateCustomerViewController {
 
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
-        mainApplication.load("Walk-In3");
+//        mainApplication.load("Walk-In3");
     }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
         //load previous Page
-        mainApplication.load("Walk-In1");
+//        mainApplication.load("Walk-In1");
 
     }
 
@@ -85,7 +83,7 @@ public class CreateCustomerViewController {
     //Payment Page (Walk-In3)
     @FXML
     private void onBackButtonClickedPayment(ActionEvent e) throws IOException {
-        mainApplication.load("Walk-In2");
+//        mainApplication.load("Walk-In2");
     }
 
 
@@ -103,6 +101,7 @@ public class CreateCustomerViewController {
         //      (ausprobieren ob es nicht automatisch gelöscht wird)
         //home menü laden
 
+        /*
         CreateCustomerUseCaseController useCaseController = new CreateCustomerUseCaseController();
 
         CustomerEntity customerEntity = new CustomerEntity(number, firstName.getText(), lastName.getText(),
@@ -112,5 +111,7 @@ public class CreateCustomerViewController {
         number++;
 
         useCaseController.storeCustomer(customerEntity);
+
+         */
     }
 }

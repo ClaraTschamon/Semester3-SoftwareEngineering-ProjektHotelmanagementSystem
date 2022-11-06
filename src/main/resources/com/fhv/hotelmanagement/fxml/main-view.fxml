@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.MainController">
+    <left>
+        <VBox prefHeight="792.0" prefWidth="140.0" style="-fx-background-color: #21273D;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="80.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Sunway.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Reservierungen.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="45.0" right="45.0" top="25.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservierungen" textAlignment="CENTER" wrappingWidth="140.0" />
+                <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Buchungen.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="45.0" right="45.0" top="30.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchungen" textAlignment="CENTER" wrappingWidth="140.0" />
+                <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Rechnungen.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="50.0" right="50.0" top="30.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Rechnungen" textAlignment="CENTER" wrappingWidth="140.0" />
+                <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Kunden.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="45.0" right="45.0" top="30.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Kunden" textAlignment="CENTER" wrappingWidth="140.0" />
+                <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Zimmer.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="45.0" right="45.0" top="40.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer" textAlignment="CENTER" wrappingWidth="140.0" />
+                <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Bilder/Journale.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets left="45.0" right="45.0" top="30.0" />
+                    </VBox.margin>
+                </ImageView>
+                <Text fill="#9a9a9a" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal" textAlignment="CENTER" wrappingWidth="140.0" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane fx:id="contentArea" prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
+                    <children>
+                        <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunway">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Text>
+                    </children>
+                    <effect>
+                        <InnerShadow height="8.0" radius="1.5" width="0.0">
+                            <input>
+                                <DropShadow />
+                            </input>
+                        </InnerShadow>
+                    </effect>
+                </AnchorPane>
+            </children></AnchorPane>
+    </center>
+</BorderPane>

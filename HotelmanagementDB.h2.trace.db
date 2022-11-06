@@ -1,4 +1,8 @@
-2022-10-27 19:49:48 jdbc[3]: exception
+2022-11-05 16:23:39 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "CUSTOMER" nicht gefunden (diese Datenbank ist leer)
+Table "CUSTOMER" not found (this database is empty); SQL statement:
+select c1_0.customer_number,c1_0.customer_city,c1_0.customer_country,c1_0.customer_credit_card_number,c1_0.customer_date_of_birth,c1_0.customer_email_address,c1_0.customer_first_name,c1_0.customer_house_number,c1_0.customer_last_name,c1_0.customer_nationality,c1_0.customer_phone_number,c1_0.customer_postal_code,c1_0.saved,c1_0.customer_street from customer c1_0 where c1_0.customer_number=? [42104-214]
+2022-11-05 15:25:01 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -19,7 +23,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-27 19:49:52 jdbc[3]: exception
+2022-11-05 15:25:28 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -40,7 +44,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-27 19:52:17 jdbc[3]: exception
+2022-11-05 15:25:28 jdbc[4]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -61,7 +65,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-27 19:52:18 jdbc[4]: exception
+2022-11-05 15:25:44 jdbc[5]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -82,7 +86,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-27 19:52:30 jdbc[5]: exception
+2022-11-05 15:25:50 jdbc[6]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -103,7 +107,59 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 10:26:07 jdbc[3]: exception
+2022-11-05 16:25:56 database: flush
+org.h2.message.DbException: Allgemeiner Fehler: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]" [50000-214]
+	at com.h2database@2.1.214/org.h2.message.DbException.get(DbException.java:212)
+	at com.h2database@2.1.214/org.h2.message.DbException.convert(DbException.java:395)
+	at com.h2database@2.1.214/org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at com.h2database@2.1.214/org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at com.h2database@2.1.214/org.h2.engine.Database.<init>(Database.java:324)
+	at com.h2database@2.1.214/org.h2.engine.Engine.openSession(Engine.java:92)
+	at com.h2database@2.1.214/org.h2.engine.Engine.openSession(Engine.java:222)
+	at com.h2database@2.1.214/org.h2.engine.Engine.createSession(Engine.java:201)
+	at com.h2database@2.1.214/org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at com.h2database@2.1.214/org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at com.h2database@2.1.214/org.h2.Driver.connect(Driver.java:59)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:40)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:61)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:498)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.<init>(DriverManagerConnectionProviderImpl.java:364)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections$Builder.build(DriverManagerConnectionProviderImpl.java:549)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:102)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:78)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:125)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:239)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:207)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.service.internal.SessionFactoryServiceRegistryImpl.getService(SessionFactoryServiceRegistryImpl.java:100)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.internal.FastSessionServices.<init>(FastSessionServices.java:230)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:378)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1425)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:55)
+	at jakarta.persistence@3.0.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:80)
+	at jakarta.persistence@3.0.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at com.fhv.hotelmanagement@1.0-SNAPSHOT/com.fhv.hotelmanagement.persistence.PersistenceFacade.<init>(PersistenceFacade.java:19)
+	at com.fhv.hotelmanagement@1.0-SNAPSHOT/com.fhv.hotelmanagement.persistence.PersistenceFacade.main(PersistenceFacade.java:38)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Allgemeiner Fehler: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]" [50000-214]
+	at com.h2database@2.1.214/org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at com.h2database@2.1.214/org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 35 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]
+	at com.h2database@2.1.214/org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at com.h2database@2.1.214/org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at com.h2database@2.1.214/org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 29 more
+2022-11-05 16:26:24 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "CHARACTER VARYING to BOOLEAN"
+Data conversion error converting "CHARACTER VARYING to BOOLEAN" [22018-214]
+2022-11-05 15:28:50 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -124,7 +180,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:35:03 jdbc[3]: exception
+2022-11-05 15:28:50 jdbc[4]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -145,17 +201,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:35:04 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "ROOM_CATEGORY" nicht gefunden
-Table "ROOM_CATEGORY" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER,
-    CONSTRAINT pk_room_id PRIMARY KEY (room_id),
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [42102-210]
-2022-10-28 11:35:04 jdbc[4]: exception
+2022-11-05 15:29:04 jdbc[5]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -176,48 +222,12 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:35:39 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER,
-    CONSTRAINT pk_room_id PRIMARY KEY (room_id),
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:35:39 jdbc[5]: exception
+2022-11-05 15:29:05 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLDataException: Datenumwandlungsfehler beim Umwandeln von "'ja' (CUSTOMER: ""SAVED"" BOOLEAN)"
+Data conversion error converting "'ja' (CUSTOMER: ""SAVED"" BOOLEAN)"; SQL statement:
+INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, customer_credit_card_number, saved)
+VALUES(1, 'Angelina', 'Pfeiffer', DATE '1980-06-07', 'Österreich', '+43178/9074374', 'apfeiffer@live-mail.none', 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', 'AT88 3888 2222 3333', 'ja') [22018-210]
+2022-11-05 15:29:53 jdbc[6]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -238,510 +248,52 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:36:37 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER,
-    CONSTRAINT pk_room_id PRIMARY KEY (room_id),
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:36:37 jdbc[6]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:37:44 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER PRIMARY KEY ,
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at jdk.internal.reflect.GeneratedMethodAccessor30.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:37:44 jdbc[7]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:37:47 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER PRIMARY KEY ,
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at jdk.internal.reflect.GeneratedMethodAccessor30.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:37:47 jdbc[8]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:38:05 jdbc[9]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:38:42 jdbc[10]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:38:43 jdbc[11]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:38:55 jdbc[12]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:39:04 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER PRIMARY KEY ,
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at jdk.internal.reflect.GeneratedMethodAccessor30.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:39:04 jdbc[13]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:47:09 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER,
-    CONSTRAINT pk_room_id PRIMARY KEY(room_id),
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at jdk.internal.reflect.GeneratedMethodAccessor30.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:47:09 jdbc[14]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:47:48 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Bedingung "PRIMARY KEY | UNIQUE (DESCRIPTION)" nicht gefunden
-Constraint "PRIMARY KEY | UNIQUE (DESCRIPTION)" not found; SQL statement:
-CREATE TABLE room (
-    room_id INTEGER PRIMARY KEY,
-    room_category VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_room_category FOREIGN KEY (room_category)
-    REFERENCES room_category(description)
-) [90057-210]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
-	at org.h2.message.DbException.get(DbException.java:227)
-	at org.h2.message.DbException.get(DbException.java:203)
-	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:258)
-	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
-	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
-	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
-	at org.h2.command.ddl.CreateTable.update(CreateTable.java:131)
-	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
-	at org.h2.command.Command.executeUpdate(Command.java:252)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
-	at com.intellij.database.remote.jdbc.impl.RemoteStatementImpl.execute(RemoteStatementImpl.java:78)
-	at jdk.internal.reflect.GeneratedMethodAccessor30.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-10-28 11:47:48 jdbc[15]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-11-04 16:59:09 jdbc[3]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-11-04 16:59:09 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "CUSTOMER" nicht gefunden
-Table "CUSTOMER" not found; SQL statement:
-SELECT t.*
-FROM PUBLIC.CUSTOMER t
-LIMIT 501 [42102-210]
-2022-11-04 16:59:21 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "CUSTOMER" nicht gefunden
-Table "CUSTOMER" not found; SQL statement:
-SELECT t.*
-FROM PUBLIC.CUSTOMER t
-LIMIT 501 [42102-210]
-2022-11-04 17:00:08 jdbc[3]: exception
-java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
-	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1573)
-	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
-	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
-	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-2022-11-04 17:00:08 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "CUSTOMER" nicht gefunden
-Table "CUSTOMER" not found; SQL statement:
-SELECT t.*
-FROM PUBLIC.CUSTOMER t
-LIMIT 501 [42102-210]
+2022-11-05 16:30:20 database: flush
+org.h2.message.DbException: Allgemeiner Fehler: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]" [50000-214]
+	at com.h2database@2.1.214/org.h2.message.DbException.get(DbException.java:212)
+	at com.h2database@2.1.214/org.h2.message.DbException.convert(DbException.java:395)
+	at com.h2database@2.1.214/org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at com.h2database@2.1.214/org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at com.h2database@2.1.214/org.h2.engine.Database.<init>(Database.java:324)
+	at com.h2database@2.1.214/org.h2.engine.Engine.openSession(Engine.java:92)
+	at com.h2database@2.1.214/org.h2.engine.Engine.openSession(Engine.java:222)
+	at com.h2database@2.1.214/org.h2.engine.Engine.createSession(Engine.java:201)
+	at com.h2database@2.1.214/org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at com.h2database@2.1.214/org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at com.h2database@2.1.214/org.h2.Driver.connect(Driver.java:59)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:40)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:61)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.addConnections(DriverManagerConnectionProviderImpl.java:498)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections.<init>(DriverManagerConnectionProviderImpl.java:364)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections$Builder.build(DriverManagerConnectionProviderImpl.java:549)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:102)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:78)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:125)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:239)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:207)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.service.internal.SessionFactoryServiceRegistryImpl.getService(SessionFactoryServiceRegistryImpl.java:100)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.internal.FastSessionServices.<init>(FastSessionServices.java:230)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:378)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1425)
+	at org.hibernate.orm.core@6.1.4.Final/org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:55)
+	at jakarta.persistence@3.0.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:80)
+	at jakarta.persistence@3.0.0/jakarta.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at com.fhv.hotelmanagement@1.0-SNAPSHOT/com.fhv.hotelmanagement.persistence.PersistenceFacade.<init>(PersistenceFacade.java:19)
+	at com.fhv.hotelmanagement@1.0-SNAPSHOT/com.fhv.hotelmanagement.persistence.PersistenceFacade.main(PersistenceFacade.java:38)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Allgemeiner Fehler: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]" [50000-214]
+	at com.h2database@2.1.214/org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at com.h2database@2.1.214/org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 35 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2.mv.db [2.1.214/7]
+	at com.h2database@2.1.214/org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at com.h2database@2.1.214/org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at com.h2database@2.1.214/org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at com.h2database@2.1.214/org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 29 more

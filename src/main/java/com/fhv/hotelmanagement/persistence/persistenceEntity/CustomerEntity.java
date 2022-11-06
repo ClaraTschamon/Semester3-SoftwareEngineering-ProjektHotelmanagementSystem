@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -22,7 +23,7 @@ public class CustomerEntity {
     private String country;
     private String creditCardNumber;
     private Boolean saved;
-    private ArrayList<BookingEntity> bookings;
+    private Set<BookingEntity> bookings;
 
     public CustomerEntity(){};
 
@@ -30,7 +31,7 @@ public class CustomerEntity {
                           LocalDate dateOfBirth, String nationality, String phoneNumber,
                           String email, String street, String houseNumber, String postalCode,
                           String city, String country, String creditCardNumber, Boolean saved,
-                          ArrayList<BookingEntity> bookings) {
+                          Set<BookingEntity> bookings) {
         this.number = number;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -175,12 +176,17 @@ public class CustomerEntity {
         this.saved = saved;
     }
 
-    @OneToMany(mappedBy = "customer_number")
-    public ArrayList<BookingEntity> getBookings() {
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public Set<BookingEntity> getBookings() {
         return bookings;
     }
 
-    public void setBookings(ArrayList<BookingEntity> bookings) {
+
+    public void setBookings(Set<BookingEntity> bookings) {
         this.bookings = bookings;
     }
 }

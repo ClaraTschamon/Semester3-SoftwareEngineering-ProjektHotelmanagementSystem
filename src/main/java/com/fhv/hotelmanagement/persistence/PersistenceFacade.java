@@ -16,7 +16,7 @@ public class PersistenceFacade{
     private static PersistenceFacade _instance;
 
     private PersistenceFacade(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceProvider");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("HotelmanagementDB");
         entityManager = emf.createEntityManager();
     }
 
@@ -31,6 +31,12 @@ public class PersistenceFacade{
     @SuppressWarnings("rawtypes")
     public Optional<Customer> getCustomer(int id){
         return CustomerDataMapper.instance().get(id);
+
+    }
+
+    public static void main(String[] args) {
+        PersistenceFacade pf = new PersistenceFacade();
+        System.out.println(pf.getCustomer(1).toString());
 
     }
 }
