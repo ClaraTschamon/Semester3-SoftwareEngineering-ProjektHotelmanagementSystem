@@ -28,5 +28,4 @@ public class HomeViewController {
             System.out.println(exc.getMessage());
         }
     }
-
 }

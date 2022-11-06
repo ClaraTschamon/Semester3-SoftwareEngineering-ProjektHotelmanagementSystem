@@ -61,34 +61,36 @@ public class WalkIn2ViewController {
     private TextField billingPostalCode;
 
 
+    @FXML
+    private void onNextButtonClicked(ActionEvent e) throws IOException {
+        try{
+            MainApplication.getMainController().loadIntoContentArea("walk-in-3");
+        }catch(IOException | URISyntaxException exc){
+            System.out.println(exc.getMessage());
+        }
+    }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
-        try {
+        try{
             MainApplication.getMainController().loadIntoContentArea("walk-in-1");
-        } catch (IOException | URISyntaxException exc) {
+        }catch(IOException | URISyntaxException exc){
             System.out.println(exc.getMessage());
         }
+//        mainApplication.load("Walk-In1");
 
     }
 
     @FXML
-    private void onCancelButtonClicked(ActionEvent e) {
-        try {
+    private void onCancelButtonClicked(ActionEvent e){
+        try{
             MainApplication.getMainController().loadIntoContentArea("home");
-        } catch (IOException | URISyntaxException exc) {
+        }catch(IOException | URISyntaxException exc){
             System.out.println(exc.getMessage());
         }
+        //alle Daten aus TextFields löschen? --> muss ausprobiert werden!
     }
 
-    @FXML
-    private void onNextButtonClicked(ActionEvent e) {
-        try {
-            MainApplication.getMainController().loadIntoContentArea("walk-in-3");
-        } catch (IOException | URISyntaxException exc) {
-            System.out.println(exc.getMessage());
-        }
-    }
 
 
     //Payment Page (Walk-In3)

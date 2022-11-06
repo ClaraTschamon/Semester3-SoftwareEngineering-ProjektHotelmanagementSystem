@@ -33,22 +33,21 @@ public class WalkIn1ViewController {
     //package fehlt
 
     @FXML
-    private void onCancelButtonClicked(ActionEvent e) {
-        try {
+    private void onCancelButtonClicked(ActionEvent e){
+        try{
             MainApplication.getMainController().loadIntoContentArea("home");
-        } catch (IOException | URISyntaxException exc) {
+        }catch(IOException | URISyntaxException exc){
             System.out.println(exc.getMessage());
         }
     }
 
     @FXML
-    private void onNextButtonClicked(ActionEvent e) {
-        try {
+    private void onNextButtonClicked(ActionEvent e){
+        try{
             MainApplication.getMainController().loadIntoContentArea("walk-in-2");
-        } catch (IOException | URISyntaxException exc) {
+        }catch(IOException | URISyntaxException exc){
             System.out.println(exc.getMessage());
         }
     }
+
 }
-
-
