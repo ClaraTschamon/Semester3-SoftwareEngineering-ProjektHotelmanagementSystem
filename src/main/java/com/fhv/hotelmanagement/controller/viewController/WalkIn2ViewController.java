@@ -7,6 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class WalkIn2ViewController {
 
@@ -60,24 +61,34 @@ public class WalkIn2ViewController {
     private TextField billingPostalCode;
 
 
-    @FXML
-    private void onNextButtonClicked(ActionEvent e) throws IOException {
-//        mainApplication.load("Walk-In3");
-    }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
-        //load previous Page
-//        mainApplication.load("Walk-In1");
+        try {
+            MainApplication.getMainController().loadIntoContentArea("walk-in-1");
+        } catch (IOException | URISyntaxException exc) {
+            System.out.println(exc.getMessage());
+        }
 
     }
 
     @FXML
-    private void onCancelButtonClicked(ActionEvent e){
-        //load HomePage
-        //alle Daten aus TextFields löschen? --> muss ausprobiert werden!
+    private void onCancelButtonClicked(ActionEvent e) {
+        try {
+            MainApplication.getMainController().loadIntoContentArea("home");
+        } catch (IOException | URISyntaxException exc) {
+            System.out.println(exc.getMessage());
+        }
     }
 
+    @FXML
+    private void onNextButtonClicked(ActionEvent e) {
+        try {
+            MainApplication.getMainController().loadIntoContentArea("walk-in-3");
+        } catch (IOException | URISyntaxException exc) {
+            System.out.println(exc.getMessage());
+        }
+    }
 
 
     //Payment Page (Walk-In3)
