@@ -65,6 +65,16 @@ public class WalkIn2ViewController {
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
             // TODO fill all attributes
+            useCaseController.getCustomer().setFirstName(firstName.getText());
+            useCaseController.getCustomer().setLastName(lastName.getText());
+            useCaseController.getCustomer().setNationality(nationality.getText());
+            useCaseController.getCustomer().setPhoneNumber(phoneNumber.getText());
+            useCaseController.getCustomer().setEmail(email.getText());
+            useCaseController.getCustomer().setCity(city.getText());
+            useCaseController.getCustomer().setStreet(street.getText());
+            useCaseController.getCustomer().setHouseNumber(houseNumber.getText());
+            useCaseController.getCustomer().setPostalCode(postalCode.getText());
+
             MainApplication.getMainController().loadIntoContentArea("walk-in-3");
             WalkIn3ViewController walkIn3ViewController = MainApplication.getMainController().getCurrentFXMLLoader().getController();
             walkIn3ViewController.setUseCaseController(useCaseController);

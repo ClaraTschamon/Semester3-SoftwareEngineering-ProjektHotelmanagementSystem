@@ -17,6 +17,10 @@ public class Customer {
     private Address address;
     private String creditCardNumber;
     private Boolean saved;
+    private String city;
+    private String street;
+    private String postalCode;
+    private String houseNumber;
 
     //bookings Liste??
 
@@ -34,6 +38,10 @@ public class Customer {
         this.address = new Address(entity.getStreet(), entity.getHouseNumber(), entity.getPostalCode(), entity.getCity(), entity.getCountry());
         this.creditCardNumber = entity.getCreditCardNumber();
         this.saved = entity.getSaved();
+        this.city=entity.getCity();
+        this.street=entity.getStreet();
+        this.postalCode=entity.getPostalCode();
+        this.houseNumber=entity.getHouseNumber();
     }
 
     public CustomerEntity getEntity(){
@@ -118,5 +126,37 @@ public class Customer {
 
     public void setSaved(Boolean saved) {
         this.saved = saved;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
     }
 }

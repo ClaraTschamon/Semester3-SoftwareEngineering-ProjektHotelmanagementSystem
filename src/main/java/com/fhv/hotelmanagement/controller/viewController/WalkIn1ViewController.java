@@ -69,6 +69,7 @@ public class WalkIn1ViewController implements Initializable {
     private void onNextButtonClicked(ActionEvent e) {
         try {
             useCaseController.getBooking().setDepartureDate(departureDate.getValue());
+
             // TODO fill all attributes
             MainApplication.getMainController().loadIntoContentArea("walk-in-2");
             WalkIn2ViewController walkIn2ViewController = MainApplication.getMainController().getCurrentFXMLLoader().getController();
