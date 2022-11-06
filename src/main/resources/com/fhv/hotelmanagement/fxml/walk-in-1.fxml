@@ -78,7 +78,7 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <ComboBox fx:id = "roomCategoryDropdown" editable="true" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
+                <ComboBox fx:id ="roomCategoryDropdown" editable="true" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
                 <ComboBox fx:id="roomNumberDropdown" editable="true" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
                 <ComboBox fx:id="roomPriceDD" editable="true" layoutX="545.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
