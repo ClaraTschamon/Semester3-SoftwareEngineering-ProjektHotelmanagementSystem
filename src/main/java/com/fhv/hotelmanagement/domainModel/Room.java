@@ -8,6 +8,8 @@ public class Room {
     private int number;
     private RoomCategory category;
 
+    private Boolean isFree; //TODO: in entity und in datenbank!
+
     public Room(RoomEntity entity) {
         this.entity = entity;
         this.number = entity.getNumber();
@@ -24,5 +26,9 @@ public class Room {
 
     public RoomCategory getCategory(){
         return category;
+    }
+
+    public boolean getIsFree(){
+        return  isFree;
     }
 }
