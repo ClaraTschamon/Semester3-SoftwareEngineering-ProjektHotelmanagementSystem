@@ -8,6 +8,7 @@ module com.fhv.hotelmanagement {
     requires com.h2database;
     requires org.hibernate.commons.annotations;
     requires net.bytebuddy;
+    requires org.controlsfx.controls;
 
     exports com.fhv.hotelmanagement.controller.viewController;
     opens com.fhv.hotelmanagement.controller.viewController to javafx.fxml;

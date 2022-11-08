@@ -12,10 +12,6 @@ import java.net.URISyntaxException;
 
 public class WalkIn2ViewController {
 
-    //TODO: customer date of birth wird nicht abgefragt! umändern oder aus datenbank löschen?
-    //TODO: country wird nicht abgefragt... ändern oder feld aus datenbank löschen??
-    //TODO: verfügernummer und ablaufdatum der kreditkarte fehlt in datenbank
-
     private static int number;
 
     @FXML

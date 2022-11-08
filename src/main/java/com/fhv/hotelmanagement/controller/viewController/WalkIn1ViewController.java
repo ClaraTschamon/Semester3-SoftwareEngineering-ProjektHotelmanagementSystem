@@ -10,35 +10,32 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import org.controlsfx.control.CheckComboBox;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.ResourceBundle;
+
+//TODO: Package fehlt in Buchung
 
 public class WalkIn1ViewController implements Initializable {
 
     @FXML
-    private ComboBox<String> roomCategoryDropdown;
+    private CheckComboBox<String> roomCategoryDropdown;
+    private ObservableList selectedCategoriesList;
 
     @FXML
     private ComboBox<String> roomCategories;
 
     @FXML
-    private ComboBox<String> roomNumberDropdown;
+    private CheckComboBox<String> roomNumberDropdown;
 
     @FXML
     private Text chooseRoom;
@@ -53,7 +50,7 @@ public class WalkIn1ViewController implements Initializable {
     private Text roomPrice;
     private WalkInUseCaseController useCaseController;
 
-    //package fehlt
+
 
     @FXML
     private void onCancelButtonClicked(ActionEvent e) {
@@ -79,36 +76,49 @@ public class WalkIn1ViewController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        useCaseController = new WalkInUseCaseController();
-        //set RoomCategory DropDown
-        ArrayList<RoomCategory> allRoomCategories = RoomCategoryDataMapper.getAll();
-        ObservableList<String> names = FXCollections.observableArrayList();
-        for(RoomCategory roomCategory : allRoomCategories) {
-            names.add(roomCategory.getName());
-        }
-        roomCategoryDropdown.setItems(names);
+    @FXML
+    public void onCategorySelected(MouseEvent mouseEvent) {
+        //fehler!!! HILFE!!!!
+
+        selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
+
+        /*for(Object o : selectedCategoriesList){
+            System.out.println(o.toString());
+            selectedCategoriesList.add(o);
+        }*/
+    }
 
 
+    private void fillRooms(){
         //set RoomNumber DropDown
         /*TODO: nur die freien Zimmer sollen angezeigt werden und außerdem
         nur die Zimmer der richtigen kategorie
          */
-
-
         ArrayList<Room> allRooms = RoomDataMapper.getAll();
         ObservableList<String> rooms = FXCollections.observableArrayList();
-        //String selectedRoomCategory = roomCategories.toString();
-        //System.out.println("Selected Category: " + selectedRoomCategory);
-        for(Room room : allRooms) {
-            rooms.add(Integer.toString(room.getNumber()));
-            /*
-            if(room.getCategory().getName().equals(selectedRoomCategory)){
-                rooms.add(Integer.toString(room.getNumber()));
-            }*/
-        }
-        roomNumberDropdown.setItems(rooms);
+        String room;
+        String category;
 
+        for(int i = 0; i < allRooms.size(); i++){
+            room = allRooms.get(i).getCategory().getName();
+            category = selectedCategoriesList.get(i).toString();
+            if(room.equals(category)){
+                rooms.add(room + " " + category);
+            }
+        }
+        roomNumberDropdown.getItems().setAll(rooms);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        useCaseController = new WalkInUseCaseController();
+
+        //fill Room Categories DropDown
+        ArrayList<RoomCategory> allRoomCategories = RoomCategoryDataMapper.getAll();
+        ObservableList<String> categoryNames = FXCollections.observableArrayList();
+        for(RoomCategory roomCategory : allRoomCategories) {
+            categoryNames.add(roomCategory.getName());
+        }
+        roomCategoryDropdown.getItems().setAll(categoryNames);
     }
 }

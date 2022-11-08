@@ -1,7 +1,7 @@
 package com.fhv.hotelmanagement.domainModel;
 
 import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
-
+//TODO: Preis pro Nacht fehlt
 public class Room {
 
     private RoomEntity entity;

@@ -56,6 +56,8 @@ public class PersistenceFacade{
         CustomerDataMapper.instance().insert(clara);
         System.out.println(getCustomer(4).get().getFirstName());
 
+
+
         Booking booking = new Booking(new BookingEntity(3, clara.getEntity(), LocalDate.now(), LocalDateTime.now(), null, null,
                 null, null, null, null, null, new LinkedHashSet<>(), new HashSet<>()));
         BookingDataMapper.instance().insert(booking);
