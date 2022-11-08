@@ -86,7 +86,7 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <CheckComboBox fx:id="roomCategoryDropdown" onMouseEntered="#onCategorySelected" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
+                <CheckComboBox fx:id="roomCategoryDropdown" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
                 <CheckComboBox fx:id="roomNumberDropdown" onMouseEntered="#fillRooms" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
                 <ComboBox fx:id="roomPriceDD" editable="false" layoutX="545.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
@@ -130,7 +130,7 @@
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-
+                
             </children></AnchorPane>
     </center>
 </BorderPane>

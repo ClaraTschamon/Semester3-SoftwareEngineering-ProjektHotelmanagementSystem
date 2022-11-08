@@ -6,9 +6,6 @@ import com.fhv.hotelmanagement.domainModel.Room;
 import com.fhv.hotelmanagement.domainModel.RoomCategory;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomCategoryDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.controlsfx.control.CheckComboBox;
@@ -80,31 +76,15 @@ public class WalkIn1ViewController implements Initializable {
         }
     }
 
-    @FXML
-    public void onCategorySelected(MouseEvent mouseEvent) {
-        //fehler!!! HILFE!!!!
-
-        //selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
-        //fillRooms();
-        /*for(Object o : selectedCategoriesList){
-            System.out.println(o.toString());
-            selectedCategoriesList.add(o);
-        }*/
-
-    }
 
     @FXML
     private void fillRooms(MouseEvent e){
-        System.out.println("in fillRooms");
         //TODO: nur die freien Zimmer sollen angezeigt werden und außerdem
         //TODO: nach nummern sortieren
-
-        //https://stackoverflow.com/questions/7639519/sorting-the-dropdown-list
 
         ObservableList<String> selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
 
         if(!selectedCategoriesList.isEmpty()) {
-            System.out.println(selectedCategoriesList.size());
 
             ArrayList<Room> allRooms = RoomDataMapper.getAll();
             ObservableList<String> rooms = FXCollections.observableArrayList();
