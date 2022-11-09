@@ -17,11 +17,12 @@ public class MainController implements Initializable {
     private FXMLLoader currentFXMLLoader;
 
 
-    public void loadIntoContentArea(String resourceToLoad) throws IOException, URISyntaxException {
+    public FXMLLoader loadIntoContentArea(String resourceToLoad) throws IOException {
         currentFXMLLoader = new FXMLLoader(MainApplication.class.getResource("fxml/"+ resourceToLoad + ".fxml"));
         Parent fxml = currentFXMLLoader.load();
         contentArea.getChildren().clear();
         contentArea.getChildren().setAll(fxml);
+        return currentFXMLLoader;
     }
 
     @Override
@@ -29,8 +30,6 @@ public class MainController implements Initializable {
         try {
             loadIntoContentArea("home");
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

@@ -80,7 +80,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <DatePicker fx:id="departureDate" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
+                <DatePicker fx:id="departureDatePicker" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
                 <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
                     <font>
                         <Font name="System Bold" size="18.0" />
@@ -124,6 +124,8 @@
                     <font>
                         <Font size="13.0" />
                     </font>
+                </RadioButton>
+                <RadioButton layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
                 </RadioButton>
                 <RadioButton layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
                     <font>
