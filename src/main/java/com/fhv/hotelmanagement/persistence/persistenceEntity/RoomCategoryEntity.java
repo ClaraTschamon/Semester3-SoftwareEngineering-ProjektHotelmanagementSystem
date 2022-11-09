@@ -38,4 +38,12 @@ public class RoomCategoryEntity {
     public void setPricePerNight(BigDecimal pricePerNight) {
         this.pricePerNight = pricePerNight;
     }
+
+    @Override
+    public String toString() {
+        return "RoomCategoryEntity{" +
+                "name='" + name + '\'' +
+                ", pricePerNight=" + pricePerNight +
+                '}';
+    }
 }

@@ -62,4 +62,14 @@ public class BookedRoomCategoryEntity {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "BookedRoomCategoryEntity{" +
+                "booking=" + booking +
+                ", roomCategory=" + roomCategory +
+                ", pricePerNight=" + pricePerNight +
+                ", amount=" + amount +
+                '}';
+    }
 }

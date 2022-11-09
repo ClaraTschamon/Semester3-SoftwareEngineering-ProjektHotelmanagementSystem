@@ -2,19 +2,19 @@ package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domainModel.Booking;
 import com.fhv.hotelmanagement.domainModel.Customer;
+import com.fhv.hotelmanagement.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.CustomerDataMapper;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
+import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Month;
 
 //Broker == Mapper
@@ -42,11 +42,18 @@ public class PersistenceFacade{
 
     }
 
+    @SuppressWarnings("rawtypes")
+    public static Optional<Room> getRoom(int number){
+        return RoomDataMapper._instance().get(number);
+    }
+
     public static Optional<Booking> getBooking(int id){
         return BookingDataMapper.instance().get(4);
     }
 
     public static void main(String[] args) {
+
+
         PersistenceFacade pf = new PersistenceFacade();
         System.out.println(getCustomer(1).toString());
 
@@ -56,13 +63,10 @@ public class PersistenceFacade{
         CustomerDataMapper.instance().insert(clara);
         System.out.println(getCustomer(4).get().getFirstName());
 
-
-
         Booking booking = new Booking(new BookingEntity(3, clara.getEntity(), LocalDate.now(), LocalDateTime.now(), null, null,
                 null, null, null, null, null, new LinkedHashSet<>(), new HashSet<>()));
         BookingDataMapper.instance().insert(booking);
         System.out.println(getBooking(4).get().getCustomer().getFirstName());
-
 
     }
 }

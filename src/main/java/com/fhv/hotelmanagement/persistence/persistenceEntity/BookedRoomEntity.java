@@ -61,4 +61,14 @@ public class BookedRoomEntity {
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
     }
+
+    @Override
+    public String toString() {
+        return "BookedRoomEntity{" +
+                "booking=" + booking +
+                ", room=" + room +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                '}';
+    }
 }

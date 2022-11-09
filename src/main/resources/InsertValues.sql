@@ -27,68 +27,68 @@ INSERT INTO room_category(room_category_name, price_per_night)
 VALUES('Suite', 180);
 
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(11, 'Einzelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(11, true, true, 'Einzelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(12, 'Einzelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(12, false, false, 'Einzelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(13, 'Einzelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(13, true, false, 'Einzelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(14, 'Familienzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(14, true, true, 'Familienzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(15, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(15, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(16, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(16, false, false, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(17, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(17, true, false, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(18, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(18, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(21, 'Einzelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(21, true, true, 'Einzelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(22, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(22, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(23, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(23, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(24, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(24, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(25, 'Familienzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(25, true, true, 'Familienzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(26, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(26, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(27, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(27, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(28, 'Familienzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(28, true, true, 'Familienzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(31, 'Familienzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(31, true, true, 'Familienzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(32, 'Doppelzimmer');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(32, true, true, 'Doppelzimmer');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(33, 'Suite');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(33, true, true, 'Suite');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(34, 'Suite');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(34, true, true, 'Suite');
 
-INSERT INTO room(room_number, room_category_name)
-VALUES(35, 'Suite');
+INSERT INTO room(room_number, is_free, is_clean, room_category_name)
+VALUES(35, true, true, 'Suite');
 
 
 INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, customer_credit_card_number, saved)

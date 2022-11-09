@@ -174,4 +174,23 @@ public class BookingEntity {
     public void setBookedRooms(Set<BookedRoomEntity> bookedRooms) {
         this.bookedRooms = bookedRooms;
     }
+
+    @Override
+    public String toString() {
+        return "BookingEntity{" +
+                "number=" + number +
+                ", customer=" + customer +
+                ", arrivalDate=" + arrivalDate +
+                ", checkInDatetime=" + checkInDatetime +
+                ", departureDate=" + departureDate +
+                ", checkOutDatetime=" + checkOutDatetime +
+                ", billingStreet='" + billingStreet + '\'' +
+                ", billingHouseNumber='" + billingHouseNumber + '\'' +
+                ", BillingPostalCode='" + BillingPostalCode + '\'' +
+                ", BillingCity='" + BillingCity + '\'' +
+                ", BillingCountry='" + BillingCountry + '\'' +
+                ", bookedRoomCategories=" + bookedRoomCategories +
+                ", bookedRooms=" + bookedRooms +
+                '}';
+    }
 }

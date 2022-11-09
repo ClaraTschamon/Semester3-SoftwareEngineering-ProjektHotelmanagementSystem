@@ -13,6 +13,8 @@ CREATE TABLE room_category(
 
 CREATE TABLE room(
     room_number INTEGER PRIMARY KEY,
+    is_free BOOLEAN,
+    is_clean BOOLEAN,
     room_category_name VARCHAR(255),
     FOREIGN KEY (room_category_name) REFERENCES room_category(room_category_name)
 );

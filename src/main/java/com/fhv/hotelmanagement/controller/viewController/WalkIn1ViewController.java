@@ -31,11 +31,17 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private CheckComboBox<String> roomCategoryDropdown;
 
+    ObservableList<String> selectedCategoriesList;
+
     @FXML
     private ComboBox<String> roomCategories;
 
     @FXML
     private CheckComboBox<String> roomNumberDropdown;
+
+
+    //https://stackoverflow.com/questions/41229964/how-to-check-and-uncheck-all-items-when-checking-or-unckeck-some-of-the-items
+    private ObservableList<String> selectedRooms;
 
     @FXML
     private Text chooseRoom;
@@ -79,9 +85,41 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private void fillRooms(MouseEvent e){
-        //TODO: nur die freien Zimmer sollen angezeigt werden und außerdem
-        //TODO: nach nummern sortieren
+        /*ich brauche hier hilfe!!!*/
 
+        selectedRooms = roomNumberDropdown.getCheckModel().getCheckedItems();
+        roomNumberDropdown.getItems().setAll(selectedRooms);
+        roomNumberDropdown.getCheckModel().checkAll();
+        //problem ist dass room unten wieder neu eingefügt wird
+
+        selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
+
+        if(!selectedCategoriesList.isEmpty()) {
+
+            ArrayList<Room> allRooms = RoomDataMapper.getAll();
+            ObservableList<String> rooms = FXCollections.observableArrayList();
+            String room;
+            int roomNumber;
+
+            for (int i = 0; i < allRooms.size(); i++) {
+                Room current = allRooms.get(i);
+                room = current.getCategory().getName();
+                roomNumber = allRooms.get(i).getNumber();
+                if(selectedCategoriesList.contains(room)){
+                    if(current.getIsFree()){
+                        if(!roomNumberDropdown.getItems().contains(current.getNumber() + current.getCategory().getName())){
+                            rooms.add(roomNumber + " " + allRooms.get(i).getCategory().getName());
+                        }
+                    }
+                }
+            }
+            Collections.sort(rooms);
+            roomNumberDropdown.getItems().setAll(rooms); //ist setAll() das Problem?
+            //wahrscheinlich wird durch setAll() alles überschrieben
+        }
+
+
+        /*
         ObservableList<String> selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
 
         if(!selectedCategoriesList.isEmpty()) {
@@ -96,16 +134,15 @@ public class WalkIn1ViewController implements Initializable {
                 room = current.getCategory().getName();
                 roomNumber = allRooms.get(i).getNumber();
                 if(selectedCategoriesList.contains(room)){
-                    //nullpointer exception weil roomnumber nicht in entity und nicht in datenbank
-                    /*if(current.getIsFree()){
+                    if(current.getIsFree()){
                         rooms.add(roomNumber + " " + allRooms.get(i).getCategory().getName());
-                    }*/
-                    rooms.add(roomNumber + " " + allRooms.get(i).getCategory().getName());
+                    }
                 }
             }
             Collections.sort(rooms);
             roomNumberDropdown.getItems().setAll(rooms);
-        }
+        }*/
+
     }
 
     @Override

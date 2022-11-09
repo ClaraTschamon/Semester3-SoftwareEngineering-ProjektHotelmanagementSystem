@@ -189,4 +189,25 @@ public class CustomerEntity {
     public void setBookings(Set<BookingEntity> bookings) {
         this.bookings = bookings;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerEntity{" +
+                "number=" + number +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", nationality='" + nationality + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", street='" + street + '\'' +
+                ", houseNumber='" + houseNumber + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", creditCardNumber='" + creditCardNumber + '\'' +
+                ", saved=" + saved +
+                ", bookings=" + bookings +
+                '}';
+    }
 }
