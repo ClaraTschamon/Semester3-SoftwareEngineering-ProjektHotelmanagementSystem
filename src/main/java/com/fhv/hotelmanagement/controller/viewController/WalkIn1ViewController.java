@@ -28,16 +28,10 @@ import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
 
-    @FXML
-    private CheckComboBox<String> roomCategoryDropdown;
-
     ObservableList<String> selectedCategoriesList;
 
     @FXML
     private ComboBox<String> roomCategories;
-
-    @FXML
-    private CheckComboBox<String> roomNumberDropdown;
 
 
     //https://stackoverflow.com/questions/41229964/how-to-check-and-uncheck-all-items-when-checking-or-unckeck-some-of-the-items
@@ -82,10 +76,10 @@ public class WalkIn1ViewController implements Initializable {
         }
     }
 
-
+    /*
     @FXML
     private void fillRooms(MouseEvent e){
-        /*ich brauche hier hilfe!!!*/
+
 
         selectedRooms = roomNumberDropdown.getCheckModel().getCheckedItems();
         roomNumberDropdown.getItems().setAll(selectedRooms);
@@ -119,7 +113,7 @@ public class WalkIn1ViewController implements Initializable {
         }
 
 
-        /*
+
         ObservableList<String> selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
 
         if(!selectedCategoriesList.isEmpty()) {
@@ -141,9 +135,10 @@ public class WalkIn1ViewController implements Initializable {
             }
             Collections.sort(rooms);
             roomNumberDropdown.getItems().setAll(rooms);
-        }*/
+        }
 
-    }
+    }*/
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -155,6 +150,6 @@ public class WalkIn1ViewController implements Initializable {
         for(RoomCategory roomCategory : allRoomCategories) {
             categoryNames.add(roomCategory.getName());
         }
-        roomCategoryDropdown.getItems().setAll(categoryNames);
+        //roomCategoryDropdown.getItems().setAll(categoryNames);
     }
 }

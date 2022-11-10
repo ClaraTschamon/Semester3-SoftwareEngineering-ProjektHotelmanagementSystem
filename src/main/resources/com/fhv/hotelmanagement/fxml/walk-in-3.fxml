@@ -47,8 +47,14 @@
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font></Label>
-                <Label layoutX="60.0" layoutY="280.0" text="Kreditkartennummer" />
-                <Label layoutX="545.0" layoutY="370.0" text="Anmerkung" />
+                <Label layoutX="60.0" layoutY="280.0" text="Kreditkartennummer">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+                <Label layoutX="545.0" layoutY="434.0" text="Anmerkung">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
                 <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Zurück" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
@@ -61,21 +67,30 @@
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-                <TextField fx:id="creditCardNumber" layoutX="60.0" layoutY="305.0" prefHeight="40.0" prefWidth="300.0" promptText="Kreditkartennummer..." />
-                <Text layoutX="545.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort" />
-                <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße" />
-                <Text layoutX="790.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ" />
-                <TextField fx:id="billingCity" layoutX="545.0" layoutY="310.0" prefHeight="40.0" prefWidth="240.0" promptText="Wohnort..." />
-                <TextField fx:id="billingStreet" layoutX="545.0" layoutY="230.0" prefHeight="40.0" prefWidth="240.0" promptText="Straße..." />
+                <Text layoutX="545.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+                <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+                <Text layoutX="780.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+                <TextField fx:id="billingCity" layoutX="545.0" layoutY="295.0" prefHeight="40.0" prefWidth="230.0" />
+                <TextField fx:id="billingStreet" layoutX="545.0" layoutY="230.0" prefHeight="40.0" prefWidth="230.0" />
                 <Label layoutX="455.0" layoutY="421.0" />
                 <CheckBox layoutX="545.0" layoutY="180.0" mnemonicParsing="false" text="Rechnungsaddressse entspricht der Wohnaddresse" />
-                <TextField fx:id="billingHouseNumber" layoutX="790.0" layoutY="230.0" prefHeight="40.0" prefWidth="55.0" promptText="HNr..." />
-                <TextArea layoutX="545.0" layoutY="401.0" prefHeight="168.0" prefWidth="303.0" />
-                <Label layoutX="790.0" layoutY="192.0" prefHeight="40.0" prefWidth="55.0" text="HNr." />
-                <TextField fx:id="billingPostalCode" layoutX="790.0" layoutY="310.0" prefHeight="40.0" prefWidth="55.0" promptText="PLZ..." />
-                <Label layoutX="60.0" layoutY="350.0" text="Verfügernummer" />
-                <TextField fx:id="verfuegernummer" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" promptText="Verfügernummer..." />
-                <ComboBox fx:id="paymentMethod" editable="true" layoutX="60.0" layoutY="180.0" prefHeight="32.0" prefWidth="255.0">
+                <TextField fx:id="billingHouseNumber" layoutX="780.0" layoutY="230.0" prefHeight="40.0" prefWidth="65.0" />
+                <TextArea layoutX="544.0" layoutY="454.0" prefHeight="98.0" prefWidth="303.0" />
+                <TextField fx:id="billingPostalCode" layoutX="780.0" layoutY="295.0" prefHeight="40.0" prefWidth="65.0" />
+                <Label layoutX="60.0" layoutY="360.0" text="Verfügernummer">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+                <ComboBox fx:id="paymentMethod" layoutX="60.0" layoutY="180.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Kreditkarte" />
@@ -86,13 +101,29 @@
                         <String fx:value="Kreditkarte" /> <!--default value-->
                     </value>
                 </ComboBox>
-                <Label layoutX="60.0" layoutY="410.0" text="Ablaufdatum" />
-                <TextField layoutX="60.0" layoutY="430.0" prefHeight="40.0" prefWidth="300.0" promptText="Ablaufdatum..." />
+                <Label layoutX="60.0" layoutY="440.0" text="Ablaufdatum">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
                 <Label layoutX="545.0" layoutY="150.0" prefHeight="27.0" prefWidth="171.0" text="Rechnungsaddresse">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
+            <TextField fx:id="billingCity1" layoutX="545.0" layoutY="365.0" prefHeight="40.0" prefWidth="300.0" />
+            <Text layoutX="780.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="545.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" />
+            <TextField layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
+            <TextField layoutX="60.0" layoutY="460.0" prefHeight="40.0" prefWidth="300.0" />
             </children></AnchorPane>
     </center>
 </BorderPane>

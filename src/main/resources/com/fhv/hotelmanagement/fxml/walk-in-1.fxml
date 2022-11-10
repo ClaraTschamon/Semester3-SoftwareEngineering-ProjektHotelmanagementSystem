@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -65,7 +66,7 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Text layoutX="550.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmernummer">
+                <Text layoutX="680.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmernummer">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -86,9 +87,9 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <CheckComboBox fx:id="roomCategoryDropdown" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
-                <CheckComboBox fx:id="roomNumberDropdown" onMouseEntered="#fillRooms" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
-                <ComboBox fx:id="roomPriceDD" editable="false" layoutX="545.0" layoutY="340.0" prefHeight="40.0" prefWidth="300.0">
+
+                <ComboBox fx:id="roomPriceDD" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
+
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Normalpreis" />
@@ -100,7 +101,7 @@
                         <String fx:value="Normalpreis" /> <!--default value!-->
                     </value>
                 </ComboBox>
-                <Text layoutX="545.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreise">
+                <Text layoutX="545.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreise">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -130,7 +131,20 @@
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                
+            <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
+            <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einzelzimmer" />
+            <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doppelzimmer" />
+            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Famielenzimmer" />
+            <Text layoutX="545.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suite" />
+            <Text layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <CheckComboBox layoutX="680.0" layoutY="250.0" prefHeight="40.0" prefWidth="100.0" />
+            <CheckComboBox layoutX="680.0" layoutY="201.0" prefHeight="40.0" prefWidth="100.0" />
+            <CheckComboBox layoutX="680.0" layoutY="300.0" prefHeight="40.0" prefWidth="100.0" />
+            <CheckComboBox layoutX="680.0" layoutY="350.0" prefHeight="40.0" prefWidth="100.0" />
+
             </children></AnchorPane>
     </center>
 </BorderPane>
