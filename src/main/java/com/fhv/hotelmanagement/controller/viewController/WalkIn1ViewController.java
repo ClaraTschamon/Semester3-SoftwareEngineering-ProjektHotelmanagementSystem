@@ -31,12 +31,9 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private CheckComboBox<String> roomCategoryDropdown;
-
     ObservableList<String> selectedCategoriesList;
-
     @FXML
     private ComboBox<String> roomCategories;
-
     @FXML
     private CheckComboBox<String> roomNumberDropdown;
 
@@ -55,10 +52,10 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private Text roomPrice;
-    private WalkInUseCaseController useCaseController;
+    private WalkInViewController viewController;
 
-    public void setUseCaseController(WalkInUseCaseController useCaseController) {
-        this.useCaseController = useCaseController;
+    public void setController(WalkInViewController viewController) {
+        this.viewController = viewController;
     }
 
     @Override
@@ -73,7 +70,7 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     public void fillData() {
-        LocalDate departureDate = useCaseController.getBooking().getDepartureDate();
+        LocalDate departureDate = viewController.getUseCaseController().getBooking().getDepartureDate();
         if (departureDate != null) {
             departureDatePicker.setValue(departureDate);
         } else {
@@ -84,10 +81,10 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private void onNextButtonClicked(ActionEvent e) {
         try {
-            useCaseController.getBooking().setDepartureDate(departureDatePicker.getValue());
+            viewController.getUseCaseController().getBooking().setDepartureDate(departureDatePicker.getValue());
 
             // TODO fill all attributes
-            useCaseController.loadWalkIn2();
+            viewController.loadWalkIn2();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
         }
@@ -96,7 +93,7 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private void onCancelButtonClicked(ActionEvent e) {
         try {
-            useCaseController.cancel();
+            viewController.cancel();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
         }

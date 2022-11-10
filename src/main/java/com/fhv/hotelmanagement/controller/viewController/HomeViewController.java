@@ -12,6 +12,6 @@ public class HomeViewController {
 
     @FXML
     private void onWalkInClicked(ActionEvent e) throws IOException {
-        WalkInUseCaseController walkInUseCaseController = new WalkInUseCaseController();
+        WalkInViewController walkInViewControllerController = new WalkInViewController();
     }
 }

@@ -35,36 +35,29 @@ public class WalkIn2ViewController {
     private TextField city;
     @FXML
     private TextField postalCode;
-
     @FXML
     private ComboBox<String> paymentMethod;
-
     @FXML
     private TextField creditCardNumber;
-
     @FXML TextField verfuegernummer;
-
     @FXML
     private TextField billingCity;
-
     @FXML
     private TextField billingStreet;
-
     @FXML
     private TextField billingHouseNumber;
-
     @FXML
     private TextField billingPostalCode;
-    private WalkInUseCaseController useCaseController;
+    private WalkInViewController viewController;
 
-    public void setUseCaseController(WalkInUseCaseController useCaseController) {
-        this.useCaseController = useCaseController;
+    public void setController(WalkInViewController viewController) {
+        this.viewController = viewController;
     }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
         try {
-            useCaseController.loadWalkIn1();
+            viewController.loadWalkIn1();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
         }
@@ -74,17 +67,17 @@ public class WalkIn2ViewController {
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
             // TODO fill all attributes
-            useCaseController.getCustomer().setFirstName(firstName.getText());
-            useCaseController.getCustomer().setLastName(lastName.getText());
-            useCaseController.getCustomer().setNationality(nationality.getText());
-            useCaseController.getCustomer().setPhoneNumber(phoneNumber.getText());
-            useCaseController.getCustomer().setEmail(email.getText());
-            useCaseController.getCustomer().getAddress().setCity(city.getText());
-            useCaseController.getCustomer().getAddress().setStreet(street.getText());
-            useCaseController.getCustomer().getAddress().setHouseNumber(houseNumber.getText());
-            useCaseController.getCustomer().getAddress().setPostalCode(postalCode.getText());
+            viewController.getUseCaseController().getCustomer().setFirstName(firstName.getText());
+            viewController.getUseCaseController().getCustomer().setLastName(lastName.getText());
+            viewController.getUseCaseController().getCustomer().setNationality(nationality.getText());
+            viewController.getUseCaseController().getCustomer().setPhoneNumber(phoneNumber.getText());
+            viewController.getUseCaseController().getCustomer().setEmail(email.getText());
+            viewController.getUseCaseController().getCustomer().getAddress().setCity(city.getText());
+            viewController.getUseCaseController().getCustomer().getAddress().setStreet(street.getText());
+            viewController.getUseCaseController().getCustomer().getAddress().setHouseNumber(houseNumber.getText());
+            viewController.getUseCaseController().getCustomer().getAddress().setPostalCode(postalCode.getText());
 
-            useCaseController.loadWalkIn3();
+            viewController.loadWalkIn3();
         }catch(IOException exc){
             System.out.println(exc.getMessage());
         }
@@ -93,7 +86,7 @@ public class WalkIn2ViewController {
     @FXML
     private void onCancelButtonClicked(ActionEvent e){
         try{
-            useCaseController.cancel();
+            viewController.cancel();
         }catch(IOException exc){
             System.out.println(exc.getMessage());
         }
