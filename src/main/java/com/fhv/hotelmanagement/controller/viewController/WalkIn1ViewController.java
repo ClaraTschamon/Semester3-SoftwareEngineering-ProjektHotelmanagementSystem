@@ -1,5 +1,7 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
+import com.fhv.hotelmanagement.DTOs.AddressDTO;
+import com.fhv.hotelmanagement.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
 import com.fhv.hotelmanagement.domainModel.Room;
@@ -20,6 +22,8 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -57,8 +61,29 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     protected void fillData() {
-
+        LocalDate departureDate = viewController.getUseCaseController().getBooking().getDepartureDate();
+        if (departureDate != null) {
+            viewController.getUseCaseController().getBooking().setDepartureDate(departureDate);
+        } else {
+            viewController.getUseCaseController().getBooking().setDepartureDate(LocalDate.now());
+        }
+        LocalDate arrivalDate= viewController.getUseCaseController().getBooking().getArrivalDate();
+        CustomerDTO customer = viewController.getUseCaseController().getBooking().getCustomer();
+        LocalDateTime checkInDatetime = viewController.getUseCaseController().getBooking().getCheckInDatetime();
+        LocalDateTime checkOutDatetime = viewController.getUseCaseController().getBooking().getCheckOutDatetime();
+        AddressDTO billingAddress=viewController.getUseCaseController().getBooking().getBillingAddress();
+        Integer number = viewController.getUseCaseController().getBooking().getNumber();
     }
+
+    protected void saveData(){
+        viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
+//        viewController.getUseCaseController().getBooking().setCustomer();
+//        viewController.getUseCaseController().getBooking().setCheckInDatetime(checkIn);
+//        viewController.getUseCaseController().getBooking().setCheckOutDatetime(checkOut);
+//        viewController.getUseCaseController().getBooking().setBillingAddress(billing);
+//        viewController.getUseCaseController().getBooking().setNumber(no);
+    }
+
 
     @FXML
     private void onCancelButtonClicked(ActionEvent e) {

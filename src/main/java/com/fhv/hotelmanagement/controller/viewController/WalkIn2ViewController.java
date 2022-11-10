@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
+import com.fhv.hotelmanagement.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
 import javafx.event.ActionEvent;
@@ -52,6 +53,32 @@ public class WalkIn2ViewController {
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
+    }
+    protected void saveData() throws IOException{
+        CustomerDTO customer = viewController.getUseCaseController().getCustomer();
+        customer.setFirstName(firstName.getText());
+        customer.setLastName(lastName.getText());
+        customer.setNationality(nationality.getText());
+        customer.setPhoneNumber(phoneNumber.getText());
+        customer.setEmail(email.getText());
+        customer.getAddress().setStreet(street.getText());
+        customer.getAddress().setCity(city.getText());
+        customer.getAddress().setHouseNumber(houseNumber.getText());
+        customer.getAddress().setPostalCode(postalCode.getText());
+        viewController.loadWalkIn3();
+    }
+
+    protected void fillData() throws IOException {
+        CustomerDTO customer = viewController.getUseCaseController().getCustomer();
+        String firstname= customer.getFirstName();
+        String lastname=customer.getLastName();
+        String nationality= customer.getNationality();
+        String phonenumber =customer.getPhoneNumber();
+        String email =customer.getEmail();
+        String city=customer.getAddress().getCity();
+        String street=customer.getAddress().getStreet();
+        String housenumber =customer.getAddress().getHouseNumber();
+        String postalcode=customer.getAddress().getPostalCode();
     }
 
     @FXML
