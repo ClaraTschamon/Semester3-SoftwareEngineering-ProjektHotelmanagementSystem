@@ -4,7 +4,6 @@ import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Booking {
@@ -17,6 +16,15 @@ public class Booking {
     private LocalDate departureDate;
     private LocalDateTime checkOutDatetime;
     private Address billingAddress;
+
+    private String paymentMethod;
+
+    private String creditCardNumber;
+
+    private LocalDate expirationDate;
+
+    private String authorisationNumber;
+    private String comment;
     private HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories;
     private HashMap<Room, BookedRoom> bookedRooms;
 
@@ -49,6 +57,10 @@ public class Booking {
 
     public BookingEntity getEntity(){
         return entity;
+    }
+
+    public void setEntity(BookingEntity entity) {
+        this.entity = entity;
     }
 
     public Integer getNumber() {
@@ -105,6 +117,46 @@ public class Booking {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getAuthorisationNumber() {
+        return authorisationNumber;
+    }
+
+    public void setAuthorisationNumber(String authorisationNumber) {
+        this.authorisationNumber = authorisationNumber;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public HashMap<RoomCategory, BookedRoomCategory> getBookedRoomCategories() {

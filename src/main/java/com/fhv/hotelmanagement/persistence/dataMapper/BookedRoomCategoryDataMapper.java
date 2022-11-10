@@ -27,8 +27,11 @@ public class BookedRoomCategoryDataMapper{
     }
 
     //create
-    public void insert(BookedRoomCategory bookedRoomCategory){
-        PersistenceFacade.instance().entityManager.persist(bookedRoomCategory.getEntity());
+    public void insert(BookedRoomCategory bookedRoomCategory){ //Autocommit funktioniert nicht
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.persist(bookedRoomCategory.getEntity());
+        entityManager.getTransaction().commit();
     }
 
     //update

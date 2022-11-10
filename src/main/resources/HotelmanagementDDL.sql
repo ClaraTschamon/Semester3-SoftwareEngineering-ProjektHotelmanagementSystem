@@ -11,6 +11,11 @@ CREATE TABLE room_category(
     price_per_night INTEGER
 );
 
+CREATE TABLE package(
+    package_name VARCHAR(255) PRIMARY KEY,
+    price_per_night INTEGER
+);
+
 CREATE TABLE room(
     room_number INTEGER PRIMARY KEY,
     is_free BOOLEAN,
@@ -32,7 +37,6 @@ CREATE TABLE customer(
     customer_postal_code VARCHAR(255),
     customer_city VARCHAR(255),
     customer_country VARCHAR(255),
-    customer_credit_card_number VARCHAR(255),
     saved BOOLEAN
 );
 
@@ -40,7 +44,7 @@ CREATE TABLE booking(
     booking_number INTEGER PRIMARY KEY,
     customer_number INTEGER,
     FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
-    arrival_date DATE NOT NULL,
+    arrival_date DATE,
     check_in_datetime DATETIME, //Zeitstempel wann man eingecheckt hat
     departure_date DATE,
     check_out_datetime DATETIME,
@@ -48,7 +52,12 @@ CREATE TABLE booking(
     billing_house_number VARCHAR(255),
     billing_postal_code VARCHAR(255),
     billing_city VARCHAR(255),
-    billing_country VARCHAR(255)
+    billing_country VARCHAR(255),
+    comment VARCHAR(255),
+    payment_method VARCHAR(255),
+    credit_card_number VARCHAR(255),
+    expiration_date DATE,
+    authorisation_number VARCHAR(255),
 );
 
 CREATE TABLE booked_room(

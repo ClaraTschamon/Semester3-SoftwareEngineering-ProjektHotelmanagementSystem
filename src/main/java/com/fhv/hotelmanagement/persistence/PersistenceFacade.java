@@ -59,14 +59,17 @@ public class PersistenceFacade{
 
         Customer clara = new Customer( new CustomerEntity(4, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
                 "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
-                "Hummelweg", "36", "6710", "Nenzing", "Austria", "ajfdsajfs", true, null));
+                "Hummelweg", "36", "6710", "Nenzing", "Austria", true, null));
         CustomerDataMapper.instance().insert(clara);
-        System.out.println(getCustomer(4).get().getFirstName());
+        System.out.println(getCustomer(3).get().getFirstName());
 
+        /*
         Booking booking = new Booking(new BookingEntity(3, clara.getEntity(), LocalDate.now(), LocalDateTime.now(), null, null,
                 null, null, null, null, null, new LinkedHashSet<>(), new HashSet<>()));
         BookingDataMapper.instance().insert(booking);
         System.out.println(getBooking(4).get().getCustomer().getFirstName());
+
+         */
 
     }
 }
