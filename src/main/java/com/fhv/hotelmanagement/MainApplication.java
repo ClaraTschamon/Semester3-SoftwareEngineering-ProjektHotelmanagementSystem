@@ -51,8 +51,6 @@ public class MainApplication extends Application {
         stage.setTitle("Sunway Hotel");
         stage.setScene(scene);
         stage.show();
-
-
     }
 
     private Properties getConfigProperties() throws IOException {

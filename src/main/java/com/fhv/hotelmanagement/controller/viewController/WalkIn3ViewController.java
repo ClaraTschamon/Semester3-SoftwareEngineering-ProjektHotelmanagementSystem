@@ -1,34 +1,86 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class WalkIn3ViewController {
-    WalkInUseCaseController useCaseController;
+    @FXML
+    CheckBox billingAddressEqualsCustomerAddressCheckBox;
+    @FXML
+    TextField billingStreetTextField;
+    @FXML
+    TextField billingHouseNumberTextField;
+    @FXML
+    TextField billingCityTextField;
+    @FXML
+    TextField billingPostalCodeTextField;
+    @FXML
+    TextArea notesTextArea;
+    WalkInViewController viewController;
 
-    public void setUseCaseController(WalkInUseCaseController useCaseController) {
-        this.useCaseController = useCaseController;
+    public void setController(WalkInViewController viewController) {
+        this.viewController = viewController;
+    }
+
+    public void fillData() {
+        // TODO
+        fillBillingAddressData();
+    }
+
+    public void fillBillingAddressData() {
+        if (billingAddressEqualsCustomerAddressCheckBox.isSelected()) {
+            AddressDTO address = viewController.getUseCaseController().getCustomer().getAddress();
+            billingStreetTextField.setText(address.getStreet());
+            billingHouseNumberTextField.setText(address.getHouseNumber());
+            billingCityTextField.setText(address.getCity());
+            billingPostalCodeTextField.setText(address.getPostalCode());
+        } else {
+            billingStreetTextField.setText("");
+            billingHouseNumberTextField.setText("");
+            billingCityTextField.setText("");
+            billingPostalCodeTextField.setText("");
+        }
     }
 
     @FXML
-    public void onBackButtonClickedPayment(ActionEvent e) throws IOException {
-        useCaseController.loadWalkIn2();
+    public void onBackButtonClickedPayment(ActionEvent e) {
+        try {
+            viewController.loadWalkIn2();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @FXML
-    public void onSaveButtonClicked(ActionEvent e) throws IOException {
+    public void onSaveButtonClicked(ActionEvent e) {
         // TODO fill all attributes
-
-        useCaseController.save();
+        try {
+            viewController.save();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @FXML
-    public void onCancelButtonClickedPayment(ActionEvent e) throws IOException {
-        useCaseController.cancel();
+    public void onCancelButtonClickedPayment(ActionEvent e) {
+        try {
+            viewController.cancel();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @FXML
+    public void billingAddressEqualsCustomerAddressCheckBoxChanged(ActionEvent e) {
+        fillBillingAddressData();
     }
 }
