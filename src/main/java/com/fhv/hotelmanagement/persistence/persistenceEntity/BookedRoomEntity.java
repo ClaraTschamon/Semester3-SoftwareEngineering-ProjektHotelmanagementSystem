@@ -7,9 +7,21 @@ import java.time.LocalDate;
 @Entity
 @Table (name = "booked_room")
 public class BookedRoomEntity {
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "booking_number")
     private BookingEntity booking;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "room_number")
     private RoomEntity room;
+
+    @Column(name = "from_date")
     private LocalDate fromDate;
+
+    @Column(name = "to_date")
     private LocalDate toDate;
 
     public BookedRoomEntity(){};
@@ -22,9 +34,7 @@ public class BookedRoomEntity {
         this.toDate = toDate;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "booking_number")
+
     public BookingEntity getBooking() {
         return booking;
     }
@@ -33,9 +43,7 @@ public class BookedRoomEntity {
         this.booking = booking;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "room_number")
+
     public RoomEntity getRoom() {
         return room;
     }
@@ -44,7 +52,7 @@ public class BookedRoomEntity {
         this.room = room;
     }
 
-    @Column(name = "from_date")
+
     public LocalDate getFromDate() {
         return fromDate;
     }
@@ -53,7 +61,7 @@ public class BookedRoomEntity {
         this.fromDate = fromDate;
     }
 
-    @Column(name = "to_date")
+
     public LocalDate getToDate() {
         return toDate;
     }

@@ -5,11 +5,19 @@ import jakarta.persistence.*;
 @Entity
 @Table (name = "room")
 public class RoomEntity {
+
+    @Id
+    @Column (name = "room_number")
     private int number;
 
+    @Column(name = "is_free")
     private boolean isFree;
 
+    @Column(name = "is_clean")
     private boolean isClean;
+
+    @ManyToOne
+    @JoinColumn (name = "room_category_name")
     private RoomCategoryEntity category;
 
     public RoomEntity(){};
@@ -21,42 +29,21 @@ public class RoomEntity {
         this.category = category;
     }
 
-    @Id
-    @Column (name = "room_number")
+
     public int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    @Column(name = "is_free")
     public boolean getIsFree(){
         return  isFree;
     }
 
-    public void setIsFree(boolean isFree){
-        this.isFree = isFree;
-    }
-
-    @Column(name = "is_clean")
     public boolean getIsClean(){
         return isClean;
     }
 
-    public void setIsClean(boolean isClean){
-        this.isClean = isClean;
-    }
-
-    @ManyToOne
-    @JoinColumn (name = "room_category_name")
     public RoomCategoryEntity getCategory() {
         return category;
-    }
-
-    public void setCategory(RoomCategoryEntity category) {
-        this.category = category;
     }
 
     @Override

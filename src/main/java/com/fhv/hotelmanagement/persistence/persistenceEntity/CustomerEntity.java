@@ -9,20 +9,52 @@ import java.util.Set;
 @Entity
 @Table(name = "customer")
 public class CustomerEntity {
+
+    @Id
+    @Column(name = "customer_number")
     private int number;
+
+    @Column(name = "customer_first_name")
     private String firstName;
+
+    @Column(name = "customer_last_name")
     private String lastName;
+
+    @Column(name = "customer_date_of_birth")
     private LocalDate dateOfBirth;
+
+    @Column(name = "customer_nationality")
     private String nationality;
+
+    @Column(name = "customer_phone_number")
     private String phoneNumber;
+
+    @Column(name = "customer_email_address")
     private String email;
+
+    @Column(name = "customer_street")
     private String street;
+
+    @Column(name = "customer_house_number")
     private String houseNumber;
+
+    @Column(name = "customer_postal_code")
     private String postalCode;
+
+    @Column(name = "customer_city")
     private String city;
+
+    @Column(name = "customer_country")
     private String country;
-    private String creditCardNumber;
+
+    @Column(name = "saved")
     private Boolean saved;
+
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private Set<BookingEntity> bookings;
 
     public CustomerEntity(){};
@@ -30,7 +62,7 @@ public class CustomerEntity {
     public CustomerEntity(int number, String firstName, String lastName,
                           LocalDate dateOfBirth, String nationality, String phoneNumber,
                           String email, String street, String houseNumber, String postalCode,
-                          String city, String country, String creditCardNumber, Boolean saved,
+                          String city, String country, Boolean saved,
                           Set<BookingEntity> bookings) {
         this.number = number;
         this.firstName = firstName;
@@ -44,13 +76,11 @@ public class CustomerEntity {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
-        this.creditCardNumber = creditCardNumber;
         this.saved = saved; //für was steht saved??
         this.bookings = bookings;
     }
 
-    @Id
-    @Column(name = "customer_number")
+
     public int getNumber() {
         return number;
     }
@@ -59,7 +89,7 @@ public class CustomerEntity {
         this.number = number;
     }
 
-    @Column(name = "customer_first_name")
+
     public String getFirstName() {
         return firstName;
     }
@@ -68,7 +98,7 @@ public class CustomerEntity {
         this.firstName = firstName;
     }
 
-    @Column(name = "customer_last_name")
+
     public String getLastName() {
         return lastName;
     }
@@ -77,7 +107,7 @@ public class CustomerEntity {
         this.lastName = lastName;
     }
 
-    @Column(name = "customer_date_of_birth")
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -86,7 +116,7 @@ public class CustomerEntity {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @Column(name = "customer_nationality")
+
     public String getNationality() {
         return nationality;
     }
@@ -95,7 +125,7 @@ public class CustomerEntity {
         this.nationality = nationality;
     }
 
-    @Column(name = "customer_phone_number")
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -104,7 +134,7 @@ public class CustomerEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    @Column(name = "customer_email_address")
+
     public String getEmail() {
         return email;
     }
@@ -113,7 +143,7 @@ public class CustomerEntity {
         this.email = email;
     }
 
-    @Column(name = "customer_street")
+
     public String getStreet() {
         return street;
     }
@@ -122,7 +152,7 @@ public class CustomerEntity {
         this.street = street;
     }
 
-    @Column(name = "customer_house_number")
+
     public String getHouseNumber() {
         return houseNumber;
     }
@@ -131,7 +161,7 @@ public class CustomerEntity {
         this.houseNumber = houseNumber;
     }
 
-    @Column(name = "customer_postal_code")
+
     public String getPostalCode() {
         return postalCode;
     }
@@ -140,7 +170,7 @@ public class CustomerEntity {
         this.postalCode = postalCode;
     }
 
-    @Column(name = "customer_city")
+
     public String getCity() {
         return city;
     }
@@ -149,7 +179,7 @@ public class CustomerEntity {
         this.city = city;
     }
 
-    @Column(name = "customer_country")
+
     public String getCountry() {
         return country;
     }
@@ -158,16 +188,7 @@ public class CustomerEntity {
         this.country = country;
     }
 
-    @Column(name = "customer_credit_card_number")
-    public String getCreditCardNumber() {
-        return creditCardNumber;
-    }
 
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
-    }
-
-    @Column(name = "saved")
     public Boolean getSaved() {
         return saved;
     }
@@ -176,11 +197,7 @@ public class CustomerEntity {
         this.saved = saved;
     }
 
-    @OneToMany(
-            mappedBy = "customer",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+
     public Set<BookingEntity> getBookings() {
         return bookings;
     }
@@ -205,7 +222,6 @@ public class CustomerEntity {
                 ", postalCode='" + postalCode + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
-                ", creditCardNumber='" + creditCardNumber + '\'' +
                 ", saved=" + saved +
                 ", bookings=" + bookings +
                 '}';

@@ -26,7 +26,10 @@ public class CustomerDataMapper{
 
     //create
     public void insert(Customer customer){
-        PersistenceFacade.instance().entityManager.persist(customer.getEntity());
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.persist(customer.getEntity());
+        entityManager.getTransaction().commit();
     }
 
     //update

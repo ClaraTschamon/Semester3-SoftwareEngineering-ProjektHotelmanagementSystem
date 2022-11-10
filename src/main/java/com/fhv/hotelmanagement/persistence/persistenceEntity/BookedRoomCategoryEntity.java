@@ -8,9 +8,20 @@ import java.math.BigDecimal;
 @Table (name = "booked_room_category")
 public class BookedRoomCategoryEntity {
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name="booking_number")
     private BookingEntity booking;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "room_category_name")
     private RoomCategoryEntity roomCategory;
+
+    @Column(name = "booking_price_per_night")
     private BigDecimal pricePerNight;
+
+    @Column(name = "amount_room_category")
     private int amount;
 
     public BookedRoomCategoryEntity(){};
@@ -23,9 +34,7 @@ public class BookedRoomCategoryEntity {
         this.amount = amount;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name="booking_number")
+
     public BookingEntity getBooking() {
         return booking;
     }
@@ -34,9 +43,7 @@ public class BookedRoomCategoryEntity {
         this.booking = booking;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "room_category_name")
+
     public RoomCategoryEntity getRoomCategory() {
         return roomCategory;
     }
@@ -45,7 +52,7 @@ public class BookedRoomCategoryEntity {
         this.roomCategory = roomCategory;
     }
 
-    @Column(name = "booking_price_per_night")
+
     public BigDecimal getPricePerNight() {
         return pricePerNight;
     }
@@ -54,7 +61,7 @@ public class BookedRoomCategoryEntity {
         this.pricePerNight = pricePerNight;
     }
 
-    @Column(name = "amount_room_category")
+
     public int getAmount() {
         return amount;
     }

@@ -39,8 +39,8 @@ public class RoomDataMapper {
         return rooms;
     }
 
-    //create
-    public void insert(Room room){
+    //update
+    public void store(Room room){
         PersistenceFacade.instance().entityManager.merge(room.getEntity());
     }
 }
