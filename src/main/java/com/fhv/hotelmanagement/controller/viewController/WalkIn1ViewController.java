@@ -20,7 +20,6 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -29,13 +28,10 @@ import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
 
-    @FXML
-    private CheckComboBox<String> roomCategoryDropdown;
     ObservableList<String> selectedCategoriesList;
+
     @FXML
     private ComboBox<String> roomCategories;
-    @FXML
-    private CheckComboBox<String> roomNumberDropdown;
 
 
     //https://stackoverflow.com/questions/41229964/how-to-check-and-uncheck-all-items-when-checking-or-unckeck-some-of-the-items
@@ -45,64 +41,46 @@ public class WalkIn1ViewController implements Initializable {
     private Text chooseRoom;
 
     @FXML
-    private DatePicker departureDatePicker;
+    private DatePicker departureDate;
 
     @FXML
     private Text room;
 
     @FXML
     private Text roomPrice;
-    private WalkInViewController viewController;
+    private WalkInUseCaseController useCaseController;
 
-    public void setController(WalkInViewController viewController) {
-        this.viewController = viewController;
-    }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //fill Room Categories DropDown
-        ArrayList<RoomCategory> allRoomCategories = RoomCategoryDataMapper.getAll();
-        ObservableList<String> categoryNames = FXCollections.observableArrayList();
-        for(RoomCategory roomCategory : allRoomCategories) {
-            categoryNames.add(roomCategory.getName());
-        }
-        roomCategoryDropdown.getItems().setAll(categoryNames);
-    }
 
-    public void fillData() {
-        LocalDate departureDate = viewController.getUseCaseController().getBooking().getDepartureDate();
-        if (departureDate != null) {
-            departureDatePicker.setValue(departureDate);
-        } else {
-            departureDatePicker.setValue(LocalDate.now());
+    @FXML
+    private void onCancelButtonClicked(ActionEvent e) {
+        try {
+            useCaseController.cancel();
+            MainApplication.getMainController().loadIntoContentArea("home");
+        } catch (IOException | URISyntaxException exc) {
+            System.out.println(exc.getMessage());
         }
     }
 
     @FXML
     private void onNextButtonClicked(ActionEvent e) {
         try {
-            viewController.getUseCaseController().getBooking().setDepartureDate(departureDatePicker.getValue());
+            useCaseController.getBooking().setDepartureDate(departureDate.getValue());
 
             // TODO fill all attributes
-            viewController.loadWalkIn2();
-        } catch (IOException exc) {
+            MainApplication.getMainController().loadIntoContentArea("walk-in-2");
+            WalkIn2ViewController walkIn2ViewController = MainApplication.getMainController().getCurrentFXMLLoader().getController();
+            walkIn2ViewController.setUseCaseController(useCaseController);
+        } catch (IOException | URISyntaxException exc) {
             System.out.println(exc.getMessage());
         }
     }
 
-    @FXML
-    private void onCancelButtonClicked(ActionEvent e) {
-        try {
-            viewController.cancel();
-        } catch (IOException exc) {
-            System.out.println(exc.getMessage());
-        }
-    }
-
+    /*
     @FXML
     private void fillRooms(MouseEvent e){
-        /*ich brauche hier hilfe!!!*/
-        System.out.println("fill rooms event");
+
+
         selectedRooms = roomNumberDropdown.getCheckModel().getCheckedItems();
         roomNumberDropdown.getItems().setAll(selectedRooms);
         roomNumberDropdown.getCheckModel().checkAll();
@@ -134,5 +112,44 @@ public class WalkIn1ViewController implements Initializable {
             //wahrscheinlich wird durch setAll() alles überschrieben
         }
 
+
+
+        ObservableList<String> selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
+
+        if(!selectedCategoriesList.isEmpty()) {
+
+            ArrayList<Room> allRooms = RoomDataMapper.getAll();
+            ObservableList<String> rooms = FXCollections.observableArrayList();
+            String room;
+            int roomNumber;
+
+            for (int i = 0; i < allRooms.size(); i++) {
+                Room current = allRooms.get(i);
+                room = current.getCategory().getName();
+                roomNumber = allRooms.get(i).getNumber();
+                if(selectedCategoriesList.contains(room)){
+                    if(current.getIsFree()){
+                        rooms.add(roomNumber + " " + allRooms.get(i).getCategory().getName());
+                    }
+                }
+            }
+            Collections.sort(rooms);
+            roomNumberDropdown.getItems().setAll(rooms);
+        }
+
+    }*/
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        useCaseController = new WalkInUseCaseController();
+
+        //fill Room Categories DropDown
+        ArrayList<RoomCategory> allRoomCategories = RoomCategoryDataMapper.getAll();
+        ObservableList<String> categoryNames = FXCollections.observableArrayList();
+        for(RoomCategory roomCategory : allRoomCategories) {
+            categoryNames.add(roomCategory.getName());
+        }
+        //roomCategoryDropdown.getItems().setAll(categoryNames);
     }
 }
