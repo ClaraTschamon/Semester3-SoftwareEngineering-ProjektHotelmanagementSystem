@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -109,10 +110,13 @@
                 <fx:define>
                         <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton layoutX="60.0" layoutY="373.0" mnemonicParsing="false" text="Vollpension" toggleGroup="$packageToggleGroup">
+                <RadioButton layoutX="60.0" layoutY="373.0" mnemonicParsing="false" text="Vollpension">
                     <font>
                         <Font size="13.0" />
                     </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="packageToggleGroup" />
+               </toggleGroup>
                 </RadioButton>
                 <RadioButton layoutX="60.0" layoutY="403.0" mnemonicParsing="false" text="Halbpension" toggleGroup="$packageToggleGroup">
                     <font>
@@ -125,11 +129,6 @@
                     </font>
                 </RadioButton>
                 <RadioButton layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
-                </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
                 </RadioButton>
                 
             </children></AnchorPane>
