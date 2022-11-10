@@ -98,7 +98,7 @@ public class WalkIn1ViewController implements Initializable {
     private void onNextButtonClicked(ActionEvent e) {
         try {
             viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
-
+            saveData();
             // TODO fill all attributes
             viewController.loadWalkIn2();
         } catch (IOException ex) {

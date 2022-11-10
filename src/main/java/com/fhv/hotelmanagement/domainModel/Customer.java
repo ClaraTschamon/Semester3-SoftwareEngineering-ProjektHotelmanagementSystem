@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public class Customer {
 
+    private static int id;
+
     private CustomerEntity entity;
     private int number;
     private String firstName;
@@ -23,7 +25,9 @@ public class Customer {
 
     //bookings Liste??
 
-    public Customer() {}
+    public Customer() {
+        id++;
+    }
 
     public Customer(CustomerEntity entity) {
         this.entity = entity;
@@ -149,5 +153,10 @@ public class Customer {
 
     public String getPostalCode() {
         return postalCode;
+    }
+
+    //Id braucht nur getter weil sie statisch ist
+    public static int getId() {
+        return id;
     }
 }

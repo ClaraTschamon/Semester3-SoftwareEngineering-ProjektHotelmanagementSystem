@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 public class Booking {
 
+    private static int id;
+
     private BookingEntity entity;
     private Integer number;
     private Customer customer;
@@ -28,7 +30,9 @@ public class Booking {
     private HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories;
     private HashMap<Room, BookedRoom> bookedRooms;
 
-    public Booking() {}
+    public Booking() {
+        id++;
+    }
 
     public Booking(BookingEntity entity) {
         this.number = entity.getNumber();
@@ -173,5 +177,10 @@ public class Booking {
 
     public void setBookedRooms(HashMap<Room, BookedRoom> bookedRooms) {
         this.bookedRooms = bookedRooms;
+    }
+
+    //id braucht nur getter weil sie statisch zugeteilt wird
+    public static int getId() {
+        return id;
     }
 }

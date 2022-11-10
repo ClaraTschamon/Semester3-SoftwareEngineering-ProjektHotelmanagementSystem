@@ -33,12 +33,14 @@ public class WalkInViewController {
         FXMLLoader walkIn2Loader = MainApplication.getMainController().loadIntoContentArea("walk-in-2");
         WalkIn2ViewController walkIn2ViewController = walkIn2Loader.getController();
         walkIn2ViewController.setController(this);
+        walkIn2ViewController.fillData();
     }
 
     public void loadWalkIn3() throws IOException {
         FXMLLoader walkIn3Loader = MainApplication.getMainController().loadIntoContentArea("walk-in-3");
         WalkIn3ViewController walkIn3ViewController = walkIn3Loader.getController();
         walkIn3ViewController.setController(this);
+        walkIn3ViewController.fillData();
     }
 
     public void cancel() throws IOException {

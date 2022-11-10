@@ -6,16 +6,24 @@ import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseControl
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class WalkIn2ViewController {
     //TODO: Tabulator automatisch auf Vorname setzen
 
     private static int number;
 
+    @FXML
+    private DatePicker birthday;
+    @FXML
+    private Text country;
     @FXML
     private TextField searchDatabase;
     @FXML
@@ -65,6 +73,8 @@ public class WalkIn2ViewController {
         customer.getAddress().setCity(city.getText());
         customer.getAddress().setHouseNumber(houseNumber.getText());
         customer.getAddress().setPostalCode(postalCode.getText());
+        customer.getAddress().setCountry(country.getText());
+        customer.setDateOfBirth(birthday.getValue());
         viewController.loadWalkIn3();
     }
 
@@ -79,6 +89,8 @@ public class WalkIn2ViewController {
         String street=customer.getAddress().getStreet();
         String housenumber =customer.getAddress().getHouseNumber();
         String postalcode=customer.getAddress().getPostalCode();
+        String country = customer.getAddress().getCountry();
+        LocalDate birthday = customer.getDateOfBirth();
     }
 
     @FXML
@@ -93,6 +105,7 @@ public class WalkIn2ViewController {
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
+            saveData();
             // TODO fill all attributes
             viewController.getUseCaseController().getCustomer().setFirstName(firstName.getText());
             viewController.getUseCaseController().getCustomer().setLastName(lastName.getText());

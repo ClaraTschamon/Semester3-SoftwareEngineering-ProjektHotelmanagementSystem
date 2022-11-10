@@ -1,5 +1,7 @@
 package com.fhv.hotelmanagement;
 
+import com.fhv.hotelmanagement.domainModel.Booking;
+import com.fhv.hotelmanagement.domainModel.Customer;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,11 +25,7 @@ public class MainApplication extends Application {
     static FXMLLoader fxmlLoader;
     Scene scene;
     Properties configProperties;
-
     MainController mainController;
-
-
-
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -39,7 +37,6 @@ public class MainApplication extends Application {
     public static MainController getMainController() throws IOException {
         return fxmlLoader.getController();
     }
-
 
     private void loadMainView() throws IOException {
         double width = Double.parseDouble(getConfigProperties().getProperty("window.width"));
@@ -63,6 +60,18 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
+
+        //ID Tester
+//        int count = 0;
+//
+//        while (count<10){
+//            Customer customer = new Customer();
+//            System.out.println(customer.getId());
+//
+//            Booking booking = new Booking();
+//            System.out.println(booking.getId());
+//        }
+
         launch();
     }
 }
