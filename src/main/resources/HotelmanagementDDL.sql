@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS room_category CASCADE;
+DROP TABLE IF EXISTS package CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS booked_room CASCADE;
 DROP TABLE IF EXISTS customer CASCADE;
@@ -57,7 +58,7 @@ CREATE TABLE booking(
     payment_method VARCHAR(255),
     credit_card_number VARCHAR(255),
     expiration_date DATE,
-    authorisation_number VARCHAR(255),
+    authorisation_number VARCHAR(255)
 );
 
 CREATE TABLE booked_room(

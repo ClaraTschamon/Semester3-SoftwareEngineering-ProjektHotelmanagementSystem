@@ -24,18 +24,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
-//TODO: Package fehlt in Buchung
-
 public class WalkIn1ViewController implements Initializable {
 
-    ObservableList<String> selectedCategoriesList;
+    @FXML
+    CheckComboBox<Integer> singleRoomDropDown;
 
     @FXML
-    private ComboBox<String> roomCategories;
+    CheckComboBox<Integer> doubleRoomDropDown;
 
+    @FXML
+    CheckComboBox<Integer> familyRoomDropDown;
 
-    //https://stackoverflow.com/questions/41229964/how-to-check-and-uncheck-all-items-when-checking-or-unckeck-some-of-the-items
-    private ObservableList<String> selectedRooms;
+    @FXML
+    CheckComboBox<Integer> suiteDropDown;
 
     @FXML
     private Text chooseRoom;
@@ -48,6 +49,7 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private Text roomPrice;
+
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
@@ -79,78 +81,40 @@ public class WalkIn1ViewController implements Initializable {
         }
     }
 
-    /*
-    @FXML
-    private void fillRooms(MouseEvent e){
-
-
-        selectedRooms = roomNumberDropdown.getCheckModel().getCheckedItems();
-        roomNumberDropdown.getItems().setAll(selectedRooms);
-        roomNumberDropdown.getCheckModel().checkAll();
-        //problem ist dass room unten wieder neu eingefügt wird
-
-        selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
-
-        if(!selectedCategoriesList.isEmpty()) {
-
-            ArrayList<Room> allRooms = RoomDataMapper.getAll();
-            ObservableList<String> rooms = FXCollections.observableArrayList();
-            String room;
-            int roomNumber;
-
-            for (int i = 0; i < allRooms.size(); i++) {
-                Room current = allRooms.get(i);
-                room = current.getCategory().getName();
-                roomNumber = allRooms.get(i).getNumber();
-                if(selectedCategoriesList.contains(room)){
-                    if(current.getIsFree()){
-                        if(!roomNumberDropdown.getItems().contains(current.getNumber() + current.getCategory().getName())){
-                            rooms.add(roomNumber + " " + allRooms.get(i).getCategory().getName());
-                        }
-                    }
-                }
-            }
-            Collections.sort(rooms);
-            roomNumberDropdown.getItems().setAll(rooms); //ist setAll() das Problem?
-            //wahrscheinlich wird durch setAll() alles überschrieben
-        }
-
-
-
-        ObservableList<String> selectedCategoriesList = roomCategoryDropdown.getCheckModel().getCheckedItems();
-
-        if(!selectedCategoriesList.isEmpty()) {
-
-            ArrayList<Room> allRooms = RoomDataMapper.getAll();
-            ObservableList<String> rooms = FXCollections.observableArrayList();
-            String room;
-            int roomNumber;
-
-            for (int i = 0; i < allRooms.size(); i++) {
-                Room current = allRooms.get(i);
-                room = current.getCategory().getName();
-                roomNumber = allRooms.get(i).getNumber();
-                if(selectedCategoriesList.contains(room)){
-                    if(current.getIsFree()){
-                        rooms.add(roomNumber + " " + allRooms.get(i).getCategory().getName());
-                    }
-                }
-            }
-            Collections.sort(rooms);
-            roomNumberDropdown.getItems().setAll(rooms);
-        }
-
-    }*/
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //fill Room Categories DropDown
-        ArrayList<RoomCategory> allRoomCategories = RoomCategoryDataMapper.getAll();
-        ObservableList<String> categoryNames = FXCollections.observableArrayList();
-        for(RoomCategory roomCategory : allRoomCategories) {
-            categoryNames.add(roomCategory.getName());
+
+        ArrayList<Room> allRooms = RoomDataMapper.getAll();
+        ObservableList<Integer> numbersSingleRoom = FXCollections.observableArrayList();
+        ObservableList<Integer> numbersDoubleRoom = FXCollections.observableArrayList();
+        ObservableList<Integer> numbersFamilyRoom = FXCollections.observableArrayList();
+        ObservableList<Integer> numbersSuite = FXCollections.observableArrayList();
+
+        for(Room room : allRooms){
+            switch(room.getCategory().getName()){
+                case "Einzelzimmer":
+                    numbersSingleRoom.add(room.getNumber());
+                    break;
+                case "Doppelzimmer":
+                    numbersDoubleRoom.add(room.getNumber());
+                    break;
+                case "Familienzimmer":
+                    numbersFamilyRoom.add(room.getNumber());
+                    break;
+                case "Suite":
+                    numbersSuite.add(room.getNumber());
+                    break;
+            }
         }
-        //roomCategoryDropdown.getItems().setAll(categoryNames);
+
+        singleRoomDropDown.getItems().setAll(numbersSingleRoom);
+        doubleRoomDropDown.getItems().setAll(numbersDoubleRoom);
+        familyRoomDropDown.getItems().setAll(numbersFamilyRoom);
+        suiteDropDown.getItems().setAll(numbersSuite);
+
+        System.out.println("single:" + singleRoomDropDown.getItems().toString());
+        System.out.println("double:" + doubleRoomDropDown.getItems().toString());
+        System.out.println("family:" + familyRoomDropDown.getItems().toString());
+        System.out.println("suite:" + suiteDropDown.getItems().toString());
     }
 }

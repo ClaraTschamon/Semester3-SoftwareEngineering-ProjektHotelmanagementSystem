@@ -12,6 +12,14 @@ public class BookingDTO {
     private LocalDate departureDate;
     private LocalDateTime checkOutDatetime;
     private AddressDTO billingAddress;
+
+    private String creditCardNumber;
+
+    private LocalDate expirationDate;
+
+    private String authorisationNumber;
+
+    private String comment;
     private HashMap<RoomCategoryDTO, BookedRoomCategoryDTO> bookedRoomCategories;
     private HashMap<RoomDTO, BookedRoomDTO> bookedRooms;
 
@@ -71,6 +79,38 @@ public class BookingDTO {
 
     public void setBillingAddress(AddressDTO billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getAuthorisationNumber() {
+        return authorisationNumber;
+    }
+
+    public void setAuthorisationNumber(String authorisationNumber) {
+        this.authorisationNumber = authorisationNumber;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public HashMap<RoomCategoryDTO, BookedRoomCategoryDTO> getBookedRoomCategories() {

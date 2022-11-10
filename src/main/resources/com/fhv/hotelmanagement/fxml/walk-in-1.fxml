@@ -88,8 +88,7 @@
                     </font>
                 </Text>
 
-                <ComboBox fx:id="roomPriceDD" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
-
+                <ComboBox fx:id="roomPriceDropDown" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Normalpreis" />
@@ -101,6 +100,7 @@
                         <String fx:value="Normalpreis" /> <!--default value!-->
                     </value>
                 </ComboBox>
+
                 <Text layoutX="545.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreise">
                     <font>
                         <Font size="14.0" />
@@ -140,11 +140,10 @@
             <Text layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <CheckComboBox layoutX="680.0" layoutY="250.0" prefHeight="40.0" prefWidth="100.0" />
-            <CheckComboBox layoutX="680.0" layoutY="201.0" prefHeight="40.0" prefWidth="100.0" />
-            <CheckComboBox layoutX="680.0" layoutY="300.0" prefHeight="40.0" prefWidth="100.0" />
-            <CheckComboBox layoutX="680.0" layoutY="350.0" prefHeight="40.0" prefWidth="100.0" />
-
+            <CheckComboBox fx:id="singleRoomDropDown" layoutX="680.0" layoutY="250.0" prefHeight="40.0" prefWidth="100.0" />
+            <CheckComboBox fx:id="doubleRoomDropDown" layoutX="680.0" layoutY="201.0" prefHeight="40.0" prefWidth="100.0" />
+            <CheckComboBox fx:id="familyRoomDropDown" layoutX="680.0" layoutY="300.0" prefHeight="40.0" prefWidth="100.0" />
+            <CheckComboBox fx:id="suiteDropDown" layoutX="680.0" layoutY="350.0" prefHeight="40.0" prefWidth="100.0" />
             </children></AnchorPane>
     </center>
 </BorderPane>
