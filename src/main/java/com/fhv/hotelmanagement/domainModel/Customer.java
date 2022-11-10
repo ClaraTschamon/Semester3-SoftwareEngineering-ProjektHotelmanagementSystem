@@ -15,7 +15,6 @@ public class Customer {
     private String phoneNumber;
     private String email;
     private Address address;
-    private String creditCardNumber;
     private Boolean saved;
     private String city;
     private String street;
@@ -36,7 +35,6 @@ public class Customer {
         this.phoneNumber = entity.getPhoneNumber();
         this.email = entity.getEmail();
         this.address = new Address(entity.getStreet(), entity.getHouseNumber(), entity.getPostalCode(), entity.getCity(), entity.getCountry());
-        this.creditCardNumber = entity.getCreditCardNumber();
         this.saved = entity.getSaved();
         this.city=entity.getCity();
         this.street=entity.getStreet();
@@ -112,13 +110,6 @@ public class Customer {
         this.address = address;
     }
 
-    public String getCreditCardNumber() {
-        return creditCardNumber;
-    }
-
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
-    }
 
     public Boolean getSaved() {
         return saved;

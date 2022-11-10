@@ -27,7 +27,10 @@ public class BookedRoomDataMapper {
 
     //create
     public void insert(BookedRoom bookedRoom){
-        PersistenceFacade.instance().entityManager.persist(bookedRoom.getEntity());
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.persist(bookedRoom.getEntity());
+        entityManager.getTransaction().commit();
     }
 
     //update

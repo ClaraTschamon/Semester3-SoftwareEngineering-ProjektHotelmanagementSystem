@@ -10,18 +10,69 @@ import java.util.Set;
 @Entity
 @Table(name = "booking")
 public class BookingEntity {
+
+    @Id
+    @Column(name = "booking_number")
     private int number;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_number")
     private CustomerEntity customer;
+
+    @Column(name = "arrival_date")
     private LocalDate arrivalDate;
+
+    @Column(name = "check_in_datetime")
     private LocalDateTime checkInDatetime;
+
+    @Column(name = "departure_date")
     private LocalDate departureDate;
+
+    @Column(name = "check_out_datetime")
     private LocalDateTime checkOutDatetime;
+
+    @Column(name = "billing_street")
     private String billingStreet;
+
+    @Column(name = "billing_house_number")
     private String billingHouseNumber;
+
+    @Column(name = "billing_postal_code")
     private String BillingPostalCode;
+
+    @Column(name = "billing_city")
     private String BillingCity;
+
+    @Column(name = "billing_country")
     private String BillingCountry;
+
+    @Column(name="comment")
+    private String comment;
+
+    @Column(name="payment_method")
+    private String paymentMethod;
+
+    @Column(name="credit_card_number")
+    private String creditCardNumber;
+
+    @Column(name="expiration_date")
+    private LocalDate expirationDate;
+
+    @Column(name="authoriation_number")
+    private String authorisationNumber;
+
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private Set<BookedRoomCategoryEntity> bookedRoomCategories;
+
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private Set<BookedRoomEntity> bookedRooms;
 
     public BookingEntity(){};
@@ -48,8 +99,7 @@ public class BookingEntity {
         this.bookedRooms = bookedRooms;
     }
 
-    @Id
-    @Column(name = "booking_number")
+
     public int getNumber() {
         return number;
     }
@@ -58,8 +108,7 @@ public class BookingEntity {
         this.number = number;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "customer_number")
+
     public CustomerEntity getCustomer() {
         return customer;
     }
@@ -68,7 +117,7 @@ public class BookingEntity {
         this.customer = customer;
     }
 
-    @Column(name = "arrival_date")
+
     public LocalDate getArrivalDate() {
         return arrivalDate;
     }
@@ -77,7 +126,7 @@ public class BookingEntity {
         this.arrivalDate = arrivalDate;
     }
 
-    @Column(name = "check_in_datetime")
+
     public LocalDateTime getCheckInDatetime() {
         return checkInDatetime;
     }
@@ -86,7 +135,7 @@ public class BookingEntity {
         this.checkInDatetime = checkInDatetime;
     }
 
-    @Column(name = "departure_date")
+
     public LocalDate getDepartureDate() {
         return departureDate;
     }
@@ -95,7 +144,7 @@ public class BookingEntity {
         this.departureDate = departureDate;
     }
 
-    @Column(name = "check_out_datetime")
+
     public LocalDateTime getCheckOutDatetime() {
         return checkOutDatetime;
     }
@@ -104,7 +153,7 @@ public class BookingEntity {
         this.checkOutDatetime = checkOutDatetime;
     }
 
-    @Column(name = "billing_street")
+
     public String getBillingStreet() {
         return billingStreet;
     }
@@ -113,7 +162,7 @@ public class BookingEntity {
         this.billingStreet = billingStreet;
     }
 
-    @Column(name = "billing_house_number")
+
     public String getBillingHouseNumber() {
         return billingHouseNumber;
     }
@@ -122,7 +171,7 @@ public class BookingEntity {
         this.billingHouseNumber = billingHouseNumber;
     }
 
-    @Column(name = "billing_postal_code")
+
     public String getBillingPostalCode() {
         return BillingPostalCode;
     }
@@ -131,7 +180,7 @@ public class BookingEntity {
         BillingPostalCode = billingPostalCode;
     }
 
-    @Column(name = "billing_city")
+
     public String getBillingCity() {
         return BillingCity;
     }
@@ -140,7 +189,7 @@ public class BookingEntity {
         BillingCity = billingCity;
     }
 
-    @Column(name = "billing_country")
+
     public String getBillingCountry() {
         return BillingCountry;
     }
@@ -149,11 +198,46 @@ public class BookingEntity {
         BillingCountry = billingCountry;
     }
 
-    @OneToMany(
-            mappedBy = "booking",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getAuthorisationNumber() {
+        return authorisationNumber;
+    }
+
+    public void setAuthorisationNumber(String authorisationNumber) {
+        this.authorisationNumber = authorisationNumber;
+    }
+
     public Set<BookedRoomCategoryEntity> getBookedRoomCategories() {
         return bookedRoomCategories;
     }
@@ -162,11 +246,6 @@ public class BookingEntity {
         this.bookedRoomCategories = bookedRoomCategories;
     }
 
-    @OneToMany(
-            mappedBy = "booking",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
     public Set<BookedRoomEntity> getBookedRooms() {
         return bookedRooms;
     }

@@ -26,7 +26,10 @@ public class BookingDataMapper {
 
     //create
     public void insert(Booking booking){
-        PersistenceFacade.instance().entityManager.persist(booking.getEntity());
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.persist(booking.getEntity());
+        entityManager.getTransaction().commit();
     }
 
     //update

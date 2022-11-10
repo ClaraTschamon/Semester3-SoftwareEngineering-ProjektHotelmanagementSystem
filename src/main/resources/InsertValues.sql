@@ -27,6 +27,19 @@ INSERT INTO room_category(room_category_name, price_per_night)
 VALUES('Suite', 180);
 
 
+INSERT INTO package(package_name, price_per_night)
+VALUES('Vollpension', 30);
+
+INSERT INTO package(package_name, price_per_night)
+VALUES('Halbpension', 20);
+
+INSERT INTO package(package_name, price_per_night)
+VALUES('Nur Frühstück', 10);
+
+INSERT INTO package(package_name, price_per_night)
+VALUES('Ohne Package', 0);
+
+
 INSERT INTO room(room_number, is_free, is_clean, room_category_name)
 VALUES(11, true, true, 'Einzelzimmer');
 
@@ -91,24 +104,25 @@ INSERT INTO room(room_number, is_free, is_clean, room_category_name)
 VALUES(35, true, true, 'Suite');
 
 
-INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, customer_credit_card_number, saved)
-VALUES(1, 'Angelina', 'Pfeiffer', DATE '1980-06-07', 'Österreich', '+43178/9074374', 'apfeiffer@live-mail.none', 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', 'AT88 3888 2222 3333', true);
+INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, saved)
+VALUES(1, 'Angelina', 'Pfeiffer', DATE '1980-06-07', 'Österreich', '+43178/9074374', 'apfeiffer@live-mail.none', 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', true);
 
-INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, customer_credit_card_number, saved)
-VALUES(2, 'Dennis', 'Boto', DATE '1978-10-17', 'Deutschland', '+49151/8759788', 'boto_dennis@xyz.none', 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', 'DE83 4567 4567 4567', true);
+INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, saved)
+VALUES(2, 'Dennis', 'Boto', DATE '1978-10-17', 'Deutschland', '+49151/8759788', 'boto_dennis@xyz.none', 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', true);
 
-INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, customer_credit_card_number, saved)
-VALUES(3, 'Linda', 'Jackson', DATE '2001-01-06', 'Schweiz', '+41132/64805846', 'linda_jackson@net-mail.none', 'Iserstraße', '87', '38114', 'Amelinghausen', 'Schweiz', 'CH22 4324 6665 3256', true);
+INSERT INTO customer(customer_number, customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, saved)
+VALUES(3, 'Linda', 'Jackson', DATE '2001-01-06', 'Schweiz', '+41132/64805846', 'linda_jackson@net-mail.none', 'Iserstraße', '87', '38114', 'Amelinghausen', 'Schweiz', true);
 
 
-INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country)
-VALUES (1, 1, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 3, NULL, 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich');
+INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number)
+VALUES (1, 1, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 3, NULL, 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', 'isst Vegan', 'Kreditkarte','AT88 3888 2222 3333', DATE '2023-06-01', 'AVA2 AJ44 3285 8891');
 
-INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country)
-VALUES (2, 2, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 5, NULL, 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland');
+INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number)
+VALUES (2, 2, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 5, NULL, 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', 'hat seinen Hund dabei', 'Rechnung', null, null, null);
 
-INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country)
-VALUES (3, 3, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz');
+INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number)
+VALUES (3, 3, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', DATE '2024-12-01', 'EXI 3849 SHH 3898');
+
 
 
 
