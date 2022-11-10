@@ -48,16 +48,21 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private Text roomPrice;
-    private WalkInUseCaseController useCaseController;
+    private WalkInViewController viewController;
 
+    public void setController(WalkInViewController viewController) {
+        this.viewController = viewController;
+    }
 
+    protected void fillData() {
+
+    }
 
     @FXML
     private void onCancelButtonClicked(ActionEvent e) {
         try {
-            useCaseController.cancel();
-            MainApplication.getMainController().loadIntoContentArea("home");
-        } catch (IOException | URISyntaxException exc) {
+            viewController.cancel();
+        } catch (IOException exc) {
             System.out.println(exc.getMessage());
         }
     }
@@ -65,14 +70,12 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private void onNextButtonClicked(ActionEvent e) {
         try {
-            useCaseController.getBooking().setDepartureDate(departureDate.getValue());
+            viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
 
             // TODO fill all attributes
-            MainApplication.getMainController().loadIntoContentArea("walk-in-2");
-            WalkIn2ViewController walkIn2ViewController = MainApplication.getMainController().getCurrentFXMLLoader().getController();
-            walkIn2ViewController.setUseCaseController(useCaseController);
-        } catch (IOException | URISyntaxException exc) {
-            System.out.println(exc.getMessage());
+            viewController.loadWalkIn2();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -142,8 +145,6 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        useCaseController = new WalkInUseCaseController();
-
         //fill Room Categories DropDown
         ArrayList<RoomCategory> allRoomCategories = RoomCategoryDataMapper.getAll();
         ObservableList<String> categoryNames = FXCollections.observableArrayList();
