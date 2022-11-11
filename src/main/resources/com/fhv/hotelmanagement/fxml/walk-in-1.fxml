@@ -18,7 +18,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.viewController.viewController.WalkIn1ViewController">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
                     <children>
@@ -136,10 +136,10 @@
             <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doppelzimmer" />
             <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Famielenzimmer" />
             <Text layoutX="545.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suite" />
-            <Text layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterSingleRoom" layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterFamilyRoom" layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterSuite" layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <CheckComboBox fx:id="singleRoomDropDown" layoutX="680.0" layoutY="250.0" prefHeight="40.0" prefWidth="100.0" />
             <CheckComboBox fx:id="doubleRoomDropDown" layoutX="680.0" layoutY="201.0" prefHeight="40.0" prefWidth="100.0" />
             <CheckComboBox fx:id="familyRoomDropDown" layoutX="680.0" layoutY="300.0" prefHeight="40.0" prefWidth="100.0" />
