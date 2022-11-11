@@ -16,8 +16,13 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.Month;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 //Broker == Mapper
 public class PersistenceFacade{
+
+    private static final Logger logger = LogManager.getLogger(PersistenceFacade.class);
 
     public final EntityManager entityManager;
     private static PersistenceFacade _instance;
@@ -52,6 +57,7 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
+        /*
 
         PersistenceFacade pf = new PersistenceFacade();
         System.out.println(getCustomer(1).toString());
@@ -69,6 +75,7 @@ public class PersistenceFacade{
         System.out.println(getBooking(4).get().getCustomer().getFirstName());
 
          */
+        logger.error("jaidfj");
 
     }
 }

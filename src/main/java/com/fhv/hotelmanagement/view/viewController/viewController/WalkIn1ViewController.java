@@ -1,23 +1,24 @@
 package com.fhv.hotelmanagement.view.viewController.viewController;
 
-import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
+import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
@@ -53,29 +54,8 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     protected void fillData() {
-        LocalDate departureDate = viewController.getUseCaseController().getBooking().getDepartureDate();
-        if (departureDate != null) {
-            viewController.getUseCaseController().getBooking().setDepartureDate(departureDate);
-        } else {
-            viewController.getUseCaseController().getBooking().setDepartureDate(LocalDate.now());
-        }
-        LocalDate arrivalDate= viewController.getUseCaseController().getBooking().getArrivalDate();
-        CustomerDTO customer = viewController.getUseCaseController().getBooking().getCustomer();
-        LocalDateTime checkInDatetime = viewController.getUseCaseController().getBooking().getCheckInDatetime();
-        LocalDateTime checkOutDatetime = viewController.getUseCaseController().getBooking().getCheckOutDatetime();
-        AddressDTO billingAddress=viewController.getUseCaseController().getBooking().getBillingAddress();
-        Integer number = viewController.getUseCaseController().getBooking().getNumber();
-    }
 
-    protected void saveData(){
-        viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
-//        viewController.getUseCaseController().getBooking().setCustomer();
-//        viewController.getUseCaseController().getBooking().setCheckInDatetime(checkIn);
-//        viewController.getUseCaseController().getBooking().setCheckOutDatetime(checkOut);
-//        viewController.getUseCaseController().getBooking().setBillingAddress(billing);
-//        viewController.getUseCaseController().getBooking().setNumber(no);
     }
-
 
     @FXML
     private void onCancelButtonClicked(ActionEvent e) {
@@ -90,7 +70,7 @@ public class WalkIn1ViewController implements Initializable {
     private void onNextButtonClicked(ActionEvent e) {
         try {
             viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
-            saveData();
+
             // TODO fill all attributes
             viewController.loadWalkIn2();
         } catch (IOException ex) {
@@ -100,6 +80,55 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //ArrayList<RoomDTO> allRooms = RoomDataMapper.getAll();
+
+        //nur zum testen
+        ArrayList<RoomDTO> allRooms = new ArrayList<>();
+        RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
+        singleroomcategoy.setName("Einzelzimmer");
+        RoomDTO room1 = new RoomDTO();
+        room1.setNumber(1);
+        room1.setCategory(singleroomcategoy);
+        allRooms.add(room1);
+        //
+
+        RoomProvider roomProvider = new RoomProvider(allRooms);
+
+
+        final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
+        final CheckComboBox<RoomDTO> doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
+        final CheckComboBox<RoomDTO> familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
+        final CheckComboBox<RoomDTO> suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
+
+        singleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterSingleRoom.setText(String.valueOf(singleRoomDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+        doubleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterDoubleRoom.setText(String.valueOf(doubleRoomDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+        familyRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterFamilyRoom.setText(String.valueOf(familyRoomDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+        suiteDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterSuite.setText(String.valueOf(suiteDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+
+        singleRoomDropDown.setLayoutX(680);
+        singleRoomDropDown.setLayoutY(200);
+        singleRoomDropDown.setPrefHeight(40);
+        singleRoomDropDown.setPrefWidth(100);
 
         ArrayList<Room> allRooms = RoomDataMapper.getAll();
         ObservableList<Integer> numbersSingleRoom = FXCollections.observableArrayList();
