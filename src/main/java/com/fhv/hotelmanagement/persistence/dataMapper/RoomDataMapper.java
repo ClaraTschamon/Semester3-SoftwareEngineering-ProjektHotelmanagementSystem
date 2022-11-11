@@ -1,14 +1,10 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domainModel.Room;
-import com.fhv.hotelmanagement.domainModel.RoomCategory;
+import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
-import jakarta.persistence.EntityManager;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class RoomDataMapper {

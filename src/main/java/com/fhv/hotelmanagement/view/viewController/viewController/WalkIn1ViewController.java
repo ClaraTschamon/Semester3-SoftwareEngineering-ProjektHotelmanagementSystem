@@ -1,31 +1,23 @@
-package com.fhv.hotelmanagement.controller.viewController;
+package com.fhv.hotelmanagement.view.viewController.viewController;
 
-import com.fhv.hotelmanagement.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
-import com.fhv.hotelmanagement.domainModel.Room;
-import com.fhv.hotelmanagement.domainModel.RoomCategory;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomCategoryDataMapper;
+import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
+import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
+import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {

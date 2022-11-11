@@ -1,10 +1,8 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domainModel.Package;
-import com.fhv.hotelmanagement.domainModel.RoomCategory;
+import com.fhv.hotelmanagement.domain.domainModel.Package;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.PackageEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
 
 import java.util.ArrayList;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.domainModel;
+package com.fhv.hotelmanagement.domain.domainModel;
 
 import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
 //TODO: Preis pro Nacht fehlt

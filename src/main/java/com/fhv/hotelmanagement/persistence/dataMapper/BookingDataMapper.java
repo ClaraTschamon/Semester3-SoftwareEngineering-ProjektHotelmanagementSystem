@@ -1,6 +1,6 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domainModel.Booking;
+import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
 import java.util.Optional;

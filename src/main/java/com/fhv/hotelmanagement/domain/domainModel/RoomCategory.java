@@ -1,28 +1,26 @@
-package com.fhv.hotelmanagement.domainModel;
+package com.fhv.hotelmanagement.domain.domainModel;
 
-import com.fhv.hotelmanagement.persistence.persistenceEntity.PackageEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
 
 import java.math.BigDecimal;
 
-public class Package {
+public class RoomCategory {
 
-    private PackageEntity entity;
+    private RoomCategoryEntity entity;
     private String name;
     private BigDecimal pricePerNight;
 
-    public Package(PackageEntity entity){
+    public RoomCategory(RoomCategoryEntity entity) {
         this.entity = entity;
         this.name = entity.getName();
         this.pricePerNight = entity.getPricePerNight();
     }
 
-    public PackageEntity getEntity(){
+    public RoomCategoryEntity getEntity(){
         return entity;
     }
 
     public String getName(){
         return name;
     }
-
-
 }

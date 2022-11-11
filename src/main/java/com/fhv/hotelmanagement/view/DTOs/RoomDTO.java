@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DTOs;
+package com.fhv.hotelmanagement.view.DTOs;
 
 public class RoomDTO {
     private int number;

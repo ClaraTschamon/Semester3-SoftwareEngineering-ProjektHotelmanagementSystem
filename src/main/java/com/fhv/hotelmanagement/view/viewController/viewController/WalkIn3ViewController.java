@@ -1,16 +1,13 @@
-package com.fhv.hotelmanagement.controller.viewController;
+package com.fhv.hotelmanagement.view.viewController.viewController;
 
-import com.fhv.hotelmanagement.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
+import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class WalkIn3ViewController {
     @FXML

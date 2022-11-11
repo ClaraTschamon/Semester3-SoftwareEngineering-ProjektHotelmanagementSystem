@@ -1,6 +1,6 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domainModel.Customer;
+import com.fhv.hotelmanagement.domain.domainModel.Customer;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 

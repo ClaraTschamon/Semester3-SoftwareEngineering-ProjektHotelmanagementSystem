@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.domainModel;
+package com.fhv.hotelmanagement.domain.domainModel;
 
 public class CustomerDoesNotExistException extends Exception{
 

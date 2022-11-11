@@ -1,8 +1,8 @@
 package com.fhv.hotelmanagement.persistence;
 
-import com.fhv.hotelmanagement.domainModel.Booking;
-import com.fhv.hotelmanagement.domainModel.Customer;
-import com.fhv.hotelmanagement.domainModel.Room;
+import com.fhv.hotelmanagement.domain.domainModel.Booking;
+import com.fhv.hotelmanagement.domain.domainModel.Customer;
+import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.CustomerDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
@@ -11,7 +11,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 import java.time.LocalDate;

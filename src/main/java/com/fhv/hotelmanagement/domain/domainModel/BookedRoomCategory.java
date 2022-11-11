@@ -1,8 +1,7 @@
-package com.fhv.hotelmanagement.domainModel;
+package com.fhv.hotelmanagement.domain.domainModel;
 
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
 
 import java.math.BigDecimal;
 

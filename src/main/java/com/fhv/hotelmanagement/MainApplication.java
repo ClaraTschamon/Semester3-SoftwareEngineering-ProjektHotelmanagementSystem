@@ -1,22 +1,13 @@
 package com.fhv.hotelmanagement;
 
-import com.fhv.hotelmanagement.domainModel.Booking;
-import com.fhv.hotelmanagement.domainModel.Customer;
-import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 

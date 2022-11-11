@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.DTOs;
+package com.fhv.hotelmanagement.view.DTOs;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

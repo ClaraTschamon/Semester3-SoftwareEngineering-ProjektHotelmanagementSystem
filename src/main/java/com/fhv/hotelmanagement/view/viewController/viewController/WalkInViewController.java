@@ -1,7 +1,7 @@
-package com.fhv.hotelmanagement.controller.viewController;
+package com.fhv.hotelmanagement.view.viewController.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
+import com.fhv.hotelmanagement.view.viewController.useCaseController.WalkInUseCaseController;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;

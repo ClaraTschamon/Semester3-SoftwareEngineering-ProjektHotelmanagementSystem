@@ -1,8 +1,6 @@
-package com.fhv.hotelmanagement.controller.viewController;
+package com.fhv.hotelmanagement.view.viewController.viewController;
 
-import com.fhv.hotelmanagement.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
+import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -11,9 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class WalkIn2ViewController {
     //TODO: Tabulator automatisch auf Vorname setzen

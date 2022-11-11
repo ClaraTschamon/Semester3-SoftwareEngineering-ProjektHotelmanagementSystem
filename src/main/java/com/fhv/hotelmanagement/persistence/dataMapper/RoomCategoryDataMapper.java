@@ -1,18 +1,10 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domainModel.BookedRoomCategory;
-import com.fhv.hotelmanagement.domainModel.Booking;
-import com.fhv.hotelmanagement.domainModel.RoomCategory;
+import com.fhv.hotelmanagement.domain.domainModel.RoomCategory;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomCategoryEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 

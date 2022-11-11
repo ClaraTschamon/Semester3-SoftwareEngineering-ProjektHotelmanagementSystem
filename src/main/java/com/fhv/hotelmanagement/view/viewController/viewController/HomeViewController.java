@@ -1,11 +1,8 @@
-package com.fhv.hotelmanagement.controller.viewController;
+package com.fhv.hotelmanagement.view.viewController.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 
 public class HomeViewController {
