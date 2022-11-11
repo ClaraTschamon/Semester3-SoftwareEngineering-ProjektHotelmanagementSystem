@@ -9,6 +9,8 @@ module com.fhv.hotelmanagement {
     requires org.hibernate.commons.annotations;
     requires net.bytebuddy;
     requires org.controlsfx.controls;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
 
     exports com.fhv.hotelmanagement.controller.viewController;
     opens com.fhv.hotelmanagement.controller.viewController to javafx.fxml;

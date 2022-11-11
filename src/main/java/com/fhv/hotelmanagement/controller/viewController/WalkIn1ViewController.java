@@ -1,63 +1,42 @@
 package com.fhv.hotelmanagement.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.controller.useCaseController.WalkInUseCaseController;
-import com.fhv.hotelmanagement.domainModel.Room;
-import com.fhv.hotelmanagement.domainModel.RoomCategory;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomCategoryDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
-import javafx.collections.FXCollections;
+import com.fhv.hotelmanagement.DTOs.RoomCategoryDTO;
+import com.fhv.hotelmanagement.DTOs.RoomDTO;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
-
-    @FXML
-    CheckComboBox<Integer> singleRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> doubleRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> familyRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> suiteDropDown;
-
-    @FXML
-    private Text chooseRoom;
+    public AnchorPane contentPane;
+    public Text counterSingleRoom;
+    public Text counterDoubleRoom;
+    public Text counterFamilyRoom;
+    public Text counterSuite;
+    public Button NextButton;
+    public Button CancelButton;
+    public ComboBox roomPriceDropDown;
 
     @FXML
     private DatePicker departureDate;
-
-    @FXML
-    private Text room;
-
-    @FXML
-    private Text roomPrice;
 
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
-    }
-
-    protected void fillData() {
-
     }
 
     @FXML
@@ -83,38 +62,133 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //ArrayList<RoomDTO> allRooms = RoomDataMapper.getAll();
 
-        ArrayList<Room> allRooms = RoomDataMapper.getAll();
-        ObservableList<Integer> numbersSingleRoom = FXCollections.observableArrayList();
-        ObservableList<Integer> numbersDoubleRoom = FXCollections.observableArrayList();
-        ObservableList<Integer> numbersFamilyRoom = FXCollections.observableArrayList();
-        ObservableList<Integer> numbersSuite = FXCollections.observableArrayList();
+        //nur zum testen
+        ArrayList<RoomDTO> allRooms = new ArrayList<>();
+        RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
+        singleroomcategoy.setName("Einzelzimmer");
+        RoomDTO room1 = new RoomDTO();
+        room1.setNumber(1);
+        room1.setCategory(singleroomcategoy);
+        allRooms.add(room1);
+        //
 
-        for(Room room : allRooms){
-            switch(room.getCategory().getName()){
-                case "Einzelzimmer":
-                    numbersSingleRoom.add(room.getNumber());
-                    break;
-                case "Doppelzimmer":
-                    numbersDoubleRoom.add(room.getNumber());
-                    break;
-                case "Familienzimmer":
-                    numbersFamilyRoom.add(room.getNumber());
-                    break;
-                case "Suite":
-                    numbersSuite.add(room.getNumber());
-                    break;
+        RoomProvider roomProvider = new RoomProvider(allRooms);
+
+
+        final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
+        final CheckComboBox<RoomDTO> doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
+        final CheckComboBox<RoomDTO> familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
+        final CheckComboBox<RoomDTO> suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
+
+        singleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterSingleRoom.setText(String.valueOf(singleRoomDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+        doubleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterDoubleRoom.setText(String.valueOf(doubleRoomDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+        familyRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterFamilyRoom.setText(String.valueOf(familyRoomDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+        suiteDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
+            @Override
+            public void onChanged(Change<? extends RoomDTO> c) {
+                counterSuite.setText(String.valueOf(suiteDropDown.getCheckModel().getCheckedItems().size()));
+            }
+        });
+
+        singleRoomDropDown.setLayoutX(680);
+        singleRoomDropDown.setLayoutY(200);
+        singleRoomDropDown.setPrefHeight(40);
+        singleRoomDropDown.setPrefWidth(100);
+
+        doubleRoomDropDown.setLayoutX(680);
+        doubleRoomDropDown.setLayoutY(250);
+        doubleRoomDropDown.setPrefHeight(40);
+        doubleRoomDropDown.setPrefWidth(100);
+
+        familyRoomDropDown.setLayoutX(680);
+        familyRoomDropDown.setLayoutY(300);
+        familyRoomDropDown.setPrefHeight(40);
+        familyRoomDropDown.setPrefWidth(100);
+
+        suiteDropDown.setLayoutX(680);
+        suiteDropDown.setLayoutY(350);
+        suiteDropDown.setPrefHeight(40);
+        suiteDropDown.setPrefWidth(100);
+
+
+        singleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        doubleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        familyRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        suiteDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+
+        contentPane.getChildren().add(singleRoomDropDown);
+        contentPane.getChildren().add(doubleRoomDropDown);
+        contentPane.getChildren().add(familyRoomDropDown);
+        contentPane.getChildren().add(suiteDropDown);
+    }
+
+    public void fillData() {
+        
+    }
+}
+class RoomProvider{
+    static ArrayList<RoomDTO> allRooms;
+
+    public RoomProvider(ArrayList<RoomDTO> allRooms){
+        RoomProvider.allRooms = allRooms;
+    }
+
+    public RoomDTO getRoomFromNumber(int number){
+        for(RoomDTO room : allRooms){
+            if(room.getNumber() == number){
+                return room;
             }
         }
+        return null;
+    }
 
-        singleRoomDropDown.getItems().setAll(numbersSingleRoom);
-        doubleRoomDropDown.getItems().setAll(numbersDoubleRoom);
-        familyRoomDropDown.getItems().setAll(numbersFamilyRoom);
-        suiteDropDown.getItems().setAll(numbersSuite);
+    public ObservableList<RoomDTO> getAllRoomsFromCategory(String category) {
+        ObservableList<RoomDTO> rooms = null;
 
-        System.out.println("single:" + singleRoomDropDown.getItems().toString());
-        System.out.println("double:" + doubleRoomDropDown.getItems().toString());
-        System.out.println("family:" + familyRoomDropDown.getItems().toString());
-        System.out.println("suite:" + suiteDropDown.getItems().toString());
+        for(RoomDTO room : allRooms){
+            if(room.getCategory().getName().equals(category)){
+                rooms.add(room);
+            }
+        }
+        return rooms;
+    }
+}
+
+
+
+class RoomNumberConverter<T> extends StringConverter<RoomDTO>{
+
+    RoomProvider provider;
+    public RoomNumberConverter(RoomProvider provider){
+        this.provider = provider;
+    }
+    @Override
+    public RoomDTO fromString(final String number) {
+        return provider.getRoomFromNumber(Integer.valueOf(number));
+    }
+
+    @Override
+    public String toString(final RoomDTO room) {
+        if (room == null) {
+            return null;
+        }
+        return String.valueOf(room.getNumber());
     }
 }

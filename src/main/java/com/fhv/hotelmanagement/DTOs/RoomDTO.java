@@ -14,8 +14,16 @@ public class RoomDTO {
         return number;
     }
 
+    public void setNumber(int number){
+        this.number = number;
+    }
+
     public RoomCategoryDTO getCategory(){
         return category;
+    }
+
+    public void setCategory(RoomCategoryDTO category){
+        this.category = category;
     }
 
     public boolean getIsFree(){

@@ -1,1 +1,3 @@
 rootProject.name = "Hotelmanagement"
+include 'log4j'
+
