@@ -9,8 +9,6 @@ import java.util.HashMap;
 public class Booking {
 
     private static int id;
-
-    private BookingEntity entity;
     private Integer number;
     private Customer customer;
     private LocalDate arrivalDate;
@@ -34,37 +32,23 @@ public class Booking {
         id++;
     }
 
-    public Booking(BookingEntity entity) {
-        this.number = entity.getNumber();
-        this.customer = new Customer(entity.getCustomer());
-        this.arrivalDate = entity.getArrivalDate();
-        this.checkInDatetime = entity.getCheckInDatetime();
-        this.departureDate = entity.getDepartureDate();
-        this.checkOutDatetime = entity.getCheckOutDatetime();
-        this.billingAddress = new Address(entity.getBillingStreet(), entity.getBillingHouseNumber(), entity.getBillingPostalCode(), entity.getBillingCity(), entity.getBillingCountry());
-
-        this.bookedRoomCategories = new HashMap<>();
-        if(entity.getBookedRoomCategories() != null) {
-            for (BookedRoomCategoryEntity e : entity.getBookedRoomCategories()) {
-                BookedRoomCategory c = new BookedRoomCategory(e);
-                this.bookedRoomCategories.put(c.getRoomCategory(), c);
-            }
+    public Booking(Integer number, Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
+                   LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
+                   String billingCity, String billingCountry, HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories,
+                   HashMap<Room, BookedRoom> bookedRooms) {
+        if (number.equals(null)) {
+            number = getId();
         }
-        this.bookedRooms = new HashMap<>();
-        if(entity.getBookedRooms() != null) {
-            for (BookedRoomEntity e : entity.getBookedRooms()) {
-                BookedRoom r = new BookedRoom(e);
-                this.bookedRooms.put(r.getRoom(), r);
-            }
-        }
-    }
-
-    public BookingEntity getEntity(){
-        return entity;
-    }
-
-    public void setEntity(BookingEntity entity) {
-        this.entity = entity;
+        this.number = number;
+        this.customer = customer;
+        this.arrivalDate = arrivalDate;
+        this.checkInDatetime = checkInDatetime;
+        this.departureDate = departureDate;
+        this.checkOutDatetime = checkOutDatetime;
+        this.billingAddress = new Address(billingStreet, billingHouseNumber, billingPostalCode, billingCity, billingCountry);
+        this.bookedRoomCategories = bookedRoomCategories;
+        this.bookedRooms = bookedRooms;
+        id++;
     }
 
     public Integer getNumber() {

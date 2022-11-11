@@ -1,45 +1,45 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domain.domainModel.Package;
+import com.fhv.hotelmanagement.domain.domainModel.Board;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.PackageEntity;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class PackageDataMapper {
+public class BoardDataMapper {
 
-    private PackageDataMapper(){}
+    private BoardDataMapper(){}
 
-    private static PackageDataMapper _instance = new PackageDataMapper();
+    private static BoardDataMapper _instance = new BoardDataMapper();
 
-    public static PackageDataMapper instance(){
+    public static BoardDataMapper instance(){
         return _instance;
     }
 
     //read
-    public Optional<Package> get(final String name){
+    public Optional<Board> get(final String name){
         PackageEntity entity = PersistenceFacade.instance().entityManager.find(PackageEntity.class, name);
         if(entity != null){
-            Package mypackage = new Package(entity);
+            Board mypackage = new Board(entity);
             return Optional.of(mypackage);
         }
         return Optional.empty();
     }
 
     //TODO: generisch in persistence facade
-    public static ArrayList<Package> getAll(){
+    public static ArrayList<Board> getAll(){
         ArrayList<PackageEntity> entities = (ArrayList<PackageEntity>) PersistenceFacade.instance().entityManager.createQuery("from PackageEntity").getResultList();
-        ArrayList<Package> packages = new ArrayList<>();
+        ArrayList<Board> boards = new ArrayList<>();
         for(PackageEntity p : entities){
-            packages.add(new Package(p));
+            boards.add(new Board(p));
         }
-        return packages;
+        return boards;
     }
 
 
     //update
-    public void store(Package myPackage){
-        PersistenceFacade.instance().entityManager.merge(myPackage.getEntity());
+    public void store(Board myBoard){
+        PersistenceFacade.instance().entityManager.merge(myBoard.getEntity());
     }
 }

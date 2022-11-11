@@ -57,8 +57,6 @@ public class CustomerEntity {
     )
     private Set<BookingEntity> bookings;
 
-    public CustomerEntity(){};
-
     public CustomerEntity(int number, String firstName, String lastName,
                           LocalDate dateOfBirth, String nationality, String phoneNumber,
                           String email, String street, String houseNumber, String postalCode,

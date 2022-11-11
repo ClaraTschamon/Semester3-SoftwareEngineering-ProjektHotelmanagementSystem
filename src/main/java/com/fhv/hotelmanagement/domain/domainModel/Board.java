@@ -4,13 +4,13 @@ import com.fhv.hotelmanagement.persistence.persistenceEntity.PackageEntity;
 
 import java.math.BigDecimal;
 
-public class Package {
+public class Board {
 
     private PackageEntity entity;
     private String name;
     private BigDecimal pricePerNight;
 
-    public Package(PackageEntity entity){
+    public Board(PackageEntity entity){
         this.entity = entity;
         this.name = entity.getName();
         this.pricePerNight = entity.getPricePerNight();

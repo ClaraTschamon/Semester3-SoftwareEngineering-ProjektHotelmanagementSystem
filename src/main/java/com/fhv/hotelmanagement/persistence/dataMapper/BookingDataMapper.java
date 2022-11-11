@@ -1,8 +1,15 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
+import com.fhv.hotelmanagement.domain.domainModel.Address;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
+import com.fhv.hotelmanagement.domain.domainModel.Customer;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
+
+import java.util.HashSet;
 import java.util.Optional;
 
 public class BookingDataMapper {
@@ -37,4 +44,18 @@ public class BookingDataMapper {
         PersistenceFacade.instance().entityManager.merge(booking.getEntity());
     }
 
+    protected BookingEntity createBookingEntity(Booking booking) {
+        Address address = booking.getBillingAddress();
+        return new BookingEntity(booking.getNumber(), CustomerDataMapper.instance().createCustomerEntity(booking.getCustomer()),
+                booking.getArrivalDate(), booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
+                address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
+                new HashSet<BookedRoomCategoryEntity>(), new HashSet<BookedRoomEntity>());
+    }
+
+    protected Booking createBooking(BookingEntity bookingEntity) {
+        return new Customer(customerEntity.getNumber(), customerEntity.getFirstName(), customerEntity.getLastName(),
+                customerEntity.getDateOfBirth(), customerEntity.getNationality(), customerEntity.getPhoneNumber(),
+                customerEntity.getEmail(), customerEntity.getStreet(), customerEntity.getHouseNumber(),
+                customerEntity.getPostalCode(), customerEntity.getCity(), customerEntity.getCountry(), customerEntity.getSaved());
+    }
 }

@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement;
 
+import com.fhv.hotelmanagement.domain.domainController.DomainManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,13 +17,17 @@ public class MainApplication extends Application {
     static FXMLLoader fxmlLoader;
     Scene scene;
     Properties configProperties;
-    MainController mainController;
+    DomainManager domainManager;
 
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        this.mainController = new MainController();
+        domainManager = new DomainManager();
         loadMainView();
+    }
+
+    public DomainManager getDomainManager() {
+        return domainManager;
     }
 
     public static MainController getMainController() throws IOException {
