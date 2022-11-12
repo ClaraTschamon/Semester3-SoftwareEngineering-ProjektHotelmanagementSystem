@@ -44,7 +44,7 @@ public class PersistenceFacade{
 
     @SuppressWarnings("rawtypes")
     public static Optional<Room> getRoom(int id){
-        return RoomDataMapper._instance().get(id);
+        return RoomDataMapper.instance().get(id);
     }
 
     public static Optional<Booking> getBooking(int id){

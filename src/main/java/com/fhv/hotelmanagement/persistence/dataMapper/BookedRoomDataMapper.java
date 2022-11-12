@@ -35,7 +35,8 @@ public class BookedRoomDataMapper {
                 "SELECT bookedRoom FROM BookedRoomEntity bookedRoom WHERE bookedRoom.fromDate >=:minDate AND bookedRoom.toDate <=: maxDate").setParameter("minDate", minDate).setParameter("maxDate", maxDate).getResultList();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
         for(BookedRoomEntity e : entities){
-            bookedRooms.add(new BookedRoom(e));
+
+            bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking())));
         }
         return bookedRooms;
     }
