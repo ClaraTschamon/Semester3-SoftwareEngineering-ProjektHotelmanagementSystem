@@ -8,18 +8,18 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "package")
-public class PackageEntity {
+@Table(name = "board")
+public class BoardEntity {
     @Id
-    @Column(name = "package_name")
+    @Column(name = "board_name")
     private String name;
 
     @Column(name = "price_per_night")
     private BigDecimal pricePerNight;
 
-    public PackageEntity(){};
+    public BoardEntity() {}
 
-    public PackageEntity(String name, BigDecimal pricePerNight) {
+    public BoardEntity(String name, BigDecimal pricePerNight) {
         this.name = name;
         this.pricePerNight = pricePerNight;
     }

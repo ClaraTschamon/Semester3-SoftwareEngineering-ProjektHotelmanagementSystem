@@ -70,7 +70,7 @@ Otherwise, this version is the same as the previous version and is written so
 as to preserve the Free Software Foundation's assessment of GPL compatibility
 and OSI's certification under the Open Source Definition. Please see our
 Copyright FAQ for common questions about using materials from our site,
-including specific terms and conditions for packages like libwww, Amaya, and
+including specific terms and conditions for boards like libwww, Amaya, and
 Jigsaw. Other questions about this notice can be directed to
 site-policy@w3.org.
 

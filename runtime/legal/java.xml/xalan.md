@@ -14,7 +14,7 @@
    Specifically, we only include the XSLTC portion of the source from the Xalan distribution. 
    The Xalan project has two processors: an interpretive one (Xalan Interpretive) and a 
    compiled one (The XSLT Compiler (XSLTC)). We *only* use the XSLTC part of Xalan; We use
-   the source from the packages that are part of the XSLTC sources.
+   the source from the boards that are part of the XSLTC sources.
 
    Portions of this software was originally based on the following:
 

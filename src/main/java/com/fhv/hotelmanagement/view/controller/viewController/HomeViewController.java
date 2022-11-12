@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.view.viewController.viewController;
+package com.fhv.hotelmanagement.view.controller.viewController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

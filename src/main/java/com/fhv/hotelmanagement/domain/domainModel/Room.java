@@ -1,10 +1,7 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
-import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
 //TODO: Preis pro Nacht fehlt
 public class Room {
-
-    private RoomEntity entity;
     private int number;
 
     private Boolean isFree;
@@ -12,16 +9,11 @@ public class Room {
     private Boolean isClean;
     private RoomCategory category;
 
-    public Room(RoomEntity entity) {
-        this.entity = entity;
-        this.number = entity.getNumber();
-        this.isFree = entity.getIsFree();
-        this.isClean = entity.getIsClean();
-        this.category = new RoomCategory(entity.getCategory());
-    }
-
-    public RoomEntity getEntity(){
-        return entity;
+    public Room(int number, boolean isFree, boolean isClean, RoomCategory category) {
+        this.number = number;
+        this.isFree = isFree;
+        this.isClean = isClean;
+        this.category = category;
     }
 
     public int getNumber() {

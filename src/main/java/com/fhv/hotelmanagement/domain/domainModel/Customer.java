@@ -1,14 +1,11 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
-import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Customer {
 
     private static int id;
-
-    private CustomerEntity entity;
     private int number;
     private String firstName;
     private String lastName;
@@ -17,45 +14,31 @@ public class Customer {
     private String phoneNumber;
     private String email;
     private Address address;
-    private Boolean saved;
-    private String city;
-    private String street;
-    private String postalCode;
-    private String houseNumber;
+    private boolean saved;
+    private ArrayList<Booking> bookings;
 
-    //bookings Liste??
 
-    public Customer() {
+    public Customer(Integer number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
+                    String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
+                    String country, boolean saved, ArrayList<Booking> bookings) {
+        if (number.equals(null)) {
+            number = getId();
+        }
+        this.number = number;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = new Address(street, houseNumber, postalCode, city, country);
+        this.saved = saved;
+        this.bookings = bookings;
         id++;
     }
 
-    public Customer(CustomerEntity entity) {
-        this.entity = entity;
-        this.number = entity.getNumber();
-        this.firstName = entity.getFirstName();
-        this.lastName = entity.getLastName();
-        this.dateOfBirth = entity.getDateOfBirth();
-        this.nationality = entity.getNationality();
-        this.phoneNumber = entity.getPhoneNumber();
-        this.email = entity.getEmail();
-        this.address = new Address(entity.getStreet(), entity.getHouseNumber(), entity.getPostalCode(), entity.getCity(), entity.getCountry());
-        this.saved = entity.getSaved();
-        this.city=entity.getCity();
-        this.street=entity.getStreet();
-        this.postalCode=entity.getPostalCode();
-        this.houseNumber=entity.getHouseNumber();
-    }
-
-    public CustomerEntity getEntity(){
-        return entity;
-    }
-
     public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+        return this.number;
     }
 
     public String getFirstName() {
@@ -123,40 +106,16 @@ public class Customer {
         this.saved = saved;
     }
 
-    public String getCity() {
-        return city;
+    public ArrayList<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     //Id braucht nur getter weil sie statisch ist
-    public static int getId() {
+    private static int getId() {
         return id;
     }
 }
