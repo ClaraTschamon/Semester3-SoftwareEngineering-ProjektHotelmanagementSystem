@@ -21,7 +21,7 @@ public class RoomCategoryDataMapper {
     public Optional<RoomCategory> get(final String name){
         RoomCategoryEntity entity = PersistenceFacade.instance().entityManager.find(RoomCategoryEntity.class, name);
         if(entity != null){
-            RoomCategory roomCategory = new RoomCategory(entity);
+            RoomCategory roomCategory = createRoomCategory(entity);
             return Optional.of(roomCategory);
         }
         return Optional.empty();
@@ -32,7 +32,7 @@ public class RoomCategoryDataMapper {
         ArrayList<RoomCategoryEntity> entities = (ArrayList<RoomCategoryEntity>) PersistenceFacade.instance().entityManager.createQuery("from RoomCategoryEntity").getResultList();
         ArrayList<RoomCategory> roomCategories = new ArrayList<>();
         for(RoomCategoryEntity e : entities){
-            roomCategories.add(new RoomCategory(e));
+            roomCategories.add(createRoomCategory(e));
         }
         return roomCategories;
     }
@@ -41,14 +41,20 @@ public class RoomCategoryDataMapper {
     public void insert(RoomCategory roomCategory){
         var entityManager = PersistenceFacade.instance().entityManager;
         entityManager.getTransaction().begin();
-        entityManager.persist(roomCategory.getEntity());
+        entityManager.persist(createRoomCategoryEntity(roomCategory));
         entityManager.getTransaction().commit();
     }
 
     //update
     public void store(RoomCategory roomCategory){
-        PersistenceFacade.instance().entityManager.merge(roomCategory.getEntity());
+        PersistenceFacade.instance().entityManager.merge(createRoomCategoryEntity(roomCategory));
     }
 
+    protected static RoomCategoryEntity createRoomCategoryEntity(RoomCategory roomCategory) {
+        return new RoomCategoryEntity(roomCategory.getName(), roomCategory.getPricePerNight());
+    }
 
+    protected static RoomCategory createRoomCategory(RoomCategoryEntity roomCategoryEntity) {
+        return new RoomCategory(roomCategoryEntity.getName(), roomCategoryEntity.getPricePerNight());
+    }
 }

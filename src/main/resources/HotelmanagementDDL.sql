@@ -1,19 +1,18 @@
 DROP TABLE IF EXISTS room_category CASCADE;
-DROP TABLE IF EXISTS package CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
 DROP TABLE IF EXISTS booked_room CASCADE;
 DROP TABLE IF EXISTS customer CASCADE;
 DROP TABLE IF EXISTS booking CASCADE;
 DROP TABLE IF EXISTS booked_room_category CASCADE;
-
+DROP TABLE IF EXISTS board CASCADE;
 
 CREATE TABLE room_category(
     room_category_name VARCHAR(255) PRIMARY KEY ,
     price_per_night INTEGER
 );
 
-CREATE TABLE package(
-    package_name VARCHAR(255) PRIMARY KEY,
+CREATE TABLE board(
+    board_name VARCHAR(255) PRIMARY KEY,
     price_per_night INTEGER
 );
 

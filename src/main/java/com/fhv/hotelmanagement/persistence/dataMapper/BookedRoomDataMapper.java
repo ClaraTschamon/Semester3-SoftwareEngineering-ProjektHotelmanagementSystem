@@ -2,16 +2,12 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
-import jakarta.persistence.TemporalType;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
 
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 
 public class BookedRoomDataMapper {
@@ -24,16 +20,15 @@ public class BookedRoomDataMapper {
     }
 
     //read
-    public Optional<BookedRoom> get(final Booking booking){
+    protected Optional<BookedRoom> get(final Booking booking){
         BookedRoomEntity entity = PersistenceFacade.instance().entityManager.find(BookedRoomEntity.class, booking);
         if(entity != null){
-            BookedRoom bookedRoom = new BookedRoom(entity);
+            BookedRoom bookedRoom = createBookedRoom(entity, booking);
             return Optional.of(bookedRoom);
         }
         return Optional.empty();
     }
 
-    //sollte protected sein
     public ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
         ArrayList<BookedRoomEntity> entities;
         entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
@@ -45,16 +40,30 @@ public class BookedRoomDataMapper {
         return bookedRooms;
     }
 
+
     //create
-    public void insert(BookedRoom bookedRoom){
+    protected void insert(BookedRoom bookedRoom){
         var entityManager = PersistenceFacade.instance().entityManager;
         entityManager.getTransaction().begin();
-        entityManager.persist(bookedRoom.getEntity());
+        entityManager.persist(createBookedRoomEntity(bookedRoom));
         entityManager.getTransaction().commit();
     }
 
     //update
-    public void store(BookedRoom bookedRoom){
-        PersistenceFacade.instance().entityManager.merge(bookedRoom.getEntity());
+    protected void store(BookedRoom bookedRoom){
+        PersistenceFacade.instance().entityManager.merge(createBookedRoomEntity(bookedRoom));
+    }
+
+    protected static BookedRoomEntity createBookedRoomEntity(BookedRoom bookedRoom) {
+        Booking booking = bookedRoom.getBooking();
+        return new BookedRoomEntity(BookingDataMapper.createBookingEntity(booking,
+                CustomerDataMapper.createCustomerEntity(booking.getCustomer())),
+                RoomDataMapper.createRoomEntity(bookedRoom.getRoom()),
+                bookedRoom.getFromDate(), bookedRoom.getToDate());
+    }
+
+    protected static BookedRoom createBookedRoom(BookedRoomEntity bookedRoomEntity, Booking booking) {
+        return new BookedRoom(booking, RoomDataMapper.createRoom(bookedRoomEntity.getRoom()), bookedRoomEntity.getFromDate(),
+                bookedRoomEntity.getToDate());
     }
 }

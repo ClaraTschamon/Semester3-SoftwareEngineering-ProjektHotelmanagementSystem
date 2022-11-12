@@ -57,7 +57,7 @@ public class CustomerEntity {
     )
     private Set<BookingEntity> bookings;
 
-    public CustomerEntity(){};
+    public CustomerEntity() {}
 
     public CustomerEntity(int number, String firstName, String lastName,
                           LocalDate dateOfBirth, String nationality, String phoneNumber,

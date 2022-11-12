@@ -1,6 +1,5 @@
 package com.fhv.hotelmanagement;
 
-import com.fhv.hotelmanagement.view.viewController.viewController.WalkIn1ViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

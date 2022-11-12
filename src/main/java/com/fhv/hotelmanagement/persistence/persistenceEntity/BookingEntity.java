@@ -38,13 +38,13 @@ public class BookingEntity {
     private String billingHouseNumber;
 
     @Column(name = "billing_postal_code")
-    private String BillingPostalCode;
+    private String billingPostalCode;
 
     @Column(name = "billing_city")
-    private String BillingCity;
+    private String billingCity;
 
     @Column(name = "billing_country")
-    private String BillingCountry;
+    private String billingCountry;
 
     @Column(name="comment")
     private String comment;
@@ -82,6 +82,8 @@ public class BookingEntity {
                          LocalDateTime checkOutDatetime, String billingStreet,
                          String billingHouseNumber, String billingPostalCode,
                          String billingCity, String billingCountry,
+                         String comment, String paymentMethod, String creditCardNumber,
+                         LocalDate expirationDate, String authorisationNumber,
                          Set<BookedRoomCategoryEntity> bookedRoomCategories,
                          Set<BookedRoomEntity> bookedRooms) {
         this.number = number;
@@ -92,9 +94,14 @@ public class BookingEntity {
         this.checkOutDatetime = checkOutDatetime;
         this.billingStreet = billingStreet;
         this.billingHouseNumber = billingHouseNumber;
-        BillingPostalCode = billingPostalCode;
-        BillingCity = billingCity;
-        BillingCountry = billingCountry;
+        this.billingPostalCode = billingPostalCode;
+        this.billingCity = billingCity;
+        this.billingCountry = billingCountry;
+        this.comment = comment;
+        this.paymentMethod = paymentMethod;
+        this.creditCardNumber = creditCardNumber;
+        this.expirationDate = expirationDate;
+        this.authorisationNumber = authorisationNumber;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
@@ -173,29 +180,29 @@ public class BookingEntity {
 
 
     public String getBillingPostalCode() {
-        return BillingPostalCode;
+        return billingPostalCode;
     }
 
     public void setBillingPostalCode(String billingPostalCode) {
-        BillingPostalCode = billingPostalCode;
+        this.billingPostalCode = billingPostalCode;
     }
 
 
     public String getBillingCity() {
-        return BillingCity;
+        return billingCity;
     }
 
     public void setBillingCity(String billingCity) {
-        BillingCity = billingCity;
+        this.billingCity = billingCity;
     }
 
 
     public String getBillingCountry() {
-        return BillingCountry;
+        return billingCountry;
     }
 
     public void setBillingCountry(String billingCountry) {
-        BillingCountry = billingCountry;
+        this.billingCountry = billingCountry;
     }
 
     public String getComment() {
@@ -254,22 +261,22 @@ public class BookingEntity {
         this.bookedRooms = bookedRooms;
     }
 
-    @Override
-    public String toString() {
-        return "BookingEntity{" +
-                "number=" + number +
-                ", customer=" + customer +
-                ", arrivalDate=" + arrivalDate +
-                ", checkInDatetime=" + checkInDatetime +
-                ", departureDate=" + departureDate +
-                ", checkOutDatetime=" + checkOutDatetime +
-                ", billingStreet='" + billingStreet + '\'' +
-                ", billingHouseNumber='" + billingHouseNumber + '\'' +
-                ", BillingPostalCode='" + BillingPostalCode + '\'' +
-                ", BillingCity='" + BillingCity + '\'' +
-                ", BillingCountry='" + BillingCountry + '\'' +
-                ", bookedRoomCategories=" + bookedRoomCategories +
-                ", bookedRooms=" + bookedRooms +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "BookingEntity{" +
+//                "number=" + number +
+//                ", customer=" + customer +
+//                ", arrivalDate=" + arrivalDate +
+//                ", checkInDatetime=" + checkInDatetime +
+//                ", departureDate=" + departureDate +
+//                ", checkOutDatetime=" + checkOutDatetime +
+//                ", billingStreet='" + billingStreet + '\'' +
+//                ", billingHouseNumber='" + billingHouseNumber + '\'' +
+//                ", BillingPostalCode='" + billingPostalCode + '\'' +
+//                ", BillingCity='" + billingCity + '\'' +
+//                ", BillingCountry='" + billingCountry + '\'' +
+//                ", bookedRoomCategories=" + bookedRoomCategories +
+//                ", bookedRooms=" + bookedRooms +
+//                '}';
+//    }
 }

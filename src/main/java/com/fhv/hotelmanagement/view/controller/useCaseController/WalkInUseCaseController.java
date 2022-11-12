@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.view.viewController.useCaseController;
+package com.fhv.hotelmanagement.view.controller.useCaseController;
 
 import com.fhv.hotelmanagement.view.DTOs.*;
 

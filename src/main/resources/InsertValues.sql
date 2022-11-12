@@ -12,6 +12,8 @@ DELETE FROM BOOKED_ROOM
 WHERE TRUE;
 DELETE FROM BOOKED_ROOM_CATEGORY
 WHERE TRUE;
+DELETE FROM BOARD
+WHERE TRUE;
 
 
 INSERT INTO room_category(room_category_name, price_per_night)
@@ -27,16 +29,16 @@ INSERT INTO room_category(room_category_name, price_per_night)
 VALUES('Suite', 180);
 
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Vollpension', 30);
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Halbpension', 20);
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Nur Frühstück', 10);
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Ohne Package', 0);
 
 

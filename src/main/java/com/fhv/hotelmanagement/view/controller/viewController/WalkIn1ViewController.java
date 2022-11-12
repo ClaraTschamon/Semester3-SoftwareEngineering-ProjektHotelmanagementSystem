@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.view.viewController.viewController;
+package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
