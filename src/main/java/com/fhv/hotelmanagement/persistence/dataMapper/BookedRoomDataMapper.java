@@ -2,8 +2,16 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
+import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.RoomEntity;
+import jakarta.persistence.TemporalType;
+
+import java.awt.print.Book;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 public class BookedRoomDataMapper {
@@ -23,6 +31,18 @@ public class BookedRoomDataMapper {
             return Optional.of(bookedRoom);
         }
         return Optional.empty();
+    }
+
+    //sollte protected sein
+    public ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<BookedRoomEntity> entities;
+        entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
+                "SELECT bookedRoom FROM BookedRoomEntity bookedRoom WHERE bookedRoom.fromDate >=:minDate AND bookedRoom.toDate <=: maxDate").setParameter("minDate", minDate).setParameter("maxDate", maxDate).getResultList();
+        ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
+        for(BookedRoomEntity e : entities){
+            bookedRooms.add(new BookedRoom(e));
+        }
+        return bookedRooms;
     }
 
     //create

@@ -1,7 +1,12 @@
 package com.fhv.hotelmanagement.view.viewController.viewController;
 
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import javafx.collections.FXCollections;
@@ -12,15 +17,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -79,8 +87,6 @@ public class WalkIn1ViewController implements Initializable {
     private void onNextButtonClicked(ActionEvent e) {
         try {
             viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
-
-            // TODO fill all attributes
             viewController.loadWalkIn2();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -97,6 +103,7 @@ public class WalkIn1ViewController implements Initializable {
         singleroomcategoy.setName("Einzelzimmer");
         RoomDTO room1 = new RoomDTO();
         room1.setNumber(1);
+        room1.setIsClean(false);
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
         //
@@ -168,6 +175,7 @@ public class WalkIn1ViewController implements Initializable {
 }
 
 class RoomProvider{
+
     static ArrayList<RoomDTO> allRooms;
 
     public RoomProvider(ArrayList<RoomDTO> allRooms){
@@ -196,8 +204,14 @@ class RoomProvider{
 }
 
 
-
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
+
+    //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
+
+    LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
+    LocalDate maxDate = LocalDate.now();
+    ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.instance().getBookedRoomsBetween(minDate, maxDate);
+    ArrayList<Room> rooms = new ArrayList<>();
 
     RoomProvider provider;
     public RoomNumberConverter(RoomProvider provider){
@@ -212,6 +226,21 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
     public String toString(final RoomDTO room) {
         if (room == null) {
             return null;
+        }
+        for(BookedRoom bookedRoom : bookedRooms){
+            rooms.add(bookedRoom.getRoom());
+            if(bookedRoom.getFromDate().equals(LocalDate.now())){
+                if(!room.getIsClean()){
+                    return String.valueOf(room.getNumber() + " not clean!");
+                }
+                return String.valueOf(room.getNumber());
+            }
+        }
+        if(!rooms.contains(room)){
+            if(!room.getIsClean()){
+                return String.valueOf(room.getNumber() + " not clean!");
+            }
+            return String.valueOf(room.getNumber());
         }
         return String.valueOf(room.getNumber());
     }

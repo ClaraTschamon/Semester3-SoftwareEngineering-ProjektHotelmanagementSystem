@@ -1,8 +1,10 @@
 package com.fhv.hotelmanagement.persistence;
 
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.domain.domainModel.Customer;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.CustomerDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
@@ -11,18 +13,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
 
 //Broker == Mapper
 public class PersistenceFacade{
 
-    private static final Logger logger = LogManager.getLogger(PersistenceFacade.class);
+    //public static final Logger log4j2Logger = LogManager.getLogger(PersistenceFacade.class);
 
     public final EntityManager entityManager;
     private static PersistenceFacade _instance;
@@ -57,25 +60,45 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-        /*
+
 
         PersistenceFacade pf = new PersistenceFacade();
         System.out.println(getCustomer(1).toString());
 
+        /*
         Customer clara = new Customer( new CustomerEntity(4, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
                 "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
                 "Hummelweg", "36", "6710", "Nenzing", "Austria", true, null));
         CustomerDataMapper.instance().insert(clara);
-        System.out.println(getCustomer(3).get().getFirstName());
+        //System.out.println(getCustomer(3).get().getFirstName());
+        */
+
+        Optional<Customer> optional = CustomerDataMapper.instance().get(4);
+
+        CustomerEntity clara = optional.get().getEntity();
 
         /*
-        Booking booking = new Booking(new BookingEntity(3, clara.getEntity(), LocalDate.now(), LocalDateTime.now(), null, null,
+        Booking booking = new Booking(new BookingEntity(3, clara, LocalDate.now(), LocalDateTime.now(), null, null,
                 null, null, null, null, null, new LinkedHashSet<>(), new HashSet<>()));
         BookingDataMapper.instance().insert(booking);
-        System.out.println(getBooking(4).get().getCustomer().getFirstName());
+        System.out.println(getBooking(5).get().getCustomer().getFirstName());
 
          */
-        logger.error("jaidfj");
 
+        /*
+
+        LocalDate minDate = LocalDate.of(2022, 11, 10);
+        LocalDate maxDate = LocalDate.of(2022, 11, 12);
+
+
+        ArrayList<BookedRoom> rooms = BookedRoomDataMapper.instance().getBookedRoomsBetween(minDate, maxDate);
+
+        System.out.println(rooms.size());
+        for(BookedRoom room : rooms){
+
+            System.out.println(room);
+        }
+
+         */
     }
 }

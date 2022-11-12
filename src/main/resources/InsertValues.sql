@@ -124,6 +124,10 @@ INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_date
 VALUES (3, 3, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', DATE '2024-12-01', 'EXI 3849 SHH 3898');
 
 
+INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
+VALUES (1, 11, DATE '2022-11-10',  DATE '2022-11-12')
+
+
 
 
 

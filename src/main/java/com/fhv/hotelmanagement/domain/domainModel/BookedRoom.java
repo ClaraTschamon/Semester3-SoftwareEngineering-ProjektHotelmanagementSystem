@@ -27,4 +27,12 @@ public class BookedRoom {
     public Room getRoom() {
         return room;
     }
+
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    public LocalDate getToDate() {
+        return toDate;
+    }
 }

@@ -58,7 +58,7 @@ public class BookingEntity {
     @Column(name="expiration_date")
     private LocalDate expirationDate;
 
-    @Column(name="authoriation_number")
+    @Column(name="authorisation_number")
     private String authorisationNumber;
 
     @OneToMany(

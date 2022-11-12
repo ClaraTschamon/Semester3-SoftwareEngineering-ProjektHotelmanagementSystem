@@ -33,4 +33,8 @@ public class RoomDTO {
     public boolean getIsClean(){
         return isClean;
     }
+
+    public void setIsClean(Boolean isClean) {
+        this.isClean = isClean;
+    }
 }
