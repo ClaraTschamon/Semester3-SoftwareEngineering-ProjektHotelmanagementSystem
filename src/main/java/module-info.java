@@ -10,8 +10,8 @@ module com.fhv.hotelmanagement {
     requires net.bytebuddy;
     requires org.controlsfx.controls;
 
-    exports com.fhv.hotelmanagement.view.viewController.viewController;
-    opens com.fhv.hotelmanagement.view.viewController.viewController to javafx.fxml;
+    exports com.fhv.hotelmanagement.view.controller.viewController;
+    opens com.fhv.hotelmanagement.view.controller.viewController to javafx.fxml;
     exports com.fhv.hotelmanagement;
     opens com.fhv.hotelmanagement to javafx.fxml;
     opens com.fhv.hotelmanagement.persistence.persistenceEntity to org.hibernate.orm.core;

@@ -1,10 +1,8 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
-import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Booking {
 
@@ -16,26 +14,19 @@ public class Booking {
     private LocalDate departureDate;
     private LocalDateTime checkOutDatetime;
     private Address billingAddress;
-
-    private String paymentMethod;
-
-    private String creditCardNumber;
-
-    private LocalDate expirationDate;
-
-    private String authorisationNumber;
     private String comment;
-    private HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories;
-    private HashMap<Room, BookedRoom> bookedRooms;
-
-    public Booking() {
-        id++;
-    }
+    private String paymentMethod;
+    private String creditCardNumber;
+    private LocalDate expirationDate;
+    private String authorisationNumber;
+    private ArrayList<BookedRoomCategory> bookedRoomCategories;
+    private ArrayList<BookedRoom> bookedRooms;
 
     public Booking(Integer number, Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
-                   String billingCity, String billingCountry, HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories,
-                   HashMap<Room, BookedRoom> bookedRooms) {
+                   String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
+                   LocalDate expirationDate, String authorisationNumber, ArrayList<BookedRoomCategory> bookedRoomCategories,
+                   ArrayList<BookedRoom> bookedRooms) {
         if (number.equals(null)) {
             number = getId();
         }
@@ -46,6 +37,11 @@ public class Booking {
         this.departureDate = departureDate;
         this.checkOutDatetime = checkOutDatetime;
         this.billingAddress = new Address(billingStreet, billingHouseNumber, billingPostalCode, billingCity, billingCountry);
+        this.comment = comment;
+        this.paymentMethod = paymentMethod;
+        this.creditCardNumber = creditCardNumber;
+        this.expirationDate = expirationDate;
+        this.authorisationNumber = authorisationNumber;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
         id++;
@@ -147,19 +143,19 @@ public class Booking {
         this.comment = comment;
     }
 
-    public HashMap<RoomCategory, BookedRoomCategory> getBookedRoomCategories() {
+    public ArrayList<BookedRoomCategory> getBookedRoomCategories() {
         return bookedRoomCategories;
     }
 
-    public void setBookedRoomCategories(HashMap<RoomCategory, BookedRoomCategory> bookedRoomCategories) {
+    public void setBookedRoomCategories(ArrayList<BookedRoomCategory> bookedRoomCategories) {
         this.bookedRoomCategories = bookedRoomCategories;
     }
 
-    public HashMap<Room, BookedRoom> getBookedRooms() {
+    public ArrayList<BookedRoom> getBookedRooms() {
         return bookedRooms;
     }
 
-    public void setBookedRooms(HashMap<Room, BookedRoom> bookedRooms) {
+    public void setBookedRooms(ArrayList<BookedRoom> bookedRooms) {
         this.bookedRooms = bookedRooms;
     }
 

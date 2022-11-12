@@ -22,7 +22,7 @@ public class RoomEntity {
 
     public RoomEntity(){};
 
-    public RoomEntity(int number,boolean isFree, boolean isClean, RoomCategoryEntity category) {
+    public RoomEntity(int number, boolean isFree, boolean isClean, RoomCategoryEntity category) {
         this.number = number;
         this.isFree = isFree;
         this.isClean = isClean;

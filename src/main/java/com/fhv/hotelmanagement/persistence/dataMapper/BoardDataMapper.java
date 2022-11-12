@@ -2,7 +2,7 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 
 import com.fhv.hotelmanagement.domain.domainModel.Board;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.PackageEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BoardEntity;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -19,27 +19,35 @@ public class BoardDataMapper {
 
     //read
     public Optional<Board> get(final String name){
-        PackageEntity entity = PersistenceFacade.instance().entityManager.find(PackageEntity.class, name);
+        BoardEntity entity = PersistenceFacade.instance().entityManager.find(BoardEntity.class, name);
         if(entity != null){
-            Board mypackage = new Board(entity);
-            return Optional.of(mypackage);
+            Board board = createBoard(entity);
+            return Optional.of(board);
         }
         return Optional.empty();
     }
 
     //TODO: generisch in persistence facade
     public static ArrayList<Board> getAll(){
-        ArrayList<PackageEntity> entities = (ArrayList<PackageEntity>) PersistenceFacade.instance().entityManager.createQuery("from PackageEntity").getResultList();
+        ArrayList<BoardEntity> entities = (ArrayList<BoardEntity>) PersistenceFacade.instance().entityManager.createQuery("from BoardEntity").getResultList();
         ArrayList<Board> boards = new ArrayList<>();
-        for(PackageEntity p : entities){
-            boards.add(new Board(p));
+        for(BoardEntity b : entities){
+            boards.add(createBoard(b));
         }
         return boards;
     }
 
 
     //update
-    public void store(Board myBoard){
-        PersistenceFacade.instance().entityManager.merge(myBoard.getEntity());
+    public void store(Board board){
+        PersistenceFacade.instance().entityManager.merge(createBoardEntity(board));
+    }
+
+    protected static BoardEntity createBoardEntity(Board board) {
+        return new BoardEntity(board.getName(), board.getPricePerNight());
+    }
+
+    protected static Board createBoard(BoardEntity boardEntity) {
+        return new Board(boardEntity.getName(), boardEntity.getPricePerNight());
     }
 }

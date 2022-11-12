@@ -4,6 +4,9 @@ import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
+
 import java.util.Optional;
 
 public class BookedRoomCategoryDataMapper{
@@ -17,10 +20,10 @@ public class BookedRoomCategoryDataMapper{
     }
 
     //read
-    public Optional<BookedRoomCategory> get(final Booking booking){
+    protected Optional<BookedRoomCategory> get(final Booking booking){
         BookedRoomCategoryEntity entity = PersistenceFacade.instance().entityManager.find(BookedRoomCategoryEntity.class, booking);
         if(entity != null){
-            BookedRoomCategory bookedRoomCategory = new BookedRoomCategory(entity);
+            BookedRoomCategory bookedRoomCategory = createBookedRoomCategory(entity, booking);
             return Optional.of(bookedRoomCategory);
         }
         return Optional.empty();
@@ -30,12 +33,25 @@ public class BookedRoomCategoryDataMapper{
     public void insert(BookedRoomCategory bookedRoomCategory){ //Autocommit funktioniert nicht
         var entityManager = PersistenceFacade.instance().entityManager;
         entityManager.getTransaction().begin();
-        entityManager.persist(bookedRoomCategory.getEntity());
+        entityManager.persist(createBookedRoomCategoryEntity(bookedRoomCategory));
         entityManager.getTransaction().commit();
     }
 
     //update
-    public void store(BookedRoomCategory bookedRoomCategory){
-        PersistenceFacade.instance().entityManager.merge(bookedRoomCategory.getEntity());
+    protected void store(BookedRoomCategoryEntity bookedRoomCategoryEntity){
+        PersistenceFacade.instance().entityManager.merge(bookedRoomCategoryEntity);
+    }
+
+    protected static BookedRoomCategoryEntity createBookedRoomCategoryEntity(BookedRoomCategory bookedRoomCategory) {
+        Booking booking = bookedRoomCategory.getBooking();
+        return new BookedRoomCategoryEntity(BookingDataMapper.createBookingEntity(booking,
+                CustomerDataMapper.createCustomerEntity(booking.getCustomer())),
+                RoomCategoryDataMapper.createRoomCategoryEntity(bookedRoomCategory.getRoomCategory()),
+                bookedRoomCategory.getPricePerNight(), bookedRoomCategory.getAmount());
+    }
+
+    protected static BookedRoomCategory createBookedRoomCategory(BookedRoomCategoryEntity bookedRoomCategoryEntity, Booking booking) {
+        return new BookedRoomCategory(booking, RoomCategoryDataMapper.createRoomCategory(bookedRoomCategoryEntity.getRoomCategory()),
+                bookedRoomCategoryEntity.getPricePerNight(), bookedRoomCategoryEntity.getAmount());
     }
 }

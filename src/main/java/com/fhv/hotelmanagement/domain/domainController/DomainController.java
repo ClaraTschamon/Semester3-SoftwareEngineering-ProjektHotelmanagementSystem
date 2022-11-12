@@ -5,6 +5,7 @@ import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
@@ -30,7 +31,8 @@ public class DomainController {
             boolean isNew = customerDTO.getNumber().equals(null);
             Customer customer = new Customer(customerDTO.getNumber(), customerDTO.getFirstName(), customerDTO.getLastName(),
                     customerDTO.getDateOfBirth(), customerDTO.getNationality(), customerDTO.getPhoneNumber(), customerDTO.getEmail(),
-                    address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(), customerDTO.getSaved());
+                    address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
+                    customerDTO.getSaved(), new ArrayList<>());
 
             if (isNew) {
                 CustomerDataMapper.instance().insert(customer);

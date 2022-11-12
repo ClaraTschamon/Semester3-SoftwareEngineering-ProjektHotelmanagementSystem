@@ -1,8 +1,7 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
-import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Customer {
 
@@ -16,12 +15,12 @@ public class Customer {
     private String email;
     private Address address;
     private boolean saved;
+    private ArrayList<Booking> bookings;
 
-    //bookings Liste??
 
-
-    public Customer(Integer number, String firstName, String lastName, LocalDate dateOfBirth, String nationality, String phoneNumber,
-                    String email, String street, String houseNumber, String postalCode, String city, String country, boolean saved) {
+    public Customer(Integer number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
+                    String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
+                    String country, boolean saved, ArrayList<Booking> bookings) {
         if (number.equals(null)) {
             number = getId();
         }
@@ -34,6 +33,7 @@ public class Customer {
         this.email = email;
         this.address = new Address(street, houseNumber, postalCode, city, country);
         this.saved = saved;
+        this.bookings = bookings;
         id++;
     }
 
@@ -104,6 +104,14 @@ public class Customer {
 
     public void setSaved(Boolean saved) {
         this.saved = saved;
+    }
+
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     //Id braucht nur getter weil sie statisch ist

@@ -2,11 +2,11 @@ package com.fhv.hotelmanagement.view.DTOs;
 
 import java.math.BigDecimal;
 
-public class PackageDTO {
+public class BoardDTO {
     private String name;
     private BigDecimal pricePerNight;
 
-    public PackageDTO(){}
+    public BoardDTO(){}
 
     public String getName() {
         return name;

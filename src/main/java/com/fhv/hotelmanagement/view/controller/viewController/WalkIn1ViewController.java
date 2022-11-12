@@ -1,4 +1,4 @@
-package com.fhv.hotelmanagement.view.viewController.viewController;
+package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
