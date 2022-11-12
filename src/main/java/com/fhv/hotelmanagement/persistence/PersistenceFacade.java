@@ -1,12 +1,14 @@
 package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
-import com.fhv.hotelmanagement.persistence.dataMapper.*;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
+import com.fhv.hotelmanagement.persistence.dataMapper.CustomerDataMapper;
+import com.fhv.hotelmanagement.persistence.dataMapper.RoomCategoryDataMapper;
+import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import net.bytebuddy.asm.Advice;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -41,12 +43,12 @@ public class PersistenceFacade{
     }
 
     @SuppressWarnings("rawtypes")
-    public static Optional<Room> getRoom(int number){
-        return RoomDataMapper.instance().get(number);
+    public static Optional<Room> getRoom(int id){
+        return RoomDataMapper.instance().get(id);
     }
 
-    public static Optional<Booking> getBooking(int number){
-        return BookingDataMapper.instance().get(number);
+    public static Optional<Booking> getBooking(int id){
+        return BookingDataMapper.instance().get(id);
     }
 
     public static void main(String[] args) {
@@ -84,5 +86,6 @@ public class PersistenceFacade{
         for (BookedRoomCategory c : getBooking(104).get().getBookedRoomCategories()) {
             System.out.println(c.getRoomCategory().getName());
         }
+
     }
 }
