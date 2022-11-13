@@ -259,7 +259,7 @@ class RoomProvider{
     static ArrayList<RoomDTO> allRooms;
     static ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
 
-    public RoomProvider(ArrayList<RoomDTO> allRooms){
+    public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
         RoomProvider.allRooms = allRooms;
         RoomProvider.allBookedRooms = allBookedRooms;
     }
