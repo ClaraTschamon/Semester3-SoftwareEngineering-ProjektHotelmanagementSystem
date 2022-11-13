@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
-import javax.swing.*;
+//import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
