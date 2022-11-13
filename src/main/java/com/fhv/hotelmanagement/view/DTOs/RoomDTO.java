@@ -7,6 +7,11 @@ public class RoomDTO {
 
     private Boolean isClean;
     private RoomCategoryDTO category;
+    private int counterSingleRoom;
+    private int counterDoubleRoom;
+    private int counterFamilyRoom;
+    private int counterSuite;
+    private String roomPrice;
 
     public RoomDTO() {}
 
@@ -34,7 +39,51 @@ public class RoomDTO {
         return isClean;
     }
 
-    public void setIsClean(Boolean isClean) {
-        this.isClean = isClean;
+    public int getCounterSingleRoom() {
+        return counterSingleRoom;
+    }
+
+    public void setCounterSingleRoom(int counterSingleRoom) {
+        this.counterSingleRoom = counterSingleRoom;
+    }
+
+    public int getCounterDoubleRoom() {
+        return counterDoubleRoom;
+    }
+
+    public void setCounterDoubleRoom(int counterDoubleRoom) {
+        this.counterDoubleRoom = counterDoubleRoom;
+    }
+
+    public int getCounterFamilyRoom() {
+        return counterFamilyRoom;
+    }
+
+    public void setCounterFamilyRoom(int counterFamilyRoom) {
+        this.counterFamilyRoom = counterFamilyRoom;
+    }
+
+    public int getCounterSuite() {
+        return counterSuite;
+    }
+
+    public void setCounterSuite(int counterSuite) {
+        this.counterSuite = counterSuite;
+    }
+
+    public String getRoomPrice() {
+        return roomPrice;
+    }
+
+    public void setRoomPrice(String roomPrice) {
+        this.roomPrice = roomPrice;
+    }
+
+    public Boolean getClean() {
+        return isClean;
+    }
+
+    public void setClean(Boolean clean) {
+        isClean = clean;
     }
 }

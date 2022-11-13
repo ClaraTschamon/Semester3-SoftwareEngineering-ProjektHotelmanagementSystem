@@ -24,7 +24,7 @@ public class WalkInViewController {
 
     public void loadWalkIn1() throws IOException {
         FXMLLoader walkIn1Loader = MainApplication.getMainController().loadIntoContentArea("walk-in-1");
-        WalkIn1ViewController walkIn1ViewController = walkIn1Loader.getController();
+        com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController walkIn1ViewController = walkIn1Loader.getController();
         walkIn1ViewController.setController(this);
         walkIn1ViewController.fillData();
     }

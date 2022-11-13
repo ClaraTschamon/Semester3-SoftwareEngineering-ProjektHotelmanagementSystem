@@ -19,7 +19,7 @@ public class WalkIn2ViewController {
     @FXML
     private DatePicker birthday;
     @FXML
-    private Text country;
+    private TextField countryTextField;
     @FXML
     private TextField searchDatabase;
     @FXML
@@ -69,29 +69,41 @@ public class WalkIn2ViewController {
         customer.getAddress().setCity(city.getText());
         customer.getAddress().setHouseNumber(houseNumber.getText());
         customer.getAddress().setPostalCode(postalCode.getText());
-        customer.getAddress().setCountry(country.getText());
+        customer.getAddress().setCountry(countryTextField.getText());
         customer.setDateOfBirth(birthday.getValue());
         viewController.loadWalkIn3();
     }
 
     protected void fillData() throws IOException {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
-        String firstname= customer.getFirstName();
-        String lastname=customer.getLastName();
-        String nationality= customer.getNationality();
-        String phonenumber =customer.getPhoneNumber();
-        String email =customer.getEmail();
-        String city=customer.getAddress().getCity();
-        String street=customer.getAddress().getStreet();
-        String housenumber =customer.getAddress().getHouseNumber();
-        String postalcode=customer.getAddress().getPostalCode();
-        String country = customer.getAddress().getCountry();
-        LocalDate birthday = customer.getDateOfBirth();
+        String firstname1= customer.getFirstName();
+        firstName.setText(firstname1);
+        String lastname1=customer.getLastName();
+        lastName.setText(lastname1);
+        String nationality1= customer.getNationality();
+        nationality.setText(nationality1);
+        String phonenumber1 =customer.getPhoneNumber();
+        phoneNumber.setText(phonenumber1);
+        String email1 =customer.getEmail();
+        email.setText(email1);
+        String city1=customer.getAddress().getCity();
+        city.setText(city1);
+        String street1=customer.getAddress().getStreet();
+        street.setText(street1);
+        String housenumber1 =customer.getAddress().getHouseNumber();
+        houseNumber.setText(housenumber1);
+        String postalcode1=customer.getAddress().getPostalCode();
+        postalCode.setText(postalcode1);
+        String country1 = customer.getAddress().getCountry();
+        countryTextField.setText(country1);
+        LocalDate birthday1 = customer.getDateOfBirth();
+        birthday.setValue(birthday1);
     }
 
     @FXML
     private void onBackButtonClicked(ActionEvent e) throws IOException {
         try {
+            saveData();
             viewController.loadWalkIn1();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
@@ -102,17 +114,6 @@ public class WalkIn2ViewController {
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
             saveData();
-            // TODO fill all attributes
-            viewController.getUseCaseController().getCustomer().setFirstName(firstName.getText());
-            viewController.getUseCaseController().getCustomer().setLastName(lastName.getText());
-            viewController.getUseCaseController().getCustomer().setNationality(nationality.getText());
-            viewController.getUseCaseController().getCustomer().setPhoneNumber(phoneNumber.getText());
-            viewController.getUseCaseController().getCustomer().setEmail(email.getText());
-            viewController.getUseCaseController().getCustomer().getAddress().setCity(city.getText());
-            viewController.getUseCaseController().getCustomer().getAddress().setStreet(street.getText());
-            viewController.getUseCaseController().getCustomer().getAddress().setHouseNumber(houseNumber.getText());
-            viewController.getUseCaseController().getCustomer().getAddress().setPostalCode(postalCode.getText());
-
             viewController.loadWalkIn3();
         }catch(IOException exc){
             System.out.println(exc.getMessage());

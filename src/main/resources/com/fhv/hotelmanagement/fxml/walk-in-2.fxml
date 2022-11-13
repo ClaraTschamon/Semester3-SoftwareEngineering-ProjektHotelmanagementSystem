@@ -121,8 +121,8 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-            <TextField fx:id="street1" layoutX="545.0" layoutY="350.0" prefHeight="40.0" prefWidth="300.0" />
-            <Text fx:id="country" layoutX="545.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
+            <TextField fx:id="countryTextField" layoutX="545.0" layoutY="350.0" prefHeight="40.0" prefWidth="300.0" />
+            <Text layoutX="545.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
                <font>
                   <Font size="14.0" />
                </font>
