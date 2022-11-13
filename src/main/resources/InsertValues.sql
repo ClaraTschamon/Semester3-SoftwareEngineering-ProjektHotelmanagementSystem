@@ -1,18 +1,19 @@
 //Testdaten so schreiben, dass man kein Hartkodiertes Datum
 //hat, sondern immer das aktuelle Datum eingefügt wird.
-DELETE FROM ROOM
+DELETE FROM BOOKED_ROOM
 WHERE TRUE;
-DELETE FROM ROOM_CATEGORY
+DELETE FROM BOOKED_ROOM_CATEGORY
 WHERE TRUE;
 DELETE FROM BOOKING
 WHERE TRUE;
 DELETE FROM CUSTOMER
 WHERE TRUE;
-DELETE FROM BOOKED_ROOM
+DELETE FROM BOARD
 WHERE TRUE;
-DELETE FROM BOOKED_ROOM_CATEGORY
+DELETE FROM ROOM
 WHERE TRUE;
-
+DELETE FROM ROOM_CATEGORY
+WHERE TRUE;
 
 INSERT INTO room_category(room_category_name, price_per_night)
 VALUES('Einzelzimmer', 80);
@@ -27,16 +28,16 @@ INSERT INTO room_category(room_category_name, price_per_night)
 VALUES('Suite', 180);
 
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Vollpension', 30);
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Halbpension', 20);
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Nur Frühstück', 10);
 
-INSERT INTO package(package_name, price_per_night)
+INSERT INTO board(board_name, price_per_night)
 VALUES('Ohne Package', 0);
 
 
@@ -122,6 +123,10 @@ VALUES (2, 2, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 5, NULL, 'Wuppermanns
 
 INSERT INTO booking(booking_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number)
 VALUES (3, 3, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', DATE '2024-12-01', 'EXI 3849 SHH 3898');
+
+
+INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
+VALUES (1, 11, DATE '2022-11-10',  DATE '2022-11-12')
 
 
 

@@ -2,8 +2,8 @@ package com.fhv.hotelmanagement.view.viewController.viewController;
 
 import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.PackageDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import javafx.collections.FXCollections;
@@ -15,12 +15,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -51,18 +53,24 @@ public class WalkIn1ViewController implements Initializable {
     public AnchorPane contentPane;
     @FXML
     CheckComboBox<Integer> singleRoomDropDown;
+
     @FXML
     CheckComboBox<Integer> doubleRoomDropDown;
+
     @FXML
     CheckComboBox<Integer> familyRoomDropDown;
+
     @FXML
     CheckComboBox<Integer> suiteDropDown;
+
     @FXML
     private Text chooseRoom;
+
     @FXML
     private DatePicker departureDatePicker;
     @FXML
     private Text room;
+
     @FXML
     private ComboBox roomPriceDropDown;
 
@@ -70,6 +78,10 @@ public class WalkIn1ViewController implements Initializable {
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
+    }
+
+    protected void fillData() {
+
     }
 
     @FXML
@@ -164,12 +176,14 @@ public class WalkIn1ViewController implements Initializable {
         singleroomcategoy.setName("Einzelzimmer");
         RoomDTO room1 = new RoomDTO();
         room1.setNumber(1);
+        room1.setIsClean(false);
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
         //
 
 //        System.out.println(singleRoomDropDown.());
         RoomProvider roomProvider = new RoomProvider(allRooms);
+
 
         final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
         final CheckComboBox<RoomDTO> doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
@@ -235,6 +249,7 @@ public class WalkIn1ViewController implements Initializable {
 }
 
 class RoomProvider{
+
     static ArrayList<RoomDTO> allRooms;
 
     public RoomProvider(ArrayList<RoomDTO> allRooms){
@@ -262,7 +277,16 @@ class RoomProvider{
     }
 }
 
+
+
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
+
+    //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
+
+    LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
+    LocalDate maxDate = LocalDate.now();
+    ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.instance().getBookedRoomsBetween(minDate, maxDate);
+    ArrayList<Room> rooms = new ArrayList<>();
 
     RoomProvider provider;
     public RoomNumberConverter(RoomProvider provider){
@@ -277,6 +301,21 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
     public String toString(final RoomDTO room) {
         if (room == null) {
             return null;
+        }
+        for(BookedRoom bookedRoom : bookedRooms){
+            rooms.add(bookedRoom.getRoom());
+            if(bookedRoom.getFromDate().equals(LocalDate.now())){
+                if(!room.getIsClean()){
+                    return String.valueOf(room.getNumber() + " not clean!");
+                }
+                return String.valueOf(room.getNumber());
+            }
+        }
+        if(!rooms.contains(room)){
+            if(!room.getIsClean()){
+                return String.valueOf(room.getNumber() + " not clean!");
+            }
+            return String.valueOf(room.getNumber());
         }
         return String.valueOf(room.getNumber());
     }

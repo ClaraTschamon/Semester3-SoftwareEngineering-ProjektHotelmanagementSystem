@@ -26,7 +26,7 @@
 # In this file, various security properties are set for use by
 # java.security classes. This is where users can statically register
 # Cryptography Package Providers ("providers" for short). The term
-# "provider" refers to a package or set of packages that supply a
+# "provider" refers to a package or set of boards that supply a
 # concrete implementation of a subset of the cryptography aspects of
 # the Java Security API. A provider may, for example, implement one or
 # more digital signature algorithms or message digest algorithms.
@@ -290,7 +290,7 @@ keystore.type=pkcs12
 keystore.type.compat=true
 
 #
-# List of comma-separated packages that start with or equal this string
+# List of comma-separated boards that start with or equal this string
 # will cause a security exception to be thrown when passed to the
 # SecurityManager::checkPackageAccess method unless the corresponding
 # RuntimePermission("accessClassInPackage."+package) has been granted.
@@ -299,7 +299,7 @@ package.access=sun.misc.,\
                sun.reflect.
 
 #
-# List of comma-separated packages that start with or equal this string
+# List of comma-separated boards that start with or equal this string
 # will cause a security exception to be thrown when passed to the
 # SecurityManager::checkPackageDefinition method unless the corresponding
 # RuntimePermission("defineClassInPackage."+package) has been granted.
