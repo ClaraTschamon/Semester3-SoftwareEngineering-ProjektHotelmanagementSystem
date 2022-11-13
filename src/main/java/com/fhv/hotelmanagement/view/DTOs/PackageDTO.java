@@ -5,6 +5,10 @@ import java.math.BigDecimal;
 public class PackageDTO {
     private String name;
     private BigDecimal pricePerNight;
+    private boolean fullboard;
+    private boolean halfboard;
+    private boolean onlyBreakfast;
+    private boolean noPackage;
 
     public PackageDTO(){}
 
@@ -22,5 +26,37 @@ public class PackageDTO {
 
     public void setPricePerNight(BigDecimal pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    public boolean isFullboard() {
+        return fullboard;
+    }
+
+    public void setFullboard(boolean fullboard) {
+        this.fullboard = fullboard;
+    }
+
+    public boolean isNoPackage() {
+        return noPackage;
+    }
+
+    public void setNoPackage(boolean noPackage) {
+        this.noPackage = noPackage;
+    }
+
+    public boolean isHalfboard() {
+        return halfboard;
+    }
+
+    public void setHalfboard(boolean halfboard) {
+        this.halfboard = halfboard;
+    }
+
+    public boolean isOnlyBreakfast() {
+        return onlyBreakfast;
+    }
+
+    public void setOnlyBreakfast(boolean onlyBreakfast) {
+        this.onlyBreakfast = onlyBreakfast;
     }
 }

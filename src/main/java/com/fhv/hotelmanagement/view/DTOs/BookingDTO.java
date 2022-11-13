@@ -12,10 +12,11 @@ public class BookingDTO {
     private LocalDate departureDate;
     private LocalDateTime checkOutDatetime;
     private AddressDTO billingAddress;
+    private String paymentMethod;
 
     private String creditCardNumber;
 
-    private LocalDate expirationDate;
+    private String expirationDate;
 
     private String authorisationNumber;
 
@@ -89,11 +90,11 @@ public class BookingDTO {
         this.creditCardNumber = creditCardNumber;
     }
 
-    public LocalDate getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -127,5 +128,13 @@ public class BookingDTO {
 
     public void setBookedRooms(HashMap<RoomDTO, BookedRoomDTO> bookedRooms) {
         this.bookedRooms = bookedRooms;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
