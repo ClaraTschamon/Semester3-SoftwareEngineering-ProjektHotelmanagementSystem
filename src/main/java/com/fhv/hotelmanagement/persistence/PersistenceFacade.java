@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.persistence;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -75,7 +76,9 @@ public class PersistenceFacade{
         return RoomDataMapper.getAll();
     }
 
-
+    public static ArrayList<BookedRoom> getAllBookedRooms() {
+        return BookedRoomDataMapper.getAll();
+    }
 
     public static void main(String[] args) {
 

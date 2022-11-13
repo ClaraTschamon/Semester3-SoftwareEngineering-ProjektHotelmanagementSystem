@@ -23,6 +23,29 @@ public class BookingDTO {
 
     public BookingDTO() {}
 
+    public BookingDTO(Integer number, CustomerDTO customer, LocalDate arrivalDate,
+                      LocalDateTime checkInDatetime, LocalDate departureDate,
+                      LocalDateTime checkOutDatetime, AddressDTO billingAddress,
+                      String paymentMethod, String creditCardNumber, String expirationDate,
+                      String authorisationNumber, String comment,
+                      ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      ArrayList<BookedRoomDTO> bookedRooms) {
+        this.number = number;
+        this.customer = customer;
+        this.arrivalDate = arrivalDate;
+        this.checkInDatetime = checkInDatetime;
+        this.departureDate = departureDate;
+        this.checkOutDatetime = checkOutDatetime;
+        this.billingAddress = billingAddress;
+        this.paymentMethod = paymentMethod;
+        this.creditCardNumber = creditCardNumber;
+        this.expirationDate = expirationDate;
+        this.authorisationNumber = authorisationNumber;
+        this.comment = comment;
+        this.bookedRoomCategories = bookedRoomCategories;
+        this.bookedRooms = bookedRooms;
+    }
+
     public Integer getNumber() {
         return number;
     }

@@ -17,6 +17,20 @@ public class CustomerDTO {
         this.address = new AddressDTO();
     }
 
+    public CustomerDTO(Integer number, String firstName, String lastName, LocalDate dateOfBirth,
+                       String nationality, String phoneNumber, String email, AddressDTO address,
+                       Boolean saved) {
+        this.number = number;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.saved = saved;
+    }
+
     public Integer getNumber() {
         return number;
     }
