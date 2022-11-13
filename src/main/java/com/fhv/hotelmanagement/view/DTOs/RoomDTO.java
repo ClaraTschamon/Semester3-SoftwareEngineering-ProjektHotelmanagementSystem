@@ -1,5 +1,9 @@
 package com.fhv.hotelmanagement.view.DTOs;
 
+import com.fhv.hotelmanagement.domain.domainModel.Room;
+
+import java.util.ArrayList;
+
 public class RoomDTO {
     private int number;
 
@@ -12,6 +16,8 @@ public class RoomDTO {
     private int counterFamilyRoom;
     private int counterSuite;
     private String roomPrice;
+
+    private ArrayList<RoomDTO> allRooms;
 
     public RoomDTO() {}
 
@@ -85,5 +91,13 @@ public class RoomDTO {
 
     public void setClean(Boolean clean) {
         isClean = clean;
+    }
+
+    public ArrayList<RoomDTO> getAllRooms() {
+        return allRooms;
+    }
+
+    public void setAllRooms(ArrayList<RoomDTO> allRooms) {
+        this.allRooms = allRooms;
     }
 }

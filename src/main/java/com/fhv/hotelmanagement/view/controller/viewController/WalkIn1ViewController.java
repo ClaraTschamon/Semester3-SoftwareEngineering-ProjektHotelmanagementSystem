@@ -163,8 +163,11 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //ArrayList<RoomDTO> allRooms = RoomDataMapper.getAll();
+        //woher hat roomDTO die informationen???
+        ArrayList<RoomDTO> allRooms = viewController.getUseCaseController().getRoomDTO().getAllRooms();
+        System.out.println(allRooms);
 
+        /*
         //nur zum testen
         ArrayList<RoomDTO> allRooms = new ArrayList<>();
         RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
@@ -175,6 +178,8 @@ public class WalkIn1ViewController implements Initializable {
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
         //
+
+         */
 
 //        System.out.println(singleRoomDropDown.());
         RoomProvider roomProvider = new RoomProvider(allRooms);

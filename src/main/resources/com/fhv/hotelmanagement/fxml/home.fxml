@@ -40,7 +40,8 @@
                </graphic>
                <font>
                   <Font size="18.0" />
-               </font></Button>
+               </font>
+            </Button>
             <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="101.0" layoutY="121.0" mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" style="-fx-background-color: FFFFFF;" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font size="18.0" />
@@ -48,7 +49,7 @@
                <graphic>
                   <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Bilder/person.crop.circle.badge.plus.png" />
+                        <Image url="@Bilder/CheckOut.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -60,7 +61,7 @@
                <graphic>
                   <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Bilder/person.crop.circle.badge.minus.png" />
+                        <Image url="@Bilder/CheckIn.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -72,7 +73,7 @@
                <graphic>
                   <ImageView fitHeight="300.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Bilder/Neue%20Reservierung.png" />
+                        <Image url="@Bilder/NeueReservierung.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -84,7 +85,7 @@
                <graphic>
                   <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Bilder/gearshape.2.fill.png" />
+                        <Image url="@Bilder/Einstellungen.png" />
                      </image>
                   </ImageView>
                </graphic>

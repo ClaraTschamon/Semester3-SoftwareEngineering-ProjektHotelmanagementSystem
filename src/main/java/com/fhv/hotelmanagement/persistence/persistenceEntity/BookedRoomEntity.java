@@ -2,6 +2,7 @@ package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
