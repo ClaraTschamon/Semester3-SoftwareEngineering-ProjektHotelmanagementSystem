@@ -25,10 +25,14 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
+
+import static com.fhv.hotelmanagement.view.controller.viewController.RoomProvider.allBookedRooms;
+import static com.fhv.hotelmanagement.view.controller.viewController.RoomProvider.allRooms;
 
 public class WalkIn1ViewController implements Initializable {
 
@@ -164,12 +168,13 @@ public class WalkIn1ViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //woher hat roomDTO die informationen???
-        ArrayList<RoomDTO> allRooms = viewController.getUseCaseController().getRoomDTO().getAllRooms();
-        System.out.println(allRooms);
+        //ArrayList<RoomDTO> allRooms = viewController.getUseCaseController().getRoomDTO().getAllRooms();
+        //System.out.println(allRooms);
 
-        /*
+
         //nur zum testen
         ArrayList<RoomDTO> allRooms = new ArrayList<>();
+        ArrayList<BookedRoomDTO> allBookedRooms = new ArrayList<>();
         RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
         singleroomcategoy.setName("Einzelzimmer");
         RoomDTO room1 = new RoomDTO();
@@ -179,10 +184,9 @@ public class WalkIn1ViewController implements Initializable {
         allRooms.add(room1);
         //
 
-         */
 
 //        System.out.println(singleRoomDropDown.());
-        RoomProvider roomProvider = new RoomProvider(allRooms);
+        RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
 
 
         final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
@@ -235,11 +239,14 @@ public class WalkIn1ViewController implements Initializable {
         suiteDropDown.setPrefHeight(40);
         suiteDropDown.setPrefWidth(100);
 
-
-        singleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-        doubleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-        familyRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-        suiteDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        try {
+            singleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+            doubleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+            familyRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+            suiteDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
         contentPane.getChildren().add(singleRoomDropDown);
         contentPane.getChildren().add(doubleRoomDropDown);
@@ -251,9 +258,11 @@ public class WalkIn1ViewController implements Initializable {
 class RoomProvider{
 
     static ArrayList<RoomDTO> allRooms;
+    static ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
 
-    public RoomProvider(ArrayList<RoomDTO> allRooms){
+    public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
         RoomProvider.allRooms = allRooms;
+        RoomProvider.allBookedRooms = allBookedRooms;
     }
 
     public RoomDTO getRoomFromNumber(int number){
@@ -285,11 +294,11 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
 
     LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
     LocalDate maxDate = LocalDate.now();
-    ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.instance().getBookedRoomsBetween(minDate, maxDate);
-    ArrayList<Room> rooms = new ArrayList<>();
+    ArrayList<BookedRoomDTO> bookedRooms = getBookedRoomsBetween(minDate, maxDate);
+    ArrayList<RoomDTO> rooms = new ArrayList<>();
 
     RoomProvider provider;
-    public RoomNumberConverter(RoomProvider provider){
+    public RoomNumberConverter(RoomProvider provider) throws SQLException {
         this.provider = provider;
     }
     @Override
@@ -302,7 +311,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         if (room == null) {
             return null;
         }
-        for(BookedRoom bookedRoom : bookedRooms){
+        for(BookedRoomDTO bookedRoom : bookedRooms){
             rooms.add(bookedRoom.getRoom());
             if(bookedRoom.getFromDate().equals(LocalDate.now())){
                 if(!room.getIsClean()){
@@ -318,5 +327,15 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
             return String.valueOf(room.getNumber());
         }
         return String.valueOf(room.getNumber());
+    }
+
+    public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
+        for(BookedRoomDTO bookedRoom : RoomProvider.allBookedRooms){
+            if(bookedRoom.getFromDate().isAfter(minDate.minusDays(1)) && bookedRoom.getToDate().isBefore(maxDate.plusDays(1))){
+                bookedRooms.add(bookedRoom);
+            }
+        }
+        return bookedRooms;
     }
 }

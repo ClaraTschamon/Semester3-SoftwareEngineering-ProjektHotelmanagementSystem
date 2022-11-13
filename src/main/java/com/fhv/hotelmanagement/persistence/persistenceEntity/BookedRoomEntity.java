@@ -1,6 +1,8 @@
 package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import jakarta.persistence.*;
+import org.h2.mvstore.Page;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -80,4 +82,9 @@ public class BookedRoomEntity {
                 ", toDate=" + toDate +
                 '}';
     }
+
+
+
+
+
 }

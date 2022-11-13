@@ -9,4 +9,20 @@ public class BookedRoomDTO {
     private LocalDate toDate;
 
     public BookedRoomDTO() {}
+
+    public BookingDTO getBooking() {
+        return booking;
+    }
+
+    public RoomDTO getRoom() {
+        return room;
+    }
+
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    public LocalDate getToDate() {
+        return toDate;
+    }
 }
