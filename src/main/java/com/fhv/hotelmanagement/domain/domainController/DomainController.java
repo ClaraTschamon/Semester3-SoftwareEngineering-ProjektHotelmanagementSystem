@@ -95,7 +95,6 @@ public class DomainController {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
 
-
         Booking booking = new Booking(bookingDTO.getNumber(), createCustomer(bookingDTO.getCustomer()), bookingDTO.getArrivalDate(),
                 bookingDTO.getCheckInDatetime(), bookingDTO.getDepartureDate(), bookingDTO.getCheckOutDatetime(),
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
@@ -110,22 +109,13 @@ public class DomainController {
     public static boolean saveBooking(BookingDTO bookingDTO) {
         boolean saved = false;
         if (checkBooking(bookingDTO)) {
-            AddressDTO billingAddress = bookingDTO.getBillingAddress();
             boolean isNew = bookingDTO.getNumber().equals(null);
-
-
-
-            Booking booking = new Booking(bookingDTO.getNumber(), bookingDTO.getCustomer(), bookingDTO.getArrivalDate(),
-                    bookingDTO.getCheckInDatetime(), bookingDTO.getDepartureDate(), bookingDTO.getCheckOutDatetime(),
-                    billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
-                    billingAddress.getCity(), billingAddress.getCountry(), bookingDTO.getComment(), bookingDTO.getPaymentMethod(),
-                    bookingDTO.getCreditCardNumber(), bookingDTO.getExpirationDate(), bookingDTO.getAuthorisationNumber(),
-                    bookedRoomCategories, bookedRooms);
+            Booking booking = createBooking(bookingDTO);
 
             if (isNew) {
-                PersistenceFacade.insertCustomer(customer);
+                PersistenceFacade.insertBooking(booking);
             } else {
-                PersistenceFacade.storeCustomer(customer);
+                PersistenceFacade.storeBooking(booking);
             }
             saved = true;
         }

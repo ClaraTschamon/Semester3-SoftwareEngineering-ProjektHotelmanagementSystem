@@ -95,7 +95,7 @@ public class PersistenceFacade{
         Booking booking = new Booking(104, clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
                 null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
                 clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
-                "this is a comment", "Bar", "12435226", LocalDate.now().plusYears(2),
+                "this is a comment", "Bar", "12435226", "02/24",
                 "123", bookedRoomCategories, bookedRooms);
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(0), BigDecimal.valueOf(50), 2));
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(1), BigDecimal.valueOf(75), 1));
