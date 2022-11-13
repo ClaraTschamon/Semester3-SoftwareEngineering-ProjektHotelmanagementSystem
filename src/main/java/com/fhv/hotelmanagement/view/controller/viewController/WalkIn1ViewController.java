@@ -3,12 +3,8 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -17,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,10 +32,23 @@ import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
 
+    @FXML
+    RadioButton fullBoard;
+    @FXML
+    RadioButton halfBoard;
+    @FXML
+    RadioButton onlyBreakfast;
+    @FXML
+    RadioButton noPackage;
+    @FXML
     public Text counterSingleRoom;
+    @FXML
     public Text counterDoubleRoom;
+    @FXML
     public Text counterFamilyRoom;
+    @FXML
     public Text counterSuite;
+    @FXML
     public AnchorPane contentPane;
     @FXML
     CheckComboBox<Integer> singleRoomDropDown;
@@ -56,22 +66,17 @@ public class WalkIn1ViewController implements Initializable {
     private Text chooseRoom;
 
     @FXML
-    private DatePicker departureDate;
-
+    private DatePicker departureDatePicker;
     @FXML
     private Text room;
 
     @FXML
-    private Text roomPrice;
+    private ComboBox roomPriceDropDown;
 
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
-    }
-
-    protected void fillData() {
-
     }
 
     @FXML
@@ -86,11 +91,74 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private void onNextButtonClicked(ActionEvent e) {
         try {
-            viewController.getUseCaseController().getBooking().setDepartureDate(departureDate.getValue());
+            saveData();
             viewController.loadWalkIn2();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    protected void fillData(){
+        BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
+
+        LocalDate departureDate = bookingDTO.getDepartureDate();
+        departureDatePicker.setValue(departureDate);
+
+        //fill all package radio buttons
+        BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
+        boolean fullboard = packageDTO.isFullboard();
+        fullBoard.setSelected(fullboard);
+        boolean halfboard = packageDTO.isHalfboard();
+        halfBoard.setSelected(halfboard);
+        boolean nopackage = packageDTO.isNoPackage();
+        noPackage.setSelected(nopackage);
+        boolean onlybreakfast = packageDTO.isOnlyBreakfast();
+        onlyBreakfast.setSelected(onlybreakfast);
+
+        //fill all room counters
+        RoomDTO roomDTO = viewController.getUseCaseController().getRoomDTO();
+        int singleRoom =  roomDTO.getCounterSingleRoom();
+        counterSingleRoom.setText(String.valueOf(singleRoom));
+        int doubleRoom =  roomDTO.getCounterDoubleRoom();
+        counterDoubleRoom.setText(String.valueOf(doubleRoom));
+        int familyRoom =  roomDTO.getCounterFamilyRoom();
+        counterFamilyRoom.setText(String.valueOf(familyRoom));
+        int suite =  roomDTO.getCounterSuite();
+        counterSuite.setText(String.valueOf(suite));
+
+        //fill all roomno
+//        int roomno =roomDTO.getNumber();
+        //fill room price
+        String roomPrice = roomDTO.getRoomPrice();
+        roomPriceDropDown.setValue(roomPrice);
+
+        System.out.println(roomPriceDropDown.getEditor().getText());
+    }
+
+    protected void saveData(){
+        BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
+        bookingDTO.setDepartureDate(departureDatePicker.getValue());
+
+        //save all package radio buttons
+        BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
+        packageDTO.setFullboard(fullBoard.isSelected());
+        packageDTO.setHalfboard(halfBoard.isSelected());
+        packageDTO.setOnlyBreakfast(onlyBreakfast.isSelected());
+        packageDTO.setNoPackage(noPackage.isSelected());
+
+        //save all room counters
+        RoomDTO roomDTO = viewController.getUseCaseController().getRoomDTO();
+        roomDTO.setCounterSingleRoom(Integer.parseInt(counterSingleRoom.getText()));
+        roomDTO.setCounterDoubleRoom(Integer.parseInt(counterDoubleRoom.getText()));
+        roomDTO.setCounterFamilyRoom(Integer.parseInt(counterFamilyRoom.getText()));
+        roomDTO.setCounterSuite(Integer.parseInt(counterSuite.getText()));
+
+        //save all roomno
+
+
+        //save all room prices
+        roomDTO.setRoomPrice((String) roomPriceDropDown.getSelectionModel().getSelectedItem());
+//        singleRoomDropDown.setConverter();
     }
 
     @Override
@@ -103,11 +171,12 @@ public class WalkIn1ViewController implements Initializable {
         singleroomcategoy.setName("Einzelzimmer");
         RoomDTO room1 = new RoomDTO();
         room1.setNumber(1);
-        room1.setIsClean(false);
+        room1.setClean(false);
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
         //
 
+//        System.out.println(singleRoomDropDown.());
         RoomProvider roomProvider = new RoomProvider(allRooms);
 
 
@@ -202,6 +271,7 @@ class RoomProvider{
         return rooms;
     }
 }
+
 
 
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
