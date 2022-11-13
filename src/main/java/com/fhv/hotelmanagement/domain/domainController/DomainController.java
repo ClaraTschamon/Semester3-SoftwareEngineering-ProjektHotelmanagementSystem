@@ -25,9 +25,9 @@ public class DomainController {
             } else {
                 PersistenceFacade.storeCustomer(customer);
             }
+            System.out.println("saved customer");
             saved = true;
         }
-        System.out.println("could not save customer");
         return saved;
     }
 
@@ -45,9 +45,9 @@ public class DomainController {
             } else {
                 PersistenceFacade.storeBooking(booking);
             }
+            System.out.println("saved booking");
             saved = true;
         }
-        System.out.println("could not save booking");
         return saved;
     }
 }
