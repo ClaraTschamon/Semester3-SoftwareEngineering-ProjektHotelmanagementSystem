@@ -1,5 +1,7 @@
 package com.fhv.hotelmanagement.persistence;
 
+import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.domainController.DomainManager;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
@@ -115,5 +117,7 @@ public class PersistenceFacade{
             System.out.println(c.getRoomCategory().getName());
         }
 
+        DomainManager dm = new DomainManager();
+        System.out.println(dm.getAllBookedRoomDTOs().size());
     }
 }

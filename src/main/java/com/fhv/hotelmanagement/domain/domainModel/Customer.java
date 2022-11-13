@@ -21,7 +21,7 @@ public class Customer {
     public Customer(Integer number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
                     String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
                     String country, boolean saved, ArrayList<Booking> bookings) {
-        if (number.equals(null)) {
+        if (number == null) {
             number = getId();
         }
         this.number = number;

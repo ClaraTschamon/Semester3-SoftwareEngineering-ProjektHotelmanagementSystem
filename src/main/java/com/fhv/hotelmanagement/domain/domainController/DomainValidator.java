@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class DomainValidator {
     protected static boolean checkAddress(AddressDTO addressDTO) {
         if (
-                (addressDTO.equals(null)) &&
+                (!addressDTO.equals(null)) &&
                         (checkString(addressDTO.getStreet())) &&
                         (checkString(addressDTO.getHouseNumber())) &&
                         (checkString(addressDTO.getCity())) &&
@@ -31,10 +31,10 @@ public class DomainValidator {
                         (checkString(customerDTO.getLastName())) &&
                         (!customerDTO.getDateOfBirth().equals(null) && customerDTO.getDateOfBirth().isBefore(LocalDate.now())) &&
                         (checkString(customerDTO.getNationality())) &&
-                        (checkString(customerDTO.getPhoneNumber()) && checkValidPhoneNumber(customerDTO.getPhoneNumber())) &&
-                        (checkString(customerDTO.getEmail()) && checkValidEmail(customerDTO.getEmail())) &&
-                        (checkAddress(customerDTO.getAddress())) &&
-                        (!customerDTO.getSaved().equals(null))
+                        (checkString(customerDTO.getPhoneNumber())) && //checkValidPhoneNumber(customerDTO.getPhoneNumber())) &&
+                        (checkString(customerDTO.getEmail())) && //checkValidEmail(customerDTO.getEmail())) &&
+                        (checkAddress(customerDTO.getAddress())) //&&
+                        //(!customerDTO.getSaved().equals(null))
         ) {
             return true;
         }
@@ -56,6 +56,7 @@ public class DomainValidator {
                         (!bookingDTO.getBookedRooms().equals(null) && !bookingDTO.getBookedRooms().isEmpty()) &&
                         (!bookingDTO.getBookedRoomCategories().equals(null) && !bookingDTO.getBookedRoomCategories().isEmpty())
         ) {
+            // TODO validate arrays
             return true;
         }
         return false;

@@ -17,6 +17,10 @@ public class RoomCategoryDTO {
         return name;
     }
 
+    public BigDecimal getPricePerNight() {
+        return pricePerNight;
+    }
+
     public void setName(String name){
         this.name = name;
     }
