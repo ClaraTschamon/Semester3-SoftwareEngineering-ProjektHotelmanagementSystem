@@ -2,6 +2,7 @@ package com.fhv.hotelmanagement.view.DTOs;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BookingDTO {
@@ -13,18 +14,37 @@ public class BookingDTO {
     private LocalDateTime checkOutDatetime;
     private AddressDTO billingAddress;
     private String paymentMethod;
-
     private String creditCardNumber;
-
     private String expirationDate;
-
     private String authorisationNumber;
-
     private String comment;
-    private HashMap<RoomCategoryDTO, BookedRoomCategoryDTO> bookedRoomCategories;
-    private HashMap<RoomDTO, BookedRoomDTO> bookedRooms;
+    private ArrayList<BookedRoomCategoryDTO> bookedRoomCategories;
+    private ArrayList<BookedRoomDTO> bookedRooms;
 
     public BookingDTO() {}
+
+    public BookingDTO(Integer number, CustomerDTO customer, LocalDate arrivalDate,
+                      LocalDateTime checkInDatetime, LocalDate departureDate,
+                      LocalDateTime checkOutDatetime, AddressDTO billingAddress,
+                      String paymentMethod, String creditCardNumber, String expirationDate,
+                      String authorisationNumber, String comment,
+                      ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      ArrayList<BookedRoomDTO> bookedRooms) {
+        this.number = number;
+        this.customer = customer;
+        this.arrivalDate = arrivalDate;
+        this.checkInDatetime = checkInDatetime;
+        this.departureDate = departureDate;
+        this.checkOutDatetime = checkOutDatetime;
+        this.billingAddress = billingAddress;
+        this.paymentMethod = paymentMethod;
+        this.creditCardNumber = creditCardNumber;
+        this.expirationDate = expirationDate;
+        this.authorisationNumber = authorisationNumber;
+        this.comment = comment;
+        this.bookedRoomCategories = bookedRoomCategories;
+        this.bookedRooms = bookedRooms;
+    }
 
     public Integer getNumber() {
         return number;
@@ -114,19 +134,19 @@ public class BookingDTO {
         this.comment = comment;
     }
 
-    public HashMap<RoomCategoryDTO, BookedRoomCategoryDTO> getBookedRoomCategories() {
+    public ArrayList<BookedRoomCategoryDTO> getBookedRoomCategories() {
         return bookedRoomCategories;
     }
 
-    public void setBookedRoomCategories(HashMap<RoomCategoryDTO, BookedRoomCategoryDTO> bookedRoomCategories) {
+    public void setBookedRoomCategories(ArrayList<BookedRoomCategoryDTO> bookedRoomCategories) {
         this.bookedRoomCategories = bookedRoomCategories;
     }
 
-    public HashMap<RoomDTO, BookedRoomDTO> getBookedRooms() {
+    public ArrayList<BookedRoomDTO> getBookedRooms() {
         return bookedRooms;
     }
 
-    public void setBookedRooms(HashMap<RoomDTO, BookedRoomDTO> bookedRooms) {
+    public void setBookedRooms(ArrayList<BookedRoomDTO> bookedRooms) {
         this.bookedRooms = bookedRooms;
     }
 

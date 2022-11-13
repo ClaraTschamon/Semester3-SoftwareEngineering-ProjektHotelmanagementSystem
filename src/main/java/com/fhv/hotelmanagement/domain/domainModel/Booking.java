@@ -17,7 +17,7 @@ public class Booking {
     private String comment;
     private String paymentMethod;
     private String creditCardNumber;
-    private LocalDate expirationDate;
+    private String expirationDate;
     private String authorisationNumber;
     private ArrayList<BookedRoomCategory> bookedRoomCategories;
     private ArrayList<BookedRoom> bookedRooms;
@@ -25,7 +25,7 @@ public class Booking {
     public Booking(Integer number, Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
-                   LocalDate expirationDate, String authorisationNumber, ArrayList<BookedRoomCategory> bookedRoomCategories,
+                   String expirationDate, String authorisationNumber, ArrayList<BookedRoomCategory> bookedRoomCategories,
                    ArrayList<BookedRoom> bookedRooms) {
         if (number.equals(null)) {
             number = getId();
@@ -119,11 +119,11 @@ public class Booking {
         this.creditCardNumber = creditCardNumber;
     }
 
-    public LocalDate getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

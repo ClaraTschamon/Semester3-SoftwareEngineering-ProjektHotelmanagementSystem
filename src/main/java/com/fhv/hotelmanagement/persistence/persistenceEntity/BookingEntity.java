@@ -56,7 +56,7 @@ public class BookingEntity {
     private String creditCardNumber;
 
     @Column(name="expiration_date")
-    private LocalDate expirationDate;
+    private String expirationDate;
 
     @Column(name="authorisation_number")
     private String authorisationNumber;
@@ -83,7 +83,7 @@ public class BookingEntity {
                          String billingHouseNumber, String billingPostalCode,
                          String billingCity, String billingCountry,
                          String comment, String paymentMethod, String creditCardNumber,
-                         LocalDate expirationDate, String authorisationNumber,
+                         String expirationDate, String authorisationNumber,
                          Set<BookedRoomCategoryEntity> bookedRoomCategories,
                          Set<BookedRoomEntity> bookedRooms) {
         this.number = number;
@@ -229,11 +229,11 @@ public class BookingEntity {
         this.creditCardNumber = creditCardNumber;
     }
 
-    public LocalDate getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 

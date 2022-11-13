@@ -21,6 +21,13 @@ public class RoomDTO {
 
     public RoomDTO() {}
 
+    public RoomDTO(int number, Boolean isFree, Boolean isClean, RoomCategoryDTO category) {
+        this.number = number;
+        this.isFree = isFree;
+        this.isClean = isClean;
+        this.category = category;
+    }
+
     public int getNumber() {
         return number;
     }

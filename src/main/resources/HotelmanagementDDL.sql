@@ -56,7 +56,7 @@ CREATE TABLE booking(
     comment VARCHAR(255),
     payment_method VARCHAR(255),
     credit_card_number VARCHAR(255),
-    expiration_date DATE,
+    expiration_date VARCHAR(5),
     authorisation_number VARCHAR(255)
 );
 

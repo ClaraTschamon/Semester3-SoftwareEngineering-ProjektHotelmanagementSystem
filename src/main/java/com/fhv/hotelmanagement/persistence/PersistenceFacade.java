@@ -1,15 +1,14 @@
 package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
-import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.CustomerDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomCategoryDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.persistence.dataMapper.*;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -35,11 +34,37 @@ public class PersistenceFacade{
         return _instance;
     }
 
+    public static ArrayList<Board> getAllBoards() {
+        return BoardDataMapper.getAll();
+    }
+
+    public static Optional<Booking> getBooking(int id){
+        return BookingDataMapper.instance().get(id);
+    }
+
+    public static void insertBooking(Booking booking) {
+        BookingDataMapper.instance().insert(booking);
+    }
+
+    public static void storeBooking(Booking booking) {
+        BookingDataMapper.instance().store(booking);
+    }
 
     @SuppressWarnings("rawtypes")
     public static Optional<Customer> getCustomer(int id){
         return CustomerDataMapper.instance().get(id);
+    }
 
+    public static void insertCustomer(Customer customer) {
+        CustomerDataMapper.instance().insert(customer);
+    }
+
+    public static void storeCustomer(Customer customer) {
+        CustomerDataMapper.instance().store(customer);
+    }
+
+    public static ArrayList<RoomCategory> getAllRoomCategories() {
+        return RoomCategoryDataMapper.getAll();
     }
 
     @SuppressWarnings("rawtypes")
@@ -47,8 +72,12 @@ public class PersistenceFacade{
         return RoomDataMapper.instance().get(id);
     }
 
-    public static Optional<Booking> getBooking(int id){
-        return BookingDataMapper.instance().get(id);
+    public static ArrayList<Room> getAllRooms() {
+        return RoomDataMapper.getAll();
+    }
+
+    public static ArrayList<BookedRoom> getAllBookedRooms() {
+        return BookedRoomDataMapper.getAll();
     }
 
     public static void main(String[] args) {
@@ -69,7 +98,7 @@ public class PersistenceFacade{
         Booking booking = new Booking(104, clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
                 null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
                 clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
-                "this is a comment", "Bar", "12435226", LocalDate.now().plusYears(2),
+                "this is a comment", "Bar", "12435226", "02/24",
                 "123", bookedRoomCategories, bookedRooms);
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(0), BigDecimal.valueOf(50), 2));
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(1), BigDecimal.valueOf(75), 1));

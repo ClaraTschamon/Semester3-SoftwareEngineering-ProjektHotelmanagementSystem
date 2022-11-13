@@ -10,6 +10,13 @@ public class BookedRoomDTO {
 
     public BookedRoomDTO() {}
 
+    public BookedRoomDTO(BookingDTO booking, RoomDTO room, LocalDate fromDate, LocalDate toDate) {
+        this.booking = booking;
+        this.room = room;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
+
     public BookingDTO getBooking() {
         return booking;
     }
