@@ -1,11 +1,10 @@
-package com.fhv.hotelmanagement.view.viewController.viewController;
+package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
 import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -22,7 +21,7 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
-import javax.swing.*;
+//import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -80,10 +79,6 @@ public class WalkIn1ViewController implements Initializable {
         this.viewController = viewController;
     }
 
-    protected void fillData() {
-
-    }
-
     @FXML
     private void onCancelButtonClicked(ActionEvent e) {
         try {
@@ -110,7 +105,7 @@ public class WalkIn1ViewController implements Initializable {
         departureDatePicker.setValue(departureDate);
 
         //fill all package radio buttons
-        PackageDTO packageDTO = viewController.getUseCaseController().getPackage();
+        BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
         boolean fullboard = packageDTO.isFullboard();
         fullBoard.setSelected(fullboard);
         boolean halfboard = packageDTO.isHalfboard();
@@ -145,7 +140,7 @@ public class WalkIn1ViewController implements Initializable {
         bookingDTO.setDepartureDate(departureDatePicker.getValue());
 
         //save all package radio buttons
-        PackageDTO packageDTO = viewController.getUseCaseController().getPackage();
+        BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
         packageDTO.setFullboard(fullBoard.isSelected());
         packageDTO.setHalfboard(halfBoard.isSelected());
         packageDTO.setOnlyBreakfast(onlyBreakfast.isSelected());
@@ -176,7 +171,7 @@ public class WalkIn1ViewController implements Initializable {
         singleroomcategoy.setName("Einzelzimmer");
         RoomDTO room1 = new RoomDTO();
         room1.setNumber(1);
-        room1.setIsClean(false);
+        room1.setClean(false);
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
         //

@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import org.controlsfx.control.CheckComboBox?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
 
-<?import javafx.scene.control.ToggleGroup?>
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
     <center>
         <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -81,7 +73,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <DatePicker fx:id="departureDate" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
+                <DatePicker fx:id="departureDatePicker" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" />
                 <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
                     <font>
                         <Font name="System Bold" size="18.0" />
@@ -109,24 +101,27 @@
 
                 <!--Toggle Group Package-->
                 <fx:define>
-                        <ToggleGroup fx:id="packageToggleGroup"/>
+                        <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton layoutX="60.0" layoutY="373.0" mnemonicParsing="false" text="Vollpension" toggleGroup="$packageToggleGroup">
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" text="Vollpension">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Test" />
+               </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="halfBoard" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" text="Halbpension" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="403.0" mnemonicParsing="false" text="Halbpension" toggleGroup="$packageToggleGroup">
+                <RadioButton fx:id="noPackage" layoutX="60.0" layoutY="463.0" mnemonicParsing="false" text="Ohne Package" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="463.0" mnemonicParsing="false" text="Ohne Package" toggleGroup="$packageToggleGroup">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </RadioButton>
-                <RadioButton layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
+                <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>

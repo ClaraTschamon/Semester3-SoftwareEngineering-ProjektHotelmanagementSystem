@@ -78,4 +78,12 @@ public class RoomDTO {
     public void setRoomPrice(String roomPrice) {
         this.roomPrice = roomPrice;
     }
+
+    public Boolean getClean() {
+        return isClean;
+    }
+
+    public void setClean(Boolean clean) {
+        isClean = clean;
+    }
 }

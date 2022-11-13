@@ -7,14 +7,14 @@ import java.io.IOException;
 public class WalkInUseCaseController {
     BookingDTO booking;
     CustomerDTO customer;
-    PackageDTO packageDTO;
+    BoardDTO boardDTO;
     RoomDTO roomDTO;
     AddressDTO addressDTO;
 
     public WalkInUseCaseController() throws IOException {
         booking = new BookingDTO();
         customer = new CustomerDTO();
-        packageDTO = new PackageDTO();
+        boardDTO = new BoardDTO();
         roomDTO = new RoomDTO();
         addressDTO= new AddressDTO();
     }
@@ -27,7 +27,7 @@ public class WalkInUseCaseController {
         return customer;
     }
 
-    public PackageDTO getPackage(){return packageDTO;}
+    public BoardDTO getPackage(){return boardDTO;}
 
     public RoomDTO getRoomDTO() {
         return roomDTO;
@@ -40,7 +40,7 @@ public class WalkInUseCaseController {
     public void cancel() throws IOException {
         booking = null;
         customer = null;
-        packageDTO=null;
+        boardDTO=null;
         roomDTO=null;
         addressDTO=null;
     }
