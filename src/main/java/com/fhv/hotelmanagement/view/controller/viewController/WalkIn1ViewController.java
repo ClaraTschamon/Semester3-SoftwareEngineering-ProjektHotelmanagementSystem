@@ -246,6 +246,10 @@ public class WalkIn1ViewController implements Initializable {
         contentPane.getChildren().add(familyRoomDropDown);
         contentPane.getChildren().add(suiteDropDown);
     }
+
+    private boolean validateFields() {
+        return true;
+    }
 }
 
 class RoomProvider{

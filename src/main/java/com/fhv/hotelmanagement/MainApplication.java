@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement;
 
+import com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -35,6 +36,8 @@ public class MainApplication extends Application {
 
         URL mainViewURL = MainApplication.class.getResource("fxml/main-view.fxml");
         fxmlLoader = new FXMLLoader(mainViewURL);
+        WalkIn1ViewController w = new WalkIn1ViewController(); // debug
+        w.initialize(null, null);
         scene = new Scene(fxmlLoader.load(), width, height);
         stage.setTitle("Sunway Hotel");
         stage.setScene(scene);
