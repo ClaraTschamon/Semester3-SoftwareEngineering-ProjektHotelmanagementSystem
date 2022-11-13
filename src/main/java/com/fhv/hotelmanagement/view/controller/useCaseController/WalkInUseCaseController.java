@@ -7,6 +7,7 @@ import java.io.IOException;
 public class WalkInUseCaseController {
     BookingDTO booking;
     CustomerDTO customer;
+    
 
     public WalkInUseCaseController() throws IOException {
         booking = new BookingDTO();

@@ -10,8 +10,8 @@ module com.fhv.hotelmanagement {
     requires net.bytebuddy;
     requires org.controlsfx.controls;
     requires java.desktop;
-    //requires org.apache.logging.log4j;
-    //requires org.apache.logging.log4j.core;
+    requires org.apache.logging.log4j;
+    requires org.apache.logging.log4j.core;
 
     exports com.fhv.hotelmanagement.view.controller.viewController;
     opens com.fhv.hotelmanagement.view.controller.viewController to javafx.fxml;

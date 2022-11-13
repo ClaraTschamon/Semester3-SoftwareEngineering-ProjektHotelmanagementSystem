@@ -127,7 +127,7 @@ VALUES (3, 3, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße
 
 
 INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 11, DATE '2022-11-10',  DATE '2022-11-12')
+VALUES (1, 11, DATE '2022-11-10',  CURRENT_DATE)
 
 
 

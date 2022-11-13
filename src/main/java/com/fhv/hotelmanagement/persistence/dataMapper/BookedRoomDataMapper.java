@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -30,9 +31,17 @@ public class BookedRoomDataMapper {
     }
 
     public ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+        Date minimumDate = Date.valueOf(minDate); //Convert from LocalDate to java.sql.Date
+        Date maximumDate = Date.valueOf(maxDate);
         ArrayList<BookedRoomEntity> entities;
+
         entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
-                "SELECT bookedRoom FROM BookedRoomEntity bookedRoom WHERE bookedRoom.fromDate >=:minDate AND bookedRoom.toDate <=: maxDate").setParameter("minDate", minDate).setParameter("maxDate", maxDate).getResultList();
+                "SELECT bookedRoom FROM BookedRoomEntity bookedRoom WHERE bookedRoom.fromDate >=: minimumDate " +
+                        "AND bookedRoom.toDate <=: maximumDate").setParameter("minimumDate", minimumDate
+        ).setParameter("maximumDate", maximumDate).getResultList();
+
+        System.out.println(entities);
+
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
         for(BookedRoomEntity e : entities){
 

@@ -9,6 +9,7 @@ import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.controller.useCaseController.WalkInUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -95,8 +96,10 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //ArrayList<RoomDTO> allRooms = RoomDataMapper.getAll();
+        ArrayList<RoomDTO> allRooms = RoomDataMapper.getAll();
 
+
+        /*
         //nur zum testen
         ArrayList<RoomDTO> allRooms = new ArrayList<>();
         RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
@@ -107,6 +110,8 @@ public class WalkIn1ViewController implements Initializable {
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
         //
+
+         */
 
         RoomProvider roomProvider = new RoomProvider(allRooms);
 
@@ -236,6 +241,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
                 return String.valueOf(room.getNumber());
             }
         }
+        System.out.println(rooms);
         if(!rooms.contains(room)){
             if(!room.getIsClean()){
                 return String.valueOf(room.getNumber() + " not clean!");
