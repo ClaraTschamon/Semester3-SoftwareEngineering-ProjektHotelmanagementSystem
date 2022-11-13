@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -113,8 +114,10 @@ public class WalkIn2ViewController {
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
-            saveData();
-            viewController.loadWalkIn3();
+//            if (validate()) {
+                saveData();
+                viewController.loadWalkIn3();
+//            }
         }catch(IOException exc){
             System.out.println(exc.getMessage());
         }
@@ -127,5 +130,126 @@ public class WalkIn2ViewController {
         }catch(IOException exc){
             System.out.println(exc.getMessage());
         }
+    }
+
+    private boolean validate() throws IOException {
+        String textfieldFirstName = firstName.getText();
+        String textfieldLastName = lastName.getText();
+        String textfieldNationality = nationality.getText();
+        String textfieldPhoneNumber = phoneNumber.getText();
+        String textfieldEmail = email.getText();
+        String textfieldStreet = street.getText();
+        String textfieldHouseNumber = houseNumber.getText();
+        String textfieldCity = city.getText();
+        String textfieldPostalCode = postalCode.getText();
+
+        boolean firstNameIsValid = false;
+        boolean lastNameIsValid = false;
+        boolean nationalityIsValid = false;
+        boolean phoneNumberIsValid = false;
+        boolean emailIsValid = false;
+        boolean streetIsValid = false;
+        boolean houseNumberIsValid = false;
+        boolean cityIsValid = false;
+        boolean postalCodeIsValid = false;
+
+        if (!textfieldFirstName.isEmpty() && textfieldFirstName.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            firstNameIsValid = true;
+        } else if(textfieldFirstName.isEmpty()) {
+            firstName.setStyle("-fx-text-inner-color: red");
+            firstName.setText("Pflichtfeld");
+        } else if(!textfieldFirstName.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            firstName.setStyle("-fx-text-inner-color: red");
+            firstName.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldLastName.isEmpty() && textfieldLastName.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            lastNameIsValid = true;
+        } else if(textfieldLastName.isEmpty()) {
+            lastName.setStyle("-fx-text-inner-color: red");
+            lastName.setText("Pflichtfeld");
+        } else if(!textfieldLastName.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            lastName.setStyle("-fx-text-inner-color: red");
+            lastName.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldNationality.isEmpty() && textfieldNationality.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            nationalityIsValid = true;
+        } else if(textfieldNationality.isEmpty()) {
+            nationality.setStyle("-fx-text-inner-color: red");
+            nationality.setText("Pflichtfeld");
+        } else if(!textfieldNationality.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            nationality.setStyle("-fx-text-inner-color: red");
+            nationality.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldPhoneNumber.isEmpty() && textfieldPhoneNumber.matches("[0-9]{7,15}")) {
+            phoneNumberIsValid = true;
+        } else if(textfieldPhoneNumber.isEmpty()) {
+            phoneNumber.setStyle("-fx-text-inner-color: red");
+            phoneNumber.setText("Pflichtfeld");
+        } else if(!textfieldPhoneNumber.matches("[0-9]*")) {
+            phoneNumber.setStyle("-fx-text-inner-color: red");
+            phoneNumber.setText("inkorrekte Eingabe");
+        } else if(textfieldPhoneNumber.length() > 7 || textfieldPhoneNumber.length() < 15) {
+            phoneNumber.setStyle("-fx-text-inner-color: red");
+            phoneNumber.setText("länge der Telefonnummer beachten");
+        }
+
+        if (!textfieldEmail.isEmpty() && textfieldEmail.matches("^(.+)@(.+)$")) {
+            emailIsValid = true;
+        } else if(textfieldEmail.isEmpty()) {
+            email.setStyle("-fx-text-inner-color: red");
+            email.setText("Pflichtfeld");
+        } else if(!textfieldEmail.matches("^(.+)@(.+)$")) {
+            email.setStyle("-fx-text-inner-color: red");
+            email.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldStreet.isEmpty() && textfieldStreet.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            streetIsValid = true;
+        } else if(textfieldStreet.isEmpty()) {
+            street.setStyle("-fx-text-inner-color: red");
+            street.setText("Pflichtfeld");
+        } else if(!textfieldStreet.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            street.setStyle("-fx-text-inner-color: red");
+            street.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldHouseNumber.isEmpty() && textfieldHouseNumber.matches("[0-9]*")) {
+            houseNumberIsValid = true;
+        } else if(textfieldHouseNumber.isEmpty()) {
+            houseNumber.setStyle("-fx-text-inner-color: red");
+            houseNumber.setText("Pflichtfeld");
+        } else if(!textfieldHouseNumber.matches("[0-9]*")) {
+            houseNumber.setStyle("-fx-text-inner-color: red");
+            houseNumber.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldCity.isEmpty() && textfieldCity.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            cityIsValid = true;
+        } else if(textfieldCity.isEmpty()) {
+            city.setStyle("-fx-text-inner-color: red");
+            city.setText("Pflichtfeld");
+        } else if(!textfieldCity.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            city.setStyle("-fx-text-inner-color: red");
+            city.setText("inkorrekte Eingabe");
+        }
+
+        if (!textfieldPostalCode.isEmpty() && textfieldPostalCode.matches("[0-9]*")) {
+            postalCodeIsValid = true;
+        } else if(textfieldPostalCode.isEmpty()) {
+            postalCode.setStyle("-fx-text-inner-color: red");
+            postalCode.setText("Pflichtfeld");
+        } else if(!textfieldPostalCode.matches("[0-9]*")) {
+            postalCode.setStyle("-fx-text-inner-color: red");
+            postalCode.setText("inkorrekte Eingabe");
+        }
+
+        if (firstNameIsValid && lastNameIsValid && nationalityIsValid && phoneNumberIsValid &&
+                emailIsValid && streetIsValid && houseNumberIsValid && cityIsValid && postalCodeIsValid) {
+            return true;
+        }
+        return false;
     }
 }

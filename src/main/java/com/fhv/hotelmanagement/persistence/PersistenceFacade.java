@@ -53,7 +53,6 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-
         PersistenceFacade pf = new PersistenceFacade();
 
         Customer clara = new Customer(4, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),

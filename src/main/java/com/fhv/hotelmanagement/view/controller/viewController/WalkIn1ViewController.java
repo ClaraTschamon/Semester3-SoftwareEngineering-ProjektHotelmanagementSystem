@@ -25,14 +25,10 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
-
-import static com.fhv.hotelmanagement.view.controller.viewController.RoomProvider.allBookedRooms;
-import static com.fhv.hotelmanagement.view.controller.viewController.RoomProvider.allRooms;
 
 public class WalkIn1ViewController implements Initializable {
 
@@ -175,6 +171,7 @@ public class WalkIn1ViewController implements Initializable {
         //nur zum testen
         ArrayList<RoomDTO> allRooms = new ArrayList<>();
         ArrayList<BookedRoomDTO> allBookedRooms = new ArrayList<>();
+        /*
         RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
         singleroomcategoy.setName("Einzelzimmer");
         RoomDTO room1 = new RoomDTO();
@@ -184,6 +181,7 @@ public class WalkIn1ViewController implements Initializable {
         allRooms.add(room1);
         //
 
+         */
 
 //        System.out.println(singleRoomDropDown.());
         RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
@@ -239,19 +237,20 @@ public class WalkIn1ViewController implements Initializable {
         suiteDropDown.setPrefHeight(40);
         suiteDropDown.setPrefWidth(100);
 
-        try {
-            singleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-            doubleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-            familyRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-            suiteDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
+        singleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        doubleRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        familyRoomDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
+        suiteDropDown.setConverter(new RoomNumberConverter<>(roomProvider));
 
         contentPane.getChildren().add(singleRoomDropDown);
         contentPane.getChildren().add(doubleRoomDropDown);
         contentPane.getChildren().add(familyRoomDropDown);
         contentPane.getChildren().add(suiteDropDown);
+    }
+
+    private boolean validateFields() {
+        return true;
     }
 }
 
@@ -260,7 +259,7 @@ class RoomProvider{
     static ArrayList<RoomDTO> allRooms;
     static ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
 
-    public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
+    public RoomProvider(ArrayList<RoomDTO> allRooms){
         RoomProvider.allRooms = allRooms;
         RoomProvider.allBookedRooms = allBookedRooms;
     }
@@ -298,7 +297,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
     ArrayList<RoomDTO> rooms = new ArrayList<>();
 
     RoomProvider provider;
-    public RoomNumberConverter(RoomProvider provider) throws SQLException {
+    public RoomNumberConverter(RoomProvider provider){
         this.provider = provider;
     }
     @Override
