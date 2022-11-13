@@ -164,10 +164,11 @@ public class WalkIn1ViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //woher hat roomDTO die informationen???
+        /*
         ArrayList<RoomDTO> allRooms = viewController.getUseCaseController().getRoomDTO().getAllRooms();
         System.out.println(allRooms);
+        */
 
-        /*
         //nur zum testen
         ArrayList<RoomDTO> allRooms = new ArrayList<>();
         RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
@@ -177,9 +178,7 @@ public class WalkIn1ViewController implements Initializable {
         room1.setClean(false);
         room1.setCategory(singleroomcategoy);
         allRooms.add(room1);
-        //
 
-         */
 
 //        System.out.println(singleRoomDropDown.());
         RoomProvider roomProvider = new RoomProvider(allRooms);
@@ -289,7 +288,8 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
 
     LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
     LocalDate maxDate = LocalDate.now();
-    ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.instance().getBookedRoomsBetween(minDate, maxDate);
+//    ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.instance().getBookedRoomsBetween(minDate, maxDate);
+    ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
     ArrayList<Room> rooms = new ArrayList<>();
 
     RoomProvider provider;

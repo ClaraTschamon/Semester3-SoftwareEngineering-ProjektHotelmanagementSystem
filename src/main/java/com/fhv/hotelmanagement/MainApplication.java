@@ -36,8 +36,6 @@ public class MainApplication extends Application {
 
         URL mainViewURL = MainApplication.class.getResource("fxml/main-view.fxml");
         fxmlLoader = new FXMLLoader(mainViewURL);
-        WalkIn1ViewController w = new WalkIn1ViewController(); // debug
-        w.initialize(null, null);
         scene = new Scene(fxmlLoader.load(), width, height);
         stage.setTitle("Sunway Hotel");
         stage.setScene(scene);

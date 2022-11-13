@@ -114,10 +114,10 @@ public class WalkIn2ViewController {
     @FXML
     private void onNextButtonClicked(ActionEvent e) throws IOException {
         try{
-            if (validate()) {
+//            if (validate()) {
                 saveData();
                 viewController.loadWalkIn3();
-            }
+//            }
         }catch(IOException exc){
             System.out.println(exc.getMessage());
         }

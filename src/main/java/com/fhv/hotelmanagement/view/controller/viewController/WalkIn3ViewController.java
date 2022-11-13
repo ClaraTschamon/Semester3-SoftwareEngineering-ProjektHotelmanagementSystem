@@ -120,14 +120,14 @@ public class WalkIn3ViewController {
 
     @FXML
     public void onSaveButtonClicked(ActionEvent e) {
-        if (validate()) {
+//        if (validate()) {
             saveData();
             try {
                 viewController.save();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-        }
+//        }
     }
 
     @FXML
