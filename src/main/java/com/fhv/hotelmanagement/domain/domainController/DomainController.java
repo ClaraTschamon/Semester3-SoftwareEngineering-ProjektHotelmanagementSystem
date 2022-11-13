@@ -12,7 +12,7 @@ public class DomainController {
 
     public static ArrayList<RoomDTO> getRooms() {
         ArrayList<RoomDTO> rooms = new ArrayList<>();
-        for (Room r : MainApplication.getDomainManager().getAllRooms()) {
+        for (RoomDTO r : MainApplication.getDomainManager().getAllRooms()) {
             System.out.println(r.getNumber());
         }
 

@@ -3,17 +3,16 @@ package com.fhv.hotelmanagement.domain.domainController;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 
 import java.util.ArrayList;
 
 public class DomainManager {
     ArrayList<Board> boards;
-    ArrayList<Room> rooms;
     ArrayList<RoomCategory> roomCategories;
 
     public DomainManager() {
         boards = PersistenceFacade.getAllBoards();
-        rooms = PersistenceFacade.getAllRooms();
         roomCategories = PersistenceFacade.getAllRoomCategories();
     }
 
@@ -30,8 +29,13 @@ public class DomainManager {
         return bookedRoomDTOS;
     }
 
-    public ArrayList<Room> getAllRooms() {
-        return rooms;
+    public ArrayList<RoomDTO> getAllRooms() {
+        ArrayList<Room> rooms = PersistenceFacade.getAllRooms();
+        ArrayList<RoomDTO> roomDTOS = new ArrayList<>();
+        for(Room r : rooms){
+            roomDTOS.add(DomainTranslator.translateRoom(r));
+        }
+        return roomDTOS;
     }
 
     public ArrayList<RoomCategory> getAllRoomCategories() {

@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
@@ -163,29 +164,10 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //woher hat roomDTO die informationen???
-        //ArrayList<RoomDTO> allRooms = viewController.getUseCaseController().getRoomDTO().getAllRooms();
-        //System.out.println(allRooms);
+        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRooms();
+        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRooms();
 
-
-        //nur zum testen
-        ArrayList<RoomDTO> allRooms = new ArrayList<>();
-        ArrayList<BookedRoomDTO> allBookedRooms = new ArrayList<>();
-        /*
-        RoomCategoryDTO singleroomcategoy = new RoomCategoryDTO();
-        singleroomcategoy.setName("Einzelzimmer");
-        RoomDTO room1 = new RoomDTO();
-        room1.setNumber(1);
-        room1.setClean(false);
-        room1.setCategory(singleroomcategoy);
-        allRooms.add(room1);
-        //
-
-         */
-
-//        System.out.println(singleRoomDropDown.());
         RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
-
 
         final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
         final CheckComboBox<RoomDTO> doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
@@ -256,12 +238,19 @@ public class WalkIn1ViewController implements Initializable {
 
 class RoomProvider{
 
-    static ArrayList<RoomDTO> allRooms;
-    static ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
+    private ArrayList<RoomDTO> allRooms;
+    private ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
+
+    private ArrayList<BookedRoomDTO> freeBookedRooms;
+
+    private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
+    private LocalDate maxDate = LocalDate.now();
+
+
 
     public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
-        RoomProvider.allRooms = allRooms;
-        RoomProvider.allBookedRooms = allBookedRooms;
+        this.allRooms = allRooms;
+        this.allBookedRooms = allBookedRooms;
     }
 
     public RoomDTO getRoomFromNumber(int number){
@@ -274,15 +263,51 @@ class RoomProvider{
     }
 
     public ObservableList<RoomDTO> getAllRoomsFromCategory(String category) {
-        ObservableList<RoomDTO> rooms = FXCollections.observableArrayList(new ArrayList<>());
+
+        freeBookedRooms = getCheckoutDateToday(maxDate);
+
+        ObservableList<RoomDTO> freeRooms = FXCollections.observableArrayList(new ArrayList<>());
 
         for(RoomDTO room : allRooms){
             if(room.getCategory().getName().equals(category)){
-                rooms.add(room);
+                if(room.getIsFree()){
+                    freeRooms.add(room);
+                }
+                else{
+                    for(BookedRoomDTO bookedRoom : freeBookedRooms){
+                        if(bookedRoom.getRoom().getNumber() == room.getNumber()){
+                            freeRooms.add(room);
+                        }
+                    }
+                }
             }
         }
-        return rooms;
+        return freeRooms;
     }
+
+    public ArrayList<BookedRoomDTO> getCheckoutDateToday(LocalDate maxDate){
+        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
+        for(BookedRoomDTO bookedRoom : allBookedRooms){
+            if(bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate)){
+                bookedRooms.add(bookedRoom);
+            }
+        }
+        return bookedRooms;
+    }
+
+    //diese Methode funktioniert nicht!!!
+    public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
+        for(BookedRoomDTO bookedRoom : allBookedRooms){
+            if((bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate)) &&
+                    (bookedRoom.getFromDate().isEqual(minDate) || bookedRoom.getFromDate().isAfter(minDate) )){ //TODO: fehler in dieser Zeile!!!
+                bookedRooms.add(bookedRoom);
+            }
+        }
+        return bookedRooms;
+    }
+
+
 }
 
 
@@ -290,11 +315,6 @@ class RoomProvider{
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
 
     //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
-
-    LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
-    LocalDate maxDate = LocalDate.now();
-    ArrayList<BookedRoomDTO> bookedRooms = getBookedRoomsBetween(minDate, maxDate);
-    ArrayList<RoomDTO> rooms = new ArrayList<>();
 
     RoomProvider provider;
     public RoomNumberConverter(RoomProvider provider){
@@ -310,31 +330,10 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         if (room == null) {
             return null;
         }
-        for(BookedRoomDTO bookedRoom : bookedRooms){
-            rooms.add(bookedRoom.getRoom());
-            if(bookedRoom.getFromDate().equals(LocalDate.now())){
-                if(!room.getIsClean()){
-                    return String.valueOf(room.getNumber() + " not clean!");
-                }
-                return String.valueOf(room.getNumber());
-            }
-        }
-        if(!rooms.contains(room)){
-            if(!room.getIsClean()){
-                return String.valueOf(room.getNumber() + " not clean!");
-            }
-            return String.valueOf(room.getNumber());
+
+        if(!room.getIsClean()){
+            return String.valueOf(room.getNumber() + " not clean!");
         }
         return String.valueOf(room.getNumber());
-    }
-
-    public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
-        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
-        for(BookedRoomDTO bookedRoom : RoomProvider.allBookedRooms){
-            if(bookedRoom.getFromDate().isAfter(minDate.minusDays(1)) && bookedRoom.getToDate().isBefore(maxDate.plusDays(1))){
-                bookedRooms.add(bookedRoom);
-            }
-        }
-        return bookedRooms;
     }
 }

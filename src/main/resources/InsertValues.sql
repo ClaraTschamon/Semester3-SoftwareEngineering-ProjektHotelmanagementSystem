@@ -66,7 +66,7 @@ INSERT INTO room(room_number, is_free, is_clean, room_category_name)
 VALUES(18, true, true, 'Doppelzimmer');
 
 INSERT INTO room(room_number, is_free, is_clean, room_category_name)
-VALUES(21, true, true, 'Einzelzimmer');
+VALUES(21, false, false, 'Einzelzimmer');
 
 INSERT INTO room(room_number, is_free, is_clean, room_category_name)
 VALUES(22, true, true, 'Doppelzimmer');
@@ -126,7 +126,13 @@ VALUES (3, 3, CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße
 
 
 INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 11, DATE '2022-11-10',  CURRENT_DATE)
+VALUES (1, 12, DATE '2022-11-10',  CURRENT_DATE);
+
+INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
+VALUES (1, 16, DATE '2022-11-10',  CURRENT_DATE);
+
+INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
+VALUES (1, 21, DATE '2022-11-10',  DATE '2023-06-07');
 
 
 
