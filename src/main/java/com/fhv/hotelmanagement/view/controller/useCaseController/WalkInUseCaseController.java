@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.useCaseController;
 
+import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class WalkInUseCaseController {
 
     public void save() throws IOException {
         if (booking != null && customer != null) {
+            DomainController.saveCustomer(customer);
             // TODO
         }
     }

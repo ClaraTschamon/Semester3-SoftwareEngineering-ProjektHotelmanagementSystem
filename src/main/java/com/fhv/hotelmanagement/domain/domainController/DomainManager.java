@@ -1,9 +1,7 @@
 package com.fhv.hotelmanagement.domain.domainController;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
-import com.fhv.hotelmanagement.persistence.dataMapper.BoardDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomCategoryDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 
 import java.util.ArrayList;
 
@@ -13,9 +11,9 @@ public class DomainManager {
     ArrayList<RoomCategory> roomCategories;
 
     public DomainManager() {
-        boards = BoardDataMapper.getAll();
-        rooms = RoomDataMapper.getAll();
-        roomCategories = RoomCategoryDataMapper.getAll();
+        boards = PersistenceFacade.getAllBoards();
+        rooms = PersistenceFacade.getAllRooms();
+        roomCategories = PersistenceFacade.getAllRoomCategories();
     }
 
     public ArrayList<Board> getBoards() {
