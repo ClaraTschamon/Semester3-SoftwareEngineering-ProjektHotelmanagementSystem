@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class BoardDTO {
     private String name;
     private BigDecimal pricePerNight;
-    private boolean fullboard;
+    private boolean fullboard = true;
     private boolean halfboard;
     private boolean onlyBreakfast;
     private boolean noPackage;

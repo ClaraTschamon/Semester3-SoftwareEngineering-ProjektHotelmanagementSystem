@@ -6,7 +6,7 @@ public class AddressDTO {
     private String postalCode;
     private String city;
     private String country;
-    private boolean billingAddressEqualsCustomerAddress;
+    private boolean billingAddressEqualsCustomerAddress =true;
 
     public AddressDTO() {}
 
