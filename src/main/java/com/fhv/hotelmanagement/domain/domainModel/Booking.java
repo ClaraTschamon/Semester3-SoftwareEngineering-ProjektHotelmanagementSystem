@@ -27,7 +27,7 @@ public class Booking {
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                    String expirationDate, String authorisationNumber, ArrayList<BookedRoomCategory> bookedRoomCategories,
                    ArrayList<BookedRoom> bookedRooms) {
-        if (number.equals(null)) {
+        if (number == null) {
             number = getId();
         }
         this.number = number;

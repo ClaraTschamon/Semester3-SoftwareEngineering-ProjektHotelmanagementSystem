@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class DomainValidator {
     protected static boolean checkAddress(AddressDTO addressDTO) {
         if (
-                (addressDTO.equals(null)) &&
+                (!addressDTO.equals(null)) &&
                         (checkString(addressDTO.getStreet())) &&
                         (checkString(addressDTO.getHouseNumber())) &&
                         (checkString(addressDTO.getCity())) &&
@@ -29,12 +29,12 @@ public class DomainValidator {
                 (!customerDTO.equals(null)) &&
                         (checkString(customerDTO.getFirstName())) &&
                         (checkString(customerDTO.getLastName())) &&
-                        (!customerDTO.getDateOfBirth().equals(null) && customerDTO.getDateOfBirth().isBefore(LocalDate.now())) &&
+                        (customerDTO.getDateOfBirth() != null && customerDTO.getDateOfBirth().isBefore(LocalDate.now())) &&
                         (checkString(customerDTO.getNationality())) &&
-                        (checkString(customerDTO.getPhoneNumber()) && checkValidPhoneNumber(customerDTO.getPhoneNumber())) &&
-                        (checkString(customerDTO.getEmail()) && checkValidEmail(customerDTO.getEmail())) &&
+                        (checkString(customerDTO.getPhoneNumber())) && //checkValidPhoneNumber(customerDTO.getPhoneNumber())) &&
+                        (checkString(customerDTO.getEmail())) && //checkValidEmail(customerDTO.getEmail())) &&
                         (checkAddress(customerDTO.getAddress())) &&
-                        (!customerDTO.getSaved().equals(null))
+                        (customerDTO.getSaved() != null)
         ) {
             return true;
         }
@@ -51,11 +51,12 @@ public class DomainValidator {
                         (checkAddress(bookingDTO.getBillingAddress())) &&
                         (checkString(bookingDTO.getPaymentMethod())) &&
                         (checkString(bookingDTO.getCreditCardNumber())) &&
-                        (checkString(bookingDTO.getExpirationDate()) && checkRegex(bookingDTO.getExpirationDate(), "")) &&
+                        (checkString(bookingDTO.getExpirationDate()) && checkRegex(bookingDTO.getExpirationDate(), "[0-1][0-9]/[0-9][0-9]")) &&
                         (checkString(bookingDTO.getAuthorisationNumber())) &&
                         (!bookingDTO.getBookedRooms().equals(null) && !bookingDTO.getBookedRooms().isEmpty()) &&
                         (!bookingDTO.getBookedRoomCategories().equals(null) && !bookingDTO.getBookedRoomCategories().isEmpty())
         ) {
+            // TODO validate arrays
             return true;
         }
         return false;
@@ -64,9 +65,9 @@ public class DomainValidator {
     private static boolean checkString(String string) {
         if (!string.equals(null) && !string.equals("")) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+
     }
 
     private static boolean checkStringValidCharacters(String string, LinkedList<Character> validCharacters) {

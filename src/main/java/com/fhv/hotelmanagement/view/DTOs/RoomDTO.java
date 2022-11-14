@@ -100,6 +100,14 @@ public class RoomDTO {
         isClean = clean;
     }
 
+    public Boolean getFree() {
+        return isFree;
+    }
+
+    public void setFree(Boolean free) {
+        isFree = free;
+    }
+
     public ArrayList<RoomDTO> getAllRooms() {
         return allRooms;
     }

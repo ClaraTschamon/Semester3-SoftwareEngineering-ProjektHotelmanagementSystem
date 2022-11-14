@@ -3,7 +3,6 @@ package com.fhv.hotelmanagement.view.DTOs;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BookingDTO {
     private Integer number;
@@ -21,7 +20,7 @@ public class BookingDTO {
     private ArrayList<BookedRoomCategoryDTO> bookedRoomCategories;
     private ArrayList<BookedRoomDTO> bookedRooms;
 
-    public BookingDTO() {}
+    public BookingDTO() { this.billingAddress = new AddressDTO();}
 
     public BookingDTO(Integer number, CustomerDTO customer, LocalDate arrivalDate,
                       LocalDateTime checkInDatetime, LocalDate departureDate,

@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainManager;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -57,7 +58,6 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-
         //ID Tester
 //        int count = 0;
 //
