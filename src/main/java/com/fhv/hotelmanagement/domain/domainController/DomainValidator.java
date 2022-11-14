@@ -17,6 +17,10 @@ public class DomainValidator {
                 (StringValidator.checkString(addressDTO.getCountry()));
     }
 
+    protected static boolean checkBoard(BoardDTO boardDTO) {
+        return (MainApplication.getDomainManager().getAllBoardDTOs().contains(boardDTO));
+    }
+
     protected static boolean checkBookedRoom(BookedRoomDTO bookedRoomDTO, boolean validateBooking) {
         BookingDTO bookingDTO = bookedRoomDTO.getBooking();
         return ((!validateBooking) || (validateBooking && checkBooking(bookingDTO))) &&
@@ -53,18 +57,6 @@ public class DomainValidator {
         return true;
     }
 
-    protected static boolean checkCustomer(CustomerDTO customerDTO) {
-        return (customerDTO != null) &&
-                (StringValidator.checkString(customerDTO.getFirstName())) &&
-                (StringValidator.checkString(customerDTO.getLastName())) &&
-                (customerDTO.getDateOfBirth() != null && customerDTO.getDateOfBirth().isBefore(LocalDate.now())) &&
-                (StringValidator.checkString(customerDTO.getNationality())) &&
-                (StringValidator.checkString(customerDTO.getPhoneNumber()) && StringValidator.checkValidPhoneNumber(customerDTO.getPhoneNumber())) &&
-                (StringValidator.checkString(customerDTO.getEmail()) && StringValidator.checkValidEmail(customerDTO.getEmail())) &&
-                (checkAddress(customerDTO.getAddress())) &&
-                (customerDTO.getSaved() != null);
-    }
-
     protected static boolean checkBooking(BookingDTO bookingDTO) {
         return (bookingDTO != null) &&
                 (checkCustomer(bookingDTO.getCustomer())) &&
@@ -79,8 +71,20 @@ public class DomainValidator {
                 (bookingDTO.getBookedRooms() != null && !bookingDTO.getBookedRooms().isEmpty()) &&
                 (bookingDTO.getBookedRoomCategories() != null && !bookingDTO.getBookedRoomCategories().isEmpty()) &&
                 (checkBookedRoomCategories(bookingDTO.getBookedRoomCategories(), false)) &&
-                (checkBookedRooms(bookingDTO.getBookedRooms(), false));
+                (checkBookedRooms(bookingDTO.getBookedRooms(), false)) &&
+                ((bookingDTO.getBoard() == null && bookingDTO.getPricePerNightForBoard() == null)
+                        || (checkBoard(bookingDTO.getBoard()) && bookingDTO.getPricePerNightForBoard() != null && bookingDTO.getPricePerNightForBoard().intValue() >= 0));
     }
 
-
+    protected static boolean checkCustomer(CustomerDTO customerDTO) {
+        return (customerDTO != null) &&
+                (StringValidator.checkString(customerDTO.getFirstName())) &&
+                (StringValidator.checkString(customerDTO.getLastName())) &&
+                (customerDTO.getDateOfBirth() != null && customerDTO.getDateOfBirth().isBefore(LocalDate.now())) &&
+                (StringValidator.checkString(customerDTO.getNationality())) &&
+                (StringValidator.checkString(customerDTO.getPhoneNumber()) && StringValidator.checkValidPhoneNumber(customerDTO.getPhoneNumber())) &&
+                (StringValidator.checkString(customerDTO.getEmail()) && StringValidator.checkValidEmail(customerDTO.getEmail())) &&
+                (checkAddress(customerDTO.getAddress())) &&
+                (customerDTO.getSaved() != null);
+    }
 }

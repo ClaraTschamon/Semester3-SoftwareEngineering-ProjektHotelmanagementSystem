@@ -1,6 +1,5 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
-//TODO: Preis pro Nacht fehlt
 public class Room {
     private Integer number;
 

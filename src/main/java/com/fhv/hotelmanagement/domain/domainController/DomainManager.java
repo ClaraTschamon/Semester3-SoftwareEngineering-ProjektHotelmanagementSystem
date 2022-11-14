@@ -30,6 +30,14 @@ public class DomainManager {
         roomCategories = PersistenceFacade.getAllRoomCategories();
     }
 
+    public ArrayList<BoardDTO> getAllBoardDTOs() {
+        ArrayList<BoardDTO> boardDTOS = new ArrayList<>();
+        for (Board b : boards) {
+            boardDTOS.add(DomainTranslator.translateBoard(b));
+        }
+        return boardDTOS;
+    }
+
     public ArrayList<BookedRoomDTO> getAllBookedRoomDTOs() {
         ArrayList<BookedRoom> bookedRooms = PersistenceFacade.getAllBookedRooms();
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
