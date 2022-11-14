@@ -1,10 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
-import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -52,17 +48,6 @@ public class WalkIn1ViewController implements Initializable {
     public Text counterSuite;
     @FXML
     public AnchorPane contentPane;
-    @FXML
-    CheckComboBox<Integer> singleRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> doubleRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> familyRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> suiteDropDown;
 
     @FXML
     private Text chooseRoom;
@@ -161,8 +146,46 @@ public class WalkIn1ViewController implements Initializable {
         roomDTO.setCounterFamilyRoom(Integer.parseInt(counterFamilyRoom.getText()));
         roomDTO.setCounterSuite(Integer.parseInt(counterSuite.getText()));
 
-        //save all roomno
+        ArrayList<RoomDTO> bookedSingleRooms = new ArrayList<>(singleRoomDropDown.getCheckModel().getCheckedItems());
+        ArrayList<RoomDTO> bookedDoubleRooms = new ArrayList<>(doubleRoomDropDown.getCheckModel().getCheckedItems());
+        ArrayList<RoomDTO> bookedFamilyRooms = new ArrayList<>(familyRoomDropDown.getCheckModel().getCheckedItems());
+        ArrayList<RoomDTO> bookedSuites = new ArrayList<>(suiteDropDown.getCheckModel().getCheckedItems());
 
+        //save all roomno
+        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
+        for (RoomDTO r : bookedSingleRooms) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        for (RoomDTO r : bookedDoubleRooms) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        for (RoomDTO r : bookedFamilyRooms) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        for (RoomDTO r : bookedSuites) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        bookingDTO.setBookedRooms(bookedRooms);
+
+        HashMap<String, RoomCategoryDTO> roomCategories = MainApplication.getDomainManager().getAllRoomCategoryDTOs();
+        ArrayList<BookedRoomCategoryDTO> bookedRoomCategories = new ArrayList<>();
+        if (bookedSingleRooms.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Einzelzimmer");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        if (bookedDoubleRooms.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Doppelzimmer");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        if (bookedFamilyRooms.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Familienzimmer");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        if (bookedSuites.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Suite");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        bookingDTO.setBookedRoomCategories(bookedRoomCategories);
 
         //save all room prices
         roomDTO.setRoomPrice((String) roomPriceDropDown.getSelectionModel().getSelectedItem());
@@ -343,7 +366,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         }
 
         if(!room.getIsClean()){
-            return (room.getNumber() + " " + "\u2757");
+            return String.valueOf(room.getNumber() + " " + "\u2757");
         }
         return String.valueOf(room.getNumber());
     }

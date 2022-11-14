@@ -59,6 +59,7 @@ CREATE TABLE booking(
     expiration_date VARCHAR(5),
     authorisation_number VARCHAR(255),
     board_name VARCHAR(255),
+    FOREIGN KEY (board_name) REFERENCES board(board_name),
     price_per_night_for_board INTEGER
 );
 
