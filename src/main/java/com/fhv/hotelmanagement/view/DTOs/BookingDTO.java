@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BookingDTO {
 
@@ -26,7 +25,7 @@ public class BookingDTO {
     private ArrayList<BookedRoomCategoryDTO> bookedRoomCategories;
     private ArrayList<BookedRoomDTO> bookedRooms;
 
-    public BookingDTO() {}
+    public BookingDTO() { this.billingAddress = new AddressDTO();}
 
     public BookingDTO(Long number, CustomerDTO customer, LocalDate arrivalDate,
                       LocalDateTime checkInDatetime, LocalDate departureDate,

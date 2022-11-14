@@ -18,7 +18,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
@@ -27,11 +26,10 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
@@ -76,6 +74,12 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private ComboBox roomPriceDropDown;
+
+    private CheckComboBox<RoomDTO> singleRoomDropDown;
+    private CheckComboBox<RoomDTO> doubleRoomDropDown;
+    private CheckComboBox<RoomDTO> familyRoomDropDown;
+    private CheckComboBox<RoomDTO> suiteDropDown;
+
 
     private WalkInViewController viewController;
 
@@ -167,15 +171,16 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRooms();
-        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRooms();
+        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
+        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
 
         RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
 
-        final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
-        final CheckComboBox<RoomDTO> doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
-        final CheckComboBox<RoomDTO> familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
-        final CheckComboBox<RoomDTO> suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
+
+        singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
+        doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
+        familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
+        suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
 
         singleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
             @Override
@@ -242,10 +247,11 @@ public class WalkIn1ViewController implements Initializable {
 class RoomProvider{
 
     private ArrayList<RoomDTO> allRooms;
-    private ArrayList<BookedRoomDTO> allBookedRooms;
+    public ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
+
     private ArrayList<BookedRoomDTO> freeBookedRooms;
 
-    //private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
+    private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
     private LocalDate maxDate = LocalDate.now();
 
 
@@ -308,14 +314,23 @@ class RoomProvider{
         }
         return bookedRooms;
     }
+
+
 }
+
+
 
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
 
+    //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
+    LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
+    LocalDate maxDate = LocalDate.now();
     RoomProvider provider;
+
     public RoomNumberConverter(RoomProvider provider){
         this.provider = provider;
     }
+
     @Override
     public RoomDTO fromString(final String number) {
         return provider.getRoomFromNumber(Integer.parseInt(number));
