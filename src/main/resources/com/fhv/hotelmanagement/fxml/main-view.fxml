@@ -118,6 +118,7 @@
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-            </children></AnchorPane>
+            </children>
+      </AnchorPane>
     </center>
 </BorderPane>
