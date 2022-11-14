@@ -63,7 +63,7 @@ public class DomainValidator {
     }
 
     private static boolean checkString(String string) {
-        if (!string.equals(null) && !string.equals("")) {
+        if (string != null && !string.equals("")) {
             return true;
         }
         return false;

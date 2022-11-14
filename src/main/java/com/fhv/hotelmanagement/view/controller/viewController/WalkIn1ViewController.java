@@ -1,9 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
-import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -197,8 +194,8 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRooms();
-        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRooms();
+        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
+        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
 
         RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
 
@@ -273,7 +270,7 @@ public class WalkIn1ViewController implements Initializable {
 class RoomProvider{
 
     private ArrayList<RoomDTO> allRooms;
-    private ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
+    public ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
 
     private ArrayList<BookedRoomDTO> freeBookedRooms;
 
@@ -349,16 +346,14 @@ class RoomProvider{
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
 
     //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
-
     LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
     LocalDate maxDate = LocalDate.now();
-    ArrayList<BookedRoomDTO> bookedRooms = getBookedRoomsBetween(minDate, maxDate);
-    ArrayList<RoomDTO> rooms = new ArrayList<>();
-
     RoomProvider provider;
+
     public RoomNumberConverter(RoomProvider provider){
         this.provider = provider;
     }
+
     @Override
     public RoomDTO fromString(final String number) {
         return provider.getRoomFromNumber(Integer.valueOf(number));
@@ -374,15 +369,5 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
             return String.valueOf(room.getNumber() + " not clean!");
         }
         return String.valueOf(room.getNumber());
-    }
-
-    public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
-        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
-        for(BookedRoomDTO bookedRoom : RoomProvider.allBookedRooms){
-            if(bookedRoom.getFromDate().isAfter(minDate.minusDays(1)) && bookedRoom.getToDate().isBefore(maxDate.plusDays(1))){
-                bookedRooms.add(bookedRoom);
-            }
-        }
-        return bookedRooms;
     }
 }

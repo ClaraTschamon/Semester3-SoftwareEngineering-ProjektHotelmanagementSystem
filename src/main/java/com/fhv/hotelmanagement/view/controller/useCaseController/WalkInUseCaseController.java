@@ -50,7 +50,7 @@ public class WalkInUseCaseController {
         if (booking != null && customer != null) {
             DomainController.saveCustomer(customer);
             booking.setCheckInDatetime(LocalDateTime.now());
-            DomainController.saveBooking(booking);
+//            DomainController.saveBooking(booking); TODO
         }
     }
 }
