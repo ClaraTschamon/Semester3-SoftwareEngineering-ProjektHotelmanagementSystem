@@ -65,7 +65,7 @@ public class BookingEntity {
     private String authorisationNumber;
 
     @ManyToOne
-    @JoinColumn(name="board")
+    @JoinColumn(name="board_name")
     private BoardEntity board;
 
    @Column(name="price_per_night_for_board")
