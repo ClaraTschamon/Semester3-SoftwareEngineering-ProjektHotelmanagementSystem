@@ -29,7 +29,7 @@ public class DomainController {
         boolean saved = false;
         if (DomainValidator.checkBooking(bookingDTO)) {
             boolean isNew = bookingDTO.getNumber() == null;
-            Booking booking = DomainCreator.createBooking(bookingDTO);
+            Booking booking = DomainCreator.createBooking(bookingDTO, true);
 
             if (isNew) {
                 PersistenceFacade.insertBooking(booking);
