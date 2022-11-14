@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.control.*?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
     <center>
         <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -132,10 +132,6 @@
             <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text fx:id="counterFamilyRoom" layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text fx:id="counterSuite" layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <CheckComboBox layoutX="680.0" layoutY="250.0" prefHeight="40.0" prefWidth="100.0" />
-            <CheckComboBox layoutX="680.0" layoutY="201.0" prefHeight="40.0" prefWidth="100.0" />
-            <CheckComboBox layoutX="680.0" layoutY="300.0" prefHeight="40.0" prefWidth="100.0" />
-            <CheckComboBox layoutX="680.0" layoutY="350.0" prefHeight="40.0" prefWidth="100.0" />
             </children></AnchorPane>
     </center>
 </BorderPane>
