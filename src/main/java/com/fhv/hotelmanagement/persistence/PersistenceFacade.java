@@ -81,14 +81,14 @@ public class PersistenceFacade{
     }
 
     public static void main(String[] args) {
-
+        /*
         PersistenceFacade pf = new PersistenceFacade();
 
-
-        Customer clara = new Customer(6L, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
+        Customer clara = new Customer(null, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
                 "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
                 "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
         CustomerDataMapper.instance().insert(clara);
+
         System.out.println(getCustomer(4).get().getFirstName());
 
         ArrayList<Room> rooms = RoomDataMapper.getAll();
@@ -120,7 +120,7 @@ public class PersistenceFacade{
         }
 
         //hartkodiert customer und statt nummer einfach null zum ausprobieren von
-        //
+        */
 
     }
 }
