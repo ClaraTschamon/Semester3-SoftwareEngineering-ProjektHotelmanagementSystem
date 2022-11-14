@@ -24,4 +24,18 @@ public class RoomCategoryDTO {
     public void setName(String name){
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.equals(this)) {
+            return true;
+        }
+        if (!(o instanceof RoomCategoryDTO)) {
+            return false;
+        } else {
+            RoomCategoryDTO roomCategoryDTO = (RoomCategoryDTO) o;
+            return (roomCategoryDTO.getName().equals(name)) &&
+                    (roomCategoryDTO.getPricePerNight().equals(pricePerNight));
+        }
+    }
 }
