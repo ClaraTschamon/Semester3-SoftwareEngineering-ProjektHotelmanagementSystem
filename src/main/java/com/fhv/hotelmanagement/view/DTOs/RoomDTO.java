@@ -1,7 +1,5 @@
 package com.fhv.hotelmanagement.view.DTOs;
 
-import com.fhv.hotelmanagement.domain.domainModel.Room;
-
 import java.util.ArrayList;
 
 public class RoomDTO {
@@ -92,27 +90,27 @@ public class RoomDTO {
         this.roomPrice = roomPrice;
     }
 
-    public Boolean getClean() {
-        return isClean;
-    }
-
-    public void setClean(Boolean clean) {
-        isClean = clean;
-    }
-
-    public Boolean getFree() {
-        return isFree;
-    }
-
-    public void setFree(Boolean free) {
-        isFree = free;
-    }
-
     public ArrayList<RoomDTO> getAllRooms() {
         return allRooms;
     }
 
     public void setAllRooms(ArrayList<RoomDTO> allRooms) {
         this.allRooms = allRooms;
+    } // why?
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.equals(this)) {
+            return true;
+        }
+        if (!(o instanceof RoomDTO)) {
+            return false;
+        } else {
+            RoomDTO roomDTO = (RoomDTO) o;
+            return (roomDTO.getNumber() == number) &&
+                    (roomDTO.getIsClean() == isClean) &&
+                    (roomDTO.getIsFree() == isFree) &&
+                    (roomDTO.getCategory().equals(category));
+        }
     }
 }
