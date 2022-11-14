@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -194,6 +195,15 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //set default Values
+        //funktioniert nicht
+        //fullBoard.setSelected(true);
+
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        //departureDatePicker.setValue(LocalDate.parse(formatter.format(LocalDate.now().plusDays(1))));
+
+        //roomPriceDropDown.setValue("Normalpreis");
+
         ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
         ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
 
