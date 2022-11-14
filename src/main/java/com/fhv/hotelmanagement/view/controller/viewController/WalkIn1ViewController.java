@@ -18,6 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
@@ -26,6 +27,8 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -239,11 +242,10 @@ public class WalkIn1ViewController implements Initializable {
 class RoomProvider{
 
     private ArrayList<RoomDTO> allRooms;
-    private ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
-
+    private ArrayList<BookedRoomDTO> allBookedRooms;
     private ArrayList<BookedRoomDTO> freeBookedRooms;
 
-    private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
+    //private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
     private LocalDate maxDate = LocalDate.now();
 
 
@@ -306,15 +308,9 @@ class RoomProvider{
         }
         return bookedRooms;
     }
-
-
 }
 
-
-
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
-
-    //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
 
     RoomProvider provider;
     public RoomNumberConverter(RoomProvider provider){
@@ -322,7 +318,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
     }
     @Override
     public RoomDTO fromString(final String number) {
-        return provider.getRoomFromNumber(Integer.valueOf(number));
+        return provider.getRoomFromNumber(Integer.parseInt(number));
     }
 
     @Override
@@ -332,7 +328,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         }
 
         if(!room.getIsClean()){
-            return String.valueOf(room.getNumber() + " not clean!");
+            return (room.getNumber() + " " + "\u2757");
         }
         return String.valueOf(room.getNumber());
     }

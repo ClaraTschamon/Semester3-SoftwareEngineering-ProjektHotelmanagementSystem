@@ -84,7 +84,8 @@ public class PersistenceFacade{
 
         PersistenceFacade pf = new PersistenceFacade();
 
-        Customer clara = new Customer(4, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
+
+        Customer clara = new Customer(6L, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
                 "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
                 "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
         CustomerDataMapper.instance().insert(clara);
@@ -94,12 +95,15 @@ public class PersistenceFacade{
         ArrayList<RoomCategory> categories = RoomCategoryDataMapper.getAll();
 
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
+        Board board = new Board("Vollpension", new BigDecimal(30));
+
+
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
-        Booking booking = new Booking(104, clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
+        Booking booking = new Booking(106L, clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
                 null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
                 clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
                 "this is a comment", "Bar", "12435226", "02/24",
-                "123", bookedRoomCategories, bookedRooms);
+                "123", board, new BigDecimal(30), bookedRoomCategories, bookedRooms);
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(0), BigDecimal.valueOf(50), 2));
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(1), BigDecimal.valueOf(75), 1));
         bookedRooms.add(new BookedRoom(booking, rooms.get(0), booking.getArrivalDate(), booking.getDepartureDate()));
@@ -114,6 +118,9 @@ public class PersistenceFacade{
         for (BookedRoomCategory c : getBooking(104).get().getBookedRoomCategories()) {
             System.out.println(c.getRoomCategory().getName());
         }
+
+        //hartkodiert customer und statt nummer einfach null zum ausprobieren von
+        //
 
     }
 }

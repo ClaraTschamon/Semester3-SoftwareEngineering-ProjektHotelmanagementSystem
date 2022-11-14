@@ -12,6 +12,11 @@ public class BoardDTO {
 
     public BoardDTO(){}
 
+    public BoardDTO(String name, BigDecimal pricePerNight){
+        this.name = name;
+        this.pricePerNight = pricePerNight;
+    }
+
     public String getName() {
         return name;
     }

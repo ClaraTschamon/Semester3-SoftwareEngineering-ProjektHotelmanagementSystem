@@ -19,7 +19,7 @@ public class DomainTranslator {
         BookingDTO bookingDTO = new BookingDTO(booking.getNumber(), translateCustomer(booking.getCustomer()), booking.getArrivalDate(),
                 booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 translateAddress(booking.getBillingAddress()), booking.getPaymentMethod(), booking.getCreditCardNumber(),
-                booking.getExpirationDate(), booking.getAuthorisationNumber(), booking.getComment(),
+                booking.getExpirationDate(), booking.getAuthorisationNumber(), translateBoard(booking.getBoard()), booking.getPricePerNightForBoard(),booking.getComment(),
                 new ArrayList<BookedRoomCategoryDTO>(), new ArrayList<BookedRoomDTO>());
         if (includeArrays) {
             // TODO
@@ -41,5 +41,10 @@ public class DomainTranslator {
     protected static RoomDTO translateRoom(Room room) {
         return new RoomDTO(room.getNumber(), room.getIsFree(), room.getIsClean(),
                 translateRoomCategory(room.getCategory()));
+    }
+
+    //new
+    protected static BoardDTO translateBoard(Board board){
+        return new BoardDTO(board.getName(), board.getPricePerNight());
     }
 }

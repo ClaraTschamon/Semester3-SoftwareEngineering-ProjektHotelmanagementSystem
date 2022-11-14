@@ -25,7 +25,7 @@ CREATE TABLE room(
 );
 
 CREATE TABLE customer(
-    customer_number INTEGER PRIMARY KEY,
+    customer_number LONG PRIMARY KEY,
     customer_first_name VARCHAR(255),
     customer_last_name VARCHAR(255),
     customer_date_of_birth DATE,
@@ -41,7 +41,7 @@ CREATE TABLE customer(
 );
 
 CREATE TABLE booking(
-    booking_number INTEGER PRIMARY KEY,
+    booking_number LONG PRIMARY KEY,
     customer_number INTEGER,
     FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
     arrival_date DATE,
@@ -57,7 +57,9 @@ CREATE TABLE booking(
     payment_method VARCHAR(255),
     credit_card_number VARCHAR(255),
     expiration_date VARCHAR(5),
-    authorisation_number VARCHAR(255)
+    authorisation_number VARCHAR(255),
+    board_name VARCHAR(255),
+    price_per_night_for_board INTEGER
 );
 
 CREATE TABLE booked_room(

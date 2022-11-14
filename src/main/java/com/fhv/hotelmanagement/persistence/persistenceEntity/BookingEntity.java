@@ -1,7 +1,9 @@
 package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
+import com.fhv.hotelmanagement.domain.domainModel.Board;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,8 +14,9 @@ import java.util.Set;
 public class BookingEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_number")
-    private int number;
+    private Long number;
 
     @ManyToOne
     @JoinColumn(name = "customer_number")
@@ -61,6 +64,13 @@ public class BookingEntity {
     @Column(name="authorisation_number")
     private String authorisationNumber;
 
+    @ManyToOne
+    @JoinColumn(name="board")
+    private BoardEntity board;
+
+   @Column(name="price_per_night_for_board")
+    private BigDecimal pricePerNightForBoard;
+
     @OneToMany(
             mappedBy = "booking",
             cascade = CascadeType.ALL,
@@ -77,15 +87,17 @@ public class BookingEntity {
 
     public BookingEntity(){};
 
-    public BookingEntity(int number, CustomerEntity customer, LocalDate arrivalDate,
+    public BookingEntity(Long number, CustomerEntity customer, LocalDate arrivalDate,
                          LocalDateTime checkInDatetime, LocalDate departureDate,
                          LocalDateTime checkOutDatetime, String billingStreet,
                          String billingHouseNumber, String billingPostalCode,
                          String billingCity, String billingCountry,
                          String comment, String paymentMethod, String creditCardNumber,
-                         String expirationDate, String authorisationNumber,
+                         String expirationDate, String authorisationNumber, BoardEntity board,
+                         BigDecimal pricePerNightForBoard,
                          Set<BookedRoomCategoryEntity> bookedRoomCategories,
                          Set<BookedRoomEntity> bookedRooms) {
+
         this.number = number;
         this.customer = customer;
         this.arrivalDate = arrivalDate;
@@ -102,19 +114,16 @@ public class BookingEntity {
         this.creditCardNumber = creditCardNumber;
         this.expirationDate = expirationDate;
         this.authorisationNumber = authorisationNumber;
+        this.board = board;
+        this.pricePerNightForBoard = pricePerNightForBoard;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
 
 
-    public int getNumber() {
+    public Long getNumber() {
         return number;
     }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
 
     public CustomerEntity getCustomer() {
         return customer;
@@ -243,6 +252,22 @@ public class BookingEntity {
 
     public void setAuthorisationNumber(String authorisationNumber) {
         this.authorisationNumber = authorisationNumber;
+    }
+
+    public BoardEntity getBoard() {
+        return board;
+    }
+
+    public void setBoard(BoardEntity board) {
+        this.board = board;
+    }
+
+    public BigDecimal getPricePerNightForBoard() {
+        return pricePerNightForBoard;
+    }
+
+    public void setPricePerNightForBoard(BigDecimal pricePerNightForBoard) {
+        this.pricePerNightForBoard = pricePerNightForBoard;
     }
 
     public Set<BookedRoomCategoryEntity> getBookedRoomCategories() {

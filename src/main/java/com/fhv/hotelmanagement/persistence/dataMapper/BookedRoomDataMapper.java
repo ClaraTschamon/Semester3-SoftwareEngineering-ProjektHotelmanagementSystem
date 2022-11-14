@@ -77,7 +77,8 @@ public class BookedRoomDataMapper {
     protected static BookedRoomEntity createBookedRoomEntity(BookedRoom bookedRoom) {
         Booking booking = bookedRoom.getBooking();
         return new BookedRoomEntity(BookingDataMapper.createBookingEntity(booking,
-                CustomerDataMapper.createCustomerEntity(booking.getCustomer())),
+                CustomerDataMapper.createCustomerEntity(booking.getCustomer()),
+                BoardDataMapper.createBoardEntity(booking.getBoard())),
                 RoomDataMapper.createRoomEntity(bookedRoom.getRoom()),
                 bookedRoom.getFromDate(), bookedRoom.getToDate());
     }

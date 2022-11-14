@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BoardEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
@@ -45,7 +46,8 @@ public class BookedRoomCategoryDataMapper{
     protected static BookedRoomCategoryEntity createBookedRoomCategoryEntity(BookedRoomCategory bookedRoomCategory) {
         Booking booking = bookedRoomCategory.getBooking();
         return new BookedRoomCategoryEntity(BookingDataMapper.createBookingEntity(booking,
-                CustomerDataMapper.createCustomerEntity(booking.getCustomer())),
+                CustomerDataMapper.createCustomerEntity(booking.getCustomer()),
+                BoardDataMapper.createBoardEntity(booking.getBoard())),
                 RoomCategoryDataMapper.createRoomCategoryEntity(bookedRoomCategory.getRoomCategory()),
                 bookedRoomCategory.getPricePerNight(), bookedRoomCategory.getAmount());
     }

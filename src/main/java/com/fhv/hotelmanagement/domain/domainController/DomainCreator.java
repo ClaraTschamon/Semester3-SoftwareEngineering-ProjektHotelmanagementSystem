@@ -1,13 +1,7 @@
 package com.fhv.hotelmanagement.domain.domainController;
 
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
-import com.fhv.hotelmanagement.domain.domainModel.Booking;
-import com.fhv.hotelmanagement.domain.domainModel.Customer;
-import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
+import com.fhv.hotelmanagement.domain.domainModel.*;
+import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.util.ArrayList;
 
@@ -31,10 +25,14 @@ public class DomainCreator {
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
                 billingAddress.getCity(), billingAddress.getCountry(), bookingDTO.getComment(), bookingDTO.getPaymentMethod(),
                 bookingDTO.getCreditCardNumber(), bookingDTO.getExpirationDate(), bookingDTO.getAuthorisationNumber(),
-                bookedRoomCategories, bookedRooms);
+                createBoard(bookingDTO.getBoard()), bookingDTO.getPricePerNightForBoard(), bookedRoomCategories,bookedRooms);
 
         // TODO fill lists
         return booking;
+    }
+
+    protected static Board createBoard(BoardDTO boardDTO){
+        return new Board(boardDTO.getName(), boardDTO.getPricePerNight());
     }
 
 //    protected static BookedRoom createBookedRoom(BookedRoomDTO bookedRoomDTO) {
