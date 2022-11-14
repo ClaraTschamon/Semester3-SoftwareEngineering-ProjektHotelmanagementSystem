@@ -53,8 +53,11 @@ public class WalkIn3ViewController {
         expiryDateTextField.setText(expiryDate);
         String comment = bookingDTO.getComment(); //Comment = Notes
         notesTextArea.setText(comment);
-        String payment =bookingDTO.getPaymentMethod();
-        paymentMethod.setValue(payment);
+
+        if(bookingDTO.getPaymentMethod()!=null){
+            String payment =bookingDTO.getPaymentMethod();
+            paymentMethod.setValue(payment);
+        }
 
         AddressDTO addressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
         String billingStreet = addressDTO.getStreet();

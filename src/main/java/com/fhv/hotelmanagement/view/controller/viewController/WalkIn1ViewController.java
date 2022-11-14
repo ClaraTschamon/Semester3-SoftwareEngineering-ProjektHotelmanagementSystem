@@ -123,9 +123,11 @@ public class WalkIn1ViewController implements Initializable {
         //fill all roomno
 //        int roomno =roomDTO.getNumber();
         //fill room price
-        String roomPrice = roomDTO.getRoomPrice();
-        roomPriceDropDown.setValue(roomPrice);
 
+        if(roomDTO.getRoomPrice()!=null){
+            String roomPrice = roomDTO.getRoomPrice();
+            roomPriceDropDown.setValue(roomPrice);
+        }
         System.out.println(roomPriceDropDown.getEditor().getText());
     }
 
