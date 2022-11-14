@@ -10,6 +10,15 @@ import java.util.ArrayList;
 
 public class DomainController {
 
+    public static ArrayList<RoomDTO> getRooms() {
+        ArrayList<RoomDTO> rooms = new ArrayList<>();
+        for (Room r : MainApplication.getDomainManager().getAllRooms()) {
+            System.out.println(r.getNumber());
+        }
+
+        return rooms;
+    }
+
     public static boolean saveCustomer(CustomerDTO customerDTO) {
         boolean saved = false;
 
