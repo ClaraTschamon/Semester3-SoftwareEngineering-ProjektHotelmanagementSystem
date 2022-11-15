@@ -58,7 +58,8 @@ public class WalkIn3ViewController {
             String payment =bookingDTO.getPaymentMethod();
             paymentMethod.setValue(payment);
         }
-        AddressDTO addressDTO = viewController.getUseCaseController().getAddressDTO();
+
+        AddressDTO addressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
         String billingStreet = addressDTO.getStreet();
         billingStreetTextField.setText(billingStreet);
         String billingHouseNumber = addressDTO.getHouseNumber();
@@ -101,13 +102,13 @@ public class WalkIn3ViewController {
         bookingDTO.setComment(notesTextArea.getText());
         bookingDTO.setPaymentMethod((String) paymentMethod.getSelectionModel().getSelectedItem());
 
-        AddressDTO addressDTO = viewController.getUseCaseController().getAddressDTO();
-        addressDTO.setStreet(billingStreetTextField.getText());
-        addressDTO.setHouseNumber(billingHouseNumberTextField.getText());
-        addressDTO.setCity(billingCityTextField.getText());
-        addressDTO.setPostalCode(billingPostalCodeTextField.getText());
-        addressDTO.setCountry(billingCountryTextField.getText());
-        addressDTO.setBillingAddressEqualsCustomerAddress(billingAddressEqualsCustomerAddressCheckBox.isSelected());
+        AddressDTO billingAddressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
+        billingAddressDTO.setStreet(billingStreetTextField.getText());
+        billingAddressDTO.setHouseNumber(billingHouseNumberTextField.getText());
+        billingAddressDTO.setCity(billingCityTextField.getText());
+        billingAddressDTO.setPostalCode(billingPostalCodeTextField.getText());
+        billingAddressDTO.setCountry(billingCountryTextField.getText());
+        billingAddressDTO.setBillingAddressEqualsCustomerAddress(billingAddressEqualsCustomerAddressCheckBox.isSelected());
     }
 
     @FXML

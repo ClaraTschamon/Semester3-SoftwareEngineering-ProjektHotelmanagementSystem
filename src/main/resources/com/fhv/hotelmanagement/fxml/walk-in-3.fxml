@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
 
 
 
@@ -74,14 +74,15 @@
                 <TextField fx:id="billingCityTextField" layoutX="545.0" layoutY="295.0" prefHeight="40.0" prefWidth="230.0" />
                 <TextField fx:id="billingStreetTextField" layoutX="545.0" layoutY="230.0" prefHeight="40.0" prefWidth="230.0" />
                 <Label layoutX="455.0" layoutY="421.0" />
-                <CheckBox fx:id="billingAddressEqualsCustomerAddressCheckBox" layoutX="545.0" layoutY="180.0" mnemonicParsing="false" onAction="#billingAddressEqualsCustomerAddressCheckBoxChanged" text="Rechnungsaddressse entspricht der Wohnaddresse" />
+                <CheckBox fx:id="billingAddressEqualsCustomerAddressCheckBox" layoutX="545.0" layoutY="180.0" mnemonicParsing="false" onAction="#billingAddressEqualsCustomerAddressCheckBoxChanged" text="Rechnungsaddressse entspricht der Wohnaddresse" selected="true"/>
                 <TextField fx:id="billingHouseNumberTextField" layoutX="780.0" layoutY="230.0" prefHeight="40.0" prefWidth="65.0" />
                 <TextArea fx:id="notesTextArea" layoutX="544.0" layoutY="454.0" prefHeight="98.0" prefWidth="303.0" />
                 <TextField fx:id="billingPostalCodeTextField" layoutX="780.0" layoutY="295.0" prefHeight="40.0" prefWidth="65.0" />
                 <Label layoutX="60.0" layoutY="360.0" text="Verfügernummer">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
+                   <font>
+                      <Font size="14.0" />
+                   </font>
+                </Label>
                 <ComboBox fx:id="paymentMethod" layoutX="60.0" layoutY="180.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">

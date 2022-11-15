@@ -33,7 +33,8 @@ public class BookingDataMapper {
     //create
     public void insert(Booking booking){
         var entityManager = PersistenceFacade.instance().entityManager;
-        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
+        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()),
+                BoardDataMapper.createBoardEntity(booking.getBoard()));
 
         entityManager.getTransaction().begin();
         entityManager.persist(bookingEntity);
@@ -49,7 +50,7 @@ public class BookingDataMapper {
 
     //update
     public void store(Booking booking){
-        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
+        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()), BoardDataMapper.createBoardEntity(booking.getBoard()));
         PersistenceFacade.instance().entityManager.merge(bookingEntity);
 //        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
 //            PersistenceFacade.instance().entityManager.merge(
@@ -61,7 +62,7 @@ public class BookingDataMapper {
 //        }
     }
 
-    protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity) {
+    protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity, BoardEntity board) {
         Address address = booking.getBillingAddress();
         HashSet<BookedRoomCategoryEntity> bookedRoomCategoryEntities = new HashSet<>();
         HashSet<BookedRoomEntity> bookedRoomEntities = new HashSet<>();
@@ -70,7 +71,7 @@ public class BookingDataMapper {
                 booking.getArrivalDate(), booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
                 booking.getComment(), booking.getPaymentMethod(), booking.getCreditCardNumber(), booking.getExpirationDate(),
-                booking.getAuthorisationNumber(), bookedRoomCategoryEntities, bookedRoomEntities);
+                booking.getAuthorisationNumber(), board, booking.getPricePerNightForBoard(), bookedRoomCategoryEntities, bookedRoomEntities);
 
 //        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
 //            bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
@@ -93,7 +94,8 @@ public class BookingDataMapper {
                 bookingEntity.getCheckOutDatetime(), bookingEntity.getBillingStreet(), bookingEntity.getBillingHouseNumber(),
                 bookingEntity.getBillingPostalCode(), bookingEntity.getBillingCity(), bookingEntity.getBillingCountry(),
                 bookingEntity.getComment(), bookingEntity.getPaymentMethod(), bookingEntity.getCreditCardNumber(),
-                bookingEntity.getExpirationDate(), bookingEntity.getAuthorisationNumber(), bookedRoomCategories, bookedRooms);
+                bookingEntity.getExpirationDate(), bookingEntity.getAuthorisationNumber(), BoardDataMapper.createBoard(bookingEntity.getBoard()),
+                bookingEntity.getPricePerNightForBoard(), bookedRoomCategories, bookedRooms);
 
         for (BookedRoomCategoryEntity e : bookingEntity.getBookedRoomCategories()) {
             bookedRoomCategories.add(BookedRoomCategoryDataMapper.createBookedRoomCategory(e, booking));

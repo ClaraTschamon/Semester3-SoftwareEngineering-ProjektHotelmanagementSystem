@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class Customer {
 
-    private static int id;
-    private int number;
+    private Long number;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -18,12 +17,9 @@ public class Customer {
     private ArrayList<Booking> bookings;
 
 
-    public Customer(Integer number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
+    public Customer(Long number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
                     String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
                     String country, boolean saved, ArrayList<Booking> bookings) {
-        if (number.equals(null)) {
-            number = getId();
-        }
         this.number = number;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,11 +30,10 @@ public class Customer {
         this.address = new Address(street, houseNumber, postalCode, city, country);
         this.saved = saved;
         this.bookings = bookings;
-        id++;
     }
 
-    public int getNumber() {
-        return this.number;
+    public Long getNumber() {
+        return number;
     }
 
     public String getFirstName() {
@@ -112,10 +107,5 @@ public class Customer {
 
     public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    //Id braucht nur getter weil sie statisch ist
-    private static int getId() {
-        return id;
     }
 }
