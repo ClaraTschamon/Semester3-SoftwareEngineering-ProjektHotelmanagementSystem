@@ -49,7 +49,7 @@ public class DomainCreator {
 
     protected static Customer createCustomer(CustomerDTO customerDTO) {
         AddressDTO address = customerDTO.getAddress();
-        return new Customer(customerDTO.getNumber(), customerDTO.getFirstName(), customerDTO.getLastName(),
+        return new Customer(customerDTO.getFirstName(), customerDTO.getLastName(),
                 customerDTO.getDateOfBirth(), customerDTO.getNationality(), customerDTO.getPhoneNumber(), customerDTO.getEmail(),
                 address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
                 customerDTO.getSaved(), new ArrayList<>());

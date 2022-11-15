@@ -25,7 +25,7 @@ CREATE TABLE room(
 );
 
 CREATE TABLE customer(
-    customer_number LONG PRIMARY KEY,
+    customer_number LONG PRIMARY KEY AUTO_INCREMENT,
     customer_first_name VARCHAR(255),
     customer_last_name VARCHAR(255),
     customer_date_of_birth DATE,

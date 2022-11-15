@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Persistence;
 
 import java.lang.reflect.Array;
@@ -81,6 +82,14 @@ public class PersistenceFacade{
     }
 
     public static void main(String[] args) {
+
+        Customer clara = new Customer("Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
+                "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
+                "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
+        CustomerDataMapper.instance().insert(clara);
+
+//        System.out.println(getCustomer(10).get().getFirstName());
+
         /*
         PersistenceFacade pf = new PersistenceFacade();
 

@@ -17,7 +17,7 @@ public class Customer {
     private ArrayList<Booking> bookings;
 
 
-    public Customer(Long number, String firstName, String lastName, LocalDate dateOfBirth, String nationality,
+    public Customer(String firstName, String lastName, LocalDate dateOfBirth, String nationality,
                     String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
                     String country, boolean saved, ArrayList<Booking> bookings) {
         this.number = number;
