@@ -43,8 +43,8 @@ public class PersistenceFacade{
         return BookingDataMapper.instance().get(id);
     }
 
-    public static void insertBooking(Booking booking) {
-        BookingDataMapper.instance().insert(booking);
+    public static Long insertBooking(Booking booking) {
+        return BookingDataMapper.instance().insert(booking);
     }
 
     public static void storeBooking(Booking booking) {
@@ -56,8 +56,8 @@ public class PersistenceFacade{
         return CustomerDataMapper.instance().get(id);
     }
 
-    public static void insertCustomer(Customer customer) {
-        CustomerDataMapper.instance().insert(customer);
+    public static Long insertCustomer(Customer customer) {
+        return CustomerDataMapper.instance().insert(customer);
     }
 
     public static void storeCustomer(Customer customer) {

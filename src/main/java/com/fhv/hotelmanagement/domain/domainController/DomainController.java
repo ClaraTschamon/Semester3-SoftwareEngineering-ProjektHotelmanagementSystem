@@ -1,44 +1,44 @@
 package com.fhv.hotelmanagement.domain.domainController;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
+import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
+import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
 
 public class DomainController {
 
-    public static boolean saveCustomer(CustomerDTO customerDTO) { // void, Exceptions
-        boolean saved = false;
-
+    public static Long saveCustomer(CustomerDTO customerDTO) throws CustomerIsInvalidException {
+        Long customerNumber = customerDTO.getNumber();
         if (DomainValidator.checkCustomer(customerDTO)) {
-            boolean isNew = customerDTO.getNumber() == null;
             Customer customer = DomainCreator.createCustomer(customerDTO);
 
-            if (isNew) {
-                PersistenceFacade.insertCustomer(customer);
+            if (customerNumber == null) {
+                customerNumber = PersistenceFacade.insertCustomer(customer);
             } else {
                 PersistenceFacade.storeCustomer(customer);
             }
-            System.out.println("saved customer");
-            saved = true;
+        } else {
+            throw new CustomerIsInvalidException();
         }
-        return saved;
+        return customerNumber;
     }
 
-    public static boolean saveBooking(BookingDTO bookingDTO) {
-        boolean saved = false;
+    public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {
+        Long bookingNumber = bookingDTO.getNumber();
         if (DomainValidator.checkBooking(bookingDTO)) {
-            boolean isNew = bookingDTO.getNumber() == null;
             Booking booking = DomainCreator.createBooking(bookingDTO, true);
 
-            if (isNew) {
-                PersistenceFacade.insertBooking(booking);
+            if (bookingNumber == null) {
+                bookingNumber = PersistenceFacade.insertBooking(booking);
             } else {
                 PersistenceFacade.storeBooking(booking);
             }
             System.out.println("saved booking");
-            saved = true;
+        } else {
+            throw new BookingIsInvalidException();
         }
-        return saved;
+        return bookingNumber;
     }
 }

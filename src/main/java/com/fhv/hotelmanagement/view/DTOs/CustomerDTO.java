@@ -36,6 +36,10 @@ public class CustomerDTO {
         return number;
     }
 
+    public void setNumber(Long number) {
+        this.number = number;
+    }
+
     public String getFirstName() {
         return firstName;
     }

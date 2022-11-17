@@ -28,10 +28,10 @@ public class BookingDataMapper {
     }
 
     //create
-    public void insert(Booking booking){
-        var entityManager = PersistenceFacade.instance().entityManager;
+    public Long insert(Booking booking) {
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()),
                 BoardDataMapper.createBoardEntity(booking.getBoard()));
+        var entityManager = PersistenceFacade.instance().entityManager;
 
         entityManager.getTransaction().begin();
         entityManager.persist(bookingEntity);
@@ -43,6 +43,8 @@ public class BookingDataMapper {
         for (BookedRoom r : booking.getBookedRooms()) {
             BookedRoomDataMapper.instance().insert(r);
         }
+
+        return bookingEntity.getNumber();
     }
 
     //update

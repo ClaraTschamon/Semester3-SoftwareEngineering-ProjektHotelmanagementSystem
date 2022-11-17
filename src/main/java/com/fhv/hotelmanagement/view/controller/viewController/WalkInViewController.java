@@ -9,7 +9,6 @@ import java.io.IOException;
 public class WalkInViewController {
     private WalkInUseCaseController useCaseController;
 
-
     public WalkInViewController() {
         try {
             useCaseController = new WalkInUseCaseController();

@@ -72,6 +72,7 @@ public class WalkIn3ViewController {
         billingCountryTextField.setText(billingCountry);
 
         billingAddressEqualsCustomerAddressCheckBox.setSelected(viewController.getUseCaseController().isBillingAddressEqualsCustomerAddress());
+        fillBillingAddressData();
     }
 
     public void fillBillingAddressData() {

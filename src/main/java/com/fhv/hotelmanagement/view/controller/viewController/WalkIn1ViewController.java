@@ -202,15 +202,15 @@ public class WalkIn1ViewController implements Initializable {
         }
         if (bookedDoubleRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Doppelzimmer");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedDoubleRooms.size()));
         }
         if (bookedFamilyRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Familienzimmer");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedFamilyRooms.size()));
         }
         if (bookedSuites.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Suite");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSuites.size()));
         }
         bookingDTO.setBookedRoomCategories(bookedRoomCategories);
 
