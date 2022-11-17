@@ -4,6 +4,7 @@ import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,6 +44,14 @@ public class DomainManager {
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
         for (BookedRoom r : bookedRooms) {
             bookedRoomDTOS.add(DomainTranslator.translateBookedRoom(r));
+        }
+        return bookedRoomDTOS;
+    }
+
+    public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
+        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+        for (BookedRoom bookedRoom : PersistenceFacade.getBookedRoomsBetween(minDate, maxDate)) {
+            bookedRoomDTOS.add(DomainTranslator.translateBookedRoom(bookedRoom));
         }
         return bookedRoomDTOS;
     }

@@ -7,7 +7,7 @@ import com.fhv.hotelmanagement.view.DTOs.*;
 
 public class DomainController {
 
-    public static boolean saveCustomer(CustomerDTO customerDTO) {
+    public static boolean saveCustomer(CustomerDTO customerDTO) { // void, Exceptions
         boolean saved = false;
 
         if (DomainValidator.checkCustomer(customerDTO)) {

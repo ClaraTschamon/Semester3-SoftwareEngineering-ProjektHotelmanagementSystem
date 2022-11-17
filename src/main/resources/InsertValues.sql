@@ -134,7 +134,3 @@ VALUES (1, 16, DATE '2022-11-10',  CURRENT_DATE);
 INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
 VALUES (1, 21, DATE '2022-11-10',  DATE '2023-06-07');
 
-
-
-
-

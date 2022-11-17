@@ -2,6 +2,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
+import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
@@ -142,8 +143,6 @@ public class WalkIn1ViewController implements Initializable {
             String roomPrice = roomDTO.getRoomPrice();
             roomPriceDropDown.setValue(roomPrice);
         }
-
-        System.out.println(roomPriceDropDown.getEditor().getText());
     }
 
     protected void saveData(){
@@ -216,7 +215,7 @@ public class WalkIn1ViewController implements Initializable {
         ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
         ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
 
-        RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
+        RoomProvider roomProvider = new RoomProvider();
 
         singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
         doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
@@ -288,21 +287,12 @@ public class WalkIn1ViewController implements Initializable {
 
 class RoomProvider{
 
-    private ArrayList<RoomDTO> allRooms;
-    public ArrayList<BookedRoomDTO> allBookedRooms;
-
     private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
     private LocalDate maxDate = LocalDate.now();
     private ArrayList<BookedRoomDTO> freeBookedRooms = getCheckoutDateToday(maxDate);
 
-
-    public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
-        this.allRooms = allRooms;
-        this.allBookedRooms = allBookedRooms;
-    }
-
     public RoomDTO getRoomFromNumber(int number){
-        for(RoomDTO room : allRooms){
+        for(RoomDTO room : MainApplication.getDomainManager().getAllRoomDTOs()){
             if(room.getNumber() == number){
                 return room;
             }
@@ -316,14 +306,14 @@ class RoomProvider{
 
         ObservableList<RoomDTO> freeRooms = FXCollections.observableArrayList(new ArrayList<>());
 
-        for(RoomDTO room : allRooms){
+        for(RoomDTO room : MainApplication.getDomainManager().getAllRoomDTOs()){
             if(room.getCategory().getName().equals(category)){
                 if(room.getIsFree()){
                     freeRooms.add(room);
                 }
                 else{
                     for(BookedRoomDTO bookedRoom : freeBookedRooms){
-                        if(bookedRoom.getRoom().getNumber() == room.getNumber()){
+                        if(bookedRoom.getRoom().equals(room)){
                             freeRooms.add(room);
                         }
                     }
@@ -335,27 +325,14 @@ class RoomProvider{
 
     public ArrayList<BookedRoomDTO> getCheckoutDateToday(LocalDate maxDate){
         ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
-        for(BookedRoomDTO bookedRoom : allBookedRooms){
+        for(BookedRoomDTO bookedRoom : MainApplication.getDomainManager().getBookedRoomsBetween(LocalDate.now(), maxDate)){
             if(bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate)){
                 bookedRooms.add(bookedRoom);
             }
         }
         return bookedRooms;
     }
-
-    //diese Methode funktioniert nicht!!!
-    public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
-        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
-        for(BookedRoomDTO bookedRoom : allBookedRooms){
-            if((bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate)) &&
-                    (bookedRoom.getFromDate().isEqual(minDate) || bookedRoom.getFromDate().isAfter(minDate) )){ //TODO: fehler in dieser Zeile!!!
-                bookedRooms.add(bookedRoom);
-            }
-        }
-        return bookedRooms;
-    }
 }
-
 
 
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
