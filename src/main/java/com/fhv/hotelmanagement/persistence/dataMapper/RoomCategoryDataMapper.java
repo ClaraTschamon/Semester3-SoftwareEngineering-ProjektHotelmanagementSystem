@@ -27,7 +27,6 @@ public class RoomCategoryDataMapper {
         return Optional.empty();
     }
 
-    //TODO: generisch in persistence facade
     public static ArrayList<RoomCategory> getAll(){
         ArrayList<RoomCategoryEntity> entities = (ArrayList<RoomCategoryEntity>) PersistenceFacade.instance().entityManager.createQuery("from RoomCategoryEntity").getResultList();
         ArrayList<RoomCategory> roomCategories = new ArrayList<>();

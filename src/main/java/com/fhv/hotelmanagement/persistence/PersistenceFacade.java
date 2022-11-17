@@ -83,10 +83,12 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
+        /*
         Customer clara = new Customer("Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
                 "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
                 "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
         CustomerDataMapper.instance().insert(clara);
+        */
 
 //        System.out.println(getCustomer(10).get().getFirstName());
 
@@ -130,6 +132,14 @@ public class PersistenceFacade{
 
         //hartkodiert customer und statt nummer einfach null zum ausprobieren von
         */
+
+        LocalDate minDate = LocalDate.of(2022, 11, 12);
+        LocalDate maxDate = LocalDate.now();
+        ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
+
+        for(BookedRoom room : bookedRooms){
+            System.out.println("nummer: " + room.getRoom().getNumber());
+        }
 
     }
 }

@@ -1,12 +1,11 @@
 package com.fhv.hotelmanagement.view.DTOs;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RoomDTO {
     private int number;
-
     private Boolean isFree;
-
     private Boolean isClean;
     private RoomCategoryDTO category;
     private int counterSingleRoom;
@@ -14,8 +13,6 @@ public class RoomDTO {
     private int counterFamilyRoom;
     private int counterSuite;
     private String roomPrice;
-
-    private ArrayList<RoomDTO> allRooms;
 
     public RoomDTO() {}
 
@@ -90,27 +87,15 @@ public class RoomDTO {
         this.roomPrice = roomPrice;
     }
 
-    public ArrayList<RoomDTO> getAllRooms() {
-        return allRooms;
-    }
-
-    public void setAllRooms(ArrayList<RoomDTO> allRooms) {
-        this.allRooms = allRooms;
-    } // why?
-
     @Override
     public boolean equals(Object o) {
-        if (o.equals(this)) {
-            return true;
-        }
-        if (!(o instanceof RoomDTO)) {
-            return false;
-        } else {
-            RoomDTO roomDTO = (RoomDTO) o;
-            return (roomDTO.getNumber() == number) &&
-                    (roomDTO.getIsClean() == isClean) &&
-                    (roomDTO.getIsFree() == isFree) &&
-                    (roomDTO.getCategory().equals(category));
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoomDTO roomDTO = (RoomDTO) o;
+        return getNumber() == roomDTO.getNumber() &&
+                Objects.equals(getIsFree(), roomDTO.getIsFree())
+                && Objects.equals(getIsClean(), roomDTO.getIsClean()) &&
+                Objects.equals(getCategory(), roomDTO.getCategory());
     }
+
 }

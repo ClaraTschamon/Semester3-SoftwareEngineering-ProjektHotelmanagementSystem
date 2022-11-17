@@ -39,16 +39,16 @@ public class BookedRoomDataMapper {
         return bookedRooms;
     }
 
-    /*
-    public ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+
+    public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
         Date minimumDate = Date.valueOf(minDate); //Convert from LocalDate to java.sql.Date
         Date maximumDate = Date.valueOf(maxDate);
         ArrayList<BookedRoomEntity> entities;
 
         entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
                 "SELECT bookedRoom FROM BookedRoomEntity bookedRoom WHERE bookedRoom.fromDate >=: minimumDate " +
-                        "AND bookedRoom.toDate <=: maximumDate").setParameter("minimumDate", minimumDate
-        ).setParameter("maximumDate", maximumDate).getResultList();
+                        "AND bookedRoom.toDate <=: maximumDate").setParameter("minimumDate", minDate
+        ).setParameter("maximumDate", maxDate).getResultList();
 
         System.out.println(entities);
 
@@ -58,7 +58,7 @@ public class BookedRoomDataMapper {
             bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking())));
         }
         return bookedRooms;
-    }*/
+    }
 
 
     //create

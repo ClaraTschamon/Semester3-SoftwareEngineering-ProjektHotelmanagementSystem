@@ -2,16 +2,10 @@ package com.fhv.hotelmanagement.domain.domainModel;
 
 public class Room {
     private Integer number;
-
-    private Boolean isFree;
-
-    private Boolean isClean;
     private RoomCategory category;
 
-    public Room(Integer number, boolean isFree, boolean isClean, RoomCategory category) {
+    public Room(Integer number, RoomCategory category) {
         this.number = number;
-        this.isFree = isFree;
-        this.isClean = isClean;
         this.category = category;
     }
 
@@ -23,11 +17,4 @@ public class Room {
         return category;
     }
 
-    public boolean getIsFree(){
-        return  isFree;
-    }
-
-    public boolean getIsClean(){
-        return isClean;
-    }
 }

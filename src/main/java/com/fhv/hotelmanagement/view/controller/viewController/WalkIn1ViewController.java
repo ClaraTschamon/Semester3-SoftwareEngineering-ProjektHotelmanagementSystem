@@ -1,6 +1,8 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -93,11 +95,16 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     protected void fillData(){
+
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
-        if(bookingDTO.getDepartureDate()!=null){
+        if(bookingDTO.getDepartureDate() != null){
             LocalDate departureDate = bookingDTO.getDepartureDate();
-            departureDatePicker.setValue(departureDate);
+            departureDatePicker.setValue(departureDate.plusDays(1));
+        }
+        else{
+            LocalDate defaultDepartureDate = LocalDate.now().plusDays(1);
+            departureDatePicker.setValue(defaultDepartureDate);
         }
 
         //fill all package radio buttons
@@ -205,14 +212,6 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //set default Values
-        //funktioniert nicht
-        //fullBoard.setSelected(true);
-
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-//        departureDatePicker.setValue(LocalDate.parse(formatter.format(LocalDate.now().plusDays(1))));
-
-        //roomPriceDropDown.setValue("Normalpreis");
 
         ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
         ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
@@ -290,13 +289,11 @@ public class WalkIn1ViewController implements Initializable {
 class RoomProvider{
 
     private ArrayList<RoomDTO> allRooms;
-    public ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
-
-    private ArrayList<BookedRoomDTO> freeBookedRooms;
+    public ArrayList<BookedRoomDTO> allBookedRooms;
 
     private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
     private LocalDate maxDate = LocalDate.now();
-
+    private ArrayList<BookedRoomDTO> freeBookedRooms = getCheckoutDateToday(maxDate);
 
 
     public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
@@ -357,17 +354,11 @@ class RoomProvider{
         }
         return bookedRooms;
     }
-
-
 }
 
 
 
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
-
-    //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
-    LocalDate minDate = LocalDate.now(); //was nimmt man als minDate???
-    LocalDate maxDate = LocalDate.now();
     RoomProvider provider;
 
     public RoomNumberConverter(RoomProvider provider){
@@ -386,7 +377,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         }
 
         if(!room.getIsClean()){
-            return String.valueOf(room.getNumber() + " " + "\u2757");
+            return String.valueOf(room.getNumber() + " " + "\u2757"); //TODO: warum wird raum 13 nicht angezeigt??
         }
         return String.valueOf(room.getNumber());
     }

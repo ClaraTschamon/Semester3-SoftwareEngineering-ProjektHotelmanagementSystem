@@ -27,7 +27,6 @@ public class BoardDataMapper {
         return Optional.empty();
     }
 
-    //TODO: generisch in persistence facade
     public static ArrayList<Board> getAll(){
         ArrayList<BoardEntity> entities = (ArrayList<BoardEntity>) PersistenceFacade.instance().entityManager.createQuery("from BoardEntity").getResultList();
         ArrayList<Board> boards = new ArrayList<>();

@@ -56,7 +56,7 @@ public class DomainCreator {
     }
 
     protected static Room createRoom(RoomDTO roomDTO) {
-        return new Room(roomDTO.getNumber(), roomDTO.getIsFree(), roomDTO.getIsClean(), createRoomCategory(roomDTO.getCategory()));
+        return new Room(roomDTO.getNumber(), createRoomCategory(roomDTO.getCategory()));
     }
 
     protected static RoomCategory createRoomCategory(RoomCategoryDTO roomCategoryDTO) {

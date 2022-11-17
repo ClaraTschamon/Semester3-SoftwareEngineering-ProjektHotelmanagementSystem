@@ -19,7 +19,6 @@ public class BookingDTO {
     private String expirationDate;
     private String authorisationNumber;
     private BoardDTO board;
-
     private BigDecimal pricePerNightForBoard;
     private String comment;
     private ArrayList<BookedRoomCategoryDTO> bookedRoomCategories;
