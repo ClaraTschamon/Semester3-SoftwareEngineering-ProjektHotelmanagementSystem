@@ -70,11 +70,9 @@ public class WalkIn3ViewController {
         billingPostalCodeTextField.setText(billingPostalCode);
         String billingCountry = addressDTO.getCountry();
         billingCountryTextField.setText(billingCountry);
-        billingAddressEqualsCustomerAddressCheckBox.setSelected(addressDTO.isBillingAddressEqualsCustomerAddress());
 
-        if(addressDTO.isBillingAddressEqualsCustomerAddress()==true){
-            fillBillingAddressData();
-        }
+        billingAddressEqualsCustomerAddressCheckBox.setSelected(viewController.getUseCaseController().isBillingAddressEqualsCustomerAddress());
+        fillBillingAddressData();
     }
 
     public void fillBillingAddressData() {
@@ -108,7 +106,7 @@ public class WalkIn3ViewController {
         billingAddressDTO.setCity(billingCityTextField.getText());
         billingAddressDTO.setPostalCode(billingPostalCodeTextField.getText());
         billingAddressDTO.setCountry(billingCountryTextField.getText());
-        billingAddressDTO.setBillingAddressEqualsCustomerAddress(billingAddressEqualsCustomerAddressCheckBox.isSelected());
+        viewController.getUseCaseController().setBillingAddressEqualsCustomerAddress(billingAddressEqualsCustomerAddressCheckBox.isSelected());
     }
 
     @FXML

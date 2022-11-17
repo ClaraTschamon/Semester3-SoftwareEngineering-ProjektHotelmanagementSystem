@@ -67,15 +67,10 @@ public class BoardDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (o.equals(this)) {
-            return true;
-        }
-        if (!(o instanceof BoardDTO)) {
-            return false;
-        } else {
-            BoardDTO boardDTO = (BoardDTO) o;
-            return (boardDTO.getName().equals(name)) &&
-                    (boardDTO.getPricePerNight().equals(pricePerNight));
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BoardDTO boardDTO = (BoardDTO) o;
+        return (boardDTO.getName().equals(name)) &&
+                (boardDTO.getPricePerNight().equals(pricePerNight));
     }
 }

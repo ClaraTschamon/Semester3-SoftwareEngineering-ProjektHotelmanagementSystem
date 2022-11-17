@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class RoomCategory {
     private String name;
@@ -17,5 +18,14 @@ public class RoomCategory {
 
     public BigDecimal getPricePerNight() {
         return pricePerNight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoomCategory roomCategory = (RoomCategory) o;
+        return getName().equals(roomCategory.getName()) &&
+                getPricePerNight().equals(roomCategory.getPricePerNight());
     }
 }
