@@ -88,6 +88,19 @@ public class PersistenceFacade{
                 "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
         CustomerDataMapper.instance().insert(clara);
 
+//        ArrayList<Room> rooms = RoomDataMapper.getAll();
+//        ArrayList<RoomCategory> categories = RoomCategoryDataMapper.getAll();
+//
+//        ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
+//        Board board = new Board("Vollpension", new BigDecimal(30));
+//        ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
+//        Booking booking = new Booking(clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
+//                null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
+//                clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
+//                "this is a comment", "Bar", "12435226", "02/24",
+//                "123", board, new BigDecimal(30), bookedRoomCategories, bookedRooms);
+//        BookingDataMapper.instance().insert(booking);
+//
 //        System.out.println(getCustomer(10).get().getFirstName());
 
         /*

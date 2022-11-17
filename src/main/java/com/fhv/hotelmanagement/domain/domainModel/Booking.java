@@ -24,7 +24,7 @@ public class Booking {
     private ArrayList<BookedRoomCategory> bookedRoomCategories;
     private ArrayList<BookedRoom> bookedRooms;
 
-    public Booking(Long number, Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
+    public Booking(Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                    String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
@@ -48,6 +48,15 @@ public class Booking {
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
+
+//    public Booking(Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
+//                   LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
+//                   String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
+//                   String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
+//                   ArrayList<BookedRoomCategory> bookedRoomCategories,
+//                   ArrayList<BookedRoom> bookedRooms) {
+//        this(null,customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingStreet, billingHouseNumber, billingPostalCode, billingCity, billingCountry, comment, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard, bookedRoomCategories, bookedRooms);
+//    }
 
     public Long getNumber() {
         return number;

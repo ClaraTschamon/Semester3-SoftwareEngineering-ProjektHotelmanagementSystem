@@ -17,9 +17,10 @@ public class Customer {
     private ArrayList<Booking> bookings;
 
 
-    public Customer(String firstName, String lastName, LocalDate dateOfBirth, String nationality,
+    public Customer(Long number,String firstName, String lastName, LocalDate dateOfBirth, String nationality,
                     String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
                     String country, boolean saved, ArrayList<Booking> bookings) {
+
         this.number = number;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,6 +31,12 @@ public class Customer {
         this.address = new Address(street, houseNumber, postalCode, city, country);
         this.saved = saved;
         this.bookings = bookings;
+    }
+
+    public Customer(String firstName, String lastName, LocalDate dateOfBirth, String nationality,
+                    String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
+                    String country, boolean saved, ArrayList<Booking> bookings) {
+        this(null, firstName, lastName, dateOfBirth, nationality, phoneNumber, email, street, houseNumber, postalCode, city, country, saved, bookings);
     }
 
     public Long getNumber() {

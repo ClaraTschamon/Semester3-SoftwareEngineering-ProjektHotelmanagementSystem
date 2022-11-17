@@ -41,7 +41,7 @@ CREATE TABLE customer(
 );
 
 CREATE TABLE booking(
-    booking_number LONG PRIMARY KEY,
+    booking_number LONG PRIMARY KEY AUTO_INCREMENT,
     customer_number INTEGER,
     FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
     arrival_date DATE,
