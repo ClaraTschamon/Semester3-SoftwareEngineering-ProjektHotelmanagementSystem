@@ -5,16 +5,14 @@ import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.*;
+import com.fhv.hotelmanagement.view.controller.useCaseController.WalkInUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -23,6 +21,7 @@ import org.controlsfx.control.CheckComboBox;
 
 //import javax.swing.*;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -64,6 +63,9 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private ComboBox roomPriceDropDown;
 
+    @FXML
+    private ToggleGroup packageToggleGroup;
+
     private CheckComboBox<RoomDTO> singleRoomDropDown;
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
@@ -100,48 +102,60 @@ public class WalkIn1ViewController implements Initializable {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
         if(bookingDTO.getDepartureDate() != null){
-            LocalDate departureDate = bookingDTO.getDepartureDate();
-            departureDatePicker.setValue(departureDate.plusDays(1));
+            departureDatePicker.setValue(bookingDTO.getDepartureDate());
         }
         else{
             LocalDate defaultDepartureDate = LocalDate.now().plusDays(1);
             departureDatePicker.setValue(defaultDepartureDate);
         }
 
-        //fill all package radio buttons
-        BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
+        int amountBookedSingleRooms = 0;
+        int amountBookedDoubleRooms = 0;
+        int amountBookedFamilyRooms = 0;
+        int amountBookedSuites = 0;
+        if (bookingDTO.getBookedRooms() != null) {
+            for (BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()) {
+                String categoryName = bookedRoomDTO.getRoom().getCategory().getName();
+                if (categoryName.equals("Einzelzimmer")) {
+                    singleRoomDropDown.getCheckModel().check(bookedRoomDTO.getRoom());
+                    amountBookedSingleRooms++;
+                } else if (categoryName.equals("Doppelzimmer")) {
+                    doubleRoomDropDown.getCheckModel().check(bookedRoomDTO.getRoom());
+                    amountBookedDoubleRooms++;
+                } else if (categoryName.equals("Familienzimmer")) {
+                    familyRoomDropDown.getCheckModel().check(bookedRoomDTO.getRoom());
+                    amountBookedFamilyRooms++;
+                } else if (categoryName.equals("Suite")) {
+                    suiteDropDown.getCheckModel().check(bookedRoomDTO.getRoom());
+                    amountBookedSuites++;
+                }
+            }
+        }
+        counterSingleRoom.setText(String.valueOf(amountBookedSingleRooms));
+        counterDoubleRoom.setText(String.valueOf(amountBookedDoubleRooms));
+        counterFamilyRoom.setText(String.valueOf(amountBookedFamilyRooms));
+        counterSuite.setText(String.valueOf(amountBookedSuites));
 
-//        if(!packageDTO.isFullboard()){
-//
-//        }
-
-        boolean fullboard = packageDTO.isFullboard();
-        fullBoard.setSelected(fullboard);
-        boolean halfboard = packageDTO.isHalfboard();
-        halfBoard.setSelected(halfboard);
-        boolean nopackage = packageDTO.isNoPackage();
-        noPackage.setSelected(nopackage);
-        boolean onlybreakfast = packageDTO.isOnlyBreakfast();
-        onlyBreakfast.setSelected(onlybreakfast);
-
-        //fill all room counters
-        RoomDTO roomDTO = viewController.getUseCaseController().getRoomDTO();
-        int singleRoom =  roomDTO.getCounterSingleRoom();
-        counterSingleRoom.setText(String.valueOf(singleRoom));
-        int doubleRoom =  roomDTO.getCounterDoubleRoom();
-        counterDoubleRoom.setText(String.valueOf(doubleRoom));
-        int familyRoom =  roomDTO.getCounterFamilyRoom();
-        counterFamilyRoom.setText(String.valueOf(familyRoom));
-        int suite =  roomDTO.getCounterSuite();
-        counterSuite.setText(String.valueOf(suite));
-
-        //fill all roomno
-//        int roomno =roomDTO.getNumber();
-        //fill room price
-
-        if(roomDTO.getRoomPrice()!=null){
-            String roomPrice = roomDTO.getRoomPrice();
+        String roomPrice = viewController.getUseCaseController().getRoomPrice();
+        if (roomPrice != null) {
             roomPriceDropDown.setValue(roomPrice);
+        }
+
+        if (bookingDTO.getBoard() != null) {
+            String selectedBoardName = bookingDTO.getBoard().getName();
+            if (selectedBoardName.equals("Vollpension")) {
+                fullBoard.setSelected(true);
+            } else if (selectedBoardName.equals("Halbpension")) {
+                halfBoard.setSelected(true);
+            } else if (selectedBoardName.equals("Nur Frühstück")) {
+                onlyBreakfast.setSelected(true);
+            } else if (selectedBoardName.equals("Ohne Package")) {
+                noPackage.setSelected(true);
+            } else {
+                fullBoard.setSelected(true);
+            }
+        } else {
+            fullBoard.setSelected(true);
         }
     }
 
@@ -150,25 +164,21 @@ public class WalkIn1ViewController implements Initializable {
         bookingDTO.setDepartureDate(departureDatePicker.getValue());
 
         //save all package radio buttons
-        BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
-        packageDTO.setFullboard(fullBoard.isSelected());
-        packageDTO.setHalfboard(halfBoard.isSelected());
-        packageDTO.setOnlyBreakfast(onlyBreakfast.isSelected());
-        packageDTO.setNoPackage(noPackage.isSelected());
+        RadioButton selectedBoardButton = (RadioButton) packageToggleGroup.getSelectedToggle();
+        BoardDTO selectedBoard = getBoardByName(selectedBoardButton.getText());
+        bookingDTO.setBoard(selectedBoard);
+        if (selectedBoard != null) {
+            bookingDTO.setPricePerNightForBoard(selectedBoard.getPricePerNight());
+        } else {
+            bookingDTO.setPricePerNightForBoard(null);
+        }
 
-        //save all room counters
-        RoomDTO roomDTO = viewController.getUseCaseController().getRoomDTO();
-        roomDTO.setCounterSingleRoom(Integer.parseInt(counterSingleRoom.getText()));
-        roomDTO.setCounterDoubleRoom(Integer.parseInt(counterDoubleRoom.getText()));
-        roomDTO.setCounterFamilyRoom(Integer.parseInt(counterFamilyRoom.getText()));
-        roomDTO.setCounterSuite(Integer.parseInt(counterSuite.getText()));
-
+        // save booked rooms (TODO save other prices)
         ArrayList<RoomDTO> bookedSingleRooms = new ArrayList<>(singleRoomDropDown.getCheckModel().getCheckedItems());
         ArrayList<RoomDTO> bookedDoubleRooms = new ArrayList<>(doubleRoomDropDown.getCheckModel().getCheckedItems());
         ArrayList<RoomDTO> bookedFamilyRooms = new ArrayList<>(familyRoomDropDown.getCheckModel().getCheckedItems());
         ArrayList<RoomDTO> bookedSuites = new ArrayList<>(suiteDropDown.getCheckModel().getCheckedItems());
 
-        //save all roomno
         ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
         for (RoomDTO r : bookedSingleRooms) {
             bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
@@ -204,9 +214,7 @@ public class WalkIn1ViewController implements Initializable {
         }
         bookingDTO.setBookedRoomCategories(bookedRoomCategories);
 
-        //save all room prices
-        roomDTO.setRoomPrice((String) roomPriceDropDown.getSelectionModel().getSelectedItem());
-//        singleRoomDropDown.setConverter();
+        viewController.getUseCaseController().setRoomPrice(roomPriceDropDown.getSelectionModel().getSelectedItem().toString());
     }
 
     @Override
@@ -282,6 +290,15 @@ public class WalkIn1ViewController implements Initializable {
 
     private boolean validateFields() {
         return true;
+    }
+
+    private BoardDTO getBoardByName(String name) {
+        for (BoardDTO boardDTO : MainApplication.getDomainManager().getAllBoardDTOs()) {
+            if (boardDTO.getName().equals(name)) {
+                return boardDTO;
+            }
+        }
+        return null;
     }
 }
 
@@ -359,3 +376,4 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         return String.valueOf(room.getNumber());
     }
 }
+

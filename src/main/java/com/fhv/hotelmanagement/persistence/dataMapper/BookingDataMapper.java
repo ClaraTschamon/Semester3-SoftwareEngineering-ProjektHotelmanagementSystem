@@ -21,9 +21,6 @@ public class BookingDataMapper {
     public Optional<Booking> get(final int number){
         BookingEntity entity = PersistenceFacade.instance().entityManager.find(BookingEntity.class, number);
         if(entity != null){
-            for (BookedRoomCategoryEntity e : entity.getBookedRoomCategories()) { //debug
-                System.out.println(e.getRoomCategory() + " " + e.getAmount());
-            }
             Booking booking = createBooking(entity);
             return Optional.of(booking);
         }

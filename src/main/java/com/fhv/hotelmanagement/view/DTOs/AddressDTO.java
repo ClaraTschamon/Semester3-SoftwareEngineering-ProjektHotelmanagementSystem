@@ -6,7 +6,6 @@ public class AddressDTO {
     private String postalCode;
     private String city;
     private String country;
-    private boolean billingAddressEqualsCustomerAddress = true;
 
     public AddressDTO() {}
 
@@ -56,13 +55,5 @@ public class AddressDTO {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public boolean isBillingAddressEqualsCustomerAddress() {
-        return billingAddressEqualsCustomerAddress;
-    }
-
-    public void setBillingAddressEqualsCustomerAddress(boolean billingAddressEqualsCustomerAddress) {
-        this.billingAddressEqualsCustomerAddress = billingAddressEqualsCustomerAddress;
     }
 }

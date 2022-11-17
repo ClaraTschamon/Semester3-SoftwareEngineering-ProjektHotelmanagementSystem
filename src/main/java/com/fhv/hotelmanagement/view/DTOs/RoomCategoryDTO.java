@@ -27,15 +27,10 @@ public class RoomCategoryDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (o.equals(this)) {
-            return true;
-        }
-        if (!(o instanceof RoomCategoryDTO)) {
-            return false;
-        } else {
-            RoomCategoryDTO roomCategoryDTO = (RoomCategoryDTO) o;
-            return (roomCategoryDTO.getName().equals(name)) &&
-                    (roomCategoryDTO.getPricePerNight().equals(pricePerNight));
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoomCategoryDTO roomCategoryDTO = (RoomCategoryDTO) o;
+        return (roomCategoryDTO.getName().equals(name)) &&
+                (roomCategoryDTO.getPricePerNight().equals(pricePerNight));
     }
 }

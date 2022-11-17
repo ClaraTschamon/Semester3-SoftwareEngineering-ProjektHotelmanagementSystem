@@ -140,10 +140,5 @@ public class PersistenceFacade{
         LocalDate minDate = LocalDate.of(2022, 11, 12);
         LocalDate maxDate = LocalDate.now();
         ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
-
-        for(BookedRoom room : bookedRooms){
-            System.out.println("nummer: " + room.getRoom().getNumber());
-        }
-
     }
 }
