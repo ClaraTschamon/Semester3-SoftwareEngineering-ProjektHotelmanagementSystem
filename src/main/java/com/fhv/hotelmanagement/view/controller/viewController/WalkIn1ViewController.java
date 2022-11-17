@@ -2,9 +2,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
-import com.fhv.hotelmanagement.persistence.dataMapper.RoomDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -27,8 +25,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
@@ -51,17 +51,6 @@ public class WalkIn1ViewController implements Initializable {
     public Text counterSuite;
     @FXML
     public AnchorPane contentPane;
-    @FXML
-    CheckComboBox<Integer> singleRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> doubleRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> familyRoomDropDown;
-
-    @FXML
-    CheckComboBox<Integer> suiteDropDown;
 
     @FXML
     private Text chooseRoom;
@@ -73,6 +62,12 @@ public class WalkIn1ViewController implements Initializable {
 
     @FXML
     private ComboBox roomPriceDropDown;
+
+    private CheckComboBox<RoomDTO> singleRoomDropDown;
+    private CheckComboBox<RoomDTO> doubleRoomDropDown;
+    private CheckComboBox<RoomDTO> familyRoomDropDown;
+    private CheckComboBox<RoomDTO> suiteDropDown;
+
 
     private WalkInViewController viewController;
 
@@ -100,13 +95,25 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     protected void fillData(){
+
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
-        LocalDate departureDate = bookingDTO.getDepartureDate();
-        departureDatePicker.setValue(departureDate);
+        if(bookingDTO.getDepartureDate() != null){
+            LocalDate departureDate = bookingDTO.getDepartureDate();
+            departureDatePicker.setValue(departureDate.plusDays(1));
+        }
+        else{
+            LocalDate defaultDepartureDate = LocalDate.now().plusDays(1);
+            departureDatePicker.setValue(defaultDepartureDate);
+        }
 
         //fill all package radio buttons
         BoardDTO packageDTO = viewController.getUseCaseController().getPackage();
+
+//        if(!packageDTO.isFullboard()){
+//
+//        }
+
         boolean fullboard = packageDTO.isFullboard();
         fullBoard.setSelected(fullboard);
         boolean halfboard = packageDTO.isHalfboard();
@@ -130,8 +137,11 @@ public class WalkIn1ViewController implements Initializable {
         //fill all roomno
 //        int roomno =roomDTO.getNumber();
         //fill room price
-        String roomPrice = roomDTO.getRoomPrice();
-        roomPriceDropDown.setValue(roomPrice);
+
+        if(roomDTO.getRoomPrice()!=null){
+            String roomPrice = roomDTO.getRoomPrice();
+            roomPriceDropDown.setValue(roomPrice);
+        }
 
         System.out.println(roomPriceDropDown.getEditor().getText());
     }
@@ -154,8 +164,46 @@ public class WalkIn1ViewController implements Initializable {
         roomDTO.setCounterFamilyRoom(Integer.parseInt(counterFamilyRoom.getText()));
         roomDTO.setCounterSuite(Integer.parseInt(counterSuite.getText()));
 
-        //save all roomno
+        ArrayList<RoomDTO> bookedSingleRooms = new ArrayList<>(singleRoomDropDown.getCheckModel().getCheckedItems());
+        ArrayList<RoomDTO> bookedDoubleRooms = new ArrayList<>(doubleRoomDropDown.getCheckModel().getCheckedItems());
+        ArrayList<RoomDTO> bookedFamilyRooms = new ArrayList<>(familyRoomDropDown.getCheckModel().getCheckedItems());
+        ArrayList<RoomDTO> bookedSuites = new ArrayList<>(suiteDropDown.getCheckModel().getCheckedItems());
 
+        //save all roomno
+        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
+        for (RoomDTO r : bookedSingleRooms) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        for (RoomDTO r : bookedDoubleRooms) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        for (RoomDTO r : bookedFamilyRooms) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        for (RoomDTO r : bookedSuites) {
+            bookedRooms.add(new BookedRoomDTO(bookingDTO, r, bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate()));
+        }
+        bookingDTO.setBookedRooms(bookedRooms);
+
+        HashMap<String, RoomCategoryDTO> roomCategories = MainApplication.getDomainManager().getAllRoomCategoryDTOs();
+        ArrayList<BookedRoomCategoryDTO> bookedRoomCategories = new ArrayList<>();
+        if (bookedSingleRooms.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Einzelzimmer");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        if (bookedDoubleRooms.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Doppelzimmer");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        if (bookedFamilyRooms.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Familienzimmer");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        if (bookedSuites.size() > 0) {
+            RoomCategoryDTO roomCategoryDTO = roomCategories.get("Suite");
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+        }
+        bookingDTO.setBookedRoomCategories(bookedRoomCategories);
 
         //save all room prices
         roomDTO.setRoomPrice((String) roomPriceDropDown.getSelectionModel().getSelectedItem());
@@ -164,15 +212,17 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRooms();
-        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRooms();
+
+        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
+        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
 
         RoomProvider roomProvider = new RoomProvider(allRooms, allBookedRooms);
 
-        final CheckComboBox<RoomDTO> singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
-        final CheckComboBox<RoomDTO> doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
-        final CheckComboBox<RoomDTO> familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
-        final CheckComboBox<RoomDTO> suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
+        singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
+        doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
+        familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
+        suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
+
 
         singleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
             @Override
@@ -239,13 +289,11 @@ public class WalkIn1ViewController implements Initializable {
 class RoomProvider{
 
     private ArrayList<RoomDTO> allRooms;
-    private ArrayList<BookedRoomDTO> allBookedRooms; //darf ich das in den roomprovider???
-
-    private ArrayList<BookedRoomDTO> freeBookedRooms;
+    public ArrayList<BookedRoomDTO> allBookedRooms;
 
     private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
     private LocalDate maxDate = LocalDate.now();
-
+    private ArrayList<BookedRoomDTO> freeBookedRooms = getCheckoutDateToday(maxDate);
 
 
     public RoomProvider(ArrayList<RoomDTO> allRooms, ArrayList<BookedRoomDTO> allBookedRooms){
@@ -306,23 +354,20 @@ class RoomProvider{
         }
         return bookedRooms;
     }
-
-
 }
 
 
 
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
-
-    //javax.swing.ImageIcon icon = new ImageIcon("resources/Broom.png");
-
     RoomProvider provider;
+
     public RoomNumberConverter(RoomProvider provider){
         this.provider = provider;
     }
+
     @Override
     public RoomDTO fromString(final String number) {
-        return provider.getRoomFromNumber(Integer.valueOf(number));
+        return provider.getRoomFromNumber(Integer.parseInt(number));
     }
 
     @Override
@@ -332,7 +377,7 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         }
 
         if(!room.getIsClean()){
-            return String.valueOf(room.getNumber() + " not clean!");
+            return String.valueOf(room.getNumber() + " " + "\u2757"); //TODO: warum wird raum 13 nicht angezeigt??
         }
         return String.valueOf(room.getNumber());
     }

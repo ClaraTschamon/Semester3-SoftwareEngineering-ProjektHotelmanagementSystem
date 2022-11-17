@@ -1,13 +1,14 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.view.controller.useCaseController.WalkInUseCaseController;
 import javafx.fxml.FXMLLoader;
+import com.fhv.hotelmanagement.view.controller.useCaseController.*;
 
 import java.io.IOException;
 
 public class WalkInViewController {
     private WalkInUseCaseController useCaseController;
+
 
     public WalkInViewController() {
         try {

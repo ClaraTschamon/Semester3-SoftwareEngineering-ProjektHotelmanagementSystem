@@ -21,15 +21,31 @@ public class BookedRoomDTO {
         return booking;
     }
 
+    public void setBooking(BookingDTO booking) {
+        this.booking = booking;
+    }
+
     public RoomDTO getRoom() {
         return room;
+    }
+
+    public void setRoom(RoomDTO room) {
+        this.room = room;
     }
 
     public LocalDate getFromDate() {
         return fromDate;
     }
 
+    public void setFromDate(LocalDate fromDate) {
+        this.fromDate = fromDate;
+    }
+
     public LocalDate getToDate() {
         return toDate;
+    }
+
+    public void setToDate(LocalDate toDate) {
+        this.toDate = toDate;
     }
 }

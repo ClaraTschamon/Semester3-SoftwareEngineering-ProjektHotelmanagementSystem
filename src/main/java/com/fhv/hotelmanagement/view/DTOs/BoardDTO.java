@@ -5,12 +5,17 @@ import java.math.BigDecimal;
 public class BoardDTO {
     private String name;
     private BigDecimal pricePerNight;
-    private boolean fullboard;
+    private boolean fullboard = true;
     private boolean halfboard;
     private boolean onlyBreakfast;
     private boolean noPackage;
 
     public BoardDTO(){}
+
+    public BoardDTO(String name, BigDecimal pricePerNight){
+        this.name = name;
+        this.pricePerNight = pricePerNight;
+    }
 
     public String getName() {
         return name;
@@ -58,5 +63,19 @@ public class BoardDTO {
 
     public void setOnlyBreakfast(boolean onlyBreakfast) {
         this.onlyBreakfast = onlyBreakfast;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.equals(this)) {
+            return true;
+        }
+        if (!(o instanceof BoardDTO)) {
+            return false;
+        } else {
+            BoardDTO boardDTO = (BoardDTO) o;
+            return (boardDTO.getName().equals(name)) &&
+                    (boardDTO.getPricePerNight().equals(pricePerNight));
+        }
     }
 }

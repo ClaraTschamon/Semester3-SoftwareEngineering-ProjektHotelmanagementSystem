@@ -1,22 +1,15 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
-//TODO: Preis pro Nacht fehlt
 public class Room {
-    private int number;
-
-    private Boolean isFree;
-
-    private Boolean isClean;
+    private Integer number;
     private RoomCategory category;
 
-    public Room(int number, boolean isFree, boolean isClean, RoomCategory category) {
+    public Room(Integer number, RoomCategory category) {
         this.number = number;
-        this.isFree = isFree;
-        this.isClean = isClean;
         this.category = category;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
@@ -24,11 +17,4 @@ public class Room {
         return category;
     }
 
-    public boolean getIsFree(){
-        return  isFree;
-    }
-
-    public boolean getIsClean(){
-        return isClean;
-    }
 }

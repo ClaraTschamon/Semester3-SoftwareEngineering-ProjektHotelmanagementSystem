@@ -11,8 +11,9 @@ import java.util.Set;
 public class CustomerEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_number")
-    private int number;
+    private Long number;
 
     @Column(name = "customer_first_name")
     private String firstName;
@@ -59,7 +60,7 @@ public class CustomerEntity {
 
     public CustomerEntity() {}
 
-    public CustomerEntity(int number, String firstName, String lastName,
+    public CustomerEntity(Long number, String firstName, String lastName,
                           LocalDate dateOfBirth, String nationality, String phoneNumber,
                           String email, String street, String houseNumber, String postalCode,
                           String city, String country, Boolean saved,
@@ -80,15 +81,9 @@ public class CustomerEntity {
         this.bookings = bookings;
     }
 
-
-    public int getNumber() {
+    public Long getNumber() {
         return number;
     }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
 
     public String getFirstName() {
         return firstName;

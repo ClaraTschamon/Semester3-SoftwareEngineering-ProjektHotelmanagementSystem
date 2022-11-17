@@ -3,7 +3,8 @@ package com.fhv.hotelmanagement.view.DTOs;
 import java.time.LocalDate;
 
 public class CustomerDTO {
-    private Integer number;
+
+    private Long number;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -17,7 +18,7 @@ public class CustomerDTO {
         this.address = new AddressDTO();
     }
 
-    public CustomerDTO(Integer number, String firstName, String lastName, LocalDate dateOfBirth,
+    public CustomerDTO(Long number, String firstName, String lastName, LocalDate dateOfBirth,
                        String nationality, String phoneNumber, String email, AddressDTO address,
                        Boolean saved) {
         this.number = number;
@@ -31,12 +32,14 @@ public class CustomerDTO {
         this.saved = saved;
     }
 
-    public Integer getNumber() {
-        return number;
+    public CustomerDTO(String firstName, String lastName, LocalDate dateOfBirth,
+                       String nationality, String phoneNumber, String email, AddressDTO address,
+                       Boolean saved) {
+        this(null, firstName, lastName, dateOfBirth, nationality, phoneNumber, email, address, saved);
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public Long getNumber() {
+        return number;
     }
 
     public String getFirstName() {

@@ -42,12 +42,11 @@ public class RoomDataMapper {
     }
 
     protected static RoomEntity createRoomEntity(Room room) {
-        return new RoomEntity(room.getNumber(), room.getIsFree(), room.getIsClean(),
+        return new RoomEntity(room.getNumber(),
                 RoomCategoryDataMapper.createRoomCategoryEntity(room.getCategory()));
     }
 
     protected static Room createRoom(RoomEntity roomEntity) {
-        return new Room(roomEntity.getNumber(), roomEntity.getIsFree(), roomEntity.getIsFree(),
-                RoomCategoryDataMapper.createRoomCategory(roomEntity.getCategory()));
+        return new Room(roomEntity.getNumber(), RoomCategoryDataMapper.createRoomCategory(roomEntity.getCategory()));
     }
 }

@@ -1,12 +1,13 @@
 package com.fhv.hotelmanagement.view.DTOs;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BookingDTO {
-    private Integer number;
+
+    private Long number;
     private CustomerDTO customer;
     private LocalDate arrivalDate;
     private LocalDateTime checkInDatetime;
@@ -17,18 +18,20 @@ public class BookingDTO {
     private String creditCardNumber;
     private String expirationDate;
     private String authorisationNumber;
+    private BoardDTO board;
+    private BigDecimal pricePerNightForBoard;
     private String comment;
     private ArrayList<BookedRoomCategoryDTO> bookedRoomCategories;
     private ArrayList<BookedRoomDTO> bookedRooms;
 
-    public BookingDTO() {}
+    public BookingDTO() { this.billingAddress = new AddressDTO();}
 
-    public BookingDTO(Integer number, CustomerDTO customer, LocalDate arrivalDate,
+    public BookingDTO(Long number, CustomerDTO customer, LocalDate arrivalDate,
                       LocalDateTime checkInDatetime, LocalDate departureDate,
                       LocalDateTime checkOutDatetime, AddressDTO billingAddress,
                       String paymentMethod, String creditCardNumber, String expirationDate,
-                      String authorisationNumber, String comment,
-                      ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard,
+                      String comment, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
                       ArrayList<BookedRoomDTO> bookedRooms) {
         this.number = number;
         this.customer = customer;
@@ -41,17 +44,25 @@ public class BookingDTO {
         this.creditCardNumber = creditCardNumber;
         this.expirationDate = expirationDate;
         this.authorisationNumber = authorisationNumber;
+        this.board = board;
+        this.pricePerNightForBoard = pricePerNightForBoard;
         this.comment = comment;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
 
-    public Integer getNumber() {
-        return number;
+    public BookingDTO(CustomerDTO customer, LocalDate arrivalDate,
+                      LocalDateTime checkInDatetime, LocalDate departureDate,
+                      LocalDateTime checkOutDatetime, AddressDTO billingAddress,
+                      String paymentMethod, String creditCardNumber, String expirationDate,
+                      String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard,
+                      String comment, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      ArrayList<BookedRoomDTO> bookedRooms) {
+        this(null, customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingAddress, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,comment, bookedRoomCategories,bookedRooms);
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public Long getNumber() {
+        return number;
     }
 
     public CustomerDTO getCustomer() {
@@ -124,6 +135,18 @@ public class BookingDTO {
 
     public void setAuthorisationNumber(String authorisationNumber) {
         this.authorisationNumber = authorisationNumber;
+    }
+
+    public BoardDTO getBoard() {
+        return board;
+    }
+
+    public BigDecimal getPricePerNightForBoard() {
+        return pricePerNightForBoard;
+    }
+
+    public void setPricePerNightForBoard(BigDecimal pricePerNightForBoard) {
+        this.pricePerNightForBoard = pricePerNightForBoard;
     }
 
     public String getComment() {

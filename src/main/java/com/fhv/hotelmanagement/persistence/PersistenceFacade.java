@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Persistence;
 
 import java.lang.reflect.Array;
@@ -82,24 +83,51 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-        PersistenceFacade pf = new PersistenceFacade();
-
-        Customer clara = new Customer(4, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
+        /*
+        Customer clara = new Customer("Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
                 "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
                 "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
         CustomerDataMapper.instance().insert(clara);
+        */
+
+//        ArrayList<Room> rooms = RoomDataMapper.getAll();
+//        ArrayList<RoomCategory> categories = RoomCategoryDataMapper.getAll();
+//
+//        ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
+//        Board board = new Board("Vollpension", new BigDecimal(30));
+//        ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
+//        Booking booking = new Booking(clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
+//                null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
+//                clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
+//                "this is a comment", "Bar", "12435226", "02/24",
+//                "123", board, new BigDecimal(30), bookedRoomCategories, bookedRooms);
+//        BookingDataMapper.instance().insert(booking);
+//
+//        System.out.println(getCustomer(10).get().getFirstName());
+
+        /*
+        PersistenceFacade pf = new PersistenceFacade();
+
+        Customer clara = new Customer(null, "Clara", "Tschamon", LocalDate.of(2001, Month.JANUARY, 16),
+                "Austria", "0664/39422894028", "clara.tsch@gmfai.com",
+                "Hummelweg", "36", "6710", "Nenzing", "Austria", true, new ArrayList<>());
+        CustomerDataMapper.instance().insert(clara);
+
         System.out.println(getCustomer(4).get().getFirstName());
 
         ArrayList<Room> rooms = RoomDataMapper.getAll();
         ArrayList<RoomCategory> categories = RoomCategoryDataMapper.getAll();
 
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
+        Board board = new Board("Vollpension", new BigDecimal(30));
+
+
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
-        Booking booking = new Booking(104, clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
+        Booking booking = new Booking(106L, clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
                 null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
                 clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
                 "this is a comment", "Bar", "12435226", "02/24",
-                "123", bookedRoomCategories, bookedRooms);
+                "123", board, new BigDecimal(30), bookedRoomCategories, bookedRooms);
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(0), BigDecimal.valueOf(50), 2));
         bookedRoomCategories.add(new BookedRoomCategory(booking, categories.get(1), BigDecimal.valueOf(75), 1));
         bookedRooms.add(new BookedRoom(booking, rooms.get(0), booking.getArrivalDate(), booking.getDepartureDate()));
@@ -113,6 +141,17 @@ public class PersistenceFacade{
         System.out.println(getBooking(104).get().getCustomer().getFirstName());
         for (BookedRoomCategory c : getBooking(104).get().getBookedRoomCategories()) {
             System.out.println(c.getRoomCategory().getName());
+        }
+
+        //hartkodiert customer und statt nummer einfach null zum ausprobieren von
+        */
+
+        LocalDate minDate = LocalDate.of(2022, 11, 12);
+        LocalDate maxDate = LocalDate.now();
+        ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
+
+        for(BookedRoom room : bookedRooms){
+            System.out.println("nummer: " + room.getRoom().getNumber());
         }
 
     }
