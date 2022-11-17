@@ -1,24 +1,28 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class WalkIn2ViewController {
+public class WalkIn2ViewController implements Initializable {
     //TODO: Tabulator automatisch auf Vorname setzen
 
     private static int number;
 
     @FXML
-    private DatePicker birthday;
+    private DatePicker birthdayDatePicker;
     @FXML
     private TextField countryTextField;
     @FXML
@@ -28,7 +32,7 @@ public class WalkIn2ViewController {
     @FXML
     private TextField lastName;
     @FXML
-    private TextField nationality;
+    private ComboBox nationalityComboBox;
     @FXML
     private TextField phoneNumber;
     @FXML
@@ -45,7 +49,8 @@ public class WalkIn2ViewController {
     private ComboBox<String> paymentMethod;
     @FXML
     private TextField creditCardNumber;
-    @FXML TextField verfuegernummer;
+    @FXML
+    private TextField verfuegernummer;
     @FXML
     private TextField billingCity;
     @FXML
@@ -63,7 +68,7 @@ public class WalkIn2ViewController {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         customer.setFirstName(firstName.getText());
         customer.setLastName(lastName.getText());
-        customer.setNationality(nationality.getText());
+        customer.setNationality(nationalityComboBox.getSelectionModel().getSelectedItem().toString());
         customer.setPhoneNumber(phoneNumber.getText());
         customer.setEmail(email.getText());
         customer.getAddress().setStreet(street.getText());
@@ -71,7 +76,7 @@ public class WalkIn2ViewController {
         customer.getAddress().setHouseNumber(houseNumber.getText());
         customer.getAddress().setPostalCode(postalCode.getText());
         customer.getAddress().setCountry(countryTextField.getText());
-        customer.setDateOfBirth(birthday.getValue());
+        customer.setDateOfBirth(birthdayDatePicker.getValue());
         viewController.loadWalkIn3();
     }
 
@@ -81,8 +86,12 @@ public class WalkIn2ViewController {
         firstName.setText(firstname1);
         String lastname1=customer.getLastName();
         lastName.setText(lastname1);
+
         String nationality1= customer.getNationality();
-        nationality.setText(nationality1);
+        if(nationality1 != null){
+            nationalityComboBox.setValue(nationality1);
+        }
+
         String phonenumber1 =customer.getPhoneNumber();
         phoneNumber.setText(phonenumber1);
         String email1 =customer.getEmail();
@@ -95,10 +104,13 @@ public class WalkIn2ViewController {
         houseNumber.setText(housenumber1);
         String postalcode1=customer.getAddress().getPostalCode();
         postalCode.setText(postalcode1);
+
         String country1 = customer.getAddress().getCountry();
         countryTextField.setText(country1);
+
         LocalDate birthday1 = customer.getDateOfBirth();
-        birthday.setValue(birthday1);
+        birthdayDatePicker.setValue(birthday1);
+
     }
 
     @FXML
@@ -135,7 +147,7 @@ public class WalkIn2ViewController {
     private boolean validate() throws IOException {
         String textfieldFirstName = firstName.getText();
         String textfieldLastName = lastName.getText();
-        String textfieldNationality = nationality.getText();
+        String comboboxNationality = nationalityComboBox.getSelectionModel().getSelectedItem().toString();
         String textfieldPhoneNumber = phoneNumber.getText();
         String textfieldEmail = email.getText();
         String textfieldStreet = street.getText();
@@ -172,17 +184,17 @@ public class WalkIn2ViewController {
             lastName.setStyle("-fx-text-inner-color: red");
             lastName.setText("inkorrekte Eingabe");
         }
-
-        if (!textfieldNationality.isEmpty() && textfieldNationality.matches("[a-zA-ZäÄöÖüÜß]*")) {
+/*
+        if (!comboboxNationality.isEmpty() && comboboxNationality.matches("[a-zA-ZäÄöÖüÜß]*")) {
             nationalityIsValid = true;
-        } else if(textfieldNationality.isEmpty()) {
-            nationality.setStyle("-fx-text-inner-color: red");
-            nationality.setText("Pflichtfeld");
-        } else if(!textfieldNationality.matches("[a-zA-ZäÄöÖüÜß]*")) {
-            nationality.setStyle("-fx-text-inner-color: red");
-            nationality.setText("inkorrekte Eingabe");
+        } else if(comboboxNationality.isEmpty()) {
+            nationalityComboBox.setStyle("-fx-text-inner-color: red");
+            nationalityComboBox.setText("Pflichtfeld");
+        } else if(!comboboxNationality.matches("[a-zA-ZäÄöÖüÜß]*")) {
+            nationalityComboBox.setStyle("-fx-text-inner-color: red");
+            nationalityComboBox.setText("inkorrekte Eingabe");
         }
-
+*/
         if (!textfieldPhoneNumber.isEmpty() && textfieldPhoneNumber.matches("[0-9]{7,15}")) {
             phoneNumberIsValid = true;
         } else if(textfieldPhoneNumber.isEmpty()) {
@@ -252,4 +264,54 @@ public class WalkIn2ViewController {
         }
         return false;
     }
+
+    public void initialize(URL location, ResourceBundle resources) {
+
+        ArrayList<String> items = new ArrayList<>();
+        items.add("Afrika");
+        items.add("Asien");
+        items.add("Australien");
+        items.add("Belgien");
+        items.add("Bulgarien");
+        items.add("Dänemark");
+        items.add("Deutschland");
+        items.add("Estland");
+        items.add("Finnland");
+        items.add("Frankreich");
+        items.add("Griechenland");
+        items.add("Irland");
+        items.add("Italien");
+        items.add("Kroatien");
+        items.add("Lettland");
+        items.add("Lichtenstein");
+        items.add("Luxemburg");
+        items.add("Malta");
+        items.add("Mittelamerika");
+        items.add("Niederlande");
+        items.add("Nordamerika");
+        items.add("Österreich");
+        items.add("Polen");
+        items.add("Portugal");
+        items.add("Rumänien");
+        items.add("Schweden");
+        items.add("Schweiz");
+        items.add("Slowakei");
+        items.add("Spanien");
+        items.add("Südamerika");
+        items.add("Tschechien");
+        items.add("Ungarn");
+        items.add("Zypern");
+
+        ObservableList<String> countries = FXCollections.observableArrayList(items);
+        nationalityComboBox.getItems().addAll(countries);
+
+        nationalityComboBox.getSelectionModel().select(21);
+
+        nationalityComboBox.setOnAction(event -> {
+            String data = nationalityComboBox.getSelectionModel().getSelectedItem().toString();
+        });
+
+
+
+}
 }
