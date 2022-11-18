@@ -141,6 +141,10 @@ public class BookingDTO {
         return board;
     }
 
+    public void setBoard(BoardDTO board) {
+        this.board = board;
+    }
+
     public BigDecimal getPricePerNightForBoard() {
         return pricePerNightForBoard;
     }

@@ -53,7 +53,7 @@ public class DomainTranslator {
     }
 
     protected static RoomDTO translateRoom(Room room) {
-        return new RoomDTO(room.getNumber(), room.getIsFree(), room.getIsClean(),
+        return new RoomDTO(room.getNumber(), room.isFree(), true, //TODO when implementing clean
                 translateRoomCategory(room.getCategory()));
     }
 
