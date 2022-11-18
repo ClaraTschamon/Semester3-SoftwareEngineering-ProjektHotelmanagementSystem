@@ -120,7 +120,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-            <TextField fx:id="street1" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
+            <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
             <Text layoutX="545.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
                <font>
                   <Font size="14.0" />
@@ -131,7 +131,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <DatePicker layoutX="60.0" layoutY="440.0" prefHeight="40.0" prefWidth="300.0" />
+            <DatePicker fx:id="birthdayDatePicker" layoutX="60.0" layoutY="440.0" prefHeight="40.0" prefWidth="300.0" />
             <ComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
             <CheckBox layoutX="545.0" layoutY="557.0" mnemonicParsing="false" selected="true" text="Gast speichern" />
             </children></AnchorPane>
