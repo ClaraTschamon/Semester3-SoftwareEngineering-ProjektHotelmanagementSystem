@@ -45,12 +45,13 @@ public class BookedRoomDataMapper {
         Date maximumDate = Date.valueOf(maxDate);
         ArrayList<BookedRoomEntity> entities;
 
-        entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
-                "SELECT bookedRoom FROM BookedRoomEntity bookedRoom WHERE bookedRoom.fromDate >=: minimumDate " +
-                        "AND bookedRoom.toDate <=: maximumDate").setParameter("minimumDate", minDate
-        ).setParameter("maximumDate", maxDate).getResultList();
 
-        System.out.println(entities);
+        entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
+                        "SELECT bookedRoom FROM BookedRoomEntity bookedRoom " +
+                                "WHERE (bookedRoom.fromDate < :minimumDate AND :minimumDate <= bookedRoom.toDate) " +
+                                "OR (:minimumDate <= bookedRoom.fromDate AND bookedRoom.fromDate <= :maximumDate)")
+                .setParameter("minimumDate", minDate)
+                .setParameter("maximumDate", maxDate).getResultList();
 
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
         for(BookedRoomEntity e : entities){

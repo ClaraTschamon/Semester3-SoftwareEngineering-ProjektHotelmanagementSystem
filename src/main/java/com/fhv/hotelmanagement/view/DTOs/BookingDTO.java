@@ -51,6 +51,16 @@ public class BookingDTO {
         this.bookedRooms = bookedRooms;
     }
 
+    public BookingDTO(CustomerDTO customer, LocalDate arrivalDate,
+                      LocalDateTime checkInDatetime, LocalDate departureDate,
+                      LocalDateTime checkOutDatetime, AddressDTO billingAddress,
+                      String paymentMethod, String creditCardNumber, String expirationDate,
+                      String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard,
+                      String comment, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      ArrayList<BookedRoomDTO> bookedRooms) {
+        this(null, customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingAddress, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,comment, bookedRoomCategories,bookedRooms);
+    }
+
     public Long getNumber() {
         return number;
     }
@@ -129,6 +139,10 @@ public class BookingDTO {
 
     public BoardDTO getBoard() {
         return board;
+    }
+
+    public void setBoard(BoardDTO board) {
+        this.board = board;
     }
 
     public BigDecimal getPricePerNightForBoard() {

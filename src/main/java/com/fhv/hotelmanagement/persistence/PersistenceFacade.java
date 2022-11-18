@@ -43,8 +43,8 @@ public class PersistenceFacade{
         return BookingDataMapper.instance().get(id);
     }
 
-    public static void insertBooking(Booking booking) {
-        BookingDataMapper.instance().insert(booking);
+    public static Long insertBooking(Booking booking) {
+        return BookingDataMapper.instance().insert(booking);
     }
 
     public static void storeBooking(Booking booking) {
@@ -56,8 +56,8 @@ public class PersistenceFacade{
         return CustomerDataMapper.instance().get(id);
     }
 
-    public static void insertCustomer(Customer customer) {
-        CustomerDataMapper.instance().insert(customer);
+    public static Long insertCustomer(Customer customer) {
+        return CustomerDataMapper.instance().insert(customer);
     }
 
     public static void storeCustomer(Customer customer) {
@@ -81,6 +81,10 @@ public class PersistenceFacade{
         return BookedRoomDataMapper.getAll();
     }
 
+    public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
+        return BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
+    }
+
     public static void main(String[] args) {
 
         /*
@@ -90,6 +94,19 @@ public class PersistenceFacade{
         CustomerDataMapper.instance().insert(clara);
         */
 
+//        ArrayList<Room> rooms = RoomDataMapper.getAll();
+//        ArrayList<RoomCategory> categories = RoomCategoryDataMapper.getAll();
+//
+//        ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
+//        Board board = new Board("Vollpension", new BigDecimal(30));
+//        ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
+//        Booking booking = new Booking(clara, LocalDate.now(), LocalDateTime.now(), LocalDate.now().plusDays(5),
+//                null, clara.getAddress().getStreet(), clara.getAddress().getHouseNumber(),
+//                clara.getAddress().getPostalCode(), clara.getAddress().getCity(), clara.getAddress().getCountry(),
+//                "this is a comment", "Bar", "12435226", "02/24",
+//                "123", board, new BigDecimal(30), bookedRoomCategories, bookedRooms);
+//        BookingDataMapper.instance().insert(booking);
+//
 //        System.out.println(getCustomer(10).get().getFirstName());
 
         /*
@@ -136,10 +153,5 @@ public class PersistenceFacade{
         LocalDate minDate = LocalDate.of(2022, 11, 12);
         LocalDate maxDate = LocalDate.now();
         ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
-
-        for(BookedRoom room : bookedRooms){
-            System.out.println("nummer: " + room.getRoom().getNumber());
-        }
-
     }
 }

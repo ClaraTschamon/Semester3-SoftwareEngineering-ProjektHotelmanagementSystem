@@ -32,8 +32,18 @@ public class CustomerDTO {
         this.saved = saved;
     }
 
+    public CustomerDTO(String firstName, String lastName, LocalDate dateOfBirth,
+                       String nationality, String phoneNumber, String email, AddressDTO address,
+                       Boolean saved) {
+        this(null, firstName, lastName, dateOfBirth, nationality, phoneNumber, email, address, saved);
+    }
+
     public Long getNumber() {
         return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public String getFirstName() {

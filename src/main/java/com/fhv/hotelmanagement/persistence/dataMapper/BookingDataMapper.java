@@ -21,9 +21,6 @@ public class BookingDataMapper {
     public Optional<Booking> get(final int number){
         BookingEntity entity = PersistenceFacade.instance().entityManager.find(BookingEntity.class, number);
         if(entity != null){
-            for (BookedRoomCategoryEntity e : entity.getBookedRoomCategories()) { //debug
-                System.out.println(e.getRoomCategory() + " " + e.getAmount());
-            }
             Booking booking = createBooking(entity);
             return Optional.of(booking);
         }
@@ -31,10 +28,10 @@ public class BookingDataMapper {
     }
 
     //create
-    public void insert(Booking booking){
-        var entityManager = PersistenceFacade.instance().entityManager;
+    public Long insert(Booking booking) {
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()),
                 BoardDataMapper.createBoardEntity(booking.getBoard()));
+        var entityManager = PersistenceFacade.instance().entityManager;
 
         entityManager.getTransaction().begin();
         entityManager.persist(bookingEntity);
@@ -46,6 +43,8 @@ public class BookingDataMapper {
         for (BookedRoom r : booking.getBookedRooms()) {
             BookedRoomDataMapper.instance().insert(r);
         }
+
+        return bookingEntity.getNumber();
     }
 
     //update
@@ -89,7 +88,7 @@ public class BookingDataMapper {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
 
-        Booking booking = new Booking(bookingEntity.getNumber(), CustomerDataMapper.createCustomer(bookingEntity.getCustomer()),
+        Booking booking = new Booking(CustomerDataMapper.createCustomer(bookingEntity.getCustomer()),
                 bookingEntity.getArrivalDate(), bookingEntity.getCheckInDatetime(), bookingEntity.getDepartureDate(),
                 bookingEntity.getCheckOutDatetime(), bookingEntity.getBillingStreet(), bookingEntity.getBillingHouseNumber(),
                 bookingEntity.getBillingPostalCode(), bookingEntity.getBillingCity(), bookingEntity.getBillingCountry(),
