@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import java.io.IOException;
 
 public class WalkIn3ViewController {
-
     @FXML
     private TextField billingCountryTextField;
     @FXML
