@@ -37,11 +37,11 @@
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Button layoutX="20.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
+                <Button layoutX="20.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Bestätigen" textFill="WHITE">
+                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Bestätigen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font></Button>
