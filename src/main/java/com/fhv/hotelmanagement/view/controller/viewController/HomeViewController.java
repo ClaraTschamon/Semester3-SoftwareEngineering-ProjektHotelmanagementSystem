@@ -13,4 +13,10 @@ public class HomeViewController {
     private void onWalkInClicked(ActionEvent e) throws IOException {
         WalkInViewController walkInViewControllerController = new WalkInViewController();
     }
+
+    @FXML
+    private void onCheckOutClicked(ActionEvent e) throws IOException{
+        CheckOutViewController checkOutViewController = new CheckOutViewController();
+
+    }
 }
