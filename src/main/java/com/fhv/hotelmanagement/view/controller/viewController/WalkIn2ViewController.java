@@ -76,6 +76,7 @@ public class WalkIn2ViewController implements Initializable {
         customer.getAddress().setHouseNumber(houseNumber.getText());
         customer.getAddress().setPostalCode(postalCode.getText());
         customer.getAddress().setCountry(countryTextField.getText());
+
         customer.setDateOfBirth(birthdayDatePicker.getValue());
         viewController.loadWalkIn3();
     }
