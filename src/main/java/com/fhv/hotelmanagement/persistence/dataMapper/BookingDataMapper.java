@@ -37,13 +37,12 @@ public class BookingDataMapper {
         entityManager.persist(bookingEntity);
         entityManager.getTransaction().commit();
 
-        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
-            BookedRoomCategoryDataMapper.instance().insert(c);
-        }
-        for (BookedRoom r : booking.getBookedRooms()) {
-            BookedRoomDataMapper.instance().insert(r);
-        }
-
+//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
+//            BookedRoomCategoryDataMapper.instance().insert(c);
+//        }
+//        for (BookedRoom r : booking.getBookedRooms()) {
+//            BookedRoomDataMapper.instance().insert(r);
+//        }
         return bookingEntity.getNumber();
     }
 

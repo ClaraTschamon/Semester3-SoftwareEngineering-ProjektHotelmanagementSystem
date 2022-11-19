@@ -40,7 +40,7 @@ CREATE TABLE customer(
 
 CREATE TABLE booking(
     booking_number LONG PRIMARY KEY AUTO_INCREMENT,
-    customer_number INTEGER,
+    customer_number INTEGER AUTO_INCREMENT,
     FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
     arrival_date DATE,
     check_in_datetime DATETIME, //Zeitstempel wann man eingecheckt hat
@@ -62,7 +62,7 @@ CREATE TABLE booking(
 );
 
 CREATE TABLE booked_room(
-    booking_number INTEGER,
+    booking_number INTEGER AUTO_INCREMENT,
     FOREIGN KEY(booking_number) REFERENCES booking(booking_number),
     room_number INTEGER NOT NULL,
     FOREIGN KEY(room_number) REFERENCES room(room_number),
@@ -71,7 +71,7 @@ CREATE TABLE booked_room(
 );
 
 CREATE TABLE booked_room_category(
-    booking_number INTEGER,
+    booking_number INTEGER AUTO_INCREMENT,
     FOREIGN KEY (booking_number) REFERENCES booking(booking_number),
     room_category_name VARCHAR(255),
     FOREIGN KEY (room_category_name) REFERENCES room_category(room_category_name),

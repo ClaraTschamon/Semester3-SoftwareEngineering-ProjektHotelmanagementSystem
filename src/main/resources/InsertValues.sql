@@ -123,14 +123,14 @@ INSERT INTO booking(ARRIVAL_DATE, check_in_datetime, departure_date, check_out_d
 VALUES (CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Vollpension', 30);
 
 
-INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 12, DATE '2022-11-11',  CURRENT_DATE);
+INSERT INTO BOOKED_ROOM(room_number, from_date, to_date)
+VALUES (12, DATE '2022-11-11',  CURRENT_DATE);
 
-INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 16, DATE '2022-11-10',  CURRENT_DATE);
+INSERT INTO BOOKED_ROOM(room_number, from_date, to_date)
+VALUES (16, DATE '2022-11-10',  CURRENT_DATE);
 
-INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 21, DATE '2022-11-10',  DATE '2023-06-07');
+INSERT INTO BOOKED_ROOM(room_number, from_date, to_date)
+VALUES (21, DATE '2022-11-10',  DATE '2023-06-07');
 
 
 
