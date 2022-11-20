@@ -1,11 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.persistence.PersistenceFacade;
-import com.fhv.hotelmanagement.persistence.dataMapper.BookedRoomDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.*;
-import com.fhv.hotelmanagement.view.controller.useCaseController.WalkInUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -13,21 +9,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
 //import javax.swing.*;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -70,12 +63,103 @@ public class WalkIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
     private CheckComboBox<RoomDTO> suiteDropDown;
-
-
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
+    }
+
+    public boolean validate() {
+
+        RadioButton selectedBoardButton =  (RadioButton) packageToggleGroup.getSelectedToggle();
+
+        boolean departureDateIsValid = false;
+        boolean counterRoomIsValid = false;
+        boolean counterSingleRoomIsValid = false;
+        boolean counterDoubleRoomIsValid = false;
+        boolean counterFamilyRoomIsValid = false;
+        boolean counterSuiteRoomIsValid = false;
+        boolean boardButtonIsValid = false;
+        boolean roomPriceDropDownIsValid = false;
+
+        LocalDate departureDate = departureDatePicker.getValue();
+        LocalDate todayDate = LocalDate.now();
+
+        if (checkOutDate(todayDate, departureDate)) {
+            departureDateIsValid = true;
+        } else {
+            departureDatePicker.setStyle("-fx-text-inner-color: red");
+        }
+
+        if (Integer.parseInt(counterSingleRoom.getText()) > 0) {
+            counterSingleRoomIsValid = true;
+        }
+        else {
+            setTextColorRed(counterSingleRoom);
+        }
+
+        if (Integer.parseInt(counterDoubleRoom.getText()) > 0) {
+            counterDoubleRoomIsValid = true;
+        } else {
+            setTextColorRed(counterDoubleRoom);
+        }
+
+        if (Integer.parseInt(counterFamilyRoom.getText()) > 0) {
+            counterFamilyRoomIsValid = true;
+        } else {
+            setTextColorRed(counterFamilyRoom);
+        }
+
+        if (Integer.parseInt(counterSuite.getText()) > 0) {
+            counterSuiteRoomIsValid = true;
+        } else {
+            setTextColorRed(counterSuite);
+        }
+
+        if (counterSingleRoomIsValid || counterDoubleRoomIsValid ||
+                counterFamilyRoomIsValid || counterSuiteRoomIsValid) {
+            counterRoomIsValid = true;
+        } else {
+            counterRoomIsValid = false;
+        }
+
+        if (selectedBoardButton.isSelected()) {
+            boardButtonIsValid = true;
+        } else {
+            boardButtonIsValid = false;
+        }
+
+        if (roomPriceDropDown.getValue() != null) {
+            roomPriceDropDownIsValid = true;
+        } else {
+            roomPriceDropDownIsValid = false;
+        }
+
+        if (departureDateIsValid && counterRoomIsValid &&
+                boardButtonIsValid && roomPriceDropDownIsValid) {
+            return true;
+        }
+        else return false;
+    }
+
+    private void setTextColorRed(Text text) {
+        text.setFill(Color.RED);
+    }
+
+    private void setCounterRoomColor(Text text) {
+        if (Integer.parseInt(text.getText()) > 0) {
+        } else {
+            setTextColorRed(text);
+        }
+    }
+
+    public boolean checkOutDate(LocalDate dateOfToday, LocalDate dateOfCheckOut) {
+        if (Period.between(dateOfToday, dateOfCheckOut).getDays() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @FXML
@@ -90,8 +174,10 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private void onNextButtonClicked(ActionEvent e) {
         try {
-            saveData();
-            viewController.loadWalkIn2();
+            if (validate()) {
+                saveData();
+                viewController.loadWalkIn2();
+            }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -378,4 +464,6 @@ class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         return String.valueOf(room.getNumber());
     }
 }
+
+
 
