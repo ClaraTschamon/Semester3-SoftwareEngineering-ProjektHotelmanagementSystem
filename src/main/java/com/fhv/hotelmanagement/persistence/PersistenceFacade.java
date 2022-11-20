@@ -163,7 +163,9 @@ public class PersistenceFacade{
 //        Booking booking = new Booking(customer,LocalDate.now(),LocalDateTime.now(),LocalDate.now().plusDays(5),
 //                null,"a","a","a","a","a",
 //                "a","a","a","a","a",null,
-//                null,new ArrayList<>(),new ArrayList<>());
+//                null,2, new ArrayList<>(),new ArrayList<>());
 //        insertBooking(booking);
+//        booking.setCheckOutDatetime(LocalDateTime.now().plusDays(5));
+//        storeBooking(booking);
     }
 }
