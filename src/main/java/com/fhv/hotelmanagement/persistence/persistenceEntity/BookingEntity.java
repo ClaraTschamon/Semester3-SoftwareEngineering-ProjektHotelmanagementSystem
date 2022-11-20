@@ -16,9 +16,7 @@ public class BookingEntity {
     @Column(name = "booking_number")
     private Long number;
 
-    @ManyToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "customer_number", nullable = false)
     private CustomerEntity customer;
 
