@@ -278,16 +278,17 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(street.getText())) {
-            if (StringValidator.checkRegex(street.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
-                streetIsValid = true;
-                setTextColor(street, "black");
-            } else {
+            streetIsValid = true;
+            setTextColor(street, "black");
+          if (!StringValidator.checkString(street.getText())) {
                 setTextColor(street, "red");
             }
         }
         else {
-            setRequieredField(street);
-        }
+                setRequieredField(street);
+            }
+
+
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
