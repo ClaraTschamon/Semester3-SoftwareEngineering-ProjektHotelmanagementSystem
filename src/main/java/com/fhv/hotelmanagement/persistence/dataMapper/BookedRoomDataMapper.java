@@ -41,10 +41,7 @@ public class BookedRoomDataMapper {
 
 
     public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
-        Date minimumDate = Date.valueOf(minDate); //Convert from LocalDate to java.sql.Date
-        Date maximumDate = Date.valueOf(maxDate);
         ArrayList<BookedRoomEntity> entities;
-
 
         entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
                         "SELECT bookedRoom FROM BookedRoomEntity bookedRoom " +

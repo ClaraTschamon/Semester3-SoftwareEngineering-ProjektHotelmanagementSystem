@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import javafx.collections.FXCollections;
@@ -120,14 +121,14 @@ public class WalkIn3ViewController {
 
     @FXML
     public void onSaveButtonClicked(ActionEvent e) {
-//        if (validate()) {
+        if (validate()) {
             saveData();
             try {
                 viewController.save();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-//        }
+        }
     }
 
     @FXML
@@ -145,13 +146,6 @@ public class WalkIn3ViewController {
     }
 
     private boolean validate() {
-        String textfieldCreditCardNumber = creditCardTextField.getText();
-        String textfieldVerfuegerNummer = authorisationNumberTextField.getText();
-        String textfieldBillingCity = billingCityTextField.getText();
-        String textfieldBillingHouseNumber = billingHouseNumberTextField.getText();
-        String textfieldBillingStreet = billingStreetTextField.getText();
-        String textfieldBillingPostalCode = billingPostalCodeTextField.getText();
-        String textfieldLoc = expiryDateTextField.getText();
 
         boolean creditCardNumberIsValid = false;
         boolean verfuegerNummerIsValid = false;
@@ -159,91 +153,107 @@ public class WalkIn3ViewController {
         boolean billingHouseNumberIsValid = false;
         boolean billingStreetIsValid = false;
         boolean billingPostalCodeIsValid = false;
-        boolean locIsValid = false;
+        boolean expireDateIsValid = false;
 
-        if (!textfieldCreditCardNumber.isEmpty() && textfieldCreditCardNumber.matches("[0-9]{8,19}")) {
-            creditCardNumberIsValid = true;
-        } else if(textfieldCreditCardNumber.isEmpty()) {
-            creditCardTextField.setStyle("-fx-text-inner-color: red");
-            creditCardTextField.setText("Pflichtfeld");
-        } else if(!textfieldCreditCardNumber.matches("[0-9]*")) {
-            creditCardTextField.setStyle("-fx-text-inner-color: red");
-            creditCardTextField.setText("inkorrekte eingabe");
-        } else if(textfieldCreditCardNumber.length() < 8 || textfieldCreditCardNumber.length() >19) {
-            creditCardTextField.setStyle("-fx-text-inner-color: red");
-            creditCardTextField.setText("die Kreditkartennummer hat 8 bis 19 Ziffern");
+        if (StringValidator.checkString(creditCardTextField.getText())) {
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{8,19}")) {
+                creditCardNumberIsValid = true;
+                setTextColor(creditCardTextField, "black");
+            } else {
+                setTextColor(creditCardTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(creditCardTextField);
         }
 
-        if (!textfieldVerfuegerNummer.isEmpty() && textfieldVerfuegerNummer.matches("[0-9]{3}")) {
-            verfuegerNummerIsValid = true;
-        } else if(textfieldVerfuegerNummer.isEmpty()) {
-            authorisationNumberTextField.setStyle("-fx-text-inner-color: red");
-            authorisationNumberTextField.setText("Pflichtfeld");
-        } else if(!textfieldVerfuegerNummer.matches("[0-9]*")) {
-            authorisationNumberTextField.setStyle("-fx-text-inner-color: red");
-            authorisationNumberTextField.setText("inkorrekte Eingabe");
-        } else if(textfieldVerfuegerNummer.length() < 3 || textfieldVerfuegerNummer.length() > 3) {
-            authorisationNumberTextField.setStyle("-fx-text-inner-color: red");
-            authorisationNumberTextField.setText("die Sichherheitsnummer hat 3 Ziffern");
+        if (StringValidator.checkString(authorisationNumberTextField.getText())) {
+            if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9]{3}")) {
+                verfuegerNummerIsValid = true;
+                setTextColor(authorisationNumberTextField, "black");
+            } else {
+                setTextColor(authorisationNumberTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(authorisationNumberTextField);
         }
 
-        if (!textfieldBillingCity.isEmpty() && textfieldBillingCity.matches("[a-zA-ZäÄöÖüÜß]*")) {
-            billingCityIsValid = true;
-        } else if(textfieldBillingCity.isEmpty()) {
-            billingCityTextField.setStyle("-fx-text-inner-color: red");
-            billingCityTextField.setText("Pflichtfeld");
-        } else if(!textfieldBillingCity.matches("[a-zA-ZäÄöÖüÜß]*")) {
-            billingCityTextField.setStyle("-fx-text-inner-color: red");
-            billingCityTextField.setText("inkorrekte Eingabe");
+        if (StringValidator.checkString(billingCityTextField.getText())) {
+            if (StringValidator.checkRegex(billingCityTextField.getText(), "[a-zA-Z]*")) {
+                billingCityIsValid = true;
+                setTextColor(billingCityTextField, "black");
+            } else {
+                setTextColor(billingCityTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(billingCityTextField);
         }
 
-        if (!textfieldBillingHouseNumber.isEmpty() && textfieldBillingHouseNumber.matches("[0-9]*")) {
-            billingHouseNumberIsValid = true;
-        } else if(textfieldBillingHouseNumber.isEmpty()) {
-            billingHouseNumberTextField.setStyle("-fx-text-inner-color: red");
-            billingHouseNumberTextField.setText("Pflichtfeld");
-        } else if(!textfieldBillingHouseNumber.matches("[0-9]*")) {
-            billingHouseNumberTextField.setStyle("-fx-text-inner-color: red");
-            billingHouseNumberTextField.setText("inkorrekte Eingabe");
+        if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
+            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9]*")) {
+                billingHouseNumberIsValid = true;
+                setTextColor(billingHouseNumberTextField, "black");
+            } else {
+                setTextColor(billingHouseNumberTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(billingHouseNumberTextField);
         }
 
-        if (!textfieldBillingStreet.isEmpty() && textfieldBillingStreet.matches("[a-zA-ZäÄöÖüÜß]*")) {
-            billingStreetIsValid = true;
-        } else if(textfieldBillingStreet.isEmpty()) {
-            billingStreetTextField.setStyle("-fx-text-inner-color: red");
-            billingStreetTextField.setText("Pflichtfeld");
-        } else if(!textfieldBillingStreet.matches("[a-zA-ZäÄöÖüÜß]*")) {
-            billingStreetTextField.setStyle("-fx-text-inner-color: red");
-            billingStreetTextField.setText("inkorrekte Eingabe");
+        if (StringValidator.checkString(billingStreetTextField.getText())) {
+            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[a-zA-Z]*")) {
+                billingStreetIsValid = true;
+                setTextColor(billingStreetTextField, "black");
+            } else {
+                setTextColor(billingStreetTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(billingStreetTextField);
         }
 
-        if (!textfieldBillingPostalCode.isEmpty() && textfieldBillingPostalCode.matches("[0-9]{1,10}")) {
-            billingPostalCodeIsValid = true;
-        } else if(textfieldBillingPostalCode.isEmpty()) {
-            billingPostalCodeTextField.setStyle("-fx-text-inner-color: red");
-            billingPostalCodeTextField.setText("Pflichtfeld");
-        } else if(!textfieldBillingPostalCode.matches("[0-9]*")) {
-            billingPostalCodeTextField.setStyle("-fx-text-inner-color: red");
-            billingPostalCodeTextField.setText("inkorrekte Eingabe");
-        } else if(textfieldBillingPostalCode.length() < 1 || textfieldBillingPostalCode.length() > 10) {
-            billingPostalCodeTextField.setStyle("-fx-text-inner-color: red");
-            billingPostalCodeTextField.setText("die Postleitzahl");
+        if (StringValidator.checkString(billingPostalCodeTextField.getText())) {
+            if (StringValidator.checkRegex(billingPostalCodeTextField.getText(), "[0-9]*")) {
+                billingPostalCodeIsValid = true;
+                setTextColor(billingPostalCodeTextField, "black");
+            } else {
+                setTextColor(billingPostalCodeTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(billingPostalCodeTextField);
         }
 
-        if (!textfieldLoc.isEmpty() && textfieldLoc.matches("[0-1][1-9]/[0-9][0-9]")) {
-            locIsValid = true;
-        } else if(textfieldLoc.isEmpty()) {
-            expiryDateTextField.setStyle("-fx-text-inner-color: red");
-            expiryDateTextField.setText("Pflichtfeld");
-        } else if(!textfieldLoc.matches("[0-1][1-9]/[0-9][0-9]")) {
-            expiryDateTextField.setStyle("-fx-text-inner-color: red");
-            expiryDateTextField.setText("inkorrekte Eingabe");
+        if (StringValidator.checkString(expiryDateTextField.getText())) {
+            if (StringValidator.checkValidExpirationDate(expiryDateTextField.getText())) {
+                expireDateIsValid = true;
+                setTextColor(expiryDateTextField, "black");
+            } else {
+                setTextColor(expiryDateTextField, "red");
+            }
+        }
+        else {
+            setRequieredField(expiryDateTextField);
         }
 
         if(creditCardNumberIsValid && verfuegerNummerIsValid && billingStreetIsValid &&
-                billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid && verfuegerNummerIsValid) {
+                billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&
+                verfuegerNummerIsValid && expireDateIsValid) {
             return true;
         }
         return false;
+    }
+
+    private void setTextColor(TextField textField, String color) {
+        textField.setStyle("-fx-text-inner-color: " + color);
+    }
+
+    private void setRequieredField(TextField textField) {
+        textField.setPromptText("Pflichtfeld");
+        textField.setStyle("-fx-prompt-text-fill: red");
+
     }
 }

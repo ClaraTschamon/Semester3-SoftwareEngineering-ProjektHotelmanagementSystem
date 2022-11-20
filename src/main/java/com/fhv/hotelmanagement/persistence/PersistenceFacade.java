@@ -39,7 +39,7 @@ public class PersistenceFacade{
         return BoardDataMapper.getAll();
     }
 
-    public static Optional<Booking> getBooking(int id){
+    public static Optional<Booking> getBooking(Long id){
         return BookingDataMapper.instance().get(id);
     }
 
@@ -52,7 +52,7 @@ public class PersistenceFacade{
     }
 
     @SuppressWarnings("rawtypes")
-    public static Optional<Customer> getCustomer(int id){
+    public static Optional<Customer> getCustomer(Long id){
         return CustomerDataMapper.instance().get(id);
     }
 
@@ -150,8 +150,20 @@ public class PersistenceFacade{
         //hartkodiert customer und statt nummer einfach null zum ausprobieren von
         */
 
-        LocalDate minDate = LocalDate.of(2022, 11, 12);
-        LocalDate maxDate = LocalDate.now();
-        ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
+//        LocalDate minDate = LocalDate.of(2022, 11, 12);
+//        LocalDate maxDate = LocalDate.now();
+//        ArrayList<BookedRoom> bookedRooms = BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
+
+//        Customer customer = new Customer("Ida","Mazinger",LocalDate.now().minusYears(15),
+//                "österreich","1234","asd@at.at","asdf","asdf",
+//                "asdf","asdf","asdf",true,new ArrayList<>());
+//        Long n = insertCustomer(customer);
+//        System.out.println(n +" "+ getCustomer(n).get().getFirstName());
+//        customer.setNumber(n);
+//        Booking booking = new Booking(customer,LocalDate.now(),LocalDateTime.now(),LocalDate.now().plusDays(5),
+//                null,"a","a","a","a","a",
+//                "a","a","a","a","a",null,
+//                null,new ArrayList<>(),new ArrayList<>());
+//        insertBooking(booking);
     }
 }

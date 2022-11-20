@@ -41,14 +41,14 @@ public class WalkInUseCaseController {
     public void save() throws IOException {
         if (booking != null && customer != null) {
             booking.setCheckInDatetime(LocalDateTime.now());
-//            try {
-//                Long customerNumber = DomainController.saveCustomer(customer);
-//                customer.setNumber(customerNumber);
-//                booking.setCustomer(customer);
-//            } catch (CustomerIsInvalidException e) {
-//                System.out.println(e);
-//            }
-
+            try {
+                Long customerNumber = DomainController.saveCustomer(customer);
+                customer.setNumber(customerNumber);
+                booking.setCustomer(customer);
+            } catch (CustomerIsInvalidException e) {
+                System.out.println(e);
+            }
+            System.out.println("number: " +booking.getCustomer().getNumber());
             try {
                 DomainController.saveBooking(booking);
             } catch (BookingIsInvalidException e) {

@@ -1,5 +1,7 @@
 package com.fhv.hotelmanagement.services;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
@@ -50,5 +52,9 @@ public class StringValidator {
 
     public static boolean checkRegex(String string, String regexPattern) {
         return Pattern.compile(regexPattern).matcher(string).matches();
+    }
+
+    public static int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        return Period.between(birthDate, currentDate).getDays();
     }
 }

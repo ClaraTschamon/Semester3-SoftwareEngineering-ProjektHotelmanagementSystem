@@ -27,7 +27,6 @@ public class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
         if (room == null) {
             return null;
         }
-
         return String.valueOf(room.getNumber());
     }
 }
