@@ -16,8 +16,8 @@ public class BookingEntity {
     @Column(name = "booking_number")
     private Long number;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_number")
+    @ManyToOne()
+    @JoinColumn(name = "customer_number", nullable = false)
     private CustomerEntity customer;
 
     @Column(name = "arrival_date")
