@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -19,9 +20,12 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOutViewController implements Initializable {
 
@@ -105,7 +109,30 @@ public class CheckOutViewController implements Initializable {
         }
         roomText.setText(rooms.toString());
 
-        firstNameText.setText(bookingDTO.getCustomer().getFirstName());
-        lastNameText.setText(bookingDTO.getCustomer().getLastName());
+        firstNameText.setText("Vorname: " + bookingDTO.getCustomer().getFirstName());
+        lastNameText.setText("Nachname: " + bookingDTO.getCustomer().getLastName());
+        packageText.setText("Package: " + bookingDTO.getBoard().getName());
+        paymentMethodText.setText("Zahlungsart: " + bookingDTO.getPaymentMethod());
+
+        BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
+        totalPriceText.setText("Gesamtpreis: " + price.toString());
+
+    }
+
+    private BigDecimal calculateTotalPrice(BookingDTO bookingDTO, ArrayList<BookedRoomDTO> bookedRoomDTOs){
+        int totalNights = (int) DAYS.between(bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate());
+        System.out.println(totalNights);
+
+        BigDecimal totalPrice = new BigDecimal(0);
+
+        for(BookedRoomDTO room : bookedRoomDTOs){
+            BigDecimal roomPrice = room.getRoom().getCategory().getPricePerNight();
+            BigDecimal price = roomPrice.multiply(new BigDecimal(totalNights));
+            totalPrice.add(price);
+        }
+        BigDecimal boardPrice = bookingDTO.getBoard().getPricePerNight();
+        boardPrice = boardPrice.multiply(new BigDecimal(totalNights));
+        totalPrice.add(boardPrice);
+        return totalPrice;
     }
 }

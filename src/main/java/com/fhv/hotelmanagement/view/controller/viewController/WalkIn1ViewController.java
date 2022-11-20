@@ -316,7 +316,6 @@ public class WalkIn1ViewController implements Initializable {
         familyRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
         suiteDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Suite"));
 
-
         singleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends RoomDTO> c) {
