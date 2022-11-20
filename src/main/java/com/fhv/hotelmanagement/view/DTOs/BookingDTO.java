@@ -21,6 +21,7 @@ public class BookingDTO {
     private BoardDTO board;
     private BigDecimal pricePerNightForBoard;
     private String comment;
+    private Integer amountGuests;
     private ArrayList<BookedRoomCategoryDTO> bookedRoomCategories;
     private ArrayList<BookedRoomDTO> bookedRooms;
 
@@ -31,7 +32,7 @@ public class BookingDTO {
                       LocalDateTime checkOutDatetime, AddressDTO billingAddress,
                       String paymentMethod, String creditCardNumber, String expirationDate,
                       String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard,
-                      String comment, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      String comment, Integer amountGuests, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
                       ArrayList<BookedRoomDTO> bookedRooms) {
         this.number = number;
         this.customer = customer;
@@ -47,6 +48,7 @@ public class BookingDTO {
         this.board = board;
         this.pricePerNightForBoard = pricePerNightForBoard;
         this.comment = comment;
+        this.amountGuests = amountGuests;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
@@ -56,9 +58,11 @@ public class BookingDTO {
                       LocalDateTime checkOutDatetime, AddressDTO billingAddress,
                       String paymentMethod, String creditCardNumber, String expirationDate,
                       String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard,
-                      String comment, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
+                      String comment, Integer amountGuests, ArrayList<BookedRoomCategoryDTO> bookedRoomCategories,
                       ArrayList<BookedRoomDTO> bookedRooms) {
-        this(null, customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingAddress, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,comment, bookedRoomCategories,bookedRooms);
+        this(null, customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingAddress,
+                paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,
+                comment, amountGuests, bookedRoomCategories, bookedRooms);
     }
 
     public Long getNumber() {
@@ -183,5 +187,13 @@ public class BookingDTO {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public Integer getAmountGuests() {
+        return amountGuests;
+    }
+
+    public void setAmountGuests(Integer amountGuests) {
+        this.amountGuests = amountGuests;
     }
 }

@@ -59,6 +59,8 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private ToggleGroup packageToggleGroup;
 
+    @FXML
+    private Spinner<Integer> amountGuestsSpinner;
     private CheckComboBox<RoomDTO> singleRoomDropDown;
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
@@ -81,6 +83,7 @@ public class WalkIn1ViewController implements Initializable {
         boolean counterSuiteRoomIsValid = false;
         boolean boardButtonIsValid = false;
         boolean roomPriceDropDownIsValid = false;
+        boolean amountGuestsIsValid = false;
 
         LocalDate departureDate = departureDatePicker.getValue();
         LocalDate todayDate = LocalDate.now();
@@ -135,8 +138,22 @@ public class WalkIn1ViewController implements Initializable {
             roomPriceDropDownIsValid = false;
         }
 
+        Integer amountGuests = Integer.valueOf(amountGuestsSpinner.getValue());
+        if (amountGuests > 0 &&
+                (amountGuests - singleRoomDropDown.getCheckModel().getCheckedItems().size()
+                        - doubleRoomDropDown.getCheckModel().getCheckedItems().size() * 2
+                        - familyRoomDropDown.getCheckModel().getCheckedItems().size() * 4
+                        - suiteDropDown.getCheckModel().getCheckedItems().size() * 4
+                        <= 0)
+        ) {
+            amountGuestsIsValid = true;
+        } else {
+            amountGuestsIsValid = false;
+            amountGuestsSpinner.setStyle("-fx-text-inner-color: red");
+        }
+
         if (departureDateIsValid && counterRoomIsValid &&
-                boardButtonIsValid && roomPriceDropDownIsValid) {
+                boardButtonIsValid && roomPriceDropDownIsValid && amountGuestsIsValid) {
             return true;
         }
         else return false;
@@ -183,7 +200,20 @@ public class WalkIn1ViewController implements Initializable {
         }
     }
 
-    protected void fillData(){
+    protected void fillData() {
+        amountGuestsSpinner.setValueFactory(new SpinnerValueFactory<Integer>() {
+            @Override
+            public void decrement(int steps) {
+                if (amountGuestsSpinner.getValue()-steps > 0) {
+                    amountGuestsSpinner.getValueFactory().setValue(amountGuestsSpinner.getValue() - steps);
+                }
+            }
+
+            @Override
+            public void increment(int steps) {
+                amountGuestsSpinner.getValueFactory().setValue(amountGuestsSpinner.getValue()+steps);
+            }
+        });
 
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
@@ -243,6 +273,12 @@ public class WalkIn1ViewController implements Initializable {
         } else {
             fullBoard.setSelected(true);
         }
+
+        if (bookingDTO.getAmountGuests() != null) {
+            amountGuestsSpinner.getValueFactory().setValue(bookingDTO.getAmountGuests());
+        } else {
+            amountGuestsSpinner.getValueFactory().setValue(1);
+        }
     }
 
     protected void saveData(){
@@ -301,6 +337,7 @@ public class WalkIn1ViewController implements Initializable {
         bookingDTO.setBookedRoomCategories(bookedRoomCategories);
 
         viewController.getUseCaseController().setRoomPrice(roomPriceDropDown.getSelectionModel().getSelectedItem().toString());
+        bookingDTO.setAmountGuests(amountGuestsSpinner.getValue());
     }
 
     @Override

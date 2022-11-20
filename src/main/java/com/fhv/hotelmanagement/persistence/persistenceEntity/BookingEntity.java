@@ -69,6 +69,9 @@ public class BookingEntity {
    @Column(name="price_per_night_for_board")
     private BigDecimal pricePerNightForBoard;
 
+   @Column(name="amount_guests")
+   private int amountGuests;
+
     @OneToMany(
             mappedBy = "booking",
             cascade = CascadeType.ALL,
@@ -92,7 +95,7 @@ public class BookingEntity {
                          String billingCity, String billingCountry,
                          String comment, String paymentMethod, String creditCardNumber,
                          String expirationDate, String authorisationNumber, BoardEntity board,
-                         BigDecimal pricePerNightForBoard,
+                         BigDecimal pricePerNightForBoard, int amountGuests,
                          Set<BookedRoomCategoryEntity> bookedRoomCategories,
                          Set<BookedRoomEntity> bookedRooms) {
 
@@ -114,6 +117,7 @@ public class BookingEntity {
         this.authorisationNumber = authorisationNumber;
         this.board = board;
         this.pricePerNightForBoard = pricePerNightForBoard;
+        this.amountGuests = amountGuests;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
@@ -282,6 +286,10 @@ public class BookingEntity {
 
     public void setBookedRooms(Set<BookedRoomEntity> bookedRooms) {
         this.bookedRooms = bookedRooms;
+    }
+
+    public Integer getAmountGuests() {
+        return amountGuests;
     }
 
 //    @Override

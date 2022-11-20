@@ -1,5 +1,3 @@
-//Testdaten so schreiben, dass man kein Hartkodiertes Datum
-//hat, sondern immer das aktuelle Datum eingefügt wird.
 DELETE FROM BOOKED_ROOM
 WHERE TRUE;
 DELETE FROM BOOKED_ROOM_CATEGORY
@@ -15,17 +13,17 @@ WHERE TRUE;
 DELETE FROM ROOM_CATEGORY
 WHERE TRUE;
 
-INSERT INTO room_category(room_category_name, price_per_night)
-VALUES('Einzelzimmer', 80);
+INSERT INTO room_category(room_category_name, price_per_night, max_amount_guests)
+VALUES('Einzelzimmer', 80, 1);
 
-INSERT INTO room_category(room_category_name, price_per_night)
-VALUES('Doppelzimmer', 95);
+INSERT INTO room_category(room_category_name, price_per_night, MAX_AMOUNT_GUESTS)
+VALUES('Doppelzimmer', 95, 2);
 
-INSERT INTO room_category(room_category_name, price_per_night)
-VALUES('Familienzimmer', 120);
+INSERT INTO room_category(room_category_name, price_per_night, MAX_AMOUNT_GUESTS)
+VALUES('Familienzimmer', 120, 4);
 
-INSERT INTO room_category(room_category_name, price_per_night)
-VALUES('Suite', 180);
+INSERT INTO room_category(room_category_name, price_per_night, MAX_AMOUNT_GUESTS)
+VALUES('Suite', 180, 4);
 
 
 INSERT INTO board(board_name, price_per_night)

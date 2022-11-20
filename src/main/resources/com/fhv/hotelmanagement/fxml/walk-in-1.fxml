@@ -6,10 +6,9 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.controlsfx.control.*?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
-    <center>
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
+   <left>
         <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
@@ -73,7 +72,7 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <DatePicker fx:id="departureDatePicker" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" showWeekNumbers="false"/>
+                <DatePicker fx:id="departureDatePicker" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" showWeekNumbers="false" />
                 <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
                     <font>
                         <Font name="System Bold" size="18.0" />
@@ -103,10 +102,13 @@
                 <fx:define>
                         <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" text="Vollpension" toggleGroup="$packageToggleGroup" selected="true"> <!--default Value-->
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension"> <!--default Value-->
                     <font>
                         <Font size="13.0" />
                     </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="packageToggleGroup" />
+               </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="halfBoard" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" text="Halbpension" toggleGroup="$packageToggleGroup">
                     <font>
@@ -132,6 +134,12 @@
             <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text fx:id="counterFamilyRoom" layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text fx:id="counterSuite" layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Gäste:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Spinner fx:id="amountGuestsSpinner" editable="true" layoutX="210.0" layoutY="257.0" />
             </children></AnchorPane>
-    </center>
+   </left>
 </BorderPane>

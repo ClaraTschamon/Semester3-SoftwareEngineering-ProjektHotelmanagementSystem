@@ -28,7 +28,8 @@ public class DomainTranslator {
         BookingDTO bookingDTO = new BookingDTO(booking.getNumber(), translateCustomer(booking.getCustomer()), booking.getArrivalDate(),
                 booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 translateAddress(booking.getBillingAddress()), booking.getPaymentMethod(), booking.getCreditCardNumber(),
-                booking.getExpirationDate(), booking.getAuthorisationNumber(), translateBoard(booking.getBoard()), booking.getPricePerNightForBoard(),booking.getComment(),
+                booking.getExpirationDate(), booking.getAuthorisationNumber(), translateBoard(booking.getBoard()),
+                booking.getPricePerNightForBoard(), booking.getComment(), booking.getAmountGuests(),
                 bookedRoomCategoryDTOS, bookedRoomDTOS);
         if (includeArrays) {
             for (BookedRoomCategory bookedRoomCategory : booking.getBookedRoomCategories()) {
