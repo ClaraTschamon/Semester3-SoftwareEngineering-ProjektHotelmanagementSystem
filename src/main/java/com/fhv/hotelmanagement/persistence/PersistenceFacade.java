@@ -64,6 +64,7 @@ public class PersistenceFacade{
         CustomerDataMapper.instance().store(customer);
     }
 
+    public static Long insertInvoice(Invoice invoice) { return InvoiceDataMapper.instance().insert(invoice); }
     public static ArrayList<RoomCategory> getAllRoomCategories() {
         return RoomCategoryDataMapper.getAll();
     }
@@ -168,4 +169,6 @@ public class PersistenceFacade{
 //        booking.setCheckOutDatetime(LocalDateTime.now().plusDays(5));
 //        storeBooking(booking);
     }
+
+
 }

@@ -56,6 +56,31 @@ public class DomainCreator {
                 customerDTO.getSaved(), new ArrayList<>());
     }
 
+    protected static Invoice createInvoice(InvoiceDTO invoiceDTO, boolean fillArrays) {
+        ArrayList<InvoicedRoomCategory> invoicedRoomCategories = new ArrayList<>();
+        if (fillArrays) {
+            invoicedRoomCategories = createInvoicedRoomCategories(invoiceDTO.getInvoicedRoomCategories());
+        }
+        return new Invoice(invoiceDTO.getNumber(), createBooking(invoiceDTO.getBooking(), false),
+                createBoard(invoiceDTO.getBoard()), invoiceDTO.getPricePerNightForBoard(), invoiceDTO.getFromDate(),
+                invoiceDTO.getToDate(), invoicedRoomCategories);
+
+    }
+
+    private static InvoicedRoomCategory createInvoicedRoomCategory(InvoicedRoomCategoryDTO c) {
+        return new InvoicedRoomCategory(createInvoice(c.getInvoice(), false), createRoomCategory(c.getRoomCategory()),
+                c.getPricePerNight(), c.getAmount());
+    }
+
+    private static ArrayList<InvoicedRoomCategory> createInvoicedRoomCategories(ArrayList<InvoicedRoomCategoryDTO> invoicedRoomCategoryDTOS) {
+        ArrayList<InvoicedRoomCategory> invoicedRoomCategories = new ArrayList<>();
+        for (InvoicedRoomCategoryDTO c : invoicedRoomCategoryDTOS) {
+            invoicedRoomCategories.add(createInvoicedRoomCategory(c));
+        }
+        return invoicedRoomCategories;
+    }
+
+
     protected static Room createRoom(RoomDTO roomDTO) {
         return new Room(roomDTO.getNumber(), createRoomCategory(roomDTO.getCategory()));
     }

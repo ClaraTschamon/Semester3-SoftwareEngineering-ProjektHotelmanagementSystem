@@ -17,7 +17,7 @@ public class InvoiceDataMapper {
     }
 
     //create
-    public void insert(Invoice invoice) {
+    public Long insert(Invoice invoice) {
         var entityManager = PersistenceFacade.instance().entityManager;
         InvoiceEntity invoiceEntity = createInvoiceEntity(invoice);
         entityManager.getTransaction().begin();
@@ -30,6 +30,7 @@ public class InvoiceDataMapper {
             c.getInvoice().setNumber(invoiceNumber);
             InvoicedRoomCategoryDataMapper.instance().insert(c);
         }
+        return invoiceNumber;
     }
 
     protected static InvoiceEntity createInvoiceEntity(Invoice invoice) {
