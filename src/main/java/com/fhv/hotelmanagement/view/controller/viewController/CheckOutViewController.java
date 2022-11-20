@@ -96,6 +96,7 @@ public class CheckOutViewController implements Initializable {
         firstNameText.setText("Vorname: " + bookingDTO.getCustomer().getFirstName());
         lastNameText.setText("Nachname: " + bookingDTO.getCustomer().getLastName());
         packageText.setText("Package: " + bookingDTO.getBoard().getName());
+        numberPersonsText.setText("Personenanzahl: " + bookingDTO.getAmountGuests());
         paymentMethodText.setText("Zahlungsart: " + bookingDTO.getPaymentMethod());
 
         BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
