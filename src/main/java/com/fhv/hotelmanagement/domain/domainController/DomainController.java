@@ -29,7 +29,7 @@ public class DomainController {
         Long bookingNumber = bookingDTO.getNumber();
         if (DomainValidator.checkBooking(bookingDTO)) {
             Booking booking = DomainCreator.createBooking(bookingDTO, true);
-
+            System.out.println(booking.getCheckOutDatetime());
             if (bookingNumber == null) {
                 bookingNumber = PersistenceFacade.insertBooking(booking);
             } else {
