@@ -61,11 +61,11 @@ public class BookingDataMapper {
         entityManager.getTransaction().commit();
 //        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
 //            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c, bookingEntity));
+//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c));
 //        }
 //        for (BookedRoom r : booking.getBookedRooms()) {
 //            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomDataMapper.createBookedRoomEntity(r, bookingEntity));
+//                    BookedRoomDataMapper.createBookedRoomEntity(r));
 //        }
     }
 

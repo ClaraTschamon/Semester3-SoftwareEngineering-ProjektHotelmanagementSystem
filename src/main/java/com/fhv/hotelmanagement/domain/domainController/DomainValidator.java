@@ -103,4 +103,8 @@ public class DomainValidator {
                 (checkAddress(customerDTO.getAddress())) &&
                 (customerDTO.getSaved() != null);
     }
+
+    public static boolean checkInvoice(InvoiceDTO invoiceDTO) {
+        return true; // TODO
+    }
 }

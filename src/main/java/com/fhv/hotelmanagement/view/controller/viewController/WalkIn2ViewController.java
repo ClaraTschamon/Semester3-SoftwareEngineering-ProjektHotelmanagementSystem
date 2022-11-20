@@ -266,7 +266,7 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(houseNumber.getText())) {
-            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9]*")) {
+            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9A-Za-z]*")) {
                 houseNumberIsValid = true;
                 setTextColor(houseNumber, "black");
             } else {
@@ -278,21 +278,21 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(street.getText())) {
-            if (StringValidator.checkRegex(street.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
-                streetIsValid = true;
-                setTextColor(street, "black");
-            } else {
+            streetIsValid = true;
+            setTextColor(street, "black");
+          if (!StringValidator.checkString(street.getText())) {
                 setTextColor(street, "red");
             }
         }
         else {
-            setRequieredField(street);
-        }
+                setRequieredField(street);
+            }
+
+
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
-        LocalDate dateOfToday = LocalDate.now();
 
-        if (StringValidator.calculateAge(dateOfBirth, dateOfToday) > 0) {
+        if (StringValidator.calculateAge(dateOfBirth) >= 0) {
             birthdayIsValid = true;
         } else {
             birthdayDatePicker.setStyle("-fx-text-inner-color: red");
