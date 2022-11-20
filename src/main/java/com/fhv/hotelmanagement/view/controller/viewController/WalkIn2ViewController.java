@@ -164,6 +164,7 @@ public class WalkIn2ViewController implements Initializable {
 
         boolean firstNameIsValid = false;
         boolean lastNameIsValid = false;
+        boolean nationalityIsValid = false;
         boolean phoneNumberIsValid = false;
         boolean emailIsValid = false;
         boolean streetIsValid = false;
@@ -197,6 +198,13 @@ public class WalkIn2ViewController implements Initializable {
             setRequieredField(lastName);
         }
 
+        if (nationalityComboBox.getValue() != null) {
+             nationalityIsValid = true;
+        } else {
+            nationalityIsValid = false;
+        }
+
+
         if (StringValidator.checkString(email.getText())) {
             if (StringValidator.checkValidEmail(email.getText())) {
                 emailIsValid = true;
@@ -208,7 +216,6 @@ public class WalkIn2ViewController implements Initializable {
             setRequieredField(email);
         }
 
-        //TODO: Nationality muss ausgewählt werden
 
         if (StringValidator.checkString(postalCode.getText())) {
             if (StringValidator.checkRegex(postalCode.getText(), "[0-9]*")) {
@@ -291,7 +298,7 @@ public class WalkIn2ViewController implements Initializable {
             birthdayDatePicker.setStyle("-fx-text-inner-color: red");
         }
 
-        if(emailIsValid && firstNameIsValid && lastNameIsValid &&
+        if(emailIsValid && firstNameIsValid && lastNameIsValid && nationalityIsValid &&
                 phoneNumberIsValid && countryIsValid && streetIsValid && postalCodeIsValid &&
                 houseNumberIsValid && cityIsValid && birthdayIsValid) {
             return true;

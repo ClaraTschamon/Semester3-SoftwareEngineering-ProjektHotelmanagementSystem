@@ -29,8 +29,7 @@ public class BookingDataMapper {
 
     //create
     public Long insert(Booking booking) {
-        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()),
-                BoardDataMapper.createBoardEntity(booking.getBoard()));
+        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
         var entityManager = PersistenceFacade.instance().entityManager;
 
         entityManager.getTransaction().begin();
@@ -42,7 +41,6 @@ public class BookingDataMapper {
 
         for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
             c.getBooking().setNumber(bookingNumber);
-            System.out.println(c.getBooking().getNumber() + c.getRoomCategory().getName() + c.getAmount() + c.getPricePerNight());
             BookedRoomCategoryDataMapper.instance().insert(c);
         }
         for (BookedRoom r : booking.getBookedRooms()) {
@@ -55,7 +53,7 @@ public class BookingDataMapper {
 
     //update
     public void store(Booking booking){
-        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()), BoardDataMapper.createBoardEntity(booking.getBoard()));
+        BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
         PersistenceFacade.instance().entityManager.merge(bookingEntity);
 //        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
 //            PersistenceFacade.instance().entityManager.merge(
@@ -67,7 +65,7 @@ public class BookingDataMapper {
 //        }
     }
 
-    protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity, BoardEntity board) {
+    protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity) {
         Address address = booking.getBillingAddress();
         HashSet<BookedRoomCategoryEntity> bookedRoomCategoryEntities = new HashSet<>();
         HashSet<BookedRoomEntity> bookedRoomEntities = new HashSet<>();
@@ -76,7 +74,7 @@ public class BookingDataMapper {
                 booking.getArrivalDate(), booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
                 booking.getComment(), booking.getPaymentMethod(), booking.getCreditCardNumber(), booking.getExpirationDate(),
-                booking.getAuthorisationNumber(), board, booking.getPricePerNightForBoard(), bookedRoomCategoryEntities, bookedRoomEntities);
+                booking.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(booking.getBoard()), booking.getPricePerNightForBoard(), bookedRoomCategoryEntities, bookedRoomEntities);
 
 //        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
 //            bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
