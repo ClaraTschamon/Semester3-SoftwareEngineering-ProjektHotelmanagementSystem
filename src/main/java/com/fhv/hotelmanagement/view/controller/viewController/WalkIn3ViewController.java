@@ -252,9 +252,8 @@ public class WalkIn3ViewController {
     }
 
     private void setRequieredField(TextField textField) {
-        //textField.setText("Pflichtfeld");
         textField.setPromptText("Pflichtfeld");
-        setTextColor(textField, "red");
+        textField.setStyle("-fx-prompt-text-fill: red");
 
     }
 }

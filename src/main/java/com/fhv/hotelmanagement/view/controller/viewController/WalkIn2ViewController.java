@@ -152,7 +152,6 @@ public class WalkIn2ViewController implements Initializable {
     }
 
     private boolean validate() throws IOException {
-
         firstName.getText();
         lastName.getText();
         phoneNumber.getText();
@@ -165,7 +164,6 @@ public class WalkIn2ViewController implements Initializable {
 
         boolean firstNameIsValid = false;
         boolean lastNameIsValid = false;
-        boolean nationalityIsValid = false;
         boolean phoneNumberIsValid = false;
         boolean emailIsValid = false;
         boolean streetIsValid = false;
@@ -306,8 +304,8 @@ public class WalkIn2ViewController implements Initializable {
     }
 
     private void setRequieredField(TextField textField) {
-        setTextColor(textField, "red");
-        textField.setText("Pflichtfeld");
+        textField.setPromptText("Pflichtfeld");
+        textField.setStyle("-fx-prompt-text-fill: red");
     }
 
     public void initialize(URL location, ResourceBundle resources) {
