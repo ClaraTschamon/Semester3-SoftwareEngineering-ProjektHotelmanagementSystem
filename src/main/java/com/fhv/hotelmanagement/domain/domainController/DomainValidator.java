@@ -42,9 +42,9 @@ public class DomainValidator {
 
     protected static boolean checkBookedRoomCategory(BookedRoomCategoryDTO bookedRoomCategoryDTO, boolean validateBooking) {
         BookingDTO bookingDTO = bookedRoomCategoryDTO.getBooking();
-        System.out.println(validateBooking+" "+
-                MainApplication.getDomainManager().getAllRoomCategoryDTOs().containsValue(bookedRoomCategoryDTO.getRoomCategory())+" "+
-        bookedRoomCategoryDTO.getPricePerNight() != null + " "+bookedRoomCategoryDTO.getAmount());
+//        System.out.println(validateBooking+" "+
+//                MainApplication.getDomainManager().getAllRoomCategoryDTOs().containsValue(bookedRoomCategoryDTO.getRoomCategory())+" "+
+//                  bookedRoomCategoryDTO.getPricePerNight() != null + " "+bookedRoomCategoryDTO.getAmount());
         return ((!validateBooking) || (validateBooking && checkBooking(bookingDTO))) &&
                 (MainApplication.getDomainManager().getAllRoomCategoryDTOs().containsValue(bookedRoomCategoryDTO.getRoomCategory())) &&
                 (bookedRoomCategoryDTO.getPricePerNight() != null) &&
@@ -61,18 +61,18 @@ public class DomainValidator {
     }
 
     protected static boolean checkBooking(BookingDTO bookingDTO) {
-        System.out.println(bookingDTO + " " +checkCustomer(bookingDTO.getCustomer()) + " " +bookingDTO.getArrivalDate() + " " +
-                bookingDTO.getDepartureDate() + " " + bookingDTO.getArrivalDate().isBefore(bookingDTO.getDepartureDate()) + " " +
-                checkAddress(bookingDTO.getBillingAddress()) + " " + StringValidator.checkString(bookingDTO.getPaymentMethod()) + " " +
-                StringValidator.checkString(bookingDTO.getCreditCardNumber()) + " " + StringValidator.checkString(bookingDTO.getExpirationDate())
-                + StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate()) + " " + StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())
-                + " " + StringValidator.checkString(bookingDTO.getAuthorisationNumber()) + " " + bookingDTO.getBookedRooms() + " " +
-                bookingDTO.getBookedRooms().isEmpty() + " " + bookingDTO.getBookedRoomCategories() + " " + bookingDTO.getBookedRoomCategories().isEmpty() +
-                " " + checkBookedRoomCategories(bookingDTO.getBookedRoomCategories(), false) + " " + checkBookedRooms(bookingDTO.getBookedRooms(), false) +
-                " " + bookingDTO.getBoard() + " " + bookingDTO.getPricePerNightForBoard() + " " + checkBoard(bookingDTO.getBoard()) + " " +
-                bookingDTO.getPricePerNightForBoard() + " " + checkBoard(bookingDTO.getBoard()) + " " + bookingDTO.getPricePerNightForBoard() + " " +
-                bookingDTO.getPricePerNightForBoard().intValue()
-        );
+//        System.out.println(bookingDTO + " " +checkCustomer(bookingDTO.getCustomer()) + " " +bookingDTO.getArrivalDate() + " " +
+//                bookingDTO.getDepartureDate() + " " + bookingDTO.getArrivalDate().isBefore(bookingDTO.getDepartureDate()) + " " +
+//                checkAddress(bookingDTO.getBillingAddress()) + " " + StringValidator.checkString(bookingDTO.getPaymentMethod()) + " " +
+//                StringValidator.checkString(bookingDTO.getCreditCardNumber()) + " " + StringValidator.checkString(bookingDTO.getExpirationDate())
+//                + StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate()) + " " + StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())
+//                + " " + StringValidator.checkString(bookingDTO.getAuthorisationNumber()) + " " + bookingDTO.getBookedRooms() + " " +
+//                bookingDTO.getBookedRooms().isEmpty() + " " + bookingDTO.getBookedRoomCategories() + " " + bookingDTO.getBookedRoomCategories().isEmpty() +
+//                " " + checkBookedRoomCategories(bookingDTO.getBookedRoomCategories(), false) + " " + checkBookedRooms(bookingDTO.getBookedRooms(), false) +
+//                " " + bookingDTO.getBoard() + " " + bookingDTO.getPricePerNightForBoard() + " " + checkBoard(bookingDTO.getBoard()) + " " +
+//                bookingDTO.getPricePerNightForBoard() + " " + checkBoard(bookingDTO.getBoard()) + " " + bookingDTO.getPricePerNightForBoard() + " " +
+//                bookingDTO.getPricePerNightForBoard().intValue()
+//        );
 
         return (bookingDTO != null) &&
                 (checkCustomer(bookingDTO.getCustomer())) &&

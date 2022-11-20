@@ -48,7 +48,7 @@ public class WalkInUseCaseController {
             } catch (CustomerIsInvalidException e) {
                 System.out.println(e);
             }
-
+            System.out.println("number: " +booking.getCustomer().getNumber());
             try {
                 DomainController.saveBooking(booking);
             } catch (BookingIsInvalidException e) {

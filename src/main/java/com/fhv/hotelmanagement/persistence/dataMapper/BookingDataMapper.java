@@ -18,7 +18,7 @@ public class BookingDataMapper {
     }
 
     //read
-    public Optional<Booking> get(final int number){
+    public Optional<Booking> get(final Long number){
         BookingEntity entity = PersistenceFacade.instance().entityManager.find(BookingEntity.class, number);
         if(entity != null){
             Booking booking = createBooking(entity);
@@ -37,14 +37,20 @@ public class BookingDataMapper {
         entityManager.persist(bookingEntity);
         entityManager.getTransaction().commit();
 
+        Long bookingNumber = bookingEntity.getNumber();
+        booking.setNumber(bookingNumber);
+
         for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
+            c.getBooking().setNumber(bookingNumber);
+            System.out.println(c.getBooking().getNumber() + c.getRoomCategory().getName() + c.getAmount() + c.getPricePerNight());
             BookedRoomCategoryDataMapper.instance().insert(c);
         }
         for (BookedRoom r : booking.getBookedRooms()) {
+            r.getBooking().setNumber(bookingNumber);
             BookedRoomDataMapper.instance().insert(r);
         }
 
-        return bookingEntity.getNumber();
+        return bookingNumber;
     }
 
     //update

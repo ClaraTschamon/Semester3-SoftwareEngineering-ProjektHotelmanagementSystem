@@ -43,7 +43,9 @@ public class CustomerDTO {
     }
 
     public void setNumber(Long number) {
-        this.number = number;
+        if (this.number == null) {
+            this.number = number;
+        }
     }
 
     public String getFirstName() {

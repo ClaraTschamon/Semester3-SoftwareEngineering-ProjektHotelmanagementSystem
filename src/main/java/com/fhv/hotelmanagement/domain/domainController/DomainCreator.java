@@ -28,7 +28,7 @@ public class DomainCreator {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
 
-        Booking booking = new Booking(createCustomer(bookingDTO.getCustomer()), bookingDTO.getArrivalDate(),
+        Booking booking = new Booking(bookingDTO.getNumber(), createCustomer(bookingDTO.getCustomer()), bookingDTO.getArrivalDate(),
                 bookingDTO.getCheckInDatetime(), bookingDTO.getDepartureDate(), bookingDTO.getCheckOutDatetime(),
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
                 billingAddress.getCity(), billingAddress.getCountry(), bookingDTO.getComment(), bookingDTO.getPaymentMethod(),
@@ -49,7 +49,7 @@ public class DomainCreator {
 
     protected static Customer createCustomer(CustomerDTO customerDTO) {
         AddressDTO address = customerDTO.getAddress();
-        return new Customer(customerDTO.getFirstName(), customerDTO.getLastName(),
+        return new Customer(customerDTO.getNumber(), customerDTO.getFirstName(), customerDTO.getLastName(),
                 customerDTO.getDateOfBirth(), customerDTO.getNationality(), customerDTO.getPhoneNumber(), customerDTO.getEmail(),
                 address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
                 customerDTO.getSaved(), new ArrayList<>());

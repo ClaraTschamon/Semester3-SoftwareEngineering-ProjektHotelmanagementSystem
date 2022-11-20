@@ -43,6 +43,9 @@ public class BoardDataMapper {
     }
 
     protected static BoardEntity createBoardEntity(Board board) {
+        if (board == null) {
+            return null;
+        }
         return new BoardEntity(board.getName(), board.getPricePerNight());
     }
 

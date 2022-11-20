@@ -23,6 +23,12 @@ public class BookedRoom {
         return booking;
     }
 
+    public void setBooking(Booking booking) {
+        if (this.booking == null) {
+            this.booking = booking;
+        }
+    }
+
     public LocalDate getFromDate() {
         return fromDate;
     }
