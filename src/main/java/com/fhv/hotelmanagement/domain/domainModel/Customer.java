@@ -43,6 +43,12 @@ public class Customer {
         return number;
     }
 
+    public void setNumber(Long number) { // debug only
+        if (this.number == null) {
+            this.number = number;
+        }
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -20,7 +20,7 @@ public class CustomerDataMapper{
     }
 
     //read
-    public Optional<Customer> get(final int number){
+    public Optional<Customer> get(final Long number){
         CustomerEntity entity = PersistenceFacade.instance().entityManager.find(CustomerEntity.class, number);
         if(entity != null){
             Customer customer = createCustomer(entity);
