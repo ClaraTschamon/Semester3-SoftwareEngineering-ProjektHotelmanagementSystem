@@ -41,11 +41,12 @@ public class DomainTranslator {
                 bookedRoomCategoryDTOS.add(translateBookedRoomCategory(bookedRoomCategory));
             }
             for (BookedRoom bookedRoom : booking.getBookedRooms()) {
-                if (bookedRoom.equals(allExcept)) {
-                    bookedRoomDTOS.add(translateBookedRoom(bookedRoom, false));
-                } else {
-                    bookedRoomDTOS.add(translateBookedRoom(bookedRoom, true));
-                }
+                bookedRoomDTOS.add(translateBookedRoom(bookedRoom, false));
+//                if (bookedRoom.equals(allExcept)) {
+//                    bookedRoomDTOS.add(translateBookedRoom(bookedRoom, false));
+//                } else {
+//                    bookedRoomDTOS.add(translateBookedRoom(bookedRoom, true));
+//                }
             }
         }
         return bookingDTO;

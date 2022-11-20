@@ -266,7 +266,7 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(houseNumber.getText())) {
-            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9]*")) {
+            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9A-Za-z]*")) {
                 houseNumberIsValid = true;
                 setTextColor(houseNumber, "black");
             } else {

@@ -55,11 +55,12 @@ public class CheckOutViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allBookedRoomDTOs = MainApplication.getDomainManager().getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
-//        allBookedRoomDTOs = MainApplication.getDomainManager().getAllBookedRoomDTOs();
         ArrayList<RoomDTO> rooms = new ArrayList<>();
 
         for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            rooms.add(bookedRoom.getRoom());
+            if (bookedRoom.getBooking().getCheckOutDatetime() == null) {
+                rooms.add(bookedRoom.getRoom());
+            }
         }
         ObservableList<RoomDTO> roomDTOS = FXCollections.observableList(rooms);
         roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
