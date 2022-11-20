@@ -10,7 +10,7 @@ public class BookedRoomCategoryEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name="booking_number")
+    @JoinColumn(name = "booking_number")
     private BookingEntity booking;
 
     @Id

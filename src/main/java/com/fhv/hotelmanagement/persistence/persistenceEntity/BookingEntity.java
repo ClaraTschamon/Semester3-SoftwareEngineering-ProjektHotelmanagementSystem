@@ -1,12 +1,10 @@
 package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
-import com.fhv.hotelmanagement.domain.domainModel.Board;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Set;
 
 @Entity

@@ -1,9 +1,11 @@
+DROP TABLE IF EXISTS invoiced_room_category CASCADE;
+DROP TABLE IF EXISTS invoice CASCADE;
+DROP TABLE IF EXISTS booked_room CASCADE;
+DROP TABLE IF EXISTS booked_room_category CASCADE;
+DROP TABLE IF EXISTS booking CASCADE;
+DROP TABLE IF EXISTS customer CASCADE;
 DROP TABLE IF EXISTS room_category CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
-DROP TABLE IF EXISTS booked_room CASCADE;
-DROP TABLE IF EXISTS customer CASCADE;
-DROP TABLE IF EXISTS booking CASCADE;
-DROP TABLE IF EXISTS booked_room_category CASCADE;
 DROP TABLE IF EXISTS board CASCADE;
 
 CREATE TABLE room_category(
@@ -40,7 +42,7 @@ CREATE TABLE customer(
 
 CREATE TABLE booking(
     booking_number LONG PRIMARY KEY AUTO_INCREMENT,
-    customer_number INTEGER,
+    customer_number LONG,
     FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
     arrival_date DATE,
     check_in_datetime DATETIME, //Zeitstempel wann man eingecheckt hat
@@ -62,7 +64,7 @@ CREATE TABLE booking(
 );
 
 CREATE TABLE booked_room(
-    booking_number INTEGER,
+    booking_number LONG,
     FOREIGN KEY(booking_number) REFERENCES booking(booking_number),
     room_number INTEGER NOT NULL,
     FOREIGN KEY(room_number) REFERENCES room(room_number),
@@ -71,7 +73,7 @@ CREATE TABLE booked_room(
 );
 
 CREATE TABLE booked_room_category(
-    booking_number INTEGER,
+    booking_number LONG,
     FOREIGN KEY (booking_number) REFERENCES booking(booking_number),
     room_category_name VARCHAR(255),
     FOREIGN KEY (room_category_name) REFERENCES room_category(room_category_name),
@@ -79,4 +81,24 @@ CREATE TABLE booked_room_category(
     amount_room_category INTEGER
 );
 
+CREATE TABLE invoice (
+    invoice_number LONG PRIMARY KEY AUTO_INCREMENT,
+    booking_number LONG,
+    FOREIGN KEY (booking_number) REFERENCES booking(booking_number),
+    board_name VARCHAR(255),
+    FOREIGN KEY (board_name) REFERENCES board(board_name),
+    invoiced_price_per_night_for_board INTEGER,
+    invoiced_from_date DATE,
+    invoiced_to_date DATE
+);
+
+CREATE TABLE invoiced_room_category (
+    invoice_number LONG,
+    FOREIGN KEY (invoice_number) REFERENCES invoice(invoice_number),
+    invoiced_room_category VARCHAR(255),
+    FOREIGN KEY (invoiced_room_category) REFERENCES room_category(room_category_name),
+    PRIMARY KEY (invoice_number, invoiced_room_category),
+    invoiced_room_category_price_per_night INTEGER,
+    invoiced_room_category_amount INTEGER
+);
 
