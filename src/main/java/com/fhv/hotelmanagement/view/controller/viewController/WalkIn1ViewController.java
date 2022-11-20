@@ -343,9 +343,6 @@ public class WalkIn1ViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ArrayList<RoomDTO> allRooms = MainApplication.getDomainManager().getAllRoomDTOs();
-        ArrayList<BookedRoomDTO> allBookedRooms = MainApplication.getDomainManager().getAllBookedRoomDTOs();
-
         RoomProvider roomProvider = new RoomProvider();
 
         singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));

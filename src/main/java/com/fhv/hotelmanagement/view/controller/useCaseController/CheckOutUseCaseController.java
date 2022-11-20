@@ -13,13 +13,14 @@ public class CheckOutUseCaseController {
         this.booking = booking;
     }
 
-    public void checkOut() {
+    public void save() {
         if (booking != null) {
             booking.setCheckOutDatetime(LocalDateTime.now());
+            System.out.println(booking.getCheckOutDatetime());
             try {
                 DomainController.saveBooking(booking);
             } catch (BookingIsInvalidException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
         }
     }
