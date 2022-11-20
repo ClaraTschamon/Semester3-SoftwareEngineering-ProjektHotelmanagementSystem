@@ -10,7 +10,8 @@ DROP TABLE IF EXISTS board CASCADE;
 
 CREATE TABLE room_category(
     room_category_name VARCHAR(255) PRIMARY KEY ,
-    price_per_night INTEGER
+    price_per_night INTEGER,
+    max_amount_guests INTEGER
 );
 
 CREATE TABLE board(
@@ -60,7 +61,8 @@ CREATE TABLE booking(
     authorisation_number VARCHAR(255),
     board_name VARCHAR(255),
     FOREIGN KEY (board_name) REFERENCES board(board_name),
-    price_per_night_for_board INTEGER
+    price_per_night_for_board INTEGER,
+    amount_guests INTEGER
 );
 
 CREATE TABLE booked_room(

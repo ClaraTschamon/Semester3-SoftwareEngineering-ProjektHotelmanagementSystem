@@ -33,7 +33,8 @@ public class DomainCreator {
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
                 billingAddress.getCity(), billingAddress.getCountry(), bookingDTO.getComment(), bookingDTO.getPaymentMethod(),
                 bookingDTO.getCreditCardNumber(), bookingDTO.getExpirationDate(), bookingDTO.getAuthorisationNumber(),
-                createBoard(bookingDTO.getBoard()), bookingDTO.getPricePerNightForBoard(), bookedRoomCategories,bookedRooms);
+                createBoard(bookingDTO.getBoard()), bookingDTO.getPricePerNightForBoard(), bookingDTO.getAmountGuests(),
+                bookedRoomCategories, bookedRooms);
 
         if (fillArrays) {
             for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {

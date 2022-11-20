@@ -21,6 +21,7 @@ public class Booking {
     private String authorisationNumber;
     private Board board;
     private BigDecimal pricePerNightForBoard;
+    private Integer amountGuests;
     private ArrayList<BookedRoomCategory> bookedRoomCategories;
     private ArrayList<BookedRoom> bookedRooms;
 
@@ -28,8 +29,7 @@ public class Booking {
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                    String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
-                   ArrayList<BookedRoomCategory> bookedRoomCategories,
-                   ArrayList<BookedRoom> bookedRooms) {
+                   Integer amountGuests, ArrayList<BookedRoomCategory> bookedRoomCategories, ArrayList<BookedRoom> bookedRooms) {
 
         this.number = number;
         this.customer = customer;
@@ -45,6 +45,7 @@ public class Booking {
         this.authorisationNumber = authorisationNumber;
         this.board = board;
         this.pricePerNightForBoard = pricePerNightForBoard;
+        this.amountGuests = amountGuests;
         this.bookedRoomCategories = bookedRoomCategories;
         this.bookedRooms = bookedRooms;
     }
@@ -53,9 +54,12 @@ public class Booking {
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                    String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
-                   ArrayList<BookedRoomCategory> bookedRoomCategories,
+                   Integer amountGuests, ArrayList<BookedRoomCategory> bookedRoomCategories,
                    ArrayList<BookedRoom> bookedRooms) {
-        this(null,customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingStreet, billingHouseNumber, billingPostalCode, billingCity, billingCountry, comment, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard, bookedRoomCategories, bookedRooms);
+        this(null,customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingStreet,
+                billingHouseNumber, billingPostalCode, billingCity, billingCountry, comment, paymentMethod,
+                creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard, amountGuests,
+                bookedRoomCategories, bookedRooms);
     }
 
     public Long getNumber() {
@@ -188,5 +192,11 @@ public class Booking {
         this.bookedRooms = bookedRooms;
     }
 
+    public Integer getAmountGuests() {
+        return amountGuests;
+    }
 
+    public void setAmountGuests(Integer amountGuests) {
+        this.amountGuests = amountGuests;
+    }
 }
