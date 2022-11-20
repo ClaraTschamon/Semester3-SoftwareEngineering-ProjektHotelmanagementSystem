@@ -54,7 +54,8 @@ public class StringValidator {
         return Pattern.compile(regexPattern).matcher(string).matches();
     }
 
-    public static int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+    public static int calculateAge(LocalDate birthDate) {
+        LocalDate currentDate = LocalDate.now();
         return Period.between(birthDate, currentDate).getDays();
     }
 }
