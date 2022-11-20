@@ -62,7 +62,7 @@ public class CustomerDataMapper{
     protected static Customer createCustomer(CustomerEntity customerEntity) {
         ArrayList<Booking> bookings = new ArrayList<>();
 
-        Customer customer = new Customer(customerEntity.getFirstName(), customerEntity.getLastName(),
+        Customer customer = new Customer(customerEntity.getNumber(), customerEntity.getFirstName(), customerEntity.getLastName(),
                 customerEntity.getDateOfBirth(), customerEntity.getNationality(), customerEntity.getPhoneNumber(),
                 customerEntity.getEmail(), customerEntity.getStreet(), customerEntity.getHouseNumber(),
                 customerEntity.getPostalCode(), customerEntity.getCity(), customerEntity.getCountry(), customerEntity.getSaved(),

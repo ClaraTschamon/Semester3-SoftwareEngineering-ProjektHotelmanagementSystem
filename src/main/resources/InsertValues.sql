@@ -1,5 +1,3 @@
-//Testdaten so schreiben, dass man kein Hartkodiertes Datum
-//hat, sondern immer das aktuelle Datum eingefügt wird.
 DELETE FROM BOOKED_ROOM
 WHERE TRUE;
 DELETE FROM BOOKED_ROOM_CATEGORY
