@@ -79,7 +79,9 @@ public class CheckOutViewController implements Initializable {
     private BookingDTO getBookingFromRoom(RoomDTO room){
         for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
             if (bookedRoom.getRoom().equals(room)){
-                return bookedRoom.getBooking();
+                BookingDTO bookingDTO = bookedRoom.getBooking();
+                useCaseController.setBooking(bookingDTO);
+                return bookingDTO;
             }
         }
         return null;

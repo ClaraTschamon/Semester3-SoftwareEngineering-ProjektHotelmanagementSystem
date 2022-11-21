@@ -11,9 +11,8 @@ import java.time.LocalDateTime;
 public class CheckOutUseCaseController {
     private BookingDTO booking;
 
-    public BookingDTO getBooking(Long number) {
-        booking = MainApplication.getDomainManager().getBookingDTO(number);
-        return booking;
+    public void setBooking(BookingDTO booking) {
+        this.booking = booking;
     }
 
     public void save() {
