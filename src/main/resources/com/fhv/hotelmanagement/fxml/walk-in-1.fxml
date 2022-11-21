@@ -128,7 +128,7 @@
             <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
             <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einzelzimmer" />
             <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doppelzimmer" />
-            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Famielenzimmer" />
+            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Familienzimmer" />
             <Text layoutX="545.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suite" />
             <Text fx:id="counterSingleRoom" layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
