@@ -71,7 +71,6 @@ public class CheckOutViewController implements Initializable {
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 RoomDTO selectedRoom = (RoomDTO) roomComboBox.getSelectionModel().getSelectedItem();
                 BookingDTO bookingDTO = getBookingFromRoom(selectedRoom);
-                useCaseController.setBooking(bookingDTO);
                 setTexts(bookingDTO);
             }
         });
