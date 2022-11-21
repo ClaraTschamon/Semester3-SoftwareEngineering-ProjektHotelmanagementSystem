@@ -39,15 +39,6 @@ public class BookingDataMapper {
         Long bookingNumber = bookingEntity.getNumber();
         booking.setNumber(bookingNumber);
 
-        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
-            c.getBooking().setNumber(bookingNumber);
-            BookedRoomCategoryDataMapper.instance().insert(c);
-        }
-        for (BookedRoom r : booking.getBookedRooms()) {
-            r.getBooking().setNumber(bookingNumber);
-            BookedRoomDataMapper.instance().insert(r);
-        }
-
         return bookingNumber;
     }
 
@@ -59,7 +50,7 @@ public class BookingDataMapper {
         entityManager.getTransaction().begin();
         entityManager.merge(bookingEntity);
         entityManager.getTransaction().commit();
-//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
+//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) { // TODO
 //            PersistenceFacade.instance().entityManager.merge(
 //                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c));
 //        }
@@ -81,14 +72,14 @@ public class BookingDataMapper {
                 booking.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(booking.getBoard()), booking.getPricePerNightForBoard(),
                 booking.getAmountGuests(), bookedRoomCategoryEntities, bookedRoomEntities);
 
-//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
-//            bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
-//                    c.getPricePerNight(), c.getAmount()));
-//
-//        }
-//        for (BookedRoom b : booking.getBookedRooms()) {
-//            bookedRoomEntities.add(new BookedRoomEntity(bookingEntity, RoomDataMapper.createRoomEntity(b.getRoom()), b.getFromDate(), b.getToDate()));
-//        }
+        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
+            bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
+                    c.getPricePerNight(), c.getAmount()));
+
+        }
+        for (BookedRoom b : booking.getBookedRooms()) {
+            bookedRoomEntities.add(new BookedRoomEntity(bookingEntity, RoomDataMapper.createRoomEntity(b.getRoom()), b.getFromDate(), b.getToDate()));
+        }
 
         return bookingEntity;
     }
