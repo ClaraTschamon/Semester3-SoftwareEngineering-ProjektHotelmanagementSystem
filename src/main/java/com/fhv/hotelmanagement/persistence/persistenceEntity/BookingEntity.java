@@ -70,7 +70,7 @@ public class BookingEntity {
     private BigDecimal pricePerNightForBoard;
 
    @Column(name="amount_guests")
-   private int amountGuests;
+   private Integer amountGuests;
 
     @OneToMany(
             mappedBy = "booking",
