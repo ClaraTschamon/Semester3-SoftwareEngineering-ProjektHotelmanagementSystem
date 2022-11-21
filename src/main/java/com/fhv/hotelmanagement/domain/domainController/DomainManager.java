@@ -39,6 +39,14 @@ public class DomainManager {
         return boardDTOS;
     }
 
+    public BookingDTO getBookingDTO(Long number) {
+        Booking booking = PersistenceFacade.getBooking(number).get();
+        if (booking != null) {
+            return DomainTranslator.translateBooking(booking, true, null);
+        }
+        return null;
+    }
+
 //    public ArrayList<BookedRoomDTO> getAllBookedRoomDTOs() {
 //        ArrayList<BookedRoom> bookedRooms = PersistenceFacade.getAllBookedRooms();
 //        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
