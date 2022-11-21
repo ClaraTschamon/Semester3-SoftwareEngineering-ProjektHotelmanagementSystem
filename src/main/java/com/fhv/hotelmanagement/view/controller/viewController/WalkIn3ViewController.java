@@ -156,7 +156,8 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
-            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9 ]{8,19}")) {
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$") ||
+                   StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}")) {
                 creditCardNumberIsValid = true;
                 setTextColor(creditCardTextField, "black");
             } else {
@@ -180,7 +181,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingCityTextField.getText())) {
-            if (StringValidator.checkRegex(billingCityTextField.getText(), "[a-zA-Z]*")) {
+            if (StringValidator.checkRegex(billingCityTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
                 billingCityIsValid = true;
                 setTextColor(billingCityTextField, "black");
             } else {
@@ -192,7 +193,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
-            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9]*")) {
+            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9A-Za-z]*")) {
                 billingHouseNumberIsValid = true;
                 setTextColor(billingHouseNumberTextField, "black");
             } else {
@@ -204,10 +205,9 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingStreetTextField.getText())) {
-            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[a-zA-Z]*")) {
                 billingStreetIsValid = true;
                 setTextColor(billingStreetTextField, "black");
-            } else {
+            if (!StringValidator.checkString(billingStreetTextField.getText())) {
                 setTextColor(billingStreetTextField, "red");
             }
         }
@@ -239,11 +239,17 @@ public class WalkIn3ViewController {
             setRequieredField(expiryDateTextField);
         }
 
-        if(creditCardNumberIsValid && verfuegerNummerIsValid && billingStreetIsValid &&
-                billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&
-                verfuegerNummerIsValid && expireDateIsValid) {
+        if (paymentMethod.getValue().equals("Rechnung")) {
+            creditCardTextField.clear();
+            authorisationNumberTextField.clear();
+            expiryDateTextField.clear();
             return true;
         }
+        else if (creditCardNumberIsValid && verfuegerNummerIsValid && billingStreetIsValid &&
+                billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&
+                verfuegerNummerIsValid && expireDateIsValid) {
+                return true;
+            }
         return false;
     }
 

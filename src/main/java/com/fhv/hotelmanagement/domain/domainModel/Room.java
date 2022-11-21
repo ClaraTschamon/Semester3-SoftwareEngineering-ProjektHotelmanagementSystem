@@ -24,7 +24,6 @@ public class Room {
 
     public boolean isFree() {
         for (BookedRoom r : PersistenceFacade.getBookedRoomsBetween(LocalDate.now(), LocalDate.now())) {
-
             if (r.getRoom().equals(this)) {
                 return false;
             }

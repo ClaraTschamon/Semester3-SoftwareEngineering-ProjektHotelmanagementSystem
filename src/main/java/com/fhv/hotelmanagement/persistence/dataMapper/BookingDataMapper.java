@@ -54,14 +54,18 @@ public class BookingDataMapper {
     //update
     public void store(Booking booking){
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
-        PersistenceFacade.instance().entityManager.merge(bookingEntity);
+        var entityManager = PersistenceFacade.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(bookingEntity);
+        entityManager.getTransaction().commit();
 //        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
 //            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c, bookingEntity));
+//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c));
 //        }
 //        for (BookedRoom r : booking.getBookedRooms()) {
 //            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomDataMapper.createBookedRoomEntity(r, bookingEntity));
+//                    BookedRoomDataMapper.createBookedRoomEntity(r));
 //        }
     }
 
