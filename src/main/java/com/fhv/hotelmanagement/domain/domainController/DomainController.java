@@ -29,7 +29,6 @@ public class DomainController {
         Long bookingNumber = bookingDTO.getNumber();
         if (DomainValidator.checkBooking(bookingDTO)) {
             Booking booking = DomainCreator.createBooking(bookingDTO, true);
-
             if (bookingNumber == null) {
                 bookingNumber = PersistenceFacade.insertBooking(booking);
             } else {
@@ -40,5 +39,15 @@ public class DomainController {
             throw new BookingIsInvalidException();
         }
         return bookingNumber;
+    }
+
+    public static Long saveInvoice(InvoiceDTO invoiceDTO) {
+        if (DomainValidator.checkInvoice(invoiceDTO)) {
+            Invoice invoice = DomainCreator.createInvoice(invoiceDTO, true);
+
+            return PersistenceFacade.insertInvoice(invoice);
+
+        }
+        return null;
     }
 }

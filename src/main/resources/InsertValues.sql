@@ -1,3 +1,7 @@
+DELETE FROM INVOICED_ROOM_CATEGORY
+WHERE TRUE;
+DELETE FROM INVOICE
+WHERE TRUE;
 DELETE FROM BOOKED_ROOM
 WHERE TRUE;
 DELETE FROM BOOKED_ROOM_CATEGORY
@@ -111,24 +115,24 @@ VALUES('Dennis', 'Boto', DATE '1978-10-17', 'Deutschland', '+49151/8759788', 'bo
 INSERT INTO customer(customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, saved)
 VALUES('Linda', 'Jackson', DATE '2001-01-06', 'Schweiz', '+41132/64805846', 'linda_jackson@net-mail.none', 'Iserstraße', '87', '38114', 'Amelinghausen', 'Schweiz', true);
 
-INSERT INTO booking(ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board)
-VALUES (CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 3, NULL, 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', 'isst Vegan', 'Kreditkarte','AT88 3888 2222 3333', '01/23', 'AVA2 AJ44 3285 8891', 'Halbpension', 20);
+INSERT INTO booking(customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board)
+VALUES (1,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 3, NULL, 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', 'isst Vegan', 'Kreditkarte','AT88 3888 2222 3333', '01/23', 'AVA2 AJ44 3285 8891', 'Halbpension', 20);
 
-INSERT INTO booking(ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board)
-VALUES (CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 5, NULL, 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', 'hat seinen Hund dabei', 'Rechnung', null, '10/25', null, 'Vollpension', 30);
+INSERT INTO booking(customer_number,ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board)
+VALUES (2,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 5, NULL, 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', 'hat seinen Hund dabei', 'Rechnung', null, '10/25', null, 'Vollpension', 30);
 
-INSERT INTO booking(ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board)
-VALUES (CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Vollpension', 30);
+INSERT INTO booking(customer_number,ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board)
+VALUES (3,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Vollpension', 30);
 
 
-INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 12, DATE '2022-11-11',  CURRENT_DATE);
+INSERT INTO BOOKED_ROOM(booking_number,room_number, from_date, to_date)
+VALUES (1,12, DATE '2022-11-11',  CURRENT_DATE);
 
-INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 16, DATE '2022-11-10',  CURRENT_DATE);
+INSERT INTO BOOKED_ROOM(booking_number,room_number, from_date, to_date)
+VALUES (2,16, DATE '2022-11-10',  CURRENT_DATE);
 
-INSERT INTO BOOKED_ROOM(booking_number, room_number, from_date, to_date)
-VALUES (1, 21, DATE '2022-11-10',  DATE '2023-06-07');
+INSERT INTO BOOKED_ROOM(booking_number,room_number, from_date, to_date)
+VALUES (3,21, DATE '2022-11-10',  DATE '2023-06-07');
 
 
 

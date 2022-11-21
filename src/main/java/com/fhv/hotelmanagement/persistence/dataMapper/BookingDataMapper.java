@@ -39,29 +39,24 @@ public class BookingDataMapper {
         Long bookingNumber = bookingEntity.getNumber();
         booking.setNumber(bookingNumber);
 
-        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
-            c.getBooking().setNumber(bookingNumber);
-            BookedRoomCategoryDataMapper.instance().insert(c);
-        }
-        for (BookedRoom r : booking.getBookedRooms()) {
-            r.getBooking().setNumber(bookingNumber);
-            BookedRoomDataMapper.instance().insert(r);
-        }
-
         return bookingNumber;
     }
 
     //update
     public void store(Booking booking){
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
-        PersistenceFacade.instance().entityManager.merge(bookingEntity);
-//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
+        var entityManager = PersistenceFacade.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(bookingEntity);
+        entityManager.getTransaction().commit();
+//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) { // TODO
 //            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c, bookingEntity));
+//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c));
 //        }
 //        for (BookedRoom r : booking.getBookedRooms()) {
 //            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomDataMapper.createBookedRoomEntity(r, bookingEntity));
+//                    BookedRoomDataMapper.createBookedRoomEntity(r));
 //        }
     }
 
@@ -77,14 +72,14 @@ public class BookingDataMapper {
                 booking.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(booking.getBoard()), booking.getPricePerNightForBoard(),
                 booking.getAmountGuests(), bookedRoomCategoryEntities, bookedRoomEntities);
 
-//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
-//            bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
-//                    c.getPricePerNight(), c.getAmount()));
-//
-//        }
-//        for (BookedRoom b : booking.getBookedRooms()) {
-//            bookedRoomEntities.add(new BookedRoomEntity(bookingEntity, RoomDataMapper.createRoomEntity(b.getRoom()), b.getFromDate(), b.getToDate()));
-//        }
+        for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
+            bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
+                    c.getPricePerNight(), c.getAmount()));
+
+        }
+        for (BookedRoom b : booking.getBookedRooms()) {
+            bookedRoomEntities.add(new BookedRoomEntity(bookingEntity, RoomDataMapper.createRoomEntity(b.getRoom()), b.getFromDate(), b.getToDate()));
+        }
 
         return bookingEntity;
     }

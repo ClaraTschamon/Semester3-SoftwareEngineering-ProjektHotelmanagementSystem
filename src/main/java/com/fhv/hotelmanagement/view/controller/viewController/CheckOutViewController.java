@@ -1,8 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
@@ -10,18 +9,17 @@ import com.fhv.hotelmanagement.view.controller.useCaseController.CheckOutUseCase
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -41,6 +39,8 @@ public class CheckOutViewController implements Initializable {
     @FXML
     public Text packageText;
     @FXML
+    public Text numberPersonsText;
+    @FXML
     public Text paymentMethodText;
     @FXML
     public Text totalPriceText;
@@ -51,17 +51,16 @@ public class CheckOutViewController implements Initializable {
         useCaseController = new CheckOutUseCaseController();
     }
 
-    protected void fillData(){
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        allBookedRoomDTOs = MainApplication.getDomainManager().getAllBookedRoomDTOs();
+        allBookedRoomDTOs = MainApplication.getDomainManager().getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<RoomDTO> rooms = new ArrayList<>();
 
         for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            rooms.add(bookedRoom.getRoom());
+            if (bookedRoom.getBooking().getCheckOutDatetime() == null) {
+                rooms.add(bookedRoom.getRoom());
+            }
         }
         ObservableList<RoomDTO> roomDTOS = FXCollections.observableList(rooms);
         roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
@@ -77,27 +76,15 @@ public class CheckOutViewController implements Initializable {
         });
     }
 
-    @FXML
-    public void onCancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        //useCaseController.cancel();
-        MainApplication.getMainController().loadIntoContentArea("home");
-    }
-
-    @FXML
-    public void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
-        //useCaseController.save();
-        MainApplication.getMainController().loadIntoContentArea("home");
-
-    }
-
     private BookingDTO getBookingFromRoom(RoomDTO room){
-        BookedRoomDTO myRoom = new BookedRoomDTO();
         for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            if(bookedRoom.getRoom().getNumber() == room.getNumber()){
-                myRoom = bookedRoom;
+            if (bookedRoom.getRoom().equals(room)){
+                BookingDTO bookingDTO = bookedRoom.getBooking();
+                useCaseController.setBooking(bookingDTO);
+                return bookingDTO;
             }
         }
-        return myRoom.getBooking();
+        return null;
     }
 
     private void setTexts(BookingDTO bookingDTO){
@@ -112,27 +99,41 @@ public class CheckOutViewController implements Initializable {
         firstNameText.setText("Vorname: " + bookingDTO.getCustomer().getFirstName());
         lastNameText.setText("Nachname: " + bookingDTO.getCustomer().getLastName());
         packageText.setText("Package: " + bookingDTO.getBoard().getName());
+        numberPersonsText.setText("Personenanzahl: "+ String.valueOf(bookingDTO.getAmountGuests()));
         paymentMethodText.setText("Zahlungsart: " + bookingDTO.getPaymentMethod());
 
         BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
-        totalPriceText.setText("Gesamtpreis: " + price.toString());
-
+        totalPriceText.setText("Gesamtbetrag*: " + price + " €");
     }
 
     private BigDecimal calculateTotalPrice(BookingDTO bookingDTO, ArrayList<BookedRoomDTO> bookedRoomDTOs){
         int totalNights = (int) DAYS.between(bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate());
-        System.out.println(totalNights);
 
         BigDecimal totalPrice = new BigDecimal(0);
 
-        for(BookedRoomDTO room : bookedRoomDTOs){
-            BigDecimal roomPrice = room.getRoom().getCategory().getPricePerNight();
-            BigDecimal price = roomPrice.multiply(new BigDecimal(totalNights));
-            totalPrice.add(price);
+        for (BookedRoomCategoryDTO c : bookingDTO.getBookedRoomCategories()) {
+            BigDecimal price = c.getPricePerNight().multiply(new BigDecimal(c.getAmount()));
+            totalPrice = totalPrice.add(price);
         }
-        BigDecimal boardPrice = bookingDTO.getBoard().getPricePerNight();
-        boardPrice = boardPrice.multiply(new BigDecimal(totalNights));
-        totalPrice.add(boardPrice);
+
+        BigDecimal boardPrice = bookingDTO.getPricePerNightForBoard();
+        if (boardPrice != null) {
+            boardPrice = boardPrice.multiply(new BigDecimal(totalNights).multiply(new BigDecimal(bookingDTO.getAmountGuests())));
+            totalPrice = totalPrice.add(boardPrice);
+        }
+
         return totalPrice;
+    }
+
+    @FXML
+    public void onCancelButtonClicked(ActionEvent actionEvent) throws IOException {
+        //useCaseController.cancel();
+        MainApplication.getMainController().loadIntoContentArea("home");
+    }
+
+    @FXML
+    public void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
+        useCaseController.save();
+        MainApplication.getMainController().loadIntoContentArea("home");
     }
 }

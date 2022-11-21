@@ -39,19 +39,27 @@ public class DomainManager {
         return boardDTOS;
     }
 
-    public ArrayList<BookedRoomDTO> getAllBookedRoomDTOs() {
-        ArrayList<BookedRoom> bookedRooms = PersistenceFacade.getAllBookedRooms();
-        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
-        for (BookedRoom r : bookedRooms) {
-            bookedRoomDTOS.add(DomainTranslator.translateBookedRoom(r));
+    public BookingDTO getBookingDTO(Long number) {
+        Booking booking = PersistenceFacade.getBooking(number).get();
+        if (booking != null) {
+            return DomainTranslator.translateBooking(booking, true, null);
         }
-        return bookedRoomDTOS;
+        return null;
     }
+
+//    public ArrayList<BookedRoomDTO> getAllBookedRoomDTOs() {
+//        ArrayList<BookedRoom> bookedRooms = PersistenceFacade.getAllBookedRooms();
+//        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+//        for (BookedRoom r : bookedRooms) {
+//            bookedRoomDTOS.add(DomainTranslator.translateBookedRoom(r));
+//        }
+//        return bookedRoomDTOS;
+//    }
 
     public ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
         for (BookedRoom bookedRoom : PersistenceFacade.getBookedRoomsBetween(minDate, maxDate)) {
-            bookedRoomDTOS.add(DomainTranslator.translateBookedRoom(bookedRoom));
+            bookedRoomDTOS.add(DomainTranslator.translateBookedRoom(bookedRoom, true));
         }
         return bookedRoomDTOS;
     }

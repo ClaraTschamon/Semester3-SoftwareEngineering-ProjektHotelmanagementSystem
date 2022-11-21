@@ -193,7 +193,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
-            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9]*")) {
+            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9A-Za-z]*")) {
                 billingHouseNumberIsValid = true;
                 setTextColor(billingHouseNumberTextField, "black");
             } else {

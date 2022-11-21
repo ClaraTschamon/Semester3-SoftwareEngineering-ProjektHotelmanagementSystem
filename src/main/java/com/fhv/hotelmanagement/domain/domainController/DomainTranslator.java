@@ -10,18 +10,23 @@ public class DomainTranslator {
         return new AddressDTO(address.getStreet(), address.getHouseNumber(), address.getPostalCode(),
                 address.getCity(), address.getCountry());
     }
-    protected static BookedRoomDTO translateBookedRoom(BookedRoom bookedRoom) {
-        return new BookedRoomDTO(translateBooking(bookedRoom.getBooking(), false), translateRoom(bookedRoom.getRoom()),
-                bookedRoom.getFromDate(), bookedRoom.getToDate());
+    protected static BookedRoomDTO translateBookedRoom(BookedRoom bookedRoom, boolean includeBookingArrays) {
+        if (!includeBookingArrays) {
+            return new BookedRoomDTO(translateBooking(bookedRoom.getBooking(), false, null), translateRoom(bookedRoom.getRoom()),
+                    bookedRoom.getFromDate(), bookedRoom.getToDate());
+        } else {
+            return new BookedRoomDTO(translateBooking(bookedRoom.getBooking(), true, bookedRoom), translateRoom(bookedRoom.getRoom()),
+                    bookedRoom.getFromDate(), bookedRoom.getToDate());
+        }
     }
 
     protected static BookedRoomCategoryDTO translateBookedRoomCategory(BookedRoomCategory bookedRoomCategory) {
-        return new BookedRoomCategoryDTO(translateBooking(bookedRoomCategory.getBooking(), false),
+        return new BookedRoomCategoryDTO(translateBooking(bookedRoomCategory.getBooking(), false, null),
                 translateRoomCategory(bookedRoomCategory.getRoomCategory()), bookedRoomCategory.getPricePerNight(),
                 bookedRoomCategory.getAmount());
     }
 
-    protected static BookingDTO translateBooking(Booking booking, boolean includeArrays) {
+    protected static BookingDTO translateBooking(Booking booking, boolean includeArrays, BookedRoom allExcept) {
         ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
 
@@ -36,10 +41,14 @@ public class DomainTranslator {
                 bookedRoomCategoryDTOS.add(translateBookedRoomCategory(bookedRoomCategory));
             }
             for (BookedRoom bookedRoom : booking.getBookedRooms()) {
-                bookedRoomDTOS.add(translateBookedRoom(bookedRoom));
+                bookedRoomDTOS.add(translateBookedRoom(bookedRoom, false));
+//                if (bookedRoom.equals(allExcept)) {
+//                    bookedRoomDTOS.add(translateBookedRoom(bookedRoom, false));
+//                } else {
+//                    bookedRoomDTOS.add(translateBookedRoom(bookedRoom, true));
+//                }
             }
         }
-
         return bookingDTO;
     }
 
