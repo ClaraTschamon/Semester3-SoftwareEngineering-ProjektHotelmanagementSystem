@@ -148,7 +148,7 @@ public class WalkIn3ViewController {
     private boolean validate() {
 
         boolean creditCardNumberIsValid = false;
-        boolean verfuegerNummerIsValid = false;
+        boolean authorisationNumberIsValid = false;
         boolean billingCityIsValid = false;
         boolean billingHouseNumberIsValid = false;
         boolean billingStreetIsValid = false;
@@ -157,7 +157,10 @@ public class WalkIn3ViewController {
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
             if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$") ||
-                   StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}")) {
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4,6}[ ][0-9]{4,5}[ ][0-9]{4}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4,6}[ ][0-9]{4,5}")) {
+
                 creditCardNumberIsValid = true;
                 setTextColor(creditCardTextField, "black");
             } else {
@@ -169,8 +172,8 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(authorisationNumberTextField.getText())) {
-            if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9]{3}")) {
-                verfuegerNummerIsValid = true;
+            if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9]{3,4}")) {
+                authorisationNumberIsValid = true;
                 setTextColor(authorisationNumberTextField, "black");
             } else {
                 setTextColor(authorisationNumberTextField, "red");
@@ -245,9 +248,9 @@ public class WalkIn3ViewController {
             expiryDateTextField.clear();
             return true;
         }
-        else if (creditCardNumberIsValid && verfuegerNummerIsValid && billingStreetIsValid &&
+        else if (creditCardNumberIsValid && authorisationNumberIsValid && billingStreetIsValid &&
                 billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&
-                verfuegerNummerIsValid && expireDateIsValid) {
+                authorisationNumberIsValid && expireDateIsValid) {
                 return true;
             }
         return false;

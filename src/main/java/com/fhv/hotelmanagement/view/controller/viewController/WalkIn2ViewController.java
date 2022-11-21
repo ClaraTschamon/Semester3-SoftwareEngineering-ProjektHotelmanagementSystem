@@ -297,7 +297,7 @@ public class WalkIn2ViewController implements Initializable {
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
-        if (StringValidator.calculateAge(dateOfBirth) >= 0) {
+        if (StringValidator.calculateAge(dateOfBirth) >= 14) {
             birthdayIsValid = true;
         } else {
             birthdayDatePicker.setStyle("-fx-text-inner-color: red");
