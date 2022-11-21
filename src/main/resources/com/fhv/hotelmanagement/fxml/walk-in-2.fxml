@@ -52,13 +52,8 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="firstName" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" />
+                <TextField fx:id="firstName" layoutX="60.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" />
                 <TextField fx:id="lastName" layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
-                <Text layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationalität" wrappingWidth="74.19140625">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Text>
                 <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="74.19140625">
                     <font>
                         <Font size="14.0" />
@@ -69,6 +64,18 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
+                <Text layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationalität" wrappingWidth="74.19140625">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+            <ComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
+            <DatePicker fx:id="birthdayDatePicker" layoutX="60.0" layoutY="440.0" prefHeight="40.0" prefWidth="300.0" showWeekNumbers="false" />
+                <TextField fx:id="street" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="230.0" />
+                <TextField fx:id="houseNumber" layoutX="780.0" layoutY="200.0" prefHeight="40.0" prefWidth="65.0" />
+                <TextField fx:id="city" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="230.0" />
+                <TextField fx:id="postalCode" layoutX="780.0" layoutY="270.0" prefHeight="40.0" prefWidth="65.0" />
+            <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
                 <TextField fx:id="phoneNumber" layoutX="545.0" layoutY="425.0" prefHeight="40.0" prefWidth="300.0" />
                 <Text layoutX="545.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer" wrappingWidth="137.19140625">
                     <font>
@@ -81,7 +88,6 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
-                <TextField fx:id="street" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="230.0" />
                 <Text layoutX="545.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße">
                     <font>
                         <Font size="14.0" />
@@ -92,14 +98,11 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="houseNumber" layoutX="780.0" layoutY="200.0" prefHeight="40.0" prefWidth="65.0" />
                 <Text layoutX="550.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="city" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="230.0" />
-                <TextField fx:id="postalCode" layoutX="780.0" layoutY="270.0" prefHeight="40.0" prefWidth="65.0" />
                 <Text layoutX="780.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ" wrappingWidth="39.1083984375">
                     <font>
                         <Font size="14.0" />
@@ -120,7 +123,6 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-            <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
             <Text layoutX="545.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
                <font>
                   <Font size="14.0" />
@@ -131,8 +133,6 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <DatePicker fx:id="birthdayDatePicker" layoutX="60.0" layoutY="440.0" prefHeight="40.0" prefWidth="300.0" showWeekNumbers="false"/>
-            <ComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
             <CheckBox layoutX="545.0" layoutY="557.0" mnemonicParsing="false" selected="true" text="Gast speichern" />
             </children></AnchorPane>
     </center>
