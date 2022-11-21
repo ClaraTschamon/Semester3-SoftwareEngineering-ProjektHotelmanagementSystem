@@ -43,7 +43,7 @@
                         <Font size="14.0" />
                     </font></Button>
                 <Label layoutX="455.0" layoutY="421.0" />
-            <TextField layoutX="60.0" layoutY="110.0" prefHeight="40.0" prefWidth="300.0" promptText="Kundenname oder Buchungsnummer eingeben"/>
+            <TextField layoutX="60.0" layoutY="110.0" prefHeight="40.0" prefWidth="300.0" promptText="Kundenname oder Buchungsnummer eingeben" />
             <Text layoutX="60.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchung suchen" wrappingWidth="209.84048461914062">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -88,7 +88,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="291.0" layoutX="545.0" layoutY="110.0" stroke="#c1c1c1" strokeType="INSIDE" width="390.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="289.0" layoutX="545.0" layoutY="110.0" stroke="#c1c1c1" strokeType="INSIDE" width="390.0" />
             <Text fx:id="roomText" layoutX="560.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer:">
                <font>
                   <Font size="14.0" />
@@ -119,11 +119,12 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="totalPriceText" layoutX="558.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtbetrag:">
+            <Text fx:id="totalPriceText" layoutX="558.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtbetrag*:" wrappingWidth="159.3798828125">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
+            <Text layoutX="834.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*exklusive Ortstaxe" />
             </children></AnchorPane>
     </center>
 </BorderPane>

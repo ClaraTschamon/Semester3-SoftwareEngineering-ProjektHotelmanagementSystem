@@ -103,7 +103,7 @@ public class CheckOutViewController implements Initializable {
         paymentMethodText.setText("Zahlungsart: " + bookingDTO.getPaymentMethod());
 
         BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
-        totalPriceText.setText("Gesamtbetrag: " + price);
+        totalPriceText.setText("Gesamtbetrag*: " + price + " €");
     }
 
     private BigDecimal calculateTotalPrice(BookingDTO bookingDTO, ArrayList<BookedRoomDTO> bookedRoomDTOs){
