@@ -7,6 +7,7 @@ import com.fhv.hotelmanagement.view.controller.viewController.WalkInViewControll
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class MainApplication extends Application {
         fxmlLoader = new FXMLLoader(mainViewURL);
         scene = new Scene(fxmlLoader.load(), width, height);
         stage.setTitle("Sunway Hotel");
+        stage.getIcons().add(new Image(MainApplication.class.getResource("fxml/Bilder/Logo4.png").openStream()));
         stage.setScene(scene);
         stage.show();
     }

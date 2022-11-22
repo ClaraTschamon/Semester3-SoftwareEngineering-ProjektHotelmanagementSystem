@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 
@@ -20,7 +21,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -28,7 +31,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CheckOutViewController implements Initializable {
 
     private CheckOutUseCaseController useCaseController;
-
     private ArrayList<BookedRoomDTO> allBookedRoomDTOs;
     @FXML
     public Text roomText;
@@ -37,15 +39,23 @@ public class CheckOutViewController implements Initializable {
     @FXML
     public Text lastNameText;
     @FXML
-    public Text packageText;
+    public Text fromDateText;
+    @FXML
+    public Text toDateText;
     @FXML
     public Text numberPersonsText;
+    @FXML
+    public Text packageText;
+    @FXML
+    public Text roomPriceText;
     @FXML
     public Text paymentMethodText;
     @FXML
     public Text totalPriceText;
-
+    @FXML
     public ComboBox roomComboBox;
+    @FXML
+    public CheckBox printInvoiceCheckBox;
 
     public CheckOutViewController(){
         useCaseController = new CheckOutUseCaseController();
@@ -89,21 +99,37 @@ public class CheckOutViewController implements Initializable {
 
     private void setTexts(BookingDTO bookingDTO){
         StringBuilder rooms = new StringBuilder();
-        rooms.append("Zimmer: ");
+        rooms.append("Zimmer:               ");
         ArrayList<BookedRoomDTO> bookedRoomDTOs = bookingDTO.getBookedRooms();
         for(BookedRoomDTO bookedRoomDTO : bookedRoomDTOs){
-            rooms.append(bookedRoomDTO.getRoom().getNumber()).append(" ");
+            rooms.append(bookedRoomDTO.getRoom().getNumber()).append("   ");
         }
         roomText.setText(rooms.toString());
 
-        firstNameText.setText("Vorname: " + bookingDTO.getCustomer().getFirstName());
-        lastNameText.setText("Nachname: " + bookingDTO.getCustomer().getLastName());
-        packageText.setText("Package: " + bookingDTO.getBoard().getName());
-        numberPersonsText.setText("Personenanzahl: "+ String.valueOf(bookingDTO.getAmountGuests()));
-        paymentMethodText.setText("Zahlungsart: " + bookingDTO.getPaymentMethod());
+        firstNameText.setText("Vorname:             " + bookingDTO.getCustomer().getFirstName());
+        lastNameText.setText("Nachname:           " + bookingDTO.getCustomer().getLastName());
 
+        LocalDate arrivalDate = bookingDTO.getArrivalDate();
+        String formattedArrivalDate = arrivalDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        fromDateText.setText("Anreisedatum:      " + formattedArrivalDate);
+
+        LocalDate departureDate = bookingDTO.getDepartureDate();
+        String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        toDateText.setText("Abreisedatum:      " + formattedDepartureDate);
+
+        numberPersonsText.setText("Personenanzahl:   "+ String.valueOf(bookingDTO.getAmountGuests()));
+        packageText.setText("Package:               " + bookingDTO.getBoard().getName());
+
+        if(Objects.equals(bookingDTO.getBookedRoomCategories().get(0).getPricePerNight(), new BigDecimal(0))){
+            roomPriceText.setText("Zimmerpreis:        Preis-0");
+        }
+        else{
+            roomPriceText.setText("Zimmerpreis:        Normalpreis");
+        }
+
+        paymentMethodText.setText("Zahlungsart:         " + bookingDTO.getPaymentMethod());
         BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
-        totalPriceText.setText("Gesamtbetrag*: " + price + " €");
+        totalPriceText.setText("Gesamtbetrag*:    " + price + " €");
     }
 
     private BigDecimal calculateTotalPrice(BookingDTO bookingDTO, ArrayList<BookedRoomDTO> bookedRoomDTOs){
@@ -127,7 +153,6 @@ public class CheckOutViewController implements Initializable {
 
     @FXML
     public void onCancelButtonClicked(ActionEvent actionEvent) throws IOException {
-        //useCaseController.cancel();
         MainApplication.getMainController().loadIntoContentArea("home");
     }
 

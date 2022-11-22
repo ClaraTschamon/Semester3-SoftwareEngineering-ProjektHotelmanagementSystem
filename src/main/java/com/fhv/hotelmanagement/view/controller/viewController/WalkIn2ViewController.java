@@ -5,6 +5,7 @@ import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class WalkIn2ViewController implements Initializable {
-    //TODO: Tabulator automatisch auf Vorname setzen
 
     private static int number;
 

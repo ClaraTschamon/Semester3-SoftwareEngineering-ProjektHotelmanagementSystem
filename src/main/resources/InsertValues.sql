@@ -106,6 +106,9 @@ VALUES(34, 'Suite');
 INSERT INTO room(room_number, room_category_name)
 VALUES(35, 'Suite');
 
+
+//nur bis hierher!!
+
 INSERT INTO customer(customer_first_name, customer_last_name, customer_date_of_birth, customer_nationality, customer_phone_number, customer_email_address, customer_street, customer_house_number, customer_postal_code, customer_city, customer_country, saved)
 VALUES('Angelina', 'Pfeiffer', DATE '1980-06-07', 'Österreich', '+43178/9074374', 'apfeiffer@live-mail.none', 'Orsoyer Straße', '72', '38114', 'Braunschweig', 'Österreich', true);
 

@@ -17,6 +17,7 @@ import org.controlsfx.control.CheckComboBox;
 
 //import javax.swing.*;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
@@ -26,6 +27,8 @@ import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
 
+    @FXML
+    public Button nextButton;
     @FXML
     RadioButton fullBoard;
     @FXML
@@ -192,6 +195,7 @@ public class WalkIn1ViewController implements Initializable {
     private void onNextButtonClicked(ActionEvent e) {
         try {
             if (validate()) {
+                //nextButton.setStyle("-fx-background-color: #21273d");
                 saveData();
                 viewController.loadWalkIn2();
             }
@@ -320,19 +324,35 @@ public class WalkIn1ViewController implements Initializable {
         ArrayList<BookedRoomCategoryDTO> bookedRoomCategories = new ArrayList<>();
         if (bookedSingleRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Einzelzimmer");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSingleRooms.size()));
+            BigDecimal price = roomCategoryDTO.getPricePerNight();
+            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Preis-0")){
+                price = new BigDecimal(0);
+            }
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedSingleRooms.size()));
         }
         if (bookedDoubleRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Doppelzimmer");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedDoubleRooms.size()));
+            BigDecimal price = roomCategoryDTO.getPricePerNight();
+            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Preis-0")){
+                price = new BigDecimal(0);
+            }
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedDoubleRooms.size()));
         }
         if (bookedFamilyRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Familienzimmer");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedFamilyRooms.size()));
+            BigDecimal price = roomCategoryDTO.getPricePerNight();
+            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Preis-0")){
+                price = new BigDecimal(0);
+            }
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedFamilyRooms.size()));
         }
         if (bookedSuites.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Suite");
-            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, roomCategoryDTO.getPricePerNight(), bookedSuites.size()));
+            BigDecimal price = roomCategoryDTO.getPricePerNight();
+            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Preis-0")){
+                price = new BigDecimal(0);
+            }
+            bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedSuites.size()));
         }
         bookingDTO.setBookedRoomCategories(bookedRoomCategories);
 
