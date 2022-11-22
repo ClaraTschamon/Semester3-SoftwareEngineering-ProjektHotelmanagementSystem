@@ -179,7 +179,7 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
-            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$") ||
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$") ||
                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}")) {
                 creditCardNumberIsValid = true;
                 setTextColor(creditCardTextField, "black");
@@ -277,7 +277,7 @@ public class WalkIn3ViewController {
     }
 
     private void setTextColor(TextField textField, String color) {
-        textField.setStyle("-fx-text-inner-color: " + color);
+        textField.setPromptText("-fx-text-inner-color: " + color);
     }
 
     private void setRequieredField(TextField textField) {

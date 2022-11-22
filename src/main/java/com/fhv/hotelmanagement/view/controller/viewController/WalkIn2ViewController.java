@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -178,8 +179,10 @@ public class WalkIn2ViewController implements Initializable {
             if (StringValidator.checkRegex(firstName.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
                 firstNameIsValid = true;
                 setTextColor(firstName, "black");
+                //setTextColorBlack(firstName);
             } else {
                 setTextColor(firstName, "red");
+                //setTextColorRed(firstName);
             }
         }
         else {
@@ -190,8 +193,10 @@ public class WalkIn2ViewController implements Initializable {
             if (StringValidator.checkRegex(lastName.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
                 lastNameIsValid = true;
                 setTextColor(lastName, "black");
+                //setTextColorBlack(lastName);
             } else {
                 setTextColor(lastName, "red");
+                //setTextColorRed(lastName);
             }
         }
         else {
@@ -308,6 +313,19 @@ public class WalkIn2ViewController implements Initializable {
 
     private void setTextColor(TextField textField, String color) {
         textField.setStyle("-fx-text-inner-color: " + color);
+    }
+
+    private void setTextColorRed(TextField textField) {
+        //textField.setPromptText(textField.getText());
+        //textField.getText();
+
+        textField.setStyle("-fx-prompt-text-fill: red");
+
+    }
+
+    private void setTextColorBlack(TextField textField) {
+        textField.setPromptText(textField.getText());
+        textField.setStyle("-fx-prompt-text-fill: black");
     }
 
     private void setRequieredField(TextField textField) {
