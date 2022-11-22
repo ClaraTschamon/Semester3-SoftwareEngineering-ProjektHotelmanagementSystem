@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -64,7 +65,7 @@ public class CheckOutViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        allBookedRoomDTOs = MainApplication.getDomainManager().getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
+        allBookedRoomDTOs = DomainController.getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<RoomDTO> rooms = new ArrayList<>();
 
         for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){

@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -320,7 +321,7 @@ public class WalkIn1ViewController implements Initializable {
         }
         bookingDTO.setBookedRooms(bookedRooms);
 
-        HashMap<String, RoomCategoryDTO> roomCategories = MainApplication.getDomainManager().getAllRoomCategoryDTOs();
+        HashMap<String, RoomCategoryDTO> roomCategories = DomainController.getAllRoomCategories();
         ArrayList<BookedRoomCategoryDTO> bookedRoomCategories = new ArrayList<>();
         if (bookedSingleRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Einzelzimmer");
@@ -432,7 +433,7 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     private BoardDTO getBoardByName(String name) {
-        for (BoardDTO boardDTO : MainApplication.getDomainManager().getAllBoardDTOs()) {
+        for (BoardDTO boardDTO : DomainController.getAllBoards()) {
             if (boardDTO.getName().equals(name)) {
                 return boardDTO;
             }
@@ -448,7 +449,7 @@ class RoomProvider{
     private ArrayList<BookedRoomDTO> freeBookedRooms = getCheckoutDateToday(maxDate);
 
     public RoomDTO getRoomFromNumber(int number){
-        for(RoomDTO room : MainApplication.getDomainManager().getAllRoomDTOs()){
+        for(RoomDTO room : DomainController.getAllRooms()){
             if(room.getNumber() == number){
                 return room;
             }
@@ -462,7 +463,7 @@ class RoomProvider{
 
         ObservableList<RoomDTO> freeRooms = FXCollections.observableArrayList(new ArrayList<>());
 
-        for(RoomDTO room : MainApplication.getDomainManager().getAllRoomDTOs()){
+        for(RoomDTO room : DomainController.getAllRooms()){
             if(room.getCategory().getName().equals(category)){
                 if(room.getIsFree()){
                     freeRooms.add(room);
@@ -481,7 +482,7 @@ class RoomProvider{
 
     public ArrayList<BookedRoomDTO> getCheckoutDateToday(LocalDate maxDate){
         ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
-        for(BookedRoomDTO bookedRoom : MainApplication.getDomainManager().getBookedRoomsBetween(LocalDate.now(), maxDate)){
+        for(BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(LocalDate.now(), maxDate)){
             if(bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate)){
                 bookedRooms.add(bookedRoom);
             }

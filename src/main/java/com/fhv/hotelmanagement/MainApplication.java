@@ -1,9 +1,8 @@
 package com.fhv.hotelmanagement;
 
-import com.fhv.hotelmanagement.domain.domainController.DomainManager;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController;
-import com.fhv.hotelmanagement.view.controller.viewController.WalkInViewController;
+import com.fhv.hotelmanagement.domain.factory.BoardFactory;
+import com.fhv.hotelmanagement.domain.factory.RoomCategoryFactory;
+import com.fhv.hotelmanagement.domain.factory.RoomFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,7 +20,6 @@ public class MainApplication extends Application {
     static FXMLLoader fxmlLoader;
     Scene scene;
     Properties configProperties;
-    static DomainManager domainManager;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,12 +31,10 @@ public class MainApplication extends Application {
         return fxmlLoader.getController();
     }
 
-    public static DomainManager getDomainManager() {
-        return domainManager;
-    }
-
     private void loadMainView() throws IOException {
-        domainManager = new DomainManager();
+        BoardFactory.getAllBoards();
+        RoomFactory.getAllRooms();
+        RoomCategoryFactory.getAllRoomCategories();
 
         double width = Double.parseDouble(getConfigProperties().getProperty("window.width"));
         double height = Double.parseDouble(getConfigProperties().getProperty("window.height"));
@@ -62,19 +58,6 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        //ID Tester
-//        int count = 0;
-//
-//        while (count<10){
-//            Customer customer = new Customer();
-//            System.out.println(customer.getId());
-//
-//            Booking booking = new Booking();
-//            System.out.println(booking.getId());
-//        }
-
-
         launch();
-
     }
 }
