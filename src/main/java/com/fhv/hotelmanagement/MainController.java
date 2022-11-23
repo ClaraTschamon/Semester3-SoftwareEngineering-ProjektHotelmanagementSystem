@@ -4,7 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -38,30 +42,15 @@ public class MainController implements Initializable {
         return currentFXMLLoader;
     }
 
-    /*
-    @FXML
-    private void home(MouseEvent event) {
-        loadPage("home");
+    public void debugAlert() {
+        System.out.println("alert");
+        AnchorPane alertPane = new AnchorPane();
+        Label label = new Label();
+        label.setText("alert");
+        alertPane.getChildren().setAll(label);
+        label.setStyle("-fx-background-color: #00d7ff; -fx-min-height: 30; -fx-min-width: 30");
+        alertPane.setLayoutX(400);
+        alertPane.setLayoutY(400);
+        contentArea.getChildren().add(alertPane);
     }
-
-    @FXML
-    private void bookings(MouseEvent event) {
-        loadPage("bookings");
-    }
-
-     */
-
-    /*
-    public void loadPage(String page) {
-        Parent selectedPage = null;
-        try {
-            System.out.println("---"+ page + ": " + FXMLLoader.load(MainApplication.class.getResource("fxml/" + page + ".fxml")));
-            selectedPage = FXMLLoader.load(MainApplication.class.getResource("fxml/" + page + ".fxml"));
-            bp.setCenter(selectedPage);
-        } catch (IOException e) {
-            System.out.println("Error loading page: " + e);
-        }
-    }
-
-     */
 }
