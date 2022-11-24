@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -50,45 +49,22 @@
                </font>
             </Text>
             <ComboBox fx:id="roomComboBox" layoutX="60.0" layoutY="220.0" prefHeight="40.0" prefWidth="300.0" />
+            <CheckBox fx:id="printInvoiceCheckBox" layoutX="60.0" layoutY="495.0" mnemonicParsing="false" text="Rechnung drucken" selected="true"> <!--standardmäßig selected-->
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
             <Text layoutX="60.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer" wrappingWidth="209.84048461914062">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="66.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtrechnung generieren" textAlignment="CENTER" wrappingWidth="157.34048461914062">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="266.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtrechnung ausdrucken" textAlignment="CENTER" wrappingWidth="162.84048461914062">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Button layoutX="110.0" layoutY="350.0" mnemonicParsing="false" style="-fx-background-color: f4f4f4;">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Rechnung.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="308.0" layoutY="350.0" mnemonicParsing="false" style="-fx-background-color: f4f4f4;">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Drucker.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Text layoutX="545.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zusammenfassung" wrappingWidth="209.84048461914062">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="289.0" layoutX="545.0" layoutY="110.0" stroke="#c1c1c1" strokeType="INSIDE" width="390.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="400.0" layoutX="545.0" layoutY="110.0" stroke="#c1c1c1" strokeType="INSIDE" width="390.0" />
             <Text fx:id="roomText" layoutX="560.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer:">
                <font>
                   <Font size="14.0" />
@@ -104,27 +80,42 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="packageText" layoutX="560.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package:">
+            <Text fx:id="fromDateText" layoutX="560.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anreisedatum:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="numberPersonsText" layoutX="558.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personenanzahl:">
+            <Text fx:id="toDateText" layoutX="558.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreisedatum:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="paymentMethodText" layoutX="558.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zahlungsart:">
+            <Text fx:id="numberPersonsText" layoutX="558.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personenanzahl:">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text fx:id="totalPriceText" layoutX="558.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtbetrag*:" wrappingWidth="159.3798828125">
+            <Text fx:id="packageText" layoutX="558.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package:" wrappingWidth="332.04656982421875">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="834.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*exklusive Ortstaxe" />
+            <Text layoutX="834.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*exklusive Ortstaxe" />
+            <Text fx:id="roomPriceText" layoutX="558.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreis:" wrappingWidth="327.3798828125">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="paymentMethodText" layoutX="558.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zahlungsart:" wrappingWidth="327.3798828125">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="totalPriceText" layoutX="558.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtbetrag*:" wrappingWidth="159.3798828125">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
             </children></AnchorPane>
     </center>
 </BorderPane>

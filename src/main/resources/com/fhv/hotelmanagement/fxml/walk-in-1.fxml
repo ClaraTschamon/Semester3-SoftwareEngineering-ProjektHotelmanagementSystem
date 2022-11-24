@@ -62,12 +62,12 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Button fx:id="NextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
+                <Button fx:id="nextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <Button fx:id="CancelButton" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
+                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -83,7 +83,6 @@
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Normalpreis" />
-                            <String fx:value="Sonderpreis" />
                             <String fx:value="Preis-0" />
                         </FXCollections>
                     </items>
@@ -102,13 +101,10 @@
                 <fx:define>
                         <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension"> <!--default Value-->
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension" toggleGroup="$packageToggleGroup"> <!--default Value-->
                     <font>
                         <Font size="13.0" />
                     </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="packageToggleGroup" />
-               </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="halfBoard" layoutX="60.0" layoutY="403.0" mnemonicParsing="false" text="Halbpension" toggleGroup="$packageToggleGroup">
                     <font>
@@ -128,7 +124,7 @@
             <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
             <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einzelzimmer" />
             <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doppelzimmer" />
-            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Famielenzimmer" />
+            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Familienzimmer" />
             <Text layoutX="545.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suite" />
             <Text fx:id="counterSingleRoom" layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
             <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />

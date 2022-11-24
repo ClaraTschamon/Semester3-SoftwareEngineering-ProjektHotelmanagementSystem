@@ -1,53 +1,45 @@
 package com.fhv.hotelmanagement.domain.domainController;
 
-import com.fhv.hotelmanagement.domain.domainModel.*;
-import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
-import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
-import com.fhv.hotelmanagement.persistence.PersistenceFacade;
+import com.fhv.hotelmanagement.domain.exceptions.*;
+import com.fhv.hotelmanagement.domain.factory.*;
 import com.fhv.hotelmanagement.view.DTOs.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class DomainController {
 
-    public static Long saveCustomer(CustomerDTO customerDTO) throws CustomerIsInvalidException {
-        Long customerNumber = customerDTO.getNumber();
-        if (DomainValidator.checkCustomer(customerDTO)) {
-            Customer customer = DomainCreator.createCustomer(customerDTO);
+    public static ArrayList<BoardDTO> getAllBoards() {
+        return BoardFactory.getAllBoards();
+    }
 
-            if (customerNumber == null) {
-                customerNumber = PersistenceFacade.insertCustomer(customer);
-            } else {
-                PersistenceFacade.storeCustomer(customer);
-            }
-        } else {
-            throw new CustomerIsInvalidException();
-        }
-        return customerNumber;
+    public static ArrayList<BookedRoomDTO> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
+        return BookedRoomFactory.getBookedRoomsBetween(minDate, maxDate);
+    }
+
+    public static BookingDTO getBooking(Long number) {
+        return BookingFactory.getBooking(number);
     }
 
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {
-        Long bookingNumber = bookingDTO.getNumber();
-        if (DomainValidator.checkBooking(bookingDTO)) {
-            Booking booking = DomainCreator.createBooking(bookingDTO, true);
-            if (bookingNumber == null) {
-                bookingNumber = PersistenceFacade.insertBooking(booking);
-            } else {
-                PersistenceFacade.storeBooking(booking);
-            }
-            System.out.println("saved booking");
-        } else {
-            throw new BookingIsInvalidException();
-        }
-        return bookingNumber;
+        return BookingFactory.saveBooking(bookingDTO);
+    }
+
+    public static Long saveCustomer(CustomerDTO customerDTO) throws CustomerIsInvalidException {
+        return CustomerFactory.saveCustomer(customerDTO);
     }
 
     public static Long saveInvoice(InvoiceDTO invoiceDTO) {
-        if (DomainValidator.checkInvoice(invoiceDTO)) {
-            Invoice invoice = DomainCreator.createInvoice(invoiceDTO, true);
+        return InvoiceFactory.saveInvoice(invoiceDTO);
+    }
 
-            return PersistenceFacade.insertInvoice(invoice);
+    public static ArrayList<RoomDTO> getAllRooms() {
+        return RoomFactory.getAllRooms();
+    }
 
-        }
-        return null;
+    public static HashMap<String, RoomCategoryDTO> getAllRoomCategories() {
+        return RoomCategoryFactory.getAllRoomCategories();
     }
 }
