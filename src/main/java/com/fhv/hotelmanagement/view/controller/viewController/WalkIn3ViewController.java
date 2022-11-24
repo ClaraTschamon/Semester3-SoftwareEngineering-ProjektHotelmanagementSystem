@@ -57,15 +57,15 @@ public class WalkIn3ViewController {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         String creditCard = bookingDTO.getCreditCardNumber();
         creditCardTextField.setText(creditCard);
-        String authorisationNumber=bookingDTO.getAuthorisationNumber();
+        String authorisationNumber = bookingDTO.getAuthorisationNumber();
         authorisationNumberTextField.setText(authorisationNumber);
-        String expiryDate=bookingDTO.getExpirationDate();
+        String expiryDate = bookingDTO.getExpirationDate();
         expiryDateTextField.setText(expiryDate);
         String comment = bookingDTO.getComment(); //Comment = Notes
         notesTextArea.setText(comment);
 
-        if(bookingDTO.getPaymentMethod()!=null){
-            String payment =bookingDTO.getPaymentMethod();
+        if (bookingDTO.getPaymentMethod() != null) {
+            String payment = bookingDTO.getPaymentMethod();
             paymentMethod.setValue(payment);
         }
 
@@ -74,7 +74,7 @@ public class WalkIn3ViewController {
         billingStreetTextField.setText(billingStreet);
         String billingHouseNumber = addressDTO.getHouseNumber();
         billingHouseNumberTextField.setText(billingHouseNumber);
-        String billingCity =addressDTO.getCity();
+        String billingCity = addressDTO.getCity();
         billingCityTextField.setText(billingCity);
         String billingPostalCode = addressDTO.getPostalCode();
         billingPostalCodeTextField.setText(billingPostalCode);
@@ -103,13 +103,13 @@ public class WalkIn3ViewController {
         }
     }
 
-    public void fillSummaryLabels(){
+    public void fillSummaryLabels() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         CustomerDTO customerDTO = bookingDTO.getCustomer();
         checkInForLabel.setText("Check-in für: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
 
         StringBuilder sb = new StringBuilder("Zimmernummer(n): ");
-        for(BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()){
+        for (BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()) {
             sb.append(bookedRoomDTO.getRoom().getNumber());
             sb.append(" ");
         }
@@ -117,7 +117,7 @@ public class WalkIn3ViewController {
 
     }
 
-    protected void saveData(){
+    protected void saveData() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         bookingDTO.setCreditCardNumber(creditCardTextField.getText());
         bookingDTO.setAuthorisationNumber(authorisationNumberTextField.getText());
@@ -185,14 +185,12 @@ public class WalkIn3ViewController {
                     StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}") || //allgemein
                     StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}") || //Diners Club
                     StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}")) { //American Express
-                System.out.println("if abfrage");
                 creditCardNumberIsValid = true;
             } else {
                 setTextColor(creditCardTextField, "red");
                 setEventHandler(creditCardTextField);
             }
-        }
-        else {
+        } else {
             setRequieredField(creditCardTextField);
         }
 
@@ -203,8 +201,7 @@ public class WalkIn3ViewController {
                 setTextColor(authorisationNumberTextField, "red");
                 setEventHandler(authorisationNumberTextField);
             }
-        }
-        else {
+        } else {
             setRequieredField(authorisationNumberTextField);
         }
 
@@ -215,8 +212,7 @@ public class WalkIn3ViewController {
                 setTextColor(billingCityTextField, "red");
                 setEventHandler(billingCityTextField);
             }
-        }
-        else {
+        } else {
             setRequieredField(billingCityTextField);
         }
 
@@ -227,20 +223,19 @@ public class WalkIn3ViewController {
                 setTextColor(billingHouseNumberTextField, "red");
                 setEventHandler(billingHouseNumberTextField);
             }
-        }
-        else {
+        } else {
             setRequieredField(billingHouseNumberTextField);
         }
 
-        if (StringValidator.checkString(billingStreetTextField.getText())) {
-            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/]*")) {
+
+        if(StringValidator.checkString(billingStreetTextField.getText())){
+            if(StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/]*")){
                 billingStreetIsValid = true;
-            if (!StringValidator.checkString(billingStreetTextField.getText())) {
+            } else{
                 setTextColor(billingStreetTextField, "red");
                 setEventHandler(billingStreetTextField);
             }
-        }
-        else {
+        } else{
             setRequieredField(billingStreetTextField);
         }
 
@@ -251,8 +246,7 @@ public class WalkIn3ViewController {
                 setTextColor(billingPostalCodeTextField, "red");
                 setEventHandler(creditCardTextField);
             }
-        }
-        else {
+        } else {
             setRequieredField(billingPostalCodeTextField);
         }
 
@@ -263,8 +257,7 @@ public class WalkIn3ViewController {
                 setTextColor(expiryDateTextField, "red");
                 setEventHandler(expiryDateTextField);
             }
-        }
-        else {
+        } else {
             setRequieredField(expiryDateTextField);
         }
 
@@ -273,27 +266,25 @@ public class WalkIn3ViewController {
             authorisationNumberTextField.clear();
             expiryDateTextField.clear();
             return true;
-        }
-        else if (creditCardNumberIsValid && authorisationNumberIsValid && billingStreetIsValid &&
+        } else if (creditCardNumberIsValid && authorisationNumberIsValid && billingStreetIsValid &&
                 billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&
                 authorisationNumberIsValid && expireDateIsValid) {
-                return true;
-            }
+            return true;
+        }
         return false;
     }
 
-    private void setTextColor(TextField textField, String color) {
-        //textField.setPromptText("-fx-text-inner-color: " + color);
+    private void setTextColor (TextField textField, String color){
         textField.setStyle("-fx-text-inner-color: " + color);
     }
 
-    private void setRequieredField(TextField textField) {
+    private void setRequieredField (TextField textField){
         textField.setPromptText("Pflichtfeld");
         textField.setStyle("-fx-prompt-text-fill: red");
 
     }
 
-    private void setEventHandler(TextField textField){
+    private void setEventHandler (TextField textField){
         textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
