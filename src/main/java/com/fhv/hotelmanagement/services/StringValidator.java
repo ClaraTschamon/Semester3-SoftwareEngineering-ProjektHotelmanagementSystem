@@ -1,15 +1,16 @@
 package com.fhv.hotelmanagement.services;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 public class StringValidator {
     public static boolean checkString(String string) {
         return string != null && !string.equals("");
-
     }
 
     public static boolean checkStringValidCharacters(String string, LinkedList<Character> validCharacters) {
@@ -47,7 +48,40 @@ public class StringValidator {
 
     public static boolean checkValidExpirationDate(String expirationDate) {
         String regexPattern = "[0-1][0-9]/[0-9][0-9]";
-        return checkRegex(expirationDate, regexPattern);
+        if(checkRegex(expirationDate, regexPattern)){
+            //check if expired
+            StringBuilder sbMonth = new StringBuilder();
+            StringBuilder sbYear = new StringBuilder();
+            sbMonth.append(expirationDate.charAt(0));
+            sbMonth.append(expirationDate.charAt(1));
+            sbYear.append(expirationDate.charAt(3));
+            sbYear.append(expirationDate.charAt(4));
+
+            int expireMonth = Integer.parseInt(sbMonth.toString());
+            int expireYear = Integer.parseInt(sbYear.toString());
+
+            SimpleDateFormat currentMonthDF = new SimpleDateFormat("MM");
+            SimpleDateFormat currentYearDF = new SimpleDateFormat("yy");
+            Date currentDate = new Date();
+
+            int currentMonth = Integer.parseInt(currentMonthDF.format(currentDate));
+            int currentYear = Integer.parseInt(currentYearDF.format(currentDate));
+
+            if(expireYear > currentYear){
+                return true;
+            }else if(expireYear < currentYear){
+                return false;
+            }else{
+                if(expireMonth < currentMonth){
+                    return false;
+                }else if(expireMonth > 12){
+                    return false;
+                }
+                return true;
+            }
+
+        }
+        return false;
     }
 
     public static boolean checkRegex(String string, String regexPattern) {
@@ -58,6 +92,4 @@ public class StringValidator {
         LocalDate currentDate = LocalDate.now();
         return Period.between(birthDate, currentDate).getYears();
     }
-
-    //american express,
 }

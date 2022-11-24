@@ -5,7 +5,6 @@ import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,7 +15,6 @@ import java.io.IOException;
 
 public class WalkIn3ViewController {
     WalkInViewController viewController;
-
     @FXML
     private TextField billingCountryTextField;
     @FXML
@@ -24,7 +22,7 @@ public class WalkIn3ViewController {
     @FXML
     private TextField authorisationNumberTextField;
     @FXML
-    private TextField expiryDateTextField;
+    private TextField expireDateTextField;
     @FXML
     private CheckBox billingAddressEqualsCustomerAddressCheckBox;
     @FXML
@@ -60,7 +58,7 @@ public class WalkIn3ViewController {
         String authorisationNumber = bookingDTO.getAuthorisationNumber();
         authorisationNumberTextField.setText(authorisationNumber);
         String expiryDate = bookingDTO.getExpirationDate();
-        expiryDateTextField.setText(expiryDate);
+        expireDateTextField.setText(expiryDate);
         String comment = bookingDTO.getComment(); //Comment = Notes
         notesTextArea.setText(comment);
 
@@ -121,7 +119,7 @@ public class WalkIn3ViewController {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         bookingDTO.setCreditCardNumber(creditCardTextField.getText());
         bookingDTO.setAuthorisationNumber(authorisationNumberTextField.getText());
-        bookingDTO.setExpirationDate(expiryDateTextField.getText());
+        bookingDTO.setExpirationDate(expireDateTextField.getText());
         bookingDTO.setComment(notesTextArea.getText());
         bookingDTO.setPaymentMethod((String) paymentMethod.getSelectionModel().getSelectedItem());
 
@@ -250,21 +248,21 @@ public class WalkIn3ViewController {
             setRequieredField(billingPostalCodeTextField);
         }
 
-        if (StringValidator.checkString(expiryDateTextField.getText())) {
-            if (StringValidator.checkValidExpirationDate(expiryDateTextField.getText())) {
+        if (StringValidator.checkString(expireDateTextField.getText())) {
+            if (StringValidator.checkValidExpirationDate(expireDateTextField.getText())) {
                 expireDateIsValid = true;
             } else {
-                setTextColor(expiryDateTextField, "red");
-                setEventHandler(expiryDateTextField);
+                setTextColor(expireDateTextField, "red");
+                setEventHandler(expireDateTextField);
             }
         } else {
-            setRequieredField(expiryDateTextField);
+            setRequieredField(expireDateTextField);
         }
 
         if (paymentMethod.getValue().equals("Rechnung")) {
             creditCardTextField.clear();
             authorisationNumberTextField.clear();
-            expiryDateTextField.clear();
+            expireDateTextField.clear();
             return true;
         } else if (creditCardNumberIsValid && authorisationNumberIsValid && billingStreetIsValid &&
                 billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&

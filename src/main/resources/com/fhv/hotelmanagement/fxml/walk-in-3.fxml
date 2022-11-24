@@ -126,7 +126,7 @@
             </Text>
             <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" />
             <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
-            <TextField fx:id="expiryDateTextField" layoutX="60.0" layoutY="460.0" prefHeight="40.0" prefWidth="300.0" promptText="MM/JJ" />
+            <TextField fx:id="expireDateTextField" layoutX="60.0" layoutY="460.0" prefHeight="40.0" prefWidth="300.0" promptText="MM/JJ" />
             <Label fx:id="checkInForLabel" layoutX="70.0" layoutY="579.0" text="Check-In für:">
                <font>
                   <Font size="14.0" />

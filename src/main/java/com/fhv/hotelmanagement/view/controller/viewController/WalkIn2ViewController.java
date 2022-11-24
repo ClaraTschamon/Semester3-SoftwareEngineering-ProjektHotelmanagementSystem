@@ -110,8 +110,13 @@ public class WalkIn2ViewController implements Initializable {
             birthdayDatePicker.setValue(defaultBirthday);
         }
 
-        boolean saved = customer.getSaved();
-        customerSavedCheckBox.setSelected(saved);
+        if(customer.getSaved() != null){
+            boolean saved = customer.getSaved();
+            customerSavedCheckBox.setSelected(saved);
+        }else{
+            boolean defaultSaved = true;
+            customerSavedCheckBox.setSelected(defaultSaved);
+        }
     }
 
     @FXML
@@ -169,7 +174,7 @@ public class WalkIn2ViewController implements Initializable {
         boolean birthdayIsValid = false;
 
         if (StringValidator.checkString(firstNameTextField.getText())) {
-            if (StringValidator.checkRegex(firstNameTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+            if (StringValidator.checkRegex(firstNameTextField.getText(), "[^0-9]+$")) {
                 firstNameIsValid = true;
             } else {
                 setTextColor(firstNameTextField, "red");
@@ -181,7 +186,7 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(lastNameTextField.getText())) {
-            if (StringValidator.checkRegex(lastNameTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+            if (StringValidator.checkRegex(lastNameTextField.getText(), "[^0-9]+$")) {
                 lastNameIsValid = true;
             } else {
                 setTextColor(lastNameTextField, "red");
