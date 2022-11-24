@@ -283,9 +283,10 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(street.getText())) {
-            streetIsValid = true;
-            setTextColor(street, "black");
-          if (!StringValidator.checkString(street.getText())) {
+            if (StringValidator.checkRegex(street.getText(), "[0-9a-zA-Z-/]*")) {
+                streetIsValid = true;
+                setTextColor(street, "black");
+            } else {
                 setTextColor(street, "red");
             }
         }

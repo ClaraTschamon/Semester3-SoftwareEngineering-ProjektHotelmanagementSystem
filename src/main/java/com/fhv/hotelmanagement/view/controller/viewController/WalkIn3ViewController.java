@@ -179,14 +179,15 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
-            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4,6}[ ][0-9]{4,5}[ ][0-9]{4}") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4,6}[ ][0-9]{4,5}")) {
-
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}") || //mastercard, visa
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}") || //allgemein
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}") || //Diners Club
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}")) { //American Express
+                System.out.println("if abfrage");
                 creditCardNumberIsValid = true;
                 setTextColor(creditCardTextField, "black");
             } else {
+                System.out.println("else abfrage");
                 setTextColor(creditCardTextField, "red");
             }
         }
@@ -231,10 +232,12 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingStreetTextField.getText())) {
+            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/]*")) {
                 billingStreetIsValid = true;
                 setTextColor(billingStreetTextField, "black");
-            if (!StringValidator.checkString(billingStreetTextField.getText())) {
+            } else {
                 setTextColor(billingStreetTextField, "red");
+
             }
         }
         else {
@@ -280,7 +283,8 @@ public class WalkIn3ViewController {
     }
 
     private void setTextColor(TextField textField, String color) {
-        textField.setPromptText("-fx-text-inner-color: " + color);
+        //textField.setPromptText("-fx-text-inner-color: " + color);
+        textField.setStyle("-fx-text-inner-color: " + color);
     }
 
     private void setRequieredField(TextField textField) {
