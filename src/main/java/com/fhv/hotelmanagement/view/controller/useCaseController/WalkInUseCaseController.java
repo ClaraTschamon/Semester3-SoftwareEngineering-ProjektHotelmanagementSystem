@@ -21,7 +21,7 @@ public class WalkInUseCaseController {
         customer = new CustomerDTO();
         booking.setCustomer(customer);
         booking.setArrivalDate(LocalDate.now());
-        customer.setSaved(true);
+        //customer.setSaved(true);
         billingAddressEqualsCustomerAddress = true;
     }
 

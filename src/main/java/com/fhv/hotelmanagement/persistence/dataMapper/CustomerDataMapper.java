@@ -29,6 +29,20 @@ public class CustomerDataMapper{
         return Optional.empty();
     }
 
+    public static ArrayList<Customer> getSavedCustomers(){
+        ArrayList<CustomerEntity> entities;
+
+        entities = (ArrayList<CustomerEntity>) PersistenceFacade.instance().entityManager.createQuery(
+                "SELECT customer FROM CustomerEntity customer WHERE customer.saved = true"
+        ).getResultList();
+
+        ArrayList<Customer> customers = new ArrayList<>();
+        for(CustomerEntity e : entities){
+            customers.add(createCustomer(e));
+        }
+        return customers;
+    }
+
     //create
     public Long insert(Customer customer){
         CustomerEntity customerEntity = createCustomerEntity(customer);

@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -47,6 +48,8 @@ public class WalkIn2ViewController implements Initializable {
     private TextField cityTextField;
     @FXML
     private TextField postalCodeTextField;
+    @FXML
+    public CheckBox customerSavedCheckBox;
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
@@ -59,6 +62,7 @@ public class WalkIn2ViewController implements Initializable {
         customer.setNationality(nationalityComboBox.getSelectionModel().getSelectedItem().toString());
         customer.setPhoneNumber(phoneNumberTextField.getText());
         customer.setEmail(emailTextField.getText());
+        customer.setSaved(customerSavedCheckBox.isSelected());
         customer.getAddress().setStreet(streetTextField.getText());
         customer.getAddress().setCity(cityTextField.getText());
         customer.getAddress().setHouseNumber(houseNumberTextField.getText());
@@ -71,40 +75,43 @@ public class WalkIn2ViewController implements Initializable {
 
     protected void fillData() throws IOException {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
-        String firstname1= customer.getFirstName();
-        firstNameTextField.setText(firstname1);
-        String lastname1=customer.getLastName();
-        lastNameTextField.setText(lastname1);
+        String firstname= customer.getFirstName();
+        firstNameTextField.setText(firstname);
+        String lastname=customer.getLastName();
+        lastNameTextField.setText(lastname);
 
-        String nationality1= customer.getNationality();
-        if(nationality1 != null){
-            nationalityComboBox.setValue(nationality1);
+        String nationality= customer.getNationality();
+        if(nationality != null){
+            nationalityComboBox.setValue(nationality);
         }
 
-        String phonenumber1 =customer.getPhoneNumber();
-        phoneNumberTextField.setText(phonenumber1);
-        String email1 =customer.getEmail();
-        emailTextField.setText(email1);
-        String city1=customer.getAddress().getCity();
-        cityTextField.setText(city1);
-        String street1=customer.getAddress().getStreet();
-        streetTextField.setText(street1);
-        String housenumber1 =customer.getAddress().getHouseNumber();
-        houseNumberTextField.setText(housenumber1);
-        String postalcode1=customer.getAddress().getPostalCode();
-        postalCodeTextField.setText(postalcode1);
+        String phonenumber =customer.getPhoneNumber();
+        phoneNumberTextField.setText(phonenumber);
+        String email =customer.getEmail();
+        emailTextField.setText(email);
+        String city=customer.getAddress().getCity();
+        cityTextField.setText(city);
+        String street=customer.getAddress().getStreet();
+        streetTextField.setText(street);
+        String housenumber =customer.getAddress().getHouseNumber();
+        houseNumberTextField.setText(housenumber);
+        String postalcode=customer.getAddress().getPostalCode();
+        postalCodeTextField.setText(postalcode);
 
-        String country1 = customer.getAddress().getCountry();
-        countryTextField.setText(country1);
+        String country = customer.getAddress().getCountry();
+        countryTextField.setText(country);
 
         if(customer.getDateOfBirth() != null){
-            LocalDate birthday1 = customer.getDateOfBirth();
-            birthdayDatePicker.setValue(birthday1);
+            LocalDate birthday = customer.getDateOfBirth();
+            birthdayDatePicker.setValue(birthday);
         }
         else{
             LocalDate defaultBirthday = LocalDate.of(2000, 1, 1);
             birthdayDatePicker.setValue(defaultBirthday);
         }
+
+        boolean saved = customer.getSaved();
+        customerSavedCheckBox.setSelected(saved);
     }
 
     @FXML
@@ -275,7 +282,6 @@ public class WalkIn2ViewController implements Initializable {
         else {
                 setRequieredField(streetTextField);
             }
-
 
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();

@@ -56,6 +56,8 @@ public class PersistenceFacade{
         return CustomerDataMapper.instance().get(id);
     }
 
+    public static ArrayList<Customer> getSavedCustomers(){ return CustomerDataMapper.getSavedCustomers();}
+
     public static Long insertCustomer(Customer customer) {
         return CustomerDataMapper.instance().insert(customer);
     }
@@ -168,7 +170,10 @@ public class PersistenceFacade{
 //        insertBooking(booking);
 //        booking.setCheckOutDatetime(LocalDateTime.now().plusDays(5));
 //        storeBooking(booking);
+
+        ArrayList<Customer> customers = getSavedCustomers();
+        for(Customer c : customers){
+            System.out.println(c.toString());
+        }
     }
-
-
 }

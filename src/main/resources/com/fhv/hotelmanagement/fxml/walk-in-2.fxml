@@ -133,7 +133,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <CheckBox layoutX="545.0" layoutY="557.0" mnemonicParsing="false" selected="true" text="Gast speichern" />
+            <CheckBox fx:id="customerSavedCheckBox" layoutX="545.0" layoutY="557.0" mnemonicParsing="false" selected="true" text="Gast speichern" />
             </children></AnchorPane>
     </center>
 </BorderPane>

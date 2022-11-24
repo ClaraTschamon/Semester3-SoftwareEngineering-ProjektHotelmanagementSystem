@@ -50,14 +50,6 @@ public class BookingDataMapper {
         entityManager.getTransaction().begin();
         entityManager.merge(bookingEntity);
         entityManager.getTransaction().commit();
-//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) { // TODO
-//            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c));
-//        }
-//        for (BookedRoom r : booking.getBookedRooms()) {
-//            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomDataMapper.createBookedRoomEntity(r));
-//        }
     }
 
     protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity) {

@@ -8,11 +8,11 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.hibernate" level="warn" additivity="false">
+        <Logger name="org.hibernate" level="info" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
 
-        <Logger name="org.hibernate.SQL" level="error" additivity="false">
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
 
