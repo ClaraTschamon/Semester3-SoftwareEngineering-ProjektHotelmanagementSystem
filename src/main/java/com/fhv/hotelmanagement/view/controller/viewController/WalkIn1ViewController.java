@@ -3,13 +3,18 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -154,6 +159,14 @@ public class WalkIn1ViewController implements Initializable {
         } else {
             amountGuestsIsValid = false;
             amountGuestsSpinner.setStyle("-fx-text-inner-color: red");
+
+
+            amountGuestsSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
+                @Override
+                public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                    amountGuestsSpinner.setStyle("-fx-text-inner-color: black");
+                }
+            });
         }
 
         if (departureDateIsValid && counterRoomIsValid &&
