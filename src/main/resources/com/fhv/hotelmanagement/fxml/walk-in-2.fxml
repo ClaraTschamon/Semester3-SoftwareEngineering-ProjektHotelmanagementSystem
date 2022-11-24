@@ -37,7 +37,7 @@
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <TextField fx:id="searchDatabase" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Kunde in Gästekartei suchen...">
+                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Kunde in Gästekartei suchen...">
                     <opaqueInsets>
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                     </opaqueInsets>
@@ -52,8 +52,8 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="firstName" layoutX="60.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" />
-                <TextField fx:id="lastName" layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
+                <TextField fx:id="firstNameTextField" layoutX="60.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" />
+                <TextField fx:id="lastNameTextField" layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
                 <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="74.19140625">
                     <font>
                         <Font size="14.0" />
@@ -71,18 +71,18 @@
                 </Text>
             <ComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
             <DatePicker fx:id="birthdayDatePicker" layoutX="60.0" layoutY="440.0" prefHeight="40.0" prefWidth="300.0" showWeekNumbers="false" />
-                <TextField fx:id="street" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="230.0" />
-                <TextField fx:id="houseNumber" layoutX="780.0" layoutY="200.0" prefHeight="40.0" prefWidth="65.0" />
-                <TextField fx:id="city" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="230.0" />
-                <TextField fx:id="postalCode" layoutX="780.0" layoutY="270.0" prefHeight="40.0" prefWidth="65.0" />
-            <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
-                <TextField fx:id="phoneNumber" layoutX="545.0" layoutY="425.0" prefHeight="40.0" prefWidth="300.0" />
+                <TextField fx:id="streetTextField" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="230.0" />
+                <TextField fx:id="houseNumberTextField" layoutX="780.0" layoutY="200.0" prefHeight="40.0" prefWidth="65.0" />
+                <TextField fx:id="cityTextField" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="230.0" />
+                <TextField fx:id="postalCodeTextField" layoutX="780.0" layoutY="270.0" prefHeight="40.0" prefWidth="65.0" />
+                <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
+                <TextField fx:id="phoneNumberTextField" layoutX="545.0" layoutY="425.0" prefHeight="40.0" prefWidth="300.0" />
                 <Text layoutX="545.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer" wrappingWidth="137.19140625">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="email" layoutX="545.0" layoutY="495.0" prefHeight="40.0" prefWidth="300.0" />
+                <TextField fx:id="emailTextField" layoutX="545.0" layoutY="495.0" prefHeight="40.0" prefWidth="300.0" />
                 <Text layoutX="545.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wohnadresse">
                     <font>
                         <Font name="System Bold" size="18.0" />

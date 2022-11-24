@@ -7,8 +7,10 @@ import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
@@ -182,9 +184,9 @@ public class WalkIn3ViewController {
             if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$") ||
                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}")) {
                 creditCardNumberIsValid = true;
-                setTextColor(creditCardTextField, "black");
             } else {
                 setTextColor(creditCardTextField, "red");
+                setEventHandler(creditCardTextField);
             }
         }
         else {
@@ -194,9 +196,9 @@ public class WalkIn3ViewController {
         if (StringValidator.checkString(authorisationNumberTextField.getText())) {
             if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9]{3}")) {
                 verfuegerNummerIsValid = true;
-                setTextColor(authorisationNumberTextField, "black");
             } else {
                 setTextColor(authorisationNumberTextField, "red");
+                setEventHandler(authorisationNumberTextField);
             }
         }
         else {
@@ -206,9 +208,9 @@ public class WalkIn3ViewController {
         if (StringValidator.checkString(billingCityTextField.getText())) {
             if (StringValidator.checkRegex(billingCityTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
                 billingCityIsValid = true;
-                setTextColor(billingCityTextField, "black");
             } else {
                 setTextColor(billingCityTextField, "red");
+                setEventHandler(billingCityTextField);
             }
         }
         else {
@@ -218,9 +220,9 @@ public class WalkIn3ViewController {
         if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
             if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9A-Za-z]*")) {
                 billingHouseNumberIsValid = true;
-                setTextColor(billingHouseNumberTextField, "black");
             } else {
                 setTextColor(billingHouseNumberTextField, "red");
+                setEventHandler(billingHouseNumberTextField);
             }
         }
         else {
@@ -229,9 +231,9 @@ public class WalkIn3ViewController {
 
         if (StringValidator.checkString(billingStreetTextField.getText())) {
                 billingStreetIsValid = true;
-                setTextColor(billingStreetTextField, "black");
             if (!StringValidator.checkString(billingStreetTextField.getText())) {
                 setTextColor(billingStreetTextField, "red");
+                setEventHandler(billingStreetTextField);
             }
         }
         else {
@@ -241,9 +243,9 @@ public class WalkIn3ViewController {
         if (StringValidator.checkString(billingPostalCodeTextField.getText())) {
             if (StringValidator.checkRegex(billingPostalCodeTextField.getText(), "[0-9]*")) {
                 billingPostalCodeIsValid = true;
-                setTextColor(billingPostalCodeTextField, "black");
             } else {
                 setTextColor(billingPostalCodeTextField, "red");
+                setEventHandler(creditCardTextField);
             }
         }
         else {
@@ -253,9 +255,9 @@ public class WalkIn3ViewController {
         if (StringValidator.checkString(expiryDateTextField.getText())) {
             if (StringValidator.checkValidExpirationDate(expiryDateTextField.getText())) {
                 expireDateIsValid = true;
-                setTextColor(expiryDateTextField, "black");
             } else {
                 setTextColor(expiryDateTextField, "red");
+                setEventHandler(expiryDateTextField);
             }
         }
         else {
@@ -284,5 +286,14 @@ public class WalkIn3ViewController {
         textField.setPromptText("Pflichtfeld");
         textField.setStyle("-fx-prompt-text-fill: red");
 
+    }
+
+    private void setEventHandler(TextField textField){
+        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                setTextColor(textField, "black");
+            }
+        });
     }
 }
