@@ -2,7 +2,9 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
+import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +13,8 @@ import javafx.scene.control.*;
 import java.io.IOException;
 
 public class WalkIn3ViewController {
+    WalkInViewController viewController;
+
     @FXML
     private TextField billingCountryTextField;
     @FXML
@@ -31,9 +35,13 @@ public class WalkIn3ViewController {
     private TextField billingPostalCodeTextField;
     @FXML
     private TextArea notesTextArea;
-    WalkInViewController viewController;
     @FXML
     private ComboBox paymentMethod;
+    @FXML
+    public Label checkInForLabel;
+    @FXML
+    public Label roomNumbersLabel;
+
 
     /*if you go back after you clicked the "billingAddressEqualsCustomerAddressButton" it will delete the filled in customer bill address
     -->This prevents false information to be saved (if the customer chooses to replace his address after going back to walk-In2*/
@@ -73,6 +81,7 @@ public class WalkIn3ViewController {
 
         billingAddressEqualsCustomerAddressCheckBox.setSelected(viewController.getUseCaseController().isBillingAddressEqualsCustomerAddress());
         fillBillingAddressData();
+        fillSummaryLabels();
     }
 
     public void fillBillingAddressData() {
@@ -90,6 +99,20 @@ public class WalkIn3ViewController {
             billingPostalCodeTextField.setText("");
             billingCountryTextField.setText("");
         }
+    }
+
+    public void fillSummaryLabels(){
+        BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
+        CustomerDTO customerDTO = bookingDTO.getCustomer();
+        checkInForLabel.setText("Check-in für: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
+
+        StringBuilder sb = new StringBuilder("Zimmernummer(n): ");
+        for(BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()){
+            sb.append(bookedRoomDTO.getRoom().getNumber());
+            sb.append(" ");
+        }
+        roomNumbersLabel.setText(sb.toString());
+
     }
 
     protected void saveData(){
@@ -156,7 +179,7 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
-            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$") ||
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$") ||
                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{16}")) {
                 creditCardNumberIsValid = true;
                 setTextColor(creditCardTextField, "black");
@@ -254,7 +277,7 @@ public class WalkIn3ViewController {
     }
 
     private void setTextColor(TextField textField, String color) {
-        textField.setStyle("-fx-text-inner-color: " + color);
+        textField.setPromptText("-fx-text-inner-color: " + color);
     }
 
     private void setRequieredField(TextField textField) {
