@@ -22,11 +22,4 @@ public class HomeViewController{
     }
 
 
-    public void debugAlert(ActionEvent actionEvent) {
-        try {
-            MainApplication.getMainController().debugAlert();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

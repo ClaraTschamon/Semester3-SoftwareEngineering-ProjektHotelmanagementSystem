@@ -146,11 +146,7 @@ public class WalkIn3ViewController {
     public void onSaveButtonClicked(ActionEvent e) {
         if (validate()) {
             saveData();
-            try {
-                viewController.save();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            viewController.save();
         }
     }
 
