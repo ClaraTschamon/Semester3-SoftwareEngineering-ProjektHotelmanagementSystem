@@ -1,0 +1,39 @@
+
+.nextButton{
+    -fx-background-color: #21273d;
+}
+.nextButton:hover {
+    -fx-background-color: #131724;
+}
+
+
+.cancelButton{
+    -fx-background-color: #962c43;
+}
+.cancelButton:hover {
+    -fx-background-color: #591a28;
+}
+
+
+.backButton{
+    -fx-background-color: #21273d;
+}
+.backButton:hover {
+    -fx-background-color: #131724;
+}
+
+
+.homebutton{
+    -fx-background-color: #FFFFFF;
+}
+.homebutton:hover{
+    -fx-background-color: #f3f3f3;
+}
+
+
+.mainviewbutton{
+    -fx-background-color: #21273d;
+}
+.mainviewbutton:hover{
+    -fx-background-color: #131724;
+}
