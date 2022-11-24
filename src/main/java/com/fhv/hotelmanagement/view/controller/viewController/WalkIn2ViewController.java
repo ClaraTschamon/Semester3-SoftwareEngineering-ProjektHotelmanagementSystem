@@ -265,8 +265,9 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(streetTextField.getText())) {
-            streetIsValid = true;
-          if (!StringValidator.checkString(streetTextField.getText())) {
+            if (StringValidator.checkRegex(streetTextField.getText(), "[0-9a-zA-Z-/]*")) {
+                streetIsValid = true;
+            } else {
                 setTextColor(streetTextField, "red");
                 setEventHandler(streetTextField);
             }
@@ -279,7 +280,7 @@ public class WalkIn2ViewController implements Initializable {
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
-        if (StringValidator.calculateAge(dateOfBirth) >= 0) {
+        if (StringValidator.calculateAge(dateOfBirth) >= 16) {
             birthdayIsValid = true;
         } else {
             birthdayDatePicker.setStyle("-fx-text-inner-color: red");
