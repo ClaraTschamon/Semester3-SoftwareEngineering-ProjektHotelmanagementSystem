@@ -16,7 +16,7 @@ import java.util.Properties;
 
 
 public class MainApplication extends Application {
-    Stage stage;
+    static Stage stage;
     static FXMLLoader fxmlLoader;
     Scene scene;
     Properties configProperties;
