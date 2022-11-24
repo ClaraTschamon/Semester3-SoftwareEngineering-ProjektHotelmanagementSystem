@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.domain.domainModel.InvoicedRoomCategory;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.InvoiceEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.InvoicedRoomCategoryEntity;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.HashSet;
 
@@ -18,8 +19,9 @@ public class InvoiceDataMapper {
 
     //create
     public Long insert(Invoice invoice) {
-        var entityManager = PersistenceFacade.instance().entityManager;
         InvoiceEntity invoiceEntity = createInvoiceEntity(invoice);
+        var entityManager = PersistenceFacade.instance().entityManager;
+
         entityManager.getTransaction().begin();
         entityManager.persist(invoiceEntity);
         entityManager.getTransaction().commit();
@@ -31,6 +33,15 @@ public class InvoiceDataMapper {
             InvoicedRoomCategoryDataMapper.instance().insert(c);
         }
         return invoiceNumber;
+    }
+
+    public void store (Invoice invoice){
+        InvoiceEntity invoiceEntity = createInvoiceEntity(invoice);
+        var entityManager = PersistenceFacade.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(invoiceEntity);
+        entityManager.getTransaction().commit();
     }
 
     protected static InvoiceEntity createInvoiceEntity(Invoice invoice) {

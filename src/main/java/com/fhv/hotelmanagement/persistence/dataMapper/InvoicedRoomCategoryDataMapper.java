@@ -29,6 +29,14 @@ public class InvoicedRoomCategoryDataMapper {
         entityManager.getTransaction().commit();
     }
 
+    public void store(InvoicedRoomCategory invoicedRoomCategory){
+        var entityManager = PersistenceFacade.instance().entityManager;
+        InvoicedRoomCategoryEntity invoicedRoomCategoryEntity = createInvoicedRoomCategoryEntity(invoicedRoomCategory);
+        entityManager.getTransaction().begin();
+        entityManager.merge(invoicedRoomCategoryEntity);
+        entityManager.getTransaction().commit();
+    }
+
     private InvoicedRoomCategoryEntity createInvoicedRoomCategoryEntity(InvoicedRoomCategory invoicedRoomCategory) {
         return new InvoicedRoomCategoryEntity(InvoiceDataMapper.createInvoiceEntity(invoicedRoomCategory.getInvoice()),
                 RoomCategoryDataMapper.createRoomCategoryEntity(invoicedRoomCategory.getRoomCategory()),

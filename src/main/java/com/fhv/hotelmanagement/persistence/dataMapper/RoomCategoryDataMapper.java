@@ -46,7 +46,10 @@ public class RoomCategoryDataMapper {
 
     //update
     public void store(RoomCategory roomCategory){
-        PersistenceFacade.instance().entityManager.merge(createRoomCategoryEntity(roomCategory));
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createRoomCategoryEntity(roomCategory));
+        entityManager.getTransaction().commit();
     }
 
     protected static RoomCategoryEntity createRoomCategoryEntity(RoomCategory roomCategory) {

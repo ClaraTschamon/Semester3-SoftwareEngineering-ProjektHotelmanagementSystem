@@ -69,7 +69,10 @@ public class BookedRoomDataMapper {
 
     //update
     protected void store(BookedRoom bookedRoom){
-        PersistenceFacade.instance().entityManager.merge(createBookedRoomEntity(bookedRoom));
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createBookedRoomEntity(bookedRoom));
+        entityManager.getTransaction().commit();
     }
 
     protected static BookedRoomEntity createBookedRoomEntity(BookedRoom bookedRoom) {

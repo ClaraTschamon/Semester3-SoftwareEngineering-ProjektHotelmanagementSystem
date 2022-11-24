@@ -39,8 +39,11 @@ public class BookedRoomCategoryDataMapper{
     }
 
     //update
-    protected void store(BookedRoomCategoryEntity bookedRoomCategoryEntity){
-        PersistenceFacade.instance().entityManager.merge(bookedRoomCategoryEntity);
+    protected void store(BookedRoomCategory bookedRoomCategory){
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createBookedRoomCategoryEntity(bookedRoomCategory));
+        entityManager.getTransaction().commit();
     }
 
     protected static BookedRoomCategoryEntity createBookedRoomCategoryEntity(BookedRoomCategory bookedRoomCategory) {
