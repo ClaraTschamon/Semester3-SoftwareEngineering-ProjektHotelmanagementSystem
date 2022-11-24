@@ -41,7 +41,12 @@ public class CustomerDataMapper{
 
     //update
     public void store(Customer customer){
-        PersistenceFacade.instance().entityManager.merge(createCustomerEntity(customer));
+        CustomerEntity customerEntity = createCustomerEntity(customer);
+        var entityManager = PersistenceFacade.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(customerEntity);
+        entityManager.getTransaction().commit();
     }
 
     protected static CustomerEntity createCustomerEntity(Customer customer) {

@@ -36,10 +36,12 @@ public class BoardDataMapper {
         return boards;
     }
 
-
     //update
     public void store(Board board){
-        PersistenceFacade.instance().entityManager.merge(createBoardEntity(board));
+        var entityManager = PersistenceFacade.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createBoardEntity(board));
+        entityManager.getTransaction().commit();
     }
 
     protected static BoardEntity createBoardEntity(Board board) {
