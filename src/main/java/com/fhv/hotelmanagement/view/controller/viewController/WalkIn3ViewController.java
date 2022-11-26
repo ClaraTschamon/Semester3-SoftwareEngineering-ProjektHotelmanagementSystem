@@ -179,15 +179,13 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
-            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}") || //mastercard, visa
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}") || //allgemein
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}") || //Diners Club
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}")) { //American Express
-                System.out.println("if abfrage");
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}( )?") || //mastercard, visa
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}( )?") || //allgemein
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}( )?") || //Diners Club
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}( )?")) { //American Express
                 creditCardNumberIsValid = true;
                 setTextColor(creditCardTextField, "black");
             } else {
-                System.out.println("else abfrage");
                 setTextColor(creditCardTextField, "red");
             }
         }
