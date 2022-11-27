@@ -139,7 +139,7 @@ public class CheckOutViewController implements Initializable {
         BigDecimal totalPrice = new BigDecimal(0);
 
         for (BookedRoomCategoryDTO c : bookingDTO.getBookedRoomCategories()) {
-            BigDecimal price = c.getPricePerNight().multiply(new BigDecimal(c.getAmount()));
+            BigDecimal price = c.getPricePerNight().multiply(new BigDecimal(totalNights)).multiply(new BigDecimal(c.getAmount()));
             totalPrice = totalPrice.add(price);
         }
 
