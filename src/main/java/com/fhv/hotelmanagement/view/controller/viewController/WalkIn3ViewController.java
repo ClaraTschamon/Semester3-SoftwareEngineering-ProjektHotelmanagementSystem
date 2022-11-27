@@ -218,7 +218,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
-            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9A-Za-z]*")) {
+            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9 ]{1,5}([a-zA-Z])?")) {
                 billingHouseNumberIsValid = true;
                 setTextColor(billingHouseNumberTextField, "black");
             } else {
@@ -230,7 +230,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingStreetTextField.getText())) {
-            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/]*")) {
+            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/ ]*")) {
                 billingStreetIsValid = true;
                 setTextColor(billingStreetTextField, "black");
             } else {

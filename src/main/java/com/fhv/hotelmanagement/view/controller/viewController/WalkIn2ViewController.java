@@ -269,9 +269,9 @@ public class WalkIn2ViewController implements Initializable {
         else {
             setRequieredField(phoneNumber);
         }
-
+        ////[0-9A-Za-z]*
         if (StringValidator.checkString(houseNumber.getText())) {
-            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9A-Za-z]*")) {
+            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9 ]{1,5}([a-zA-Z])?")) {
                 houseNumberIsValid = true;
                 setTextColor(houseNumber, "black");
             } else {
@@ -283,7 +283,7 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (StringValidator.checkString(street.getText())) {
-            if (StringValidator.checkRegex(street.getText(), "[0-9a-zA-Z-/]*")) {
+            if (StringValidator.checkRegex(street.getText(), "[0-9a-zA-Z-/ ]*")) {
                 streetIsValid = true;
                 setTextColor(street, "black");
             } else {
