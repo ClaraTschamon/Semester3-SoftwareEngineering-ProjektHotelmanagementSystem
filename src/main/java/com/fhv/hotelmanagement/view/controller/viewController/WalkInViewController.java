@@ -75,21 +75,4 @@ public class WalkInViewController {
         }
     }
 
-    public void setTextColor(TextField textField, String color) {
-        textField.setStyle("-fx-text-inner-color: " + color);
-    }
-
-    public void setRequieredField(TextField textField) {
-        textField.setPromptText("Pflichtfeld");
-        textField.setStyle("-fx-prompt-text-fill: red");
-    }
-
-    public void setEventHandler(TextField textField){
-        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                setTextColor(textField, "black");
-            }
-        });
-    }
 }
