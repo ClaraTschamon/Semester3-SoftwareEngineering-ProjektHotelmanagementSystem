@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class WalkIn3ViewController {
     WalkInViewController viewController;
+
     @FXML
     private TextField billingCountryTextField;
     @FXML
@@ -175,10 +176,10 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (StringValidator.checkString(creditCardTextField.getText())) {
-            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}") || //mastercard, visa
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}") || //allgemein
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}") || //Diners Club
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}")) { //American Express
+            if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}( )?") || //mastercard, visa
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}( )?") || //allgemein
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}( )?") || //Diners Club
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}( )?")) { //American Express
                 creditCardNumberIsValid = true;
             } else {
                 setTextColor(creditCardTextField, "red");
@@ -211,7 +212,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
-            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9A-Za-z]*")) {
+            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9 ]{1,5}([a-zA-Z])?")) {
                 billingHouseNumberIsValid = true;
             } else {
                 setTextColor(billingHouseNumberTextField, "red");
@@ -221,9 +222,8 @@ public class WalkIn3ViewController {
             setRequieredField(billingHouseNumberTextField);
         }
 
-
-        if(StringValidator.checkString(billingStreetTextField.getText())){
-            if(StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/]*")){
+        if (StringValidator.checkString(billingStreetTextField.getText())) {
+            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/ ]*")) {
                 billingStreetIsValid = true;
             } else{
                 setTextColor(billingStreetTextField, "red");
