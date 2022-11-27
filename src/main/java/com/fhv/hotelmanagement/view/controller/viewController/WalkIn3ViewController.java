@@ -206,7 +206,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingCityTextField.getText())) {
-            if (StringValidator.checkRegex(billingCityTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+            if (StringValidator.checkCity(billingCityTextField.getText())) {
                 billingCityIsValid = true;
                 setTextColor(billingCityTextField, "black");
             } else {
@@ -218,7 +218,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingHouseNumberTextField.getText())) {
-            if (StringValidator.checkRegex(billingHouseNumberTextField.getText(), "[0-9 ]{1,5}([a-zA-Z])?")) {
+            if (StringValidator.checkHouseNumber(billingHouseNumberTextField.getText())) {
                 billingHouseNumberIsValid = true;
                 setTextColor(billingHouseNumberTextField, "black");
             } else {
@@ -230,7 +230,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingStreetTextField.getText())) {
-            if (StringValidator.checkRegex(billingStreetTextField.getText(), "[0-9a-zA-Z-/ ]*")) {
+            if (StringValidator.checkStreet(billingStreetTextField.getText())) {
                 billingStreetIsValid = true;
                 setTextColor(billingStreetTextField, "black");
             } else {
@@ -243,7 +243,7 @@ public class WalkIn3ViewController {
         }
 
         if (StringValidator.checkString(billingPostalCodeTextField.getText())) {
-            if (StringValidator.checkRegex(billingPostalCodeTextField.getText(), "[0-9]*")) {
+            if (StringValidator.checkPostalCode(billingPostalCodeTextField.getText())) {
                 billingPostalCodeIsValid = true;
                 setTextColor(billingPostalCodeTextField, "black");
             } else {

@@ -8,9 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -28,39 +30,27 @@ public class WalkIn2ViewController implements Initializable {
     @FXML
     private TextField countryTextField;
     @FXML
-    private TextField searchDatabase;
+    private TextField searchDatabaseTextField;
     @FXML
-    private TextField firstName;
+    private TextField firstNameTextField;
     @FXML
-    private TextField lastName;
+    private TextField lastNameTextField;
     @FXML
     private ComboBox nationalityComboBox;
     @FXML
-    private TextField phoneNumber;
+    private TextField phoneNumberTextField;
     @FXML
-    private TextField email;
+    private TextField emailTextField;
     @FXML
-    private TextField street;
+    private TextField streetTextField;
     @FXML
-    private TextField houseNumber;
+    private TextField houseNumberTextField;
     @FXML
-    private TextField city;
+    private TextField cityTextField;
     @FXML
-    private TextField postalCode;
+    private TextField postalCodeTextField;
     @FXML
-    private ComboBox<String> paymentMethod;
-    @FXML
-    private TextField creditCardNumber;
-    @FXML
-    private TextField verfuegernummer;
-    @FXML
-    private TextField billingCity;
-    @FXML
-    private TextField billingStreet;
-    @FXML
-    private TextField billingHouseNumber;
-    @FXML
-    private TextField billingPostalCode;
+    public CheckBox customerSavedCheckBox;
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
@@ -68,15 +58,16 @@ public class WalkIn2ViewController implements Initializable {
     }
     protected void saveData() throws IOException{
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
-        customer.setFirstName(firstName.getText());
-        customer.setLastName(lastName.getText());
+        customer.setFirstName(firstNameTextField.getText());
+        customer.setLastName(lastNameTextField.getText());
         customer.setNationality(nationalityComboBox.getSelectionModel().getSelectedItem().toString());
-        customer.setPhoneNumber(phoneNumber.getText());
-        customer.setEmail(email.getText());
-        customer.getAddress().setStreet(street.getText());
-        customer.getAddress().setCity(city.getText());
-        customer.getAddress().setHouseNumber(houseNumber.getText());
-        customer.getAddress().setPostalCode(postalCode.getText());
+        customer.setPhoneNumber(phoneNumberTextField.getText());
+        customer.setEmail(emailTextField.getText());
+        customer.setSaved(customerSavedCheckBox.isSelected());
+        customer.getAddress().setStreet(streetTextField.getText());
+        customer.getAddress().setCity(cityTextField.getText());
+        customer.getAddress().setHouseNumber(houseNumberTextField.getText());
+        customer.getAddress().setPostalCode(postalCodeTextField.getText());
         customer.getAddress().setCountry(countryTextField.getText());
 
         customer.setDateOfBirth(birthdayDatePicker.getValue());
@@ -85,39 +76,47 @@ public class WalkIn2ViewController implements Initializable {
 
     protected void fillData() throws IOException {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
-        String firstname1= customer.getFirstName();
-        firstName.setText(firstname1);
-        String lastname1=customer.getLastName();
-        lastName.setText(lastname1);
+        String firstname= customer.getFirstName();
+        firstNameTextField.setText(firstname);
+        String lastname=customer.getLastName();
+        lastNameTextField.setText(lastname);
 
-        String nationality1= customer.getNationality();
-        if(nationality1 != null){
-            nationalityComboBox.setValue(nationality1);
+        String nationality= customer.getNationality();
+        if(nationality != null){
+            nationalityComboBox.setValue(nationality);
         }
 
-        String phonenumber1 =customer.getPhoneNumber();
-        phoneNumber.setText(phonenumber1);
-        String email1 =customer.getEmail();
-        email.setText(email1);
-        String city1=customer.getAddress().getCity();
-        city.setText(city1);
-        String street1=customer.getAddress().getStreet();
-        street.setText(street1);
-        String housenumber1 =customer.getAddress().getHouseNumber();
-        houseNumber.setText(housenumber1);
-        String postalcode1=customer.getAddress().getPostalCode();
-        postalCode.setText(postalcode1);
+        String phonenumber =customer.getPhoneNumber();
+        phoneNumberTextField.setText(phonenumber);
+        String email =customer.getEmail();
+        emailTextField.setText(email);
+        String city=customer.getAddress().getCity();
+        cityTextField.setText(city);
+        String street=customer.getAddress().getStreet();
+        streetTextField.setText(street);
+        String housenumber =customer.getAddress().getHouseNumber();
+        houseNumberTextField.setText(housenumber);
+        String postalcode=customer.getAddress().getPostalCode();
+        postalCodeTextField.setText(postalcode);
 
-        String country1 = customer.getAddress().getCountry();
-        countryTextField.setText(country1);
+        String country = customer.getAddress().getCountry();
+        countryTextField.setText(country);
 
         if(customer.getDateOfBirth() != null){
-            LocalDate birthday1 = customer.getDateOfBirth();
-            birthdayDatePicker.setValue(birthday1);
+            LocalDate birthday = customer.getDateOfBirth();
+            birthdayDatePicker.setValue(birthday);
         }
         else{
             LocalDate defaultBirthday = LocalDate.of(2000, 1, 1);
             birthdayDatePicker.setValue(defaultBirthday);
+        }
+
+        if(customer.getSaved() != null){
+            boolean saved = customer.getSaved();
+            customerSavedCheckBox.setSelected(saved);
+        }else{
+            boolean defaultSaved = true;
+            customerSavedCheckBox.setSelected(defaultSaved);
         }
     }
 
@@ -153,14 +152,14 @@ public class WalkIn2ViewController implements Initializable {
     }
 
     private boolean validate() throws IOException {
-        firstName.getText();
-        lastName.getText();
-        phoneNumber.getText();
-        email.getText();
-        street.getText();
-        houseNumber.getText();
-        city.getText();
-        postalCode.getText();
+        firstNameTextField.getText();
+        lastNameTextField.getText();
+        phoneNumberTextField.getText();
+        emailTextField.getText();
+        streetTextField.getText();
+        houseNumberTextField.getText();
+        cityTextField.getText();
+        postalCodeTextField.getText();
         countryTextField.getText();
 
         boolean firstNameIsValid = false;
@@ -175,32 +174,28 @@ public class WalkIn2ViewController implements Initializable {
         boolean countryIsValid = false;
         boolean birthdayIsValid = false;
 
-        if (StringValidator.checkString(firstName.getText())) {
-            if (StringValidator.checkRegex(firstName.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+        if (StringValidator.checkString(firstNameTextField.getText())) {
+            if (StringValidator.checkRegex(firstNameTextField.getText(), "[^0-9]+$")) {
                 firstNameIsValid = true;
-                setTextColor(firstName, "black");
-                //setTextColorBlack(firstName);
             } else {
-                setTextColor(firstName, "red");
-                //setTextColorRed(firstName);
+                setTextColor(firstNameTextField, "red");
+                setEventHandler(firstNameTextField);
             }
         }
         else {
-            setRequieredField(firstName);
+            setRequieredField(firstNameTextField);
         }
 
-        if (StringValidator.checkString(lastName.getText())) {
-            if (StringValidator.checkRegex(lastName.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+        if (StringValidator.checkString(lastNameTextField.getText())) {
+            if (StringValidator.checkRegex(lastNameTextField.getText(), "[^0-9]+$")) {
                 lastNameIsValid = true;
-                setTextColor(lastName, "black");
-                //setTextColorBlack(lastName);
             } else {
-                setTextColor(lastName, "red");
-                //setTextColorRed(lastName);
+                setTextColor(lastNameTextField, "red");
+                setEventHandler(lastNameTextField);
             }
         }
         else {
-            setRequieredField(lastName);
+            setRequieredField(lastNameTextField);
         }
 
         if (nationalityComboBox.getValue() != null) {
@@ -210,95 +205,96 @@ public class WalkIn2ViewController implements Initializable {
         }
 
 
-        if (StringValidator.checkString(email.getText())) {
-            if (StringValidator.checkValidEmail(email.getText())) {
+        if (StringValidator.checkString(emailTextField.getText())) {
+            if (StringValidator.checkValidEmail(emailTextField.getText())) {
                 emailIsValid = true;
-                setTextColor(email, "black");
             } else {
-                setTextColor(email, "red");
+                setTextColor(emailTextField, "red");
+                setEventHandler(emailTextField);
             }
         } else {
-            setRequieredField(email);
+            setRequieredField(emailTextField);
         }
 
 
-        if (StringValidator.checkString(postalCode.getText())) {
-            if (StringValidator.checkRegex(postalCode.getText(), "[0-9]*")) {
+        if (StringValidator.checkString(postalCodeTextField.getText())) {
+            if (StringValidator.checkPostalCode(postalCodeTextField.getText())) {
                 postalCodeIsValid = true;
-                setTextColor(postalCode, "black");
             } else {
-                setTextColor(postalCode, "red");
+                setTextColor(postalCodeTextField, "red");
+                setEventHandler(postalCodeTextField);
             }
         }
         else {
-            setRequieredField(postalCode);
+            setRequieredField(postalCodeTextField);
         }
 
-        if (StringValidator.checkString(city.getText())) {
-            if (StringValidator.checkRegex(city.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+        if (StringValidator.checkString(cityTextField.getText())) {
+            if (StringValidator.checkCity(cityTextField.getText())) {
                 cityIsValid = true;
-                setTextColor(city, "black");
             } else {
-                setTextColor(city, "red");
+                setTextColor(cityTextField, "red");
+                setEventHandler(cityTextField);
             }
         }
         else {
-            setRequieredField(city);
+            setRequieredField(cityTextField);
         }
 
         if (StringValidator.checkString(countryTextField.getText())) {
             if (StringValidator.checkRegex(countryTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
                 countryIsValid = true;
-                setTextColor(countryTextField, "black");
             } else {
                 setTextColor(countryTextField, "red");
+                setEventHandler(countryTextField);
             }
         }
         else {
             setRequieredField(countryTextField);
         }
 
-        if (StringValidator.checkString(phoneNumber.getText())) {
-            if (StringValidator.checkValidPhoneNumber(phoneNumber.getText())) {
+        if (StringValidator.checkString(phoneNumberTextField.getText())) {
+            if (StringValidator.checkValidPhoneNumber(phoneNumberTextField.getText())) {
                 phoneNumberIsValid = true;
-                setTextColor(phoneNumber, "black");
             } else {
-                setTextColor(phoneNumber, "red");
+                setTextColor(phoneNumberTextField, "red");
+                setEventHandler(phoneNumberTextField);
             }
         }
         else {
-            setRequieredField(phoneNumber);
+            setRequieredField(phoneNumberTextField);
         }
-        ////[0-9A-Za-z]*
-        if (StringValidator.checkString(houseNumber.getText())) {
-            if (StringValidator.checkRegex(houseNumber.getText(), "[0-9 ]{1,5}([a-zA-Z])?")) {
+
+        if (StringValidator.checkString(houseNumberTextField.getText())) {
+            if (StringValidator.checkHouseNumber(houseNumberTextField.getText())) {
                 houseNumberIsValid = true;
-                setTextColor(houseNumber, "black");
             } else {
-                setTextColor(houseNumber, "red");
+                setTextColor(houseNumberTextField, "red");
+                setEventHandler(houseNumberTextField);
             }
         }
         else {
-            setRequieredField(houseNumber);
+            setRequieredField(houseNumberTextField);
         }
 
-        if (StringValidator.checkString(street.getText())) {
-            if (StringValidator.checkRegex(street.getText(), "[0-9a-zA-Z-/ ]*")) {
+        if (StringValidator.checkString(streetTextField.getText())) {
+            if (StringValidator.checkStreet(streetTextField.getText())) {
                 streetIsValid = true;
-                setTextColor(street, "black");
             } else {
-                setTextColor(street, "red");
+
+                setTextColor(streetTextField, "red");
+                setEventHandler(streetTextField);
             }
         }
         else {
-                setRequieredField(street);
-            }
 
+                setRequieredField(streetTextField);
+            }
 
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
-        if (StringValidator.calculateAge(dateOfBirth) >= 14) {
+        if (StringValidator.calculateAge(dateOfBirth) >= 16) {
             birthdayIsValid = true;
         } else {
             birthdayDatePicker.setStyle("-fx-text-inner-color: red");
@@ -316,22 +312,18 @@ public class WalkIn2ViewController implements Initializable {
         textField.setStyle("-fx-text-inner-color: " + color);
     }
 
-    private void setTextColorRed(TextField textField) {
-        //textField.setPromptText(textField.getText());
-        //textField.getText();
-
-        textField.setStyle("-fx-prompt-text-fill: red");
-
-    }
-
-    private void setTextColorBlack(TextField textField) {
-        textField.setPromptText(textField.getText());
-        textField.setStyle("-fx-prompt-text-fill: black");
-    }
-
     private void setRequieredField(TextField textField) {
         textField.setPromptText("Pflichtfeld");
         textField.setStyle("-fx-prompt-text-fill: red");
+    }
+
+    private void setEventHandler(TextField textField){
+        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                setTextColor(textField, "black");
+            }
+        });
     }
 
     public void initialize(URL location, ResourceBundle resources) {
