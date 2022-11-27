@@ -19,7 +19,7 @@ public class RoomCategoryDataMapper {
 
     //read
     public Optional<RoomCategory> get(final String name){
-        RoomCategoryEntity entity = PersistenceFacade.instance().entityManager.find(RoomCategoryEntity.class, name);
+        RoomCategoryEntity entity = PersistenceManager.instance().entityManager.find(RoomCategoryEntity.class, name);
         if(entity != null){
             RoomCategory roomCategory = createRoomCategory(entity);
             return Optional.of(roomCategory);
@@ -28,7 +28,7 @@ public class RoomCategoryDataMapper {
     }
 
     public static ArrayList<RoomCategory> getAll(){
-        ArrayList<RoomCategoryEntity> entities = (ArrayList<RoomCategoryEntity>) PersistenceFacade.instance().entityManager.createQuery("from RoomCategoryEntity").getResultList();
+        ArrayList<RoomCategoryEntity> entities = (ArrayList<RoomCategoryEntity>) PersistenceManager.instance().entityManager.createQuery("from RoomCategoryEntity").getResultList();
         ArrayList<RoomCategory> roomCategories = new ArrayList<>();
         for(RoomCategoryEntity e : entities){
             roomCategories.add(createRoomCategory(e));
@@ -38,7 +38,7 @@ public class RoomCategoryDataMapper {
 
     //create
     public void insert(RoomCategory roomCategory){
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
         entityManager.getTransaction().begin();
         entityManager.persist(createRoomCategoryEntity(roomCategory));
         entityManager.getTransaction().commit();
@@ -46,7 +46,10 @@ public class RoomCategoryDataMapper {
 
     //update
     public void store(RoomCategory roomCategory){
-        PersistenceFacade.instance().entityManager.merge(createRoomCategoryEntity(roomCategory));
+        var entityManager = PersistenceManager.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createRoomCategoryEntity(roomCategory));
+        entityManager.getTransaction().commit();
     }
 
     protected static RoomCategoryEntity createRoomCategoryEntity(RoomCategory roomCategory) {

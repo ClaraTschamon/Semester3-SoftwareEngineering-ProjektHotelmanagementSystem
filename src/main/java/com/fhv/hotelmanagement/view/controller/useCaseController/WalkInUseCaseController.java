@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.controller.useCaseController;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
@@ -21,7 +22,7 @@ public class WalkInUseCaseController {
         customer = new CustomerDTO();
         booking.setCustomer(customer);
         booking.setArrivalDate(LocalDate.now());
-        customer.setSaved(true);
+        //customer.setSaved(true);
         billingAddressEqualsCustomerAddress = true;
     }
 
@@ -38,21 +39,13 @@ public class WalkInUseCaseController {
         customer = null;
     }
 
-    public void save() throws IOException {
+    public void save() throws IOException, BookingIsInvalidException, CustomerIsInvalidException {
         if (booking != null && customer != null) {
             booking.setCheckInDatetime(LocalDateTime.now());
-            try {
-                Long customerNumber = DomainController.saveCustomer(customer);
-                customer.setNumber(customerNumber);
-                booking.setCustomer(customer);
-            } catch (CustomerIsInvalidException e) {
-                System.out.println(e);
-            }
-            try {
-                DomainController.saveBooking(booking);
-            } catch (BookingIsInvalidException e) {
-                System.out.println(e);
-            }
+            Long customerNumber = DomainController.saveCustomer(customer);
+            customer.setNumber(customerNumber);
+            booking.setCustomer(customer);
+            DomainController.saveBooking(booking);
         }
     }
 

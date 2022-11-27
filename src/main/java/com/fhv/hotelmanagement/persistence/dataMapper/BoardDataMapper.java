@@ -19,7 +19,7 @@ public class BoardDataMapper {
 
     //read
     public Optional<Board> get(final String name){
-        BoardEntity entity = PersistenceFacade.instance().entityManager.find(BoardEntity.class, name);
+        BoardEntity entity = PersistenceManager.instance().entityManager.find(BoardEntity.class, name);
         if(entity != null){
             Board board = createBoard(entity);
             return Optional.of(board);
@@ -28,7 +28,7 @@ public class BoardDataMapper {
     }
 
     public static ArrayList<Board> getAll(){
-        ArrayList<BoardEntity> entities = (ArrayList<BoardEntity>) PersistenceFacade.instance().entityManager.createQuery("from BoardEntity").getResultList();
+        ArrayList<BoardEntity> entities = (ArrayList<BoardEntity>) PersistenceManager.instance().entityManager.createQuery("from BoardEntity").getResultList();
         ArrayList<Board> boards = new ArrayList<>();
         for(BoardEntity b : entities){
             boards.add(createBoard(b));
@@ -36,10 +36,12 @@ public class BoardDataMapper {
         return boards;
     }
 
-
     //update
     public void store(Board board){
-        PersistenceFacade.instance().entityManager.merge(createBoardEntity(board));
+        var entityManager = PersistenceManager.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createBoardEntity(board));
+        entityManager.getTransaction().commit();
     }
 
     protected static BoardEntity createBoardEntity(Board board) {

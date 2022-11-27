@@ -19,7 +19,7 @@ public class RoomDataMapper {
 
     //read
     public Optional<Room> get(final int number){
-        RoomEntity entity = PersistenceFacade.instance().entityManager.find(RoomEntity.class, number);
+        RoomEntity entity = PersistenceManager.instance().entityManager.find(RoomEntity.class, number);
         if(entity != null){
             Room room = createRoom(entity);
             return Optional.of(room);
@@ -28,7 +28,7 @@ public class RoomDataMapper {
     }
 
     public static ArrayList<Room> getAll(){
-        ArrayList<RoomEntity> entities = (ArrayList<RoomEntity>) PersistenceFacade.instance().entityManager.createQuery("from RoomEntity").getResultList();
+        ArrayList<RoomEntity> entities = (ArrayList<RoomEntity>) PersistenceManager.instance().entityManager.createQuery("from RoomEntity").getResultList();
         ArrayList<Room> rooms = new ArrayList<>();
         for(RoomEntity e : entities){
             rooms.add(createRoom(e));
@@ -38,7 +38,10 @@ public class RoomDataMapper {
 
     //update
     public void store(Room room){
-        PersistenceFacade.instance().entityManager.merge(createRoomEntity(room));
+        var entityManager = PersistenceManager.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createRoomEntity(room));
+        entityManager.getTransaction().commit();
     }
 
     protected static RoomEntity createRoomEntity(Room room) {

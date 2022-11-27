@@ -19,7 +19,7 @@ public class BookingDataMapper {
 
     //read
     public Optional<Booking> get(final Long number){
-        BookingEntity entity = PersistenceFacade.instance().entityManager.find(BookingEntity.class, number);
+        BookingEntity entity = PersistenceManager.instance().entityManager.find(BookingEntity.class, number);
         if(entity != null){
             Booking booking = createBooking(entity);
             return Optional.of(booking);
@@ -30,7 +30,7 @@ public class BookingDataMapper {
     //create
     public Long insert(Booking booking) {
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
         entityManager.persist(bookingEntity);
@@ -45,19 +45,11 @@ public class BookingDataMapper {
     //update
     public void store(Booking booking){
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
         entityManager.merge(bookingEntity);
         entityManager.getTransaction().commit();
-//        for (BookedRoomCategory c : booking.getBookedRoomCategories()) { // TODO
-//            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomCategoryDataMapper.createBookedRoomCategoryEntity(c));
-//        }
-//        for (BookedRoom r : booking.getBookedRooms()) {
-//            PersistenceFacade.instance().entityManager.merge(
-//                    BookedRoomDataMapper.createBookedRoomEntity(r));
-//        }
     }
 
     protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity) {

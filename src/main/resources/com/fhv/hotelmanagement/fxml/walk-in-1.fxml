@@ -18,12 +18,12 @@
                                 <Font size="24.0" />
                             </font>
                         </Text>
-                        <Text fill="#c9c9c9" layoutX="96.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" &lt; Gast anlegen">
+                        <Text fill="#c9c9c9" layoutX="96.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" &gt; Gast anlegen">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Text>
-                        <Text fill="#c9c9c9" layoutX="270.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt; Zahlung auswählen">
+                        <Text fill="#c9c9c9" layoutX="270.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Zahlung auswählen">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -47,6 +47,16 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
+            <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Gäste:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+                <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Text>
                 <Text layoutX="545.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer auswählen">
                     <font>
                         <Font name="System Bold" size="18.0" />
@@ -62,46 +72,37 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Button fx:id="nextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Button>
-                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #962c43;" text="Abbrechen" textFill="WHITE">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Button>
-                <DatePicker fx:id="departureDatePicker" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" showWeekNumbers="false" />
-                <Text layoutX="60.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package auswählen">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Text>
-
-                <ComboBox fx:id="roomPriceDropDown" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Normalpreis" />
-                            <String fx:value="Preis-0" />
-                        </FXCollections>
-                    </items>
-                    <value>
-                        <String fx:value="Normalpreis" /> <!--default value!-->
-                    </value>
-                </ComboBox>
+            <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
+            <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einzelzimmer" />
+            <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doppelzimmer" />
+            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Familienzimmer" />
+            <Text layoutX="545.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suite" />
+            <Text fx:id="counterSingleRoom" layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterFamilyRoom" layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+            <Text fx:id="counterSuite" layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
 
                 <Text layoutX="545.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreise">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Text>
+                <DatePicker fx:id="departureDatePicker" layoutX="60.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="Abreisedatum" showWeekNumbers="false" />
+            <Spinner fx:id="amountGuestsSpinner" editable="true" layoutX="210.0" layoutY="257.0" />
 
                 <!--Toggle Group Package-->
                 <fx:define>
                         <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension" toggleGroup="$packageToggleGroup"> <!--default Value-->
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension"> <!--default Value-->
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="packageToggleGroup" />
+               </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -116,26 +117,28 @@
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
+
+                <ComboBox fx:id="roomPriceDropDown" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Normalpreis" />
+                            <String fx:value="Preis-0" />
+                        </FXCollections>
+                    </items>
+                    <value>
+                        <String fx:value="Normalpreis" /> <!--default value!-->
+                    </value>
+                </ComboBox>
+                <Button fx:id="nextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Weiter" textFill="WHITE">
                     <font>
-                        <Font size="13.0" />
+                        <Font size="14.0" />
                     </font>
-                </RadioButton>
-            <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
-            <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Einzelzimmer" />
-            <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doppelzimmer" />
-            <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Familienzimmer" />
-            <Text layoutX="545.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suite" />
-            <Text fx:id="counterSingleRoom" layoutX="825.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="counterDoubleRoom" layoutX="825.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="counterFamilyRoom" layoutX="825.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text fx:id="counterSuite" layoutX="825.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-            <Text layoutX="60.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Gäste:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Spinner fx:id="amountGuestsSpinner" editable="true" layoutX="210.0" layoutY="257.0" />
+                </Button>
+                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Abbrechen" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
             </children></AnchorPane>
    </left>
 </BorderPane>

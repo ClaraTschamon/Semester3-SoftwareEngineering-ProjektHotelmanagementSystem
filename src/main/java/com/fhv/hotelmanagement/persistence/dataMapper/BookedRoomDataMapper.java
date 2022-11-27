@@ -22,7 +22,7 @@ public class BookedRoomDataMapper {
 
     //read
     protected Optional<BookedRoom> get(final Booking booking){
-        BookedRoomEntity entity = PersistenceFacade.instance().entityManager.find(BookedRoomEntity.class, booking);
+        BookedRoomEntity entity = PersistenceManager.instance().entityManager.find(BookedRoomEntity.class, booking);
         if(entity != null){
             BookedRoom bookedRoom = createBookedRoom(entity, booking);
             return Optional.of(bookedRoom);
@@ -31,7 +31,7 @@ public class BookedRoomDataMapper {
     }
 
     public static ArrayList<BookedRoom> getAll(){
-        ArrayList<BookedRoomEntity> entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery("from BookedRoomEntity").getResultList();
+        ArrayList<BookedRoomEntity> entities = (ArrayList<BookedRoomEntity>) PersistenceManager.instance().entityManager.createQuery("from BookedRoomEntity").getResultList();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
         for(BookedRoomEntity e : entities){
             bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking())));
@@ -43,7 +43,7 @@ public class BookedRoomDataMapper {
     public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate){
         ArrayList<BookedRoomEntity> entities;
 
-        entities = (ArrayList<BookedRoomEntity>) PersistenceFacade.instance().entityManager.createQuery(
+        entities = (ArrayList<BookedRoomEntity>) PersistenceManager.instance().entityManager.createQuery(
                         "SELECT bookedRoom FROM BookedRoomEntity bookedRoom " +
                                 "WHERE (bookedRoom.fromDate < :minimumDate AND :minimumDate <= bookedRoom.toDate) " +
                                 "OR (:minimumDate <= bookedRoom.fromDate AND bookedRoom.fromDate <= :maximumDate)")
@@ -61,7 +61,7 @@ public class BookedRoomDataMapper {
 
     //create
     protected void insert(BookedRoom bookedRoom){
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
         entityManager.getTransaction().begin();
         entityManager.persist(createBookedRoomEntity(bookedRoom));
         entityManager.getTransaction().commit();
@@ -69,7 +69,10 @@ public class BookedRoomDataMapper {
 
     //update
     protected void store(BookedRoom bookedRoom){
-        PersistenceFacade.instance().entityManager.merge(createBookedRoomEntity(bookedRoom));
+        var entityManager = PersistenceManager.instance().entityManager;
+        entityManager.getTransaction().begin();
+        entityManager.merge(createBookedRoomEntity(bookedRoom));
+        entityManager.getTransaction().commit();
     }
 
     protected static BookedRoomEntity createBookedRoomEntity(BookedRoom bookedRoom) {

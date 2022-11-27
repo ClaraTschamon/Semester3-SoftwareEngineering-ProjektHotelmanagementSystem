@@ -2,6 +2,9 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import javafx.event.EventHandler;
+import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
+import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
+import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.fxml.FXMLLoader;
 import com.fhv.hotelmanagement.view.controller.useCaseController.*;
 import javafx.scene.control.TextField;
@@ -51,9 +54,25 @@ public class WalkInViewController {
         MainApplication.getMainController().loadIntoContentArea("home");
     }
 
-    public void save() throws IOException {
-        useCaseController.save();
-        MainApplication.getMainController().loadIntoContentArea("home");
+    public void save() {
+        try {
+            useCaseController.save();
+            MainApplication.getMainController().loadIntoContentArea("home");
+            MainApplication.getMainController().alert("Die Buchung wurde erfolgreich gespeichert.",
+                    WarningType.CONFIRMATION);
+        } catch (BookingIsInvalidException e) {
+            System.out.println(e.getMessage());
+            MainApplication.getMainController().alert("Ungültige Buchung: Die Buchung konnte nicht gespeichert werden.",
+                    WarningType.WARNING);
+        } catch (CustomerIsInvalidException e) {
+            System.out.println(e.getMessage());
+            MainApplication.getMainController().alert("Ungültiger Kunde: Der Kunde konnte nicht gespeichert werden.",
+                    WarningType.WARNING);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            MainApplication.getMainController().alert("Der Bildschirm konnte nicht gewechselt werden",
+                    WarningType.WARNING);
+        }
     }
 
     public void setTextColor(TextField textField, String color) {

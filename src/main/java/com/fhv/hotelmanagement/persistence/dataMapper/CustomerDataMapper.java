@@ -21,7 +21,7 @@ public class CustomerDataMapper{
 
     //read
     public Optional<Customer> get(final Long number){
-        CustomerEntity entity = PersistenceFacade.instance().entityManager.find(CustomerEntity.class, number);
+        CustomerEntity entity = PersistenceManager.instance().entityManager.find(CustomerEntity.class, number);
         if(entity != null){
             Customer customer = createCustomer(entity);
             return Optional.of(customer);
@@ -29,10 +29,24 @@ public class CustomerDataMapper{
         return Optional.empty();
     }
 
+    public static ArrayList<Customer> getSavedCustomers(){
+        ArrayList<CustomerEntity> entities;
+
+        entities = (ArrayList<CustomerEntity>) PersistenceManager.instance().entityManager.createQuery(
+                "SELECT customer FROM CustomerEntity customer WHERE customer.saved = true"
+        ).getResultList();
+
+        ArrayList<Customer> customers = new ArrayList<>();
+        for(CustomerEntity e : entities){
+            customers.add(createCustomer(e));
+        }
+        return customers;
+    }
+
     //create
     public Long insert(Customer customer){
         CustomerEntity customerEntity = createCustomerEntity(customer);
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
         entityManager.getTransaction().begin();
         entityManager.persist(customerEntity);
         entityManager.getTransaction().commit();
@@ -41,7 +55,12 @@ public class CustomerDataMapper{
 
     //update
     public void store(Customer customer){
-        PersistenceFacade.instance().entityManager.merge(createCustomerEntity(customer));
+        CustomerEntity customerEntity = createCustomerEntity(customer);
+        var entityManager = PersistenceManager.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(customerEntity);
+        entityManager.getTransaction().commit();
     }
 
     protected static CustomerEntity createCustomerEntity(Customer customer) {

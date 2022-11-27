@@ -16,7 +16,7 @@ import java.util.Properties;
 
 
 public class MainApplication extends Application {
-    Stage stage;
+    static Stage stage;
     static FXMLLoader fxmlLoader;
     Scene scene;
     Properties configProperties;
@@ -27,7 +27,7 @@ public class MainApplication extends Application {
         loadMainView();
     }
 
-    public static MainController getMainController() throws IOException {
+    public static MainController getMainController() {
         return fxmlLoader.getController();
     }
 
