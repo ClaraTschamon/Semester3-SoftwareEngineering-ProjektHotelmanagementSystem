@@ -20,7 +20,7 @@ public class InvoiceDataMapper {
     //create
     public Long insert(Invoice invoice) {
         InvoiceEntity invoiceEntity = createInvoiceEntity(invoice);
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
         entityManager.persist(invoiceEntity);
@@ -37,7 +37,7 @@ public class InvoiceDataMapper {
 
     public void store (Invoice invoice){
         InvoiceEntity invoiceEntity = createInvoiceEntity(invoice);
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
         entityManager.merge(invoiceEntity);

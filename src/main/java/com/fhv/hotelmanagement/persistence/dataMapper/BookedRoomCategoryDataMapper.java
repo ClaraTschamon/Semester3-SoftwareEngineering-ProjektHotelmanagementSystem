@@ -22,7 +22,7 @@ public class BookedRoomCategoryDataMapper{
 
     //read
     protected Optional<BookedRoomCategory> get(final Booking booking){
-        BookedRoomCategoryEntity entity = PersistenceFacade.instance().entityManager.find(BookedRoomCategoryEntity.class, booking);
+        BookedRoomCategoryEntity entity = PersistenceManager.instance().entityManager.find(BookedRoomCategoryEntity.class, booking);
         if(entity != null){
             BookedRoomCategory bookedRoomCategory = createBookedRoomCategory(entity, booking);
             return Optional.of(bookedRoomCategory);
@@ -32,7 +32,7 @@ public class BookedRoomCategoryDataMapper{
 
     //create
     public void insert(BookedRoomCategory bookedRoomCategory){ //Autocommit funktioniert nicht
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
         entityManager.getTransaction().begin();
         entityManager.persist(createBookedRoomCategoryEntity(bookedRoomCategory));
         entityManager.getTransaction().commit();
@@ -40,7 +40,7 @@ public class BookedRoomCategoryDataMapper{
 
     //update
     protected void store(BookedRoomCategory bookedRoomCategory){
-        var entityManager = PersistenceFacade.instance().entityManager;
+        var entityManager = PersistenceManager.instance().entityManager;
         entityManager.getTransaction().begin();
         entityManager.merge(createBookedRoomCategoryEntity(bookedRoomCategory));
         entityManager.getTransaction().commit();
