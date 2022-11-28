@@ -37,3 +37,12 @@
 .mainviewbutton:hover{
     -fx-background-color: #131724;
 }
+
+.checkoutbutton{
+    -fx-background-color: #21273d;
+}
+.checkoutbutton:hover{
+    -fx-background-color: #131724;
+}
+
+
