@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import org.controlsfx.control.SearchableComboBox;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class WalkIn2ViewController implements Initializable {
     @FXML
     private TextField lastNameTextField;
     @FXML
-    private ComboBox nationalityComboBox;
+    private SearchableComboBox nationalityComboBox;
     @FXML
     private TextField phoneNumberTextField;
     @FXML
@@ -367,8 +368,7 @@ public class WalkIn2ViewController implements Initializable {
         nationalityComboBox.getSelectionModel().select(21);
 
         nationalityComboBox.setOnAction(event -> {
-            String data = nationalityComboBox.getSelectionModel().getSelectedItem().toString();
+            String data = (String) nationalityComboBox.getSelectionModel().getSelectedItem();
         });
-
     }
 }
