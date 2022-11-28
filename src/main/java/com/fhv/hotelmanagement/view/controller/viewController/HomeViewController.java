@@ -18,7 +18,9 @@ public class HomeViewController{
 
     @FXML
     private void onCheckOutClicked(ActionEvent e) throws IOException{
-        FXMLLoader walkIn1Loader = MainApplication.getMainController().loadIntoContentArea("check-out");
+        CheckOutViewController checkOutViewController = new CheckOutViewController();
+        //FXMLLoader walkIn1Loader = MainApplication.getMainController().loadIntoContentArea("check-out-1");
+        //TODO: warum walkIn1Loader??
     }
 
 

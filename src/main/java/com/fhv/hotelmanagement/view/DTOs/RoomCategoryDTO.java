@@ -33,4 +33,9 @@ public class RoomCategoryDTO {
         return (roomCategoryDTO.getName().equals(name)) &&
                 (roomCategoryDTO.getPricePerNight().equals(pricePerNight));
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
