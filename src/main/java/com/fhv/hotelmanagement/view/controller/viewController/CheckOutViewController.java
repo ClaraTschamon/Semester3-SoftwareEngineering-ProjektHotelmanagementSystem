@@ -2,6 +2,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
+import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -24,6 +26,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -66,36 +69,30 @@ public class CheckOutViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allBookedRoomDTOs = DomainController.getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
-        ArrayList<RoomDTO> rooms = new ArrayList<>();
+        ArrayList<BookingDTO> bookings = new ArrayList<>();
+        ArrayList<Long> bookingNumbers = new ArrayList<>();
 
-        for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            if (bookedRoom.getBooking().getCheckOutDatetime() == null) {
-                rooms.add(bookedRoom.getRoom());
+        for(BookedRoomDTO bookedRoom : allBookedRoomDTOs) {
+            BookingDTO booking = bookedRoom.getBooking();
+            if (booking.getCheckOutDatetime() == null) {
+                if (!bookingNumbers.contains(booking.getNumber())) {
+                    bookings.add(booking);
+                    bookingNumbers.add(booking.getNumber());
+                }
             }
         }
-        ObservableList<RoomDTO> roomDTOS = FXCollections.observableList(rooms);
-        roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
-        roomComboBox.getItems().addAll(roomDTOS);
+
+        roomComboBox.setConverter(new RoomNumberCustomerNameConverter(bookings));
+        roomComboBox.getItems().setAll(FXCollections.observableArrayList(bookings));
 
         roomComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                RoomDTO selectedRoom = (RoomDTO) roomComboBox.getSelectionModel().getSelectedItem();
-                BookingDTO bookingDTO = getBookingFromRoom(selectedRoom);
-                setTexts(bookingDTO);
+                BookingDTO selectedBooking = (BookingDTO) roomComboBox.getSelectionModel().getSelectedItem();
+                setTexts(selectedBooking);
+                useCaseController.setBooking(selectedBooking);
             }
         });
-    }
-
-    private BookingDTO getBookingFromRoom(RoomDTO room){
-        for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            if (bookedRoom.getRoom().equals(room)){
-                BookingDTO bookingDTO = bookedRoom.getBooking();
-                useCaseController.setBooking(bookingDTO);
-                return bookingDTO;
-            }
-        }
-        return null;
     }
 
     private void setTexts(BookingDTO bookingDTO){
@@ -161,5 +158,81 @@ public class CheckOutViewController implements Initializable {
     public void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
         useCaseController.save();
         MainApplication.getMainController().loadIntoContentArea("home");
+    }
+}
+
+class RoomNumberCustomerNameConverter<T> extends StringConverter<BookingDTO> {
+    ArrayList<BookingDTO> bookings;
+
+    RoomNumberCustomerNameConverter(ArrayList<BookingDTO> bookings) {
+        this.bookings = bookings;
+    }
+
+    @Override
+    public String toString(BookingDTO booking) {
+        if (
+                booking == null ||
+                booking.getBookedRooms() == null
+        ) {
+            return "";
+        }
+
+        String string = "";
+        for (BookedRoomDTO bookedRoom : booking.getBookedRooms()) {
+            if (bookedRoomIsCurrent(bookedRoom)) {
+                string = string.concat(bookedRoom.getRoom().getNumber() + " ");
+            }
+        }
+        if (booking.getCustomer() != null) {
+            string = string.concat(booking.getCustomer().getLastName());
+        }
+        return string;
+    }
+
+    @Override
+    public BookingDTO fromString(String string) {
+        ArrayList<String> strings = (ArrayList<String>) Arrays.asList(string.split(" "));
+        ArrayList<Integer> numbers = new ArrayList<>();
+        String lastName = "";
+
+        for (String s : strings) {
+            try {
+                numbers.add(Integer.parseInt(s));
+            } catch (NumberFormatException e) {
+                lastName = lastName.concat(s + " ");
+            }
+        }
+
+        for (BookingDTO booking : bookings) {
+            if (
+                    booking.getCustomer() != null &&
+                    booking.getCustomer().getLastName().equals(lastName) &&
+                    bookingContrainsRooms(booking, numbers)
+            ) {
+                return booking;
+            }
+        }
+        return null;
+    }
+
+    private boolean bookedRoomIsCurrent(BookedRoomDTO bookedRoom) {
+        LocalDate toDate = bookedRoom.getToDate();
+        return toDate.isAfter(LocalDate.now()) || toDate.equals(LocalDate.now());
+    }
+
+    private boolean bookingContrainsRooms(BookingDTO bookingDTO, ArrayList<Integer> numbers) {
+        if (bookingDTO.getBookedRooms() == null) {
+            return false;
+        }
+        for (BookedRoomDTO bookedRoom : bookingDTO.getBookedRooms()) {
+            LocalDate toDate = bookedRoom.getToDate();
+            if (
+                    bookedRoomIsCurrent(bookedRoom) &&
+                    !numbers.contains(bookedRoom.getRoom().getNumber())
+            ) {
+                return false;
+            }
+        }
+        return true;
     }
 }
