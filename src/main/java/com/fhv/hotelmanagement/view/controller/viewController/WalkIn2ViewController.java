@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
@@ -368,5 +369,6 @@ public class WalkIn2ViewController implements Initializable {
         nationalityComboBox.setOnAction(event -> {
             String data = nationalityComboBox.getSelectionModel().getSelectedItem().toString();
         });
+
     }
 }
