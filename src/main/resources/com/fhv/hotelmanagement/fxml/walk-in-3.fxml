@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
 
 
 
@@ -56,13 +56,13 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" />
+            <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="xxxx xxxx xxxx xxxx" />
                 <Label layoutX="60.0" layoutY="360.0" text="Sicherheitsnummer">
                    <font>
                       <Font size="14.0" />
                    </font>
                 </Label>
-            <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
+            <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="xxx" />
                 <Label layoutX="60.0" layoutY="440.0" text="Ablaufdatum">
                <font>
                   <Font size="14.0" />
