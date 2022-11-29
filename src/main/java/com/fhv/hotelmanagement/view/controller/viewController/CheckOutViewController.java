@@ -26,6 +26,7 @@ public class CheckOutViewController {
         FXMLLoader checkOut1Loader = MainApplication.getMainController().loadIntoContentArea("check-out-1");
         CheckOut1ViewController checkOut1ViewController = checkOut1Loader.getController();
         checkOut1ViewController.setController(this);
+        checkOut1ViewController.fillData();
     }
 
     public void loadCheckOut2() throws IOException{

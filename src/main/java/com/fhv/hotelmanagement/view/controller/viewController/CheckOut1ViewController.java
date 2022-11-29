@@ -57,13 +57,30 @@ public class CheckOut1ViewController implements Initializable {
     public Text totalPriceText;
     @FXML
     public ComboBox roomComboBox;
-    @FXML
-    public CheckBox printInvoiceCheckBox;
 
     private CheckOutViewController viewController;
 
     public void setController(CheckOutViewController viewController){
         this.viewController = viewController;
+    }
+
+    protected void fillData(){
+        if(viewController.getUseCaseController().getBooking() != null){
+            BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
+            RoomDTO selectedRoom = bookingDTO.getBookedRooms().get(0).getRoom();
+            roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
+            roomComboBox.setValue(selectedRoom);
+            setTexts(bookingDTO);
+        }
+    }
+
+    private void saveData(){
+        //BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
+        RoomDTO roomDTO = (RoomDTO) roomComboBox.getSelectionModel().getSelectedItem();
+
+        BookingDTO myBookingDTO = getBookingFromRoom(roomDTO);
+        viewController.getUseCaseController().setBooking(myBookingDTO);
+
     }
 
     @Override
@@ -166,8 +183,7 @@ public class CheckOut1ViewController implements Initializable {
 
     @FXML
     public void onNextButtonClicked(ActionEvent actionEvent) throws IOException {
-        //useCaseController.save();
-        //MainApplication.getMainController().loadIntoContentArea("home");
+        saveData();
         viewController.loadCheckOut2();
     }
 }
