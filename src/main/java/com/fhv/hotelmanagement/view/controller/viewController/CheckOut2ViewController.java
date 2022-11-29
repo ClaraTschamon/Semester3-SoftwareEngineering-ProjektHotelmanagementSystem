@@ -69,7 +69,12 @@ public class CheckOut2ViewController implements Initializable {
 
     @FXML
     public void onBackButtonClicked(ActionEvent actionEvent) throws IOException {
-        viewController.loadCheckOut1();
+        try{
+            //saveData(); //neu
+            viewController.loadCheckOut1();
+        }catch (IOException exc){
+            System.out.println(exc.getMessage());
+        }
     }
 
     @FXML
@@ -80,13 +85,12 @@ public class CheckOut2ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        calculatePrices();
 
 
     }
 
-    public void fillData(){
-        //Tabelle 1
+    private void calculatePrices(){
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         ObservableList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = FXCollections.observableArrayList(bookingDTO.getBookedRoomCategories());
         table1.setItems(bookedRoomCategoryDTOS);
@@ -141,4 +145,17 @@ public class CheckOut2ViewController implements Initializable {
 
         totalSumGrossText.setText("Gesamtsumme (Brutto):       " + totalSumGross.setScale(2) + "€");
     }
+
+    public void fillData(){
+
+    }
+
+    protected void saveData(){
+
+
+    }
+
+
+
+
 }

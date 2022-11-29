@@ -62,14 +62,9 @@ public class CheckOut1ViewController implements Initializable {
 
     private CheckOutViewController viewController;
 
-    /*public CheckOut1ViewController(){
-        useCaseController = new CheckOutUseCaseController();
-    }*/
-
     public void setController(CheckOutViewController viewController){
         this.viewController = viewController;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
