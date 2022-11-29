@@ -1,6 +1,5 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
@@ -9,12 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -97,36 +93,64 @@ public class WalkIn1ViewController implements Initializable {
         LocalDate departureDate = departureDatePicker.getValue();
         LocalDate todayDate = LocalDate.now();
 
-        if (checkOutDate(todayDate, departureDate)) {
+        if (validateCheckOutDate(todayDate, departureDate)) {
             departureDateIsValid = true;
         } else {
             departureDatePicker.setStyle("-fx-text-inner-color: red");
         }
 
-        if (Integer.parseInt(counterSingleRoom.getText()) > 0) {
+        if (singleRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterSingleRoomIsValid = true;
         }
         else {
             setTextColorRed(counterSingleRoom);
         }
 
-        if (Integer.parseInt(counterDoubleRoom.getText()) > 0) {
+//        if (Integer.parseInt(counterSingleRoom.getText()) > 0) {
+//            counterSingleRoomIsValid = true;
+//        }
+//        else {
+//            setTextColorRed(counterSingleRoom);
+//        }
+
+        if (doubleRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterDoubleRoomIsValid = true;
-        } else {
+        }
+        else {
             setTextColorRed(counterDoubleRoom);
         }
 
-        if (Integer.parseInt(counterFamilyRoom.getText()) > 0) {
+//        if (Integer.parseInt(counterDoubleRoom.getText()) > 0) {
+//            counterDoubleRoomIsValid = true;
+//        } else {
+//            setTextColorRed(counterDoubleRoom);
+//        }
+
+        if (familyRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterFamilyRoomIsValid = true;
-        } else {
+        }
+        else {
             setTextColorRed(counterFamilyRoom);
         }
 
-        if (Integer.parseInt(counterSuite.getText()) > 0) {
+//        if (Integer.parseInt(counterFamilyRoom.getText()) > 0) {
+//            counterFamilyRoomIsValid = true;
+//        } else {
+//            setTextColorRed(counterFamilyRoom);
+//        }
+
+        if (suiteDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterSuiteRoomIsValid = true;
-        } else {
+        }
+        else {
             setTextColorRed(counterSuite);
         }
+
+//        if (Integer.parseInt(counterSuite.getText()) > 0) {
+//            counterSuiteRoomIsValid = true;
+//        } else {
+//            setTextColorRed(counterSuite);
+//        }
 
         if (counterSingleRoomIsValid || counterDoubleRoomIsValid ||
                 counterFamilyRoomIsValid || counterSuiteRoomIsValid) {
@@ -187,7 +211,7 @@ public class WalkIn1ViewController implements Initializable {
         }
     }
 
-    public boolean checkOutDate(LocalDate dateOfToday, LocalDate dateOfCheckOut) {
+    public boolean validateCheckOutDate(LocalDate dateOfToday, LocalDate dateOfCheckOut) {
         if (Period.between(dateOfToday, dateOfCheckOut).getDays() > 0) {
             return true;
         }

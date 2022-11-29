@@ -1,5 +1,7 @@
 package com.fhv.hotelmanagement.services;
 
+import javafx.scene.control.TextField;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -11,6 +13,7 @@ import java.util.regex.Pattern;
 public class StringValidator {
     public static boolean checkString(String string) {
         return string != null && !string.equals("");
+
     }
 
     public static boolean checkStringValidCharacters(String string, LinkedList<Character> validCharacters) {
@@ -92,4 +95,25 @@ public class StringValidator {
         LocalDate currentDate = LocalDate.now();
         return Period.between(birthDate, currentDate).getYears();
     }
+
+    public static boolean checkHouseNumber(String houseNumber) {
+        String regexPattern = "[0-9 ]{1,5}([a-zA-Z])?";
+        return checkRegex(houseNumber, regexPattern);
+    }
+
+    public static boolean checkStreet(String street) {
+        String regexPattern = "[0-9a-zA-Z-/]*";
+        return checkRegex(street, regexPattern);
+    }
+
+    public static boolean checkCity(String city) {
+        String regexPattern = "[a-zA-ZäÄöÖüÜß]*";
+        return checkRegex(city, regexPattern);
+    }
+
+    public static boolean checkPostalCode(String postalCode) {
+        String regexPattern = "[0-9]{3,6}";
+        return checkRegex(postalCode, regexPattern);
+    }
+
 }
