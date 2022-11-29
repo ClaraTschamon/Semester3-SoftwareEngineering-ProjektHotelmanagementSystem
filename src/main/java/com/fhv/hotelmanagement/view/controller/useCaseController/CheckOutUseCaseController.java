@@ -15,6 +15,10 @@ public class CheckOutUseCaseController {
         this.booking = booking;
     }
 
+    public BookingDTO getBooking() {
+        return booking;
+    }
+
     public void save() {
         if (booking != null) {
             booking.setCheckOutDatetime(LocalDateTime.now());

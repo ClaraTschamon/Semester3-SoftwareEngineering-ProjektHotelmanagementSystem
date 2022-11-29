@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import org.controlsfx.control.SearchableComboBox?>
 <BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn2ViewController">
 
     <center>
@@ -64,7 +65,7 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-            <ComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
+            <SearchableComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
             <Text layoutX="60.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtstag" wrappingWidth="74.19140625">
                <font>
                   <Font size="14.0" />

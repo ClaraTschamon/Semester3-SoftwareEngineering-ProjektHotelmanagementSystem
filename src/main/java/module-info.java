@@ -16,6 +16,8 @@ module com.fhv.hotelmanagement {
     opens com.fhv.hotelmanagement.view.controller.viewController to javafx.fxml;
     exports com.fhv.hotelmanagement;
     opens com.fhv.hotelmanagement to javafx.fxml;
+    opens com.fhv.hotelmanagement.view.DTOs to javafx.base; //neue Zeile
     opens com.fhv.hotelmanagement.persistence.persistenceEntity to org.hibernate.orm.core;
     exports com.fhv.hotelmanagement.persistence.persistenceEntity;
+
 }
