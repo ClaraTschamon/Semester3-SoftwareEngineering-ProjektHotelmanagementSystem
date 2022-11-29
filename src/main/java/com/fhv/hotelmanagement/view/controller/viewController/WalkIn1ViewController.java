@@ -71,6 +71,7 @@ public class WalkIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> familyRoomDropDown;
     private CheckComboBox<RoomDTO> suiteDropDown;
     private WalkInViewController viewController;
+    private RoomProvider roomProvider;
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
@@ -398,10 +399,17 @@ public class WalkIn1ViewController implements Initializable {
         bookingDTO.setAmountGuests(amountGuestsSpinner.getValue());
     }
 
+    private void refreshFreeRoomsInDropDowns () {
+        singleRoomDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
+        doubleRoomDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
+        familyRoomDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Familienzimmer"));
+        suiteDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Suite"));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        RoomProvider roomProvider = new RoomProvider();
+        roomProvider = new RoomProvider();
 
         singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
         doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Doppelzimmer"));
@@ -477,17 +485,24 @@ public class WalkIn1ViewController implements Initializable {
         }
         return null;
     }
+
+    @FXML
+    private void departureDatePickerOnAction() {
+        roomProvider.refreshFreeRooms(departureDatePicker.getValue());
+        refreshFreeRoomsInDropDowns();
+    }
 }
 
 class RoomProvider{
+    private ArrayList<RoomDTO> freeRooms;
 
-    private LocalDate minDate = LocalDate.now().minusDays(1); //was nimmt man als minDate???
-    private LocalDate maxDate = LocalDate.now();
-    private ArrayList<BookedRoomDTO> freeBookedRooms = getCheckoutDateToday(maxDate);
+    public RoomProvider() {
+        refreshFreeRooms(LocalDate.now().plusDays(1));
+    }
 
-    public RoomDTO getRoomFromNumber(int number){
-        for(RoomDTO room : DomainController.getAllRooms()){
-            if(room.getNumber() == number){
+    public RoomDTO getRoomFromNumber(int number) {
+        for (RoomDTO room : DomainController.getAllRooms()) {
+            if (room.getNumber() == number) {
                 return room;
             }
         }
@@ -495,36 +510,27 @@ class RoomProvider{
     }
 
     public ObservableList<RoomDTO> getAllRoomsFromCategory(String category) {
+        ObservableList<RoomDTO> freeRoomsFromCategory = FXCollections.observableArrayList(new ArrayList<>());
 
-        freeBookedRooms = getCheckoutDateToday(maxDate);
-
-        ObservableList<RoomDTO> freeRooms = FXCollections.observableArrayList(new ArrayList<>());
-
-        for(RoomDTO room : DomainController.getAllRooms()){
-            if(room.getCategory().getName().equals(category)){
-                if(room.getIsFree()){
-                    freeRooms.add(room);
-                }
-                else{
-                    for(BookedRoomDTO bookedRoom : freeBookedRooms){
-                        if(bookedRoom.getRoom().equals(room)){
-                            freeRooms.add(room);
-                        }
-                    }
-                }
+        for (RoomDTO room : freeRooms) {
+            if (room.getCategory().getName().equals(category)) {
+                freeRoomsFromCategory.add(room);
             }
         }
-        return freeRooms;
+        return freeRoomsFromCategory;
     }
 
-    public ArrayList<BookedRoomDTO> getCheckoutDateToday(LocalDate maxDate){
-        ArrayList<BookedRoomDTO> bookedRooms = new ArrayList<>();
+    public void refreshFreeRooms(LocalDate maxDate) {
+        freeRooms = DomainController.getAllRooms();
+
         for(BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(LocalDate.now(), maxDate)){
-            if(bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate)){
-                bookedRooms.add(bookedRoom);
+            if(!(bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate))) {
+                RoomDTO room = bookedRoom.getRoom();
+                if (freeRooms.contains(room)) {
+                    freeRooms.remove(room);
+                }
             }
         }
-        return bookedRooms;
     }
 }
 
