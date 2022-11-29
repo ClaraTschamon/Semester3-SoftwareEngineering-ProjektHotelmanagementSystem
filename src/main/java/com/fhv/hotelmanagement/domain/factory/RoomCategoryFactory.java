@@ -8,19 +8,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RoomCategoryFactory {
-    private static HashMap<String, RoomCategoryDTO> roomCategories;
+    private static HashMap<String, RoomCategory> roomCategories;
 
     public static HashMap<String, RoomCategoryDTO> getAllRoomCategories() {
         if (roomCategories == null) {
             refreshRoomCategories();
         }
-        return roomCategories;
+
+        HashMap<String, RoomCategoryDTO> roomCategoryDTOs = new HashMap<>();
+        for (RoomCategory c : roomCategories.values()) {
+            roomCategoryDTOs.put(c.getName(), createRoomCategoryDTO(c));
+        }
+        return roomCategoryDTOs;
     }
 
     private static void refreshRoomCategories() {
         roomCategories = new HashMap<>();
         for (RoomCategory c : PersistenceFacade.getAllRoomCategories()) {
-            roomCategories.put(c.getName(), createRoomCategoryDTO(c));
+            roomCategories.put(c.getName(), c);
         }
     }
 

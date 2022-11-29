@@ -7,19 +7,24 @@ import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import java.util.ArrayList;
 
 public class RoomFactory {
-    private static ArrayList<RoomDTO> rooms;
+    private static ArrayList<Room> rooms;
 
     public static ArrayList<RoomDTO> getAllRooms() {
         if (rooms == null) {
             refreshRooms();
         }
-        return rooms;
+
+        ArrayList<RoomDTO> roomDTOs = new ArrayList<RoomDTO>();
+        for (Room r : rooms) {
+            roomDTOs.add(createRoomDTO(r));
+        }
+        return roomDTOs;
     }
 
     private static void refreshRooms() {
-        rooms = new ArrayList<RoomDTO>();
+        rooms = new ArrayList<Room>();
         for (Room r : PersistenceFacade.getAllRooms()) {
-            rooms.add(createRoomDTO(r));
+            rooms.add(r);
         }
     }
 

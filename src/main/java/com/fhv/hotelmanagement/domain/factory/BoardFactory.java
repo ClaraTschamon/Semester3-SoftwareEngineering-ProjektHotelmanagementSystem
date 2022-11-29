@@ -7,19 +7,24 @@ import com.fhv.hotelmanagement.view.DTOs.BoardDTO;
 import java.util.ArrayList;
 
 public class BoardFactory {
-    private static ArrayList<BoardDTO> boards;
+    private static ArrayList<Board> boards;
 
     public static ArrayList<BoardDTO> getAllBoards() {
         if (boards == null) {
             refreshBoards();
         }
-        return boards;
+
+        ArrayList<BoardDTO> boardDTOs = new ArrayList<>();
+        for (Board b: boards) {
+            boardDTOs.add(createBoardDTO(b));
+        }
+        return boardDTOs;
     }
 
     private static void refreshBoards() {
         boards = new ArrayList<>();
         for (Board b: PersistenceFacade.getAllBoards()) {
-            boards.add(createBoardDTO(b));
+            boards.add(b);
         }
     }
 
