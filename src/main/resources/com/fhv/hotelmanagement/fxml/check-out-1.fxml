@@ -30,11 +30,8 @@
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-<<<<<<< Updated upstream:src/main/resources/com/fhv/hotelmanagement/fxml/check-out.fxml
-                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onConfirmButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-Out" textFill="WHITE">
-=======
-                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #21273d;" text="Weiter" textFill="WHITE">
->>>>>>> Stashed changes:src/main/resources/com/fhv/hotelmanagement/fxml/check-out-1.fxml
+                <!--<Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onConfirmButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-Out" textFill="WHITE">-->
+                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0"  styleClass="nextButton" stylesheets="@css.css" text="Weiter" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font></Button>

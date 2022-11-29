@@ -56,21 +56,21 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-<<<<<<< Updated upstream
+
             <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="xxxx xxxx xxxx xxxx" />
-=======
+
             <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="1234 1234 1234 1234"/>
->>>>>>> Stashed changes
+
                 <Label layoutX="60.0" layoutY="360.0" text="Sicherheitsnummer">
                    <font>
                       <Font size="14.0" />
                    </font>
                 </Label>
-<<<<<<< Updated upstream
+
             <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="xxx" />
-=======
+
             <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="123"/>
->>>>>>> Stashed changes
+
                 <Label layoutX="60.0" layoutY="440.0" text="Ablaufdatum">
                <font>
                   <Font size="14.0" />

@@ -188,19 +188,6 @@ public class WalkIn2ViewController implements Initializable {
             setEventHandler(firstNameTextField);
         }
 
-//        if (StringValidator.checkString(firstNameTextField.getText())) {
-//            if (StringValidator.checkRegex(firstNameTextField.getText(), "[^0-9]+$")) {
-//                firstNameIsValid = true;
-//            } else {
-//
-//                setTextColor(firstNameTextField, "red");
-//                setEventHandler(firstNameTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(firstNameTextField);
-//        }
-
         if (!StringValidator.checkString(lastNameTextField.getText())) {
             setRequieredField(lastNameTextField);
         } else if (StringValidator.checkRegex(lastNameTextField.getText(), "[^0-9]+$")) {
@@ -209,18 +196,6 @@ public class WalkIn2ViewController implements Initializable {
             setTextColor(lastNameTextField, "red");
             setEventHandler(lastNameTextField);
         }
-
-//        if (StringValidator.checkString(lastNameTextField.getText())) {
-//            if (StringValidator.checkRegex(lastNameTextField.getText(), "[^0-9]+$")) {
-//                lastNameIsValid = true;
-//            } else {
-//                setTextColor(lastNameTextField, "red");
-//                setEventHandler(lastNameTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(lastNameTextField);
-//        }
 
         if (nationalityComboBox.getValue() != null) {
              nationalityIsValid = true;
@@ -237,17 +212,6 @@ public class WalkIn2ViewController implements Initializable {
             setEventHandler(emailTextField);
         }
 
-//        if (StringValidator.checkString(emailTextField.getText())) {
-//            if (StringValidator.checkValidEmail(emailTextField.getText())) {
-//                emailIsValid = true;
-//            } else {
-//                setTextColor(emailTextField, "red");
-//                setEventHandler(emailTextField);
-//            }
-//        } else {
-//            setRequieredField(emailTextField);
-//        }
-
         if (!StringValidator.checkString(postalCodeTextField.getText())) {
             setRequieredField(postalCodeTextField);
         } else if (StringValidator.checkPostalCode(postalCodeTextField.getText())) {
@@ -256,18 +220,6 @@ public class WalkIn2ViewController implements Initializable {
             setTextColor(postalCodeTextField, "red");
             setEventHandler(postalCodeTextField);
         }
-
-//        if (StringValidator.checkString(postalCodeTextField.getText())) {
-//            if (StringValidator.checkPostalCode(postalCodeTextField.getText())) {
-//                postalCodeIsValid = true;
-//            } else {
-//                setTextColor(postalCodeTextField, "red");
-//                setEventHandler(postalCodeTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(postalCodeTextField);
-//        }
 
         if (!StringValidator.checkString(cityTextField.getText())) {
             setRequieredField(cityTextField);
@@ -278,18 +230,6 @@ public class WalkIn2ViewController implements Initializable {
             setEventHandler(cityTextField);
         }
 
-//        if (StringValidator.checkString(cityTextField.getText())) {
-//            if (StringValidator.checkCity(cityTextField.getText())) {
-//                cityIsValid = true;
-//            } else {
-//                setTextColor(cityTextField, "red");
-//                setEventHandler(cityTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(cityTextField);
-//        }
-
         if (!StringValidator.checkString(countryTextField.getText())) {
             setRequieredField(countryTextField);
         } else if (StringValidator.checkRegex(countryTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
@@ -298,18 +238,6 @@ public class WalkIn2ViewController implements Initializable {
             setTextColor(countryTextField, "red");
             setEventHandler(countryTextField);
         }
-
-//        if (StringValidator.checkString(countryTextField.getText())) {
-//            if (StringValidator.checkRegex(countryTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
-//                countryIsValid = true;
-//            } else {
-//                setTextColor(countryTextField, "red");
-//                setEventHandler(countryTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(countryTextField);
-//        }
 
         if (!StringValidator.checkString(phoneNumberTextField.getText())) {
             setRequieredField(phoneNumberTextField);
@@ -320,18 +248,6 @@ public class WalkIn2ViewController implements Initializable {
             setEventHandler(phoneNumberTextField);
         }
 
-//        if (StringValidator.checkString(phoneNumberTextField.getText())) {
-//            if (StringValidator.checkValidPhoneNumber(phoneNumberTextField.getText())) {
-//                phoneNumberIsValid = true;
-//            } else {
-//                setTextColor(phoneNumberTextField, "red");
-//                setEventHandler(phoneNumberTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(phoneNumberTextField);
-//        }
-
         if (!StringValidator.checkString(houseNumberTextField.getText())) {
             setRequieredField(houseNumberTextField);
         } else if (StringValidator.checkHouseNumber(houseNumberTextField.getText())) {
@@ -341,18 +257,6 @@ public class WalkIn2ViewController implements Initializable {
             setEventHandler(houseNumberTextField);
         }
 
-//        if (StringValidator.checkString(houseNumberTextField.getText())) {
-//            if (StringValidator.checkHouseNumber(houseNumberTextField.getText())) {
-//                houseNumberIsValid = true;
-//            } else {
-//                setTextColor(houseNumberTextField, "red");
-//                setEventHandler(houseNumberTextField);
-//            }
-//        }
-//        else {
-//            setRequieredField(houseNumberTextField);
-//        }
-
         if (!StringValidator.checkString(streetTextField.getText())) {
             setRequieredField(streetTextField);
         } else if (StringValidator.checkStreet(streetTextField.getText())) {
@@ -361,20 +265,6 @@ public class WalkIn2ViewController implements Initializable {
             setTextColor(streetTextField, "red");
             setEventHandler(streetTextField);
         }
-
-//        if (StringValidator.checkString(streetTextField.getText())) {
-//            if (StringValidator.checkStreet(streetTextField.getText())) {
-//                streetIsValid = true;
-//            } else {
-//
-//                setTextColor(streetTextField, "red");
-//                setEventHandler(streetTextField);
-//            }
-//        }
-//        else {
-//                setRequieredField(streetTextField);
-//            }
-
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
