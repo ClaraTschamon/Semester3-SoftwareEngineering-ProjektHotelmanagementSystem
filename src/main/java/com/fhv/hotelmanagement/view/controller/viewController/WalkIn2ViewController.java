@@ -1,3 +1,4 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
@@ -22,14 +23,10 @@ import java.util.ResourceBundle;
 
 public class WalkIn2ViewController implements Initializable {
 
-    private static int number;
-
     @FXML
     private DatePicker birthdayDatePicker;
     @FXML
     private TextField countryTextField;
-    @FXML
-    private TextField searchDatabaseTextField;
     @FXML
     private TextField firstNameTextField;
     @FXML
@@ -49,7 +46,7 @@ public class WalkIn2ViewController implements Initializable {
     @FXML
     private TextField postalCodeTextField;
     @FXML
-    public CheckBox customerSavedCheckBox;
+    private CheckBox customerSavedCheckBox;
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {

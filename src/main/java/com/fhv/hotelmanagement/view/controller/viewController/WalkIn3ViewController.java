@@ -1,3 +1,4 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
@@ -38,11 +39,11 @@ public class WalkIn3ViewController {
     @FXML
     private TextArea notesTextArea;
     @FXML
-    private ComboBox paymentMethod;
+    private ComboBox paymentMethodComboBox;
     @FXML
-    public Label checkInForLabel;
+    private Label checkInForLabel;
     @FXML
-    public Label roomNumbersLabel;
+    private Label roomNumbersLabel;
 
 
     /*if you go back after you clicked the "billingAddressEqualsCustomerAddressButton" it will delete the filled in customer bill address
@@ -53,7 +54,7 @@ public class WalkIn3ViewController {
         this.viewController = viewController;
     }
 
-    public void fillData() {
+    protected void fillData() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         String creditCard = bookingDTO.getCreditCardNumber();
         creditCardTextField.setText(creditCard);
@@ -66,7 +67,7 @@ public class WalkIn3ViewController {
 
         if (bookingDTO.getPaymentMethod() != null) {
             String payment = bookingDTO.getPaymentMethod();
-            paymentMethod.setValue(payment);
+            paymentMethodComboBox.setValue(payment);
         }
 
         AddressDTO addressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
@@ -86,7 +87,7 @@ public class WalkIn3ViewController {
         fillSummaryLabels();
     }
 
-    public void fillBillingAddressData() {
+    private void fillBillingAddressData() {
         if (billingAddressEqualsCustomerAddressCheckBox.isSelected()) {
             AddressDTO address = viewController.getUseCaseController().getCustomer().getAddress();
             billingStreetTextField.setText(address.getStreet());
@@ -123,7 +124,7 @@ public class WalkIn3ViewController {
         bookingDTO.setAuthorisationNumber(authorisationNumberTextField.getText());
         bookingDTO.setExpirationDate(expireDateTextField.getText());
         bookingDTO.setComment(notesTextArea.getText());
-        bookingDTO.setPaymentMethod((String) paymentMethod.getSelectionModel().getSelectedItem());
+        bookingDTO.setPaymentMethod((String) paymentMethodComboBox.getSelectionModel().getSelectedItem());
 
         AddressDTO billingAddressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
         billingAddressDTO.setStreet(billingStreetTextField.getText());
@@ -135,7 +136,7 @@ public class WalkIn3ViewController {
     }
 
     @FXML
-    public void onBackButtonClickedPayment(ActionEvent e) {
+    private void onBackButtonClickedPayment(ActionEvent e) {
         try {
             saveData();
             viewController.loadWalkIn2();
@@ -145,7 +146,7 @@ public class WalkIn3ViewController {
     }
 
     @FXML
-    public void onSaveButtonClicked(ActionEvent e) {
+    private void onSaveButtonClicked(ActionEvent e) {
         if (validate()) {
             saveData();
             viewController.save();
@@ -153,7 +154,7 @@ public class WalkIn3ViewController {
     }
 
     @FXML
-    public void onCancelButtonClickedPayment(ActionEvent e) {
+    private void onCancelButtonClickedPayment(ActionEvent e) {
         try {
             viewController.cancel();
         } catch (IOException ex) {
@@ -162,7 +163,7 @@ public class WalkIn3ViewController {
     }
 
     @FXML
-    public void billingAddressEqualsCustomerAddressCheckBoxChanged(ActionEvent e) {
+    private void billingAddressEqualsCustomerAddressCheckBoxChanged(ActionEvent e) {
         fillBillingAddressData();
     }
 
@@ -242,7 +243,7 @@ public class WalkIn3ViewController {
             TextFunction.setEventHandler(expireDateTextField);
         }
 
-        if (paymentMethod.getValue().equals("Rechnung")) {
+        if (paymentMethodComboBox.getValue().equals("Rechnung")) {
             creditCardTextField.clear();
             authorisationNumberTextField.clear();
             expireDateTextField.clear();
@@ -253,24 +254,5 @@ public class WalkIn3ViewController {
             return true;
         }
         return false;
-    }
-
-    private void setTextColor (TextField textField, String color){
-        textField.setStyle("-fx-text-inner-color: " + color);
-    }
-
-    private void setRequieredField (TextField textField){
-        textField.setPromptText("Pflichtfeld");
-        textField.setStyle("-fx-prompt-text-fill: red");
-
-    }
-
-    private void setEventHandler (TextField textField){
-        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                setTextColor(textField, "black");
-            }
-        });
     }
 }

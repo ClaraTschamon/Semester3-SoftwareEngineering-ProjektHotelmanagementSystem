@@ -1,6 +1,6 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

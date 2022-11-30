@@ -1,6 +1,6 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.DTOs;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class RoomDTO {

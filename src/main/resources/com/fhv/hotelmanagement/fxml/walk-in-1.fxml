@@ -94,13 +94,10 @@
                 <fx:define>
                         <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension"> <!--default Value-->
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension" toggleGroup="$packageToggleGroup"> <!--default Value-->
                     <font>
                         <Font size="13.0" />
                     </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="packageToggleGroup" />
-               </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Nur Frühstück" toggleGroup="$packageToggleGroup">
                     <font>

@@ -1,55 +1,52 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.domain.domainModel.Board;
-import com.fhv.hotelmanagement.view.DTOs.BoardDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.controller.useCaseController.CheckOutUseCaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOut2ViewController {
 
     @FXML
-    public TableView<BookedRoomCategoryDTO> table1;
+    private TableView<BookedRoomCategoryDTO> table1;
     @FXML
-    public TableColumn<BookedRoomCategoryDTO, Integer> amountColTable1;
+    private TableColumn<BookedRoomCategoryDTO, Integer> amountColTable1;
     @FXML
-    public TableColumn<BookedRoomCategoryDTO, String> categoryColTable1;
+    private TableColumn<BookedRoomCategoryDTO, String> categoryColTable1;
     @FXML
-    public TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable1;
+    private TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable1;
     @FXML
-    public Text nightsText;
+    private Text nightsText;
     @FXML
-    public CheckBox printInvoiceCheckBox;
+    private CheckBox printInvoiceCheckBox;
     @FXML
-    public Text boardNumberText;
+    private Text boardNumberText;
     @FXML
-    public Text boardNameText;
-    public Text sumRoomsText;
-    public Text totalSumNetText;
-    public Text sumBoardsText;
+    private Text boardNameText;
     @FXML
-    public Text salesTaxText;
+    private Text sumRoomsText;
     @FXML
-    public Text touristTaxText;
+    private Text totalSumNetText;
     @FXML
-    public Text totalSumGrossText;
+    private Text sumBoardsText;
+    @FXML
+    private Text salesTaxText;
+    @FXML
+    private Text touristTaxText;
+    @FXML
+    private Text totalSumGrossText;
 
     private final BigDecimal SALEXTAX = new BigDecimal("0.2");
 
@@ -62,7 +59,7 @@ public class CheckOut2ViewController {
     }
 
     @FXML
-    public void onBackButtonClicked(ActionEvent actionEvent) throws IOException {
+    private void onBackButtonClicked(ActionEvent actionEvent) throws IOException {
         try {
             viewController.loadCheckOut1();
         } catch (IOException exc) {
@@ -71,7 +68,7 @@ public class CheckOut2ViewController {
     }
 
     @FXML
-    public void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
+    private void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
         viewController.getUseCaseController().save();
         MainApplication.getMainController().loadIntoContentArea("home");
     }
@@ -80,7 +77,7 @@ public class CheckOut2ViewController {
         fillBillData();
     }
 
-    public void fillBillData() {
+    private void fillBillData() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         ObservableList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = FXCollections.observableArrayList(bookingDTO.getBookedRoomCategories());
         table1.setItems(bookedRoomCategoryDTOS);
@@ -96,7 +93,7 @@ public class CheckOut2ViewController {
             totalRoomPrice = totalRoomPrice.add(price);
         }
         nightsText.setText("Nächte: " + nights);
-        sumRoomsText.setText("Summe für Zimmer:         " + totalRoomPrice + "€");
+        sumRoomsText.setText("Summe für Zimmer:          " + totalRoomPrice + "€");
 
 
         int amountGuests = bookingDTO.getAmountGuests();
@@ -128,7 +125,7 @@ public class CheckOut2ViewController {
         touristTax = touristTax.add(BigDecimal.valueOf(amountGuests).multiply(TOURISTTAXPERNIGHT));
         touristTax = touristTax.multiply(BigDecimal.valueOf(nights));
 
-        touristTaxText.setText("Ortstaxe*:              " + touristTax.setScale(2) + "€");
+        touristTaxText.setText("Ortstaxe*:           " + touristTax.setScale(2) + "€");
 
         BigDecimal totalSumGross = totalSumNet.add(salesTax).add(touristTax);
 

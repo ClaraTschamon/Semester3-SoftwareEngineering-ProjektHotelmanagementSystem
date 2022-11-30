@@ -1,13 +1,12 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.useCaseController;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

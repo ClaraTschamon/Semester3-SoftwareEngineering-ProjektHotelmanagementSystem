@@ -1,14 +1,12 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import javafx.event.EventHandler;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.fxml.FXMLLoader;
 import com.fhv.hotelmanagement.view.controller.useCaseController.*;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
@@ -74,5 +72,4 @@ public class WalkInViewController {
                     WarningType.WARNING);
         }
     }
-
 }

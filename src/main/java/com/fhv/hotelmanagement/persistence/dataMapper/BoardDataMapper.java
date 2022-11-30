@@ -1,7 +1,7 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
 import com.fhv.hotelmanagement.domain.domainModel.Board;
-import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BoardEntity;
 
 import java.util.ArrayList;

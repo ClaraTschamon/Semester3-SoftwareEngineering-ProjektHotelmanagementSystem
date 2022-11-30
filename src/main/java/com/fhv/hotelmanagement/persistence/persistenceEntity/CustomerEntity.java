@@ -1,9 +1,9 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Set;
 
 @Entity

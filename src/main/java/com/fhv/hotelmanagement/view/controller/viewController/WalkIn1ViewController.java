@@ -1,7 +1,7 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.services.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,7 +18,6 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
 
-//import javax.swing.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -31,40 +30,29 @@ import java.util.ResourceBundle;
 public class WalkIn1ViewController implements Initializable {
 
     @FXML
-    public Button nextButton;
+    private RadioButton fullBoard;
     @FXML
-    RadioButton fullBoard;
+    private RadioButton halfBoard;
     @FXML
-    RadioButton halfBoard;
+    private RadioButton onlyBreakfast;
     @FXML
-    RadioButton onlyBreakfast;
+    private RadioButton noPackage;
     @FXML
-    RadioButton noPackage;
+    private Text counterSingleRoom;
     @FXML
-    public Text counterSingleRoom;
+    private Text counterDoubleRoom;
     @FXML
-    public Text counterDoubleRoom;
+    private Text counterFamilyRoom;
     @FXML
-    public Text counterFamilyRoom;
+    private Text counterSuite;
     @FXML
-    public Text counterSuite;
-    @FXML
-    public AnchorPane contentPane;
-
-    @FXML
-    private Text chooseRoom;
-
+    private AnchorPane contentPane;
     @FXML
     private DatePicker departureDatePicker;
     @FXML
-    private Text room;
-
-    @FXML
     private ComboBox roomPriceDropDown;
-
     @FXML
     private ToggleGroup packageToggleGroup;
-
     @FXML
     private Spinner<Integer> amountGuestsSpinner;
     private CheckComboBox<RoomDTO> singleRoomDropDown;
@@ -78,7 +66,7 @@ public class WalkIn1ViewController implements Initializable {
         this.viewController = viewController;
     }
 
-    public boolean validate() {
+    private boolean validate() {
 
         RadioButton selectedBoardButton =  (RadioButton) packageToggleGroup.getSelectedToggle();
 
@@ -513,8 +501,6 @@ class RoomProvider{
 
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
     RoomProvider provider;
-
-
 
     public RoomNumberConverter(RoomProvider provider){
         this.provider = provider;

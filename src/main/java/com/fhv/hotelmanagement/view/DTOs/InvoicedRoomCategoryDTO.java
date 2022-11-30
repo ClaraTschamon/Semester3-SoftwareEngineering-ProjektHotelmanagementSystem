@@ -1,7 +1,5 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.DTOs;
-
-import com.fhv.hotelmanagement.domain.domainModel.Invoice;
-import com.fhv.hotelmanagement.domain.domainModel.RoomCategory;
 
 import java.math.BigDecimal;
 

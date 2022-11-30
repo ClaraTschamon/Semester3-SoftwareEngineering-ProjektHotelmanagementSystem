@@ -1,3 +1,4 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
@@ -6,7 +7,6 @@ import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
-import com.fhv.hotelmanagement.view.controller.useCaseController.CheckOutUseCaseController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 
@@ -31,32 +30,31 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOut1ViewController implements Initializable {
 
-    //private CheckOutUseCaseController useCaseController;
     private ArrayList<BookedRoomDTO> allBookedRoomDTOs;
     @FXML
-    public Text roomText;
+    private Text roomText;
     @FXML
-    public Text firstNameText;
+    private Text firstNameText;
     @FXML
-    public Text lastNameText;
+    private Text lastNameText;
     @FXML
-    public Text nightsText;
+    private Text nightsText;
     @FXML
-    public Text fromDateText;
+    private Text fromDateText;
     @FXML
-    public Text toDateText;
+    private Text toDateText;
     @FXML
-    public Text numberPersonsText;
+    private Text numberPersonsText;
     @FXML
-    public Text packageText;
+    private Text packageText;
     @FXML
-    public Text roomPriceText;
+    private Text roomPriceText;
     @FXML
-    public Text paymentMethodText;
+    private Text paymentMethodText;
     @FXML
-    public Text totalPriceText;
+    private Text totalPriceText;
     @FXML
-    public ComboBox roomComboBox;
+    private ComboBox roomComboBox;
 
     private CheckOutViewController viewController;
 
@@ -75,12 +73,10 @@ public class CheckOut1ViewController implements Initializable {
     }
 
     private void saveData(){
-        //BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         RoomDTO roomDTO = (RoomDTO) roomComboBox.getSelectionModel().getSelectedItem();
 
         BookingDTO myBookingDTO = getBookingFromRoom(roomDTO);
         viewController.getUseCaseController().setBooking(myBookingDTO);
-
     }
 
     @Override
@@ -165,7 +161,6 @@ public class CheckOut1ViewController implements Initializable {
             BigDecimal price = c.getPricePerNight().multiply(new BigDecimal(c.getAmount())).multiply(BigDecimal.valueOf(totalNights));
             totalPrice = totalPrice.add(price);
         }
-        //TODO: überprüfen ob die nächtezahl mitgerechnet ist
 
         BigDecimal boardPrice = bookingDTO.getPricePerNightForBoard();
         if (boardPrice != null) {
@@ -177,12 +172,12 @@ public class CheckOut1ViewController implements Initializable {
     }
 
     @FXML
-    public void onCancelButtonClicked(ActionEvent actionEvent) throws IOException {
+    private void onCancelButtonClicked(ActionEvent actionEvent) throws IOException {
         MainApplication.getMainController().loadIntoContentArea("home");
     }
 
     @FXML
-    public void onNextButtonClicked(ActionEvent actionEvent) throws IOException {
+    private void onNextButtonClicked(ActionEvent actionEvent) throws IOException {
         saveData();
         viewController.loadCheckOut2();
     }
