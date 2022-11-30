@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
+import com.fhv.hotelmanagement.services.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -106,25 +107,12 @@ public class WalkIn1ViewController implements Initializable {
             setTextColorRed(counterSingleRoom);
         }
 
-//        if (Integer.parseInt(counterSingleRoom.getText()) > 0) {
-//            counterSingleRoomIsValid = true;
-//        }
-//        else {
-//            setTextColorRed(counterSingleRoom);
-//        }
-
         if (doubleRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterDoubleRoomIsValid = true;
         }
         else {
             setTextColorRed(counterDoubleRoom);
         }
-
-//        if (Integer.parseInt(counterDoubleRoom.getText()) > 0) {
-//            counterDoubleRoomIsValid = true;
-//        } else {
-//            setTextColorRed(counterDoubleRoom);
-//        }
 
         if (familyRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterFamilyRoomIsValid = true;
@@ -133,24 +121,12 @@ public class WalkIn1ViewController implements Initializable {
             setTextColorRed(counterFamilyRoom);
         }
 
-//        if (Integer.parseInt(counterFamilyRoom.getText()) > 0) {
-//            counterFamilyRoomIsValid = true;
-//        } else {
-//            setTextColorRed(counterFamilyRoom);
-//        }
-
         if (suiteDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterSuiteRoomIsValid = true;
         }
         else {
             setTextColorRed(counterSuite);
         }
-
-//        if (Integer.parseInt(counterSuite.getText()) > 0) {
-//            counterSuiteRoomIsValid = true;
-//        } else {
-//            setTextColorRed(counterSuite);
-//        }
 
         if (counterSingleRoomIsValid || counterDoubleRoomIsValid ||
                 counterFamilyRoomIsValid || counterSuiteRoomIsValid) {

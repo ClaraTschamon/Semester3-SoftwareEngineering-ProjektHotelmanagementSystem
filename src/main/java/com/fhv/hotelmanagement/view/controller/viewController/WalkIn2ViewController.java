@@ -1,24 +1,18 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
+import com.fhv.hotelmanagement.services.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 
-import com.fhv.hotelmanagement.view.viewServices.fxmlServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import org.w3c.dom.Text;
-import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.SearchableComboBox;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
@@ -180,21 +174,21 @@ public class WalkIn2ViewController implements Initializable {
         boolean birthdayIsValid = false;
         //warum alles außer zahlen?
         if (!StringValidator.checkString(firstNameTextField.getText())) {
-            setRequieredField(firstNameTextField);
+            TextFunction.setRequieredTextField(firstNameTextField);
         } else if (StringValidator.checkRegex(firstNameTextField.getText(), "[^0-9]+$")) {
             firstNameIsValid = true;
         } else {
-            setTextColor(firstNameTextField, "red");
-            setEventHandler(firstNameTextField);
+            TextFunction.setTextFieldColor(firstNameTextField, "red");
+            TextFunction.setEventHandler(firstNameTextField);
         }
 
         if (!StringValidator.checkString(lastNameTextField.getText())) {
-            setRequieredField(lastNameTextField);
+            TextFunction.setRequieredTextField(lastNameTextField);
         } else if (StringValidator.checkRegex(lastNameTextField.getText(), "[^0-9]+$")) {
             lastNameIsValid = true;
         } else {
-            setTextColor(lastNameTextField, "red");
-            setEventHandler(lastNameTextField);
+            TextFunction.setTextFieldColor(lastNameTextField, "red");
+            TextFunction.setEventHandler(lastNameTextField);
         }
 
         if (nationalityComboBox.getValue() != null) {
@@ -204,66 +198,66 @@ public class WalkIn2ViewController implements Initializable {
         }
 
         if (!StringValidator.checkString(emailTextField.getText())) {
-            setRequieredField(emailTextField);
+            TextFunction.setRequieredTextField(emailTextField);
         } else if (StringValidator.checkValidEmail(emailTextField.getText())) {
             emailIsValid = true;
         } else {
-            setTextColor(emailTextField, "red");
-            setEventHandler(emailTextField);
+            TextFunction.setTextFieldColor(emailTextField, "red");
+            TextFunction.setEventHandler(emailTextField);
         }
 
         if (!StringValidator.checkString(postalCodeTextField.getText())) {
-            setRequieredField(postalCodeTextField);
+            TextFunction.setRequieredTextField(postalCodeTextField);
         } else if (StringValidator.checkPostalCode(postalCodeTextField.getText())) {
             postalCodeIsValid = true;
         } else {
-            setTextColor(postalCodeTextField, "red");
-            setEventHandler(postalCodeTextField);
+            TextFunction.setTextFieldColor(postalCodeTextField, "red");
+            TextFunction.setEventHandler(postalCodeTextField);
         }
 
         if (!StringValidator.checkString(cityTextField.getText())) {
-            setRequieredField(cityTextField);
+            TextFunction.setRequieredTextField(cityTextField);
         } else if (StringValidator.checkCity(cityTextField.getText())) {
             cityIsValid = true;
         } else {
-            setTextColor(cityTextField, "red");
-            setEventHandler(cityTextField);
+            TextFunction.setTextFieldColor(cityTextField, "red");
+            TextFunction.setEventHandler(cityTextField);
         }
 
         if (!StringValidator.checkString(countryTextField.getText())) {
-            setRequieredField(countryTextField);
+            TextFunction.setRequieredTextField(countryTextField);
         } else if (StringValidator.checkRegex(countryTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
             countryIsValid = true;
         } else {
-            setTextColor(countryTextField, "red");
-            setEventHandler(countryTextField);
+            TextFunction.setTextFieldColor(countryTextField, "red");
+            TextFunction.setEventHandler(countryTextField);
         }
 
         if (!StringValidator.checkString(phoneNumberTextField.getText())) {
-            setRequieredField(phoneNumberTextField);
+            TextFunction.setRequieredTextField(phoneNumberTextField);
         } else if (StringValidator.checkValidPhoneNumber(phoneNumberTextField.getText())) {
             phoneNumberIsValid = true;
         } else {
-            setTextColor(phoneNumberTextField, "red");
-            setEventHandler(phoneNumberTextField);
+            TextFunction.setTextFieldColor(phoneNumberTextField, "red");
+            TextFunction.setEventHandler(phoneNumberTextField);
         }
 
         if (!StringValidator.checkString(houseNumberTextField.getText())) {
-            setRequieredField(houseNumberTextField);
+            TextFunction.setRequieredTextField(houseNumberTextField);
         } else if (StringValidator.checkHouseNumber(houseNumberTextField.getText())) {
             houseNumberIsValid = true;
         } else {
-            setTextColor(houseNumberTextField, "red");
-            setEventHandler(houseNumberTextField);
+            TextFunction.setTextFieldColor(houseNumberTextField, "red");
+            TextFunction.setEventHandler(houseNumberTextField);
         }
 
         if (!StringValidator.checkString(streetTextField.getText())) {
-            setRequieredField(streetTextField);
+            TextFunction.setRequieredTextField(streetTextField);
         } else if (StringValidator.checkStreet(streetTextField.getText())) {
             streetIsValid = true;
         } else {
-            setTextColor(streetTextField, "red");
-            setEventHandler(streetTextField);
+            TextFunction.setTextFieldColor(streetTextField, "red");
+            TextFunction.setEventHandler(streetTextField);
         }
 
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
@@ -282,23 +276,23 @@ public class WalkIn2ViewController implements Initializable {
         return false;
     }
 
-    private void setTextColor(TextField textField, String color) {
-        textField.setStyle("-fx-text-inner-color: " + color);
-    }
-
-    private void setRequieredField(TextField textField) {
-        textField.setPromptText("Pflichtfeld");
-        textField.setStyle("-fx-prompt-text-fill: red");
-    }
-
-    private void setEventHandler(TextField textField){
-        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                setTextColor(textField, "black");
-            }
-        });
-    }
+//    private void setTextColor(TextField textField, String color) {
+//        textField.setStyle("-fx-text-inner-color: " + color);
+//    }
+//
+//    private void setRequieredField(TextField textField) {
+//        textField.setPromptText("Pflichtfeld");
+//        textField.setStyle("-fx-prompt-text-fill: red");
+//    }
+//
+//    private void setEventHandler(TextField textField){
+//        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                setTextColor(textField, "black");
+//            }
+//        });
+//    }
 
     public void initialize(URL location, ResourceBundle resources) {
 
