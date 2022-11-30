@@ -19,7 +19,7 @@ public class CheckOutViewController {
         }
     }
 
-    protected CheckOutUseCaseController getUseCaseController(){
+    public CheckOutUseCaseController getUseCaseController(){
         return useCaseController;
     }
 

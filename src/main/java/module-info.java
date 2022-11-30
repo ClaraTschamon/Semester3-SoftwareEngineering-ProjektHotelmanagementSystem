@@ -11,6 +11,8 @@ module com.fhv.hotelmanagement {
     requires org.controlsfx.controls;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;
+    requires org.apache.fontbox;
+    requires org.apache.pdfbox;
 
     exports com.fhv.hotelmanagement.view.controller.viewController;
     opens com.fhv.hotelmanagement.view.controller.viewController to javafx.fxml;

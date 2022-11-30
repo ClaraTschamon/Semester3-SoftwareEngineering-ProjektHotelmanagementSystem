@@ -4,6 +4,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
+import com.fhv.hotelmanagement.view.viewServices.ApachePDFBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,6 +72,11 @@ public class CheckOut2ViewController {
     private void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
         viewController.getUseCaseController().save();
         MainApplication.getMainController().loadIntoContentArea("home");
+
+        if(printInvoiceCheckBox.selectedProperty().get()==true){
+            ApachePDFBox apachePDFBox = new ApachePDFBox();
+            apachePDFBox.createBill(viewController);
+        }
     }
 
     protected void fillData() {
@@ -94,7 +100,6 @@ public class CheckOut2ViewController {
         }
         nightsText.setText("Nächte: " + nights);
         sumRoomsText.setText("Summe für Zimmer:          " + totalRoomPrice + "€");
-
 
         int amountGuests = bookingDTO.getAmountGuests();
         boardNumberText.setText(String.valueOf(amountGuests));
