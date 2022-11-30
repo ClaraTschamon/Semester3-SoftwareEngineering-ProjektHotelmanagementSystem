@@ -276,24 +276,6 @@ public class WalkIn2ViewController implements Initializable {
         return false;
     }
 
-//    private void setTextColor(TextField textField, String color) {
-//        textField.setStyle("-fx-text-inner-color: " + color);
-//    }
-//
-//    private void setRequieredField(TextField textField) {
-//        textField.setPromptText("Pflichtfeld");
-//        textField.setStyle("-fx-prompt-text-fill: red");
-//    }
-//
-//    private void setEventHandler(TextField textField){
-//        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                setTextColor(textField, "black");
-//            }
-//        });
-//    }
-
     public void initialize(URL location, ResourceBundle resources) {
 
         ArrayList<String> items = new ArrayList<>();

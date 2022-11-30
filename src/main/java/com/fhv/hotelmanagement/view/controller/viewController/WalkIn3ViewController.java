@@ -217,7 +217,7 @@ public class WalkIn3ViewController {
 
         if (!StringValidator.checkString(billingStreetTextField.getText())) {
             TextFunction.setRequieredTextField(billingStreetTextField);
-        } else if (StringValidator.checkCity(billingStreetTextField.getText())) {
+        } else if (StringValidator.checkStreet(billingStreetTextField.getText())) {
             billingStreetIsValid = true;
         } else {
             TextFunction.setTextFieldColor(billingStreetTextField, "red");
