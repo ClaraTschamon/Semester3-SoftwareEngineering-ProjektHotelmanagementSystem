@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
+import com.fhv.hotelmanagement.services.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -176,69 +177,69 @@ public class WalkIn3ViewController {
         boolean expireDateIsValid = false;
 
         if (!StringValidator.checkString(creditCardTextField.getText())) {
-            setRequieredField(creditCardTextField);
-        } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,}") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}[ ]{0,}") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,}") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,}")) {
+            TextFunction.setRequieredTextField(creditCardTextField);
+        } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}( )?") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}( )?") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}( )?") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}( )?")) {
                     creditCardNumberIsValid = true;
         } else {
-            setTextColor(creditCardTextField, "red");
-            setEventHandler(creditCardTextField);
+            TextFunction.setTextFieldColor(creditCardTextField, "red");
+            TextFunction.setEventHandler(creditCardTextField);
         }
 
         if (!StringValidator.checkString(authorisationNumberTextField.getText())) {
-            setRequieredField(authorisationNumberTextField);
+            TextFunction.setRequieredTextField(authorisationNumberTextField);
         } else if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9]{3,4}")) {
             authorisationNumberIsValid = true;
         } else {
-            setTextColor(authorisationNumberTextField, "red");
-            setEventHandler(authorisationNumberTextField);
+            TextFunction.setTextFieldColor(authorisationNumberTextField, "red");
+            TextFunction.setEventHandler(authorisationNumberTextField);
         }
 
         if (!StringValidator.checkString(billingCityTextField.getText())) {
-            setRequieredField(billingCityTextField);
+            TextFunction.setRequieredTextField(billingCityTextField);
         } else if (StringValidator.checkCity(billingCityTextField.getText())) {
             billingCityIsValid = true;
         } else {
-            setTextColor(billingCityTextField, "red");
-            setEventHandler(billingCityTextField);
+            TextFunction.setTextFieldColor(billingCityTextField, "red");
+            TextFunction.setEventHandler(billingCityTextField);
         }
 
         if (!StringValidator.checkString(billingHouseNumberTextField.getText())) {
-            setRequieredField(billingHouseNumberTextField);
+            TextFunction.setRequieredTextField(billingHouseNumberTextField);
         } else if (StringValidator.checkHouseNumber(billingHouseNumberTextField.getText())) {
             billingHouseNumberIsValid = true;
         } else {
-            setTextColor(billingHouseNumberTextField, "red");
-            setEventHandler(billingHouseNumberTextField);
+            TextFunction.setTextFieldColor(billingHouseNumberTextField, "red");
+            TextFunction.setEventHandler(billingHouseNumberTextField);
         }
 
         if (!StringValidator.checkString(billingStreetTextField.getText())) {
-            setRequieredField(billingStreetTextField);
-        } else if (StringValidator.checkCity(billingStreetTextField.getText())) {
+            TextFunction.setRequieredTextField(billingStreetTextField);
+        } else if (StringValidator.checkStreet(billingStreetTextField.getText())) {
             billingStreetIsValid = true;
         } else {
-            setTextColor(billingStreetTextField, "red");
-            setEventHandler(billingStreetTextField);
+            TextFunction.setTextFieldColor(billingStreetTextField, "red");
+            TextFunction.setEventHandler(billingStreetTextField);
         }
 
         if (!StringValidator.checkString(billingPostalCodeTextField.getText())) {
-            setRequieredField(billingPostalCodeTextField);
+            TextFunction.setRequieredTextField(billingPostalCodeTextField);
         } else if (StringValidator.checkPostalCode(billingPostalCodeTextField.getText())) {
             billingPostalCodeIsValid = true;
         } else {
-            setTextColor(billingPostalCodeTextField, "red");
-            setEventHandler(billingPostalCodeTextField);
+            TextFunction.setTextFieldColor(billingPostalCodeTextField, "red");
+            TextFunction.setEventHandler(billingPostalCodeTextField);
         }
 
         if (!StringValidator.checkString(expireDateTextField.getText())) {
-            setRequieredField(expireDateTextField);
+            TextFunction.setRequieredTextField(expireDateTextField);
         } else if (StringValidator.checkValidExpirationDate(expireDateTextField.getText())) {
             expireDateIsValid = true;
         } else {
-            setTextColor(expireDateTextField, "red");
-            setEventHandler(expireDateTextField);
+            TextFunction.setTextFieldColor(expireDateTextField, "red");
+            TextFunction.setEventHandler(expireDateTextField);
         }
 
         if (paymentMethod.getValue().equals("Rechnung")) {
