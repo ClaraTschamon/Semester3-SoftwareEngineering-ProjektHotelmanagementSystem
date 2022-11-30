@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement.view.viewServices;
 
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
+import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.controller.viewController.CheckOutViewController;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -10,6 +11,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -65,11 +67,18 @@ public class ApachePDFBox {
 
                 BigDecimal totalSumGross = totalSumNet.add(salesTax).add(touristTax);
 
+                StringBuilder rooms = new StringBuilder();
+                rooms.append("Zimmer:               ");
+                ArrayList<BookedRoomDTO> bookedRoomDTOs = bookingDTO.getBookedRooms();
+                for(BookedRoomDTO bookedRoomDTO : bookedRoomDTOs){
+                    rooms.append(bookedRoomDTO.getRoom().getNumber()).append("   ");
+                }
+
 
                 //line in the pdf file
                 String line8="Vorname:"+bookingDTO.getCustomer().getFirstName();
                 String line9="Nachname:"+bookingDTO.getCustomer().getLastName();
-                String line10="Räume:"+bookingDTO.getBookedRooms();
+                String line10="Räume:"+rooms;
                 String line1 ="Package:"+ bookingDTO.getBoard().getName();
                 String line2 ="Nächte:"+String.valueOf(nights);
                 String line3 ="Summe für Zimmer:"+String.valueOf(totalRoomPrice);
