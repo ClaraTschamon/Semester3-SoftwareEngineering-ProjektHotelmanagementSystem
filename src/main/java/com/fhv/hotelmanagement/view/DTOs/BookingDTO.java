@@ -197,4 +197,11 @@ public class BookingDTO {
     public void setAmountGuests(Integer amountGuests) {
         this.amountGuests = amountGuests;
     }
+
+    @Override
+    public String toString() {
+        return number + " " + customer.getLastName() +
+                " " + arrivalDate + " - " + departureDate +
+                " " + bookedRooms.toString();
+    }
 }

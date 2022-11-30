@@ -19,6 +19,8 @@ public class PersistenceFacade{
         return BookingDataMapper.instance().get(id);
     }
 
+    public static ArrayList<Booking> getAllBookings(){return BookingDataMapper.getAll();} //neu von Clara
+
     public static Long insertBooking(Booking booking) {
         return BookingDataMapper.instance().insert(booking);
     }

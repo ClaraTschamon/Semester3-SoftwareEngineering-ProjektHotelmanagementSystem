@@ -16,12 +16,33 @@ import java.util.ArrayList;
 
 public class BookingFactory {
 
+    private static ArrayList<Booking> bookings;
+
     public static BookingDTO getBooking(Long number) {
         Booking booking = PersistenceFacade.getBooking(number).get();
         if (booking != null) {
             return createBookingDTO(booking, true, null);
         }
         return null;
+    }
+
+    public static ArrayList<BookingDTO> getAllBookings(){
+        if(bookings == null){
+            refreshBookings();
+        }
+
+        ArrayList<BookingDTO> bookingDTOs = new ArrayList<>();
+        for(Booking b : bookings){
+            bookingDTOs.add(createBookingDTO(b, true, null)); //ist das richtig so???
+        }
+        return bookingDTOs;
+    }
+
+    private static void refreshBookings(){
+        bookings = new ArrayList<>();
+        for(Booking b : PersistenceFacade.getAllBookings()){
+            bookings.add(b);
+        }
     }
 
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {

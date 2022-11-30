@@ -1,6 +1,7 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.domainController;
 
+import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.domain.exceptions.*;
 import com.fhv.hotelmanagement.domain.factory.*;
 import com.fhv.hotelmanagement.view.DTOs.*;
@@ -22,6 +23,10 @@ public class DomainController {
 
     public static BookingDTO getBooking(Long number) {
         return BookingFactory.getBooking(number);
+    }
+
+    public static ArrayList<BookingDTO> getAllBookings(){
+        return BookingFactory.getAllBookings();
     }
 
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {

@@ -27,6 +27,15 @@ public class BookingDataMapper {
         return Optional.empty();
     }
 
+    public static ArrayList<Booking> getAll(){
+        ArrayList<BookingEntity> entities = (ArrayList<BookingEntity>) PersistenceManager.instance().entityManager.createQuery("from BookingEntity").getResultList();
+        ArrayList<Booking> bookings = new ArrayList<>();
+        for(BookingEntity b : entities){
+            bookings.add(createBooking(b));
+        }
+        return bookings;
+    }
+
     //create
     public Long insert(Booking booking) {
         BookingEntity bookingEntity = createBookingEntity(booking, CustomerDataMapper.createCustomerEntity(booking.getCustomer()));
