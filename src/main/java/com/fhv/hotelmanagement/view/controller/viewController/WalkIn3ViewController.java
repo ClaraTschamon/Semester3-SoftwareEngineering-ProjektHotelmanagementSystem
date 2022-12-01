@@ -267,7 +267,6 @@ public class WalkIn3ViewController {
             authorisationNumberTextField.setDisable(false);
             expireDateTextField.setDisable(false);
         } else {
-            creditCardTextField.setEditable(false);
             creditCardTextField.setDisable(true);
             authorisationNumberTextField.setDisable(true);
             expireDateTextField.setDisable(true);

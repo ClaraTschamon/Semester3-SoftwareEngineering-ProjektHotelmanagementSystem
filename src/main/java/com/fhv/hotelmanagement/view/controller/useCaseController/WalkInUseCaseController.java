@@ -33,6 +33,10 @@ public class WalkInUseCaseController {
         return customer;
     }
 
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
+    }
+
     public void cancel() throws IOException {
         booking = null;
         customer = null;
