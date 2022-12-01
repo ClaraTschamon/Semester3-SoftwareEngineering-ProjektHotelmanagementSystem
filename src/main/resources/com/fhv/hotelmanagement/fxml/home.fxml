@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="970.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeViewController">
+<BorderPane id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="970.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeViewController">
     <top>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -32,7 +26,7 @@
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="181.0" layoutY="87.0" mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
+                <Button fx:id="HomeCheckInButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="181.0" layoutY="87.0" mnemonicParsing="false" onAction="#onHomeCheckInClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font size="18.0" />
                     </font>
