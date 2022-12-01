@@ -13,6 +13,7 @@ module com.fhv.hotelmanagement {
     requires org.apache.logging.log4j.core;
     requires org.apache.fontbox;
     requires org.apache.pdfbox;
+    requires java.desktop;
 
     exports com.fhv.hotelmanagement.view.controller.viewController;
     opens com.fhv.hotelmanagement.view.controller.viewController to javafx.fxml;
@@ -21,5 +22,4 @@ module com.fhv.hotelmanagement {
     opens com.fhv.hotelmanagement.view.DTOs to javafx.base; //neue Zeile
     opens com.fhv.hotelmanagement.persistence.persistenceEntity to org.hibernate.orm.core;
     exports com.fhv.hotelmanagement.persistence.persistenceEntity;
-
 }

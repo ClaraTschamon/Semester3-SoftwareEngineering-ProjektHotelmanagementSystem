@@ -4,7 +4,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.viewServices.ApachePDFBox;
+import com.fhv.hotelmanagement.view.viewServices.ApachePDFBoxServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,7 +74,7 @@ public class CheckOut2ViewController {
         MainApplication.getMainController().loadIntoContentArea("home");
 
         if(printInvoiceCheckBox.selectedProperty().get()==true){
-            ApachePDFBox apachePDFBox = new ApachePDFBox();
+            ApachePDFBoxServices apachePDFBox = new ApachePDFBoxServices();
             apachePDFBox.createBill(viewController);
         }
     }
