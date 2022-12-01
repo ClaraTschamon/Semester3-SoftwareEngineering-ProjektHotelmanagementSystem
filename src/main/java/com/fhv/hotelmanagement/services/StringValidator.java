@@ -111,8 +111,7 @@ public class StringValidator {
     }
 
     public static boolean checkPostalCode(String postalCode) {
-        String regexPattern = "[0-9]{3,6}";
+        String regexPattern = "[0-9a-zA-Z]{3,6}";
         return checkRegex(postalCode, regexPattern);
     }
-
 }

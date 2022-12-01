@@ -20,13 +20,13 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CheckOut2ViewController {
 
     @FXML
-    private TableView<BookedRoomCategoryDTO> table1;
+    private TableView<BookedRoomCategoryDTO> bookedRoomsTable;
     @FXML
-    private TableColumn<BookedRoomCategoryDTO, Integer> amountColTable1;
+    private TableColumn<BookedRoomCategoryDTO, Integer> amountColTable;
     @FXML
-    private TableColumn<BookedRoomCategoryDTO, String> categoryColTable1;
+    private TableColumn<BookedRoomCategoryDTO, String> categoryColTable;
     @FXML
-    private TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable1;
+    private TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable;
     @FXML
     private Text nightsText;
     @FXML
@@ -80,10 +80,10 @@ public class CheckOut2ViewController {
     private void fillBillData() { //TODO: table1 umbenennen
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         ObservableList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = FXCollections.observableArrayList(bookingDTO.getBookedRoomCategories());
-        table1.setItems(bookedRoomCategoryDTOS);
-        amountColTable1.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, Integer>("amount"));
-        categoryColTable1.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, String>("roomCategory"));
-        pricePerNightColTable1.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, BigDecimal>("pricePerNight"));
+        bookedRoomsTable.setItems(bookedRoomCategoryDTOS);
+        amountColTable.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, Integer>("amount"));
+        categoryColTable.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, String>("roomCategory"));
+        pricePerNightColTable.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, BigDecimal>("pricePerNight"));
 
         int nights = (int) DAYS.between(bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate());
         BigDecimal totalRoomPrice = new BigDecimal(0).setScale(2);
