@@ -1,7 +1,9 @@
 package com.fhv.hotelmanagement;
 
+import com.fhv.hotelmanagement.view.controller.viewController.BookingOverviewViewController;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -103,5 +105,24 @@ public class MainController implements Initializable {
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(e -> contentArea.getChildren().remove(alertPane));
         delay.play();
+    }
+
+    @FXML
+    public void onBookingsClicked(ActionEvent actionEvent) throws IOException {
+        try{
+            BookingOverviewViewController bookingOverviewViewController = new BookingOverviewViewController();
+            loadIntoContentArea("booking-overview");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void onHomeClicked(ActionEvent actionEvent) {
+        try{
+            BookingOverviewViewController bookingOverviewViewController = new BookingOverviewViewController();
+            loadIntoContentArea("home");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

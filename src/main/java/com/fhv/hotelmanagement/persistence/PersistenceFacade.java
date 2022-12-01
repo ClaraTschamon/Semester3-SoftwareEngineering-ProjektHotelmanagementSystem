@@ -19,6 +19,14 @@ public class PersistenceFacade{
         return BookingDataMapper.instance().get(id);
     }
 
+    public static ArrayList<Booking> getAllBookings(){return BookingDataMapper.getAll();} //neu von Clara
+
+    public static ArrayList<Booking> getCurrentBookings(){return BookingDataMapper.getCurrentBookings();}
+
+    public static ArrayList<Booking> getAllBookingsBetween(LocalDate minDate, LocalDate maxDate){
+        return BookingDataMapper.getAllBookingsBetween(minDate, maxDate);
+    }
+
     public static Long insertBooking(Booking booking) {
         return BookingDataMapper.instance().insert(booking);
     }
@@ -64,6 +72,12 @@ public class PersistenceFacade{
         return BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
     }
 
-//    public static void main(String[] args) {
-//    }
+    public static void main(String[] args) {
+        System.out.println(BookingDataMapper.getCurrentBookings());
+
+        LocalDate minDate = LocalDate.now();
+        LocalDate maxDate = LocalDate.now().plusDays(2);
+
+        System.out.println(BookingDataMapper.getAllBookingsBetween(minDate, maxDate));
+    }
 }

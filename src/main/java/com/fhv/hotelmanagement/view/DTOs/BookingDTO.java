@@ -197,4 +197,5 @@ public class BookingDTO {
     public void setAmountGuests(Integer amountGuests) {
         this.amountGuests = amountGuests;
     }
+
 }

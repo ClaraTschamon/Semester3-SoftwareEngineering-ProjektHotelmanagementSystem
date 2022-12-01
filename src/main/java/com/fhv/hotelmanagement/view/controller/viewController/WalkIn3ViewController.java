@@ -193,10 +193,10 @@ public class WalkIn3ViewController {
         if (paymentMethodComboBox.getValue().equals("Kreditkarte")) {
             if (!StringValidator.checkString(creditCardTextField.getText())) {
                 TextFunction.setRequieredTextField(creditCardTextField);
-            } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}( )?") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}( )?") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}( )?") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}( )?")) {
+            } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}[ ]{0,}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,}")) {
                 creditCardNumberIsValid = true;
             } else {
                 TextFunction.setTextFieldColor(creditCardTextField, "red");
@@ -273,7 +273,6 @@ public class WalkIn3ViewController {
             authorisationNumberTextField.setDisable(false);
             expireDateTextField.setDisable(false);
         } else {
-            creditCardTextField.setEditable(false);
             creditCardTextField.setDisable(true);
             authorisationNumberTextField.setDisable(true);
             expireDateTextField.setDisable(true);

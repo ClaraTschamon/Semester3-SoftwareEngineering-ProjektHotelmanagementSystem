@@ -55,7 +55,7 @@ public class WalkInViewController {
     public void save() {
         try {
             useCaseController.save();
-            MainApplication.getMainController().loadIntoContentArea("home");
+            MainApplication.getMainController().loadIntoContentArea("booking-overview");
             MainApplication.getMainController().alert("Die Buchung wurde erfolgreich gespeichert.",
                     WarningType.CONFIRMATION);
         } catch (BookingIsInvalidException e) {

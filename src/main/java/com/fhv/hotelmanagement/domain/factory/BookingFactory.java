@@ -12,9 +12,12 @@ import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BookingFactory {
+
+    private static ArrayList<Booking> bookings;
 
     public static BookingDTO getBooking(Long number) {
         Booking booking = PersistenceFacade.getBooking(number).get();
@@ -22,6 +25,41 @@ public class BookingFactory {
             return createBookingDTO(booking, true, null);
         }
         return null;
+    }
+
+    public static ArrayList<BookingDTO> getAllBookings(){
+        if(bookings == null){
+            refreshBookings();
+        }
+
+        ArrayList<BookingDTO> bookingDTOs = new ArrayList<>();
+        for(Booking b : bookings){
+            bookingDTOs.add(createBookingDTO(b, true, null)); //ist das richtig so???
+        }
+        return bookingDTOs;
+    }
+
+    public static ArrayList<BookingDTO> getAllBookingsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<BookingDTO> bookingDTOS = new ArrayList<>();
+        for(Booking booking : PersistenceFacade.getAllBookingsBetween(minDate, maxDate)){
+            bookingDTOS.add(createBookingDTO(booking, true, null));
+        }
+        return bookingDTOS;
+    }
+
+    public static ArrayList<BookingDTO> getCurrentBookings(){
+        ArrayList<BookingDTO> bookingDTOS = new ArrayList<>();
+        for(Booking booking : PersistenceFacade.getCurrentBookings()){
+            bookingDTOS.add(createBookingDTO(booking, true, null));
+        }
+        return bookingDTOS;
+    }
+
+    private static void refreshBookings(){
+        bookings = new ArrayList<>();
+        for(Booking b : PersistenceFacade.getAllBookings()){
+            bookings.add(b);
+        }
     }
 
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {

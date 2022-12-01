@@ -13,6 +13,14 @@ import java.util.ArrayList;
 
 public class CustomerFactory {
 
+    public static ArrayList<CustomerDTO> getSavedCustomers() {
+        ArrayList<CustomerDTO> customerDTOS = new ArrayList<>();
+        for (Customer customer : PersistenceFacade.getSavedCustomers()) {
+            customerDTOS.add(createCustomerDTO(customer));
+        }
+        return customerDTOS;
+    }
+
     public static Long saveCustomer(CustomerDTO customerDTO) throws CustomerIsInvalidException {
         Long customerNumber = customerDTO.getNumber();
         if (checkCustomer(customerDTO)) {

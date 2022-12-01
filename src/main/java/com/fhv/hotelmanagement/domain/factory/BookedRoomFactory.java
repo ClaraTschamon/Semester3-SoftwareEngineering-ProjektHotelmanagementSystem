@@ -1,7 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.factory;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
