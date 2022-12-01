@@ -113,9 +113,9 @@ public class WalkIn3ViewController {
     public void fillSummaryLabels() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         CustomerDTO customerDTO = bookingDTO.getCustomer();
-        checkInForLabel.setText("Check-in für: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
+        checkInForLabel.setText("Check-in for: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
 
-        StringBuilder sb = new StringBuilder("Zimmernummer(n): ");
+        StringBuilder sb = new StringBuilder("Room number(n): ");
         for (BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()) {
             sb.append(bookedRoomDTO.getRoom().getNumber());
             sb.append(" ");
@@ -128,7 +128,7 @@ public class WalkIn3ViewController {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         String paymentMethod = (String) paymentMethodComboBox.getValue();
         bookingDTO.setPaymentMethod(paymentMethod);
-        if (paymentMethod.equals("Kreditkarte")) {
+        if (paymentMethod.equals("Credit card")) {
             bookingDTO.setCreditCardNumber(creditCardTextField.getText());
             bookingDTO.setAuthorisationNumber(authorisationNumberTextField.getText());
             bookingDTO.setExpirationDate(expireDateTextField.getText());
@@ -190,7 +190,7 @@ public class WalkIn3ViewController {
         boolean billingPostalCodeIsValid = false;
         boolean expireDateIsValid = false;
 
-        if (paymentMethodComboBox.getValue().equals("Kreditkarte")) {
+        if (paymentMethodComboBox.getValue().equals("Credit card")) {
             if (!StringValidator.checkString(creditCardTextField.getText())) {
                 TextFunction.setRequieredTextField(creditCardTextField);
             } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}( )?") ||
@@ -268,7 +268,7 @@ public class WalkIn3ViewController {
 
     @FXML
     private void paymentMethodComboBoxOnAction() {
-        if (paymentMethodComboBox.getValue().equals("Kreditkarte")) {
+        if (paymentMethodComboBox.getValue().equals("Credit card")) {
             creditCardTextField.setDisable(false);
             authorisationNumberTextField.setDisable(false);
             expireDateTextField.setDisable(false);

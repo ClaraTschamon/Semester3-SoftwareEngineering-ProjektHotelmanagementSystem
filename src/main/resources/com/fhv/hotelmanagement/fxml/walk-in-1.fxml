@@ -73,7 +73,7 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
+                <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of selected rooms" wrappingWidth="114.666015625" />
                 <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Single room" />
                 <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double room" />
                 <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family room" />
@@ -122,12 +122,12 @@
                 <ComboBox fx:id="roomPriceDropDown" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Normalpreis" />
-                            <String fx:value="Preis-0" />
+                            <String fx:value="Standard price" />
+                            <String fx:value="Price-0" />
                         </FXCollections>
                     </items>
                     <value>
-                        <String fx:value="Normalpreis" /> <!--default value!-->
+                        <String fx:value="Standard price" /> <!--default value!-->
                     </value>
                 </ComboBox>
                 <Button fx:id="nextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Next" textFill="WHITE">
