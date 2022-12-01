@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -10,10 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="650.0" prefWidth="970.0" style="-fx-background-color: FFFFFF;"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeViewController">
+<BorderPane id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="970.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeViewController">
     <top>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -21,95 +20,65 @@
                     <children>
                         <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunway">
                             <font>
-                                <Font size="24.0"/>
+                                <Font size="24.0" />
                             </font>
                         </Text>
                     </children>
                     <effect>
                         <InnerShadow height="8.0" radius="1.5" width="0.0">
                             <input>
-                                <DropShadow/>
+                                <DropShadow />
                             </input>
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Button fx:id="WalkInButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString=""
-                        layoutX="396.0" layoutY="121.0" mnemonicParsing="false" onAction="#onWalkInClicked"
-                        prefHeight="153.0" prefWidth="179.0" styleClass="homebutton" stylesheets="@css.css"
-                        text="Walk-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
-                    <graphic>
-                        <ImageView fitHeight="250.0" fitWidth="105.0" layoutX="458.0" pickOnBounds="true"
-                                   preserveRatio="true">
-                            <image>
-                                <Image url="@Bilder/Walk-In.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
+                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="181.0" layoutY="87.0" mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="101.0" layoutY="121.0"
-                        mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton"
-                        stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d"
-                        textOverrun="WORD_ELLIPSIS">
-                    <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Bilder/CheckOut.png"/>
+                                <Image url="@Bilder/CheckOut.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="632.0" layoutY="121.0"
-                        mnemonicParsing="false" onAction="#onCheckOutClicked" prefHeight="213.0" prefWidth="219.0"
-                        styleClass="homebutton" stylesheets="@css.css" text="Check-Out" textAlignment="CENTER"
-                        textFill="#21273d" textOverrun="WORD_ELLIPSIS">
+                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="181.0" layoutY="360.0" mnemonicParsing="false" onAction="#onCheckOutClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-Out" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Bilder/CheckIn.png"/>
+                                <Image url="@Bilder/CheckIn.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="211.0" layoutY="365.0"
-                        mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton"
-                        stylesheets="@css.css" text="Neue Reservierung" textAlignment="CENTER" textFill="#21273d"
-                        textOverrun="WORD_ELLIPSIS">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="300.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@Bilder/NeueReservierung.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="523.0" layoutY="365.0"
-                        mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton"
-                        stylesheets="@css.css" text="Einstellungen" textAlignment="CENTER" textFill="#21273d"
-                        textOverrun="WORD_ELLIPSIS">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@Bilder/Einstellungen.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
+            <TableView layoutX="526.0" layoutY="194.0" prefHeight="200.0" prefWidth="410.0">
+              <columns>
+                <TableColumn prefWidth="149.0" />
+                <TableColumn text="frei" />
+                  <TableColumn prefWidth="84.0" text="besetzt" />
+                  <TableColumn prefWidth="96.0" text="erwartet" />
+              </columns>
+            </TableView>
             </children>
         </AnchorPane>
     </top>
+   <bottom>
+          <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" prefHeight="0.0" prefWidth="50.0" styleClass="homebutton" stylesheets="@css.css" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS" BorderPane.alignment="CENTER_LEFT">
+              <font>
+                  <Font size="18.0" />
+              </font>
+              <graphic>
+                  <ImageView fitHeight="300.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@Bilder/Einstellungen.png" />
+                      </image>
+                  </ImageView>
+              </graphic>
+          </Button>
+   </bottom>
 </BorderPane>
