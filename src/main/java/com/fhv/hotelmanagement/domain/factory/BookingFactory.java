@@ -94,15 +94,26 @@ public class BookingFactory {
                 (bookingDTO.getDepartureDate() != null) &&
                 (bookingDTO.getArrivalDate().isBefore(bookingDTO.getDepartureDate())) &&
                 (AddressFactory.checkAddress(bookingDTO.getBillingAddress())) &&
-                (StringValidator.checkString(bookingDTO.getPaymentMethod())) &&
-                (StringValidator.checkString(bookingDTO.getCreditCardNumber())) &&
-                (StringValidator.checkString(bookingDTO.getExpirationDate()) && StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())) &&
-                (StringValidator.checkString(bookingDTO.getAuthorisationNumber())) &&
+                (checkPaymentMethod(bookingDTO)) &&
                 (bookingDTO.getBookedRooms() != null && !bookingDTO.getBookedRooms().isEmpty()) &&
                 (bookingDTO.getBookedRoomCategories() != null && !bookingDTO.getBookedRoomCategories().isEmpty()) &&
                 (BookedRoomCategoryFactory.checkBookedRoomCategories(bookingDTO.getBookedRoomCategories(), false)) &&
                 (BookedRoomFactory.checkBookedRooms(bookingDTO.getBookedRooms(), false)) &&
                 ((bookingDTO.getBoard() == null && bookingDTO.getPricePerNightForBoard() == null)
                         || (BoardFactory.checkBoard(bookingDTO.getBoard()) && bookingDTO.getPricePerNightForBoard() != null && bookingDTO.getPricePerNightForBoard().intValue() >= 0));
+    }
+
+    private static boolean checkPaymentMethod(BookingDTO bookingDTO) {
+        if (StringValidator.checkString(bookingDTO.getPaymentMethod())) {
+            if (bookingDTO.getPaymentMethod().equals("Kreditkarte")) {
+                return (StringValidator.checkString(bookingDTO.getCreditCardNumber())) &&
+                        (StringValidator.checkString(bookingDTO.getExpirationDate()) && StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())) &&
+                        (StringValidator.checkString(bookingDTO.getAuthorisationNumber()));
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }
