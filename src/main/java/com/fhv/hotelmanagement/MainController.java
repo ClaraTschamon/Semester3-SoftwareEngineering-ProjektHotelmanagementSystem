@@ -116,4 +116,13 @@ public class MainController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+
+    public void onHomeClicked(ActionEvent actionEvent) {
+        try{
+            BookingOverviewViewController bookingOverviewViewController = new BookingOverviewViewController();
+            loadIntoContentArea("home");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

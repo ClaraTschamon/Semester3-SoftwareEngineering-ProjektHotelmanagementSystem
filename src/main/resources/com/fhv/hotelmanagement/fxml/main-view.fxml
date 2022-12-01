@@ -13,7 +13,7 @@
     <left>
         <VBox prefHeight="792.0" prefWidth="140.0" style="-fx-background-color: #21273D;" BorderPane.alignment="CENTER">
             <children>
-            <Button mnemonicParsing="false" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css">
+            <Button onAction="#onHomeClicked" mnemonicParsing="false" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css">
                <graphic>
                       <ImageView fitHeight="64.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -36,7 +36,7 @@
                </VBox.margin>
             </Button>
             <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Buchungen" textFill="#9a9a9a">
+            <Button onAction="#onBookingsClicked" contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Buchungen" textFill="#9a9a9a">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
