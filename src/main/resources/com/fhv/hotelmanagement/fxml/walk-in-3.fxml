@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
 
 
 
@@ -58,7 +68,7 @@
                </font></Label>
 
 
-            <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="1234 1234 1234 1234"/>
+            <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="1234 1234 1234 1234" />
 
                 <Label layoutX="60.0" layoutY="360.0" text="Sicherheitsnummer">
                    <font>
@@ -66,7 +76,7 @@
                    </font>
                 </Label>
 
-            <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="123"/>
+            <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="123" />
 
                 <Label layoutX="60.0" layoutY="440.0" text="Ablaufdatum">
                <font>
@@ -124,15 +134,36 @@
                 <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-In" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
-                    </font></Button>
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/CheckInKlein.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
                 <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Abbrechen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
-                    </font></Button>
-                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text="Zurück" textFill="WHITE">
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Abbrechen.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text=" Zurück" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
-                    </font></Button>
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Zurück.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             </children></AnchorPane>
     </center>
 </BorderPane>

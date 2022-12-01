@@ -3,7 +3,7 @@
     -fx-background-color: #21273d;
 }
 .nextButton:hover {
-    -fx-background-color: #131724;
+    -fx-background-color: #43507c;
 }
 
 
@@ -11,7 +11,7 @@
     -fx-background-color: #962c43;
 }
 .cancelButton:hover {
-    -fx-background-color: #591a28;
+    -fx-background-color: #b93653;
 }
 
 
@@ -30,6 +30,12 @@
     -fx-background-color: #f3f3f3;
 }
 
+.checkoutbutton{
+    -fx-background-color: #21273d;
+}
+.checkoutbutton:hover{
+    -fx-background-color: #5868a3;
+}
 
 .mainviewbutton{
     -fx-background-color: #21273d;
@@ -38,11 +44,8 @@
     -fx-background-color: #131724;
 }
 
-.checkoutbutton{
-    -fx-background-color: #21273d;
-}
-.checkoutbutton:hover{
-    -fx-background-color: #131724;
-}
+
+
+
 
 
