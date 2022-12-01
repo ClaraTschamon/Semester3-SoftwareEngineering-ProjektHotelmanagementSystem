@@ -4,6 +4,7 @@
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -124,15 +125,36 @@
                 <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-In" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
-                    </font></Button>
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Weiter.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
                 <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Abbrechen" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
-                    </font></Button>
-                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text="Zurück" textFill="WHITE">
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Abbrechen.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text=" Zurück" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
-                    </font></Button>
+                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Zurück.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             </children></AnchorPane>
     </center>
 </BorderPane>
