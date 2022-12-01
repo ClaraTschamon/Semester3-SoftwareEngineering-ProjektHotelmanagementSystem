@@ -75,8 +75,6 @@ public class WalkIn1ViewController implements Initializable {
 
     private boolean validate() {
 
-        RadioButton selectedBoardButton =  (RadioButton) packageToggleGroup.getSelectedToggle();
-
         boolean departureDateIsValid = false;
         boolean counterRoomIsValid = false;
         boolean counterSingleRoomIsValid = false;
@@ -131,7 +129,7 @@ public class WalkIn1ViewController implements Initializable {
             counterRoomIsValid = false;
         }
 
-        if (selectedBoardButton.isSelected()) {
+        if (packageToggleGroup.getSelectedToggle() != null) {
             boardButtonIsValid = true;
         } else {
             boardButtonIsValid = false;
@@ -145,7 +143,8 @@ public class WalkIn1ViewController implements Initializable {
 
         Integer amountGuests = Integer.valueOf(amountGuestsSpinner.getValue());
         if (amountGuests > 0 &&
-                (amountGuests - singleRoomDropDown.getCheckModel().getCheckedItems().size()
+                (amountGuests
+                        - singleRoomDropDown.getCheckModel().getCheckedItems().size()
                         - doubleRoomDropDown.getCheckModel().getCheckedItems().size() * 2
                         - familyRoomDropDown.getCheckModel().getCheckedItems().size() * 4
                         - suiteDropDown.getCheckModel().getCheckedItems().size() * 4

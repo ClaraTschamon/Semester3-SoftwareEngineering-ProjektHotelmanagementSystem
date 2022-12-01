@@ -100,7 +100,7 @@
                 <fx:define>
                         <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension"> <!--default Value-->
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Vollpension" toggleGroup="$packageToggleGroup"> <!--default Value-->
                     <font>
                         <Font size="13.0" />
                     </font>
