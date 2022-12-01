@@ -10,8 +10,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.io.IOException;
@@ -50,6 +53,8 @@ public class WalkIn2ViewController implements Initializable {
     private TextField postalCodeTextField;
     @FXML
     public CheckBox customerSavedCheckBox;
+    @FXML
+    public Text nationalityText;
     private WalkInViewController viewController;
 
     public void setController(WalkInViewController viewController) {
@@ -172,6 +177,7 @@ public class WalkIn2ViewController implements Initializable {
         boolean postalCodeIsValid = false;
         boolean countryIsValid = false;
         boolean birthdayIsValid = false;
+
         //warum alles außer zahlen?
         if (!StringValidator.checkString(firstNameTextField.getText())) {
             TextFunction.setRequieredTextField(firstNameTextField);
