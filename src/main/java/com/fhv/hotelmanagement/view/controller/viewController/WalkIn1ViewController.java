@@ -1,6 +1,7 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -22,6 +24,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +32,8 @@ import java.util.ResourceBundle;
 
 public class WalkIn1ViewController implements Initializable {
 
+    @FXML
+    private TextField searchDatabaseTextField;
     @FXML
     private RadioButton fullBoard;
     @FXML
@@ -61,6 +66,8 @@ public class WalkIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> suiteDropDown;
     private WalkInViewController viewController;
     private RoomProvider roomProvider;
+    private ArrayList<CustomerDTO> customers;
+    private ListView<CustomerDTO> searchedCustomersListView;
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
@@ -372,7 +379,7 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        customers = DomainController.getSavedCustomers();
         roomProvider = new RoomProvider();
 
         singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Einzelzimmer"));
@@ -382,7 +389,7 @@ public class WalkIn1ViewController implements Initializable {
 
         singleRoomDropDown.getCheckModel().getCheckedItems().addListener(new ListChangeListener<RoomDTO>() {
             @Override
-            public void onChanged(ListChangeListener.Change<? extends RoomDTO> c) {
+            public void onChanged(Change<? extends RoomDTO> c) {
                 counterSingleRoom.setText(String.valueOf(singleRoomDropDown.getCheckModel().getCheckedItems().size()));
             }
         });
@@ -435,6 +442,32 @@ public class WalkIn1ViewController implements Initializable {
         contentPane.getChildren().add(doubleRoomDropDown);
         contentPane.getChildren().add(familyRoomDropDown);
         contentPane.getChildren().add(suiteDropDown);
+
+        searchDatabaseTextField.textProperty().addListener((observable, oldValue, newValue) ->
+                searchDatabaseTextFieldChanged());
+
+        searchedCustomersListView = new ListView<>();
+        searchedCustomersListView.setStyle("-fx-border-radius: 8px;");
+        searchedCustomersListView.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(CustomerDTO item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getFirstName() + " " + item.getLastName() + " (" + item.getDateOfBirth() + ")");
+                }
+            }
+        });
+        searchedCustomersListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+                searchedCustomersListViewChanged());
+
+        searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                contentPane.getChildren().remove(searchedCustomersListView);
+            }
+        });
     }
 
     private BoardDTO getBoardByName(String name) {
@@ -450,6 +483,47 @@ public class WalkIn1ViewController implements Initializable {
     private void departureDatePickerOnAction() {
         roomProvider.refreshFreeRooms(departureDatePicker.getValue());
         refreshFreeRoomsInDropDowns();
+    }
+
+    private void searchDatabaseTextFieldChanged() {
+        String searchText = searchDatabaseTextField.getText().toLowerCase();
+
+        if (!searchedCustomersListView.getSelectionModel().getSelectedItems().isEmpty()) {
+            searchedCustomersListView.getSelectionModel().clearSelection();
+        }
+
+        if (searchText == null || searchText.equals("")) {
+            contentPane.getChildren().remove(searchedCustomersListView);
+
+        } else {
+            ArrayList<CustomerDTO> searchedCustomers = new ArrayList<>();
+            for (CustomerDTO c : customers) {
+                if (c.getFirstName().toLowerCase().contains(searchText) || c.getLastName().toLowerCase().contains(searchText)) {
+                    searchedCustomers.add(c);
+                }
+            }
+            searchedCustomersListView.setItems(FXCollections.observableArrayList(searchedCustomers));
+
+            if (!contentPane.getChildren().contains(searchedCustomersListView)) {
+                searchedCustomersListView.setMinWidth(searchDatabaseTextField.getWidth());
+                searchedCustomersListView.setMaxWidth(searchDatabaseTextField.getWidth());
+                searchedCustomersListView.setMaxHeight(200);
+                searchedCustomersListView.setLayoutX(searchDatabaseTextField.getLayoutX());
+                searchedCustomersListView.setLayoutY(searchDatabaseTextField.getLayoutY() + searchDatabaseTextField.getHeight() + 4);
+                contentPane.getChildren().add(searchedCustomersListView);
+            }
+        }
+    }
+
+    private void searchedCustomersListViewChanged() {
+        CustomerDTO selectedCustomer = searchedCustomersListView.getSelectionModel().getSelectedItem();
+        searchDatabaseTextField.setText("");
+        if (selectedCustomer != null) {
+            searchDatabaseTextField.setPromptText(selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
+            viewController.getUseCaseController().setCustomer(selectedCustomer);
+        }
+        contentPane.getChildren().remove(searchedCustomersListView);
+        departureDatePicker.requestFocus();
     }
 }
 
@@ -489,8 +563,6 @@ class RoomProvider{
             LocalDate toDate = bookedRoom.getToDate();
             LocalDate fromDate = bookedRoom.getFromDate();
             RoomDTO room = bookedRoom.getRoom();
-            System.out.println(toDate.isEqual(today) +" "+ toDate.isBefore(today) + " "+
-                    fromDate.isEqual(maxDate) + " "+fromDate.isAfter(maxDate));
             if (
                     !(toDate.isEqual(today) || toDate.isBefore(today)) &&
                     !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
