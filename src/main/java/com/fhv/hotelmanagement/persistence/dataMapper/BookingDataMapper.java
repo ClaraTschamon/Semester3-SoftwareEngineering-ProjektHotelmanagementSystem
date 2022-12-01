@@ -4,6 +4,7 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
@@ -32,6 +33,34 @@ public class BookingDataMapper {
         ArrayList<Booking> bookings = new ArrayList<>();
         for(BookingEntity b : entities){
             bookings.add(createBooking(b));
+        }
+        return bookings;
+    }
+
+    public static ArrayList<Booking> getCurrentBookings() {
+        ArrayList<BookingEntity> entities;
+        entities = (ArrayList<BookingEntity>) PersistenceManager.instance().entityManager.createQuery("SELECT booking FROM BookingEntity booking " +
+                "WHERE booking.checkInDatetime IS NOT NULL AND booking.checkOutDatetime IS NULL").getResultList();
+
+        ArrayList<Booking> bookings = new ArrayList<>();
+        for(BookingEntity e : entities){
+            bookings.add(createBooking(e));
+        }
+        return bookings;
+    }
+
+    public static ArrayList<Booking> getAllBookingsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<BookingEntity> entities;
+        entities = (ArrayList<BookingEntity>) PersistenceManager.instance().entityManager.createQuery("" +
+                "SELECT booking FROM BookingEntity booking " +
+                "WHERE (booking.arrivalDate <= :minimumDate AND :minimumDate <= booking.departureDate)" +
+                "OR (:minimumDate <= booking.arrivalDate AND booking.departureDate <= :maximumDate)")
+                .setParameter("minimumDate", minDate)
+                .setParameter("maximumDate", maxDate).getResultList();
+
+        ArrayList<Booking> bookings = new ArrayList<>();
+        for(BookingEntity e : entities){
+            bookings.add(createBooking(e));
         }
         return bookings;
     }

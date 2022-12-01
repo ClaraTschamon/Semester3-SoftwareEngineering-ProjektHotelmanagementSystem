@@ -29,6 +29,14 @@ public class DomainController {
         return BookingFactory.getAllBookings();
     }
 
+    public static ArrayList<BookingDTO> getAllBookingsBetween(LocalDate minDate, LocalDate maxDate){
+        return BookingFactory.getAllBookingsBetween(minDate, maxDate);
+    }
+
+    public static ArrayList<BookingDTO> getCurrentBookings(){
+        return BookingFactory.getCurrentBookings();
+    }
+
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {
         return BookingFactory.saveBooking(bookingDTO);
     }
