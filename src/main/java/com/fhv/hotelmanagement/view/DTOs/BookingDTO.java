@@ -198,10 +198,4 @@ public class BookingDTO {
         this.amountGuests = amountGuests;
     }
 
-    @Override
-    public String toString() {
-        return number + " " + customer.getLastName() +
-                " " + arrivalDate + " - " + departureDate +
-                " " + bookedRooms.toString();
-    }
 }

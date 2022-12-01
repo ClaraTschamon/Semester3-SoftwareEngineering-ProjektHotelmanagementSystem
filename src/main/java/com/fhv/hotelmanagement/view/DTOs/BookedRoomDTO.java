@@ -54,4 +54,5 @@ public class BookedRoomDTO {
     public String toString(){
         return String.valueOf(room.getNumber());
     }
+
 }

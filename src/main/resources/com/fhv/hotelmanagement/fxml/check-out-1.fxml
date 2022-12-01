@@ -12,7 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.CheckOut1ViewController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.fhv.hotelmanagement.view.controller.viewController.CheckOut1ViewController">
     <center>
         <AnchorPane prefHeight="30.0" prefWidth="140.0" BorderPane.alignment="CENTER">
             <children>
@@ -20,102 +22,126 @@
                     <children>
                         <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-Out">
                             <font>
-                                <Font size="24.0" />
+                                <Font size="24.0"/>
                             </font>
                         </Text>
                     </children>
                     <effect>
                         <InnerShadow height="8.0" radius="1.5" width="0.0">
                             <input>
-                                <DropShadow />
+                                <DropShadow/>
                             </input>
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Button layoutX="20.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Abbrechen" textFill="WHITE">
+                <Button layoutX="20.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked"
+                        prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css"
+                        text="Abbrechen" textFill="WHITE">
                     <font>
-                        <Font size="14.0" />
-                    </font></Button>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
                 <!--<Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onConfirmButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-Out" textFill="WHITE">-->
-                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0"  styleClass="nextButton" stylesheets="@css.css" text="Weiter" textFill="WHITE">
+                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked"
+                        prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Weiter"
+                        textFill="WHITE">
                     <font>
-                        <Font size="14.0" />
-                    </font></Button>
-                <Label layoutX="455.0" layoutY="421.0" />
-            <TextField layoutX="60.0" layoutY="110.0" prefHeight="40.0" prefWidth="300.0" promptText="Kundenname oder Buchungsnummer eingeben" />
-            <Text layoutX="60.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchung suchen" wrappingWidth="209.84048461914062">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <ComboBox fx:id="roomComboBox" layoutX="60.0" layoutY="220.0" prefHeight="40.0" prefWidth="300.0" />
-            <Text layoutX="60.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer" wrappingWidth="209.84048461914062">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="545.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zusammenfassung" wrappingWidth="209.84048461914062">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="437.0" layoutX="545.0" layoutY="110.0" stroke="#c1c1c1" strokeType="INSIDE" width="390.0" />
-            <Text fx:id="roomText" layoutX="560.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="firstNameText" layoutX="560.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="lastNameText" layoutX="560.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="fromDateText" layoutX="560.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anreisedatum:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="toDateText" layoutX="558.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abreisedatum:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="numberPersonsText" layoutX="558.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personenanzahl:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="packageText" layoutX="558.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Package:" wrappingWidth="332.04656982421875">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text layoutX="774.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*exklusive MwSt. und Ortstaxe" />
-            <Text fx:id="roomPriceText" layoutX="558.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmerpreis:" wrappingWidth="327.3798828125">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="paymentMethodText" layoutX="558.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zahlungsart:" wrappingWidth="327.3798828125">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="totalPriceText" layoutX="558.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gesamtbetrag*:" wrappingWidth="159.3798828125">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text fx:id="nightsText" layoutX="560.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nächte: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            </children></AnchorPane>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+                <Label layoutX="455.0" layoutY="421.0"/>
+                <TextField layoutX="60.0" layoutY="110.0" prefHeight="40.0" prefWidth="300.0"
+                           promptText="Kundenname oder Buchungsnummer eingeben"/>
+                <Text layoutX="60.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchung suchen"
+                      wrappingWidth="209.84048461914062">
+                    <font>
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Text>
+                <ComboBox fx:id="roomComboBox" layoutX="60.0" layoutY="220.0" prefHeight="40.0" prefWidth="300.0"/>
+                <Text layoutX="60.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer"
+                      wrappingWidth="209.84048461914062">
+                    <font>
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Text>
+                <Text layoutX="545.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zusammenfassung"
+                      wrappingWidth="209.84048461914062">
+                    <font>
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Text>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="437.0" layoutX="545.0" layoutY="110.0"
+                           stroke="#c1c1c1" strokeType="INSIDE" width="390.0"/>
+                <Text fx:id="roomText" layoutX="560.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Zimmer:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="firstNameText" layoutX="560.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Vorname:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="lastNameText" layoutX="560.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Nachname:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="fromDateText" layoutX="560.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Anreisedatum:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="toDateText" layoutX="558.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Abreisedatum:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="numberPersonsText" layoutX="558.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Personenanzahl:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="packageText" layoutX="558.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Package:" wrappingWidth="332.04656982421875">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text layoutX="774.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="*exklusive MwSt. und Ortstaxe"/>
+                <Text fx:id="roomPriceText" layoutX="558.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Zimmerpreis:" wrappingWidth="327.3798828125">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="paymentMethodText" layoutX="558.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Zahlungsart:" wrappingWidth="327.3798828125">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="totalPriceText" layoutX="558.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Gesamtbetrag*:" wrappingWidth="159.3798828125">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <Text fx:id="nightsText" layoutX="560.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Nächte: ">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
     </center>
 </BorderPane>

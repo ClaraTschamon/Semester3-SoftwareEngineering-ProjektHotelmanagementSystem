@@ -77,7 +77,7 @@ public class CheckOut2ViewController {
         fillBillData();
     }
 
-    private void fillBillData() {
+    private void fillBillData() { //TODO: table1 umbenennen
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         ObservableList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = FXCollections.observableArrayList(bookingDTO.getBookedRoomCategories());
         table1.setItems(bookedRoomCategoryDTOS);
