@@ -3,10 +3,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,6 +28,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CheckOut1ViewController implements Initializable {
 
     private ArrayList<BookedRoomDTO> allBookedRoomDTOs;
+    private ArrayList<CustomerDTO> currentCustomerDTOs;
     @FXML
     private Text roomText;
     @FXML
@@ -82,10 +80,13 @@ public class CheckOut1ViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allBookedRoomDTOs = DomainController.getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
+        currentCustomerDTOs = new ArrayList<>();
         ArrayList<RoomDTO> rooms = new ArrayList<>();
 
-        for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            if (bookedRoom.getBooking().getCheckOutDatetime() == null) {
+        for (BookedRoomDTO bookedRoom : allBookedRoomDTOs) {
+            BookingDTO bookingDTO = bookedRoom.getBooking();
+            if (bookingDTO.getCheckOutDatetime() == null) {
+                currentCustomerDTOs.add(bookingDTO.getCustomer());
                 rooms.add(bookedRoom.getRoom());
             }
         }

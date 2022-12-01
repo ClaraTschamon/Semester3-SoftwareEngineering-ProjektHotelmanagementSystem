@@ -1,172 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.SearchableComboBox?>
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn2ViewController">
+
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn2ViewController">
 
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Walk-In">
+                        <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walk-In">
                             <font>
-                                <Font size="24.0"/>
+                                <Font size="24.0" />
                             </font>
                         </Text>
-                        <Text layoutX="96.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text=" &gt; Gast anlegen">
+                        <Text layoutX="96.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" &gt; Gast anlegen">
                             <font>
-                                <Font size="24.0"/>
+                                <Font size="24.0" />
                             </font>
                         </Text>
-                        <Text fill="#c9c9c9" layoutX="270.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="&gt; Zahlung auswählen">
+                        <Text fill="#c9c9c9" layoutX="270.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Zahlung auswählen">
                             <font>
-                                <Font size="24.0"/>
+                                <Font size="24.0" />
                             </font>
                         </Text>
                     </children>
                     <effect>
                         <InnerShadow height="8.0" radius="1.5" width="0.0">
                             <input>
-                                <DropShadow/>
+                                <DropShadow />
                             </input>
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0"
-                           prefWidth="300.0" promptText="Kunde in Gästekartei suchen...">
+                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Kunde in Gästekartei suchen...">
                     <opaqueInsets>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                     </opaqueInsets>
                 </TextField>
-                <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gast anlegen"
-                      wrappingWidth="234.994140625">
+                <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gast anlegen" wrappingWidth="234.994140625">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
                 <Text layoutX="60.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="firstNameTextField" layoutX="60.0" layoutY="202.0" prefHeight="40.0"
-                           prefWidth="300.0"/>
-                <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname"
-                      wrappingWidth="74.19140625">
+                <TextField fx:id="firstNameTextField" layoutX="60.0" layoutY="202.0" prefHeight="40.0" prefWidth="300.0" />
+                <Text layoutX="60.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname" wrappingWidth="74.19140625">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="lastNameTextField" layoutX="60.0" layoutY="270.0" prefHeight="40.0"
-                           prefWidth="300.0"/>
-                <Text layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationalität"
-                      wrappingWidth="74.19140625">
+                <TextField fx:id="lastNameTextField" layoutX="60.0" layoutY="270.0" prefHeight="40.0" prefWidth="300.0" />
+                <Text layoutX="60.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationalität" wrappingWidth="74.19140625">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <SearchableComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0"
-                                    prefHeight="40.0" prefWidth="300.0"/>
-                <Text layoutX="60.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtstag"
-                      wrappingWidth="74.19140625">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                </Text>
-                <DatePicker fx:id="birthdayDatePicker" layoutX="60.0" layoutY="440.0" prefHeight="40.0"
-                            prefWidth="300.0" showWeekNumbers="false"/>
+            <SearchableComboBox fx:id="nationalityComboBox" editable="true" layoutX="60.0" layoutY="370.0" prefHeight="40.0" prefWidth="300.0" />
+            <Text layoutX="60.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geburtstag" wrappingWidth="74.19140625">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="birthdayDatePicker" layoutX="60.0" layoutY="440.0" prefHeight="40.0" prefWidth="300.0" showWeekNumbers="false" />
                 <Text layoutX="545.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wohnadresse">
                     <font>
-                        <Font name="System Bold" size="18.0"/>
+                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Text>
                 <Text layoutX="545.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="streetTextField" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="230.0"/>
-                <Text layoutX="780.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr."
-                      wrappingWidth="39.1083984375">
+                <TextField fx:id="streetTextField" layoutX="545.0" layoutY="200.0" prefHeight="40.0" prefWidth="230.0" />
+                <Text layoutX="780.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr." wrappingWidth="39.1083984375">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="houseNumberTextField" layoutX="780.0" layoutY="200.0" prefHeight="40.0"
-                           prefWidth="65.0"/>
+                <TextField fx:id="houseNumberTextField" layoutX="780.0" layoutY="200.0" prefHeight="40.0" prefWidth="65.0" />
                 <Text layoutX="550.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="cityTextField" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="230.0"/>
-                <Text layoutX="780.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ"
-                      wrappingWidth="39.1083984375">
+                <TextField fx:id="cityTextField" layoutX="545.0" layoutY="270.0" prefHeight="40.0" prefWidth="230.0" />
+                <Text layoutX="780.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ" wrappingWidth="39.1083984375">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="postalCodeTextField" layoutX="780.0" layoutY="270.0" prefHeight="40.0"
-                           prefWidth="65.0"/>
-                <Text layoutX="545.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
+                <TextField fx:id="postalCodeTextField" layoutX="780.0" layoutY="270.0" prefHeight="40.0" prefWidth="65.0" />
+            <Text layoutX="545.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+                <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
+                <Text layoutX="545.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer" wrappingWidth="137.19140625">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="countryTextField" layoutX="545.0" layoutY="344.0" prefHeight="40.0"
-                           prefWidth="300.0"/>
-                <Text layoutX="545.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer"
-                      wrappingWidth="137.19140625">
+                <TextField fx:id="phoneNumberTextField" layoutX="545.0" layoutY="425.0" prefHeight="40.0" prefWidth="300.0" />
+                <Text layoutX="545.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail Adresse" wrappingWidth="137.19140625">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Text>
-                <TextField fx:id="phoneNumberTextField" layoutX="545.0" layoutY="425.0" prefHeight="40.0"
-                           prefWidth="300.0"/>
-                <Text layoutX="545.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail Adresse"
-                      wrappingWidth="137.19140625">
+                <TextField fx:id="emailTextField" layoutX="545.0" layoutY="495.0" prefHeight="40.0" prefWidth="300.0" />
+            <CheckBox fx:id="customerSavedCheckBox" layoutX="545.0" layoutY="557.0" mnemonicParsing="false" selected="true" text="Gast speichern" />
+                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Weiter" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
-                </Text>
-                <TextField fx:id="emailTextField" layoutX="545.0" layoutY="495.0" prefHeight="40.0" prefWidth="300.0"/>
-                <CheckBox fx:id="customerSavedCheckBox" layoutX="545.0" layoutY="557.0" mnemonicParsing="false"
-                          selected="true" text="Gast speichern"/>
-                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked"
-                        prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Weiter"
-                        textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Weiter.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
-                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked"
-                        prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css"
-                        text="Abbrechen" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="180.0">
+                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Abbrechen" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="180.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Abbrechen.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
-                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClicked"
-                        prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text="Zurück"
-                        textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="340.0">
+                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text=" Zurück" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="340.0">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Bilder/Zurück.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
-            </children>
-        </AnchorPane>
+            </children></AnchorPane>
     </center>
 </BorderPane>

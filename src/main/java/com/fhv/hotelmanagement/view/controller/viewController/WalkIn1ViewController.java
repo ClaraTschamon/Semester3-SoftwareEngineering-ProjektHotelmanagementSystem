@@ -437,10 +437,6 @@ public class WalkIn1ViewController implements Initializable {
         contentPane.getChildren().add(suiteDropDown);
     }
 
-    private boolean validateFields() {
-        return true;
-    }
-
     private BoardDTO getBoardByName(String name) {
         for (BoardDTO boardDTO : DomainController.getAllBoards()) {
             if (boardDTO.getName().equals(name)) {
@@ -486,14 +482,27 @@ class RoomProvider{
 
     public void refreshFreeRooms(LocalDate maxDate) {
         freeRooms = DomainController.getAllRooms();
+        ArrayList<RoomDTO> bookedRooms = new ArrayList<>();
+        LocalDate today = LocalDate.now();
 
-        for(BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(LocalDate.now(), maxDate)){
-            if(!(bookedRoom.getToDate().isEqual(maxDate) || bookedRoom.getToDate().isBefore(maxDate))) {
-                RoomDTO room = bookedRoom.getRoom();
-                if (freeRooms.contains(room)) {
-                    freeRooms.remove(room);
+        for (BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(today, maxDate)) {
+            LocalDate toDate = bookedRoom.getToDate();
+            LocalDate fromDate = bookedRoom.getFromDate();
+            RoomDTO room = bookedRoom.getRoom();
+            System.out.println(toDate.isEqual(today) +" "+ toDate.isBefore(today) + " "+
+                    fromDate.isEqual(maxDate) + " "+fromDate.isAfter(maxDate));
+            if (
+                    !(toDate.isEqual(today) || toDate.isBefore(today)) &&
+                    !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
+            ) {
+                if (!bookedRooms.contains(room)) {
+                    bookedRooms.add(room);
                 }
             }
+        }
+
+        for (RoomDTO room : bookedRooms) {
+            freeRooms.remove(room);
         }
     }
 }
