@@ -515,9 +515,9 @@ public class WalkIn1ViewController implements Initializable {
 
     private void searchedCustomersListViewChanged() {
         CustomerDTO selectedCustomer = searchedCustomersListView.getSelectionModel().getSelectedItem();
-        searchDatabaseTextField.setText("");
         if (selectedCustomer != null) {
-            searchDatabaseTextField.setPromptText(selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
+            searchDatabaseTextField.setText(selectedCustomer.getLastName()); //funktioniert
+            //searchDatabaseTextField.setPromptText(selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
             viewController.getUseCaseController().setCustomer(selectedCustomer);
         }
         contentPane.getChildren().remove(searchedCustomersListView);

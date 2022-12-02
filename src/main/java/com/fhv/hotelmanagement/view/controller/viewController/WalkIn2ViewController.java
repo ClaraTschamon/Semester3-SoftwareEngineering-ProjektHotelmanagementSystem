@@ -8,11 +8,13 @@ import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.io.IOException;
@@ -56,7 +58,9 @@ public class WalkIn2ViewController implements Initializable {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         customer.setFirstName(firstNameTextField.getText());
         customer.setLastName(lastNameTextField.getText());
-        customer.setNationality(nationalityComboBox.getSelectionModel().getSelectedItem().toString());
+        if(nationalityComboBox.getSelectionModel().getSelectedItem() != null){
+            customer.setNationality(nationalityComboBox.getSelectionModel().getSelectedItem().toString());
+        }
         customer.setPhoneNumber(phoneNumberTextField.getText());
         customer.setEmail(emailTextField.getText());
         customer.setSaved(customerSavedCheckBox.isSelected());
@@ -188,7 +192,7 @@ public class WalkIn2ViewController implements Initializable {
             TextFunction.setEventHandler(lastNameTextField);
         }
 
-        if (nationalityComboBox.getValue() != null) {
+        if (nationalityComboBox.getSelectionModel().getSelectedItem() != null) {
              nationalityIsValid = true;
         } else {
             nationalityIsValid = false;
@@ -315,8 +319,14 @@ public class WalkIn2ViewController implements Initializable {
 
         nationalityComboBox.getSelectionModel().select(3);
 
+
+        /* //funktioniert noch nicht
         nationalityComboBox.setOnAction(event -> {
-            String data = (String) nationalityComboBox.getSelectionModel().getSelectedItem();
-        });
+            nationalityComboBox.getSelectionModel().select(3);
+            if(nationalityComboBox.getSelectionModel().getSelectedItem() == null){
+                nationalityComboBox.getSelectionModel().select(3);
+
+            }
+        });*/
     }
 }
