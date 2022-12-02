@@ -94,14 +94,12 @@ public class ApachePDFBoxServices {
                 for(int i=0; i<bookingDTO.getBookedRoomCategories().size();i++){
                     if(!parsedArrayList.contains(bookingDTO.getBookedRoomCategories().get(i))){
                         parsedArrayList.add(i, bookingDTO.getBookedRoomCategories().get(i));
-                        System.out.println(parsedArrayList.get(i).getRoomCategory().getName());
                     }
                 }
 
                 int allAmounts = 0;
 
                 if(bookingDTO.getBookedRoomCategories().size()>0){
-                    System.out.println(bookingDTO.getBookedRooms().size());
                     String category0 = parsedArrayList.get(0).getRoomCategory().getName();
                     String pricePerNight0= String.valueOf(parsedArrayList.get(0).getRoomCategory().getPricePerNight());
 
@@ -182,7 +180,7 @@ public class ApachePDFBoxServices {
                     rooms=dynamicRoomNumbers(rooms, 10);
                 }
 
-                String line11 = rooms + "" + dynamicStringDistance(20, rooms.length()) + packages+ dynamicStringDistance(20, 11) + packagecost+",-" + dynamicStringDistance(20,packagecost.length()+2 );
+                String line11 = rooms + "" + dynamicStringDistance(20, rooms.length()) + packages+ dynamicStringDistance(20, packages.length()) + packagecost+",-" + dynamicStringDistance(20,packagecost.length()+2 );
                 cont.showText(line11);
                 cont.newLine();
 

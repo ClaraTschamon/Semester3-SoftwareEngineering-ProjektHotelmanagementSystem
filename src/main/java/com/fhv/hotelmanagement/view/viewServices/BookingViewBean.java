@@ -19,7 +19,7 @@ public class BookingViewBean {
     private LocalDate arrivalDate;
     private LocalDate departureDate;
     private ArrayList<Integer> roomNumbers = new ArrayList<>();
-    private Image checkedInImage = new Image("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\src\\main\\resources\\com\\fhv\\hotelmanagement\\fxml\\Bilder\\icons\\confirmation.png");
+    private Image checkedInImage = new Image("com/fhv/hotelmanagement/fxml/Bilder/icons/confirmation.png");
     //private ImageView checkedInImageView = new ImageView();
 
     //private char checkedInSymbol = '\u2611';
