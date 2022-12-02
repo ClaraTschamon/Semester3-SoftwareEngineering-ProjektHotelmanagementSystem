@@ -9,100 +9,111 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.MainController">
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.MainController">
     <left>
         <VBox prefHeight="792.0" prefWidth="140.0" style="-fx-background-color: #21273D;" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="80.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@Bilder/Sunway.png" />
-                    </image>
+                <Button onAction="#onHomeClicked" mnemonicParsing="false" prefWidth="140.0" styleClass="mainviewbutton"
+                        stylesheets="@css.css">
+                    <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/SunwayohneHintergrund.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0"
+                        styleClass="mainviewbutton" stylesheets="@css.css" text="Reservations" textFill="#9a9a9a">
+                    <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Reservierungen.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
                     <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="5.0"/>
                     </VBox.margin>
-                </ImageView>
-            <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Reservierungen" textFill="#9a9a9a">
-               <graphic>
-                      <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@Bilder/Reservierungen.png" />
-                          </image>
-                      </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Buchungen" textFill="#9a9a9a">
-               <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Buchungen.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Rechnungen" textFill="#9a9a9a">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Rechnungen.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Kunden" textFill="#9a9a9a">
-               <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Kunden.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Zimmer" textFill="#9a9a9a">
-               <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Zimmer.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Button>
-            <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Journale" textFill="#9a9a9a">
-               <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Journale.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets bottom="50.0" top="5.0" />
-               </VBox.margin>
-            </Button>
+                </Button>
+                <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                <Button onAction="#onBookingsClicked" contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0"
+                        prefWidth="140.0" styleClass="mainviewbutton" stylesheets="@css.css" text="Bookings"
+                        textFill="#9a9a9a">
+                    <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Buchungen.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
+                </Button>
+                <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0"
+                        styleClass="mainviewbutton" stylesheets="@css.css" text="Invoices" textFill="#9a9a9a">
+                    <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Rechnungen.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
+                </Button>
+                <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0"
+                        styleClass="mainviewbutton" stylesheets="@css.css" text="Customers" textFill="#9a9a9a">
+                    <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Kunden.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
+                </Button>
+                <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0"
+                        styleClass="mainviewbutton" stylesheets="@css.css" text="Rooms" textFill="#9a9a9a">
+                    <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Zimmer.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <VBox.margin>
+                        <Insets top="5.0"/>
+                    </VBox.margin>
+                </Button>
+                <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
+                <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0"
+                        styleClass="mainviewbutton" stylesheets="@css.css" text="Journals" textFill="#9a9a9a">
+                    <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Journale.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <VBox.margin>
+                        <Insets bottom="50.0" top="5.0"/>
+                    </VBox.margin>
+                </Button>
             </children>
         </VBox>
     </left>
     <center>
-        <AnchorPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+        <AnchorPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
     </center>
 </BorderPane>

@@ -12,9 +12,12 @@ import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BookingFactory {
+
+    private static ArrayList<Booking> bookings;
 
     public static BookingDTO getBooking(Long number) {
         Booking booking = PersistenceFacade.getBooking(number).get();
@@ -22,6 +25,41 @@ public class BookingFactory {
             return createBookingDTO(booking, true, null);
         }
         return null;
+    }
+
+    public static ArrayList<BookingDTO> getAllBookings(){
+        if(bookings == null){
+            refreshBookings();
+        }
+
+        ArrayList<BookingDTO> bookingDTOs = new ArrayList<>();
+        for(Booking b : bookings){
+            bookingDTOs.add(createBookingDTO(b, true, null)); //ist das richtig so???
+        }
+        return bookingDTOs;
+    }
+
+    public static ArrayList<BookingDTO> getAllBookingsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<BookingDTO> bookingDTOS = new ArrayList<>();
+        for(Booking booking : PersistenceFacade.getAllBookingsBetween(minDate, maxDate)){
+            bookingDTOS.add(createBookingDTO(booking, true, null));
+        }
+        return bookingDTOS;
+    }
+
+    public static ArrayList<BookingDTO> getCurrentBookings(){
+        ArrayList<BookingDTO> bookingDTOS = new ArrayList<>();
+        for(Booking booking : PersistenceFacade.getCurrentBookings()){
+            bookingDTOS.add(createBookingDTO(booking, true, null));
+        }
+        return bookingDTOS;
+    }
+
+    private static void refreshBookings(){
+        bookings = new ArrayList<>();
+        for(Booking b : PersistenceFacade.getAllBookings()){
+            bookings.add(b);
+        }
     }
 
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {
@@ -94,15 +132,26 @@ public class BookingFactory {
                 (bookingDTO.getDepartureDate() != null) &&
                 (bookingDTO.getArrivalDate().isBefore(bookingDTO.getDepartureDate())) &&
                 (AddressFactory.checkAddress(bookingDTO.getBillingAddress())) &&
-                (StringValidator.checkString(bookingDTO.getPaymentMethod())) &&
-                (StringValidator.checkString(bookingDTO.getCreditCardNumber())) &&
-                (StringValidator.checkString(bookingDTO.getExpirationDate()) && StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())) &&
-                (StringValidator.checkString(bookingDTO.getAuthorisationNumber())) &&
+                (checkPaymentMethod(bookingDTO)) &&
                 (bookingDTO.getBookedRooms() != null && !bookingDTO.getBookedRooms().isEmpty()) &&
                 (bookingDTO.getBookedRoomCategories() != null && !bookingDTO.getBookedRoomCategories().isEmpty()) &&
                 (BookedRoomCategoryFactory.checkBookedRoomCategories(bookingDTO.getBookedRoomCategories(), false)) &&
                 (BookedRoomFactory.checkBookedRooms(bookingDTO.getBookedRooms(), false)) &&
                 ((bookingDTO.getBoard() == null && bookingDTO.getPricePerNightForBoard() == null)
                         || (BoardFactory.checkBoard(bookingDTO.getBoard()) && bookingDTO.getPricePerNightForBoard() != null && bookingDTO.getPricePerNightForBoard().intValue() >= 0));
+    }
+
+    private static boolean checkPaymentMethod(BookingDTO bookingDTO) {
+        if (StringValidator.checkString(bookingDTO.getPaymentMethod())) {
+            if (bookingDTO.getPaymentMethod().equals("Kreditkarte")) {
+                return (StringValidator.checkString(bookingDTO.getCreditCardNumber())) &&
+                        (StringValidator.checkString(bookingDTO.getExpirationDate()) && StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())) &&
+                        (StringValidator.checkString(bookingDTO.getAuthorisationNumber()));
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }

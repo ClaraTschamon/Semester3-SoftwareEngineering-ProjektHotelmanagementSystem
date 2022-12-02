@@ -18,84 +18,84 @@ DELETE FROM ROOM_CATEGORY
 WHERE TRUE;
 
 INSERT INTO room_category(room_category_name, price_per_night, max_amount_guests)
-VALUES('Einzelzimmer', 80, 1);
+VALUES('Single room', 80, 1);
 
 INSERT INTO room_category(room_category_name, price_per_night, MAX_AMOUNT_GUESTS)
-VALUES('Doppelzimmer', 95, 2);
+VALUES('Double room', 95, 2);
 
 INSERT INTO room_category(room_category_name, price_per_night, MAX_AMOUNT_GUESTS)
-VALUES('Familienzimmer', 120, 4);
+VALUES('Family room', 120, 4);
 
 INSERT INTO room_category(room_category_name, price_per_night, MAX_AMOUNT_GUESTS)
 VALUES('Suite', 180, 4);
 
 
 INSERT INTO board(board_name, price_per_night)
-VALUES('Vollpension', 30);
+VALUES('Full Board', 30);
 
 INSERT INTO board(board_name, price_per_night)
-VALUES('Halbpension', 20);
+VALUES('Half Board', 20);
 
 INSERT INTO board(board_name, price_per_night)
-VALUES('Nur Frühstück', 10);
+VALUES('Just Breakfast', 10);
 
 INSERT INTO board(board_name, price_per_night)
-VALUES('Ohne Package', 0);
+VALUES('No Package', 0);
 
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(11, 'Einzelzimmer');
+VALUES(11, 'Single room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(12, 'Einzelzimmer');
+VALUES(12, 'Single room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(13, 'Einzelzimmer');
+VALUES(13, 'Single room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(14, 'Familienzimmer');
+VALUES(14, 'Family room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(15, 'Doppelzimmer');
+VALUES(15, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(16, 'Doppelzimmer');
+VALUES(16, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(17, 'Doppelzimmer');
+VALUES(17, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(18, 'Doppelzimmer');
+VALUES(18, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(21, 'Einzelzimmer');
+VALUES(21, 'Single room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(22, 'Doppelzimmer');
+VALUES(22, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(23, 'Doppelzimmer');
+VALUES(23, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(24, 'Doppelzimmer');
+VALUES(24, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(25, 'Familienzimmer');
+VALUES(25, 'Family room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(26, 'Doppelzimmer');
+VALUES(26, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(27, 'Doppelzimmer');
+VALUES(27, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(28, 'Familienzimmer');
+VALUES(28, 'Family room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(31, 'Familienzimmer');
+VALUES(31, 'Family room');
 
 INSERT INTO room(room_number, room_category_name)
-VALUES(32, 'Doppelzimmer');
+VALUES(32, 'Double room');
 
 INSERT INTO room(room_number, room_category_name)
 VALUES(33, 'Suite');

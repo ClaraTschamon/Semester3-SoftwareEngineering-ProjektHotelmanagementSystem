@@ -3,10 +3,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,32 +26,33 @@ import java.util.ResourceBundle;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOut1ViewController implements Initializable {
-
-    private ArrayList<BookedRoomDTO> allBookedRoomDTOs;
-    @FXML
-    private Text roomText;
-    @FXML
-    private Text firstNameText;
-    @FXML
-    private Text lastNameText;
-    @FXML
-    private Text nightsText;
-    @FXML
-    private Text fromDateText;
-    @FXML
-    private Text toDateText;
-    @FXML
-    private Text numberPersonsText;
-    @FXML
-    private Text packageText;
-    @FXML
-    private Text roomPriceText;
-    @FXML
-    private Text paymentMethodText;
-    @FXML
-    private Text totalPriceText;
     @FXML
     private ComboBox roomComboBox;
+    @FXML
+    public Text phRoomText;
+    @FXML
+    public Text phFirstNameText;
+    @FXML
+    public Text phLastNameText;
+    @FXML
+    public Text phNightsText;
+    @FXML
+    public Text phArrivalDateText;
+    @FXML
+    public Text phDepartureDateText;
+    @FXML
+    public Text phPersonNrText;
+    @FXML
+    public Text phBoardText;
+    @FXML
+    public Text phRoomPriceText;
+    @FXML
+    public Text phPaymentMethodText;
+    @FXML
+    public Text phTotalAmountText;
+    private ArrayList<BookedRoomDTO> allBookedRoomDTOs;
+    private ArrayList<CustomerDTO> currentCustomerDTOs;
+
 
     private CheckOutViewController viewController;
 
@@ -81,11 +79,27 @@ public class CheckOut1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //hide Placeholder Text
+        phRoomText.setText("");
+        phFirstNameText.setText("");
+        phLastNameText.setText("");
+        phNightsText.setText("");
+        phArrivalDateText.setText("");
+        phDepartureDateText.setText("");
+        phPersonNrText.setText("");
+        phBoardText.setText("");
+        phRoomPriceText.setText("");
+        phPaymentMethodText.setText("");
+        phTotalAmountText.setText("");
+
         allBookedRoomDTOs = DomainController.getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
+        currentCustomerDTOs = new ArrayList<>();
         ArrayList<RoomDTO> rooms = new ArrayList<>();
 
-        for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            if (bookedRoom.getBooking().getCheckOutDatetime() == null) {
+        for (BookedRoomDTO bookedRoom : allBookedRoomDTOs) {
+            BookingDTO bookingDTO = bookedRoom.getBooking();
+            if (bookingDTO.getCheckOutDatetime() == null) {
+                currentCustomerDTOs.add(bookingDTO.getCustomer());
                 rooms.add(bookedRoom.getRoom());
             }
         }
@@ -116,40 +130,39 @@ public class CheckOut1ViewController implements Initializable {
 
     private void setTexts(BookingDTO bookingDTO){
         StringBuilder rooms = new StringBuilder();
-        rooms.append("Zimmer:               ");
         ArrayList<BookedRoomDTO> bookedRoomDTOs = bookingDTO.getBookedRooms();
         for(BookedRoomDTO bookedRoomDTO : bookedRoomDTOs){
             rooms.append(bookedRoomDTO.getRoom().getNumber()).append("   ");
         }
-        roomText.setText(rooms.toString());
+        phRoomText.setText(rooms.toString());
 
-        firstNameText.setText("Vorname:             " + bookingDTO.getCustomer().getFirstName());
-        lastNameText.setText("Nachname:           " + bookingDTO.getCustomer().getLastName());
+        phFirstNameText.setText(bookingDTO.getCustomer().getFirstName());
+        phLastNameText.setText(bookingDTO.getCustomer().getLastName());
 
         int nights = (int) DAYS.between(bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate());
-        nightsText.setText("Nächte:                " + nights);
+        phNightsText.setText(String.valueOf(nights));
 
         LocalDate arrivalDate = bookingDTO.getArrivalDate();
         String formattedArrivalDate = arrivalDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        fromDateText.setText("Anreisedatum:      " + formattedArrivalDate);
+        phArrivalDateText.setText(formattedArrivalDate);
 
         LocalDate departureDate = bookingDTO.getDepartureDate();
         String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        toDateText.setText("Abreisedatum:      " + formattedDepartureDate);
+        phDepartureDateText.setText(formattedDepartureDate);
 
-        numberPersonsText.setText("Personenanzahl:   "+ String.valueOf(bookingDTO.getAmountGuests()));
-        packageText.setText("Package:               " + bookingDTO.getBoard().getName());
+        phPersonNrText.setText(String.valueOf(bookingDTO.getAmountGuests()));
+        phBoardText.setText(bookingDTO.getBoard().getName());
 
         if(Objects.equals(bookingDTO.getBookedRoomCategories().get(0).getPricePerNight(), new BigDecimal(0))){
-            roomPriceText.setText("Zimmerpreis:        Preis-0");
+            phRoomPriceText.setText("Price-0");
         }
         else{
-            roomPriceText.setText("Zimmerpreis:        Normalpreis");
+            phRoomPriceText.setText("Standard price");
         }
 
-        paymentMethodText.setText("Zahlungsart:         " + bookingDTO.getPaymentMethod());
+        phPaymentMethodText.setText(bookingDTO.getPaymentMethod());
         BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
-        totalPriceText.setText("Gesamtbetrag*:    " + price + " €");
+        phTotalAmountText.setText(price + " €");
     }
 
     private BigDecimal calculateTotalPrice(BookingDTO bookingDTO, ArrayList<BookedRoomDTO> bookedRoomDTOs){

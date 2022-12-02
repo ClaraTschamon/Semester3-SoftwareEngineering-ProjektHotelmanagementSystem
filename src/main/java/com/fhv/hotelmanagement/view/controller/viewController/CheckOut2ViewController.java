@@ -21,33 +21,33 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class CheckOut2ViewController {
 
     @FXML
-    private TableView<BookedRoomCategoryDTO> table1;
+    private TableView<BookedRoomCategoryDTO> bookedRoomsTable;
     @FXML
-    private TableColumn<BookedRoomCategoryDTO, Integer> amountColTable1;
+    private TableColumn<BookedRoomCategoryDTO, Integer> amountColTable;
     @FXML
-    private TableColumn<BookedRoomCategoryDTO, String> categoryColTable1;
+    private TableColumn<BookedRoomCategoryDTO, String> categoryColTable;
     @FXML
-    private TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable1;
+    private TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable;
     @FXML
-    private Text nightsText;
+    public Text phNightsText;
+    @FXML
+    public Text phBoardAmountText;
     @FXML
     private CheckBox printInvoiceCheckBox;
     @FXML
-    private Text boardNumberText;
-    @FXML
     private Text boardNameText;
     @FXML
-    private Text sumRoomsText;
+    public Text phSumRoomsText;
     @FXML
-    private Text totalSumNetText;
+    public Text phSumBoardsText;
     @FXML
-    private Text sumBoardsText;
+    public Text phTotalSumNetText;
     @FXML
-    private Text salesTaxText;
+    public Text phSalesTaxText;
     @FXML
-    private Text touristTaxText;
+    public Text phTouristTaxText;
     @FXML
-    private Text totalSumGrossText;
+    public Text phTotalSumGrossText;
 
     private final BigDecimal SALEXTAX = new BigDecimal("0.2");
 
@@ -86,10 +86,10 @@ public class CheckOut2ViewController {
     private void fillBillData() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         ObservableList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = FXCollections.observableArrayList(bookingDTO.getBookedRoomCategories());
-        table1.setItems(bookedRoomCategoryDTOS);
-        amountColTable1.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, Integer>("amount"));
-        categoryColTable1.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, String>("roomCategory"));
-        pricePerNightColTable1.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, BigDecimal>("pricePerNight"));
+        bookedRoomsTable.setItems(bookedRoomCategoryDTOS);
+        amountColTable.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, Integer>("amount"));
+        categoryColTable.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, String>("roomCategory"));
+        pricePerNightColTable.setCellValueFactory(new PropertyValueFactory<BookedRoomCategoryDTO, BigDecimal>("pricePerNight"));
 
         int nights = (int) DAYS.between(bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate());
         BigDecimal totalRoomPrice = new BigDecimal(0).setScale(2);
@@ -98,11 +98,11 @@ public class CheckOut2ViewController {
             BigDecimal price = c.getPricePerNight().multiply(new BigDecimal(c.getAmount())).multiply(BigDecimal.valueOf(nights));
             totalRoomPrice = totalRoomPrice.add(price);
         }
-        nightsText.setText("Nächte: " + nights);
-        sumRoomsText.setText("Summe für Zimmer:          " + totalRoomPrice + "€");
+        phNightsText.setText(String.valueOf(nights));
+        phSumRoomsText.setText(totalRoomPrice + "€");
 
         int amountGuests = bookingDTO.getAmountGuests();
-        boardNumberText.setText(String.valueOf(amountGuests));
+        phBoardAmountText.setText(String.valueOf(amountGuests));
 
         boardNameText.setText(bookingDTO.getBoard().getName());
 
@@ -114,26 +114,26 @@ public class CheckOut2ViewController {
             totalBoardPrice = totalBoardPrice.add(boardPrice);
         }
 
-        sumBoardsText.setText("Summe für Package:         " + totalBoardPrice + "€");
+        phSumBoardsText.setText(totalBoardPrice + "€");
 
         BigDecimal totalSumNet = new BigDecimal(0);
         totalSumNet = totalSumNet.add(totalRoomPrice);
         totalSumNet = totalSumNet.add(totalBoardPrice);
 
-        totalSumNetText.setText("Gesamtsumme (Netto):         " + totalSumNet + "€");
+        phTotalSumNetText.setText(totalSumNet + "€");
 
         BigDecimal salesTax = totalSumNet.multiply(SALEXTAX);
 
-        salesTaxText.setText("+20% MwSt.:         " + salesTax.setScale(2) + "€");
+        phSalesTaxText.setText(salesTax.setScale(2) + "€");
 
         BigDecimal touristTax = new BigDecimal(0);
         touristTax = touristTax.add(BigDecimal.valueOf(amountGuests).multiply(TOURISTTAXPERNIGHT));
         touristTax = touristTax.multiply(BigDecimal.valueOf(nights));
 
-        touristTaxText.setText("Ortstaxe*:           " + touristTax.setScale(2) + "€");
+        phTouristTaxText.setText(touristTax.setScale(2) + "€");
 
         BigDecimal totalSumGross = totalSumNet.add(salesTax).add(touristTax);
 
-        totalSumGrossText.setText("Gesamtsumme (Brutto):       " + totalSumGross.setScale(2) + "€");
+        phTotalSumGrossText.setText(totalSumGross.setScale(2) + "€");
     }
 }

@@ -1,4 +1,10 @@
 //Hotelmanagementsystem TeamA 2022/23
+/**Created by
+ * Date:
+ * Time:
+ * Project Name:
+ */
+
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
@@ -107,9 +113,9 @@ public class WalkIn3ViewController {
     public void fillSummaryLabels() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         CustomerDTO customerDTO = bookingDTO.getCustomer();
-        checkInForLabel.setText("Check-in für: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
+        checkInForLabel.setText("Check-in for: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
 
-        StringBuilder sb = new StringBuilder("Zimmernummer(n): ");
+        StringBuilder sb = new StringBuilder("Room number(s): ");
         for (BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()) {
             sb.append(bookedRoomDTO.getRoom().getNumber());
             sb.append(" ");
@@ -120,11 +126,18 @@ public class WalkIn3ViewController {
 
     protected void saveData() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
-        bookingDTO.setCreditCardNumber(creditCardTextField.getText());
-        bookingDTO.setAuthorisationNumber(authorisationNumberTextField.getText());
-        bookingDTO.setExpirationDate(expireDateTextField.getText());
+        String paymentMethod = (String) paymentMethodComboBox.getValue();
+        bookingDTO.setPaymentMethod(paymentMethod);
+        if (paymentMethod.equals("Credit card")) {
+            bookingDTO.setCreditCardNumber(creditCardTextField.getText());
+            bookingDTO.setAuthorisationNumber(authorisationNumberTextField.getText());
+            bookingDTO.setExpirationDate(expireDateTextField.getText());
+        } else {
+            bookingDTO.setCreditCardNumber(null);
+            bookingDTO.setAuthorisationNumber(null);
+            bookingDTO.setExpirationDate(null);
+        }
         bookingDTO.setComment(notesTextArea.getText());
-        bookingDTO.setPaymentMethod((String) paymentMethodComboBox.getSelectionModel().getSelectedItem());
 
         AddressDTO billingAddressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
         billingAddressDTO.setStreet(billingStreetTextField.getText());
@@ -177,25 +190,40 @@ public class WalkIn3ViewController {
         boolean billingPostalCodeIsValid = false;
         boolean expireDateIsValid = false;
 
-        if (!StringValidator.checkString(creditCardTextField.getText())) {
-            TextFunction.setRequieredTextField(creditCardTextField);
-        } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}( )?") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}( )?") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}( )?") ||
-                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}( )?")) {
-                    creditCardNumberIsValid = true;
-        } else {
-            TextFunction.setTextFieldColor(creditCardTextField, "red");
-            TextFunction.setEventHandler(creditCardTextField);
-        }
+        if (paymentMethodComboBox.getValue().equals("Credit card")) {
+            if (!StringValidator.checkString(creditCardTextField.getText())) {
+                TextFunction.setRequieredTextField(creditCardTextField);
+            } else if (StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{14,16}[ ]{0,}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,}") ||
+                    StringValidator.checkRegex(creditCardTextField.getText(), "[0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,}")) {
+                creditCardNumberIsValid = true;
+            } else {
+                TextFunction.setTextFieldColor(creditCardTextField, "red");
+                TextFunction.setEventHandler(creditCardTextField);
+            }
 
-        if (!StringValidator.checkString(authorisationNumberTextField.getText())) {
-            TextFunction.setRequieredTextField(authorisationNumberTextField);
-        } else if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9]{3,4}")) {
-            authorisationNumberIsValid = true;
+            if (!StringValidator.checkString(authorisationNumberTextField.getText())) {
+                TextFunction.setRequieredTextField(authorisationNumberTextField);
+            } else if (StringValidator.checkRegex(authorisationNumberTextField.getText(), "[0-9 ]{3,5}")) {
+                authorisationNumberIsValid = true;
+            } else {
+                TextFunction.setTextFieldColor(authorisationNumberTextField, "red");
+                TextFunction.setEventHandler(authorisationNumberTextField);
+            }
+
+            if (!StringValidator.checkString(expireDateTextField.getText())) {
+                TextFunction.setRequieredTextField(expireDateTextField);
+            } else if (StringValidator.checkValidExpirationDate(expireDateTextField.getText())) {
+                expireDateIsValid = true;
+            } else {
+                TextFunction.setTextFieldColor(expireDateTextField, "red");
+                TextFunction.setEventHandler(expireDateTextField);
+            }
         } else {
-            TextFunction.setTextFieldColor(authorisationNumberTextField, "red");
-            TextFunction.setEventHandler(authorisationNumberTextField);
+            creditCardNumberIsValid = true;
+            authorisationNumberIsValid = true;
+            expireDateIsValid = true;
         }
 
         if (!StringValidator.checkString(billingCityTextField.getText())) {
@@ -234,25 +262,20 @@ public class WalkIn3ViewController {
             TextFunction.setEventHandler(billingPostalCodeTextField);
         }
 
-        if (!StringValidator.checkString(expireDateTextField.getText())) {
-            TextFunction.setRequieredTextField(expireDateTextField);
-        } else if (StringValidator.checkValidExpirationDate(expireDateTextField.getText())) {
-            expireDateIsValid = true;
-        } else {
-            TextFunction.setTextFieldColor(expireDateTextField, "red");
-            TextFunction.setEventHandler(expireDateTextField);
-        }
+        return (creditCardNumberIsValid && authorisationNumberIsValid && expireDateIsValid &&
+                    billingStreetIsValid && billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid);
+    }
 
-        if (paymentMethodComboBox.getValue().equals("Rechnung")) {
-            creditCardTextField.clear();
-            authorisationNumberTextField.clear();
-            expireDateTextField.clear();
-            return true;
-        } else if (creditCardNumberIsValid && authorisationNumberIsValid && billingStreetIsValid &&
-                billingHouseNumberIsValid && billingCityIsValid && billingPostalCodeIsValid &&
-                authorisationNumberIsValid && expireDateIsValid) {
-            return true;
+    @FXML
+    private void paymentMethodComboBoxOnAction() {
+        if (paymentMethodComboBox.getValue().equals("Credit card")) {
+            creditCardTextField.setDisable(false);
+            authorisationNumberTextField.setDisable(false);
+            expireDateTextField.setDisable(false);
+        } else {
+            creditCardTextField.setDisable(true);
+            authorisationNumberTextField.setDisable(true);
+            expireDateTextField.setDisable(true);
         }
-        return false;
     }
 }
