@@ -12,6 +12,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -227,9 +228,12 @@ public class ApachePDFBoxServices {
                 String line23 = dynamicStringDistance(40, 0) + "Gesamtsumme (Brutto):" + dynamicStringDistance(25, 21) + totalSumGross.setScale(2);
                 cont.showText(line23);
                 cont.newLine();
+                cont.endText();
             }
 
             doc.save(DEST);
+            File pdf = new File(DEST);
+            Desktop.getDesktop().open(pdf);
             //infinite booking hack
 //            String easteregg = String.valueOf(bookingDTO.getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0));
         } catch (IOException e) {
