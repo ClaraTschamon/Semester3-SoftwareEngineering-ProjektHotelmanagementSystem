@@ -81,7 +81,7 @@
                 </Button>
                 <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="211.0" layoutY="365.0"
                         mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton"
-                        stylesheets="@css.css" text="Neue Reservierung" textAlignment="CENTER" textFill="#21273d"
+                        stylesheets="@css.css" text="New Reservation" textAlignment="CENTER" textFill="#21273d"
                         textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font size="18.0"/>
@@ -96,7 +96,7 @@
                 </Button>
                 <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="523.0" layoutY="365.0"
                         mnemonicParsing="false" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton"
-                        stylesheets="@css.css" text="Einstellungen" textAlignment="CENTER" textFill="#21273d"
+                        stylesheets="@css.css" text="Settings" textAlignment="CENTER" textFill="#21273d"
                         textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font size="18.0"/>

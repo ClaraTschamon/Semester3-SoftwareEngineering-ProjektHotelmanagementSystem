@@ -23,7 +23,7 @@
             <children>
                 <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
                     <children>
-                        <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchungen">
+                        <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings">
                             <font>
                                 <Font size="24.0"/>
                             </font>
@@ -38,7 +38,7 @@
                     </effect>
                 </AnchorPane>
                 <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0"
-                        styleClass="nextButton" stylesheets="@css.css" text="Bearbeiten" textFill="WHITE">
+                        styleClass="nextButton" stylesheets="@css.css" text="edit" textFill="WHITE">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -60,21 +60,21 @@
                 <ComboBox fx:id="stateComboBox" layoutX="391.0" layoutY="47.0" prefHeight="30.0" prefWidth="150.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="alle"/>
-                            <String fx:value="eingechecked"/>
-                            <String fx:value="ausgechecked"/>
+                            <String fx:value="all"/>
+                            <String fx:value="checked-in"/>
+                            <String fx:value="checked-out"/>
                         </FXCollections>
                     </items>
                     <value>
-                        <String fx:value="alle"/> <!--default value!-->
+                        <String fx:value="all"/> <!--default value!-->
                     </value>
                 </ComboBox>
-                <Text layoutX="15.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="von">
+                <Text layoutX="15.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="from">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="203.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="bis">
+                <Text layoutX="203.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="until">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -82,13 +82,13 @@
                 <DatePicker fx:id="fromDateDatePicker" layoutX="52.0" layoutY="47.0" prefHeight="30.0"
                             prefWidth="139.0"/>
                 <Text fx:id="arrivalDateText" layoutX="570.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Anreisedatum">
+                      text="Arrival date">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="departureDateText" layoutX="695.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Abreisedatum">
+                      text="Departure date">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -98,89 +98,89 @@
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buchungsnummer:">
+                <Text layoutX="570.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booking number:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                <Text layoutX="570.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zimmer:">
+                <Text layoutX="570.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room(s):">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Line endX="204.09307861328125" layoutX="745.0" layoutY="204.0" startX="-195.4462890625"/>
-                <Text layoutX="570.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname: ">
+                <Text layoutX="570.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname: ">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nachname:">
+                <Text layoutX="570.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße:">
+                <Text layoutX="570.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort:">
+                <Text layoutX="570.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land:">
+                <Text layoutX="570.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnummer:">
+                <Text layoutX="570.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone number:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
-                <Text layoutX="570.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hausnummer:">
+                <Text layoutX="570.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr.:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phFirstnameText" layoutX="695.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHVorname">
+                      text="PHFirstname">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phLastnameText" layoutX="695.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHNachname">
+                      text="PHLastname">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phStreetText" layoutX="695.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHStraße">
+                      text="PHStreet">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phCityText" layoutX="695.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHOrt">
+                      text="PHCity">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phCountryText" layoutX="695.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHLand">
+                      text="PHCountry">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phPhoneNrText" layoutX="695.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHTelefonnummer">
+                      text="PHPhoneNumber">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -191,37 +191,37 @@
                     </font>
                 </Text>
                 <Text fx:id="phPostalCodeText" layoutX="695.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHPlz">
+                      text="PHPostalCode">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phHouseNrText" layoutX="695.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHHausnummer">
+                      text="PHHNr">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Line endX="204.09307861328125" layoutX="744.0" layoutY="464.0" startX="-195.4462890625"/>
-                <Text layoutX="570.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zahlungsart:">
+                <Text layoutX="570.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method:">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phPaymentMethodText" layoutX="695.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHZahlungsart">
+                      text="PHPaymentmethod">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phStateText" layoutX="695.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHStatus">
+                      text="PHState">
                     <font>
                         <Font size="14.0"/>
                     </font>
                 </Text>
                 <Text fx:id="phRoomsText" layoutX="695.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="PHZimmer">
+                      text="PHRooms">
                     <font>
                         <Font size="14.0"/>
                     </font>

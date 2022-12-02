@@ -19,7 +19,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOut2ViewController {
 
-
     @FXML
     private TableView<BookedRoomCategoryDTO> bookedRoomsTable;
     @FXML
@@ -29,14 +28,13 @@ public class CheckOut2ViewController {
     @FXML
     private TableColumn<BookedRoomCategoryDTO, BigDecimal> pricePerNightColTable;
     @FXML
-    private Text nightsText;
+    public Text phNightsText;
+    @FXML
+    public Text phBoardAmountText;
     @FXML
     private CheckBox printInvoiceCheckBox;
     @FXML
-    private Text boardNumberText;
-    @FXML
     private Text boardNameText;
-
     @FXML
     public Text phSumRoomsText;
     @FXML
@@ -94,12 +92,12 @@ public class CheckOut2ViewController {
             BigDecimal price = c.getPricePerNight().multiply(new BigDecimal(c.getAmount())).multiply(BigDecimal.valueOf(nights));
             totalRoomPrice = totalRoomPrice.add(price);
         }
-        nightsText.setText(String.valueOf(nights));
+        phNightsText.setText(String.valueOf(nights));
         phSumRoomsText.setText(totalRoomPrice + "€");
 
 
         int amountGuests = bookingDTO.getAmountGuests();
-        boardNumberText.setText(String.valueOf(amountGuests));
+        phBoardAmountText.setText(String.valueOf(amountGuests));
 
         boardNameText.setText(bookingDTO.getBoard().getName());
 

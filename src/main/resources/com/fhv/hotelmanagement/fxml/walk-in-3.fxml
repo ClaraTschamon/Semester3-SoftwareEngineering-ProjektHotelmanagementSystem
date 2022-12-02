@@ -9,152 +9,185 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
-
+<BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn3ViewController">
 
 
     <center>
         <AnchorPane prefHeight="30.0" prefWidth="140.0" BorderPane.alignment="CENTER">
             <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="60.0" layoutX="60.0" layoutY="570.0" stroke="#c1c1c1" strokeType="INSIDE" width="300.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="60.0" layoutX="60.0" layoutY="570.0"
+                           stroke="#c1c1c1" strokeType="INSIDE" width="300.0"/>
                 <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
                     <children>
-                        <Text layoutX="277.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Zahlungsart auswählen">
+                        <Text layoutX="277.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="&gt; Choose payment">
                             <font>
-                                <Font size="24.0" />
+                                <Font size="24.0"/>
                             </font>
                         </Text>
-                        <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walk-In &gt; Gast anlegen">
+                        <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="Walk-In &gt; Create guest">
                             <font>
-                                <Font size="24.0" />
+                                <Font size="24.0"/>
                             </font>
                         </Text>
                     </children>
                     <effect>
                         <InnerShadow height="8.0" radius="1.5" width="0.0">
                             <input>
-                                <DropShadow />
+                                <DropShadow/>
                             </input>
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Label layoutX="60.0" layoutY="150.0" prefHeight="21.0" prefWidth="142.0" text="Zahlungsart">
+                <Label layoutX="60.0" layoutY="150.0" prefHeight="21.0" prefWidth="180.0" text="Payment method">
                     <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font></Label>
-                <ComboBox fx:id="paymentMethodComboBox" layoutX="60.0" layoutY="180.0" onAction="#paymentMethodComboBoxOnAction" prefHeight="40.0" prefWidth="300.0">
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="paymentMethodComboBox" layoutX="60.0" layoutY="180.0"
+                          onAction="#paymentMethodComboBoxOnAction" prefHeight="40.0" prefWidth="300.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Kreditkarte" />
-                            <String fx:value="Rechnung" />
+                            <String fx:value="Credit card"/>
+                            <String fx:value="Bill"/>
                         </FXCollections>
                     </items>
                     <value>
-                        <String fx:value="Kreditkarte" /> <!--default value-->
+                        <String fx:value="Credit card"/> <!--default value-->
                     </value>
                 </ComboBox>
-                <Label layoutX="60.0" layoutY="280.0" text="Kreditkartennummer">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-
-
-            <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="1234 1234 1234 1234" />
-
-                <Label layoutX="60.0" layoutY="360.0" text="Sicherheitsnummer">
-                   <font>
-                      <Font size="14.0" />
-                   </font>
-                </Label>
-
-            <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="123" />
-
-                <Label layoutX="60.0" layoutY="440.0" text="Ablaufdatum">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-            <TextField fx:id="expireDateTextField" layoutX="60.0" layoutY="460.0" prefHeight="40.0" prefWidth="300.0" promptText="MM/JJ" />
-                <CheckBox fx:id="billingAddressEqualsCustomerAddressCheckBox" layoutX="545.0" layoutY="180.0" mnemonicParsing="false" onAction="#billingAddressEqualsCustomerAddressCheckBoxChanged" selected="true" text="Rechnungsaddressse entspricht der Wohnadresse" />
-                <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Straße">
-               <font>
-                  <Font size="14.0" />
-               </font></Text>
-                <TextField fx:id="billingStreetTextField" layoutX="545.0" layoutY="230.0" prefHeight="40.0" prefWidth="230.0" />
-            <Text layoutX="780.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr.">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-                <TextField fx:id="billingHouseNumberTextField" layoutX="780.0" layoutY="230.0" prefHeight="40.0" prefWidth="65.0" />
-                <Text layoutX="545.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort">
-               <font>
-                  <Font size="14.0" />
-               </font></Text>
-                <TextField fx:id="billingCityTextField" layoutX="545.0" layoutY="295.0" prefHeight="40.0" prefWidth="230.0" />
-                <Text layoutX="780.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLZ">
-               <font>
-                  <Font size="14.0" />
-               </font></Text>
-                <TextField fx:id="billingPostalCodeTextField" layoutX="780.0" layoutY="295.0" prefHeight="40.0" prefWidth="65.0" />
-            <Text layoutX="545.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Land">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="billingCountryTextField" layoutX="545.0" layoutY="365.0" prefHeight="40.0" prefWidth="300.0" />
-                <Label layoutX="545.0" layoutY="434.0" text="Anmerkung">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
-                <TextArea fx:id="notesTextArea" layoutX="544.0" layoutY="454.0" prefHeight="98.0" prefWidth="303.0" />
-                <Label layoutX="545.0" layoutY="150.0" prefHeight="27.0" prefWidth="171.0" text="Rechnungsadresse">
+                <Label layoutX="60.0" layoutY="280.0" text="Credit card number">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="14.0"/>
                     </font>
                 </Label>
-            <Label fx:id="checkInForLabel" layoutX="70.0" layoutY="579.0" text="Check-In für:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="roomNumbersLabel" layoutX="70.0" layoutY="602.0" text="Zimmernummer(n):">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onSaveButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-In" textFill="WHITE">
+
+
+                <TextField fx:id="creditCardTextField" layoutX="60.0" layoutY="300.0" prefHeight="40.0"
+                           prefWidth="300.0" promptText="1234 1234 1234 1234"/>
+
+                <Label layoutX="60.0" layoutY="360.0" text="Security number">
                     <font>
-                        <Font size="14.0" />
+                        <Font size="14.0"/>
                     </font>
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/CheckInKlein.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Abbrechen" textFill="WHITE">
+                </Label>
+
+                <TextField fx:id="authorisationNumberTextField" layoutX="60.0" layoutY="380.0" prefHeight="40.0"
+                           prefWidth="300.0" promptText="123"/>
+
+                <Label layoutX="60.0" layoutY="440.0" text="Expiration date">
                     <font>
-                        <Font size="14.0" />
+                        <Font size="14.0"/>
                     </font>
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Abbrechen.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment" prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css" text=" Zurück" textFill="WHITE">
+                </Label>
+                <TextField fx:id="expireDateTextField" layoutX="60.0" layoutY="460.0" prefHeight="40.0"
+                           prefWidth="300.0" promptText="MM/JJ"/>
+                <CheckBox fx:id="billingAddressEqualsCustomerAddressCheckBox" layoutX="545.0" layoutY="180.0"
+                          mnemonicParsing="false" onAction="#billingAddressEqualsCustomerAddressCheckBoxChanged"
+                          selected="true" text="The billing address is the same as the home address"/>
+                <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street">
                     <font>
-                        <Font size="14.0" />
+                        <Font size="14.0"/>
                     </font>
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Bilder/Zurück.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            </children></AnchorPane>
+                </Text>
+                <TextField fx:id="billingStreetTextField" layoutX="545.0" layoutY="230.0" prefHeight="40.0"
+                           prefWidth="230.0"/>
+                <Text layoutX="780.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HNr.">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="billingHouseNumberTextField" layoutX="780.0" layoutY="230.0" prefHeight="40.0"
+                           prefWidth="65.0"/>
+                <Text layoutX="545.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="billingCityTextField" layoutX="545.0" layoutY="295.0" prefHeight="40.0"
+                           prefWidth="230.0"/>
+                <Text layoutX="780.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip code">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="billingPostalCodeTextField" layoutX="780.0" layoutY="295.0" prefHeight="40.0"
+                           prefWidth="65.0"/>
+                <Text layoutX="545.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="billingCountryTextField" layoutX="545.0" layoutY="365.0" prefHeight="40.0"
+                           prefWidth="300.0"/>
+                <Label layoutX="545.0" layoutY="434.0" text="Comment">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+                <TextArea fx:id="notesTextArea" layoutX="544.0" layoutY="454.0" prefHeight="98.0" prefWidth="303.0" promptText="optional"/>
+                <Label layoutX="545.0" layoutY="150.0" prefHeight="27.0" prefWidth="171.0" text="Billing address">
+                    <font>
+                        <Font name="System Bold" size="18.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="checkInForLabel" layoutX="70.0" layoutY="579.0" text="Check-In for:">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="roomNumbersLabel" layoutX="70.0" layoutY="602.0" text="Room number(s):">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+                <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onSaveButtonClicked"
+                        prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css"
+                        text="Check-In" textFill="WHITE">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/CheckInKlein.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" onAction="#onCancelButtonClickedPayment"
+                        prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css"
+                        text="Cancel" textFill="WHITE">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Abbrechen.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="480.0" layoutY="600.0" mnemonicParsing="false" onAction="#onBackButtonClickedPayment"
+                        prefHeight="30.0" prefWidth="140.0" styleClass="backButton" stylesheets="@css.css"
+                        text="Back" textFill="WHITE">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Bilder/Zurück.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
     </center>
 </BorderPane>

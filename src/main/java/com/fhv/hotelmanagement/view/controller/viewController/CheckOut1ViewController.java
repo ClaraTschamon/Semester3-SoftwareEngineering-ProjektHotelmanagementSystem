@@ -154,10 +154,10 @@ public class CheckOut1ViewController implements Initializable {
         phBoardText.setText(bookingDTO.getBoard().getName());
 
         if(Objects.equals(bookingDTO.getBookedRoomCategories().get(0).getPricePerNight(), new BigDecimal(0))){
-            phRoomPriceText.setText("Preis-0");
+            phRoomPriceText.setText("Price-0");
         }
         else{
-            phRoomPriceText.setText("Normalpreis");
+            phRoomPriceText.setText("Standard price");
         }
 
         phPaymentMethodText.setText(bookingDTO.getPaymentMethod());

@@ -44,12 +44,12 @@ public class StringValidator {
     }
 
     public static boolean checkValidEmail(String email) {
-        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][ÄäÖöÜüA-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][ÄäÖöÜüA-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z ]{2,})$";
         return checkRegex(email, regexPattern);
     }
 
     public static boolean checkValidExpirationDate(String expirationDate) {
-        String regexPattern = "[0-1][0-9]/[0-9][0-9]";
+        String regexPattern = "[0-1][0-9]/[0-9][0-9 ]";
         if(checkRegex(expirationDate, regexPattern)){
             //check if expired
             StringBuilder sbMonth = new StringBuilder();
@@ -101,17 +101,17 @@ public class StringValidator {
     }
 
     public static boolean checkStreet(String street) {
-        String regexPattern = "[0-9a-zA-Z-/]*";
+        String regexPattern = "[0-9a-zA-Z-/ß ]*";
         return checkRegex(street, regexPattern);
     }
 
     public static boolean checkCity(String city) {
-        String regexPattern = "[a-zA-ZäÄöÖüÜß]*";
+        String regexPattern = "[a-zA-ZäÄöÖüÜß ]*";
         return checkRegex(city, regexPattern);
     }
 
     public static boolean checkPostalCode(String postalCode) {
-        String regexPattern = "[0-9a-zA-Z]{3,6}";
+        String regexPattern = "[0-9a-zA-Z ]{3,6}";
         return checkRegex(postalCode, regexPattern);
     }
 }

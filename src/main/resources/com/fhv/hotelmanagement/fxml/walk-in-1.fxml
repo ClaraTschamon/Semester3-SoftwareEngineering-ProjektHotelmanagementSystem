@@ -13,7 +13,7 @@
     <left>
         <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Kunde in Gästekartei suchen...">
+                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Search guest in guest file...">
                     <opaqueInsets>
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                     </opaqueInsets>
@@ -79,7 +79,7 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl der ausgwählten Zimmer" wrappingWidth="114.666015625" />
+                <Text layoutX="820.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of selected rooms" wrappingWidth="114.666015625" />
                 <Text layoutX="545.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Single room" />
                 <Text layoutX="545.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double room" />
                 <Text layoutX="545.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family room" />
@@ -101,15 +101,12 @@
                 <fx:define>
                     <ToggleGroup fx:id="packageToggleGroup" />
                 </fx:define>
-                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Full board"> <!--default Value-->
+                <RadioButton fx:id="fullBoard" layoutX="60.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Full Board" toggleGroup="$packageToggleGroup"> <!--default Value-->
                     <font>
                         <Font size="13.0" />
                     </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="packageToggleGroup" />
-                    </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="only Breakfast" toggleGroup="$packageToggleGroup">
+                <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Only Breakfast" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -119,7 +116,7 @@
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="noPackage" layoutX="60.0" layoutY="463.0" mnemonicParsing="false" text="no Package" toggleGroup="$packageToggleGroup">
+                <RadioButton fx:id="noPackage" layoutX="60.0" layoutY="463.0" mnemonicParsing="false" text="No Package" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -128,12 +125,12 @@
                 <ComboBox fx:id="roomPriceDropDown" editable="false" layoutX="545.0" layoutY="463.0" prefHeight="40.0" prefWidth="300.0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Normalpreis" />
-                            <String fx:value="Preis-0" />
+                            <String fx:value="Standard price" />
+                            <String fx:value="Price-0" />
                         </FXCollections>
                     </items>
                     <value>
-                        <String fx:value="Normalpreis" /> <!--default value!-->
+                        <String fx:value="Standard price" /> <!--default value!-->
                     </value>
                 </ComboBox>
                 <Button fx:id="nextButton" layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#onNextButtonClicked" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Next" textFill="WHITE">

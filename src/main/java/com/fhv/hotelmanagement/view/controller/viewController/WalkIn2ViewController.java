@@ -223,7 +223,7 @@ public class WalkIn2ViewController implements Initializable {
 
         if (!StringValidator.checkString(countryTextField.getText())) {
             TextFunction.setRequieredTextField(countryTextField);
-        } else if (StringValidator.checkRegex(countryTextField.getText(), "[a-zA-ZäÄöÖüÜß]*")) {
+        } else if (StringValidator.checkRegex(countryTextField.getText(), "[a-zA-ZäÄöÖüÜß ]*")) {
             countryIsValid = true;
         } else {
             TextFunction.setTextFieldColor(countryTextField, "red");
@@ -276,44 +276,44 @@ public class WalkIn2ViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         ArrayList<String> items = new ArrayList<>();
-        items.add("Afrika");
-        items.add("Asien");
-        items.add("Australien");
-        items.add("Belgien");
-        items.add("Bulgarien");
-        items.add("Dänemark");
-        items.add("Deutschland");
-        items.add("Estland");
-        items.add("Finnland");
-        items.add("Frankreich");
-        items.add("Griechenland");
-        items.add("Irland");
-        items.add("Italien");
-        items.add("Kroatien");
-        items.add("Lettland");
-        items.add("Lichtenstein");
-        items.add("Luxemburg");
+        items.add("Africa");
+        items.add("Asia");
+        items.add("Australia");
+        items.add("Austria");
+        items.add("Belgium");
+        items.add("Bulgaria");
+        items.add("Central America");
+        items.add("Croatia");
+        items.add("Cyprus");
+        items.add("Czech Republic");
+        items.add("Denmark");
+        items.add("Estonia");
+        items.add("Finland");
+        items.add("France");
+        items.add("Germany");
+        items.add("Greece");
+        items.add("Hungary");
+        items.add("Ireland");
+        items.add("Italy");
+        items.add("Latvia");
+        items.add("Liechtenstein");
+        items.add("Luxembourg");
         items.add("Malta");
-        items.add("Mittelamerika");
-        items.add("Niederlande");
-        items.add("Nordamerika");
-        items.add("Österreich");
-        items.add("Polen");
+        items.add("Netherlands");
+        items.add("North America");
+        items.add("Poland");
         items.add("Portugal");
-        items.add("Rumänien");
-        items.add("Schweden");
-        items.add("Schweiz");
-        items.add("Slowakei");
-        items.add("Spanien");
-        items.add("Südamerika");
-        items.add("Tschechien");
-        items.add("Ungarn");
-        items.add("Zypern");
+        items.add("Romania");
+        items.add("Slovakia");
+        items.add("South America");
+        items.add("Spain");
+        items.add("Sweden");
+        items.add("Switzerland");
 
         ObservableList<String> countries = FXCollections.observableArrayList(items);
         nationalityComboBox.getItems().addAll(countries);
 
-        nationalityComboBox.getSelectionModel().select(21);
+        nationalityComboBox.getSelectionModel().select(3);
 
         nationalityComboBox.setOnAction(event -> {
             String data = (String) nationalityComboBox.getSelectionModel().getSelectedItem();

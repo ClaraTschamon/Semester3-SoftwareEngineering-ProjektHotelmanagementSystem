@@ -56,19 +56,19 @@ public class WalkInViewController {
         try {
             useCaseController.save();
             MainApplication.getMainController().loadIntoContentArea("booking-overview");
-            MainApplication.getMainController().alert("Die Buchung wurde erfolgreich gespeichert.",
+            MainApplication.getMainController().alert("The booking was saved successfully.",
                     WarningType.CONFIRMATION);
         } catch (BookingIsInvalidException e) {
             System.out.println(e.getMessage());
-            MainApplication.getMainController().alert("Ungültige Buchung: Die Buchung konnte nicht gespeichert werden.",
+            MainApplication.getMainController().alert("Invalid booking: The booking could not be saved.",
                     WarningType.WARNING);
         } catch (CustomerIsInvalidException e) {
             System.out.println(e.getMessage());
-            MainApplication.getMainController().alert("Ungültiger Kunde: Der Kunde konnte nicht gespeichert werden.",
+            MainApplication.getMainController().alert("Invalid customer: The customer could not be saved.",
                     WarningType.WARNING);
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            MainApplication.getMainController().alert("Der Bildschirm konnte nicht gewechselt werden",
+            MainApplication.getMainController().alert("The screen could not be changed.",
                     WarningType.WARNING);
         }
     }
