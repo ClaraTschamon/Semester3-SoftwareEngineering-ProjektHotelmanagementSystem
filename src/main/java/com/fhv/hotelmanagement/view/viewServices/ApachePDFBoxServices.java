@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.view.viewServices;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
+import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import com.fhv.hotelmanagement.view.controller.viewController.CheckOutViewController;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -143,43 +144,54 @@ public class ApachePDFBoxServices {
                 cont.showText(line02);
                 cont.newLine();
 
+//                new PropertyValueFactory<BookedRoomCategoryDTO, String>("amount"));
+                //schrieben mi a i erklärs euch denn koa kommentar kann des erklära L.G Samuel Jäger
+                ArrayList<BookedRoomCategoryDTO> parsedArrayList = new ArrayList<>();
+
+                for(int i=0; i<bookingDTO.getBookedRoomCategories().size();i++){
+                    if(!parsedArrayList.contains(bookingDTO.getBookedRoomCategories().get(i))){
+                        parsedArrayList.add(i, bookingDTO.getBookedRoomCategories().get(i));
+                        System.out.println(parsedArrayList.get(i).getRoomCategory().getName());
+                    }
+                }
+
                 if(bookingDTO.getBookedRoomCategories().size()>0){
                     System.out.println(bookingDTO.getBookedRooms().size());
-                    String category0 = bookingDTO.getBookedRooms().get(0).getRoom().getCategory().getName();
-                    String pricePerNight0= String.valueOf(bookingDTO.getBookedRooms().get(0).getRoom().getCategory().getPricePerNight());
+                    String category0 = parsedArrayList.get(0).getRoomCategory().getName();
+                    String pricePerNight0= String.valueOf(parsedArrayList.get(0).getRoomCategory().getPricePerNight());
 
 
-                    String amount0 = String.valueOf(bookingDTO.getBookedRoomCategories().get(0).getAmount());
+                    String amount0 = String.valueOf(parsedArrayList.get(0).getAmount());
                     String line03 =amount0+dynamicStringDistance(20, amount0.length()) + category0 + dynamicStringDistance(20, category0.length()) + pricePerNight0+",-" + dynamicStringDistance(20, pricePerNight0.length()+2);
                     cont.showText(line03);
                     cont.newLine();
                 }
 
                 if(bookingDTO.getBookedRoomCategories().size()>1){
-                    String category1 = bookingDTO.getBookedRooms().get(1).getRoom().getCategory().getName();
-                    String pricePerNight1= String.valueOf(bookingDTO.getBookedRooms().get(1).getRoom().getCategory().getPricePerNight());
+                    String category1 = parsedArrayList.get(1).getRoomCategory().getName();
+                    String pricePerNight1= String.valueOf(parsedArrayList.get(1).getRoomCategory().getPricePerNight());
 
-                    String amount1 = String.valueOf(bookingDTO.getBookedRoomCategories().get(1).getAmount());
+                    String amount1 = String.valueOf(parsedArrayList.get(1).getAmount());
                     String line04 =amount1+dynamicStringDistance(20, amount1.length()) + category1 + dynamicStringDistance(20, category1.length()) + pricePerNight1+",-" + dynamicStringDistance(20, pricePerNight1.length()+2);
                     cont.showText(line04);
                     cont.newLine();
                 }
 
                 if(bookingDTO.getBookedRoomCategories().size()>2){
-                    String category2 = bookingDTO.getBookedRooms().get(2).getRoom().getCategory().getName();
-                    String pricePerNight2= String.valueOf(bookingDTO.getBookedRooms().get(2).getRoom().getCategory().getPricePerNight());
+                    String category2 = parsedArrayList.get(2).getRoomCategory().getName();
+                    String pricePerNight2= String.valueOf(parsedArrayList.get(2).getRoomCategory().getPricePerNight());
 
-                    String amount2 = String.valueOf(bookingDTO.getBookedRoomCategories().get(2).getAmount());
+                    String amount2 = String.valueOf(parsedArrayList.get(2).getAmount());
                     String line05 =amount2+dynamicStringDistance(20, amount2.length()) + category2 + dynamicStringDistance(20, category2.length()) + pricePerNight2+",-" + dynamicStringDistance(20, pricePerNight2.length()+2);
                     cont.showText(line05);
                     cont.newLine();
                 }
 
                 if(bookingDTO.getBookedRoomCategories().size()>3){
-                    String category3 = bookingDTO.getBookedRooms().get(3).getRoom().getCategory().getName();
-                    String pricePerNight3= String.valueOf(bookingDTO.getBookedRooms().get(3).getRoom().getCategory().getPricePerNight());
+                    String category3 = parsedArrayList.get(3).getRoomCategory().getName();
+                    String pricePerNight3= String.valueOf(parsedArrayList.get(3).getRoomCategory().getPricePerNight());
 
-                    String amount3 = String.valueOf(bookingDTO.getBookedRoomCategories().get(3).getAmount());
+                    String amount3 = String.valueOf(parsedArrayList.get(3).getAmount());
                     String line06 =amount3+dynamicStringDistance(20, amount3.length()) + category3 + dynamicStringDistance(20, category3.length()) + pricePerNight3+",-" + dynamicStringDistance(20, pricePerNight3.length()+2);
                     cont.showText(line06);
                     cont.newLine();
