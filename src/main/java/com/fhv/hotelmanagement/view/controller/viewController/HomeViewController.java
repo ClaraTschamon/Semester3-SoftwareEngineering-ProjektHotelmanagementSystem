@@ -10,8 +10,8 @@ import java.io.IOException;
 public class HomeViewController{
 
     @FXML
-    private void onHomeCheckInClicked(ActionEvent e) throws IOException {
-        HomeCheckInViewController homeCheckInViewController = new HomeCheckInViewController();
+    private void onWalkInClicked(ActionEvent e) throws IOException {
+        WalkInViewController walkInViewControllerController = new WalkInViewController();
     }
 
 

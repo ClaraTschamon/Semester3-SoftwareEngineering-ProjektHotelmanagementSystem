@@ -1,0 +1,4 @@
+package com.fhv.hotelmanagement.view.controller.useCaseController;
+
+public class UnnoetigerUseCaseController {
+}
