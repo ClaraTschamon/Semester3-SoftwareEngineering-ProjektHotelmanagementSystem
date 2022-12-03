@@ -10,11 +10,13 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -27,12 +29,25 @@ public class ApachePDFBoxServices {
 
         String DEST = "src/main/resources/com/fhv/hotelmanagement/pdf/Rechnung" + bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf";
 
+//        String watermarkSrc="src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/watermarkFinal.png";
+//        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/RealWatermark.png";
+//        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/evenBetterFinalVersionWatermark.png";
+        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/final20Plus.png";
+
+        String iconSrc = "src/main/resources/com/fhv/hotelmanagement/fxml/Bilder/SunwayohneHintergrund2.png";
+
         try (PDDocument doc = new PDDocument()) {
 
             PDPage myPage = new PDPage();
             doc.addPage(myPage);
 
+            PDImageXObject watermark = PDImageXObject.createFromFile(watermarkSrc, doc);
+            PDImageXObject icon = PDImageXObject.createFromFile(iconSrc, doc);
+
             try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
+                //cont.drawImage(watermark, 70,250);
+
+                cont.drawImage(icon, 10, 680);
                 cont.beginText();
                 cont.setFont(PDType1Font.COURIER, 12);
                 cont.setLeading(14.5f);
@@ -76,12 +91,55 @@ public class ApachePDFBoxServices {
                 }
 
                 //line in the pdf file
-                String line001 = "Kunde:" + bookingDTO.getCustomer().getFirstName() + " " + bookingDTO.getCustomer().getLastName();
+                String spaceIng = " ";
+                cont.showText(spaceIng);
+                cont.newLine();
+
+                String spaceIng1 = dynamicStringDistance(60, 0) + "Sunnway GmbH.";
+                cont.showText(spaceIng1);
+                cont.newLine();
+
+                String spaceIng2 = dynamicStringDistance(60, 0) + "TANNBERG 187";
+                cont.showText(spaceIng2);
+                cont.newLine();
+
+                String spaceIng3 = dynamicStringDistance(60, 0) + "6764 LECH AM BERG";
+                cont.showText(spaceIng3);
+                cont.newLine();
+
+                String spaceIng4 = dynamicStringDistance(60, 0) + "Tel.:+43 5583 2134-0";
+                cont.showText(spaceIng4);
+                cont.newLine();
+
+                String spaceIng5 = dynamicStringDistance(60, 0) + "sunnway@hotel.com";
+                cont.showText(spaceIng5);
+                cont.newLine();
+
+                String line00001 = "Guest:" + bookingDTO.getCustomer().getFirstName() + " " + bookingDTO.getCustomer().getLastName();
+                cont.showText(line00001);
+                cont.newLine();
+
+                String line0001 = bookingDTO.getCustomer().getAddress().getStreet() + " " + bookingDTO.getCustomer().getAddress().getHouseNumber();
+                cont.showText(line0001);
+                cont.newLine();
+
+                String line001 = bookingDTO.getCustomer().getAddress().getPostalCode() + " " + bookingDTO.getCustomer().getAddress().getCity();
                 cont.showText(line001);
+                cont.newLine();
+
+                String bookingNr = String.valueOf(bookingDTO.getNumber());
+                String bookingNumber = dynamicStringDistance(60, 0) + "Booking Number:" + " " +bookingNr;
+                cont.showText(bookingNumber);
+                cont.newLine();
+
+                String dateNow = LocalDate.now().toString();
+                String date = dynamicStringDistance(60, 0) +"Date"+" "+dateNow;
+                cont.showText(date);
+                cont.newLine();
                 cont.newLine();
                 cont.newLine();
 
-                String line01 = "Anzahl" + dynamicStringDistance(20, 6) + "Zimmer" + dynamicStringDistance(20, 6) + "Preis pro Nacht" + dynamicStringDistance(25, 15) + "Preis";
+                String line01 = "Amount" + dynamicStringDistance(20, 6) + "Room" + dynamicStringDistance(20, 4) + "Price per Night" + dynamicStringDistance(25, 15) + "Price";
                 cont.showText(line01);
                 cont.newLine();
 
@@ -92,55 +150,54 @@ public class ApachePDFBoxServices {
                 //schrieben mi a i erklärs euch denn koa kommentar kann des erklära LG. Samuel Jäger
                 ArrayList<BookedRoomCategoryDTO> parsedArrayList = new ArrayList<>();
 
-                for(int i=0; i<bookingDTO.getBookedRoomCategories().size();i++){
-                    if(!parsedArrayList.contains(bookingDTO.getBookedRoomCategories().get(i))){
+                for (int i = 0; i < bookingDTO.getBookedRoomCategories().size(); i++) {
+                    if (!parsedArrayList.contains(bookingDTO.getBookedRoomCategories().get(i))) {
                         parsedArrayList.add(i, bookingDTO.getBookedRoomCategories().get(i));
                     }
                 }
 
                 int allAmounts = 0;
 
-                if(bookingDTO.getBookedRoomCategories().size()>0){
+                if (bookingDTO.getBookedRoomCategories().size() > 0) {
                     String category0 = parsedArrayList.get(0).getRoomCategory().getName();
-                    String pricePerNight0= String.valueOf(parsedArrayList.get(0).getRoomCategory().getPricePerNight());
-
+                    String pricePerNight0 = String.valueOf(parsedArrayList.get(0).getRoomCategory().getPricePerNight());
 
                     String amount0 = String.valueOf(parsedArrayList.get(0).getAmount());
-                    allAmounts+=parsedArrayList.get(0).getAmount();
-                    String line03 =amount0+dynamicStringDistance(20, amount0.length()) + category0 + dynamicStringDistance(20, category0.length()) + pricePerNight0+",-" + dynamicStringDistance(20, pricePerNight0.length()+2);
+                    allAmounts += parsedArrayList.get(0).getAmount();
+                    String line03 = amount0 + dynamicStringDistance(20, amount0.length()) + category0 + dynamicStringDistance(20, category0.length()) + pricePerNight0 + ",-" + dynamicStringDistance(20, pricePerNight0.length() + 2);
                     cont.showText(line03);
                     cont.newLine();
                 }
 
-                if(bookingDTO.getBookedRoomCategories().size()>1){
+                if (bookingDTO.getBookedRoomCategories().size() > 1) {
                     String category1 = parsedArrayList.get(1).getRoomCategory().getName();
-                    String pricePerNight1= String.valueOf(parsedArrayList.get(1).getRoomCategory().getPricePerNight());
+                    String pricePerNight1 = String.valueOf(parsedArrayList.get(1).getRoomCategory().getPricePerNight());
 
                     String amount1 = String.valueOf(parsedArrayList.get(1).getAmount());
-                    allAmounts+=parsedArrayList.get(1).getAmount();
-                    String line04 =amount1+dynamicStringDistance(20, amount1.length()) + category1 + dynamicStringDistance(20, category1.length()) + pricePerNight1+",-" + dynamicStringDistance(20, pricePerNight1.length()+2);
+                    allAmounts += parsedArrayList.get(1).getAmount();
+                    String line04 = amount1 + dynamicStringDistance(20, amount1.length()) + category1 + dynamicStringDistance(20, category1.length()) + pricePerNight1 + ",-" + dynamicStringDistance(20, pricePerNight1.length() + 2);
                     cont.showText(line04);
                     cont.newLine();
                 }
 
-                if(bookingDTO.getBookedRoomCategories().size()>2){
+                if (bookingDTO.getBookedRoomCategories().size() > 2) {
                     String category2 = parsedArrayList.get(2).getRoomCategory().getName();
-                    String pricePerNight2= String.valueOf(parsedArrayList.get(2).getRoomCategory().getPricePerNight());
+                    String pricePerNight2 = String.valueOf(parsedArrayList.get(2).getRoomCategory().getPricePerNight());
 
                     String amount2 = String.valueOf(parsedArrayList.get(2).getAmount());
-                    allAmounts+=parsedArrayList.get(2).getAmount();
-                    String line05 =amount2+dynamicStringDistance(20, amount2.length()) + category2 + dynamicStringDistance(20, category2.length()) + pricePerNight2+",-" + dynamicStringDistance(20, pricePerNight2.length()+2);
+                    allAmounts += parsedArrayList.get(2).getAmount();
+                    String line05 = amount2 + dynamicStringDistance(20, amount2.length()) + category2 + dynamicStringDistance(20, category2.length()) + pricePerNight2 + ",-" + dynamicStringDistance(20, pricePerNight2.length() + 2);
                     cont.showText(line05);
                     cont.newLine();
                 }
 
-                if(bookingDTO.getBookedRoomCategories().size()>3){
+                if (bookingDTO.getBookedRoomCategories().size() > 3) {
                     String category3 = parsedArrayList.get(3).getRoomCategory().getName();
-                    String pricePerNight3= String.valueOf(parsedArrayList.get(3).getRoomCategory().getPricePerNight());
+                    String pricePerNight3 = String.valueOf(parsedArrayList.get(3).getRoomCategory().getPricePerNight());
 
                     String amount3 = String.valueOf(parsedArrayList.get(3).getAmount());
-                    allAmounts+=parsedArrayList.get(3).getAmount();
-                    String line06 =amount3+dynamicStringDistance(20, amount3.length()) + category3 + dynamicStringDistance(20, category3.length()) + pricePerNight3+",-" + dynamicStringDistance(20, pricePerNight3.length()+2);
+                    allAmounts += parsedArrayList.get(3).getAmount();
+                    String line06 = amount3 + dynamicStringDistance(20, amount3.length()) + category3 + dynamicStringDistance(20, category3.length()) + pricePerNight3 + ",-" + dynamicStringDistance(20, pricePerNight3.length() + 2);
                     cont.showText(line06);
                     cont.newLine();
                 }
@@ -150,8 +207,8 @@ public class ApachePDFBoxServices {
                 cont.newLine();
 
                 String night = String.valueOf(nights);
-                String stringAmounts= String.valueOf(allAmounts);
-                String line08 = stringAmounts + dynamicStringDistance(20, stringAmounts.length()) + "Nächte" + dynamicStringDistance(20, 6) + nights + "x" + dynamicStringDistance(25, night.length() + 1)+totalRoomPrice;
+                String stringAmounts = String.valueOf(allAmounts);
+                String line08 = stringAmounts + dynamicStringDistance(20, stringAmounts.length()) + "Nights" + dynamicStringDistance(20, 6) + nights + "x" + dynamicStringDistance(25, night.length() + 1) + totalRoomPrice;
                 cont.showText(line08);
                 cont.newLine();
 
@@ -166,7 +223,7 @@ public class ApachePDFBoxServices {
                 cont.showText(spacing2);
                 cont.newLine();
 
-                String line09 = "Zimmernummer" + dynamicStringDistance(20, 12) + "Package" + dynamicStringDistance(20, 7) + "Preis pro Nacht" + dynamicStringDistance(25, 15) + "Preis";
+                String line09 = "Roomnumber" + dynamicStringDistance(20, 10) + "Package" + dynamicStringDistance(20, 7) + "Price per Night" + dynamicStringDistance(25, 15) + "Prices";
                 cont.showText(line09);
                 cont.newLine();
 
@@ -174,14 +231,14 @@ public class ApachePDFBoxServices {
                 cont.showText(line10);
                 cont.newLine();
 
-                String packages= bookingDTO.getBoard().getName();
-                String packagecost= String.valueOf(bookingDTO.getBoard().getPricePerNight());
+                String packages = bookingDTO.getBoard().getName();
+                String packagecost = String.valueOf(bookingDTO.getBoard().getPricePerNight());
 
-                if(rooms.length()>10){
-                    rooms=dynamicRoomNumbers(rooms, 10);
+                if (rooms.length() > 10) {
+                    rooms = dynamicRoomNumbers(rooms, 10);
                 }
 
-                String line11 = rooms + "" + dynamicStringDistance(20, rooms.length()) + packages+ dynamicStringDistance(20, packages.length()) + packagecost+",-" + dynamicStringDistance(20,packagecost.length()+2 );
+                String line11 = rooms + "" + dynamicStringDistance(20, rooms.length()) + packages + dynamicStringDistance(20, packages.length()) + packagecost + ",-" + dynamicStringDistance(20, packagecost.length() + 2);
                 cont.showText(line11);
                 cont.newLine();
 
@@ -189,7 +246,7 @@ public class ApachePDFBoxServices {
                 cont.showText(line15);
                 cont.newLine();
 
-                String line16 = dynamicStringDistance(20, 0) + "Nächte" + dynamicStringDistance(20, 6) + nights + "x" + dynamicStringDistance(25, night.length()+1)+totalBoardPrice;
+                String line16 = dynamicStringDistance(20, 0) + "Nights" + dynamicStringDistance(20, 6) + nights + "x" + dynamicStringDistance(25, night.length() + 1) + totalBoardPrice;
                 cont.showText(line16);
                 cont.newLine();
 
@@ -197,11 +254,11 @@ public class ApachePDFBoxServices {
                 cont.showText(line17);
                 cont.newLine();
 
-                String line18 = dynamicStringDistance(40, 0) + "Summe für Zimmer:" + dynamicStringDistance(25, 17) + totalRoomPrice;
+                String line18 = dynamicStringDistance(40, 0) + "Total Room Price:" + dynamicStringDistance(25, 17) + totalRoomPrice;
                 cont.showText(line18);
                 cont.newLine();
 
-                String line19 = dynamicStringDistance(40, 0) + "Summe für Package:" + dynamicStringDistance(25, 18) + totalBoardPrice;
+                String line19 = dynamicStringDistance(40, 0) + "Total Board Price:" + dynamicStringDistance(25, 18) + totalBoardPrice;
                 cont.showText(line19);
                 cont.newLine();
 
@@ -209,15 +266,15 @@ public class ApachePDFBoxServices {
                 cont.showText(spacing3);
                 cont.newLine();
 
-                String line20 = dynamicStringDistance(40, 0) + "Gesamtsumme (Netto):" + dynamicStringDistance(25, 20) + totalSumNet;
+                String line20 = dynamicStringDistance(40, 0) + "Total Sum (Net):" + dynamicStringDistance(25, 16) + totalSumNet;
                 cont.showText(line20);
                 cont.newLine();
 
-                String line21 = dynamicStringDistance(40, 0) + "+20% MwSt:" + dynamicStringDistance(25, 10) + salesTax.setScale(2);
+                String line21 = dynamicStringDistance(40, 0) + "+20% VAT:" + dynamicStringDistance(25, 9) + salesTax.setScale(2);
                 cont.showText(line21);
                 cont.newLine();
 
-                String line22 = dynamicStringDistance(40, 0) + "Ortstaxe:" + dynamicStringDistance(25, 9) + touristTax.setScale(2);
+                String line22 = dynamicStringDistance(40, 0) + "Tourist Tax:" + dynamicStringDistance(25, 12) + touristTax.setScale(2);
                 cont.showText(line22);
                 cont.newLine();
 
@@ -225,7 +282,7 @@ public class ApachePDFBoxServices {
                 cont.showText(spacing4);
                 cont.newLine();
 
-                String line23 = dynamicStringDistance(40, 0) + "Gesamtsumme (Brutto):" + dynamicStringDistance(25, 21) + totalSumGross.setScale(2);
+                String line23 = dynamicStringDistance(40, 0) + "Total Sum (Gross):" + dynamicStringDistance(25, 18) + totalSumGross.setScale(2);
                 cont.showText(line23);
                 cont.newLine();
                 cont.endText();
@@ -245,7 +302,7 @@ public class ApachePDFBoxServices {
         StringBuilder dynamicDistance = new StringBuilder();
         int addEmptySpace = minDistanceLength - wordLength;
 
-        if(!(minDistanceLength <0)) {
+        if (!(minDistanceLength < 0)) {
             for (int i = 0; i < addEmptySpace; i++) {
                 dynamicDistance.append(" ");
             }
@@ -253,17 +310,17 @@ public class ApachePDFBoxServices {
         return dynamicDistance;
     }
 
-    public StringBuilder dynamicRoomNumbers (StringBuilder roomnumbers, int idealLength){
+    public StringBuilder dynamicRoomNumbers(StringBuilder roomnumbers, int idealLength) {
         StringBuilder dynamicRoomNumbers = new StringBuilder();
 
-        for (int i =0; i<idealLength;i++){
-            if(i+4==idealLength){
+        for (int i = 0; i < idealLength; i++) {
+            if (i + 4 == idealLength) {
                 dynamicRoomNumbers.append("...");
                 break;
             }
             dynamicRoomNumbers.append(roomnumbers.charAt(i));
         }
-        roomnumbers= (dynamicRoomNumbers);
+        roomnumbers = (dynamicRoomNumbers);
         return roomnumbers;
     }
 }
