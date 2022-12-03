@@ -71,12 +71,12 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <BarChart fx:id="freeRoomsBarChart" layoutX="33.0" layoutY="368.0" prefHeight="272.0" prefWidth="453.0" styleClass="barchart" stylesheets="@css.css">
+            <BarChart fx:id="freeRoomsBarChart" layoutX="33.0" layoutY="368.0" prefHeight="272.0" prefWidth="453.0" styleClass="barchart" stylesheets="@css.css" title="Room Occupancy">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis fx:id="yAxis" side="LEFT" />
+                <NumberAxis fx:id="yAxis" autoRanging="false" minorTickCount="2" side="LEFT" tickLabelGap="2.0" tickUnit="2.0" upperBound="10.0" />
               </yAxis>
             </BarChart>
             <TableView fx:id="checkOutTodayTableView" layoutX="523.0" layoutY="398.0" prefHeight="200.0" prefWidth="349.0">
