@@ -10,38 +10,16 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 public class HomeCheckInViewController {
-    private UnnoetigerUseCaseController useCaseController;
+    private HomeViewController viewController;
 
-  //  @FXML
-  //  private void onWalkInClicked(ActionEvent e) throws IOException {
-  //      WalkInViewController walkInViewControllerController = new WalkInViewController();
-  //  }
-
-    protected UnnoetigerUseCaseController getUseCaseController() {
-        return useCaseController;
+    @FXML
+    private void onWalkInClicked(ActionEvent e) throws IOException {
+        WalkInViewController walkInViewControllerController = new WalkInViewController();
     }
 
-    public HomeCheckInViewController() {
-        try {
-            useCaseController = new UnnoetigerUseCaseController();
-            loader();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void loader() throws IOException {
-        FXMLLoader homecheckinloader = new FXMLLoader(getClass().getResource("fxml/home-Check-In.fxml"));
-        HomeCheckInViewController homeCheckInViewController = homecheckinloader.getController();
-        HomeCheckInViewController.setController(this);
-
-
-    }
-
-    private static void setController(HomeCheckInViewController homeCheckInViewController) {
-
-    }
-
+    /*public void setController(HomeViewController viewController) {
+        this.viewController = viewController;
+    }*/
 
 }
 
