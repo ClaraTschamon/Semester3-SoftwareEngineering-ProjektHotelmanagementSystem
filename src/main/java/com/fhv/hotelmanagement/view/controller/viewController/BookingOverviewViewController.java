@@ -1,7 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -14,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,7 +47,7 @@ public class BookingOverviewViewController implements Initializable {
     @FXML
     private TableColumn<BookingViewBean, LocalDate> departureDateCol;
     @FXML
-    public TableColumn<BookingViewBean, String> stateCol;
+    public TableColumn<BookingViewBean, Button> stateCol;
     @FXML
     private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrCol;
     @FXML
@@ -89,16 +87,21 @@ public class BookingOverviewViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //hide weekNumbers in DatePicker
         fromDateDatePicker.setShowWeekNumbers(false);
         toDateDatePicker.setShowWeekNumbers(false);
+        //set default Value on DatePicker
         fromDateDatePicker.setValue(LocalDate.now());
         toDateDatePicker.setValue(LocalDate.now().plusDays(1));
+        //disable DatePicker on default because default state is "checked-in"
         fromDateDatePicker.setDisable(true);
         toDateDatePicker.setDisable(true);
 
+        //default state is set in .fxml to: 'checked-in'
         String state = stateComboBox.getSelectionModel().getSelectedItem().toString();
         fillTable(state);
 
+        //listener auf stateComboBox. Wenn ein anderer State ausgewählt wird, muss die Tabelle aktualisiert werden
         stateComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -108,6 +111,14 @@ public class BookingOverviewViewController implements Initializable {
         });
     }
 
+
+    /**
+     * Funktion befüllt die Tabelle mit Daten. Wenn in ComboBox checked-in ausgewählt ist,
+     * werden nur die eingecheckten Buchungen angezeigt usw.
+     * Um Bookings in Tabelle anzeigen zu können musste die Zwischenklasse "BookingViewBean"
+     * erstellt werden, die die nötigen Informationen der Booking schön aufbereitet.
+     * @param state is the state of the booking
+     */
     public void fillTable(String state){
         ObservableList<BookingDTO> bookingDTOs = FXCollections.observableArrayList();
         if(state.equals("all")){
@@ -129,6 +140,14 @@ public class BookingOverviewViewController implements Initializable {
         comparator = comparator.reversed();
         allBookings.sort(comparator);
 
+        //greift auf Attribute in BookingViewBean zu
+        bookingNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Long>("bookingNumber"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
+        arrivalDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("arrivalDate"));
+        departureDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("departureDate"));
+        stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("imageButton"));
+        roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
+
         if(allBookings.size() == 0){
             bookingTableView.setPlaceholder(new Label("No bookings"));
             bookingTableView.getItems().clear();
@@ -136,14 +155,8 @@ public class BookingOverviewViewController implements Initializable {
             bookingTableView.setItems(allBookings);
         }
 
-        bookingNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Long>("bookingNumber"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
-        arrivalDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("arrivalDate"));
-        departureDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("departureDate"));
-        //stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("symbol"));
-        roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
-
         //TODO: Kopfzeile ausblenden
+        //TODO: mit bookings aktualisieren nach walk-in bei rausholen aus datenbank klappt es noch nicht
         /*
         //hide header //Fehler: header = null
         Pane header = (Pane) bookingTableView.lookup("TableHeaderRow");
@@ -184,6 +197,9 @@ public class BookingOverviewViewController implements Initializable {
         });
     }
 
+    /**
+     * füllt die platzhaltertexte auf der rechten Seite mit den informationen aus dem bookingDTO
+     */
     private void setTexts(BookingDTO bookingDTO){
         CustomerDTO customerDTO = bookingDTO.getCustomer();
         AddressDTO addressDTO = customerDTO.getAddress();
@@ -219,6 +235,9 @@ public class BookingOverviewViewController implements Initializable {
         phPaymentMethodText.setText(bookingDTO.getPaymentMethod());
     }
 
+    /**
+     * wenn der State "all between" angezeigt wird, dürfen die DatePicker nichtmehr ausgegraut sein
+     */
     @FXML
     public void stateComboBoxAction(ActionEvent actionEvent) {
         if(stateComboBox.getValue().equals("all between")){
@@ -230,6 +249,9 @@ public class BookingOverviewViewController implements Initializable {
         }
     }
 
+    /**
+     * wenn im DatePicker ein Value verändert wird, muss die Tabelle neu befüllt werden mit den richtigen Daten
+     */
     @FXML
     public void onFromDateDatePickerClicked(ActionEvent actionEvent) {
         if(toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null){
@@ -244,6 +266,10 @@ public class BookingOverviewViewController implements Initializable {
         }
     }
 
+    /**
+     * Wenn check-out geklickt wird, wird die ausgewählte buchung an den checkOutUseCaseController
+     * weiter gegeben. Dann wird der CheckOut geladen.
+     */
     @FXML
     public void onCheckedOutClicked(ActionEvent actionEvent) throws IOException {
         CheckOutViewController checkOutViewController = new CheckOutViewController();
@@ -253,6 +279,5 @@ public class BookingOverviewViewController implements Initializable {
             checkOutViewController.getUseCaseController().setBooking(bookingDTO);
             checkOutViewController.loadCheckOut1();
         }
-
     }
 }

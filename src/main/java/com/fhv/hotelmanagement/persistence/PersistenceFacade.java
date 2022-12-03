@@ -2,6 +2,7 @@
 package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
+import com.fhv.hotelmanagement.domain.factory.CustomerFactory;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 
 import java.util.*;
@@ -73,11 +74,6 @@ public class PersistenceFacade{
     }
 
     public static void main(String[] args) {
-        System.out.println(BookingDataMapper.getCurrentBookings());
 
-        LocalDate minDate = LocalDate.now();
-        LocalDate maxDate = LocalDate.now().plusDays(2);
-
-        System.out.println(BookingDataMapper.getAllBookingsBetween(minDate, maxDate));
     }
 }
