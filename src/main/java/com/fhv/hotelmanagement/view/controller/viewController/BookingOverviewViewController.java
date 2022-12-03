@@ -7,8 +7,6 @@ import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.view.controller.useCaseController.BookingOverviewUseCaseController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import net.bytebuddy.asm.Advice;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -79,11 +79,8 @@ public class BookingOverviewViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //TODO: Tabelle verwenden und nicht liste
-
-
-
+        fromDateDatePicker.setShowWeekNumbers(false);
+        toDateDatePicker.setShowWeekNumbers(false);
 
         ObservableList<BookingDTO> allBookingDTOs = FXCollections.observableArrayList(DomainController.getAllBookings());
         ArrayList<BookingViewBean> allBookingViewBeans = new ArrayList<>();
@@ -100,6 +97,7 @@ public class BookingOverviewViewController implements Initializable {
         //stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("symbol"));
         roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
 
+        //TODO: Kopfzeile ausblenden
         /*
         //hide header //Fehler: header = null
         Pane header = (Pane) bookingTableView.lookup("TableHeaderRow");
@@ -108,8 +106,6 @@ public class BookingOverviewViewController implements Initializable {
         bookingTableView.autosize();
 
          */
-
-
 
         if(bookingTableView.getSelectionModel().getTableView().getColumns().get(0) != null){
             bookingTableView.getSelectionModel().select(0); //per default erstes Item auswählen
@@ -124,31 +120,20 @@ public class BookingOverviewViewController implements Initializable {
         });
 
 
-
-        /*
-        for(BookingDTO bookingDTO : allBookings){
-            bookingsListView.getItems().add(bookingDTO);
-        }
-
-        bookingsListView.getSelectionModel().select(0); //per default erstes Item auswählen
-        System.out.println("selected Item = " + bookingsListView.getSelectionModel().getSelectedItem());
-        setTexts(bookingsListView.getSelectionModel().getSelectedItem());
-
-        bookingsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            BookingDTO selectedItem = (BookingDTO) bookingsListView.getSelectionModel().getSelectedItem();
-            setTexts(selectedItem);
-        });
-
-         */
     }
 
     private void setTexts(BookingDTO bookingDTO){
         CustomerDTO customerDTO = bookingDTO.getCustomer();
         AddressDTO addressDTO = customerDTO.getAddress();
         phBookingNumberText.setText(String.valueOf(bookingDTO.getNumber()));
-        //TODO: format Date
-        arrivalDateText.setText(bookingDTO.getArrivalDate().toString());
-        departureDateText.setText(bookingDTO.getDepartureDate().toString());
+
+        LocalDate arrivalDate = bookingDTO.getArrivalDate();
+        String formattedArrivalDate = arrivalDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        arrivalDateText.setText(formattedArrivalDate);
+
+        LocalDate departureDate = bookingDTO.getDepartureDate();
+        String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        departureDateText.setText(formattedDepartureDate);
 
         if(bookingDTO.getCheckInDatetime() == null){
             phStateText.setText("booked");

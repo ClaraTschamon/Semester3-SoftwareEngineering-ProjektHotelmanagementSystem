@@ -63,11 +63,11 @@
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <TableView fx:id="table1" layoutX="103.0" layoutY="95.0" prefHeight="200.0" prefWidth="746.0">
+            <TableView fx:id="bookedRoomsTable" layoutX="103.0" layoutY="95.0" prefHeight="200.0" prefWidth="746.0">
               <columns>
-                  <TableColumn fx:id="amountColTable1" prefWidth="85.04084777832031" style="-fx-alignment: CENTER;" text="Anzahl" />
-                  <TableColumn fx:id="categoryColTable1" minWidth="0.0" prefWidth="445.0" style="-fx-alignment: CENTER;" text="Kategorie" />
-                  <TableColumn fx:id="pricePerNightColTable1" prefWidth="214.5" style="-fx-alignment: CENTER;" text="Preis pro Nacht" />
+                  <TableColumn fx:id="amountColTable" prefWidth="85.04084777832031" style="-fx-alignment: CENTER;" text="Anzahl" />
+                  <TableColumn fx:id="categoryColTable" minWidth="0.0" prefWidth="445.0" style="-fx-alignment: CENTER;" text="Kategorie" />
+                  <TableColumn fx:id="pricePerNightColTable" prefWidth="214.5" style="-fx-alignment: CENTER;" text="Preis pro Nacht" />
               </columns>
             </TableView>
             <Text fx:id="nightsText" layoutX="103.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nächte: " />

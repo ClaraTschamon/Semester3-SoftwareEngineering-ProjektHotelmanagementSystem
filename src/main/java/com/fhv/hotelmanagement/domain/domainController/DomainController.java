@@ -2,6 +2,7 @@
 package com.fhv.hotelmanagement.domain.domainController;
 
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
+import com.fhv.hotelmanagement.domain.domainModel.Customer;
 import com.fhv.hotelmanagement.domain.exceptions.*;
 import com.fhv.hotelmanagement.domain.factory.*;
 import com.fhv.hotelmanagement.view.DTOs.*;
@@ -29,8 +30,20 @@ public class DomainController {
         return BookingFactory.getAllBookings();
     }
 
+    public static ArrayList<BookingDTO> getAllBookingsBetween(LocalDate minDate, LocalDate maxDate){
+        return BookingFactory.getAllBookingsBetween(minDate, maxDate);
+    }
+
+    public static ArrayList<BookingDTO> getCurrentBookings(){
+        return BookingFactory.getCurrentBookings();
+    }
+
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {
         return BookingFactory.saveBooking(bookingDTO);
+    }
+
+    public static ArrayList<CustomerDTO> getSavedCustomers() {
+        return CustomerFactory.getSavedCustomers();
     }
 
     public static Long saveCustomer(CustomerDTO customerDTO) throws CustomerIsInvalidException {
