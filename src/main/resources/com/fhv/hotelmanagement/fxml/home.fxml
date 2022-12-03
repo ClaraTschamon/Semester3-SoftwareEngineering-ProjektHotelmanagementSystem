@@ -50,14 +50,6 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <TableView layoutX="526.0" layoutY="194.0" prefHeight="200.0" prefWidth="410.0">
-              <columns>
-                <TableColumn prefWidth="149.0" />
-                <TableColumn text="frei" />
-                  <TableColumn prefWidth="84.0" text="besetzt" />
-                  <TableColumn prefWidth="96.0" text="erwartet" />
-              </columns>
-            </TableView>
             </children>
         </AnchorPane>
     </top>

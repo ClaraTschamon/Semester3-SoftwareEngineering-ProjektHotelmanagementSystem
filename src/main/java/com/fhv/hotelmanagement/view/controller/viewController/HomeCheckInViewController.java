@@ -1,33 +1,45 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.view.controller.useCaseController.BookingOverviewUseCaseController;
+import com.fhv.hotelmanagement.view.controller.useCaseController.CheckOutUseCaseController;
 import com.fhv.hotelmanagement.view.controller.useCaseController.UnnoetigerUseCaseController;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HomeCheckInViewController {
     private UnnoetigerUseCaseController useCaseController;
 
-    @FXML
-    private void onWalkInClicked(ActionEvent e) throws IOException {
-        WalkInViewController walkInViewControllerController = new WalkInViewController();
+  //  @FXML
+  //  private void onWalkInClicked(ActionEvent e) throws IOException {
+  //      WalkInViewController walkInViewControllerController = new WalkInViewController();
+  //  }
+
+    protected UnnoetigerUseCaseController getUseCaseController() {
+        return useCaseController;
     }
 
-    private void addRelease(Event event) throws IOException {
-        Popup popup = new Popup();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/home-Check-In.fxml"));
-        Parent parent = (Parent)loader.load();
-        HomeCheckInViewController controller = loader.getController();
-        popup.getContent().add(parent);
+    public HomeCheckInViewController() {
+        try {
+            useCaseController = new UnnoetigerUseCaseController();
+            loader();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void loader() throws IOException {
+        FXMLLoader homecheckinloader = new FXMLLoader(getClass().getResource("fxml/home-Check-In.fxml"));
+        HomeCheckInViewController homeCheckInViewController = homecheckinloader.getController();
+        HomeCheckInViewController.setController(this);
+
+
+    }
+
+    private static void setController(HomeCheckInViewController homeCheckInViewController) {
+
     }
 
 
