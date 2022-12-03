@@ -1,7 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.MainController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.beans.value.ChangeListener;
@@ -12,10 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
@@ -24,11 +24,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class WalkIn1ViewController implements Initializable {
 
@@ -60,6 +57,12 @@ public class WalkIn1ViewController implements Initializable {
     private ToggleGroup packageToggleGroup;
     @FXML
     private Spinner<Integer> amountGuestsSpinner;
+    @FXML
+    private Rectangle customerInfoRectangle;
+    @FXML
+    private Label checkInForLabel;
+    @FXML
+    private Label lastRoomsLabel;
     private CheckComboBox<RoomDTO> singleRoomDropDown;
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
@@ -68,6 +71,7 @@ public class WalkIn1ViewController implements Initializable {
     private RoomProvider roomProvider;
     private ArrayList<CustomerDTO> customers;
     private ListView<CustomerDTO> searchedCustomersListView;
+    private boolean searching;
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
@@ -291,6 +295,22 @@ public class WalkIn1ViewController implements Initializable {
         } else {
             amountGuestsSpinner.getValueFactory().setValue(1);
         }
+
+        setCustomerInfo();
+    }
+
+    private void setCustomerInfo() {
+        CustomerDTO customer = viewController.getUseCaseController().getCustomer();
+        if (customer != null && customer.getNumber() != null) {
+            checkInForLabel.setText("Check-In for: " + customer.getFirstName() + " " + customer.getLastName());
+            customerInfoRectangle.setVisible(true);
+            checkInForLabel.setVisible(true);
+            lastRoomsLabel.setVisible(false); // TODO fill former rooms
+        } else {
+            customerInfoRectangle.setVisible(false);
+            checkInForLabel.setVisible(false);
+            lastRoomsLabel.setVisible(false);
+        }
     }
 
     protected void saveData(){
@@ -379,6 +399,7 @@ public class WalkIn1ViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         customers = DomainController.getSavedCustomers();
         roomProvider = new RoomProvider();
+        searching = false;
 
         singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Single room"));
         doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Double room"));
@@ -462,7 +483,10 @@ public class WalkIn1ViewController implements Initializable {
                 searchedCustomersListViewChanged());
 
         searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
+            if (newValue) {
+                searching = true;
+            } else {
+                searching = false;
                 contentPane.getChildren().remove(searchedCustomersListView);
             }
         });
@@ -484,6 +508,10 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     private void searchDatabaseTextFieldChanged() {
+        if (!searching) {
+            return;
+        }
+
         String searchText = searchDatabaseTextField.getText().toLowerCase();
 
         if (!searchedCustomersListView.getSelectionModel().getSelectedItems().isEmpty()) {
@@ -496,7 +524,16 @@ public class WalkIn1ViewController implements Initializable {
         } else {
             ArrayList<CustomerDTO> searchedCustomers = new ArrayList<>();
             for (CustomerDTO c : customers) {
-                if (c.getFirstName().toLowerCase().contains(searchText) || c.getLastName().toLowerCase().contains(searchText)) {
+                String firstName = c.getFirstName().toLowerCase();
+                String lastName = c.getLastName().toLowerCase();
+                String fullName = firstName.concat(" ").concat(lastName);
+                String reversedFullName = lastName.concat(" ").concat(firstName);
+                if (
+                        firstName.contains(searchText) ||
+                        lastName.contains(searchText) ||
+                        fullName.contains(searchText) ||
+                        reversedFullName.contains(searchText)
+                ) {
                     searchedCustomers.add(c);
                 }
             }
@@ -516,12 +553,12 @@ public class WalkIn1ViewController implements Initializable {
     private void searchedCustomersListViewChanged() {
         CustomerDTO selectedCustomer = searchedCustomersListView.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
-            searchDatabaseTextField.setText(selectedCustomer.getLastName()); //funktioniert
-            //searchDatabaseTextField.setPromptText(selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
+            searching = false;
+            searchDatabaseTextField.setText(selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
             viewController.getUseCaseController().setCustomer(selectedCustomer);
+            contentPane.getChildren().remove(searchedCustomersListView);
+            departureDatePicker.requestFocus();
         }
-        contentPane.getChildren().remove(searchedCustomersListView);
-        departureDatePicker.requestFocus();
     }
 }
 

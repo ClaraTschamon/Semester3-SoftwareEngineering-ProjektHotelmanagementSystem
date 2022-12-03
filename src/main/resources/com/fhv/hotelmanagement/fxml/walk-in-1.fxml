@@ -7,17 +7,13 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.WalkIn1ViewController">
     <left>
         <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Search guest in guest file...">
-                    <opaqueInsets>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                    </opaqueInsets>
-                </TextField>
                 <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;">
                     <children>
                         <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walk-In ">
@@ -44,6 +40,11 @@
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
+                <TextField fx:id="searchDatabaseTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0" prefWidth="300.0" promptText="Search guest in guest file...">
+                    <opaqueInsets>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                    </opaqueInsets>
+                </TextField>
                 <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrival/Departure" wrappingWidth="234.994140625">
                     <font>
                         <Font name="System Bold" size="18.0" />
@@ -157,6 +158,17 @@
                         </ImageView>
                     </graphic>
                 </Button>
+            <Rectangle fx:id="customerInfoRectangle" arcHeight="5.0" arcWidth="5.0" fill="#f4f4f4" height="60.0" layoutX="60.0" layoutY="570.0" stroke="#c1c1c1" strokeType="INSIDE" width="300.0" />
+            <Label fx:id="checkInForLabel" layoutX="70.0" layoutY="579.0" text="Check-In for:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lastRoomsLabel" layoutX="70.0" layoutY="602.0" text="Last room(s):">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </left>
