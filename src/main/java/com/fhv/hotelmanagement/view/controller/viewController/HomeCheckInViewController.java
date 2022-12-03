@@ -1,7 +1,5 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.view.controller.useCaseController.CheckOutUseCaseController;
 import com.fhv.hotelmanagement.view.controller.useCaseController.UnnoetigerUseCaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,10 +10,11 @@ import java.io.IOException;
 public class HomeCheckInViewController {
     private UnnoetigerUseCaseController useCaseController;
 
-  //  @FXML
-  //  private void onWalkInClicked(ActionEvent e) throws IOException {
-  //      WalkInViewController walkInViewControllerController = new WalkInViewController();
-  //  }
+
+    @FXML
+    private void onWalkInClicked(ActionEvent e) throws IOException {
+        WalkInViewController walkInViewControllerController = new WalkInViewController();
+    }
 
     protected UnnoetigerUseCaseController getUseCaseController() {
         return useCaseController;
@@ -31,15 +30,12 @@ public class HomeCheckInViewController {
     }
 
     public void loader() throws IOException {
-        FXMLLoader homecheckinloader = new FXMLLoader(getClass().getResource("fxml/home-Check-In.fxml"));
+        FXMLLoader homecheckinloader = new FXMLLoader(getClass().getResource("home-Check-In"));
         HomeCheckInViewController homeCheckInViewController = homecheckinloader.getController();
         HomeCheckInViewController.setController(this);
-
-
     }
 
     private static void setController(HomeCheckInViewController homeCheckInViewController) {
-
     }
 
 
