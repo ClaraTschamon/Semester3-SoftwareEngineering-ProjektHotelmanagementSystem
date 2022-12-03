@@ -95,23 +95,23 @@ public class ApachePDFBoxServices {
                 cont.showText(spaceIng);
                 cont.newLine();
 
-                String spaceIng1 = dynamicStringDistance(60, 0) + "Sunnway GmbH.";
+                String spaceIng1 = dynamicStringDistance(55, 0) + "Sunnway GmbH.";
                 cont.showText(spaceIng1);
                 cont.newLine();
 
-                String spaceIng2 = dynamicStringDistance(60, 0) + "TANNBERG 187";
+                String spaceIng2 = dynamicStringDistance(55, 0) + "TANNBERG 187";
                 cont.showText(spaceIng2);
                 cont.newLine();
 
-                String spaceIng3 = dynamicStringDistance(60, 0) + "6764 LECH AM BERG";
+                String spaceIng3 = dynamicStringDistance(55, 0) + "6764 LECH AM BERG";
                 cont.showText(spaceIng3);
                 cont.newLine();
 
-                String spaceIng4 = dynamicStringDistance(60, 0) + "Tel.:+43 5583 2134-0";
+                String spaceIng4 = dynamicStringDistance(55, 0) + "Tel.:+43 5583 2134-0";
                 cont.showText(spaceIng4);
                 cont.newLine();
 
-                String spaceIng5 = dynamicStringDistance(60, 0) + "sunnway@hotel.com";
+                String spaceIng5 = dynamicStringDistance(55, 0) + "sunnway@hotel.com";
                 cont.showText(spaceIng5);
                 cont.newLine();
 
@@ -128,12 +128,12 @@ public class ApachePDFBoxServices {
                 cont.newLine();
 
                 String bookingNr = String.valueOf(bookingDTO.getNumber());
-                String bookingNumber = dynamicStringDistance(60, 0) + "Booking Number:" + " " +bookingNr;
+                String bookingNumber = dynamicStringDistance(55, 0) + "Booking Number:" + " " +bookingNr;
                 cont.showText(bookingNumber);
                 cont.newLine();
 
                 String dateNow = LocalDate.now().toString();
-                String date = dynamicStringDistance(60, 0) +"Date"+" "+dateNow;
+                String date = dynamicStringDistance(55, 0) +"Date"+" "+dateNow;
                 cont.showText(date);
                 cont.newLine();
                 cont.newLine();
