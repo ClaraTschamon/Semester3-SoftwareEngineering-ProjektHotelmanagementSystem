@@ -49,7 +49,7 @@ public class BookingOverviewViewController implements Initializable {
     @FXML
     private TableColumn<BookingViewBean, LocalDate> departureDateCol;
     @FXML
-    public TableColumn<BookingViewBean, String> stateCol;
+    public TableColumn<BookingViewBean, Button> stateCol;
     @FXML
     private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrCol;
     @FXML
@@ -129,6 +129,13 @@ public class BookingOverviewViewController implements Initializable {
         comparator = comparator.reversed();
         allBookings.sort(comparator);
 
+        bookingNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Long>("bookingNumber"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
+        arrivalDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("arrivalDate"));
+        departureDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("departureDate"));
+        stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("imageButton"));
+        roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
+
         if(allBookings.size() == 0){
             bookingTableView.setPlaceholder(new Label("No bookings"));
             bookingTableView.getItems().clear();
@@ -136,14 +143,8 @@ public class BookingOverviewViewController implements Initializable {
             bookingTableView.setItems(allBookings);
         }
 
-        bookingNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Long>("bookingNumber"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
-        arrivalDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("arrivalDate"));
-        departureDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("departureDate"));
-        //stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("symbol"));
-        roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
-
         //TODO: Kopfzeile ausblenden
+        //TODO: mit bookings aktualisieren nach walk-in bei rausholen aus datenbank klappt es noch nicht
         /*
         //hide header //Fehler: header = null
         Pane header = (Pane) bookingTableView.lookup("TableHeaderRow");
@@ -253,6 +254,5 @@ public class BookingOverviewViewController implements Initializable {
             checkOutViewController.getUseCaseController().setBooking(bookingDTO);
             checkOutViewController.loadCheckOut1();
         }
-
     }
 }
