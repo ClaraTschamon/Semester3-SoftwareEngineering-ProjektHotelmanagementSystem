@@ -144,8 +144,11 @@ public class BookingOverviewViewController implements Initializable {
         bookingNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Long>("bookingNumber"));
         nameCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
         arrivalDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("arrivalDate"));
+        arrivalDateCol.setStyle("-fx-alignment: CENTER");
         departureDateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, LocalDate>("departureDate"));
+        departureDateCol.setStyle("-fx-alignment: CENTER");
         stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("imageButton"));
+        stateCol.setStyle("-fx-alignment: CENTER");
         roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
 
         if(allBookings.size() == 0){
@@ -154,17 +157,6 @@ public class BookingOverviewViewController implements Initializable {
         }else{
             bookingTableView.setItems(allBookings);
         }
-
-        //TODO: Kopfzeile ausblenden
-        //TODO: mit bookings aktualisieren nach walk-in bei rausholen aus datenbank klappt es noch nicht
-        /*
-        //hide header //Fehler: header = null
-        Pane header = (Pane) bookingTableView.lookup("TableHeaderRow");
-        header.setVisible(false);
-        bookingTableView.setLayoutY(-header.getHeight());
-        bookingTableView.autosize();
-
-         */
 
         if(bookingTableView.getSelectionModel().getTableView().getColumns().get(0) != null){
             bookingTableView.getSelectionModel().select(0); //per default erstes Item auswählen

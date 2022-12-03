@@ -2,6 +2,7 @@
 package com.fhv.hotelmanagement.domain.factory;
 
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
+import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 
@@ -9,7 +10,28 @@ import java.util.ArrayList;
 
 public class BookedRoomCategoryFactory {
 
-    protected static BookedRoomCategoryDTO createRoomCategoryDTO(BookedRoomCategory bookedRoomCategory) {
+    private static ArrayList<BookedRoomCategory> bookedRoomCategories;
+
+    public static ArrayList<BookedRoomCategoryDTO> getAllBookedRoomCategoriesWithoutBookings(){
+        if(bookedRoomCategories == null){
+            refreshBookedRoomCategories();
+        }
+
+        ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOs = new ArrayList<>();
+        for(BookedRoomCategory c : bookedRoomCategories){
+            bookedRoomCategoryDTOs.add(createBookedRoomCategoryDTO(c));
+        }
+        return bookedRoomCategoryDTOs;
+    }
+
+    private static void refreshBookedRoomCategories(){
+        bookedRoomCategories = new ArrayList<BookedRoomCategory>();
+        for(BookedRoomCategory c : PersistenceFacade.getAllBookedRoomCategories()){
+            bookedRoomCategories.add(c);
+        }
+    }
+
+    protected static BookedRoomCategoryDTO createBookedRoomCategoryDTO(BookedRoomCategory bookedRoomCategory) {
         return new BookedRoomCategoryDTO(BookingFactory.createBookingDTO(bookedRoomCategory.getBooking(), false, null),
                 RoomCategoryFactory.createRoomCategoryDTO(bookedRoomCategory.getRoomCategory()), bookedRoomCategory.getPricePerNight(),
                 bookedRoomCategory.getAmount());

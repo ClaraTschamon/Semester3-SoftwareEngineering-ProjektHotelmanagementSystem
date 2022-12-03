@@ -1,6 +1,7 @@
 package com.fhv.hotelmanagement;
 
 import com.fhv.hotelmanagement.view.controller.viewController.BookingOverviewViewController;
+import com.fhv.hotelmanagement.view.controller.viewController.HomeViewController;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -119,7 +120,7 @@ public class MainController implements Initializable {
 
     public void onHomeClicked(ActionEvent actionEvent) {
         try{
-            BookingOverviewViewController bookingOverviewViewController = new BookingOverviewViewController();
+            HomeViewController homeViewController = new HomeViewController();
             loadIntoContentArea("home");
         }catch (IOException e){
             System.out.println(e.getMessage());

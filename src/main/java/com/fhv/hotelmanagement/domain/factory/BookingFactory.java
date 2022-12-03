@@ -90,7 +90,7 @@ public class BookingFactory {
                 bookedRoomCategoryDTOS, bookedRoomDTOS);
         if (includeArrays) {
             for (BookedRoomCategory bookedRoomCategory : booking.getBookedRoomCategories()) {
-                bookedRoomCategoryDTOS.add(BookedRoomCategoryFactory.createRoomCategoryDTO(bookedRoomCategory));
+                bookedRoomCategoryDTOS.add(BookedRoomCategoryFactory.createBookedRoomCategoryDTO(bookedRoomCategory));
             }
             for (BookedRoom bookedRoom : booking.getBookedRooms()) {
                 bookedRoomDTOS.add(BookedRoomFactory.createBookedRoomDTO(bookedRoom, false));

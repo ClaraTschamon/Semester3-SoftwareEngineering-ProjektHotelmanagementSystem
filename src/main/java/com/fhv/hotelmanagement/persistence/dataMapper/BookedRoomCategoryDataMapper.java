@@ -1,10 +1,13 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class BookedRoomCategoryDataMapper{
@@ -25,6 +28,15 @@ public class BookedRoomCategoryDataMapper{
             return Optional.of(bookedRoomCategory);
         }
         return Optional.empty();
+    }
+
+    public static ArrayList<BookedRoomCategory> getAll(){
+        ArrayList<BookedRoomCategoryEntity> entities = (ArrayList<BookedRoomCategoryEntity>) PersistenceManager.instance().entityManager.createQuery("from BookedRoomCategoryEntity").getResultList();
+        ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
+        for(BookedRoomCategoryEntity e : entities){
+            bookedRoomCategories.add(createBookedRoomCategory(e, BookingDataMapper.createBooking(e.getBooking())));
+        }
+        return bookedRoomCategories;
     }
 
     //create

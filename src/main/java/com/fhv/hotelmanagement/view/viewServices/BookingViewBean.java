@@ -1,7 +1,5 @@
 package com.fhv.hotelmanagement.view.viewServices;
 
-
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import javafx.geometry.Insets;
@@ -14,9 +12,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BookingViewBean {
-
-
-
     private BookingDTO bookingDTO;
     private long bookingNumber;
     private String lastName;

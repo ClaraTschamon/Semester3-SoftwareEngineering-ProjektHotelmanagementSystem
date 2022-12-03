@@ -211,7 +211,7 @@
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <TableView fx:id="bookingTableView" layoutX="15.0" layoutY="88.0" prefHeight="496.0" prefWidth="537.0">
+                <TableView fx:id="bookingTableView" layoutX="15.0" layoutY="88.0" prefHeight="496.0" prefWidth="537.0" styleClass="noheader" stylesheets="@css.css">
                     <columns>
                         <TableColumn fx:id="bookingNrCol" prefWidth="43.99996840953827" />
                         <TableColumn fx:id="nameCol" prefWidth="115.99997329711914" />

@@ -5,16 +5,16 @@ import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.services.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.io.IOException;
@@ -192,10 +192,15 @@ public class WalkIn2ViewController implements Initializable {
             TextFunction.setEventHandler(lastNameTextField);
         }
 
+        /*
         if (nationalityComboBox.getSelectionModel().getSelectedItem() != null) {
              nationalityIsValid = true;
-        } else {
-            nationalityIsValid = false;
+        }*/
+
+        if (!nationalityComboBox.getSelectionModel().getSelectedItem().equals("")) {
+            nationalityIsValid = true;
+        }else{
+            nationalityComboBox.setStyle("-fx-border-color: red");
         }
 
         if (!StringValidator.checkString(emailTextField.getText())) {
@@ -320,13 +325,15 @@ public class WalkIn2ViewController implements Initializable {
         nationalityComboBox.getSelectionModel().select(3);
 
 
-        /* //funktioniert noch nicht
-        nationalityComboBox.setOnAction(event -> {
-            nationalityComboBox.getSelectionModel().select(3);
-            if(nationalityComboBox.getSelectionModel().getSelectedItem() == null){
-                nationalityComboBox.getSelectionModel().select(3);
-
+        nationalityComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                /*
+                if(nationalityComboBox.getSelectionModel().getSelectedItem().equals("")){
+                    nationalityComboBox.getSelectionModel().select(oldValue);
+                }*/
+                nationalityComboBox.setStyle("-fx-border-color: none");
             }
-        });*/
+        });
     }
 }

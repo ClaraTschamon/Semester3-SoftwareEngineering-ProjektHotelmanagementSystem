@@ -101,7 +101,7 @@ public class StringValidator {
     }
 
     public static boolean checkStreet(String street) {
-        String regexPattern = "[0-9a-zA-Z-/ß ]*";
+        String regexPattern = "[0-9a-zA-Z-/ß. ]*";
         return checkRegex(street, regexPattern);
     }
 

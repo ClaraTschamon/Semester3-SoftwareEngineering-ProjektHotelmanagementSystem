@@ -1,8 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.domainController;
 
-import com.fhv.hotelmanagement.domain.domainModel.Booking;
-import com.fhv.hotelmanagement.domain.domainModel.Customer;
 import com.fhv.hotelmanagement.domain.exceptions.*;
 import com.fhv.hotelmanagement.domain.factory.*;
 import com.fhv.hotelmanagement.view.DTOs.*;
@@ -60,5 +58,9 @@ public class DomainController {
 
     public static HashMap<String, RoomCategoryDTO> getAllRoomCategories() {
         return RoomCategoryFactory.getAllRoomCategories();
+    }
+
+    public static ArrayList<BookedRoomCategoryDTO> getAllBookedRoomCategoriesWithoutBookings(){
+        return BookedRoomCategoryFactory.getAllBookedRoomCategoriesWithoutBookings();
     }
 }

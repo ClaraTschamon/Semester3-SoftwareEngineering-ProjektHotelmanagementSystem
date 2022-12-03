@@ -44,8 +44,16 @@
     -fx-background-color: #131724;
 }
 
+.default-color0.chart-bar{
+    -fx-bar-fill: #21273D;
+}
 
+.default-color1.chart-bar{
+    -fx-bar-fill: #6A759B;
+}
 
-
-
-
+.noheader .column-header-background{
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}

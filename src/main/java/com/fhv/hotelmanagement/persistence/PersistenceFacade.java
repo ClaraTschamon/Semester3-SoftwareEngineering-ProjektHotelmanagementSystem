@@ -73,6 +73,8 @@ public class PersistenceFacade{
         return BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
     }
 
+    public static ArrayList<BookedRoomCategory> getAllBookedRoomCategories(){return BookedRoomCategoryDataMapper.getAll();}
+
     public static void main(String[] args) {
 
     }
