@@ -328,10 +328,11 @@ public class WalkIn2ViewController implements Initializable {
         nationalityComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                /*
-                if(nationalityComboBox.getSelectionModel().getSelectedItem().equals("")){
-                    nationalityComboBox.getSelectionModel().select(oldValue);
-                }*/
+                if(!(nationalityComboBox.getSelectionModel().getSelectedItem() == null)){
+                    if(nationalityComboBox.getSelectionModel().getSelectedItem().equals("")){
+                        nationalityComboBox.getSelectionModel().select(oldValue);
+                    }
+                }
                 nationalityComboBox.setStyle("-fx-border-color: none");
             }
         });

@@ -25,7 +25,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 public class HomeViewController implements Initializable {
 
     @FXML
@@ -146,5 +145,4 @@ public class HomeViewController implements Initializable {
             checkOutTodayTableView.setItems(checkOutTodayBookings);
         }
     }
-
 }
