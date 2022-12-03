@@ -1,10 +1,12 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.services.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 
+import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,9 +14,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 
 public class WalkIn2ViewController implements Initializable {
 
+    @FXML
+    private AnchorPane contentPane;
     @FXML
     private DatePicker birthdayDatePicker;
     @FXML
@@ -49,12 +52,17 @@ public class WalkIn2ViewController implements Initializable {
     private TextField postalCodeTextField;
     @FXML
     private CheckBox customerSavedCheckBox;
+    @FXML
+    private TextField searchDatabaseTextField;
+    private ListView<CustomerDTO> searchedCustomersListView;
+    private boolean searching;
     private WalkInViewController viewController;
+
 
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
     }
-    protected void saveData() throws IOException{
+    protected void saveData() {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         customer.setFirstName(firstNameTextField.getText());
         customer.setLastName(lastNameTextField.getText());
@@ -71,10 +79,15 @@ public class WalkIn2ViewController implements Initializable {
         customer.getAddress().setCountry(countryTextField.getText());
 
         customer.setDateOfBirth(birthdayDatePicker.getValue());
-        viewController.loadWalkIn3();
+        try {
+            viewController.loadWalkIn3();
+        } catch (IOException e) {
+            System.out.println("Error loading walk in 3: " + e.getMessage());
+            MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
+        }
     }
 
-    protected void fillData() throws IOException {
+    protected void fillData() {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         String firstname= customer.getFirstName();
         firstNameTextField.setText(firstname);
@@ -118,27 +131,37 @@ public class WalkIn2ViewController implements Initializable {
             boolean defaultSaved = true;
             customerSavedCheckBox.setSelected(defaultSaved);
         }
-    }
 
-    @FXML
-    private void onBackButtonClicked(ActionEvent e) throws IOException {
-        try {
-            saveData();
-            viewController.loadWalkIn1();
-        } catch (IOException exc) {
-            System.out.println(exc.getMessage());
+        if (customer != null && customer.getNumber() != null) {
+            String name = customer.getFirstName() + " " + customer.getLastName();
+            searchDatabaseTextField.setText("Guest: " + name);
+        } else {
+            searchDatabaseTextField.setText("");
+            searchDatabaseTextField.setPromptText("Search guest in guest file...");
         }
     }
 
     @FXML
-    private void onNextButtonClicked(ActionEvent e) throws IOException {
+    private void onBackButtonClicked(ActionEvent e) {
+        try {
+            saveData();
+            viewController.loadWalkIn1();
+        } catch (IOException exc) {
+            System.out.println("Error clicking back button: " + exc.getMessage());
+            MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
+        }
+    }
+
+    @FXML
+    private void onNextButtonClicked(ActionEvent e) {
         try{
             if (validate()) {
                 saveData();
                 viewController.loadWalkIn3();
             }
         }catch(IOException exc){
-            System.out.println(exc.getMessage());
+            System.out.println("Error clicking next button: " + exc.getMessage());
+            MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
         }
     }
 
@@ -147,7 +170,8 @@ public class WalkIn2ViewController implements Initializable {
         try{
             viewController.cancel();
         }catch(IOException exc){
-            System.out.println(exc.getMessage());
+            System.out.println("Error clicking cancel button: " + exc.getMessage());
+            MainApplication.getMainController().alert("Error cancelling, please try again.", WarningType.WARNING);
         }
     }
 
@@ -283,6 +307,7 @@ public class WalkIn2ViewController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        searching = false;
 
         ArrayList<String> items = new ArrayList<>();
         items.add("Africa");
@@ -336,5 +361,92 @@ public class WalkIn2ViewController implements Initializable {
                 nationalityComboBox.setStyle("-fx-border-color: none");
             }
         });
+
+        // search
+        searchDatabaseTextField.textProperty().addListener((observable, oldValue, newValue) ->
+                searchDatabaseTextFieldChanged());
+
+        searchedCustomersListView = new ListView<>();
+        searchedCustomersListView.setStyle("-fx-border-radius: 8px;");
+        searchedCustomersListView.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(CustomerDTO item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getFirstName() + " " + item.getLastName() + " (" + item.getDateOfBirth() + ")");
+                }
+            }
+        });
+        searchedCustomersListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+                searchedCustomersListViewChanged());
+
+        searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) ->
+                searchDatabaseTextFieldFocusChanged(newValue));
+    }
+
+    private void searchDatabaseTextFieldChanged() {
+        if (!searching) {
+            return;
+        }
+
+        String searchText = searchDatabaseTextField.getText().toLowerCase();
+
+        if (!searchedCustomersListView.getSelectionModel().getSelectedItems().isEmpty()) {
+            searchedCustomersListView.getSelectionModel().clearSelection();
+        }
+
+        if (searchText == null || searchText.equals("")) {
+            contentPane.getChildren().remove(searchedCustomersListView);
+
+        } else {
+            ArrayList<CustomerDTO> searchedCustomers = new ArrayList<>();
+            for (CustomerDTO c : viewController.getUseCaseController().getCustomers()) {
+                String firstName = c.getFirstName().toLowerCase();
+                String lastName = c.getLastName().toLowerCase();
+                String fullName = firstName.concat(" ").concat(lastName);
+                String reversedFullName = lastName.concat(" ").concat(firstName);
+                if (
+                        firstName.contains(searchText) ||
+                                lastName.contains(searchText) ||
+                                fullName.contains(searchText) ||
+                                reversedFullName.contains(searchText)
+                ) {
+                    searchedCustomers.add(c);
+                }
+            }
+            searchedCustomersListView.setItems(FXCollections.observableArrayList(searchedCustomers));
+
+            if (!contentPane.getChildren().contains(searchedCustomersListView)) {
+                searchedCustomersListView.setMinWidth(searchDatabaseTextField.getWidth());
+                searchedCustomersListView.setMaxWidth(searchDatabaseTextField.getWidth());
+                searchedCustomersListView.setMaxHeight(200);
+                searchedCustomersListView.setLayoutX(searchDatabaseTextField.getLayoutX());
+                searchedCustomersListView.setLayoutY(searchDatabaseTextField.getLayoutY() + searchDatabaseTextField.getHeight() + 4);
+                contentPane.getChildren().add(searchedCustomersListView);
+            }
+        }
+    }
+
+    private void searchedCustomersListViewChanged() {
+        CustomerDTO selectedCustomer = searchedCustomersListView.getSelectionModel().getSelectedItem();
+        if (selectedCustomer != null) {
+            searching = false;
+            viewController.getUseCaseController().setCustomer(selectedCustomer);
+            fillData();
+            contentPane.getChildren().remove(searchedCustomersListView);
+            firstNameTextField.requestFocus();
+        }
+    }
+
+    private void searchDatabaseTextFieldFocusChanged(boolean newValue) {
+        if (newValue) {
+            searching = true;
+        } else {
+            searching = false;
+            contentPane.getChildren().remove(searchedCustomersListView);
+        }
     }
 }

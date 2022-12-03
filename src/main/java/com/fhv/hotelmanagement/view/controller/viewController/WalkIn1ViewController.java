@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -69,7 +70,6 @@ public class WalkIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> suiteDropDown;
     private WalkInViewController viewController;
     private RoomProvider roomProvider;
-    private ArrayList<CustomerDTO> customers;
     private ListView<CustomerDTO> searchedCustomersListView;
     private boolean searching;
 
@@ -302,11 +302,15 @@ public class WalkIn1ViewController implements Initializable {
     private void setCustomerInfo() {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         if (customer != null && customer.getNumber() != null) {
-            checkInForLabel.setText("Check-In for: " + customer.getFirstName() + " " + customer.getLastName());
+            String name = customer.getFirstName() + " " + customer.getLastName();
+            checkInForLabel.setText("Check-In for: " + name);
+            searchDatabaseTextField.setText("Guest: " + name);
             customerInfoRectangle.setVisible(true);
             checkInForLabel.setVisible(true);
             lastRoomsLabel.setVisible(false); // TODO fill former rooms
         } else {
+            searchDatabaseTextField.setText("");
+            searchDatabaseTextField.setPromptText("Search guest in guest file...");
             customerInfoRectangle.setVisible(false);
             checkInForLabel.setVisible(false);
             lastRoomsLabel.setVisible(false);
@@ -397,9 +401,9 @@ public class WalkIn1ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        customers = DomainController.getSavedCustomers();
-        roomProvider = new RoomProvider();
         searching = false;
+        searchedCustomersListView = new ListView<>();
+        roomProvider = new RoomProvider();
 
         singleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Single room"));
         doubleRoomDropDown = new CheckComboBox<>(roomProvider.getAllRoomsFromCategory("Double room"));
@@ -462,6 +466,7 @@ public class WalkIn1ViewController implements Initializable {
         contentPane.getChildren().add(familyRoomDropDown);
         contentPane.getChildren().add(suiteDropDown);
 
+        // search
         searchDatabaseTextField.textProperty().addListener((observable, oldValue, newValue) ->
                 searchDatabaseTextFieldChanged());
 
@@ -482,29 +487,8 @@ public class WalkIn1ViewController implements Initializable {
         searchedCustomersListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
                 searchedCustomersListViewChanged());
 
-        searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                searching = true;
-            } else {
-                searching = false;
-                contentPane.getChildren().remove(searchedCustomersListView);
-            }
-        });
-    }
-
-    private BoardDTO getBoardByName(String name) {
-        for (BoardDTO boardDTO : DomainController.getAllBoards()) {
-            if (boardDTO.getName().equals(name)) {
-                return boardDTO;
-            }
-        }
-        return null;
-    }
-
-    @FXML
-    private void departureDatePickerOnAction() {
-        roomProvider.refreshFreeRooms(departureDatePicker.getValue());
-        refreshFreeRoomsInDropDowns();
+        searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) ->
+                searchDatabaseTextFieldFocusChanged(newValue));
     }
 
     private void searchDatabaseTextFieldChanged() {
@@ -523,16 +507,16 @@ public class WalkIn1ViewController implements Initializable {
 
         } else {
             ArrayList<CustomerDTO> searchedCustomers = new ArrayList<>();
-            for (CustomerDTO c : customers) {
+            for (CustomerDTO c : viewController.getUseCaseController().getCustomers()) {
                 String firstName = c.getFirstName().toLowerCase();
                 String lastName = c.getLastName().toLowerCase();
                 String fullName = firstName.concat(" ").concat(lastName);
                 String reversedFullName = lastName.concat(" ").concat(firstName);
                 if (
                         firstName.contains(searchText) ||
-                        lastName.contains(searchText) ||
-                        fullName.contains(searchText) ||
-                        reversedFullName.contains(searchText)
+                                lastName.contains(searchText) ||
+                                fullName.contains(searchText) ||
+                                reversedFullName.contains(searchText)
                 ) {
                     searchedCustomers.add(c);
                 }
@@ -554,11 +538,35 @@ public class WalkIn1ViewController implements Initializable {
         CustomerDTO selectedCustomer = searchedCustomersListView.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
             searching = false;
-            searchDatabaseTextField.setText(selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
             viewController.getUseCaseController().setCustomer(selectedCustomer);
+            setCustomerInfo();
             contentPane.getChildren().remove(searchedCustomersListView);
             departureDatePicker.requestFocus();
         }
+    }
+
+    private void searchDatabaseTextFieldFocusChanged(boolean newValue) {
+        if (newValue) {
+            searching = true;
+        } else {
+            searching = false;
+            contentPane.getChildren().remove(searchedCustomersListView);
+        }
+    }
+
+    private BoardDTO getBoardByName(String name) {
+        for (BoardDTO boardDTO : DomainController.getAllBoards()) {
+            if (boardDTO.getName().equals(name)) {
+                return boardDTO;
+            }
+        }
+        return null;
+    }
+
+    @FXML
+    private void departureDatePickerOnAction() {
+        roomProvider.refreshFreeRooms(departureDatePicker.getValue());
+        refreshFreeRoomsInDropDowns();
     }
 }
 

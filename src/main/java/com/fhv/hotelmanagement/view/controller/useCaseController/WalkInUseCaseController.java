@@ -9,12 +9,14 @@ import com.fhv.hotelmanagement.view.DTOs.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class WalkInUseCaseController {
     BookingDTO booking;
     CustomerDTO customer;
     String roomPrice;
     boolean billingAddressEqualsCustomerAddress;
+    ArrayList<CustomerDTO> customers;
 
     public WalkInUseCaseController() throws IOException {
         booking = new BookingDTO();
@@ -23,6 +25,7 @@ public class WalkInUseCaseController {
         booking.setArrivalDate(LocalDate.now());
         //customer.setSaved(true);
         billingAddressEqualsCustomerAddress = true;
+        customers = DomainController.getSavedCustomers();
     }
 
     public BookingDTO getBooking() {
@@ -31,6 +34,10 @@ public class WalkInUseCaseController {
 
     public CustomerDTO getCustomer() {
         return customer;
+    }
+
+    public ArrayList<CustomerDTO> getCustomers() {
+        return customers;
     }
 
     public void setCustomer(CustomerDTO customer) {
