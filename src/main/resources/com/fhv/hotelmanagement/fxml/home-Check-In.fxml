@@ -7,32 +7,38 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeCheckInViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
+            prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeCheckInViewController">
     <center>
-        <AnchorPane prefHeight="900.0" prefWidth="600.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="900.0" prefWidth="600.0" style="-fx-background-color: FFFFFF;"
+                    BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="WalkInButton" contentDisplay="TOP" layoutX="460.0" layoutY="133.0" mnemonicParsing="false" onAction="#onWalkInClicked" styleClass="homebutton" stylesheets="@css.css" text="Walk-In Gast">
+                <Button fx:id="WalkInButton" contentDisplay="TOP" layoutX="460.0" layoutY="133.0"
+                        mnemonicParsing="false" onAction="#onWalkInClicked" styleClass="homebutton"
+                        stylesheets="@css.css" text="Walk-In Gast">
                     <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Bilder/Walk-In.png" />
+                                <Image url="@Bilder/Walk-In.png"/>
                             </image>
                         </ImageView>
                     </graphic>
                     <font>
-                        <Font size="15.0" />
+                        <Font size="15.0"/>
                     </font>
                 </Button>
-                <Button contentDisplay="TOP" layoutX="127.0" layoutY="133.0" mnemonicParsing="false" styleClass="homebutton" stylesheets="@css.css" text="Anhand von Reservierung">
+                <Button contentDisplay="TOP" layoutX="130.0" layoutY="133.0" mnemonicParsing="false"
+                        styleClass="homebutton" stylesheets="@css.css" text="Anhand von Reservierung">
                     <graphic>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Bilder/AnhandvonReservierung.png" />
+                                <Image url="@Bilder/AnhandvonReservierung.png"/>
                             </image>
                         </ImageView>
                     </graphic>
                     <font>
-                        <Font size="15.0" />
+                        <Font size="15.0"/>
                     </font>
                 </Button>
             </children>
