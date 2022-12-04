@@ -22,14 +22,10 @@ public class WalkInViewController {
     private WalkInUseCaseController useCaseController;
     private boolean searching;
 
-    public WalkInViewController() {
-        try {
-            useCaseController = new WalkInUseCaseController();
-            searching = false;
-            loadWalkIn1();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public WalkInViewController() throws IOException {
+        useCaseController = new WalkInUseCaseController();
+        searching = false;
+        loadWalkIn1();
     }
 
     protected WalkInUseCaseController getUseCaseController() {

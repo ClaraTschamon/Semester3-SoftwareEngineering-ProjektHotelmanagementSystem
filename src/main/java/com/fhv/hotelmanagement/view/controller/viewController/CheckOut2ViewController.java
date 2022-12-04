@@ -2,9 +2,11 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.viewServices.ApachePDFBoxServices;
+import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,22 +62,43 @@ public class CheckOut2ViewController {
     }
 
     @FXML
-    private void onBackButtonClicked(ActionEvent actionEvent) throws IOException {
+    private void onBackButtonClicked(ActionEvent actionEvent) {
         try {
             viewController.loadCheckOut1();
         } catch (IOException exc) {
-            System.out.println(exc.getMessage());
+            MainApplication.getMainController().alert("Could not switch page", WarningType.WARNING);
+            System.out.println("Error clicking back button: " + exc.getMessage());
         }
     }
 
     @FXML
-    private void onConfirmButtonClicked(ActionEvent actionEvent) throws IOException {
-        viewController.getUseCaseController().save();
-        MainApplication.getMainController().loadIntoContentArea("home");
+    private void onConfirmButtonClicked(ActionEvent actionEvent) {
+        try {
+            viewController.getUseCaseController().save();
+            MainApplication.getMainController().loadIntoContentArea("home");
 
-        if(printInvoiceCheckBox.selectedProperty().get()==true){
-            ApachePDFBoxServices apachePDFBox = new ApachePDFBoxServices();
-            apachePDFBox.createBill(viewController);
+            if (printInvoiceCheckBox.selectedProperty().get() == true) {
+                ApachePDFBoxServices apachePDFBox = new ApachePDFBoxServices();
+                apachePDFBox.createBill(viewController);
+            }
+            MainApplication.getMainController().alert("Successfully checked out", WarningType.CONFIRMATION);
+
+        } catch (BookingIsInvalidException e) {
+            System.out.println("Error booking is invalid: " + e.getMessage() + " Booking: " + viewController.getUseCaseController().getBooking());
+            MainApplication.getMainController().alert("Can not check out booking.", WarningType.WARNING);
+        } catch (IOException e) {
+            System.out.println("Error loading home screen: " + e.getMessage());
+            MainApplication.getMainController().alert("Something went wrong switching the screen.", WarningType.WARNING);
+        }
+    }
+
+    @FXML
+    private void onCancelButtonClicked(ActionEvent actionEvent) {
+        try {
+            MainApplication.getMainController().loadIntoContentArea("home");
+        } catch (IOException e) {
+            MainApplication.getMainController().alert("Could cancel transaction.", WarningType.WARNING);
+            System.out.println("Error clicking cancel button: " + e.getMessage());
         }
     }
 

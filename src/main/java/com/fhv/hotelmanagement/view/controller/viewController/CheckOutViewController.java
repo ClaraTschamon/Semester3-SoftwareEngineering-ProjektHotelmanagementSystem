@@ -10,13 +10,9 @@ import java.io.IOException;
 public class CheckOutViewController {
     private CheckOutUseCaseController useCaseController;
 
-    public CheckOutViewController(){
-        try{
-            useCaseController = new CheckOutUseCaseController();
-            loadCheckOut1();
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
+    public CheckOutViewController() throws IOException {
+        useCaseController = new CheckOutUseCaseController();
+        loadCheckOut1();
     }
 
     public CheckOutUseCaseController getUseCaseController(){

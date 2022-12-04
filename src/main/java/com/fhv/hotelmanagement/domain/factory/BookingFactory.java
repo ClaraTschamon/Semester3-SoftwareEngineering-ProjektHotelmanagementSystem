@@ -126,6 +126,21 @@ public class BookingFactory {
     }
 
     protected static boolean checkBooking(BookingDTO bookingDTO) {
+//        System.out.println( // debug only
+//                (bookingDTO != null) + " " +
+//                        (CustomerFactory.checkCustomer(bookingDTO.getCustomer())) + " " +
+//                        (bookingDTO.getArrivalDate() != null) + " " +
+//                        (bookingDTO.getDepartureDate() != null) + " " +
+//                        (bookingDTO.getArrivalDate().isBefore(bookingDTO.getDepartureDate())) + " " +
+//                        (AddressFactory.checkAddress(bookingDTO.getBillingAddress())) + " " +
+//                        (checkPaymentMethod(bookingDTO)) + " " +
+//                        (bookingDTO.getBookedRooms() != null && !bookingDTO.getBookedRooms().isEmpty()) + " " +
+//                        (bookingDTO.getBookedRoomCategories() != null && !bookingDTO.getBookedRoomCategories().isEmpty()) + " " +
+//                        (BookedRoomCategoryFactory.checkBookedRoomCategories(bookingDTO.getBookedRoomCategories(), false)) + " " +
+//                        (BookedRoomFactory.checkBookedRooms(bookingDTO.getBookedRooms(), false)) + " " +
+//                        ((bookingDTO.getBoard() == null && bookingDTO.getPricePerNightForBoard() == null)
+//                                || (BoardFactory.checkBoard(bookingDTO.getBoard()) && bookingDTO.getPricePerNightForBoard() != null && bookingDTO.getPricePerNightForBoard().intValue() >= 0))
+//        );
         return (bookingDTO != null) &&
                 (CustomerFactory.checkCustomer(bookingDTO.getCustomer())) &&
                 (bookingDTO.getArrivalDate() != null) &&

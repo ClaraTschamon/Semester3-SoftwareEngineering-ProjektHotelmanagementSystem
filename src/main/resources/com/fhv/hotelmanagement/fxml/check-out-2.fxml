@@ -91,7 +91,7 @@
                 <Text layoutX="16.0" layoutY="635.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Local tax = 1,50€ per person and night" />
                 <Text layoutX="555.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total amount (gross):" />
                 <Text fx:id="boardNameText" layoutX="288.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Packagename" />
-                <Button layoutX="640.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Cancel" textFill="WHITE">
+                <Button onAction="#onCancelButtonClicked" layoutX="640.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="cancelButton" stylesheets="@css.css" text="Cancel" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>

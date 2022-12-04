@@ -39,12 +39,28 @@ public class BookedRoomFactory {
 
     protected static boolean checkBookedRoom(BookedRoomDTO bookedRoomDTO, boolean validateBooking) {
         BookingDTO bookingDTO = bookedRoomDTO.getBooking();
+//        System.out.println( // debug only
+//                ((!validateBooking) || (validateBooking && BookingFactory.checkBooking(bookingDTO))) +" "+
+//                        (RoomFactory.getAllRooms().contains(bookedRoomDTO.getRoom())) +" "+
+//                        (bookedRoomDTO.getFromDate().isEqual(bookingDTO.getArrivalDate())
+//                                || (bookedRoomDTO.getFromDate().isAfter(bookingDTO.getArrivalDate()) &&
+//                                    (bookedRoomDTO.getFromDate().isBefore(bookingDTO.getDepartureDate()) ||
+//                                            bookedRoomDTO.getFromDate().isEqual(bookingDTO.getDepartureDate())))) +" "+
+//                        (bookedRoomDTO.getToDate().isEqual(bookingDTO.getDepartureDate())
+//                                || (bookedRoomDTO.getToDate().isBefore(bookingDTO.getDepartureDate()) &&
+//                                    (bookedRoomDTO.getToDate().isAfter(bookingDTO.getArrivalDate()) ||
+//                                            bookedRoomDTO.getToDate().isEqual(bookingDTO.getArrivalDate()))))
+//        );
         return ((!validateBooking) || (validateBooking && BookingFactory.checkBooking(bookingDTO))) &&
                 (RoomFactory.getAllRooms().contains(bookedRoomDTO.getRoom())) &&
                 (bookedRoomDTO.getFromDate().isEqual(bookingDTO.getArrivalDate())
-                        || (bookedRoomDTO.getFromDate().isAfter(bookingDTO.getArrivalDate()) && bookedRoomDTO.getFromDate().isBefore(bookingDTO.getDepartureDate()))) &&
+                        || (bookedRoomDTO.getFromDate().isAfter(bookingDTO.getArrivalDate()) &&
+                        (bookedRoomDTO.getFromDate().isBefore(bookingDTO.getDepartureDate()) ||
+                                bookedRoomDTO.getFromDate().isEqual(bookingDTO.getDepartureDate())))) &&
                 (bookedRoomDTO.getToDate().isEqual(bookingDTO.getDepartureDate())
-                        || (bookedRoomDTO.getToDate().isBefore(bookingDTO.getDepartureDate()) && bookedRoomDTO.getToDate().isAfter(bookingDTO.getArrivalDate())));
+                        || (bookedRoomDTO.getToDate().isBefore(bookingDTO.getDepartureDate()) &&
+                            (bookedRoomDTO.getToDate().isAfter(bookingDTO.getArrivalDate()) ||
+                                bookedRoomDTO.getToDate().isEqual(bookingDTO.getArrivalDate()))));
     }
 
     protected static boolean checkBookedRooms(ArrayList<BookedRoomDTO> bookedRoomDTOS, boolean validateBooking) {

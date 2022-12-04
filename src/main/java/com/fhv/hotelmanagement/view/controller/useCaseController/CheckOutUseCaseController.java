@@ -21,7 +21,7 @@ public class CheckOutUseCaseController {
         return booking;
     }
 
-    public void save() {
+    public void save() throws BookingIsInvalidException {
         if (booking != null) {
             LocalDate today = LocalDate.now();
             booking.setCheckOutDatetime(LocalDateTime.now());
@@ -35,12 +35,11 @@ public class CheckOutUseCaseController {
                 }
             }
 
-            try {
-                DomainController.saveBooking(booking);
-                DomainController.saveInvoice(new InvoiceDTO(booking));
-            } catch (BookingIsInvalidException e) {
-                System.out.println(e.getMessage());
-            }
+            DomainController.saveBooking(booking);
+            DomainController.saveInvoice(new InvoiceDTO(booking));
+
+        } else {
+            throw new BookingIsInvalidException("Error: booking is null");
         }
     }
 }

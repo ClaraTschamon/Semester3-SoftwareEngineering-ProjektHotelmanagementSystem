@@ -1,11 +1,13 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
+import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,13 +45,23 @@ public class HomeViewController implements Initializable {
     private static int totalSuites;
 
     @FXML
-    private void onWalkInClicked(ActionEvent e) throws IOException {
-        WalkInViewController walkInViewControllerController = new WalkInViewController();
+    private void onWalkInClicked(ActionEvent e) {
+        try {
+            WalkInViewController walkInViewControllerController = new WalkInViewController();
+        } catch (IOException ex) {
+            MainApplication.getMainController().alert("Could start a walk in.", WarningType.WARNING);
+            System.out.println("Error walk in clicked: " + ex.getMessage());
+        }
     }
 
     @FXML
-    private void onCheckOutClicked(ActionEvent e) throws IOException{
-        CheckOutViewController checkOutViewController = new CheckOutViewController();
+    private void onCheckOutClicked(ActionEvent e) {
+        try {
+            CheckOutViewController checkOutViewController = new CheckOutViewController();
+        } catch (IOException ex) {
+            MainApplication.getMainController().alert("Could start a check out.", WarningType.WARNING);
+            System.out.println("Error check out clicked: " + ex.getMessage());
+        }
     }
 
     @Override

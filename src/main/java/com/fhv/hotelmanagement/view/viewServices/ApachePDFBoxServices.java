@@ -41,13 +41,13 @@ public class ApachePDFBoxServices {
             PDPage myPage = new PDPage();
             doc.addPage(myPage);
 
-            PDImageXObject watermark = PDImageXObject.createFromFile(watermarkSrc, doc);
-            PDImageXObject icon = PDImageXObject.createFromFile(iconSrc, doc);
+//            PDImageXObject watermark = PDImageXObject.createFromFile(watermarkSrc, doc);
+//            PDImageXObject icon = PDImageXObject.createFromFile(iconSrc, doc);
 
             try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
                 //cont.drawImage(watermark, 70,250);
 
-                cont.drawImage(icon, 10, 680);
+//                cont.drawImage(icon, 10, 680);
                 cont.beginText();
                 cont.setFont(PDType1Font.COURIER, 12);
                 cont.setLeading(14.5f);
