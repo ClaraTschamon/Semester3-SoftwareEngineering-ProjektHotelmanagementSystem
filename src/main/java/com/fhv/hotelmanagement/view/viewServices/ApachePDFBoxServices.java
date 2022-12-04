@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.viewServices;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -27,7 +28,9 @@ public class ApachePDFBoxServices {
 
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
-        String DEST = "src/main/resources/com/fhv/hotelmanagement/pdf/Rechnung" + bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf";
+//        String DEST = "src/main/resources/com/fhv/hotelmanagement/pdf/Rechnung" + bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf";
+
+        String DEST=("Rechnung"+bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf");
 
 //        String watermarkSrc="src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/watermarkFinal.png";
 //        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/RealWatermark.png";
