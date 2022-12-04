@@ -8,8 +8,8 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 public class HomeCheckInViewController {
-    private UnnoetigerUseCaseController useCaseController;
 
+    private UnnoetigerUseCaseController useCaseController;
 
     @FXML
     private void onWalkInClicked(ActionEvent e) throws IOException {
@@ -38,6 +38,10 @@ public class HomeCheckInViewController {
     private static void setController(HomeCheckInViewController homeCheckInViewController) {
     }
 
+
+    /*public void setController(HomeViewController viewController) {
+        this.viewController = viewController;
+    }*/
 
 }
 
