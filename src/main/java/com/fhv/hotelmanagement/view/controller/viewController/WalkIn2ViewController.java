@@ -62,11 +62,12 @@ public class WalkIn2ViewController implements Initializable {
     public void setController(WalkInViewController viewController) {
         this.viewController = viewController;
     }
+
     protected void saveData() {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         customer.setFirstName(firstNameTextField.getText());
         customer.setLastName(lastNameTextField.getText());
-        if(nationalityComboBox.getSelectionModel().getSelectedItem() != null){
+        if (nationalityComboBox.getSelectionModel().getSelectedItem() != null) {
             customer.setNationality(nationalityComboBox.getSelectionModel().getSelectedItem().toString());
         }
         customer.setPhoneNumber(phoneNumberTextField.getText());
@@ -89,45 +90,44 @@ public class WalkIn2ViewController implements Initializable {
 
     protected void fillData() {
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
-        String firstname= customer.getFirstName();
+        String firstname = customer.getFirstName();
         firstNameTextField.setText(firstname);
-        String lastname=customer.getLastName();
+        String lastname = customer.getLastName();
         lastNameTextField.setText(lastname);
 
-        String nationality= customer.getNationality();
-        if(nationality != null){
+        String nationality = customer.getNationality();
+        if (nationality != null) {
             nationalityComboBox.setValue(nationality);
         }
 
-        String phonenumber =customer.getPhoneNumber();
+        String phonenumber = customer.getPhoneNumber();
         phoneNumberTextField.setText(phonenumber);
-        String email =customer.getEmail();
+        String email = customer.getEmail();
         emailTextField.setText(email);
-        String city=customer.getAddress().getCity();
+        String city = customer.getAddress().getCity();
         cityTextField.setText(city);
-        String street=customer.getAddress().getStreet();
+        String street = customer.getAddress().getStreet();
         streetTextField.setText(street);
-        String housenumber =customer.getAddress().getHouseNumber();
+        String housenumber = customer.getAddress().getHouseNumber();
         houseNumberTextField.setText(housenumber);
-        String postalcode=customer.getAddress().getPostalCode();
+        String postalcode = customer.getAddress().getPostalCode();
         postalCodeTextField.setText(postalcode);
 
         String country = customer.getAddress().getCountry();
         countryTextField.setText(country);
 
-        if(customer.getDateOfBirth() != null){
+        if (customer.getDateOfBirth() != null) {
             LocalDate birthday = customer.getDateOfBirth();
             birthdayDatePicker.setValue(birthday);
-        }
-        else{
+        } else {
             LocalDate defaultBirthday = LocalDate.of(2000, 1, 1);
             birthdayDatePicker.setValue(defaultBirthday);
         }
 
-        if(customer.getSaved() != null){
+        if (customer.getSaved() != null) {
             boolean saved = customer.getSaved();
             customerSavedCheckBox.setSelected(saved);
-        }else{
+        } else {
             boolean defaultSaved = true;
             customerSavedCheckBox.setSelected(defaultSaved);
         }
@@ -154,22 +154,22 @@ public class WalkIn2ViewController implements Initializable {
 
     @FXML
     private void onNextButtonClicked(ActionEvent e) {
-        try{
+        try {
             if (validate()) {
                 saveData();
                 viewController.loadWalkIn3();
             }
-        }catch(IOException exc){
+        } catch (IOException exc) {
             System.out.println("Error clicking next button: " + exc.getMessage());
             MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
         }
     }
 
     @FXML
-    private void onCancelButtonClicked(ActionEvent e){
-        try{
+    private void onCancelButtonClicked(ActionEvent e) {
+        try {
             viewController.cancel();
-        }catch(IOException exc){
+        } catch (IOException exc) {
             System.out.println("Error clicking cancel button: " + exc.getMessage());
             MainApplication.getMainController().alert("Error cancelling, please try again.", WarningType.WARNING);
         }
@@ -223,7 +223,7 @@ public class WalkIn2ViewController implements Initializable {
 
         if (!nationalityComboBox.getSelectionModel().getSelectedItem().equals("")) {
             nationalityIsValid = true;
-        }else{
+        } else {
             nationalityComboBox.setStyle("-fx-border-color: red");
         }
 
@@ -298,7 +298,7 @@ public class WalkIn2ViewController implements Initializable {
             birthdayDatePicker.setStyle("-fx-text-inner-color: red");
         }
 
-        if(emailIsValid && firstNameIsValid && lastNameIsValid && nationalityIsValid &&
+        if (emailIsValid && firstNameIsValid && lastNameIsValid && nationalityIsValid &&
                 phoneNumberIsValid && countryIsValid && streetIsValid && postalCodeIsValid &&
                 houseNumberIsValid && cityIsValid && birthdayIsValid) {
             return true;
@@ -353,8 +353,8 @@ public class WalkIn2ViewController implements Initializable {
         nationalityComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                if(!(nationalityComboBox.getSelectionModel().getSelectedItem() == null)){
-                    if(nationalityComboBox.getSelectionModel().getSelectedItem().equals("")){
+                if (!(nationalityComboBox.getSelectionModel().getSelectedItem() == null)) {
+                    if (nationalityComboBox.getSelectionModel().getSelectedItem().equals("")) {
                         nationalityComboBox.getSelectionModel().select(oldValue);
                     }
                 }
