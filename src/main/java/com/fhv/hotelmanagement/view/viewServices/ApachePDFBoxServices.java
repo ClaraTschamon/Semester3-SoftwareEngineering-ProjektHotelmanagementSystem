@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.viewServices;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -27,14 +28,16 @@ public class ApachePDFBoxServices {
 
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
-        String DEST = "src/main/resources/com/fhv/hotelmanagement/pdf/Rechnung" + bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf";
+//        String DEST = "src/main/resources/com/fhv/hotelmanagement/pdf/Rechnung" + bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf";
+
+        String DEST=("Rechnung"+bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf");
 
 //        String watermarkSrc="src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/watermarkFinal.png";
 //        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/RealWatermark.png";
 //        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/evenBetterFinalVersionWatermark.png";
-        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/final20Plus.png";
-
-        String iconSrc = "src/main/resources/com/fhv/hotelmanagement/fxml/Bilder/SunwayohneHintergrund2.png";
+//        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/final20Plus.png";
+//
+//        String iconSrc = "src/main/resources/com/fhv/hotelmanagement/fxml/Bilder/SunwayohneHintergrund2.png";
 
         try (PDDocument doc = new PDDocument()) {
 
@@ -45,8 +48,7 @@ public class ApachePDFBoxServices {
 //            PDImageXObject icon = PDImageXObject.createFromFile(iconSrc, doc);
 
             try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
-                //cont.drawImage(watermark, 70,250);
-
+//                cont.drawImage(watermark, 70,250);
 //                cont.drawImage(icon, 10, 680);
                 cont.beginText();
                 cont.setFont(PDType1Font.COURIER, 12);
@@ -103,7 +105,7 @@ public class ApachePDFBoxServices {
                 cont.showText(spaceIng2);
                 cont.newLine();
 
-                String spaceIng3 = dynamicStringDistance(55, 0) + "6764 LECH AM BERG";
+                String spaceIng3 = dynamicStringDistance(55, 0) + "6764 LECH ARLBERG";
                 cont.showText(spaceIng3);
                 cont.newLine();
 
