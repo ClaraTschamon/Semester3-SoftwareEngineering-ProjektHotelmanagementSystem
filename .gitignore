@@ -42,3 +42,4 @@ bin/
 .DS_Store
 testDB.h2.mv.db
 .idea/sqlDataSources.xml
+HotelmanagementDB.h2.mv.db
