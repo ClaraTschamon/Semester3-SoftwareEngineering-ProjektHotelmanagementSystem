@@ -489,6 +489,11 @@ public class WalkIn1ViewController implements Initializable {
 
         searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) ->
                 searchDatabaseTextFieldFocusChanged(newValue));
+
+        //damit in validierung rot gemachtes datum wieder schwarz wird wenn neues Datum ausgewählt wird
+        departureDatePicker.setOnAction(action -> {
+            departureDatePicker.setStyle("-fx-text-inner-color: black");
+        });
     }
 
     private void searchDatabaseTextFieldChanged() {

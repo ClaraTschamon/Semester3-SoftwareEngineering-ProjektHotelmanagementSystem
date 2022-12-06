@@ -154,6 +154,7 @@ public class BookingOverviewViewController implements Initializable {
         if(allBookings.size() == 0){
             bookingTableView.setPlaceholder(new Label("No bookings"));
             bookingTableView.getItems().clear();
+            hidePlaceholderTexts();
         }else{
             bookingTableView.setItems(allBookings);
         }
@@ -271,5 +272,20 @@ public class BookingOverviewViewController implements Initializable {
             checkOutViewController.getUseCaseController().setBooking(bookingDTO);
             checkOutViewController.loadCheckOut1();
         }
+    }
+
+    private void hidePlaceholderTexts(){
+        phBookingNumberText.setText("");
+        phStateText.setText("");
+        phRoomsText.setText("");
+        phFirstnameText.setText("");
+        phLastnameText.setText("");
+        phStreetText.setText("");
+        phHouseNrText.setText("");
+        phPostalCodeText.setText("");
+        phCityText.setText("");
+        phCountryText.setText("");
+        phPhoneNrText.setText("");
+        phPaymentMethodText.setText("");
     }
 }

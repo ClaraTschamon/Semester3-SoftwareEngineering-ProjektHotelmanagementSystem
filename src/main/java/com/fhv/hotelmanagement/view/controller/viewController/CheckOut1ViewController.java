@@ -113,6 +113,7 @@ public class CheckOut1ViewController implements Initializable {
                 rooms.add(bookedRoom.getRoom());
             }
         }
+
         ObservableList<RoomDTO> roomDTOS = FXCollections.observableList(rooms);
         roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
         roomComboBox.getItems().addAll(roomDTOS);

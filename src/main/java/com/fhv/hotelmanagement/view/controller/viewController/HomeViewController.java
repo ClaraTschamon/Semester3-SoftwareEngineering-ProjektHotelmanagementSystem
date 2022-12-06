@@ -126,23 +126,24 @@ public class HomeViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createBarChart();
-
         fillCheckOutTodayTable();
     }
 
     public void createBarChart(){
         ArrayList<RoomDTO> allRooms =  DomainController.getAllRooms();
         //Count all Rooms
-        for(RoomDTO roomDTO : allRooms){
-            String category = roomDTO.getCategory().getName();
-            if(category.equals("Single room")){
-                totalSingleRooms ++;
-            } else if(category.equals("Double room")){
-                totalDoubleRooms ++;
-            } else if(category.equals("Family room")){
-                totalFamilyRooms ++;
-            } else{
-                totalSuites ++;
+        if(totalSingleRooms == 0){
+            for(RoomDTO roomDTO : allRooms){
+                String category = roomDTO.getCategory().getName();
+                if(category.equals("Single room")){
+                    totalSingleRooms ++;
+                } else if(category.equals("Double room")){
+                    totalDoubleRooms ++;
+                } else if(category.equals("Family room")){
+                    totalFamilyRooms ++;
+                } else{
+                    totalSuites ++;
+                }
             }
         }
 
@@ -161,7 +162,7 @@ public class HomeViewController implements Initializable {
                 occupiedDoubleRooms ++;
             } else if(category.equals("Family room")){
                 occupiedFamilyRooms ++;
-            } else{
+            } else if(category.equals("Suites")){
                 occupiedSuites ++;
             }
         }
