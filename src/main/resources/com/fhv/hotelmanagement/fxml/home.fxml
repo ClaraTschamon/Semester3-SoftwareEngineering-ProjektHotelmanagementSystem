@@ -7,10 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="650.0" prefWidth="970.0" style="-fx-background-color: FFFFFF;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeViewController">
+<BorderPane id="Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="970.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.view.controller.viewController.HomeViewController">
     <top>
         <AnchorPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -18,82 +15,57 @@
                     <children>
                         <Text layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunway">
                             <font>
-                                <Font size="24.0"/>
+                                <Font size="24.0" />
                             </font>
                         </Text>
                     </children>
                     <effect>
                         <InnerShadow height="8.0" radius="1.5" width="0.0">
                             <input>
-                                <DropShadow/>
+                                <DropShadow />
                             </input>
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Button fx:id="WalkInButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString=""
-                        layoutX="396.0" layoutY="121.0" mnemonicParsing="false" onAction="#onWalkInClicked"
-                        prefHeight="153.0" prefWidth="179.0" styleClass="homebutton" stylesheets="@css.css"
-                        text="Walk-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
-                    <graphic>
-                        <ImageView fitHeight="250.0" fitWidth="105.0" layoutX="458.0" pickOnBounds="true"
-                                   preserveRatio="true">
-                            <image>
-                                <Image url="@Bilder/Walk-In.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
+                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="101.0" layoutY="121.0" mnemonicParsing="false" onAction="#onHomeCheckInClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="101.0" layoutY="121.0"
-                        mnemonicParsing="false" onAction="#onHomeCheckInClicked" prefHeight="213.0" prefWidth="219.0"
-                        styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER"
-                        textFill="#21273d" textOverrun="WORD_ELLIPSIS">
-                    <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Bilder/CheckOut.png"/>
+                                <Image url="@Bilder/CheckOut.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="632.0" layoutY="121.0"
-                        mnemonicParsing="false" onAction="#onCheckOutClicked" prefHeight="213.0" prefWidth="219.0"
-                        styleClass="homebutton" stylesheets="@css.css" text="Check-Out" textAlignment="CENTER"
-                        textFill="#21273d" textOverrun="WORD_ELLIPSIS">
+                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="632.0" layoutY="121.0" mnemonicParsing="false" onAction="#onCheckOutClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-Out" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="300.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Bilder/CheckIn.png"/>
+                                <Image url="@Bilder/CheckIn.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <BarChart fx:id="freeRoomsBarChart" layoutX="33.0" layoutY="368.0" prefHeight="272.0" prefWidth="453.0"
-                          styleClass="barchart" stylesheets="@css.css" title="Room Occupancy">
+                <BarChart fx:id="freeRoomsBarChart" layoutX="33.0" layoutY="368.0" prefHeight="272.0" prefWidth="453.0" styleClass="barchart" stylesheets="@css.css" title="Room Occupancy">
                     <xAxis>
-                        <CategoryAxis side="BOTTOM"/>
+                        <CategoryAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                        <NumberAxis fx:id="yAxis" autoRanging="false" minorTickCount="2" side="LEFT" tickLabelGap="2.0"
-                                    tickUnit="2.0" upperBound="10.0"/>
+                        <NumberAxis fx:id="yAxis" autoRanging="false" minorTickCount="2" side="LEFT" tickLabelGap="2.0" tickUnit="2.0" upperBound="10.0" />
                     </yAxis>
                 </BarChart>
-                <TableView fx:id="checkOutTodayTableView" layoutX="523.0" layoutY="398.0" prefHeight="200.0"
-                           prefWidth="349.0">
+                <TableView fx:id="checkOutTodayTableView" layoutX="523.0" layoutY="398.0" prefHeight="200.0" prefWidth="349.0">
                     <columns>
-                        <TableColumn fx:id="nameCol" prefWidth="176.010009765625" text="Name"/>
-                        <TableColumn fx:id="roomNrCol" prefWidth="172.5614013671875" text="Room(s)"/>
+                        <TableColumn fx:id="nameCol" prefWidth="176.010009765625" text="Name" />
+                        <TableColumn fx:id="roomNrCol" prefWidth="172.5614013671875" text="Room(s)" />
                     </columns>
                 </TableView>
-                <Text layoutX="527.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-Out Today"/>
+                <Text layoutX="527.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-Out Today" />
             </children>
         </AnchorPane>
     </top>

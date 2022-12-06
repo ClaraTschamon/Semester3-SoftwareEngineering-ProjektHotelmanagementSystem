@@ -1,6 +1,7 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -9,8 +10,12 @@ import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -23,6 +28,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,6 +59,10 @@ public class HomeViewController implements Initializable {
     private static int totalFamilyRooms;
     private static int totalSuites;
 
+    private ImageView anhandReservierungImageView = new ImageView("com/fhv/hotelmanagement/fxml/Bilder/AnhandvonReservierungKlein.png");
+    private ImageView walkInImageView = new ImageView("com/fhv/hotelmanagement/fxml/Bilder/Walk-In.png");
+
+
     @FXML
     private void onCheckOutClicked(ActionEvent e) throws IOException {
         CheckOutViewController checkOutViewController = new CheckOutViewController();
@@ -59,11 +71,6 @@ public class HomeViewController implements Initializable {
     @FXML
     private void onHomeCheckInClicked(ActionEvent e) throws FileNotFoundException {
         choice();
-    }
-
-    @FXML
-    private void onWalkInClicked(ActionEvent e) throws IOException {
-        WalkInViewController walkInViewControllerController = new WalkInViewController();
     }
 
 
@@ -75,15 +82,6 @@ public class HomeViewController implements Initializable {
         choice.setStyle("-fx-background-color: #eeeeee; -fx-pref-height:450px; -fx-pref-width: 750px;");
 
 
-        FileInputStream anhandReservierungInput = new FileInputStream();
-        FileInputStream walkInInput = new FileInputStream("C:\\Users\\ninah\\Desktop\\FH Dornbirn\\Hotelmanagement\\src\\main\\resources\\com\\fhv\\hotelmanagement\\fxml\\Bilder\\Walk-In.png");
-        
-        Image anhandReservierungImage = new Image(anhandReservierungInput);
-        Image walkInImage = new Image(walkInInput);
-
-        ImageView anhandReservierungImageView = new ImageView(anhandReservierungImage);
-        ImageView walkInImageView = new ImageView(walkInImage);
-
         Button walkInButton = new Button("Walk-In Guest", walkInImageView);
         Button anhandReservierungButton = new Button("Based on reservations", anhandReservierungImageView);
 
@@ -91,6 +89,9 @@ public class HomeViewController implements Initializable {
         anhandReservierungButton.setText("Based on reservations");
 
         walkInButton.setFont(new Font("System", 15));
+
+
+
         anhandReservierungButton.setFont(new Font("System", 15));
 
         walkInButton.setLayoutX(460);
@@ -99,7 +100,7 @@ public class HomeViewController implements Initializable {
         anhandReservierungButton.setLayoutX(130);
         anhandReservierungButton.setLayoutY(130);
 
-        //walkInButton.onActionProperty().addListener();
+
 
         anhandReservierungButton.setStyle("-fx-content-display: TOP;");
         walkInButton.setStyle("-fx-content-display: TOP;");
@@ -108,13 +109,16 @@ public class HomeViewController implements Initializable {
         choice.getChildren().add(anhandReservierungButton);
         choice.getChildren().add(walkInButton);
         contentArea.getChildren().add(choice);
-
-
-        //FXML Datei Größe
-        //insgesamt: 1100 Breite 650 Höhe
-
-        //Home-Check-In: 700 Breite 450 Höhe
-
+            walkInButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        WalkInViewController walkInViewControllerController = new WalkInViewController();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
 
     }
 
