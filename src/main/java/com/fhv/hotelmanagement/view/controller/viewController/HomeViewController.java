@@ -1,7 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
@@ -12,10 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -24,15 +21,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -49,9 +41,13 @@ public class HomeViewController implements Initializable {
     @FXML
     private TableView<BookingViewBean> checkOutTodayTableView;
     @FXML
-    private TableColumn<BookingViewBean, String> nameCol;
+    private TableColumn<BookingViewBean, String> nameColCheckOut;
     @FXML
-    private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrCol;
+    private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrColCheckOut;
+
+    public TableView checkInTodayTableView;
+    public TableColumn nameColCheckIn;
+    public TableColumn roomNrColCheckIn;
     @FXML
     private NumberAxis yAxis;
     private static int totalSingleRooms;
@@ -86,11 +82,9 @@ public class HomeViewController implements Initializable {
         Button anhandReservierungButton = new Button("Based on reservations", anhandReservierungImageView);
 
         walkInButton.setText("Walk-In Guest");
-        anhandReservierungButton.setText("Based on reservations");
+        anhandReservierungButton.setText("Based on a reservation");
 
         walkInButton.setFont(new Font("System", 15));
-
-
 
         anhandReservierungButton.setFont(new Font("System", 15));
 
@@ -100,8 +94,6 @@ public class HomeViewController implements Initializable {
         anhandReservierungButton.setLayoutX(130);
         anhandReservierungButton.setLayoutY(130);
 
-
-
         anhandReservierungButton.setStyle("-fx-content-display: TOP;");
         walkInButton.setStyle("-fx-content-display: TOP;");
 
@@ -109,16 +101,16 @@ public class HomeViewController implements Initializable {
         choice.getChildren().add(anhandReservierungButton);
         choice.getChildren().add(walkInButton);
         contentArea.getChildren().add(choice);
-            walkInButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-                        WalkInViewController walkInViewControllerController = new WalkInViewController();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+        walkInButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    WalkInViewController walkInViewControllerController = new WalkInViewController();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            });
+            }
+        });
 
     }
 
@@ -126,43 +118,51 @@ public class HomeViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         createBarChart();
         fillCheckOutTodayTable();
+        fillCheckInTodayTable();
     }
 
-    public void createBarChart(){
-        ArrayList<RoomDTO> allRooms =  DomainController.getAllRooms();
+    public void createBarChart() {
+        ArrayList<RoomDTO> allRooms = DomainController.getAllRooms();
         //Count all Rooms
-        if(totalSingleRooms == 0){
-            for(RoomDTO roomDTO : allRooms){
+        if (totalSingleRooms == 0) {
+            for (RoomDTO roomDTO : allRooms) {
                 String category = roomDTO.getCategory().getName();
-                if(category.equals("Single room")){
-                    totalSingleRooms ++;
-                } else if(category.equals("Double room")){
-                    totalDoubleRooms ++;
-                } else if(category.equals("Family room")){
-                    totalFamilyRooms ++;
-                } else{
-                    totalSuites ++;
+                if (category.equals("Single room")) {
+                    totalSingleRooms++;
+                } else if (category.equals("Double room")) {
+                    totalDoubleRooms++;
+                } else if (category.equals("Family room")) {
+                    totalFamilyRooms++;
+                } else {
+                    totalSuites++;
                 }
             }
         }
 
-        ArrayList<BookedRoomCategoryDTO> allBookedRoomCategoryDTOs = DomainController.getAllBookedRoomCategoriesWithoutBookings();
+        //count all occupied Rooms
+        ArrayList<BookingDTO> allCurrentBookingDTOs = DomainController.getCurrentBookings();
         int occupiedSingleRooms = 0;
         int occupiedDoubleRooms = 0;
         int occupiedFamilyRooms = 0;
         int occupiedSuites = 0;
 
-        //count all occupied Rooms
-        for(BookedRoomCategoryDTO bookedRoomCategoryDTO : allBookedRoomCategoryDTOs){
-            String category = bookedRoomCategoryDTO.getRoomCategory().getName();
-            if(category.equals("Single room")){
-                occupiedSingleRooms ++;
-            } else if(category.equals("Double room")){
-                occupiedDoubleRooms ++;
-            } else if(category.equals("Family room")){
-                occupiedFamilyRooms ++;
-            } else if(category.equals("Suites")){
-                occupiedSuites ++;
+        for (BookingDTO bookingDTO : allCurrentBookingDTOs) {
+            for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
+                String category = bookedRoomCategoryDTO.getRoomCategory().getName();
+                switch (category) {
+                    case "Single room":
+                        occupiedSingleRooms++;
+                        break;
+                    case "Double room":
+                        occupiedDoubleRooms++;
+                        break;
+                    case "Family room":
+                        occupiedFamilyRooms++;
+                        break;
+                    case "Suites":
+                        occupiedSuites++;
+                        break;
+                }
             }
         }
 
@@ -188,15 +188,15 @@ public class HomeViewController implements Initializable {
 
 
         freeRoomsBarChart.getData().addAll(totalRoomsSeries, freeRoomsSeries);
-        //yAxis.setUpperBound(11);
+        freeRoomsBarChart.setLegendSide(Side.RIGHT);
     }
 
-    public void fillCheckOutTodayTable(){
+    public void fillCheckOutTodayTable() {
         ArrayList<BookingDTO> allBookingDTOs = DomainController.getCurrentBookings(); //reicht das oder muss ich aus datenbank abfragen welche bookings heute ausgechecked werden?
         ArrayList<BookingViewBean> checkOutTodayBeans = new ArrayList<>();
 
-        for(BookingDTO bookingDTO : allBookingDTOs){
-            if(bookingDTO.getDepartureDate().equals(LocalDate.now())){
+        for (BookingDTO bookingDTO : allBookingDTOs) {
+            if (bookingDTO.getDepartureDate().equals(LocalDate.now())) {
                 BookingViewBean booking = new BookingViewBean(bookingDTO);
                 checkOutTodayBeans.add(booking);
             }
@@ -204,14 +204,18 @@ public class HomeViewController implements Initializable {
 
         ObservableList<BookingViewBean> checkOutTodayBookings = FXCollections.observableArrayList(checkOutTodayBeans);
 
-        nameCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
-        roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
+        nameColCheckOut.setCellValueFactory(new PropertyValueFactory<BookingViewBean, String>("lastName"));
+        roomNrColCheckOut.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
 
-        if(checkOutTodayBookings.size() == 0){
+        if (checkOutTodayBookings.size() == 0) {
             checkOutTodayTableView.setPlaceholder(new Label("No check-outs today"));
             checkOutTodayTableView.getItems().clear();
-        }else{
+        } else {
             checkOutTodayTableView.setItems(checkOutTodayBookings);
         }
+    }
+
+    public void fillCheckInTodayTable() {
+        checkInTodayTableView.setPlaceholder(new Label("No check-ins today")); //wegen englisch video
     }
 }

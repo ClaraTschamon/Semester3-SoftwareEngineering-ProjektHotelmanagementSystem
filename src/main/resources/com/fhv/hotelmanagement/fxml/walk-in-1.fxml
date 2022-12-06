@@ -107,7 +107,7 @@
                         <Font size="13.0" />
                     </font>
                 </RadioButton>
-                <RadioButton fx:id="onlyBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Only Breakfast" toggleGroup="$packageToggleGroup">
+                <RadioButton fx:id="justBreakfast" layoutX="60.0" layoutY="433.0" mnemonicParsing="false" text="Just Breakfast" toggleGroup="$packageToggleGroup">
                     <font>
                         <Font size="13.0" />
                     </font>

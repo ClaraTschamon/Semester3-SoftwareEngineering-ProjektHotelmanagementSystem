@@ -36,7 +36,7 @@ public class WalkIn1ViewController implements Initializable {
     @FXML
     private RadioButton halfBoard;
     @FXML
-    private RadioButton onlyBreakfast;
+    private RadioButton justBreakfast;
     @FXML
     private RadioButton noPackage;
     @FXML
@@ -279,7 +279,7 @@ public class WalkIn1ViewController implements Initializable {
             } else if (selectedBoardName.equals("Half Board")) {
                 halfBoard.setSelected(true);
             } else if (selectedBoardName.equals("Just Breakfast")) {
-                onlyBreakfast.setSelected(true);
+                justBreakfast.setSelected(true);
             } else if (selectedBoardName.equals("No Package")) {
                 noPackage.setSelected(true);
             } else {

@@ -27,7 +27,7 @@
                         </InnerShadow>
                     </effect>
                 </AnchorPane>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="101.0" layoutY="121.0" mnemonicParsing="false" onAction="#onHomeCheckInClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
+                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="90.0" layoutY="121.0" mnemonicParsing="false" onAction="#onHomeCheckInClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-In" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -39,7 +39,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="632.0" layoutY="121.0" mnemonicParsing="false" onAction="#onCheckOutClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-Out" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
+                <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" ellipsisString="" layoutX="331.0" layoutY="121.0" mnemonicParsing="false" onAction="#onCheckOutClicked" prefHeight="213.0" prefWidth="219.0" styleClass="homebutton" stylesheets="@css.css" text="Check-Out" textAlignment="CENTER" textFill="#21273d" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -51,7 +51,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <BarChart fx:id="freeRoomsBarChart" layoutX="33.0" layoutY="368.0" prefHeight="272.0" prefWidth="453.0" styleClass="barchart" stylesheets="@css.css" title="Room Occupancy">
+                <BarChart fx:id="freeRoomsBarChart" layoutX="586.0" layoutY="68.0" prefHeight="268.0" prefWidth="337.0" styleClass="barchart" stylesheets="@css.css" title="Room Occupancy">
                     <xAxis>
                         <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -59,13 +59,20 @@
                         <NumberAxis fx:id="yAxis" autoRanging="false" minorTickCount="2" side="LEFT" tickLabelGap="2.0" tickUnit="2.0" upperBound="10.0" />
                     </yAxis>
                 </BarChart>
-                <TableView fx:id="checkOutTodayTableView" layoutX="523.0" layoutY="398.0" prefHeight="200.0" prefWidth="349.0">
+                <TableView fx:id="checkOutTodayTableView" layoutX="581.0" layoutY="398.0" prefHeight="200.0" prefWidth="349.0">
                     <columns>
-                        <TableColumn fx:id="nameCol" prefWidth="176.010009765625" text="Name" />
-                        <TableColumn fx:id="roomNrCol" prefWidth="172.5614013671875" text="Room(s)" />
+                        <TableColumn fx:id="nameColCheckOut" prefWidth="176.010009765625" text="Name" />
+                        <TableColumn fx:id="roomNrColCheckOut" prefWidth="172.5614013671875" text="Room(s)" />
                     </columns>
                 </TableView>
-                <Text layoutX="527.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-Out Today" />
+                <Text layoutX="582.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-Out Today" />
+            <TableView fx:id="checkInTodayTableView" layoutX="102.0" layoutY="398.0" prefHeight="200.0" prefWidth="349.0">
+               <columns>
+                  <TableColumn fx:id="nameColCheckIn" prefWidth="176.010009765625" text="Name" />
+                  <TableColumn fx:id="roomNrColCheckIn" prefWidth="172.5614013671875" text="Room(s)" />
+               </columns>
+            </TableView>
+            <Text layoutX="106.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-In Today" />
             </children>
         </AnchorPane>
     </top>

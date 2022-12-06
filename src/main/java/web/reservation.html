@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Make Reservation</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Bibliothek, Blons, Ausleihen, Leihen, Bibliohteksabo,
+            Bücher, Filme, Zeitschriften, Spiele, Ludothek">
+    <meta name="description" content="Webseite der Bibliothek Blons">
+    <meta name="author" content="Clara Tschamon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="WebStylesheet.css">
+</head>
+<body>
+<!--zurückpfeil-->
+<div class="topbar">
+    <div class="left">
+        <a href="index.html">
+            <img src="zurueckpfeil.png" id="back" alt="backArrow">
+        </a>
+    </div>
+</div>
+
+<div class="centerContent">
+    <h1>Make a Reservation</h1>
+    <div class="container">
+        <form id="form"
+              action=""
+              method="POST">
+
+            <!-- Arrival Date -->
+            <!-- Departure Date -->
+            <!-- Number of Guests -->
+            <!-- Select Room -->
+
+
+            <div class="input-control">
+                <label id="board" class="bold">Board</label>
+                <div>
+                    <label for="fullBoard"></label>
+                    <input type="radio" name="Board" id="fullBoard" value="Full Board">
+                    Full Board
+                </div>
+                <div>
+                    <label for="halfBoard"></label>
+                    <input type="radio" name="Board" id="halfBoard" value="Half Board">
+                    Half Board
+                </div>
+                <div>
+                    <label for="justBreakfast"></label>
+                    <input type="radio" name="Board" id="justBreakfast" value="Just Breakfast">
+                    Just Breakfast
+                </div>
+                <div>
+                    <label for="noPackage"></label>
+                    <input type="radio" name="Board" id="noPackage" value="No Package">
+                    No Package
+                </div>
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="firstName" class="bold">First Name <br/></label>
+                <input name="First Name" id="firstName" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="lastName" class="bold">Last Name <br/> </label>
+                <input name="Last Name" id="lastName" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="nationality" class="bold">Nationality <br/></label>
+                <select name="Nationality" id="nationality">
+                    <option value="select">--Please select--</option>
+                    <option value="Oesterreich">Österreich</option>
+                    <option value="Deutschland">Deutschland</option>
+                    <option value="Schweiz">Schweiz</option>
+                    <option value="andere">andere</option>
+                </select>
+                <div class="error"></div>
+            </div>
+
+            <!-- Date of Birth Datepicker -->
+
+            <div class="input-control">
+                <label for="street" class="bold">Street <br/></label>
+                <input name="Street" id="street" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="houseNumber" class="bold">HNr. <br/></label>
+                <input name="HouseNumber" id="houseNumber" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="city" class="bold">City <br/></label>
+                <input name="City" id="city" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="zipCode" class="bold">ZIP Code <br/></label>
+                <input name="ZIPCode" id="zipCode" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="country" class="bold">Country <br/></label>
+                <input name="Country" id="country" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="phoneNumber" class="bold">Phone Number <br/></label>
+                <input name="PhoneNumber" id="phoneNumber" type="text">
+                <div class="error"></div>
+            </div>
+
+            <div class="input-control">
+                <label for="email" class="bold">E-Mail Address <br/> </label>
+                <input name="Email Address" id="email" type="text">
+                <div class="error"></div>
+            </div>
+
+            <button type="reset">Reset</button>
+            <button type="submit">Send</button> <!--submit type damit enter taste auch submitted-->
+        </form>
+    </div>
+</div>
+</body>
+<script src="FormValidation.js"></script>
+</html>
