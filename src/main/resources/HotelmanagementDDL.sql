@@ -1,8 +1,11 @@
 DROP TABLE IF EXISTS invoiced_room_category CASCADE;
 DROP TABLE IF EXISTS invoice CASCADE;
 DROP TABLE IF EXISTS booked_room CASCADE;
+DROP TABLE IF EXISTS reserved_room CASCADE; //neu
 DROP TABLE IF EXISTS booked_room_category CASCADE;
+DROP TABLE IF EXISTS reserved_room_category CASCADE; //neu
 DROP TABLE IF EXISTS booking CASCADE;
+DROP TABLE IF EXISTS reservation CASCADE; //neu
 DROP TABLE IF EXISTS customer CASCADE;
 DROP TABLE IF EXISTS room_category CASCADE;
 DROP TABLE IF EXISTS room CASCADE;
@@ -41,6 +44,27 @@ CREATE TABLE customer(
     saved BOOLEAN
 );
 
+CREATE TABLE reservation(
+    reservation_number LONG PRIMARY KEY AUTO_INCREMENT,
+    creation_timestamp DATETIME, //Timestamp der Reservierungserstellung wegen Zahlungsfrist
+    arrival_date DATE,
+    departure_date DATE,
+    billing_street VARCHAR(255),
+    billing_house_number VARCHAR(255),
+    billing_postal_code VARCHAR(255),
+    billing_city VARCHAR(255),
+    billing_country VARCHAR(255),
+    comment VARCHAR(255),
+    payment_method VARCHAR(255),
+    credit_card_number VARCHAR(255),
+    expiration_date VARCHAR(5),
+    authorisation_number VARCHAR(255),
+    board_name VARCHAR(255),
+    FOREIGN KEY (board_name) REFERENCES board(board_name),
+    price_per_night_for_board INTEGER,
+    amount_guests INTEGER
+);
+
 CREATE TABLE booking(
     booking_number LONG PRIMARY KEY AUTO_INCREMENT,
     reservation_number LONG,
@@ -67,28 +91,6 @@ CREATE TABLE booking(
     amount_guests INTEGER
 );
 
-CREATE TABLE reservation(
-    reservation_number LONG PRIMARY KEY AUTO_INCREMENT,
-    booking_number LONG,
-    FOREIGN KEY (booking_number) REFERENCES booking(booking_number),
-    creation_timestamp DATETIME, //Timestamp der Reservierungserstellung wegen Zahlungsfrist
-    arrival_date DATE,
-    departure_date DATE,
-    billing_street VARCHAR(255),
-    billing_house_number VARCHAR(255),
-    billing_postal_code VARCHAR(255),
-    billing_city VARCHAR(255),
-    billing_country VARCHAR(255),
-    comment VARCHAR(255),
-    payment_method VARCHAR(255),
-    credit_card_number VARCHAR(255),
-    expiration_date VARCHAR(5),
-    authorisation_number VARCHAR(255),
-    board_name VARCHAR(255),
-    FOREIGN KEY (board_name) REFERENCES board(board_name),
-    price_per_night_for_board INTEGER,
-    amount_guests INTEGER
-);
 
 CREATE TABLE booked_room(
     booking_number LONG,
