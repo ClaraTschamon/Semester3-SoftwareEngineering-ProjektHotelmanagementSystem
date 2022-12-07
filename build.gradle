@@ -12,6 +12,7 @@ buildscript {
 plugins {
     id 'java'
     id 'application'
+    id 'war'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.beryx.jlink' version '2.25.0'
     id 'org.hibernate.orm' version '6.1.4.Final'
@@ -46,7 +47,6 @@ javafx {
 }
 
 dependencies {
-
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("org.hibernate:hibernate-core-jakarta:5.6.12.Final")
@@ -58,6 +58,10 @@ dependencies {
     implementation('org.apache.pdfbox:pdfbox:2.0.27')
     implementation('org.bouncycastle:bcprov-jdk15:1.46')
     implementation('org.bouncycastle:bcmail-jdk15:1.46')
+
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '5.0.0'
+    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '2.0.0'
+    runtimeOnly group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
 }
 
 test {
