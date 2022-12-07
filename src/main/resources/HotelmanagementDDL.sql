@@ -46,6 +46,7 @@ CREATE TABLE customer(
 
 CREATE TABLE reservation(
     reservation_number LONG PRIMARY KEY AUTO_INCREMENT,
+    customer_number LONG,
     creation_timestamp DATETIME, //Timestamp der Reservierungserstellung wegen Zahlungsfrist
     arrival_date DATE,
     departure_date DATE,
@@ -61,6 +62,7 @@ CREATE TABLE reservation(
     authorisation_number VARCHAR(255),
     board_name VARCHAR(255),
     FOREIGN KEY (board_name) REFERENCES board(board_name),
+    FOREIGN KEY (customer_number) REFERENCES customer(customer_number),
     price_per_night_for_board INTEGER,
     amount_guests INTEGER
 );
