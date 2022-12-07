@@ -80,9 +80,4 @@ public class BookedRoomEntity {
                 ", toDate=" + toDate +
                 '}';
     }
-
-
-
-
-
 }
