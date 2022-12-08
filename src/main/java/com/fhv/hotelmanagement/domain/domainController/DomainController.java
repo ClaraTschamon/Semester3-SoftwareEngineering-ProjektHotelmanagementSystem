@@ -63,4 +63,11 @@ public class DomainController {
     public static ArrayList<BookedRoomCategoryDTO> getAllBookedRoomCategoriesWithoutBookings(){
         return BookedRoomCategoryFactory.getAllBookedRoomCategoriesWithoutBookings();
     }
+
+    public static ReservationDTO getReservation(Long number){return ReservationFactory.getReservation(number);}
+
+    public static Long saveReservation(ReservationDTO reservationDTO) throws ReservationIsInvalidException {return ReservationFactory.saveReservation(reservationDTO);}
+
+    public static ArrayList<ReservationDTO> getAllReservations(){return ReservationFactory.getAllReservations();}
+
 }

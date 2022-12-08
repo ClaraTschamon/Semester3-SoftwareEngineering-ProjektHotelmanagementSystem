@@ -1,17 +1,11 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.factory;
 
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.Reservation;
-import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.ReservedRoomCategory;
+import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.services.StringValidator;
-import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservedRoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.util.ArrayList;
 
@@ -24,6 +18,27 @@ public class ReservationFactory {
             return createReservationDTO(reservation, true, null);
         }
         return null;
+    }
+
+    public static ArrayList<ReservationDTO> getAllReservations(){
+        if(reservations==null){
+            refreshReservations();
+        }
+
+        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+
+        for (Reservation r: reservations){
+            reservationDTOS.add(createReservationDTO(r, true, null));
+        }
+
+        return reservationDTOS;
+    }
+
+    private static void refreshReservations() {
+        reservations= new ArrayList<>();
+        for(Reservation r : PersistenceFacade.getAllReservations()){
+            reservations.add(r);
+        }
     }
 
     //TODO: getALlReservations
