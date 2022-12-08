@@ -65,6 +65,10 @@ public class PersistenceFacade{
         return RoomCategoryDataMapper.getAll();
     }
 
+    public static ArrayList<ReservedRoomCategory> getAllReservedRoomCategories() {
+        return ReservedRoomCategoryDataMapper.getAll();
+    }
+
     @SuppressWarnings("rawtypes")
     public static Optional<Room> getRoom(int id){
         return RoomDataMapper.instance().get(id);
@@ -78,6 +82,10 @@ public class PersistenceFacade{
         return BookedRoomDataMapper.getAll();
     }
 
+    public static ArrayList<ReservedRoom> getAllReservedRooms() {
+        return ReservedRoomDataMapper.getAll();
+    }
+
     public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
         return BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
     }
@@ -86,19 +94,37 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-        ArrayList<Booking> bookings = getAllBookings();
+//        ArrayList<Booking> bookings = getAllBookings();
+//
+//        for (Booking booking:bookings) {
+//            System.out.println(booking);
+//        }
 
-        for (Booking booking:bookings) {
-            System.out.println(booking);
+        //Testing out reservations
+
+//        ArrayList<Reservation> reservations = getAllReservations();
+//
+//        for (Reservation reservation:reservations) {
+//            System.out.println(reservation);
+//        }
+
+        //Testing out reservedRoomCategories
+
+        ArrayList<ReservedRoomCategory> reservedRoomCategories = getAllReservedRoomCategories();
+
+        for (ReservedRoomCategory reservedRoomCategory:reservedRoomCategories) {
+            System.out.println(reservedRoomCategory);
+        }
+
+        //Testing out reservedRooms
+
+        ArrayList<ReservedRoom> reservedRooms = getAllReservedRooms();
+
+        for (ReservedRoom reservedRoom:reservedRooms) {
+            System.out.println(reservedRoom);
         }
 
 
-
-        ArrayList<Reservation> reservations = getAllReservations();
-
-        for (Reservation reservation:reservations) {
-            System.out.println(reservation);
-        }
 
 
     }
