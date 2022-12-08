@@ -158,7 +158,7 @@ public class BookingFactory {
 
     private static boolean checkPaymentMethod(BookingDTO bookingDTO) {
         if (StringValidator.checkString(bookingDTO.getPaymentMethod())) {
-            if (bookingDTO.getPaymentMethod().equals("Kreditkarte")) {
+            if (bookingDTO.getPaymentMethod().equals("Kreditkarte")) { //TODO: Credit Card??
                 return (StringValidator.checkString(bookingDTO.getCreditCardNumber())) &&
                         (StringValidator.checkString(bookingDTO.getExpirationDate()) && StringValidator.checkValidExpirationDate(bookingDTO.getExpirationDate())) &&
                         (StringValidator.checkString(bookingDTO.getAuthorisationNumber()));

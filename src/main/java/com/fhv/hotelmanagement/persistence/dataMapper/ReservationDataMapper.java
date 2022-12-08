@@ -24,50 +24,71 @@ public class ReservationDataMapper {
         return Optional.empty();
     }
 
-    protected static BookingEntity createReservationEntity(Reservation reservation, CustomerEntity customerEntity) {
+    public Long insert(Reservation reservation) {
+        ReservationEntity reservationEntity = createReservationEntity(reservation, CustomerDataMapper.createCustomerEntity(reservation.getCustomer()));
+        var entityManager = PersistenceManager.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(reservationEntity);
+        entityManager.getTransaction().commit();
+
+        Long reservationNumber = reservationEntity.getNumber();
+        reservation.setNumber(reservationNumber);
+
+        return reservationNumber;
+    }
+
+    public void store(Reservation reservation){
+        ReservationEntity reservationEntity = createReservationEntity(reservation, CustomerDataMapper.createCustomerEntity(reservation.getCustomer()));
+        var entityManager = PersistenceManager.instance().entityManager;
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(reservationEntity);
+        entityManager.getTransaction().commit();
+    }
+
+    protected static ReservationEntity createReservationEntity(Reservation reservation, CustomerEntity customerEntity) {
         Address address = reservation.getBillingAddress();
         HashSet<ReservedRoomCategoryEntity> reservedRoomCategoryEntities = new HashSet<>();
         HashSet<ReservedRoomEntity> reservedRoomEntities = new HashSet<>();
 
-        ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), customerEntity,
-                reservation.getArrivalDate(), reservation.getDepartureDate(),
-                address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
-                reservation.getComment(), reservation.getPaymentMethod(), reservation.getCreditCardNumber(), reservation.getExpirationDate(),
-                reservation.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(reservation.getBoard()), reservation.getPricePerNightForBoard(),
+        ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), customerEntity, reservation.getCreationTimestamp(),
+                reservation.getArrivalDate(), reservation.getDepartureDate(), address.getStreet(), address.getHouseNumber(), address.getPostalCode(),
+                address.getCity(), address.getCountry(), reservation.getComment(), reservation.getPaymentMethod(), reservation.getCreditCardNumber(),
+                reservation.getExpirationDate(), reservation.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(reservation.getBoard()), reservation.getPricePerNightForBoard(),
                 reservation.getAmountGuests(), reservedRoomCategoryEntities, reservedRoomEntities);
 
-        for (BookedRoomCategory c : reservation.getBookedRoomCategories()) {
-            reservedRoomCategoryEntities.add(new BookedRoomCategoryEntity(reservationEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
+        for (ReservedRoomCategory c : reservation.getReservedRoomCategories()) {
+            reservedRoomCategoryEntities.add(new ReservedRoomCategoryEntity(reservationEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
                     c.getPricePerNight(), c.getAmount()));
 
         }
-        for (BookedRoom b : reservation.getBookedRooms()) {
-            reservedRoomEntities.add(new BookedRoomEntity(reservationEntity, RoomDataMapper.createRoomEntity(b.getRoom()), b.getFromDate(), b.getToDate()));
+        for (ReservedRoom r : reservation.getReservedRooms()) {
+            reservedRoomEntities.add(new ReservedRoomEntity(reservationEntity, RoomDataMapper.createRoomEntity(r.getRoom()), r.getFromDate(), r.getToDate()));
         }
 
         return reservationEntity;
     }
 
-    protected static Booking createBooking(BookingEntity bookingEntity) {
-        ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
-        ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
+    protected static Reservation createReservation(ReservationEntity reservationEntity) {
+        ArrayList<ReservedRoomCategory> reservedRoomCategories = new ArrayList<>();
+        ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
 
-        Booking booking = new Booking(bookingEntity.getNumber(), CustomerDataMapper.createCustomer(bookingEntity.getCustomer()),
-                bookingEntity.getArrivalDate(), bookingEntity.getCheckInDatetime(), bookingEntity.getDepartureDate(),
-                bookingEntity.getCheckOutDatetime(), bookingEntity.getBillingStreet(), bookingEntity.getBillingHouseNumber(),
-                bookingEntity.getBillingPostalCode(), bookingEntity.getBillingCity(), bookingEntity.getBillingCountry(),
-                bookingEntity.getComment(), bookingEntity.getPaymentMethod(), bookingEntity.getCreditCardNumber(),
-                bookingEntity.getExpirationDate(), bookingEntity.getAuthorisationNumber(), BoardDataMapper.createBoard(bookingEntity.getBoard()),
-                bookingEntity.getPricePerNightForBoard(), bookingEntity.getAmountGuests(), bookedRoomCategories, bookedRooms);
+        Reservation reservation = new Reservation(reservationEntity.getNumber(), CustomerDataMapper.createCustomer(reservationEntity.getCustomer()),
+                reservationEntity.getCreationTimestamp(), reservationEntity.getArrivalDate(), reservationEntity.getDepartureDate(),
+                reservationEntity.getBillingStreet(), reservationEntity.getBillingHouseNumber(), reservationEntity.getBillingPostalCode(),
+                reservationEntity.getBillingCity(), reservationEntity.getBillingCountry(), reservationEntity.getComment(),
+                reservationEntity.getPaymentMethod(), reservationEntity.getCreditCardNumber(), reservationEntity.getExpirationDate(),
+                reservationEntity.getAuthorisationNumber(), BoardDataMapper.createBoard(reservationEntity.getBoard()),
+                reservationEntity.getPricePerNightForBoard(), reservationEntity.getAmountGuests(), reservedRoomCategories, reservedRooms);
 
-        for (BookedRoomCategoryEntity e : bookingEntity.getBookedRoomCategories()) {
-            bookedRoomCategories.add(BookedRoomCategoryDataMapper.createBookedRoomCategory(e, booking));
+        for (ReservedRoomCategoryEntity e : reservationEntity.getReservedRoomCategories()) {
+            reservedRoomCategories.add(ReservedRoomCategoryDataMapper.createReservedRoomCategory(e, reservation));
         }
-        for (BookedRoomEntity e : bookingEntity.getBookedRooms()) {
-            bookedRooms.add(BookedRoomDataMapper.createBookedRoom(e, booking));
+        for (ReservedRoomEntity e : reservationEntity.getReservedRooms()) {
+            reservedRooms.add(ReservedRoomDataMapper.createReservedRoom(e, reservation));
         }
 
-        return booking;
+        return reservation;
     }
-
 }

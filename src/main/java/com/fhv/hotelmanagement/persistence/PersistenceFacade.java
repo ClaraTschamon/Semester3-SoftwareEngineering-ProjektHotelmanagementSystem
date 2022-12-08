@@ -2,7 +2,6 @@
 package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
-import com.fhv.hotelmanagement.domain.factory.CustomerFactory;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 
 import java.util.*;
@@ -35,6 +34,14 @@ public class PersistenceFacade{
     public static void storeBooking(Booking booking) {
         BookingDataMapper.instance().store(booking);
     }
+
+    public static Optional<Reservation> getReservation(Long id){
+        return ReservationDataMapper.instance().get(id);
+    }
+
+    public static Long insertReservation(Reservation reservation) {return ReservationDataMapper.instance().insert(reservation);}
+
+    public static void storeReservation(Reservation reservation){ReservationDataMapper.instance().store(reservation);}
 
     @SuppressWarnings("rawtypes")
     public static Optional<Customer> getCustomer(Long id){

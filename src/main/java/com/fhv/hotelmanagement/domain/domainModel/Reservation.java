@@ -10,6 +10,7 @@ public class Reservation {
 
     private Long number;
     private Customer customer;
+    private LocalDateTime creationTimestamp;
     private LocalDate arrivalDate;
     private LocalDate departureDate;
     private Address billingAddress;
@@ -20,41 +21,45 @@ public class Reservation {
     private String authorisationNumber;
     private Board board;
     private BigDecimal pricePerNightForBoard;
+
     private Integer amountGuests;
-    private ArrayList<BookedRoomCategory> bookedRoomCategories;
 
+    private ArrayList<ReservedRoomCategory> reservedRoomCategories;
 
-    public Reservation(Long number, Customer customer, LocalDate arrivalDate, LocalDate departureDate, String billingStreet, String billingHouseNumber, String billingPostalCode,
-                   String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
-                   String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
-                   Integer amountGuests, ArrayList<BookedRoomCategory> bookedRoomCategories) {
+    private ArrayList<ReservedRoom> reservedRooms;
 
-        this.number = number;
+    public Reservation(Long number, Customer customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+                             String billingStreet, String billingHouseNumber, String billingPostalCode, String billingCity,
+                             String  billingCountry, String comment, String paymentMethod, String creditCardNumber,
+                             String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard, Integer amountGuests,
+                             ArrayList<ReservedRoomCategory> reservedRoomCategories, ArrayList<ReservedRoom> reservedRooms){
+
+        this.number=number;
         this.customer = customer;
-        this.arrivalDate = arrivalDate;
-        this.departureDate = departureDate;
+        this.creationTimestamp=creationTimestamp;
+        this.arrivalDate=arrivalDate;
+        this.departureDate=departureDate;
         this.billingAddress = new Address(billingStreet, billingHouseNumber, billingPostalCode, billingCity, billingCountry);
-        this.comment = comment;
-        this.paymentMethod = paymentMethod;
-        this.creditCardNumber = creditCardNumber;
-        this.expirationDate = expirationDate;
-        this.authorisationNumber = authorisationNumber;
-        this.board = board;
+        this.comment=comment;
+        this.paymentMethod=paymentMethod;
+        this.creditCardNumber=creditCardNumber;
+        this.expirationDate=expirationDate;
+        this.authorisationNumber=authorisationNumber;
+        this.board=board;
         this.pricePerNightForBoard = pricePerNightForBoard;
         this.amountGuests = amountGuests;
-        this.bookedRoomCategories = bookedRoomCategories;
+        this.reservedRoomCategories = reservedRoomCategories;
+        this.reservedRooms = reservedRooms;
     }
 
-    public Reservation(Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
-                   LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
-                   String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
-                   String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
-                   Integer amountGuests, ArrayList<BookedRoomCategory> bookedRoomCategories,
-                   ArrayList<BookedRoom> bookedRooms) {
-        this(null,customer, arrivalDate, departureDate, billingStreet,
-                billingHouseNumber, billingPostalCode, billingCity, billingCountry, comment, paymentMethod,
-                creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard, amountGuests,
-                bookedRoomCategories);
+    public Reservation(Customer customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+                       String billingStreet, String billingHouseNumber, String billingPostalCode,
+                       String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
+                       String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
+                       Integer amountGuests, ArrayList<ReservedRoomCategory> reservedRoomCategories, ArrayList<ReservedRoom> reservedRooms){
+        this(null, customer, creationTimestamp, arrivalDate, departureDate, billingStreet, billingHouseNumber, billingPostalCode,
+                billingCity, billingCountry, comment, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,
+                amountGuests, reservedRoomCategories, reservedRooms);
     }
 
     public Long getNumber() {
@@ -62,7 +67,7 @@ public class Reservation {
     }
 
     public void setNumber(Long number) {
-        if (this.number == null) {
+        if(this.number == null){
             this.number = number;
         }
     }
@@ -73,6 +78,14 @@ public class Reservation {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public LocalDateTime getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(LocalDateTime creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
     }
 
     public LocalDate getArrivalDate() {
@@ -97,6 +110,14 @@ public class Reservation {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getPaymentMethod() {
@@ -147,27 +168,27 @@ public class Reservation {
         this.pricePerNightForBoard = pricePerNightForBoard;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public ArrayList<BookedRoomCategory> getBookedRoomCategories() {
-        return bookedRoomCategories;
-    }
-
-    public void setBookedRoomCategories(ArrayList<BookedRoomCategory> bookedRoomCategories) {
-        this.bookedRoomCategories = bookedRoomCategories;
-    }
-
     public Integer getAmountGuests() {
         return amountGuests;
     }
 
     public void setAmountGuests(Integer amountGuests) {
         this.amountGuests = amountGuests;
+    }
+
+    public ArrayList<ReservedRoomCategory> getReservedRoomCategories() {
+        return reservedRoomCategories;
+    }
+
+    public void setReservedRoomCategories(ArrayList<ReservedRoomCategory> reservedRoomCategories) {
+        this.reservedRoomCategories = reservedRoomCategories;
+    }
+
+    public ArrayList<ReservedRoom> getReservedRooms() {
+        return reservedRooms;
+    }
+
+    public void setReservedRooms(ArrayList<ReservedRoom> reservedRooms) {
+        this.reservedRooms = reservedRooms;
     }
 }

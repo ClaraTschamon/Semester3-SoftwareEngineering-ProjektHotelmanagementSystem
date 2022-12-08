@@ -2,8 +2,10 @@ package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "reservation")
@@ -62,16 +64,35 @@ public class ReservationEntity {
     private BoardEntity board;
 
     @Column(name = "price_per_night_for_board")
-    private Integer price_per_night_for_board;
+    private BigDecimal pricePerNightForBoard;
+
+    @Column(name="amount_guests")
+    private Integer amountGuests;
+
+    @OneToMany(
+            mappedBy = "reservation",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private Set<ReservedRoomCategoryEntity> reservedRoomCategories;
+
+    @OneToMany(
+            mappedBy = "reservation",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private Set<ReservedRoomEntity> reservedRooms;
 
     public ReservationEntity(){}
 
-    public ReservationEntity(Long number, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+    public ReservationEntity(Long number, CustomerEntity customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
                              String billingStreet, String billingHouseNumber, String billingPostalCode, String billingCity,
                              String  billingCountry, String comment, String paymentMethod, String creditCardNumber,
-                             String expirationDate, String authorisationNumber, BoardEntity board){
+                             String expirationDate, String authorisationNumber, BoardEntity board, BigDecimal pricePerNightForBoard,
+                             int amountGuests, Set<ReservedRoomCategoryEntity> reservedRoomCategories, Set<ReservedRoomEntity> reservedRooms){
 
         this.number=number;
+        this.customer = customer;
         this.creationTimestamp=creationTimestamp;
         this.arrivalDate=arrivalDate;
         this.departureDate=departureDate;
@@ -85,7 +106,11 @@ public class ReservationEntity {
         this.creditCardNumber=creditCardNumber;
         this.expirationDate=expirationDate;
         this.authorisationNumber=authorisationNumber;
-        this.board=board;
+        this.board = board;
+        this.pricePerNightForBoard = pricePerNightForBoard;
+        this.amountGuests=amountGuests;
+        this.reservedRoomCategories = reservedRoomCategories;
+        this.reservedRooms = reservedRooms;
     }
 
     public Long getNumber() {
@@ -94,6 +119,14 @@ public class ReservationEntity {
 
     public void setNumber(Long number) {
         this.number = number;
+    }
+
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
     public LocalDateTime getCreationTimestamp() {
@@ -120,108 +153,124 @@ public class ReservationEntity {
         this.departureDate = departureDate;
     }
 
-    public BoardEntity getBoard() {
-        return board;
-    }
-
-    public CustomerEntity getCustomer() {
-        return customer;
-    }
-
-    public Integer getPrice_per_night_for_board() {
-        return price_per_night_for_board;
-    }
-
-    public String getAuthorisationNumber() {
-        return authorisationNumber;
-    }
-
     public String getBillingStreet() {
         return billingStreet;
-    }
-
-    public String getBillingCity() {
-        return billingCity;
-    }
-
-    public String getBillingHouseNumber() {
-        return billingHouseNumber;
-    }
-
-    public String getBillingPostalCode() {
-        return billingPostalCode;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public String getBillingCountry() {
-        return billingCountry;
-    }
-
-    public String getCreditCardNumber() {
-        return creditCardNumber;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setAuthorisationNumber(String authorisationNumber) {
-        this.authorisationNumber = authorisationNumber;
-    }
-
-    public void setBillingCity(String billingCity) {
-        this.billingCity = billingCity;
-    }
-
-    public void setBillingHouseNumber(String billingHouseNumber) {
-        this.billingHouseNumber = billingHouseNumber;
-    }
-
-    public void setBillingPostalCode(String billingPostalCode) {
-        this.billingPostalCode = billingPostalCode;
     }
 
     public void setBillingStreet(String billingStreet) {
         this.billingStreet = billingStreet;
     }
 
-    public void setBoard(BoardEntity board) {
-        this.board = board;
+    public String getBillingHouseNumber() {
+        return billingHouseNumber;
+    }
+
+    public void setBillingHouseNumber(String billingHouseNumber) {
+        this.billingHouseNumber = billingHouseNumber;
+    }
+
+    public String getBillingPostalCode() {
+        return billingPostalCode;
+    }
+
+    public void setBillingPostalCode(String billingPostalCode) {
+        this.billingPostalCode = billingPostalCode;
+    }
+
+    public String getBillingCity() {
+        return billingCity;
+    }
+
+    public void setBillingCity(String billingCity) {
+        this.billingCity = billingCity;
+    }
+
+    public String getBillingCountry() {
+        return billingCountry;
+    }
+
+    public void setBillingCountry(String billingCountry) {
+        this.billingCountry = billingCountry;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
     }
 
-    public void setBillingCountry(String country) {
-        this.billingCountry = country;
-    }
-
-    public void setCreditCardNumber(String creditCardNumber) {
-        creditCardNumber = creditCardNumber;
-    }
-
-    public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setPrice_per_night_for_board(Integer price_per_night_for_board) {
-        this.price_per_night_for_board = price_per_night_for_board;
+    public String getCreditCardNumber() {
+        return creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getAuthorisationNumber() {
+        return authorisationNumber;
+    }
+
+    public void setAuthorisationNumber(String authorisationNumber) {
+        this.authorisationNumber = authorisationNumber;
+    }
+
+    public BoardEntity getBoard() {
+        return board;
+    }
+
+    public void setBoard(BoardEntity board) {
+        this.board = board;
+    }
+
+    public BigDecimal getPricePerNightForBoard() {
+        return pricePerNightForBoard;
+    }
+
+    public void setPricePerNightForBoard(BigDecimal pricePerNightForBoard) {
+        this.pricePerNightForBoard = pricePerNightForBoard;
+    }
+
+    public Integer getAmountGuests() {
+        return amountGuests;
+    }
+
+    public void setAmountGuests(Integer amountGuests) {
+        this.amountGuests = amountGuests;
+    }
+
+    public Set<ReservedRoomCategoryEntity> getReservedRoomCategories() {
+        return reservedRoomCategories;
+    }
+
+    public void setReservedRoomCategories(Set<ReservedRoomCategoryEntity> reservedRoomCategories) {
+        this.reservedRoomCategories = reservedRoomCategories;
+    }
+
+    public Set<ReservedRoomEntity> getReservedRooms() {
+        return reservedRooms;
+    }
+
+    public void setReservedRooms(Set<ReservedRoomEntity> reservedRooms) {
+        this.reservedRooms = reservedRooms;
     }
 }
 
