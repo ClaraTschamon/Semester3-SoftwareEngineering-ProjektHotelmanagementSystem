@@ -83,13 +83,23 @@ public class ReservationEntity {
     )
     private Set<ReservedRoomEntity> reservedRooms;
 
+
+    @OneToMany(mappedBy = "reservation",
+               cascade = CascadeType.ALL,
+                fetch=FetchType.LAZY
+    )
+    private Set<BookingEntity> bookings;
+
+
+
+
     public ReservationEntity(){}
 
     public ReservationEntity(Long number, CustomerEntity customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
                              String billingStreet, String billingHouseNumber, String billingPostalCode, String billingCity,
-                             String  billingCountry, String comment, String paymentMethod, String creditCardNumber,
+                             String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                              String expirationDate, String authorisationNumber, BoardEntity board, BigDecimal pricePerNightForBoard,
-                             int amountGuests, Set<ReservedRoomCategoryEntity> reservedRoomCategories, Set<ReservedRoomEntity> reservedRooms){
+                             int amountGuests, Set<ReservedRoomCategoryEntity> reservedRoomCategories, Set<ReservedRoomEntity> reservedRooms, Set<BookingEntity> bookings){
 
         this.number=number;
         this.customer = customer;
@@ -111,6 +121,7 @@ public class ReservationEntity {
         this.amountGuests=amountGuests;
         this.reservedRoomCategories = reservedRoomCategories;
         this.reservedRooms = reservedRooms;
+        this.bookings = bookings;
     }
 
     public Long getNumber() {

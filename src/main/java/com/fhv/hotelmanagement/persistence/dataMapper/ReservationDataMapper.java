@@ -24,6 +24,15 @@ public class ReservationDataMapper {
         return Optional.empty();
     }
 
+    public static ArrayList<Reservation> getAll(){
+        ArrayList<ReservationEntity> entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("from ReservationEntity ").getResultList();
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        for(ReservationEntity r : entities){
+            reservations.add(createReservation(r));
+        }
+        return reservations;
+    }
+
     public Long insert(Reservation reservation) {
         ReservationEntity reservationEntity = createReservationEntity(reservation, CustomerDataMapper.createCustomerEntity(reservation.getCustomer()));
         var entityManager = PersistenceManager.instance().entityManager;
@@ -51,12 +60,13 @@ public class ReservationDataMapper {
         Address address = reservation.getBillingAddress();
         HashSet<ReservedRoomCategoryEntity> reservedRoomCategoryEntities = new HashSet<>();
         HashSet<ReservedRoomEntity> reservedRoomEntities = new HashSet<>();
+        HashSet<BookingEntity> bookings = new HashSet<>();
 
         ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), customerEntity, reservation.getCreationTimestamp(),
                 reservation.getArrivalDate(), reservation.getDepartureDate(), address.getStreet(), address.getHouseNumber(), address.getPostalCode(),
                 address.getCity(), address.getCountry(), reservation.getComment(), reservation.getPaymentMethod(), reservation.getCreditCardNumber(),
                 reservation.getExpirationDate(), reservation.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(reservation.getBoard()), reservation.getPricePerNightForBoard(),
-                reservation.getAmountGuests(), reservedRoomCategoryEntities, reservedRoomEntities);
+                reservation.getAmountGuests(), reservedRoomCategoryEntities, reservedRoomEntities, bookings);
 
         for (ReservedRoomCategory c : reservation.getReservedRoomCategories()) {
             reservedRoomCategoryEntities.add(new ReservedRoomCategoryEntity(reservationEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),

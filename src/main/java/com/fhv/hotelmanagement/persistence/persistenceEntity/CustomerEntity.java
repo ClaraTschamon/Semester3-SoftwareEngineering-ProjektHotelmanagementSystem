@@ -58,13 +58,21 @@ public class CustomerEntity {
     )
     private Set<BookingEntity> bookings;
 
+    //?
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private Set<ReservationEntity> reservation;
+
     public CustomerEntity() {}
 
     public CustomerEntity(Long number, String firstName, String lastName,
                           LocalDate dateOfBirth, String nationality, String phoneNumber,
                           String email, String street, String houseNumber, String postalCode,
                           String city, String country, Boolean saved,
-                          Set<BookingEntity> bookings) {
+                          Set<BookingEntity> bookings, Set<ReservationEntity> reservation) {
         this.number = number;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -79,6 +87,7 @@ public class CustomerEntity {
         this.country = country;
         this.saved = saved; //für was steht saved??
         this.bookings = bookings;
+//        this.reservation=reservation;
     }
 
     public Long getNumber() {

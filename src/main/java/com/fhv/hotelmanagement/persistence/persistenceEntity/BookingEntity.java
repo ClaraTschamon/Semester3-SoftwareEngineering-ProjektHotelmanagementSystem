@@ -21,6 +21,10 @@ public class BookingEntity {
     @JoinColumn(name = "customer_number", nullable = false)
     private CustomerEntity customer;
 
+    @ManyToOne()
+    @JoinColumn(name = "reservation_number", nullable = false)
+    private ReservationEntity reservation;
+
     @Column(name = "arrival_date")
     private LocalDate arrivalDate;
 
@@ -87,7 +91,14 @@ public class BookingEntity {
     )
     private Set<BookedRoomEntity> bookedRooms;
 
-    public BookingEntity(){};
+//    @OneToMany(
+//            mappedBy = "booking",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+//    private Set<ReservationEntity> reservations;
+
+    public BookingEntity(){}
 
     public BookingEntity(Long number, CustomerEntity customer, LocalDate arrivalDate,
                          LocalDateTime checkInDatetime, LocalDate departureDate,
@@ -293,7 +304,14 @@ public class BookingEntity {
         return amountGuests;
     }
 
-//    @Override
+    public ReservationEntity getReservation() {
+        return reservation;
+    }
+    public void setReservation(ReservationEntity reservation) {
+        this.reservation = reservation;
+    }
+
+    //    @Override
 //    public String toString() {
 //        return "BookingEntity{" +
 //                "number=" + number +

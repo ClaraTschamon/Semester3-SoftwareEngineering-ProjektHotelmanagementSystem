@@ -27,6 +27,8 @@ public class PersistenceFacade{
         return BookingDataMapper.getAllBookingsBetween(minDate, maxDate);
     }
 
+    public static ArrayList<Reservation> getAllReservations(){return ReservationDataMapper.getAll();}
+
     public static Long insertBooking(Booking booking) {
         return BookingDataMapper.instance().insert(booking);
     }
@@ -83,6 +85,21 @@ public class PersistenceFacade{
     public static ArrayList<BookedRoomCategory> getAllBookedRoomCategories(){return BookedRoomCategoryDataMapper.getAll();}
 
     public static void main(String[] args) {
+
+        ArrayList<Booking> bookings = getAllBookings();
+
+        for (Booking booking:bookings) {
+            System.out.println(booking);
+        }
+
+
+
+        ArrayList<Reservation> reservations = getAllReservations();
+
+        for (Reservation reservation:reservations) {
+            System.out.println(reservation);
+        }
+
 
     }
 }
