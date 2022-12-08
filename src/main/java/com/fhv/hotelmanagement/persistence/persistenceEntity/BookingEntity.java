@@ -22,7 +22,7 @@ public class BookingEntity {
     private CustomerEntity customer;
 
     @ManyToOne()
-    @JoinColumn(name = "reservation_number", nullable = false)
+    @JoinColumn(name = "reservation_number")
     private ReservationEntity reservation;
 
     @Column(name = "arrival_date")
