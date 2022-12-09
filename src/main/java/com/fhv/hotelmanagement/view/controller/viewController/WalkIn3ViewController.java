@@ -9,10 +9,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.services.TextFunction;
-import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -138,6 +135,7 @@ public class WalkIn3ViewController {
             bookingDTO.setAuthorisationNumber(null);
             bookingDTO.setExpirationDate(null);
         }
+
         bookingDTO.setComment(notesTextArea.getText());
 
         AddressDTO billingAddressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();

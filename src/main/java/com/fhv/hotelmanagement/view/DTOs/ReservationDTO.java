@@ -1,3 +1,4 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.DTOs;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class ReservationDTO {
     private Long number;
+    private BookingDTO booking;
     private CustomerDTO customer;
     private LocalDateTime creationTimestamp;
     private LocalDate arrivalDate;
@@ -30,12 +32,13 @@ public class ReservationDTO {
 
     public ReservationDTO(){this.billingAddress = new AddressDTO();}
 
-    public ReservationDTO(Long number, CustomerDTO customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+    public ReservationDTO(Long number, BookingDTO booking, CustomerDTO customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
                        AddressDTO billingAddress, String paymentMethod, String creditCardNumber,
                        String expirationDate, String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard, String comment, Integer amountGuests,
                        ArrayList<ReservedRoomCategoryDTO> reservedRoomCategories, ArrayList<ReservedRoomDTO> reservedRooms){
 
         this.number=number;
+        this.booking = booking;
         this.customer = customer;
         this.creationTimestamp=creationTimestamp;
         this.arrivalDate=arrivalDate;
@@ -53,16 +56,24 @@ public class ReservationDTO {
         this.reservedRooms = reservedRooms;
     }
 
-    public ReservationDTO(CustomerDTO customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+    public ReservationDTO(CustomerDTO customer, BookingDTO booking, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
                        AddressDTO billingAddress, String paymentMethod, String creditCardNumber,
                        String expirationDate, String authorisationNumber, BoardDTO board, BigDecimal pricePerNightForBoard, String comment,
                        Integer amountGuests, ArrayList<ReservedRoomCategoryDTO> reservedRoomCategories, ArrayList<ReservedRoomDTO> reservedRooms){
-        this(null, customer, creationTimestamp, arrivalDate, departureDate, billingAddress, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,
+        this(null, booking, customer, creationTimestamp, arrivalDate, departureDate, billingAddress, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,
                 comment ,amountGuests, reservedRoomCategories, reservedRooms);
     }
 
     public Long getNumber() {
         return number;
+    }
+
+    public BookingDTO getBooking() {
+        return booking;
+    }
+
+    public void setBooking(BookingDTO booking) {
+        this.booking = booking;
     }
 
     public CustomerDTO getCustomer() {

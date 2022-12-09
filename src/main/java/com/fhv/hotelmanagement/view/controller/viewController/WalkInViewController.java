@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WalkInViewController {
     private WalkInUseCaseController useCaseController;
@@ -77,6 +78,7 @@ public class WalkInViewController {
                     WarningType.WARNING);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace())); //TODO: neu
             MainApplication.getMainController().alert("The screen could not be changed.",
                     WarningType.WARNING);
         }

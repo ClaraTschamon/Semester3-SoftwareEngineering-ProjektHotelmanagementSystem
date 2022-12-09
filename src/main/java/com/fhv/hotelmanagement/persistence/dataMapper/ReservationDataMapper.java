@@ -34,7 +34,8 @@ public class ReservationDataMapper {
     }
 
     public Long insert(Reservation reservation) {
-        ReservationEntity reservationEntity = createReservationEntity(reservation, CustomerDataMapper.createCustomerEntity(reservation.getCustomer()));
+        CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
+        ReservationEntity reservationEntity = createReservationEntity(reservation, BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity) ,customerEntity);
         var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
@@ -48,7 +49,8 @@ public class ReservationDataMapper {
     }
 
     public void store(Reservation reservation){
-        ReservationEntity reservationEntity = createReservationEntity(reservation, CustomerDataMapper.createCustomerEntity(reservation.getCustomer()));
+        CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
+        ReservationEntity reservationEntity = createReservationEntity(reservation, BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity), customerEntity);
         var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
@@ -56,22 +58,21 @@ public class ReservationDataMapper {
         entityManager.getTransaction().commit();
     }
 
-    protected static ReservationEntity createReservationEntity(Reservation reservation, CustomerEntity customerEntity) {
+    protected static ReservationEntity createReservationEntity(Reservation reservation, BookingEntity bookingEntity, CustomerEntity customerEntity) {
         Address address = reservation.getBillingAddress();
         HashSet<ReservedRoomCategoryEntity> reservedRoomCategoryEntities = new HashSet<>();
         HashSet<ReservedRoomEntity> reservedRoomEntities = new HashSet<>();
         HashSet<BookingEntity> bookings = new HashSet<>();
 
-        ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), customerEntity, reservation.getCreationTimestamp(),
+        ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), bookingEntity, customerEntity, reservation.getCreationTimestamp(),
                 reservation.getArrivalDate(), reservation.getDepartureDate(), address.getStreet(), address.getHouseNumber(), address.getPostalCode(),
                 address.getCity(), address.getCountry(), reservation.getComment(), reservation.getPaymentMethod(), reservation.getCreditCardNumber(),
                 reservation.getExpirationDate(), reservation.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(reservation.getBoard()), reservation.getPricePerNightForBoard(),
-                reservation.getAmountGuests(), reservedRoomCategoryEntities, reservedRoomEntities, bookings);
+                reservation.getAmountGuests(), reservedRoomCategoryEntities, reservedRoomEntities);
 
         for (ReservedRoomCategory c : reservation.getReservedRoomCategories()) {
             reservedRoomCategoryEntities.add(new ReservedRoomCategoryEntity(reservationEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
                     c.getPricePerNight(), c.getAmount()));
-
         }
         for (ReservedRoom r : reservation.getReservedRooms()) {
             reservedRoomEntities.add(new ReservedRoomEntity(reservationEntity, RoomDataMapper.createRoomEntity(r.getRoom()), r.getFromDate(), r.getToDate()));
@@ -81,10 +82,21 @@ public class ReservationDataMapper {
     }
 
     protected static Reservation createReservation(ReservationEntity reservationEntity) {
+        if(reservationEntity == null){
+            return null;
+        }
         ArrayList<ReservedRoomCategory> reservedRoomCategories = new ArrayList<>();
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
+        Booking booking;
 
-        Reservation reservation = new Reservation(reservationEntity.getNumber(), CustomerDataMapper.createCustomer(reservationEntity.getCustomer()),
+        if(reservationEntity.getBooking() == null){
+            booking = null;
+        } else{
+            booking = BookingDataMapper.createBooking(reservationEntity.getBooking());
+        }
+
+        Reservation reservation = new Reservation(reservationEntity.getNumber(), booking,
+                CustomerDataMapper.createCustomer(reservationEntity.getCustomer()),
                 reservationEntity.getCreationTimestamp(), reservationEntity.getArrivalDate(), reservationEntity.getDepartureDate(),
                 reservationEntity.getBillingStreet(), reservationEntity.getBillingHouseNumber(), reservationEntity.getBillingPostalCode(),
                 reservationEntity.getBillingCity(), reservationEntity.getBillingCountry(), reservationEntity.getComment(),

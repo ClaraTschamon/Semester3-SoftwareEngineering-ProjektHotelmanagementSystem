@@ -1,9 +1,8 @@
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.domain.domainModel.Reservation;
 import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.ReservedRoomEntity;
 
 import java.util.ArrayList;
@@ -51,8 +50,9 @@ public class ReservedRoomDataMapper {
 
     protected static ReservedRoomEntity createReservedRoomEntity(ReservedRoom reservedRoom) {
         Reservation reservation = reservedRoom.getReservation();
-        return new ReservedRoomEntity(ReservationDataMapper.createReservationEntity(reservation,
-                CustomerDataMapper.createCustomerEntity(reservation.getCustomer())),
+        CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
+        return new ReservedRoomEntity(
+                ReservationDataMapper.createReservationEntity(reservation, BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity), customerEntity),
                 RoomDataMapper.createRoomEntity(reservedRoom.getRoom()),
                 reservedRoom.getFromDate(), reservedRoom.getToDate());
     }

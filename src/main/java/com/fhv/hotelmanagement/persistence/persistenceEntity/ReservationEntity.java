@@ -1,10 +1,13 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
+import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,6 +18,9 @@ public class ReservationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_number")
     private Long number;
+
+    @OneToOne(mappedBy = "reservation")
+    private BookingEntity booking;
 
     @ManyToOne()
     @JoinColumn(name = "customer_number", nullable = false)
@@ -84,44 +90,37 @@ public class ReservationEntity {
     private Set<ReservedRoomEntity> reservedRooms;
 
 
-    @OneToMany(mappedBy = "reservation",
-               cascade = CascadeType.ALL,
-                fetch=FetchType.LAZY
-    )
-    private Set<BookingEntity> bookings;
-
-
-
 
     public ReservationEntity(){}
 
-    public ReservationEntity(Long number, CustomerEntity customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
-                             String billingStreet, String billingHouseNumber, String billingPostalCode, String billingCity,
-                             String billingCountry, String comment, String paymentMethod, String creditCardNumber,
-                             String expirationDate, String authorisationNumber, BoardEntity board, BigDecimal pricePerNightForBoard,
-                             int amountGuests, Set<ReservedRoomCategoryEntity> reservedRoomCategories, Set<ReservedRoomEntity> reservedRooms, Set<BookingEntity> bookings){
-
-        this.number=number;
+    public ReservationEntity(Long number, BookingEntity booking, CustomerEntity customer,
+                             LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+                             String billingStreet, String billingHouseNumber, String billingPostalCode,
+                             String billingCity, String billingCountry, String comment, String paymentMethod,
+                             String creditCardNumber, String expirationDate, String authorisationNumber, BoardEntity board,
+                             BigDecimal pricePerNightForBoard, Integer amountGuests, Set<ReservedRoomCategoryEntity> reservedRoomCategories,
+                             Set<ReservedRoomEntity> reservedRooms) {
+        this.number = number;
+        this.booking = booking;
         this.customer = customer;
-        this.creationTimestamp=creationTimestamp;
-        this.arrivalDate=arrivalDate;
-        this.departureDate=departureDate;
+        this.creationTimestamp = creationTimestamp;
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
         this.billingStreet = billingStreet;
-        this.billingHouseNumber=billingHouseNumber;
-        this.billingPostalCode=billingPostalCode;
-        this.billingCity=billingCity;
-        this.billingCountry=billingCountry;
-        this.comment=comment;
-        this.paymentMethod=paymentMethod;
-        this.creditCardNumber=creditCardNumber;
-        this.expirationDate=expirationDate;
-        this.authorisationNumber=authorisationNumber;
+        this.billingHouseNumber = billingHouseNumber;
+        this.billingPostalCode = billingPostalCode;
+        this.billingCity = billingCity;
+        this.billingCountry = billingCountry;
+        this.comment = comment;
+        this.paymentMethod = paymentMethod;
+        this.creditCardNumber = creditCardNumber;
+        this.expirationDate = expirationDate;
+        this.authorisationNumber = authorisationNumber;
         this.board = board;
         this.pricePerNightForBoard = pricePerNightForBoard;
-        this.amountGuests=amountGuests;
+        this.amountGuests = amountGuests;
         this.reservedRoomCategories = reservedRoomCategories;
         this.reservedRooms = reservedRooms;
-        this.bookings = bookings;
     }
 
     public Long getNumber() {
@@ -130,6 +129,14 @@ public class ReservationEntity {
 
     public void setNumber(Long number) {
         this.number = number;
+    }
+
+    public BookingEntity getBooking() {
+        return booking;
+    }
+
+    public void setBooking(BookingEntity booking) {
+        this.booking = booking;
     }
 
     public CustomerEntity getCustomer() {

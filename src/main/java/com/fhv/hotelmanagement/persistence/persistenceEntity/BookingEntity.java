@@ -17,13 +17,13 @@ public class BookingEntity {
     @Column(name = "booking_number")
     private Long number;
 
+    @OneToOne
+    @JoinColumn(name = "reservation_number", nullable = true)
+    private ReservationEntity reservation;
+
     @ManyToOne()
     @JoinColumn(name = "customer_number", nullable = false)
     private CustomerEntity customer;
-
-    @ManyToOne()
-    @JoinColumn(name = "reservation_number")
-    private ReservationEntity reservation;
 
     @Column(name = "arrival_date")
     private LocalDate arrivalDate;
@@ -52,30 +52,30 @@ public class BookingEntity {
     @Column(name = "billing_country")
     private String billingCountry;
 
-    @Column(name="comment")
+    @Column(name = "comment")
     private String comment;
 
-    @Column(name="payment_method")
+    @Column(name = "payment_method")
     private String paymentMethod;
 
-    @Column(name="credit_card_number")
+    @Column(name = "credit_card_number")
     private String creditCardNumber;
 
-    @Column(name="expiration_date")
+    @Column(name = "expiration_date")
     private String expirationDate;
 
-    @Column(name="authorisation_number")
+    @Column(name = "authorisation_number")
     private String authorisationNumber;
 
     @ManyToOne
-    @JoinColumn(name="board_name")
+    @JoinColumn(name = "board_name")
     private BoardEntity board;
 
-   @Column(name="price_per_night_for_board")
+    @Column(name = "price_per_night_for_board")
     private BigDecimal pricePerNightForBoard;
 
-   @Column(name="amount_guests")
-   private Integer amountGuests;
+    @Column(name = "amount_guests")
+    private Integer amountGuests;
 
     @OneToMany(
             mappedBy = "booking",
@@ -91,27 +91,20 @@ public class BookingEntity {
     )
     private Set<BookedRoomEntity> bookedRooms;
 
-//    @OneToMany(
-//            mappedBy = "booking",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY
-//    )
-//    private Set<ReservationEntity> reservations;
+    public BookingEntity() {
+    }
 
-    public BookingEntity(){}
-
-    public BookingEntity(Long number, CustomerEntity customer, LocalDate arrivalDate,
-                         LocalDateTime checkInDatetime, LocalDate departureDate,
-                         LocalDateTime checkOutDatetime, String billingStreet,
-                         String billingHouseNumber, String billingPostalCode,
-                         String billingCity, String billingCountry,
-                         String comment, String paymentMethod, String creditCardNumber,
-                         String expirationDate, String authorisationNumber, BoardEntity board,
-                         BigDecimal pricePerNightForBoard, int amountGuests,
-                         Set<BookedRoomCategoryEntity> bookedRoomCategories,
+    public BookingEntity(Long number, ReservationEntity reservation, CustomerEntity customer,
+                         LocalDate arrivalDate, LocalDateTime checkInDatetime,
+                         LocalDate departureDate, LocalDateTime checkOutDatetime,
+                         String billingStreet, String billingHouseNumber, String billingPostalCode,
+                         String billingCity, String billingCountry, String comment,
+                         String paymentMethod, String creditCardNumber, String expirationDate,
+                         String authorisationNumber, BoardEntity board, BigDecimal pricePerNightForBoard,
+                         Integer amountGuests, Set<BookedRoomCategoryEntity> bookedRoomCategories,
                          Set<BookedRoomEntity> bookedRooms) {
-
         this.number = number;
+        this.reservation = reservation;
         this.customer = customer;
         this.arrivalDate = arrivalDate;
         this.checkInDatetime = checkInDatetime;
@@ -134,10 +127,18 @@ public class BookingEntity {
         this.bookedRooms = bookedRooms;
     }
 
-
     public Long getNumber() {
         return number;
     }
+
+    public ReservationEntity getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(ReservationEntity reservation) {
+        this.reservation = reservation;
+    }
+
 
     public CustomerEntity getCustomer() {
         return customer;
@@ -304,29 +305,5 @@ public class BookingEntity {
         return amountGuests;
     }
 
-    public ReservationEntity getReservation() {
-        return reservation;
-    }
-    public void setReservation(ReservationEntity reservation) {
-        this.reservation = reservation;
-    }
 
-    //    @Override
-//    public String toString() {
-//        return "BookingEntity{" +
-//                "number=" + number +
-//                ", customer=" + customer +
-//                ", arrivalDate=" + arrivalDate +
-//                ", checkInDatetime=" + checkInDatetime +
-//                ", departureDate=" + departureDate +
-//                ", checkOutDatetime=" + checkOutDatetime +
-//                ", billingStreet='" + billingStreet + '\'' +
-//                ", billingHouseNumber='" + billingHouseNumber + '\'' +
-//                ", BillingPostalCode='" + billingPostalCode + '\'' +
-//                ", BillingCity='" + billingCity + '\'' +
-//                ", BillingCountry='" + billingCountry + '\'' +
-//                ", bookedRoomCategories=" + bookedRoomCategories +
-//                ", bookedRooms=" + bookedRooms +
-//                '}';
-//    }
 }
