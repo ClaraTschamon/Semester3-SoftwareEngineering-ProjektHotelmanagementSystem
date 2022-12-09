@@ -32,7 +32,8 @@ public class BookedRoomDataMapper {
         ArrayList<BookedRoomEntity> entities = (ArrayList<BookedRoomEntity>) PersistenceManager.instance().entityManager.createQuery("from BookedRoomEntity").getResultList();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
         for(BookedRoomEntity e : entities){
-            bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking())));
+            bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking(),
+                    ReservationDataMapper.createReservation(e.getBooking().getReservation()))));
         }
         return bookedRooms;
     }
@@ -51,7 +52,8 @@ public class BookedRoomDataMapper {
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
         for(BookedRoomEntity e : entities){
 
-            bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking())));
+            bookedRooms.add(createBookedRoom(e, BookingDataMapper.createBooking(e.getBooking(),
+                    ReservationDataMapper.createReservation(e.getBooking().getReservation()))));
         }
         return bookedRooms;
     }

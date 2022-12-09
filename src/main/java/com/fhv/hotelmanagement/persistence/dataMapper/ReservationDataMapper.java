@@ -87,15 +87,8 @@ public class ReservationDataMapper {
         }
         ArrayList<ReservedRoomCategory> reservedRoomCategories = new ArrayList<>();
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
-        Booking booking;
 
-        if(reservationEntity.getBooking() == null){
-            booking = null;
-        } else{
-            booking = BookingDataMapper.createBooking(reservationEntity.getBooking());
-        }
-
-        Reservation reservation = new Reservation(reservationEntity.getNumber(), booking,
+        Reservation reservation = new Reservation(reservationEntity.getNumber(), null,
                 CustomerDataMapper.createCustomer(reservationEntity.getCustomer()),
                 reservationEntity.getCreationTimestamp(), reservationEntity.getArrivalDate(), reservationEntity.getDepartureDate(),
                 reservationEntity.getBillingStreet(), reservationEntity.getBillingHouseNumber(), reservationEntity.getBillingPostalCode(),
@@ -103,6 +96,14 @@ public class ReservationDataMapper {
                 reservationEntity.getPaymentMethod(), reservationEntity.getCreditCardNumber(), reservationEntity.getExpirationDate(),
                 reservationEntity.getAuthorisationNumber(), BoardDataMapper.createBoard(reservationEntity.getBoard()),
                 reservationEntity.getPricePerNightForBoard(), reservationEntity.getAmountGuests(), reservedRoomCategories, reservedRooms);
+
+        Booking booking;
+        if (reservationEntity.getBooking() == null){
+            booking = null;
+        } else{
+            booking = BookingDataMapper.createBooking(reservationEntity.getBooking(), reservation);
+        }
+        reservation.setBooking(booking);
 
         for (ReservedRoomCategoryEntity e : reservationEntity.getReservedRoomCategories()) {
             reservedRoomCategories.add(ReservedRoomCategoryDataMapper.createReservedRoomCategory(e, reservation));
