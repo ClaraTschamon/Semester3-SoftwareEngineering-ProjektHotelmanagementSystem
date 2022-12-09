@@ -2,7 +2,6 @@
 package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
-import com.fhv.hotelmanagement.domain.factory.CustomerFactory;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 
 import java.util.*;
@@ -28,6 +27,8 @@ public class PersistenceFacade{
         return BookingDataMapper.getAllBookingsBetween(minDate, maxDate);
     }
 
+    public static ArrayList<Reservation> getAllReservations(){return ReservationDataMapper.getAll();}
+
     public static Long insertBooking(Booking booking) {
         return BookingDataMapper.instance().insert(booking);
     }
@@ -35,6 +36,14 @@ public class PersistenceFacade{
     public static void storeBooking(Booking booking) {
         BookingDataMapper.instance().store(booking);
     }
+
+    public static Optional<Reservation> getReservation(Long id){
+        return ReservationDataMapper.instance().get(id);
+    }
+
+    public static Long insertReservation(Reservation reservation) {return ReservationDataMapper.instance().insert(reservation);}
+
+    public static void storeReservation(Reservation reservation){ReservationDataMapper.instance().store(reservation);}
 
     @SuppressWarnings("rawtypes")
     public static Optional<Customer> getCustomer(Long id){
@@ -56,6 +65,10 @@ public class PersistenceFacade{
         return RoomCategoryDataMapper.getAll();
     }
 
+    public static ArrayList<ReservedRoomCategory> getAllReservedRoomCategories() {
+        return ReservedRoomCategoryDataMapper.getAll();
+    }
+
     @SuppressWarnings("rawtypes")
     public static Optional<Room> getRoom(int id){
         return RoomDataMapper.instance().get(id);
@@ -69,6 +82,10 @@ public class PersistenceFacade{
         return BookedRoomDataMapper.getAll();
     }
 
+    public static ArrayList<ReservedRoom> getAllReservedRooms() {
+        return ReservedRoomDataMapper.getAll();
+    }
+
     public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
         return BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
     }
@@ -76,6 +93,39 @@ public class PersistenceFacade{
     public static ArrayList<BookedRoomCategory> getAllBookedRoomCategories(){return BookedRoomCategoryDataMapper.getAll();}
 
     public static void main(String[] args) {
+
+//        ArrayList<Booking> bookings = getAllBookings();
+//
+//        for (Booking booking:bookings) {
+//            System.out.println(booking);
+//        }
+
+        //Testing out reservations
+
+//        ArrayList<Reservation> reservations = getAllReservations();
+//
+//        for (Reservation reservation:reservations) {
+//            System.out.println(reservation);
+//        }
+
+        //Testing out reservedRoomCategories
+
+        ArrayList<ReservedRoomCategory> reservedRoomCategories = getAllReservedRoomCategories();
+
+        for (ReservedRoomCategory reservedRoomCategory:reservedRoomCategories) {
+            System.out.println(reservedRoomCategory);
+        }
+
+        //Testing out reservedRooms
+
+        ArrayList<ReservedRoom> reservedRooms = getAllReservedRooms();
+
+        for (ReservedRoom reservedRoom:reservedRooms) {
+            System.out.println(reservedRoom);
+        }
+
+
+
 
     }
 }

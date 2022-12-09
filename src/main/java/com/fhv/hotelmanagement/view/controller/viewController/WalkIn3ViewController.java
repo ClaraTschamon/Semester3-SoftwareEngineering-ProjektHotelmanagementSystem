@@ -112,7 +112,8 @@ public class WalkIn3ViewController {
 
     public void fillSummaryLabels() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
-        CustomerDTO customerDTO = bookingDTO.getCustomer();
+        //CustomerDTO customerDTO = bookingDTO.getCustomer();
+        CustomerDTO customerDTO = viewController.getUseCaseController().getCustomer();
         checkInForLabel.setText("Check-in for: " + customerDTO.getFirstName() + " " + customerDTO.getLastName());
 
         StringBuilder sb = new StringBuilder("Room number(s): ");

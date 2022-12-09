@@ -13,7 +13,6 @@ public class PersistenceManager {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("HotelmanagementDB");
         entityManager = emf.createEntityManager();
     }
-
     protected static PersistenceManager instance(){
         if(_instance == null){
             _instance = new PersistenceManager();

@@ -14,6 +14,8 @@ module com.fhv.hotelmanagement {
     requires org.apache.fontbox;
     requires org.apache.pdfbox;
     requires java.desktop;
+    requires jakarta.servlet.jsp.jstl;
+    requires jakarta.servlet;
 
     exports com.fhv.hotelmanagement.view.controller.viewController;
     opens com.fhv.hotelmanagement.view.controller.viewController to javafx.fxml;

@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.domain.domainModel.Customer;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.ReservationEntity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -66,10 +67,11 @@ public class CustomerDataMapper{
     protected static CustomerEntity createCustomerEntity(Customer customer) {
         Address address = customer.getAddress();
         HashSet<BookingEntity> bookingEntities = new HashSet<>();
+        HashSet<ReservationEntity> reservationEntities = new HashSet<>();
 
         CustomerEntity customerEntity = new CustomerEntity(customer.getNumber(), customer.getFirstName(), customer.getLastName(), customer.getDateOfBirth(),
                 customer.getNationality(), customer.getPhoneNumber(), customer.getEmail(), address.getStreet(), address.getHouseNumber(),
-                address.getPostalCode(), address.getCity(), address.getCountry(), customer.getSaved(), bookingEntities);
+                address.getPostalCode(), address.getCity(), address.getCountry(), customer.getSaved(), bookingEntities, reservationEntities);
 
 //        for (Booking b : customer.getBookings()) {
 //            bookingEntities.add(BookingDataMapper.createBookingEntity(b, customerEntity));

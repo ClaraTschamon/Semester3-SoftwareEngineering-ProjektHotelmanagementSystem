@@ -6,13 +6,12 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table (name = "booked_room")
-public class BookedRoomEntity {
-
+@Table(name="reserved_room")
+public class ReservedRoomEntity {
     @Id
     @ManyToOne
-    @JoinColumn(name = "booking_number")
-    private BookingEntity booking;
+    @JoinColumn(name = "reservation_number")
+    private ReservationEntity reservation;
 
     @Id
     @ManyToOne
@@ -25,25 +24,23 @@ public class BookedRoomEntity {
     @Column(name = "to_date")
     private LocalDate toDate;
 
-    public BookedRoomEntity(){};
+    public ReservedRoomEntity(){};
 
-    public BookedRoomEntity(BookingEntity booking, RoomEntity room,
+    public ReservedRoomEntity(ReservationEntity reservation, RoomEntity room,
                             LocalDate fromDate, LocalDate toDate) {
-        this.booking = booking;
+        this.reservation = reservation;
         this.room = room;
         this.fromDate = fromDate;
         this.toDate = toDate;
     }
 
-
-    public BookingEntity getBooking() {
-        return booking;
+    public ReservationEntity getReservation() {
+        return reservation;
     }
 
-    public void setBooking(BookingEntity booking) {
-        this.booking = booking;
+    public void setReservation(ReservationEntity reservation) {
+        this.reservation = reservation;
     }
-
 
     public RoomEntity getRoom() {
         return room;
@@ -53,7 +50,6 @@ public class BookedRoomEntity {
         this.room = room;
     }
 
-
     public LocalDate getFromDate() {
         return fromDate;
     }
@@ -61,7 +57,6 @@ public class BookedRoomEntity {
     public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
-
 
     public LocalDate getToDate() {
         return toDate;
@@ -73,8 +68,8 @@ public class BookedRoomEntity {
 
     @Override
     public String toString() {
-        return "BookedRoomEntity{" +
-                "booking=" + booking +
+        return "ReservedRoomEntity{" +
+                "reservation=" + reservation +
                 ", room=" + room +
                 ", fromDate=" + fromDate +
                 ", toDate=" + toDate +

@@ -25,7 +25,6 @@ public class BoardEntity {
         this.pricePerNight = pricePerNight;
     }
 
-
     public String getName() {
         return name;
     }
