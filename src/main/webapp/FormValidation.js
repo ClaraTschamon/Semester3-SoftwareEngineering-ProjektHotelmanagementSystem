@@ -8,7 +8,8 @@ const noPackage = document.getElementById('noPackage');
 
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
-let nationality = document.querySelectorAll('input[name="Nationality"]');
+/*let nationality = document.querySelectorAll('input[name="Nationality"]');*/
+const nationality = document.getElementById('nationality');
 const street = document.getElementById('street');
 const houseNumber = document.getElementById('houseNumber');
 const city = document.getElementById('city');
@@ -54,13 +55,47 @@ const isValidEmail = emailValue => {
 }
 
 const isValidStreet = streetValue => {
+    const regex = new RegExp('/^([a-zA-Z0-9 _/-]*$)/');
+    return regex.test(streetValue);
     //cronst regex = ...
     //return regex.test(streetValue);
 }
 
 const isValidHouseNr = houseNumberValue => {
+    const regex = new RegExp('/^([a-zA-Z0-9_]){1,5}/');
+    return regex.test(houseNumberValue);
     //cronst regex = ...
     //return regex.test(houseNumberValue);
+}
+
+const isValidFirstName = firstName => {
+    const regex = new RegExp('/^[a-zA-Z -]*$/');
+    return regex.test(firstName);
+}
+
+const isValidLastName = lastName => {
+    const regex = new RegExp('/^[a-zA-Z -]*$/');
+    return regex.test(lastName);
+}
+
+const isValidCity = city => {
+    const regex = new RegExp('^[A-Za-z- ]*');
+    return regex.test(city);
+}
+
+const isValidZipCode = zipCode => {
+    const regex = new RegExp('^[0-9a-zA-Z ]{3,6}');
+    return regex.test(zipCode);
+}
+
+const isValidPhoneNumber = phoneNumber => {
+    const regex = new RegExp('/^([+])?([0-9 ]){7,12}/');
+    return regex.test(phoneNumber);
+}
+
+const isValidCountry = country => {
+    const regex = new RegExp('^[A-Za-z]*$');
+    return regex.test(country);
 }
 
 const validateInputs = () =>{
@@ -74,6 +109,7 @@ const validateInputs = () =>{
     const countryValue = country.value.trim();
     const phoneNumberValue = phoneNumber.value.trim();
     const emailValue = email.value.trim();
+    const nationalityValue = nationality.value;
 
     //umändern in board radiobutton überprüfung
     /*
@@ -83,15 +119,34 @@ const validateInputs = () =>{
         setSuccess(gender)
     }*/
 
+   if(!(fullBoard.checked === true ||
+        halfBoard.checked === true ||
+        justBreakfast.checked === true ||
+        noPackage.checked === true)) {
+       setError(board, 'Required field');
+   } else {
+       setSuccess(board);
+   }
+
+    if(nationality.value === 'select') {
+        setError(nationality, 'Required field');
+    } else {
+        setSuccess(nationality);
+    }
+
     if(firstNameValue === ''){
-        setError(firstName, 'Required');
-    }else{
+        setError(firstName, 'Required field');
+    } else if(!firstNameValue.match(/^([a-zA-Z -])*$/)) {
+        setError(firstName, 'Incorrect input')
+    } else {
         setSuccess(firstName);
     }
 
     if(lastNameValue === ''){
-        setError(lastName, 'Required')
-    }else{
+        setError(lastName, 'Required field')
+    } else if(!lastNameValue.match(/^([a-zA-Z -])*$/)) {
+        setError(lastName, 'Incorrect input')
+    } else{
         setSuccess(lastName)
     }
 
@@ -102,29 +157,61 @@ const validateInputs = () =>{
     }
 
     if(streetValue === ''){
-        setError(street, 'Required');
-    }
-    else if(!isValidStreet(streetValue)){
-        setError(street, 'Not a valid street name')
-    }
-    else{
+        setError(street, 'Required field');
+    } else if(!streetValue.match(/^([0-9a-zA-Z /-])*$/)) {
+        setError(street, 'Incorrect input')
+    } else{
         setSuccess(street);
     }
 
-    //city
-    //zipCode
-    //country
-    //phone Number
+    if (cityValue === '') {
+        setError (city, 'Required field');
+    } else if(!cityValue.match(/^([a-zA-Z /-])*$/)) {
+        setError(city, 'Incorrect input')
+    } else {
+        setSuccess (city);
+    }
+
+    if (zipCodeValue === '') {
+        setError (zipCode, 'Required field');
+    } else if(!zipCodeValue.match(/^([0-9a-zA-Z]{3,6})$/)) {
+        setError(zipCode, 'Incorrect input')
+    } else {
+        setSuccess (zipCode);
+    }
+
+    if (countryValue === '') {
+        setError (country, 'Required field');
+    } else if(!countryValue.match(/^([a-zA-ZöÖäÄüÜß -])*$/)) {
+        setError(country, 'Incorrect input')
+    } else {
+        setSuccess(country);
+    }
+
+    if (phoneNumberValue === '') {
+        setError (phoneNumber, 'Required field');
+    } else if(!phoneNumberValue.match(/^[+]?[0-9 /]{7,15}/)) {
+        setError(phoneNumber, 'Incorrect input')
+    } else {
+        setSuccess (phoneNumber);
+    }
+
+    if (houseNumberValue === '') {
+        setError(houseNumber, 'Required field');
+    } else if(!phoneNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
+        setError(phoneNumber, 'Incorrect input')
+    } else {
+        setSuccess (houseNumber);
+    }
 
     if(emailValue === ''){
-        setError(email, 'Required');
-    }
-    else if(!isValidEmail(emailValue)){
-        setError(email, 'Not a valid email')
-    }
-    else{
+        setError(email, 'Required field');
+    } else if(!emailValue.match(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][ÄäÖöÜüA-Za-z0-9-]+(\.[ÄäÖöÜüA-Za-z0-9-]+)*(\.[A-Za-z ]{2,})$/)) {
+        setError(email, 'Incorrect input')
+    } else{
         setSuccess(email);
     }
+
 
     /*
     if(password1Value === ''){

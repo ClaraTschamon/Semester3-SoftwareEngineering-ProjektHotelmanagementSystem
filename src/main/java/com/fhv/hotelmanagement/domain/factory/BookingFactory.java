@@ -81,7 +81,7 @@ public class BookingFactory {
         ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
 
-        BookingDTO bookingDTO = new BookingDTO(booking.getNumber(),
+        BookingDTO bookingDTO = new BookingDTO(booking.getNumber(), ReservationFactory.createReservationDTO(booking.getReservation(), true, null),
                 CustomerFactory.createCustomerDTO(booking.getCustomer()), booking.getArrivalDate(),
                 booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 AddressFactory.createAddressDTO(booking.getBillingAddress()), booking.getPaymentMethod(), booking.getCreditCardNumber(),
@@ -105,7 +105,8 @@ public class BookingFactory {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
 
-        Booking booking = new Booking(bookingDTO.getNumber(), CustomerFactory.createCustomer(bookingDTO.getCustomer()), bookingDTO.getArrivalDate(),
+        Booking booking = new Booking(bookingDTO.getNumber(), ReservationFactory.createReservation(bookingDTO.getReservation(), true),
+                CustomerFactory.createCustomer(bookingDTO.getCustomer()), bookingDTO.getArrivalDate(),
                 bookingDTO.getCheckInDatetime(), bookingDTO.getDepartureDate(), bookingDTO.getCheckOutDatetime(),
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
                 billingAddress.getCity(), billingAddress.getCountry(), bookingDTO.getComment(), bookingDTO.getPaymentMethod(),
@@ -128,6 +129,7 @@ public class BookingFactory {
     protected static boolean checkBooking(BookingDTO bookingDTO) {
 //        System.out.println( // debug only
 //                (bookingDTO != null) + " " +
+//                        checkReservation(bookingDTO) + " " +
 //                        (CustomerFactory.checkCustomer(bookingDTO.getCustomer())) + " " +
 //                        (bookingDTO.getArrivalDate() != null) + " " +
 //                        (bookingDTO.getDepartureDate() != null) + " " +
@@ -141,7 +143,8 @@ public class BookingFactory {
 //                        ((bookingDTO.getBoard() == null && bookingDTO.getPricePerNightForBoard() == null)
 //                                || (BoardFactory.checkBoard(bookingDTO.getBoard()) && bookingDTO.getPricePerNightForBoard() != null && bookingDTO.getPricePerNightForBoard().intValue() >= 0))
 //        );
-        return (bookingDTO != null) &&
+        return (bookingDTO != null) && checkReservation(bookingDTO) &&
+                //(ReservationFactory.checkReservation(bookingDTO.getReservation())) &&
                 (CustomerFactory.checkCustomer(bookingDTO.getCustomer())) &&
                 (bookingDTO.getArrivalDate() != null) &&
                 (bookingDTO.getDepartureDate() != null) &&
@@ -167,6 +170,17 @@ public class BookingFactory {
             }
         } else {
             return false;
+        }
+    }
+
+    private static boolean checkReservation(BookingDTO bookingDTO){
+        if(bookingDTO.getReservation() == null){
+            return true;
+        } else {
+            if(ReservationFactory.checkReservation(bookingDTO.getReservation())){
+                return true;
+            }
+            return  false;
         }
     }
 }

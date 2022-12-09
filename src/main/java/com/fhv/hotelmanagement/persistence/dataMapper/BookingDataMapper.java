@@ -91,17 +91,26 @@ public class BookingDataMapper {
     }
 
     protected static BookingEntity createBookingEntity(Booking booking, CustomerEntity customerEntity) {
+        ReservationEntity reservationEntity = null;
+
         Address address = booking.getBillingAddress();
         HashSet<BookedRoomCategoryEntity> bookedRoomCategoryEntities = new HashSet<>();
         HashSet<BookedRoomEntity> bookedRoomEntities = new HashSet<>();
 
-        BookingEntity bookingEntity = new BookingEntity(booking.getNumber(), customerEntity,
-                booking.getArrivalDate(), booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
+        BookingEntity bookingEntity = new BookingEntity(booking.getNumber(), reservationEntity, customerEntity, booking.getArrivalDate(),
+                booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 address.getStreet(), address.getHouseNumber(), address.getPostalCode(), address.getCity(), address.getCountry(),
                 booking.getComment(), booking.getPaymentMethod(), booking.getCreditCardNumber(), booking.getExpirationDate(),
                 booking.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(booking.getBoard()), booking.getPricePerNightForBoard(),
                 booking.getAmountGuests(), bookedRoomCategoryEntities, bookedRoomEntities);
 
+
+        if(booking.getReservation() != null) {
+            reservationEntity = ReservationDataMapper.createReservationEntity(booking.getReservation(), bookingEntity, customerEntity); //Nullpointer Exception
+            bookingEntity.setReservation(reservationEntity);
+            System.out.println(booking.getReservation().toString());
+
+        }
         for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
             bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
                     c.getPricePerNight(), c.getAmount()));
@@ -118,7 +127,15 @@ public class BookingDataMapper {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
 
-        Booking booking = new Booking(bookingEntity.getNumber(), CustomerDataMapper.createCustomer(bookingEntity.getCustomer()),
+        Reservation reservation;
+        if(bookingEntity.getReservation() == null){
+            reservation = null;
+        } else{
+            reservation = ReservationDataMapper.createReservation(bookingEntity.getReservation());
+        }
+
+        Booking booking = new Booking(bookingEntity.getNumber(), reservation,
+                CustomerDataMapper.createCustomer(bookingEntity.getCustomer()),
                 bookingEntity.getArrivalDate(), bookingEntity.getCheckInDatetime(), bookingEntity.getDepartureDate(),
                 bookingEntity.getCheckOutDatetime(), bookingEntity.getBillingStreet(), bookingEntity.getBillingHouseNumber(),
                 bookingEntity.getBillingPostalCode(), bookingEntity.getBillingCity(), bookingEntity.getBillingCountry(),

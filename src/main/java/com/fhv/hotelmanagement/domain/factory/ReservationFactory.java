@@ -41,7 +41,6 @@ public class ReservationFactory {
         }
     }
 
-    //TODO: getALlReservations
 
     public static Long saveReservation(ReservationDTO reservationDTO) throws ReservationIsInvalidException {
         Long reservationNumber = reservationDTO.getNumber();
@@ -59,11 +58,16 @@ public class ReservationFactory {
     }
 
     protected static ReservationDTO createReservationDTO(Reservation reservation, boolean includeArrays, ReservedRoom allExcept){
+        if(reservation == null){
+            return null;
+        }
         ArrayList<ReservedRoomCategoryDTO> reservedRoomCategoryDTOS = new ArrayList<>();
         ArrayList<ReservedRoomDTO> reservedRoomDTOS = new ArrayList<>();
 
         ReservationDTO reservationDTO = new ReservationDTO(reservation.getNumber(),
-                CustomerFactory.createCustomerDTO(reservation.getCustomer()), reservation.getCreationTimestamp(), reservation.getArrivalDate(),
+                BookingFactory.createBookingDTO(reservation.getBooking(), true, null),
+                CustomerFactory.createCustomerDTO(reservation.getCustomer()),
+                reservation.getCreationTimestamp(), reservation.getArrivalDate(),
                 reservation.getDepartureDate(), AddressFactory.createAddressDTO(reservation.getBillingAddress()),
                 reservation.getPaymentMethod(), reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(),
                 BoardFactory.createBoardDTO(reservation.getBoard()), reservation.getPricePerNightForBoard(),reservation.getComment(),
@@ -81,12 +85,16 @@ public class ReservationFactory {
     }
 
     protected static Reservation createReservation(ReservationDTO reservationDTO, boolean fillArrays){
+        if(reservationDTO == null){
+            return null;
+        }
         AddressDTO billingAddress = reservationDTO.getBillingAddress();
 
         ArrayList<ReservedRoomCategory> reservedRoomCategories = new ArrayList<>();
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
 
-        Reservation reservation = new Reservation(reservationDTO.getNumber(), CustomerFactory.createCustomer(reservationDTO.getCustomer()),
+        Reservation reservation = new Reservation(reservationDTO.getNumber(), BookingFactory.createBooking(reservationDTO.getBooking(), true),
+                CustomerFactory.createCustomer(reservationDTO.getCustomer()),
                 reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
                 billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Booking {
 
     private Long number;
+
+    private Reservation reservation;
     private Customer customer;
     private LocalDate arrivalDate;
     private LocalDateTime checkInDatetime;
@@ -26,13 +28,14 @@ public class Booking {
     private ArrayList<BookedRoomCategory> bookedRoomCategories;
     private ArrayList<BookedRoom> bookedRooms;
 
-    public Booking(Long number, Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
+    public Booking(Long number, Reservation reservation, Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                    String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
                    Integer amountGuests, ArrayList<BookedRoomCategory> bookedRoomCategories, ArrayList<BookedRoom> bookedRooms) {
 
         this.number = number;
+        this.reservation = reservation;
         this.customer = customer;
         this.arrivalDate = arrivalDate;
         this.checkInDatetime = checkInDatetime;
@@ -51,13 +54,13 @@ public class Booking {
         this.bookedRooms = bookedRooms;
     }
 
-    public Booking(Customer customer, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
+    public Booking(Customer customer, Reservation reservation, LocalDate arrivalDate, LocalDateTime checkInDatetime, LocalDate departureDate,
                    LocalDateTime checkOutDatetime, String billingStreet, String billingHouseNumber, String billingPostalCode,
                    String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                    String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
                    Integer amountGuests, ArrayList<BookedRoomCategory> bookedRoomCategories,
                    ArrayList<BookedRoom> bookedRooms) {
-        this(null,customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingStreet,
+        this(null, reservation, customer, arrivalDate, checkInDatetime, departureDate, checkOutDatetime, billingStreet,
                 billingHouseNumber, billingPostalCode, billingCity, billingCountry, comment, paymentMethod,
                 creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard, amountGuests,
                 bookedRoomCategories, bookedRooms);
@@ -71,6 +74,14 @@ public class Booking {
         if (this.number == null) {
             this.number = number;
         }
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     public Customer getCustomer() {

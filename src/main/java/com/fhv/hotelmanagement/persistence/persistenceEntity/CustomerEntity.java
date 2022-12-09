@@ -58,13 +58,12 @@ public class CustomerEntity {
     )
     private Set<BookingEntity> bookings;
 
-    //?
     @OneToMany(
             mappedBy = "customer",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private Set<ReservationEntity> reservation;
+    private Set<ReservationEntity> reservations;
 
     public CustomerEntity() {}
 
@@ -72,7 +71,7 @@ public class CustomerEntity {
                           LocalDate dateOfBirth, String nationality, String phoneNumber,
                           String email, String street, String houseNumber, String postalCode,
                           String city, String country, Boolean saved,
-                          Set<BookingEntity> bookings, Set<ReservationEntity> reservation) {
+                          Set<BookingEntity> bookings, Set<ReservationEntity> reservations) {
         this.number = number;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -85,9 +84,9 @@ public class CustomerEntity {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
-        this.saved = saved; //für was steht saved??
+        this.saved = saved;
         this.bookings = bookings;
-//        this.reservation=reservation;
+        this.reservations = reservations;
     }
 
     public Long getNumber() {
@@ -211,23 +210,11 @@ public class CustomerEntity {
         this.bookings = bookings;
     }
 
-    @Override
-    public String toString() {
-        return "CustomerEntity{" +
-                "number=" + number +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", nationality='" + nationality + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", street='" + street + '\'' +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", saved=" + saved +
-                ", bookings=" + bookings +
-                '}';
+    public Set<ReservationEntity> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<ReservationEntity> reservations) {
+        this.reservations = reservations;
     }
 }

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Customer {
-
     private Long number;
     private String firstName;
     private String lastName;
@@ -16,11 +15,12 @@ public class Customer {
     private Address address;
     private boolean saved;
     private ArrayList<Booking> bookings;
+    private ArrayList<Reservation> reservations;
 
 
     public Customer(Long number,String firstName, String lastName, LocalDate dateOfBirth, String nationality,
                     String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
-                    String country, boolean saved, ArrayList<Booking> bookings) {
+                    String country, boolean saved, ArrayList<Booking> bookings, ArrayList<Reservation> reservations) {
 
         this.number = number;
         this.firstName = firstName;
@@ -32,12 +32,14 @@ public class Customer {
         this.address = new Address(street, houseNumber, postalCode, city, country);
         this.saved = saved;
         this.bookings = bookings;
+        this.reservations = reservations;
     }
 
     public Customer(String firstName, String lastName, LocalDate dateOfBirth, String nationality,
                     String phoneNumber, String email, String street, String houseNumber, String postalCode, String city,
-                    String country, boolean saved, ArrayList<Booking> bookings) {
-        this(null, firstName, lastName, dateOfBirth, nationality, phoneNumber, email, street, houseNumber, postalCode, city, country, saved, bookings);
+                    String country, boolean saved, ArrayList<Booking> bookings, ArrayList<Reservation> reservations) {
+        this(null, firstName, lastName, dateOfBirth, nationality, phoneNumber, email, street, houseNumber, postalCode,
+                city, country, saved, bookings, reservations);
     }
 
     public Long getNumber() {
@@ -121,5 +123,13 @@ public class Customer {
 
     public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(ArrayList<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

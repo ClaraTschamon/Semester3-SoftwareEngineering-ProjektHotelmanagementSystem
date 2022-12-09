@@ -2,6 +2,7 @@ package com.fhv.hotelmanagement;
 
 import com.fhv.hotelmanagement.view.controller.viewController.BookingOverviewViewController;
 import com.fhv.hotelmanagement.view.controller.viewController.HomeViewController;
+import com.fhv.hotelmanagement.view.controller.viewController.ReservationOverviewViewController;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -109,20 +110,31 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void onBookingsClicked(ActionEvent actionEvent) throws IOException {
-        try{
-            BookingOverviewViewController bookingOverviewViewController = new BookingOverviewViewController();
-            loadIntoContentArea("booking-overview");
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void onHomeClicked(ActionEvent actionEvent) {
         try{
             HomeViewController homeViewController = new HomeViewController();
             //homeViewController.createBarChart();
             loadIntoContentArea("home");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void onReservationsClicked(ActionEvent actionEvent){
+        try{
+            ReservationOverviewViewController reservationOverviewViewController = new ReservationOverviewViewController();
+            loadIntoContentArea("reservation-overview");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void onBookingsClicked(ActionEvent actionEvent) throws IOException {
+        try{
+            BookingOverviewViewController bookingOverviewViewController = new BookingOverviewViewController();
+            loadIntoContentArea("booking-overview");
         }catch (IOException e){
             System.out.println(e.getMessage());
         }

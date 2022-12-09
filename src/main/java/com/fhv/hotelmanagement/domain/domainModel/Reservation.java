@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Reservation {
 
     private Long number;
+    private Booking booking;
     private Customer customer;
     private LocalDateTime creationTimestamp;
     private LocalDate arrivalDate;
@@ -28,13 +29,14 @@ public class Reservation {
 
     private ArrayList<ReservedRoom> reservedRooms;
 
-    public Reservation(Long number, Customer customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+    public Reservation(Long number, Booking booking, Customer customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
                              String billingStreet, String billingHouseNumber, String billingPostalCode, String billingCity,
                              String  billingCountry, String comment, String paymentMethod, String creditCardNumber,
                              String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard, Integer amountGuests,
                              ArrayList<ReservedRoomCategory> reservedRoomCategories, ArrayList<ReservedRoom> reservedRooms){
 
         this.number=number;
+        this.booking = booking;
         this.customer = customer;
         this.creationTimestamp=creationTimestamp;
         this.arrivalDate=arrivalDate;
@@ -52,12 +54,12 @@ public class Reservation {
         this.reservedRooms = reservedRooms;
     }
 
-    public Reservation(Customer customer, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
+    public Reservation(Customer customer, Booking booking, LocalDateTime creationTimestamp, LocalDate arrivalDate, LocalDate departureDate,
                        String billingStreet, String billingHouseNumber, String billingPostalCode,
                        String billingCity, String billingCountry, String comment, String paymentMethod, String creditCardNumber,
                        String expirationDate, String authorisationNumber, Board board, BigDecimal pricePerNightForBoard,
                        Integer amountGuests, ArrayList<ReservedRoomCategory> reservedRoomCategories, ArrayList<ReservedRoom> reservedRooms){
-        this(null, customer, creationTimestamp, arrivalDate, departureDate, billingStreet, billingHouseNumber, billingPostalCode,
+        this(null, booking, customer, creationTimestamp, arrivalDate, departureDate, billingStreet, billingHouseNumber, billingPostalCode,
                 billingCity, billingCountry, comment, paymentMethod, creditCardNumber, expirationDate, authorisationNumber, board, pricePerNightForBoard,
                 amountGuests, reservedRoomCategories, reservedRooms);
     }
@@ -70,6 +72,14 @@ public class Reservation {
         if(this.number == null){
             this.number = number;
         }
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 
     public Customer getCustomer() {
