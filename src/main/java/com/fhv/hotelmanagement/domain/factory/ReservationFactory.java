@@ -64,8 +64,7 @@ public class ReservationFactory {
         ArrayList<ReservedRoomCategoryDTO> reservedRoomCategoryDTOS = new ArrayList<>();
         ArrayList<ReservedRoomDTO> reservedRoomDTOS = new ArrayList<>();
 
-        ReservationDTO reservationDTO = new ReservationDTO(reservation.getNumber(),
-                BookingFactory.createBookingDTO(reservation.getBooking(), true, null),
+        ReservationDTO reservationDTO = new ReservationDTO(reservation.getNumber(), null,
                 CustomerFactory.createCustomerDTO(reservation.getCustomer()),
                 reservation.getCreationTimestamp(), reservation.getArrivalDate(),
                 reservation.getDepartureDate(), AddressFactory.createAddressDTO(reservation.getBillingAddress()),
