@@ -9,8 +9,10 @@
     <meta name="author" content="Clara Tschamon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="WebStylesheet.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
-<body>
+<body style="font-family: Arial}">
+
 <!--zurückpfeil-->
 <div class="topbar">
     <div class="left">
@@ -32,6 +34,13 @@
             <!-- Number of Guests -->
             <!-- Select Room -->
 
+            <label class="rooms" for="Room">Choose a Room:</label>
+            <select id="Room" class="roomsfield">
+                <option value="option1">Single Room</option>
+                <option value="option2">Double Room</option>
+                <option value="option3">Family Room</option>
+                <option value="option4">Suite</option>
+            </select>
 
             <div class="input-control">
                 <label id="board" class="bold">Board</label>
@@ -58,17 +67,18 @@
                 <div class="error"></div>
             </div>
 
-            <div class="input-control">
-                <label for="firstName" class="bold">First Name <br/></label>
-                <input name="First Name" id="firstName" type="text">
-                <div class="error"></div>
-            </div>
 
-            <div class="input-control">
-                <label for="lastName" class="bold">Last Name <br/> </label>
-                <input name="Last Name" id="lastName" type="text">
-                <div class="error"></div>
-            </div>
+
+            <table class="b" id="singleroom" style="margin-left: 140px">
+                <tr>
+                    <td><label for="firstName" class="bold">First Name <br/></label>
+                        <input class="name" name="First Name" id="firstName" type="text"></td>
+                    <td><label for="lastName" class="bold">Last Name <br/> </label>
+                        <input class="name" name="Last Name" id="lastName" type="text"></td>
+                </tr >
+            </table>
+
+
 
             <div class="input-control">
                 <label for="nationality" class="bold">Nationality <br/></label>

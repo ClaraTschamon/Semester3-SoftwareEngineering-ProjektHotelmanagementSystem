@@ -58,15 +58,16 @@ form textarea{
 ul {
     list-style-type: none;
     overflow: hidden;
-    background-color: #333;
+    background-color: #21273d;
+    margin-top: -20px;
 }
 
-li {
+.oben{
     float: right;
     border-right:1px solid #bbb;
 }
 
-li:last-child {
+.last-child {
     border-right: none;
 }
 
@@ -79,20 +80,108 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.active {
     background-color: rgba(255, 255, 255, 0.3)
 }
 
+.active {
+    background-color: rgba(33, 39, 61, 0.1);
+}
+
 body{
-    background-image: url("Pictures/Background.jpg");
-    opacity: 0.5;
+    font-family: Arial;
+}
+
+#background{
+    background-image: url("Background.jpg");
+    opacity: 0.9;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     background-position-y: 0;
-    font-family: Arial;
+}
 
+.header{
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.classdigga {
+    background: #21273d;
+    color:white;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 590px;
+    padding: 20px;
+    align-items: center;
+    align-content: center;
+    opacity: 1;
+}
+.arrivaldate{
+margin-left: 350px;
+}
+.departuredate{
+    margin-left: 70px;
+}
+.rooms{
+    margin-left: 38px;
+}
+
+.people{
+    margin-left: 38px;
+}
+
+.arrivaldatefield{
+    margin-top: 10px;
+    margin-left: 350px;
+    width: 200px;
+    height: 40px;
+}
+.departuredatefield{
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+.roomsfield{
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+
+.peoplefield{
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+
+.button{
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 180px;
+    height: 40px;
+}
+
+table.a{
+    table-layout: auto;
+    width: 1700px;
+}
+
+table.b{
+    width: 1920px;
+}
+
+td.a{
+    text-align: center;
+    vertical-align: middle;
+    padding: 100px
+}
+
+.name{
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 50px;
 }

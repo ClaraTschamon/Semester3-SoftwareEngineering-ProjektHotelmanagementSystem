@@ -4,19 +4,120 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="WebStylesheet.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
+<div id="background">
     <ul>
         <li><img src="" alt=""></li>
-        <li><a class="active" href="Index.html">Home</a></li>
-        <li><a href="reservation.html">Reservations</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li style="float:right"><a href="#about">About</a></li>
+        <li><a class="active, oben" href="Index.html">Home</a></li>
+        <li><a class="oben" href="reservationVorlage.html">Reservations</a></li>
+        <li><a class="oben" href="#about">About</a></li>
+        <li><a class="oben" href="#contact">Contact</a></li>
     </ul>
 
-<div style=" position: center; ">
-    <h1>Hotel Sunway</h1>
+
+    <h1 class="header">Hotel Sunway</h1>
+
+    <form action="selection.html" method="GET">
+        <div class="classdigga">
+            <div>
+                <label class="arrivaldate" for="arrivalDate">Choose a arrival date: </label>
+                <label class="departuredate" for="departureDate">Choose a departure date:</label>
+
+                <label class="people" for="people-input">Number of people:</label>
+            </div>
+
+            <div>
+                <input class="arrivaldatefield" type="date" id="arrivalDate" name="arrivalDate">
+                <input class="departuredatefield" type="date" id="departureDate" name="departureDate">
+
+
+
+                <input type="number" class="peoplefield" id="people-input" name="people-input">
+
+                <button type="submit" class="w3-hover-shadow, button">Submit</button>
+            </div>
+        </div>
+    </form>
 
 </div>
+
+
+<table class="a" id="singleroom" style="margin-left: 140px">
+    <tr class="w3-hover-shadow">
+        <td><img style="width: 800px" src="singleroom.png"></td>
+        <td class="a">
+            <h3 style="margin-top: -100px">Single Room</h3><br><br><br><br><br>
+            <img style="width: 150px; margin-top: -80px" src="single-bed.png"><br>
+            <p style="margin-top: 50px">
+                Our sheep room with its 30 m² is perfect for a fine time for two.
+                This room is equipped with a fluffy double bed, an open bathroom with rain shower,
+                a cozy reading corner and a large balcony or terrace with a fantastic mountain view.
+                This sheep's room is made for a relaxing jaunt in the mountains.
+                There is no wolf in sheep's clothing.
+                Neither in the closet nor under the bed.</p></td>
+    </tr>
+</table>
+
+
+<table class="a" id="doubleroom" style="margin-left: 140px; margin-top: 100px">
+    <tr class="w3-hover-shadow">
+
+        <td class="a">
+            <h3 style="margin-top: -100px">Double Room</h3><br><br><br><br><br>
+            <img style="width: 150px; margin-top: -80px" src="double-bed.png"><br>
+            <p style="margin-top: 50px">
+                Our sheep room with its 30 m² is perfect for a fine time for two.
+                This room is equipped with a fluffy double bed, an open bathroom with rain shower,
+                a cozy reading corner and a large balcony or terrace with a fantastic mountain view.
+                This sheep's room is made for a relaxing jaunt in the mountains.
+                There is no wolf in sheep's clothing.
+                Neither in the closet nor under the bed.</p></td>
+        <td><img style="width: 800px" src="doubleroom.png"></td>
+    </tr>
+</table>
+
+
+<table class="a" id="familyroom" style="margin-left: 140px; margin-top: 100px">
+    <tr class="w3-hover-shadow">
+        <td><img style="width: 800px" src="familyroom.png"></td>
+        <td class="a">
+            <h3 style="margin-top: -100px">Family Room</h3><br><br><br><br>
+            <img style="width: 150px; margin-top: -80px" src="family.png"><br>
+            <p style="margin-top: 50px">
+                Sunways Suite is so big that you can have a polonaise with the Montafon stone sheep,
+                from one room to the other. Up to six people can sink exhausted into the soft pillows
+                in this suite afterwards and immediately fall asleep. Equipped with sauna and steam shower,
+                deluxe kitchenette, two fluffy double beds in two separate bedrooms, a sofa bed, a dreamy
+                living/dining area with crackling fireplace and a large balcony with mountain views,
+                this suite is without a doubt a cherry on the cake.</p></td>
+    </tr>
+</table>
+
+
+<table class="a" id="suite" style="margin-left: 140px; margin-top: 100px">
+    <tr class="w3-hover-shadow">
+        <td class="a">
+            <h3 style="margin-top: -100px">Suite</h3><br><br><br><br><br>
+            <img style="width: 150px; margin-top: -80px" src="suite-bed.png"><br>
+            <p style="margin-top: 50px">
+                Ode to the vacations! Biting into a crispy croissant in the morning sun,
+                while your better half is already stretching the morning greeting towards
+                the midday peak and letting the Qigong balls spin. Welcome to the Maisäß SPA Suite!
+                On more than 70 m² you will find wellness at its best, framed by our unique Maisäß architecture.
+                Lots of light, light wood and unique furnishings make this suite a very
+                special vacation experience. AMRAI's private spring bath with integrated steam bath
+                and reclining shower, a classic rain shower, a feel-good sauna and an extra-large double
+                bed (2 meters) as well as an elegant living area with desk, this suite leaves nothing to be desired.
+                A private panoramic bathtub, a well-tempered waterbed and an extra-large yoga sun balcony make the
+                vacation joy itch like the stone sheep in spring.
+
+            </p></td>
+        <td><img style="width: 800px" src="suite.png"></td>
+    </tr>
+</table>
+
+
 </body>
 </html>
