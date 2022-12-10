@@ -1,23 +1,22 @@
-#back{
+#back {
     width: 20px;
     margin: 20px;
     float: left;
 }
 
-form{
-    margin-left: 20px;
+form {
+    margin-left: 180px;
     margin-bottom: 20px;
 }
 
-label.bold{
+label.bold {
     margin-bottom: 5px;
-    font-weight: bold;
     display: block; /* add this */
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
-input:focus, textarea:focus{
-    outline:0;
+input:focus, textarea:focus {
+    outline: 0;
     border: 2px solid dodgerblue;
 }
 
@@ -36,19 +35,18 @@ input:focus, textarea:focus{
 .input-control .error {
     color: #ff3860;
     font-size: 14px;
-    height: 13px;
-    margin-bottom: 15px;
+    height: 8px;
+    margin-bottom: 10px;
 }
 
-select{
+select {
     margin-bottom: 15px;
 }
 
 form input[type ="text"],
 form input[type ="email"],
 form select,
-form textarea{
-    width: 30%;
+form textarea {
     padding: 10px;
     font-size: 14px;
 }
@@ -62,9 +60,9 @@ ul {
     margin-top: -20px;
 }
 
-.oben{
+.oben {
     float: right;
-    border-right:1px solid #bbb;
+    border-right: 1px solid #bbb;
 }
 
 .last-child {
@@ -87,11 +85,11 @@ li a:hover:not(.active) {
     background-color: rgba(33, 39, 61, 0.1);
 }
 
-body{
+body {
     font-family: Arial;
 }
 
-#background{
+#background {
     background-image: url("Background.jpg");
     opacity: 0.9;
     background-repeat: no-repeat;
@@ -100,7 +98,7 @@ body{
     background-position-y: 0;
 }
 
-.header{
+.header {
     color: white;
     font-size: 100px;
     text-align: center;
@@ -109,7 +107,7 @@ body{
 
 .classdigga {
     background: #21273d;
-    color:white;
+    color: white;
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 590px;
@@ -118,70 +116,146 @@ body{
     align-content: center;
     opacity: 1;
 }
-.arrivaldate{
-margin-left: 350px;
+
+.arrivaldate {
+    margin-left: 350px;
 }
-.departuredate{
+
+.departuredate {
     margin-left: 70px;
 }
-.rooms{
+
+.rooms {
     margin-left: 38px;
 }
 
-.people{
+.people {
     margin-left: 38px;
 }
 
-.arrivaldatefield{
+.arrivaldatefield {
     margin-top: 10px;
     margin-left: 350px;
     width: 200px;
     height: 40px;
 }
-.departuredatefield{
-    margin-top: 10px;
-    margin-left: 35px;
-    width: 200px;
-    height: 40px;
-}
-.roomsfield{
+
+.departuredatefield {
     margin-top: 10px;
     margin-left: 35px;
     width: 200px;
     height: 40px;
 }
 
-.peoplefield{
+.roomsfield {
     margin-top: 10px;
     margin-left: 35px;
     width: 200px;
     height: 40px;
 }
 
-.button{
+.peoplefield {
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+
+.button {
     margin-top: 10px;
     margin-left: 35px;
     width: 180px;
     height: 40px;
 }
 
-table.a{
+table.a {
     table-layout: auto;
     width: 1700px;
 }
 
-table.b{
-    width: 1920px;
-}
 
-td.a{
+td.a {
     text-align: center;
     vertical-align: middle;
     padding: 100px
 }
 
-.name{
-    border-radius: 10px;
-    border: 1px solid black;
+
+#name input[name="firstname"] {
+    width: 400px;
     height: 50px;
 }
+
+#name input[name="lastname"] {
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+
+
+#date label[name="departureDate"] {
+    margin-left: 100px;
+}
+
+#date input[name="arrivalDate"] {
+    width: 400px;
+    height: 50px;
+}
+
+#date input[name="departureDate"] {
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+#adress1 input[name="HouseNumber"]{
+    margin-left: 50px;
+}
+
+#adress2 input[name="ZIPCode"]{
+    margin-left: 50px;
+}
+
+#room1 input[name="doubleroom"] {
+    margin-left: 50px;
+}
+
+#room2 input[name="suite"] {
+    margin-left: 50px;
+}
+
+.sizebig{
+    width: 400px;
+    height: 50px;
+}
+
+.sizesmall{
+    width: 150px;
+    height: 50px;
+}
+
+
+button.reset {
+    background-color: #962c43;
+    opacity: 0.9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+button.send {
+    background-color: #21273d;
+    opacity: 0.9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+

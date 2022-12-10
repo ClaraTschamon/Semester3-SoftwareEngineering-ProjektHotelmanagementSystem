@@ -10,36 +10,32 @@
 <div id="background">
     <ul>
         <li><img src="" alt=""></li>
-        <li><a class="active, oben" href="Index.html">Home</a></li>
-        <li><a class="oben" href="reservationVorlage.html">Reservations</a></li>
         <li><a class="oben" href="#about">About</a></li>
         <li><a class="oben" href="#contact">Contact</a></li>
+        <li><a class="oben" href="reservationVorlage.html">Reservations</a></li>
+        <li><a class="active, oben" href="Index.html">Home</a></li>
     </ul>
 
 
     <h1 class="header">Hotel Sunway</h1>
 
-    <form action="selection.html" method="GET">
+    <form action="reservationVorlage.html" method="POST">
         <div class="classdigga">
             <div>
                 <label class="arrivaldate" for="arrivalDate">Choose a arrival date: </label>
                 <label class="departuredate" for="departureDate">Choose a departure date:</label>
-
-                <label class="people" for="people-input">Number of people:</label>
+                <label class="people" for="people-input">Number of guests:</label>
             </div>
-
             <div>
                 <input class="arrivaldatefield" type="date" id="arrivalDate" name="arrivalDate">
                 <input class="departuredatefield" type="date" id="departureDate" name="departureDate">
-
-
-
-                <input type="number" class="peoplefield" id="people-input" name="people-input">
-
+                <input type="number" class="peoplefield" id="people-input" name="people-input"
+                       value="<?php echo $guests; ?>">
                 <button type="submit" class="w3-hover-shadow, button">Submit</button>
             </div>
         </div>
     </form>
+
 
 </div>
 
