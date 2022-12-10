@@ -22,7 +22,7 @@ public class BookingDataMapper {
     public Optional<Booking> get(final Long number){
         BookingEntity entity = PersistenceManager.instance().entityManager.find(BookingEntity.class, number);
         if(entity != null){
-            Booking booking = createBooking(entity);
+            Booking booking = createBooking(entity, ReservationDataMapper.createReservation(entity.getReservation()));
             return Optional.of(booking);
         }
         return Optional.empty();
@@ -32,7 +32,7 @@ public class BookingDataMapper {
         ArrayList<BookingEntity> entities = (ArrayList<BookingEntity>) PersistenceManager.instance().entityManager.createQuery("from BookingEntity").getResultList();
         ArrayList<Booking> bookings = new ArrayList<>();
         for(BookingEntity b : entities){
-            bookings.add(createBooking(b));
+            bookings.add(createBooking(b, ReservationDataMapper.createReservation(b.getReservation())));
         }
         return bookings;
     }
@@ -44,7 +44,7 @@ public class BookingDataMapper {
 
         ArrayList<Booking> bookings = new ArrayList<>();
         for(BookingEntity e : entities){
-            bookings.add(createBooking(e));
+            bookings.add(createBooking(e, ReservationDataMapper.createReservation(e.getReservation())));
         }
         return bookings;
     }
@@ -60,7 +60,7 @@ public class BookingDataMapper {
 
         ArrayList<Booking> bookings = new ArrayList<>();
         for(BookingEntity e : entities){
-            bookings.add(createBooking(e));
+            bookings.add(createBooking(e, ReservationDataMapper.createReservation(e.getReservation())));
         }
         return bookings;
     }
@@ -123,16 +123,9 @@ public class BookingDataMapper {
         return bookingEntity;
     }
 
-    protected static Booking createBooking(BookingEntity bookingEntity) {
+    protected static Booking createBooking(BookingEntity bookingEntity, Reservation reservation) {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
-
-        Reservation reservation;
-        if(bookingEntity.getReservation() == null){
-            reservation = null;
-        } else{
-            reservation = ReservationDataMapper.createReservation(bookingEntity.getReservation());
-        }
 
         Booking booking = new Booking(bookingEntity.getNumber(), reservation,
                 CustomerDataMapper.createCustomer(bookingEntity.getCustomer()),
