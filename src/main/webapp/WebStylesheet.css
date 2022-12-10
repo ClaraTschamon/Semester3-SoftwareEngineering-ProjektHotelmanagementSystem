@@ -1,57 +1,13 @@
-#back {
-    width: 20px;
-    margin: 20px;
-    float: left;
+/* index.html */
+#background {
+    background-image: url("Background.jpg");
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position-y: 0;
 }
 
-form {
-    margin-left: 180px;
-    margin-bottom: 20px;
-}
-
-label.bold {
-    margin-bottom: 5px;
-    display: block; /* add this */
-    padding-top: 5px;
-}
-
-input:focus, textarea:focus {
-    outline: 0;
-    border: 2px solid dodgerblue;
-}
-
-.input-control input:focus {
-    outline: 0;
-}
-
-.input-control.success input {
-    border-color: #09c372;
-}
-
-.input-control.error input {
-    border-color: #ff3860;
-}
-
-.input-control .error {
-    color: #ff3860;
-    font-size: 14px;
-    height: 8px;
-    margin-bottom: 10px;
-}
-
-select {
-    margin-bottom: 15px;
-}
-
-form input[type ="text"],
-form input[type ="email"],
-form select,
-form textarea {
-    padding: 10px;
-    font-size: 14px;
-}
-
-/*Home--------------------------------------------------------------------*/
 
 ul {
     list-style-type: none;
@@ -89,14 +45,6 @@ body {
     font-family: Arial;
 }
 
-#background {
-    background-image: url("Background.jpg");
-    opacity: 0.9;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-position-y: 0;
-}
 
 .header {
     color: white;
@@ -105,7 +53,8 @@ body {
     margin-top: auto;
 }
 
-.classdigga {
+
+.boxforindex {
     background: #21273d;
     color: white;
     margin-left: 5%;
@@ -116,6 +65,7 @@ body {
     align-content: center;
     opacity: 1;
 }
+
 
 .arrivaldate {
     margin-left: 350px;
@@ -181,56 +131,77 @@ td.a {
 }
 
 
-#name input[name="firstname"] {
+/* reservationVorlage.html */
+
+
+.whitebackground {
+    background-color: white;
+    width: 1320px;
+    height: 1650px;
+    margin-top: -25px;
+    margin-left: 300px;
+    margin-bottom: 0;
+}
+
+#back {
+    width: 20px;
+    margin: 20px;
+    float: left;
+}
+
+#form {
+    margin-left: 180px;
+    margin-bottom: 20px;
+}
+
+select {
+    margin-bottom: 15px;
+}
+
+label.bold {
+    margin-bottom: 5px;
+    display: block; /* add this */
+    padding-top: 5px;
+}
+
+input:focus, textarea:focus {
+    outline: 0;
+    border: 2px solid dodgerblue;
+}
+
+.input-control input:focus {
+    outline: 0;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 14px;
+    height: 8px;
+    margin-bottom: 10px;
+}
+
+form input[type ="text"],
+form input[type ="email"],
+form select,
+form textarea {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.sizebig {
     width: 400px;
     height: 50px;
 }
 
-#name input[name="lastname"] {
-    width: 400px;
-    height: 50px;
-    margin-left: 50px;
-}
-
-
-
-#date label[name="departureDate"] {
-    margin-left: 100px;
-}
-
-#date input[name="arrivalDate"] {
-    width: 400px;
-    height: 50px;
-}
-
-#date input[name="departureDate"] {
-    width: 400px;
-    height: 50px;
-    margin-left: 50px;
-}
-
-#adress1 input[name="HouseNumber"]{
-    margin-left: 50px;
-}
-
-#adress2 input[name="ZIPCode"]{
-    margin-left: 50px;
-}
-
-#room1 input[name="doubleroom"] {
-    margin-left: 50px;
-}
-
-#room2 input[name="suite"] {
-    margin-left: 50px;
-}
-
-.sizebig{
-    width: 400px;
-    height: 50px;
-}
-
-.sizesmall{
+.sizesmall {
     width: 150px;
     height: 50px;
 }
@@ -257,5 +228,54 @@ button.send {
     cursor: pointer;
     width: 150px;
 }
+
+
+#date input[name="arrivalDate"] {
+    width: 400px;
+    height: 50px;
+}
+
+#date label[name="departureDate"] {
+    margin-left: 100px;
+}
+
+#date input[name="departureDate"] {
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+#room1 input[name="doubleroom"] {
+    margin-left: 50px;
+}
+
+#room2 input[name="suite"] {
+    margin-left: 50px;
+}
+
+#name input[name="firstname"] {
+    width: 400px;
+    height: 50px;
+}
+
+#name input[name="lastname"] {
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+#adress1 input[name="HouseNumber"] {
+    margin-left: 50px;
+}
+
+#adress2 input[name="ZIPCode"] {
+    margin-left: 50px;
+}
+
+
+
+
+
+
 
 
