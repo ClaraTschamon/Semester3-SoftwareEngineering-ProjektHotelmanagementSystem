@@ -1,23 +1,171 @@
-#back{
+/* index.html */
+#background {
+    background-image: url("Background.jpg");
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-position-y: 0;
+}
+
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #21273d;
+    margin-top: -20px;
+}
+
+.oben {
+    float: right;
+    border-right: 1px solid #bbb;
+}
+
+.last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.3)
+}
+
+.active {
+    background-color: rgba(33, 39, 61, 0.1);
+}
+
+body {
+    font-family: Arial;
+}
+
+
+.header {
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    margin-top: auto;
+}
+
+
+.boxforindex {
+    background: #21273d;
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 590px;
+    padding: 20px;
+    align-items: center;
+    align-content: center;
+    opacity: 1;
+}
+
+
+.arrivaldate {
+    margin-left: 350px;
+}
+
+.departuredate {
+    margin-left: 70px;
+}
+
+.rooms {
+    margin-left: 38px;
+}
+
+.people {
+    margin-left: 38px;
+}
+
+.arrivaldatefield {
+    margin-top: 10px;
+    margin-left: 350px;
+    width: 200px;
+    height: 40px;
+}
+
+.departuredatefield {
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+
+.roomsfield {
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+
+.peoplefield {
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 200px;
+    height: 40px;
+}
+
+.button {
+    margin-top: 10px;
+    margin-left: 35px;
+    width: 180px;
+    height: 40px;
+}
+
+table.a {
+    table-layout: auto;
+    width: 1700px;
+}
+
+
+td.a {
+    text-align: center;
+    vertical-align: middle;
+    padding: 100px
+}
+
+
+/* reservationVorlage.html */
+
+
+.whitebackground {
+    background-color: white;
+    width: 1320px;
+    height: 1650px;
+    margin-top: -25px;
+    margin-left: 300px;
+    margin-bottom: 0;
+}
+
+#back {
     width: 20px;
     margin: 20px;
     float: left;
 }
 
-form{
-    margin-left: 20px;
+#form {
+    margin-left: 180px;
     margin-bottom: 20px;
 }
 
-label.bold{
-    margin-bottom: 5px;
-    font-weight: bold;
-    display: block; /* add this */
-    padding-top: 20px;
+select {
+    margin-bottom: 15px;
 }
 
-input:focus, textarea:focus{
-    outline:0;
+label.bold {
+    margin-bottom: 5px;
+    display: block; /* add this */
+    padding-top: 5px;
+}
+
+input:focus, textarea:focus {
+    outline: 0;
     border: 2px solid dodgerblue;
 }
 
@@ -36,19 +184,98 @@ input:focus, textarea:focus{
 .input-control .error {
     color: #ff3860;
     font-size: 14px;
-    height: 13px;
-    margin-bottom: 15px;
-}
-
-select{
-    margin-bottom: 15px;
+    height: 8px;
+    margin-bottom: 10px;
 }
 
 form input[type ="text"],
 form input[type ="email"],
 form select,
-form textarea{
-    width: 30%;
+form textarea {
     padding: 10px;
     font-size: 14px;
 }
+
+.sizebig {
+    width: 400px;
+    height: 50px;
+}
+
+.sizesmall {
+    width: 150px;
+    height: 50px;
+}
+
+
+button.reset {
+    background-color: #962c43;
+    opacity: 0.9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+button.send {
+    background-color: #21273d;
+    opacity: 0.9;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+
+#date input[name="arrivalDate"] {
+    width: 400px;
+    height: 50px;
+}
+
+#date label[name="departureDate"] {
+    margin-left: 100px;
+}
+
+#date input[name="departureDate"] {
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+#room1 input[name="doubleroom"] {
+    margin-left: 50px;
+}
+
+#room2 input[name="suite"] {
+    margin-left: 50px;
+}
+
+#name input[name="firstname"] {
+    width: 400px;
+    height: 50px;
+}
+
+#name input[name="lastname"] {
+    width: 400px;
+    height: 50px;
+    margin-left: 50px;
+}
+
+#adress1 input[name="HouseNumber"] {
+    margin-left: 50px;
+}
+
+#adress2 input[name="ZIPCode"] {
+    margin-left: 50px;
+}
+
+
+
+
+
+
+
+

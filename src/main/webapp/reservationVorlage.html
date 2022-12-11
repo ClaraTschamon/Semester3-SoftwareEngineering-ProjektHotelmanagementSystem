@@ -9,127 +9,222 @@
     <meta name="author" content="Clara Tschamon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="WebStylesheet.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
-<body>
-<!--zurückpfeil-->
-<div class="topbar">
-    <div class="left">
-        <a href="index.html">
-            <img src="zurueckpfeil.png" id="back" alt="backArrow">
-        </a>
+<body style="font-family: Arial;
+background-image: url('Background.jpg');
+background-repeat: no-repeat;
+background-attachment: fixed">
+
+<!-- Navbar-->
+
+<ul style="opacity: 0.9">
+    <li><img src="" alt=""></li>
+    <li><a class="oben" href="#about">About</a></li>
+    <li><a class="oben" href="#contact">Contact</a></li>
+    <li><a class="oben" href="reservationVorlage.html">Reservations</a></li>
+    <li><a class="active, oben" href="Index.html">Home</a></li>
+</ul>
+
+<!-- Der weiße Hintergrund-->
+<div style="float: left">
+    <div class="whitebackground">
+        <!--zurückpfeil-->
+        <div class="topbar">
+            <div class="left">
+                <a href="index.html">
+                    <img src="zurueckpfeil.png" id="back" alt="backArrow">
+                </a>
+            </div>
+        </div>
+
+        <!-- Überschrift -->
+        <div class="centerContent">
+            <h1>Make a Reservation</h1>
+            <div class="container">
+                <form id="form"
+                      action=""
+                      method="POST">
+
+
+                    <!-- Anreise und Abreise Datum (Wieso in tabelle? damit es nebeneinander geht) -->
+                    <div class="input-control">
+                        <table id="date">
+                            <tr>
+                                <td><label for="arrivalDate" class="bold">Choose a arrival date: <br/></label>
+                                    <input type="date" id="arrivalDate" name="arrivalDate"
+                                           value="<?php echo $_POST['arrivalDate']; ?>"></td>
+                                <td><label for="departureDate" style="margin-left: 50px" class="bold">Choose a departure
+                                    date:<br/> </label>
+                                    <input type="date" id="departureDate" name="departureDate"
+                                           value="<?php echo $_POST['departureDate']; ?>"></td>
+                            </tr>
+                        </table>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Anzahl der Gäste -->
+                    <div class="input-control">
+                        <label for="people-input" class="bold">Number of guests:<br/></label>
+                        <input class="sizebig" type="number" id="people-input" name="people-input" min="1" max="50"
+                               value="<?php echo $_POST['people-input']; ?>"><br><br>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Zimmer -->
+                    <div class="input-control">
+                        <!-- erste Zeile der Zimmer -->
+                        <table id="room1">
+                            <tr>
+                                <td><label for="singleroom" class="bold">Single Room<br/></label>
+                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0"
+                                           max="4"></td>
+                                <td><label for="doubleroom" style="margin-left: 50px" class="bold">Double Room
+                                    <br/></label>
+                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
+                                           max="10"></td>
+                            </tr>
+                        </table>
+                        <!-- zweite Zeile der Zimmer -->
+                        <table id="room2">
+                            <tr>
+                                <td><label for="familyroom" class="bold">Family Room<br/></label>
+                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
+                                           max="4"></td>
+                                <td><label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
+                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0" max="3">
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Board -->
+                    <div class="input-control">
+                        <label id="board" class="bold">Board</label>
+                        <!-- Fullboard -->
+                        <div>
+                            <label for="fullBoard"></label>
+                            <input type="radio" name="Board" id="fullBoard" value="Full Board">
+                            Full Board
+                        </div>
+                        <!-- halfboard -->
+                        <div>
+                            <label for="halfBoard"></label>
+                            <input type="radio" name="Board" id="halfBoard" value="Half Board">
+                            Half Board
+                        </div>
+                        <!-- just breakfast -->
+                        <div>
+                            <label for="justBreakfast"></label>
+                            <input type="radio" name="Board" id="justBreakfast" value="Just Breakfast">
+                            Just Breakfast
+                        </div>
+                        <!-- no package -->
+                        <div>
+                            <label for="noPackage"></label>
+                            <input type="radio" name="Board" id="noPackage" value="No Package">
+                            No Package
+                        </div>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Vorname und Nachname -->
+                    <div class="input-control">
+                        <table id="name">
+                            <tr>
+                                <!-- Vorname -->
+                                <td><label for="firstName" class="bold">First Name <br/></label>
+                                    <input class="name" name="firstname" id="firstName" type="text"></td>
+                                <!-- Nachname -->
+                                <td><label for="lastName" style="margin-left: 50px" class="bold">Last Name <br/>
+                                </label>
+                                    <input class="name" name="lastname" id="lastName" type="text"></td>
+                            </tr>
+                        </table>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Geburtsdatum -->
+                    <div class="input-control">
+                        <div class="error"></div>
+                        <label for="birthdate" class="bold">Choose your birthday:<br/></label>
+                        <input type="date" id="birthdate" name="birthdate" class="sizebig">
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Nationalität -->
+                    <div class="input-control">
+                        <label for="nationality" class="bold">Nationality <br/></label>
+                        <select name="Nationality" id="nationality" class="sizebig">
+                            <option value="select">--Please select--</option>
+                            <option value="Oesterreich">Österreich</option>
+                            <option value="Deutschland">Deutschland</option>
+                            <option value="Schweiz">Schweiz</option>
+                            <option value="andere">andere</option>
+                        </select>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Adresse -->
+                    <div class="input-control">
+                        <table id="adress1">
+                            <tr>
+                                <!-- Straße -->
+                                <td><label for="street" class="bold">Street<br/></label>
+                                    <input class="sizebig" name="Street" id="street" type="text"></td>
+                                <!-- HNr. -->
+                                <td><label for="houseNumber" class="bold" style="margin-left: 50px">HNr.
+                                    <br/></label>
+                                    <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text"></td>
+                            </tr>
+                        </table>
+                        <div class="error"></div>
+
+                        <table id="adress2">
+                            <tr>
+                                <!-- Stadt -->
+                                <td><label for="city" class="bold">City<br/></label>
+                                    <input class="sizebig" name="City" id="city" type="text"></td>
+                                <!-- PLZ -->
+                                <td><label for="zipCode" class="bold" style="margin-left: 50px">ZIP Code
+                                    <br/></label>
+                                    <input class="sizesmall" name="ZIPCode" id="zipCode" type="text"></td>
+                            </tr>
+                        </table>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Land -->
+                    <div class="input-control">
+                        <label for="country" class="bold">Country <br/></label>
+                        <input class="sizebig" name="Country" id="country" type="text">
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Telefonnummer -->
+                    <div class="input-control">
+                        <label for="phoneNumber" class="bold">Phone Number <br/></label>
+                        <input class="sizebig" name="PhoneNumber" id="phoneNumber" type="text">
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-control">
+                        <label for="email" class="bold">E-Mail Address <br/> </label>
+                        <input class="sizebig" name="Email Address" id="email" type="text">
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <button type="reset" class="reset">Reset</button>
+                    <button type="submit" class="send">Send</button> <!--submit type damit enter taste auch submitted-->
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="centerContent">
-    <h1>Make a Reservation</h1>
-    <div class="container">
-        <form id="form"
-              action=""
-              method="POST">
-
-            <!-- Arrival Date -->
-            <!-- Departure Date -->
-            <!-- Number of Guests -->
-            <!-- Select Room -->
-
-
-            <div class="input-control">
-                <label id="board" class="bold">Board</label>
-                <div>
-                    <label for="fullBoard"></label>
-                    <input type="radio" name="Board" id="fullBoard" value="Full Board">
-                    Full Board
-                </div>
-                <div>
-                    <label for="halfBoard"></label>
-                    <input type="radio" name="Board" id="halfBoard" value="Half Board">
-                    Half Board
-                </div>
-                <div>
-                    <label for="justBreakfast"></label>
-                    <input type="radio" name="Board" id="justBreakfast" value="Just Breakfast">
-                    Just Breakfast
-                </div>
-                <div>
-                    <label for="noPackage"></label>
-                    <input type="radio" name="Board" id="noPackage" value="No Package">
-                    No Package
-                </div>
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="firstName" class="bold">First Name <br/></label>
-                <input name="First Name" id="firstName" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="lastName" class="bold">Last Name <br/> </label>
-                <input name="Last Name" id="lastName" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="nationality" class="bold">Nationality <br/></label>
-                <select name="Nationality" id="nationality">
-                    <option value="select">--Please select--</option>
-                    <option value="Oesterreich">Österreich</option>
-                    <option value="Deutschland">Deutschland</option>
-                    <option value="Schweiz">Schweiz</option>
-                    <option value="andere">andere</option>
-                </select>
-                <div class="error"></div>
-            </div>
-
-            <!-- Date of Birth Datepicker -->
-
-            <div class="input-control">
-                <label for="street" class="bold">Street <br/></label>
-                <input name="Street" id="street" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="houseNumber" class="bold">HNr. <br/></label>
-                <input name="HouseNumber" id="houseNumber" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="city" class="bold">City <br/></label>
-                <input name="City" id="city" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="zipCode" class="bold">ZIP Code <br/></label>
-                <input name="ZIPCode" id="zipCode" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="country" class="bold">Country <br/></label>
-                <input name="Country" id="country" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="phoneNumber" class="bold">Phone Number <br/></label>
-                <input name="PhoneNumber" id="phoneNumber" type="text">
-                <div class="error"></div>
-            </div>
-
-            <div class="input-control">
-                <label for="email" class="bold">E-Mail Address <br/> </label>
-                <input name="Email Address" id="email" type="text">
-                <div class="error"></div>
-            </div>
-
-            <button type="reset">Reset</button>
-            <button type="submit">Send</button> <!--submit type damit enter taste auch submitted-->
-        </form>
-    </div>
 </div>
 </body>
 <script src="FormValidation.js"></script>
