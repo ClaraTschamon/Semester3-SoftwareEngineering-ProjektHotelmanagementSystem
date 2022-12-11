@@ -87,10 +87,10 @@ public class ApachePDFBoxServices {
                 BigDecimal totalSumGross = totalSumNet.add(salesTax).add(touristTax);
 
                 StringBuilder rooms = new StringBuilder();
-                ArrayList<BookedRoomDTO> bookedRoomDTOs = bookingDTO.getBookedRooms();
-                for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
-                    rooms.append(bookedRoomDTO.getRoom().getNumber()).append(",");
-                }
+//                ArrayList<BookedRoomDTO> bookedRoomDTOs = bookingDTO.getBookedRooms();
+//                for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
+//                    rooms.append(bookedRoomDTO.getRoom().getNumber()).append(",");
+//                }
 
                 //line in the pdf file
                 String spaceIng = " ";
@@ -225,7 +225,7 @@ public class ApachePDFBoxServices {
                 cont.showText(spacing2);
                 cont.newLine();
 
-                String line09 = "Roomnumber" + dynamicStringDistance(20, 10) + "Package" + dynamicStringDistance(20, 7) + "Price per Night" + dynamicStringDistance(25, 15) + "Prices";
+                String line09 = "Amount" + dynamicStringDistance(20, 6) + "Package" + dynamicStringDistance(20, 7) + "Price per Night" + dynamicStringDistance(25, 15) + "Prices";
                 cont.showText(line09);
                 cont.newLine();
 
@@ -236,9 +236,11 @@ public class ApachePDFBoxServices {
                 String packages = bookingDTO.getBoard().getName();
                 String packagecost = String.valueOf(bookingDTO.getBoard().getPricePerNight());
 
-                if (rooms.length() > 10) {
-                    rooms = dynamicRoomNumbers(rooms, 10);
-                }
+//                if (rooms.length() > 10) {
+//                    rooms = dynamicRoomNumbers(rooms, 10);
+//                }
+
+                rooms.append(bookingDTO.getBookedRooms().get(0).getBooking().getAmountGuests());
 
                 String line11 = rooms + "" + dynamicStringDistance(20, rooms.length()) + packages + dynamicStringDistance(20, packages.length()) + packagecost + ",-" + dynamicStringDistance(20, packagecost.length() + 2);
                 cont.showText(line11);
