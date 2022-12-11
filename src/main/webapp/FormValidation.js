@@ -49,55 +49,6 @@ const setSuccess = element => {
     inputControl.classList.remove('error');
 };
 
-const isValidEmail = emailValue => {
-    const regex = new RegExp('^[a-zA-Z]([a-zA-Z_-][.]{0,1})*@[a-z0-9]([a-z0-9_-][.]{0,1}){2,62}[^.-]$');
-    return regex.test(emailValue);
-}
-
-const isValidStreet = streetValue => {
-    const regex = new RegExp('/^([a-zA-Z0-9 _/-]*$)/');
-    return regex.test(streetValue);
-    //cronst regex = ...
-    //return regex.test(streetValue);
-}
-
-const isValidHouseNr = houseNumberValue => {
-    const regex = new RegExp('/^([a-zA-Z0-9_]){1,5}/');
-    return regex.test(houseNumberValue);
-    //cronst regex = ...
-    //return regex.test(houseNumberValue);
-}
-
-const isValidFirstName = firstName => {
-    const regex = new RegExp('/^[a-zA-Z -]*$/');
-    return regex.test(firstName);
-}
-
-const isValidLastName = lastName => {
-    const regex = new RegExp('/^[a-zA-Z -]*$/');
-    return regex.test(lastName);
-}
-
-const isValidCity = city => {
-    const regex = new RegExp('^[A-Za-z- ]*');
-    return regex.test(city);
-}
-
-const isValidZipCode = zipCode => {
-    const regex = new RegExp('^[0-9a-zA-Z ]{3,6}');
-    return regex.test(zipCode);
-}
-
-const isValidPhoneNumber = phoneNumber => {
-    const regex = new RegExp('/^([+])?([0-9 ]){7,12}/');
-    return regex.test(phoneNumber);
-}
-
-const isValidCountry = country => {
-    const regex = new RegExp('^[A-Za-z]*$');
-    return regex.test(country);
-}
-
 const validateInputs = () =>{
     //trim() removes all the whitespaces that the string has
     const firstNameValue = firstName.value.trim();
@@ -111,13 +62,6 @@ const validateInputs = () =>{
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
 
-    //umändern in board radiobutton überprüfung
-    /*
-    if (!(genderMale.checked === true || genderFemale.checked === true || genderDivers.checked === true)) {
-        setError(gender, 'Pflichtfeld')
-    }else{
-        setSuccess(gender)
-    }*/
 
    if(!(fullBoard.checked === true ||
         halfBoard.checked === true ||
@@ -211,50 +155,6 @@ const validateInputs = () =>{
     } else{
         setSuccess(email);
     }
-
-
-    /*
-    if(password1Value === ''){
-        setError(password1, 'Pflichtfeld')
-    }
-    if(password2Value === ''){
-        setError(password2, 'Pflichtfeld')
-    }else if(password1Value !== password2Value){
-        setError(password1,'Passwörter stimmen nicht überein')
-        setError(password2, 'Passwörter stimmen nicht überein')
-    }else if(!isValidPassword(password1Value)){
-        setError(password2, 'Muss zwischen 6 und 11 Zeichen lang sein und mit\n' +
-            'einem Buchstaben anfangen und darf nur Buchstaben, Ziffern und “_“, keine\n' +
-            'Leer- oder Sonderzeichen enthalten')
-    }else{
-        setSuccess(password1)
-        setSuccess(password2)
-    }*/
-
-    /*
-    //ich lasse code hier. das war mehrere medientypen auswählen.
-    //brauchen wir vielleicht bei zimmerauswahl
-    let values = [];
-    mediatype.forEach((checkbox) => {
-        if(checkbox.checked === true){
-            values.push(checkbox.value);
-        }
-    });
-
-    if(values.length < 1){
-        setError(mediatype, 'Bitte Medientyp(en) auswählen')
-    }else{
-        setSuccess(mediatype)
-    }*/
-
-    /*
-    if (!(categoryCustomer.checked === true || categoryEmployee.checked === true || categoryAdmin.checked === true)) {
-        setError(userCategory, 'Pflichtfeld')
-    }else{
-        setSuccess(userCategory)
-    }*/
-
-
 
     return hasError;
 };

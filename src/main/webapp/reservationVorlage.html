@@ -3,14 +3,9 @@
 <head>
     <title>Make Reservation</title>
     <meta charset="UTF-8">
-    <meta name="keywords" content="Bibliothek, Blons, Ausleihen, Leihen, Bibliohteksabo,
-            Bücher, Filme, Zeitschriften, Spiele, Ludothek">
-    <meta name="description" content="Webseite der Bibliothek Blons">
-    <meta name="author" content="Clara Tschamon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="WebStylesheet.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
 </head>
 <body style="font-family: Arial;
 background-image: url('Background.jpg');
@@ -136,19 +131,23 @@ background-attachment: fixed">
                             <tr>
                                 <!-- Vorname -->
                                 <td><label for="firstName" class="bold">First Name <br/></label>
-                                    <input class="name" name="firstname" id="firstName" type="text"></td>
+                                    <input class="name" name="firstname" id="firstName" type="text">
+                                    <div class="error"></div>
+                                </td>
+
                                 <!-- Nachname -->
                                 <td><label for="lastName" style="margin-left: 50px" class="bold">Last Name <br/>
                                 </label>
-                                    <input class="name" name="lastname" id="lastName" type="text"></td>
+                                    <input class="name" name="lastname" id="lastName" type="text">
+                                    <div class="error"></div>
+                                </td>
                             </tr>
                         </table>
-                        <div class="error"></div>
+
                     </div>
 
                     <!-- Geburtsdatum -->
                     <div class="input-control">
-                        <div class="error"></div>
                         <label for="birthdate" class="bold">Choose your birthday:<br/></label>
                         <input type="date" id="birthdate" name="birthdate" class="sizebig">
                         <div class="error"></div>
@@ -173,27 +172,34 @@ background-attachment: fixed">
                             <tr>
                                 <!-- Straße -->
                                 <td><label for="street" class="bold">Street<br/></label>
-                                    <input class="sizebig" name="Street" id="street" type="text"></td>
+                                    <input class="sizebig" name="Street" id="street" type="text">
+                                    <div class="error"></div>
+                                </td>
                                 <!-- HNr. -->
                                 <td><label for="houseNumber" class="bold" style="margin-left: 50px">HNr.
                                     <br/></label>
-                                    <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text"></td>
+                                    <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text">
+                                    <div class="error"></div>
+                                </td>
                             </tr>
                         </table>
-                        <div class="error"></div>
+
 
                         <table id="adress2">
                             <tr>
                                 <!-- Stadt -->
                                 <td><label for="city" class="bold">City<br/></label>
-                                    <input class="sizebig" name="City" id="city" type="text"></td>
+                                    <input class="sizebig" name="City" id="city" type="text">
+                                    <div class="error"></div>
+                                </td>
                                 <!-- PLZ -->
                                 <td><label for="zipCode" class="bold" style="margin-left: 50px">ZIP Code
                                     <br/></label>
-                                    <input class="sizesmall" name="ZIPCode" id="zipCode" type="text"></td>
+                                    <input class="sizesmall" name="ZIPCode" id="zipCode" type="text">
+                                    <div class="error"></div>
+                                </td>
                             </tr>
                         </table>
-                        <div class="error"></div>
                     </div>
 
                     <!-- Land -->
