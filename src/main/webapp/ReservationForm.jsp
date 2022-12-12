@@ -92,7 +92,7 @@ background-attachment: fixed">
                                     <label for="doubleroom" style="margin-left: 50px" class="bold">Double
                                         Room<br/></label>
                                     <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
-                                           max="10">
+                                           max=${sessionScope.maxDoubleRooms}>
                                     <div class="error"></div>
                                 </div>
                             </td>
@@ -105,14 +105,15 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="familyroom" class="bold">Family Room<br/></label>
                                     <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
-                                           max="4">
+                                           max=${sessionScope.maxFamilyRooms}>
                                     <div class="error"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-control">
                                     <label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
-                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0" max="3">
+                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0"
+                                           max=${sessionScope.maxSuites}>
                                     <div class="error"></div>
                                 </div>
                             </td>

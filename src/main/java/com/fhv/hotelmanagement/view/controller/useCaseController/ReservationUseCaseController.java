@@ -2,17 +2,11 @@
 package com.fhv.hotelmanagement.view.controller.useCaseController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
-import com.fhv.hotelmanagement.domain.factory.BoardFactory;
-import com.fhv.hotelmanagement.domain.factory.RoomCategoryFactory;
-import com.fhv.hotelmanagement.domain.factory.RoomFactory;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +14,7 @@ import java.util.HashMap;
 
 public class ReservationUseCaseController {
     private ReservationDTO reservationDTO;
-    private CustomerDTO customer;
+    private CustomerDTO customerDTO;
     ArrayList<RoomDTO> freeRooms;
     ArrayList<RoomDTO> freeSingleRooms;
     ArrayList<RoomDTO> freeDoubleRooms;
@@ -35,8 +29,8 @@ public class ReservationUseCaseController {
     public ReservationUseCaseController(LocalDate arrivalDate, LocalDate departureDate) throws IOException {
 
         reservationDTO = new ReservationDTO();
-        customer = new CustomerDTO();
-        reservationDTO.setCustomer(customer);
+        customerDTO = new CustomerDTO();
+        reservationDTO.setCustomer(customerDTO);
         freeSingleRooms = new ArrayList<>();
         freeDoubleRooms = new ArrayList<>();
         freeFamilyRooms = new ArrayList<>();
@@ -57,12 +51,12 @@ public class ReservationUseCaseController {
         this.reservationDTO = reservationDTO;
     }
 
-    public CustomerDTO getCustomer() {
-        return customer;
+    public CustomerDTO getCustomerDTO() {
+        return customerDTO;
     }
 
-    public void setCustomer(CustomerDTO customer) {
-        this.customer = customer;
+    public void setCustomerDTO(CustomerDTO customerDTO) {
+        this.customerDTO = customerDTO;
     }
 
     public int getMaxSingleRooms() {
@@ -193,11 +187,13 @@ public class ReservationUseCaseController {
 
 
     public void save() throws CustomerIsInvalidException, ReservationIsInvalidException {
-        if (reservationDTO != null && customer != null) {
+        if (reservationDTO != null && customerDTO != null) {
+            reservationDTO.setPricePerNightForBoard(reservationDTO.getBoard().getPricePerNight());
+            customerDTO.setSaved(true);
             reservationDTO.setCreationTimestamp(LocalDateTime.now());
-            Long customerNumber = DomainController.saveCustomer(customer);
-            customer.setNumber(customerNumber);
-            reservationDTO.setCustomer(customer);
+            Long customerNumber = DomainController.saveCustomer(customerDTO);
+            customerDTO.setNumber(customerNumber);
+            reservationDTO.setCustomer(customerDTO);
             DomainController.saveReservation(reservationDTO);
         }
     }
