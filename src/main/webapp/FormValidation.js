@@ -18,6 +18,18 @@ const country = document.getElementById('country');
 const phoneNumber = document.getElementById('phoneNumber');
 const email = document.getElementById('email');
 
+const arrivalDate = document.getElementById('arrivalDate');
+//const arrivalDate = document.getElementsByName('arrivalDate');
+
+const departureDate = document.getElementById('departureDate');
+const numberOfGuests = document.getElementById('people-input');
+const singleRoom = document.getElementById('singleroom');
+const doubleRoom = document.getElementById('doubleroom');
+const familyRoom = document.getElementById('familyroom');
+const suiteRoom = document.getElementById('suite');
+const dateOfBirth = document.getElementById('birthdate');
+
+
 let hasError = false;
 
 form.addEventListener('submit', e => {
@@ -61,7 +73,35 @@ const validateInputs = () =>{
     const phoneNumberValue = phoneNumber.value.trim();
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
+    const arrivalDateValue = arrivalDate.valueOf();
 
+    // document.write(arrivalDateValue.valueOf());
+    // document.write("abstand erste");
+    // document.write(arrivalDate.valueOf());
+    // document.write("Abstand hier")
+    // //document.write(firstName);
+    // document.write(firstNameValue);
+
+
+    // var userdate = new Date(document.getElementById("arrivalDate").value).toJSON().slice(0,10);
+    // var today = new Date().toJSON().slice(0,10);
+    // if(arrivalDateValue < today){
+    //     setError(arrivalDate, 'Required field');
+    // } else {
+    //     setSuccess(arrivalDate);
+    // }
+
+    // if(new Date(arrivalDate).getDate() < todayDate.getDate()) {
+    //     setError(arrivalDate, 'Required field');
+    // } else {
+    //     setSuccess(arrivalDate);
+    // }
+
+    // if(departureDate < currentDate) {
+    //     setError(departureDate, 'Required field');
+    // } else {
+    //     setSuccess(departureDate);
+    // }
 
    if(!(fullBoard.checked === true ||
         halfBoard.checked === true ||
@@ -102,7 +142,7 @@ const validateInputs = () =>{
 
     if(streetValue === ''){
         setError(street, 'Required field');
-    } else if(!streetValue.match(/^([0-9a-zA-Z /-])*$/)) {
+    } else if(!streetValue.match(/^([0-9a-zA-Z. /-])*$/)) {
         setError(street, 'Incorrect input')
     } else{
         setSuccess(street);
@@ -110,7 +150,7 @@ const validateInputs = () =>{
 
     if (cityValue === '') {
         setError (city, 'Required field');
-    } else if(!cityValue.match(/^([a-zA-Z /-])*$/)) {
+    } else if(!cityValue.match(/^([a-zA-Z. /-])*$/)) {
         setError(city, 'Incorrect input')
     } else {
         setSuccess (city);
