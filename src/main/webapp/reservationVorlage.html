@@ -3,14 +3,9 @@
 <head>
     <title>Make Reservation</title>
     <meta charset="UTF-8">
-    <meta name="keywords" content="Bibliothek, Blons, Ausleihen, Leihen, Bibliohteksabo,
-            Bücher, Filme, Zeitschriften, Spiele, Ludothek">
-    <meta name="description" content="Webseite der Bibliothek Blons">
-    <meta name="author" content="Clara Tschamon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="WebStylesheet.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
 </head>
 <body style="font-family: Arial;
 background-image: url('Background.jpg');
@@ -73,32 +68,47 @@ background-attachment: fixed">
                     </div>
 
                     <!-- Zimmer -->
-                    <div class="input-control">
-                        <!-- erste Zeile der Zimmer -->
-                        <table id="room1">
-                            <tr>
-                                <td><label for="singleroom" class="bold">Single Room<br/></label>
+                    <!-- erste Zeile der Zimmer -->
+                    <table id="room1">
+                        <tr>
+                            <td>
+                                <div class="input-control">
+                                    <label for="singleroom" class="bold">Single Room<br/></label>
                                     <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0"
-                                           max="4"></td>
-                                <td><label for="doubleroom" style="margin-left: 50px" class="bold">Double Room
-                                    <br/></label>
+                                           max="4">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-control">
+                                    <label for="doubleroom" style="margin-left: 50px" class="bold">Double Room<br/></label>
                                     <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
-                                           max="10"></td>
-                            </tr>
-                        </table>
-                        <!-- zweite Zeile der Zimmer -->
-                        <table id="room2">
-                            <tr>
-                                <td><label for="familyroom" class="bold">Family Room<br/></label>
+                                           max="10">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- zweite Zeile der Zimmer -->
+                    <table id="room2">
+                        <tr>
+                            <td>
+                                <div class="input-control">
+                                    <label for="familyroom" class="bold">Family Room<br/></label>
                                     <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
-                                           max="4"></td>
-                                <td><label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
+                                           max="4">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-control">
+                                    <label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
                                     <input class="sizesmall" type="number" id="suite" name="suite" min="0" max="3">
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="error"></div>
-                    </div>
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
                     <!-- Board -->
                     <div class="input-control">
@@ -131,24 +141,30 @@ background-attachment: fixed">
                     </div>
 
                     <!-- Vorname und Nachname -->
-                    <div class="input-control">
-                        <table id="name">
-                            <tr>
-                                <!-- Vorname -->
-                                <td><label for="firstName" class="bold">First Name <br/></label>
-                                    <input class="name" name="firstname" id="firstName" type="text"></td>
-                                <!-- Nachname -->
-                                <td><label for="lastName" style="margin-left: 50px" class="bold">Last Name <br/>
-                                </label>
-                                    <input class="name" name="lastname" id="lastName" type="text"></td>
-                            </tr>
-                        </table>
-                        <div class="error"></div>
-                    </div>
+                    <table id="name">
+                        <tr>
+                            <!-- Vorname -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="firstName" class="bold">First Name <br/></label>
+                                    <input class="name" name="firstname" id="firstName" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+
+                            <!-- Nachname -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="lastName" style="margin-left: 50px" class="bold">Last Name <br/></label>
+                                    <input class="name" name="lastname" id="lastName" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
                     <!-- Geburtsdatum -->
                     <div class="input-control">
-                        <div class="error"></div>
                         <label for="birthdate" class="bold">Choose your birthday:<br/></label>
                         <input type="date" id="birthdate" name="birthdate" class="sizebig">
                         <div class="error"></div>
@@ -168,34 +184,50 @@ background-attachment: fixed">
                     </div>
 
                     <!-- Adresse -->
-                    <div class="input-control">
-                        <table id="adress1">
-                            <tr>
-                                <!-- Straße -->
-                                <td><label for="street" class="bold">Street<br/></label>
-                                    <input class="sizebig" name="Street" id="street" type="text"></td>
-                                <!-- HNr. -->
-                                <td><label for="houseNumber" class="bold" style="margin-left: 50px">HNr.
+                    <table id="adress1">
+                        <tr>
+                            <!-- Straße -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="street" class="bold">Street<br/></label>
+                                    <input class="sizebig" name="Street" id="street" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                            <!-- HNr. -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="houseNumber" class="bold" style="margin-left: 50px">HNr.
                                     <br/></label>
-                                    <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text"></td>
-                            </tr>
-                        </table>
-                        <div class="error"></div>
+                                    <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                        <table id="adress2">
-                            <tr>
-                                <!-- Stadt -->
-                                <td><label for="city" class="bold">City<br/></label>
-                                    <input class="sizebig" name="City" id="city" type="text"></td>
-                                <!-- PLZ -->
-                                <td><label for="zipCode" class="bold" style="margin-left: 50px">ZIP Code
+                    <table id="adress2">
+                        <tr>
+                            <!-- Stadt -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="city" class="bold">City<br/></label>
+                                    <input class="sizebig" name="City" id="city" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                            <!-- PLZ -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="zipCode" class="bold" style="margin-left: 50px">ZIP Code
                                     <br/></label>
-                                    <input class="sizesmall" name="ZIPCode" id="zipCode" type="text"></td>
-                            </tr>
-                        </table>
-                        <div class="error"></div>
-                    </div>
-
+                                    <input class="sizesmall" name="ZIPCode" id="zipCode" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    
                     <!-- Land -->
                     <div class="input-control">
                         <label for="country" class="bold">Country <br/></label>
