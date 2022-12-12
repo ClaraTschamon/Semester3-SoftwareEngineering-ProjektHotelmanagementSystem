@@ -1,5 +1,8 @@
 package com.fhv.hotelmanagement.view;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
+import com.fhv.hotelmanagement.domain.factory.BoardFactory;
+import com.fhv.hotelmanagement.domain.factory.RoomCategoryFactory;
+import com.fhv.hotelmanagement.domain.factory.RoomFactory;
 import com.fhv.hotelmanagement.view.DTOs.BoardDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
@@ -36,12 +39,12 @@ public class WebServlet extends HttpServlet {
         switch (dispatchto) {
             case "newReservation":
                 if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController(
+                    useCaseController = new ReservationUseCaseController( //fehler hier
                             (LocalDate) session.getAttribute("arrivalDate"),
-                            (LocalDate) session.getAttribute("departureDate")); //wird evtl nullpointer exception verursachen
+                            (LocalDate) session.getAttribute("departureDate")); //wird evtl. nullpointer exception verursachen
                 }
                 page = "/ReservationSuccessView.jsp";
-                saveData(request, response);
+                //saveData(request, response);
 
                 dispatcher = application.getRequestDispatcher(page);
                 dispatcher.forward(request, response);

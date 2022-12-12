@@ -6,6 +6,9 @@ import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.Room;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
+import com.fhv.hotelmanagement.domain.factory.BoardFactory;
+import com.fhv.hotelmanagement.domain.factory.RoomCategoryFactory;
+import com.fhv.hotelmanagement.domain.factory.RoomFactory;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.io.IOException;
@@ -30,6 +33,7 @@ public class ReservationUseCaseController {
     private int maxSuites;
 
     public ReservationUseCaseController(LocalDate arrivalDate, LocalDate departureDate) throws IOException {
+
         reservationDTO = new ReservationDTO();
         customer = new CustomerDTO();
         reservationDTO.setCustomer(customer);
