@@ -5,6 +5,7 @@ import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.ReservedRoomEntity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -26,6 +27,23 @@ public class ReservedRoomDataMapper {
 
     public static ArrayList<ReservedRoom> getAll(){
         ArrayList<ReservedRoomEntity> entities = (ArrayList<ReservedRoomEntity>) PersistenceManager.instance().entityManager.createQuery("from ReservedRoomEntity ").getResultList();
+        ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
+        for(ReservedRoomEntity e : entities){
+            reservedRooms.add(createReservedRoom(e, ReservationDataMapper.createReservation(e.getReservation())));
+        }
+        return reservedRooms;
+    }
+
+    public static ArrayList<ReservedRoom> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<ReservedRoomEntity> entities;
+
+        entities = (ArrayList<ReservedRoomEntity>) PersistenceManager.instance().entityManager.createQuery(
+                "SELECT reservedRoom FROM ReservedRoomEntity  reservedRoom " +
+                        "WHERE (reservedRoom.fromDate < :minimumDate AND :minimumDate <= reservedRoom.toDate)" +
+                        "OR (:minimumDate <= reservedRoom.fromDate AND reservedRoom.fromDate <= :maximumDate)")
+                .setParameter("minimumDate", minDate)
+                .setParameter("maximumDate", maxDate).getResultList();
+
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
         for(ReservedRoomEntity e : entities){
             reservedRooms.add(createReservedRoom(e, ReservationDataMapper.createReservation(e.getReservation())));

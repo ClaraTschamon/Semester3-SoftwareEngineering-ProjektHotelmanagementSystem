@@ -2,13 +2,22 @@
 package com.fhv.hotelmanagement.domain.factory;
 
 import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
+import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservedRoomDTO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ReservedRoomFactory {
-    //TODO: getReservedRoomsBetween
+
+    public static ArrayList<ReservedRoomDTO> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<ReservedRoomDTO> reservedRoomDTOS = new ArrayList<>();
+        for (ReservedRoom reservedRoom : PersistenceFacade.getReservedRoomsBetween(minDate, maxDate)){
+            reservedRoomDTOS.add(createReservedRoomDTO(reservedRoom, true));
+        }
+        return reservedRoomDTOS;
+    }
 
     protected static ReservedRoomDTO createReservedRoomDTO(ReservedRoom reservedRoom, boolean includeReservationArrays){
         if(!includeReservationArrays){

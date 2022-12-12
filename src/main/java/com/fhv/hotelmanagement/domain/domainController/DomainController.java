@@ -66,6 +66,10 @@ public class DomainController {
 
     public static ReservationDTO getReservation(Long number){return ReservationFactory.getReservation(number);}
 
+    public static ArrayList<ReservedRoomDTO> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
+        return ReservedRoomFactory.getReservedRoomsBetween(minDate, maxDate);
+    }
+
     public static Long saveReservation(ReservationDTO reservationDTO) throws ReservationIsInvalidException {return ReservationFactory.saveReservation(reservationDTO);}
 
     public static ArrayList<ReservationDTO> getAllReservations(){return ReservationFactory.getAllReservations();}
