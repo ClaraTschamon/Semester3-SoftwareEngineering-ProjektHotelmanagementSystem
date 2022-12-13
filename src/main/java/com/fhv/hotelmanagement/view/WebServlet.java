@@ -90,14 +90,20 @@ public class WebServlet extends HttpServlet {
         LocalDateTime creationTimestamp = LocalDateTime.now();
         LocalDate arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
         LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
-        AddressDTO billingAddress = new AddressDTO(); //wieder auf null setzen
-        String comment = "ddd"; //probe. wieder auf null setzen
-        String paymentMethod = "Credit card"; //null
-        String creditCardNumber = "1181 1818 1818 1818"; //null
+
+        //für Probe ob speichern möglich ist
+        String testStreet = "Test";
+        String testHouseNr = "1";
+        String testPostalCode = "1111";
+        String testCity = "Test";
+        String testCountry = "Test";
+        AddressDTO billingAddress = new AddressDTO(testStreet, testHouseNr, testPostalCode, testCity, testCountry);
+        String comment = null;
+        String paymentMethod = "Credit Card"; //null
+        String creditCardNumber = "1234 1234 1234 1234"; //null
         String expirationDate = "12/22"; //null
         String authorisationNumber = "123"; //null
-        BoardDTO selectedBoard = getBoardByName(request.getParameter("Board"));
-        System.out.println(selectedBoard.toString());
+        BoardDTO board = getBoardByName(request.getParameter("Board"));
         Integer amountGuests = Integer.parseInt(request.getParameter("people-input"));
 
         //set Reservation Attributes
@@ -110,6 +116,7 @@ public class WebServlet extends HttpServlet {
         reservationDTO.setCreditCardNumber(creditCardNumber);
         reservationDTO.setExpirationDate(expirationDate);
         reservationDTO.setAuthorisationNumber(authorisationNumber);
+        reservationDTO.setBoard(board);
         reservationDTO.setAmountGuests(amountGuests);
 
         //get Attributes for Customer
@@ -132,7 +139,7 @@ public class WebServlet extends HttpServlet {
         customerAddressDTO.setHouseNumber(houseNumber);
         customerAddressDTO.setPostalCode(postalCode);
         customerAddressDTO.setCity(city);
-        customerAddressDTO.setCity(country);
+        customerAddressDTO.setCountry(country);
 
         //set Customer Attributes
         customerDTO.setFirstName(firstName);

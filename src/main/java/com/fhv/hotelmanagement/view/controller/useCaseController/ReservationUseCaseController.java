@@ -188,9 +188,9 @@ public class ReservationUseCaseController {
 
     public void save() throws CustomerIsInvalidException, ReservationIsInvalidException {
         if (reservationDTO != null && customerDTO != null) {
-            reservationDTO.setPricePerNightForBoard(reservationDTO.getBoard().getPricePerNight());
-            customerDTO.setSaved(true);
+            reservationDTO.setPricePerNightForBoard(reservationDTO.getBoard().getPricePerNight()); //nullpointer exception
             reservationDTO.setCreationTimestamp(LocalDateTime.now());
+            customerDTO.setSaved(true);
             Long customerNumber = DomainController.saveCustomer(customerDTO);
             customerDTO.setNumber(customerNumber);
             reservationDTO.setCustomer(customerDTO);
