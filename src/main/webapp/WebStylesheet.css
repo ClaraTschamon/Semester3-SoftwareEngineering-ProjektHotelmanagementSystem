@@ -121,6 +121,8 @@ body {
 table.a {
     table-layout: auto;
     width: 1700px;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 
