@@ -72,6 +72,11 @@ public class ReservationFactory {
                 BoardFactory.createBoardDTO(reservation.getBoard()), reservation.getPricePerNightForBoard(),reservation.getComment(),
                 reservation.getAmountGuests(), reservedRoomCategoryDTOS, reservedRoomDTOS);
 
+        if(reservation.getBooking() != null) {
+            BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservation.getBooking(), true, null);
+            reservationDTO.setBooking(bookingDTO);
+        }
+
         if(includeArrays){
             for(ReservedRoomCategory reservedRoomCategory : reservation.getReservedRoomCategories()){
                 reservedRoomCategoryDTOS.add(ReservedRoomCategoryFactory.createReservedRoomCategoryDTO(reservedRoomCategory));
@@ -93,7 +98,7 @@ public class ReservationFactory {
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
         Reservation reservation;
 
-        if(reservationDTO.getBooking() == null){ //neu
+        //if(reservationDTO.getBooking() == null){ //neu
             reservation = new Reservation(reservationDTO.getNumber(), null,
                     CustomerFactory.createCustomer(reservationDTO.getCustomer()),
                     reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
@@ -101,7 +106,7 @@ public class ReservationFactory {
                     billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
                     reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
                     reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
-        } else {
+        /*} else {
 
             reservation = new Reservation(reservationDTO.getNumber(), BookingFactory.createBooking(reservationDTO.getBooking(), true),
                     CustomerFactory.createCustomer(reservationDTO.getCustomer()),
@@ -110,6 +115,11 @@ public class ReservationFactory {
                     billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
                     reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
                     reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
+        }*/
+
+        if(reservation.getBooking() != null) {
+            Booking booking = BookingFactory.createBooking(reservationDTO.getBooking(), true);
+            reservation.setBooking(booking);
         }
         if(fillArrays){
             for(ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservationDTO.getReservedRoomCategories()){
