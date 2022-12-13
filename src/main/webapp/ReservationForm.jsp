@@ -304,9 +304,9 @@ background-attachment: fixed">
                     <div class="input-control">
                         <label for="paymentmethod" class="bold"><h3>Payment method</h3> <br/></label>
                         <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px">
-                            <option value="" selected>--Please select--</option>
-                            <option value="select">Credit card</option>
-                            <option value="select">Bill</option>
+                            <option value="select" selected>--Please select--</option>
+                            <option value="Credit card">Credit card</option>
+                            <option value="Bill">Bill</option>
                         </select>
                         <div class="error"></div>
                     </div>

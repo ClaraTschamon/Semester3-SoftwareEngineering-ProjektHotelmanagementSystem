@@ -40,18 +40,20 @@ public class WebServlet extends HttpServlet {
         switch (dispatchto) {
             case "newReservation":
                 if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController( //fehler hier
+                    useCaseController = new ReservationUseCaseController();
+                    useCaseController.calculateMaxCountRooms(
                             (LocalDate) session.getAttribute("arrivalDate"),
-                            (LocalDate) session.getAttribute("departureDate")); //wird evtl. nullpointer exception verursachen
+                            (LocalDate) session.getAttribute("departureDate")
+                    );
                 }
 
                 try {
                     saveData(request, response);
                 } catch (ReservationIsInvalidException | CustomerIsInvalidException e) {
-                    //page = "/ReservationErrorView.jsp";
-                    //dispatcher = application.getRequestDispatcher(page);
-                    //dispatcher.forward(request, response);
-                    throw new RuntimeException(e);
+                    page = "/ReservationErrorView.jsp";
+                    dispatcher = application.getRequestDispatcher(page);
+                    dispatcher.forward(request, response);
+                    System.out.println(e.getMessage());
                 }
 
                 page = "/ReservationSuccessView.jsp";
@@ -63,15 +65,16 @@ public class WebServlet extends HttpServlet {
                 LocalDate arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
                 LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
                 if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController(arrivalDate, departureDate);
+                    useCaseController = new ReservationUseCaseController();
                 }
+                useCaseController.calculateMaxCountRooms(arrivalDate, departureDate);
                 int amountGuests = Integer.parseInt(request.getParameter("people-input"));
                 session.setAttribute("arrivalDate", arrivalDate);
                 session.setAttribute("departureDate", departureDate);
                 session.setAttribute("amountGuests", amountGuests);
                 session.setAttribute("maxSingleRooms", useCaseController.getMaxSingleRooms());
                 session.setAttribute("maxDoubleRooms", useCaseController.getMaxDoubleRooms());
-                session.setAttribute("maxFamilyRooms", useCaseController.getMaxFamilyRomms());
+                session.setAttribute("maxFamilyRooms", useCaseController.getMaxFamilyRooms());
                 session.setAttribute("maxSuites", useCaseController.getMaxSuites());
 
                 page = "/ReservationForm.jsp";
