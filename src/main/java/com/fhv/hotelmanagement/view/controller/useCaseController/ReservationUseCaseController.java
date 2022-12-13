@@ -100,10 +100,6 @@ public class ReservationUseCaseController {
                 freeRooms.add(roomDTO);
             }
         }
-        //system out for controlling:
-        for(RoomDTO roomDTO : freeRooms){
-            System.out.println(roomDTO.getCategory() + " " + roomDTO.getNumber());
-        }
 
         return freeRooms;
     }

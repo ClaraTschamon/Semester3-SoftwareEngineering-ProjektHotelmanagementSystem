@@ -92,17 +92,22 @@ public class WebServlet extends HttpServlet {
         LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
 
         //für Probe ob speichern möglich ist
-        String testStreet = "Test";
-        String testHouseNr = "1";
-        String testPostalCode = "1111";
-        String testCity = "Test";
-        String testCountry = "Test";
-        AddressDTO billingAddress = new AddressDTO(testStreet, testHouseNr, testPostalCode, testCity, testCountry);
-        String comment = null;
-        String paymentMethod = "Credit Card"; //null
-        String creditCardNumber = "1234 1234 1234 1234"; //null
-        String expirationDate = "12/22"; //null
-        String authorisationNumber = "123"; //null
+        String billingStreet = request.getParameter("BillingStreet");
+        String billingHouseNr = request.getParameter("BillingHouseNumber");
+        String billingPostalCode = request.getParameter("BillingZIPCode");
+        String billingCity = request.getParameter("BillingCity");
+        String billingCountry = request.getParameter("BillingCountry");
+        AddressDTO billingAddress = new AddressDTO(billingStreet, billingHouseNr, billingPostalCode, billingCity, billingCountry);
+        String comment = request.getParameter("Comment");
+        String paymentMethod = request.getParameter("Paymentmethod");
+        String creditCardNumber = null;
+        String expirationDate = null;
+        String authorisationNumber = null;
+        if(paymentMethod.equals("Credit card")){
+            creditCardNumber = request.getParameter("CreditCardNumber");
+            authorisationNumber = request.getParameter("SecurityNumber");
+            expirationDate = request.getParameter("ExpirationDate");
+        }
         BoardDTO board = getBoardByName(request.getParameter("Board"));
         Integer amountGuests = Integer.parseInt(request.getParameter("people-input"));
 
@@ -145,7 +150,7 @@ public class WebServlet extends HttpServlet {
         customerDTO.setFirstName(firstName);
         customerDTO.setLastName(lastName);
         customerDTO.setDateOfBirth(dateOfBirth);
-        customerDTO.setNationality(nationality);
+        customerDTO.setNationality("Austria"); //TODO
         customerDTO.setPhoneNumber(phoneNumber);
         customerDTO.setEmail(email);
         customerDTO.setAddress(customerAddressDTO);
