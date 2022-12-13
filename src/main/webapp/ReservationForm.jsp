@@ -55,16 +55,25 @@ background-attachment: fixed">
                     <div class="input-control">
                         <table id="date">
                             <tr>
-                                <td><label for="arrivalDate" class="bold">Choose a arrival date: <br/></label>
-                                    <input type="date" id="arrivalDate" name="arrivalDate"
-                                           value=${sessionScope.arrivalDate}></td>
-                                <td><label for="departureDate" style="margin-left: 50px" class="bold">Choose a departure
-                                    date:<br/> </label>
-                                    <input type="date" id="departureDate" name="departureDate"
-                                           value=${sessionScope.departureDate}></td>
+                                <td>
+                                    <div class="input-control">
+                                        <label for="arrivalDate" class="bold">Choose a arrival date: <br/></label>
+                                        <input type="date" id="arrivalDate" name="arrivalDate"
+                                               value=${sessionScope.arrivalDate}>
+                                        <div class="error"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-control">
+                                        <label for="departureDate" style="margin-left: 50px" class="bold">Choose a departure
+                                        date:<br/> </label>
+                                        <input type="date" id="departureDate" name="departureDate"
+                                               value=${sessionScope.departureDate}>
+                                        <div class="error"></div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
-                        <div class="error"></div>
                     </div>
 
                     <!-- Anzahl der Gäste -->
@@ -269,5 +278,5 @@ background-attachment: fixed">
     </div>
 </div>
 </body>
-<script src="FormValidation.js"></script>
+<script src="ReservationFormValidation.js"></script>
 </html>
