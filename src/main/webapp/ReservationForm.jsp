@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: clara
+  Date: 12.12.2022
+  Time: 11:59
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <title>Make Reservation</title>
@@ -18,8 +25,8 @@ background-attachment: fixed">
     <li><img src="" alt=""></li>
     <li><a class="oben" href="#about">About</a></li>
     <li><a class="oben" href="#contact">Contact</a></li>
-    <li><a class="oben" href="reservationVorlage.html">Reservations</a></li>
-    <li><a class="active, oben" href="Index.html">Home</a></li>
+    <li><a class="oben" href="ReservationForm.jsp">Reservations</a></li>
+    <li><a class="active, oben" href="index.html">Home</a></li>
 </ul>
 
 <!-- Der weiße Hintergrund-->
@@ -39,7 +46,8 @@ background-attachment: fixed">
             <h1>Make a Reservation</h1>
             <div class="container">
                 <form id="form"
-                      action=""
+                      action="Controller"
+                      name="registration"
                       method="POST">
 
 
@@ -49,11 +57,11 @@ background-attachment: fixed">
                             <tr>
                                 <td><label for="arrivalDate" class="bold">Choose a arrival date: <br/></label>
                                     <input type="date" id="arrivalDate" name="arrivalDate"
-                                           value="<?php echo $_POST['arrivalDate']; ?>"></td>
+                                           value=${sessionScope.arrivalDate}></td>
                                 <td><label for="departureDate" style="margin-left: 50px" class="bold">Choose a departure
                                     date:<br/> </label>
                                     <input type="date" id="departureDate" name="departureDate"
-                                           value="<?php echo $_POST['departureDate']; ?>"></td>
+                                           value=${sessionScope.departureDate}></td>
                             </tr>
                         </table>
                         <div class="error"></div>
@@ -63,7 +71,7 @@ background-attachment: fixed">
                     <div class="input-control">
                         <label for="people-input" class="bold">Number of guests:<br/></label>
                         <input class="sizebig" type="number" id="people-input" name="people-input" min="1" max="50"
-                               value="<?php echo $_POST['people-input']; ?>"><br><br>
+                               value=${sessionScope.amountGuests}><br><br>
                         <div class="error"></div>
                     </div>
 
@@ -75,15 +83,16 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="singleroom" class="bold">Single Room<br/></label>
                                     <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0"
-                                           max="4">
+                                           max=${sessionScope.maxSingleRooms}> <!--testen-->
                                     <div class="error"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-control">
-                                    <label for="doubleroom" style="margin-left: 50px" class="bold">Double Room<br/></label>
+                                    <label for="doubleroom" style="margin-left: 50px" class="bold">Double
+                                        Room<br/></label>
                                     <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
-                                           max="10">
+                                           max=${sessionScope.maxDoubleRooms}>
                                     <div class="error"></div>
                                 </div>
                             </td>
@@ -96,14 +105,15 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="familyroom" class="bold">Family Room<br/></label>
                                     <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
-                                           max="4">
+                                           max=${sessionScope.maxFamilyRooms}>
                                     <div class="error"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-control">
                                     <label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
-                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0" max="3">
+                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0"
+                                           max=${sessionScope.maxSuites}>
                                     <div class="error"></div>
                                 </div>
                             </td>
@@ -198,7 +208,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="houseNumber" class="bold" style="margin-left: 50px">HNr.
-                                    <br/></label>
+                                        <br/></label>
                                     <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text">
                                     <div class="error"></div>
                                 </div>
@@ -220,14 +230,14 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="zipCode" class="bold" style="margin-left: 50px">ZIP Code
-                                    <br/></label>
+                                        <br/></label>
                                     <input class="sizesmall" name="ZIPCode" id="zipCode" type="text">
                                     <div class="error"></div>
                                 </div>
                             </td>
                         </tr>
                     </table>
-                    
+
                     <!-- Land -->
                     <div class="input-control">
                         <label for="country" class="bold">Country <br/></label>
@@ -251,12 +261,12 @@ background-attachment: fixed">
 
                     <!-- Buttons -->
                     <button type="reset" class="reset">Reset</button>
+                    <input type="hidden" name="dispatchto" value="newReservation">
                     <button type="submit" class="send">Send</button> <!--submit type damit enter taste auch submitted-->
                 </form>
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 <script src="FormValidation.js"></script>
