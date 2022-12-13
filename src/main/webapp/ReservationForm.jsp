@@ -334,7 +334,7 @@ background-attachment: fixed">
                     <!-- Rechnungsadresse -->
                     <table id="billingaddress1">
                         <input type="checkbox" id="addressisbillingaddress" name="isBillingAddress" checked>
-                        <lable for="addressisbillingaddress" style="margin-left: 10px">The billing addresss is the same
+                        <lable for="addressisbillingaddress" style="margin-left: 10px">The billing address is the same
                             as the home address.
                         </lable>
                         <tr>
