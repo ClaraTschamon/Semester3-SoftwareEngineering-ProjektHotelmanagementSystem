@@ -20,7 +20,10 @@ const zipCode = document.getElementById('zipCode');
 const country = document.getElementById('country');
 const phoneNumber = document.getElementById('phoneNumber');
 const email = document.getElementById('email');
-
+const billingStreet= document.getElementById('billingstreet');
+const billingHouseNumber = document.getElementById('billinghouseNumber');
+const billingCity = document.getElementById('billingcity');
+const billingZipCode = document.getElementById('billingzipCode');
 
 const arrivalDate = document.getElementById('arrivalDate');
 //const arrivalDate = document.getElementsByName('arrivalDate');
@@ -45,6 +48,53 @@ form.addEventListener('submit', e => {
     }
     hasError = false
 });
+
+function copyAddress() {
+    // Get the checkbox and the home and billing address input fields
+    const checkbox = document.getElementById('addressisbillingaddress');
+    const homeStreet = document.getElementById('street');
+    const homeHouseNumber = document.getElementById('houseNumber');
+    const homeCity = document.getElementById('city');
+    const homeZipCode = document.getElementById('zipCode');
+    const homecountry = document.getElementById('country');
+    const billingStreet = document.getElementById('billingstreet');
+    const billingHouseNumber = document.getElementById('billinghouseNumber');
+    const billingCity = document.getElementById('billingcity');
+    const billingZipCode = document.getElementById('billingzipCode');
+    const billingcountry=document.getElementById('billingcountry');
+
+    if (checkbox.checked) {
+        billingStreet.value = homeStreet.value;
+        billingHouseNumber.value = homeHouseNumber.value;
+        billingCity.value = homeCity.value;
+        billingZipCode.value = homeZipCode.value;
+        billingcountry.value = homecountry.value;
+    } else {
+        billingStreet.value="";
+        billingHouseNumber.value="";
+        billingCity.value="";
+        billingZipCode.value="";
+        billingcountry.value="";
+    }
+}
+
+function creditCardSelected(){
+    const paymentMethod = document.getElementById('paymentmethod');
+    const creditCardNumber = document.getElementById('creditcardnumber');
+    const securityNumber = document.getElementById('securitynumber');
+    const expirationDate = document.getElementById('expirationdate');
+
+    if (paymentMethod.value === 'Bill') {
+        creditCardNumber.disabled = true;
+        securityNumber.disabled = true;
+        expirationDate.disabled = true;
+    } else {
+        creditCardNumber.disabled = false;
+        securityNumber.disabled = false;
+        expirationDate.disabled = false;
+    }
+}
+
 
 const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -225,3 +275,4 @@ const validateInputs = () => {
 
     return hasError;
 };
+
