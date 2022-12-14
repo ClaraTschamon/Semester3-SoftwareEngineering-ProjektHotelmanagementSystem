@@ -78,11 +78,6 @@ public class ReservationUseCaseController {
         maxDoubleRooms = freeDoubleRooms.size();
         maxFamilyRooms = freeFamilyRooms.size();
         maxSuites = freeSuites.size();
-
-        System.out.println("MaxSinglerooms: " + maxSingleRooms);
-        System.out.println("MaxDoubleRooms: " + maxDoubleRooms);
-        System.out.println("MaxFamilyRooms: " + maxFamilyRooms);
-        System.out.println("MaxSuites: " + maxSuites);
     }
 
     public ArrayList<RoomDTO> createFreeRoomsList(LocalDate minDate, LocalDate maxDate) {

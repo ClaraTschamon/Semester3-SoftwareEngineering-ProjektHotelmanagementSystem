@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,6 +26,8 @@ public class WebServlet extends HttpServlet {
     private HttpSession session;
     private ReservationUseCaseController useCaseController;
 
+    private LocalDate arrivalDate = null;
+    private LocalDate departureDate = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,6 +36,7 @@ public class WebServlet extends HttpServlet {
         String dispatchto = "";
         String page = "";
         RequestDispatcher dispatcher;
+
 
         if (request.getParameter("dispatchto") != null) {
             dispatchto = request.getParameter("dispatchto");
@@ -62,8 +67,8 @@ public class WebServlet extends HttpServlet {
                 break;
 
             case "selectDates":
-                LocalDate arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
-                LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
+                arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
+                departureDate = LocalDate.parse(request.getParameter("departureDate"));
                 if(useCaseController == null){
                     useCaseController = new ReservationUseCaseController();
                 }
@@ -91,8 +96,6 @@ public class WebServlet extends HttpServlet {
 
         //get Attributes for Reservation
         LocalDateTime creationTimestamp = LocalDateTime.now();
-        LocalDate arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
-        LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
 
         //für Probe ob speichern möglich ist
         String billingStreet = request.getParameter("BillingStreet");

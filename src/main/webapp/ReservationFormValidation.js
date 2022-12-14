@@ -1,8 +1,5 @@
 const form = document.getElementById('form');
 
-const arrivalDate = document.getElementById('arrivalDate');
-const departureDate = document.getElementById('departureDate');
-
 const board = document.getElementById('board');
 const fullBoard = document.getElementById('fullBoard');
 const halfBoard = document.getElementById('halfBoard');
@@ -115,29 +112,6 @@ const validateInputs = () => {
     const phoneNumberValue = phoneNumber.value.trim();
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
-
-    var arrivalDateEntered = new Date(arrivalDate.value).getDate();
-    var departureDateEntered = new Date(departureDate.value).getDate();
-    var dateNow = new Date().getDate();
-
-    if(arrivalDate.value === ""){
-        setError(arrivalDate, 'Required field');
-    } else if(!(arrivalDateEntered >= dateNow)){
-        setError(arrivalDate, 'Arrival date can not be before today!')
-    } else if(arrivalDateEntered > departureDateEntered) {
-        setError(arrivalDate, 'Arrival date has to be before the departure date!')
-    } else if(arrivalDateEntered === departureDateEntered) {
-        setError(arrivalDate, 'Arrival date and departure date can not be the same!')
-    }
-    else{
-        setSuccess(arrivalDate);
-    }
-
-    if(departureDate.value === ""){
-        setError(departureDate, 'Required field');
-    } else {
-        setSuccess(departureDate);
-    }
 
     if (!(fullBoard.checked === true ||
         halfBoard.checked === true ||
