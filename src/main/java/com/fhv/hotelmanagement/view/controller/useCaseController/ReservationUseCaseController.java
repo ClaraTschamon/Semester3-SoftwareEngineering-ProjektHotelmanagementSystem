@@ -201,6 +201,7 @@ public class ReservationUseCaseController {
             customerDTO.setNumber(customerNumber);
             reservationDTO.setCustomer(customerDTO);
             DomainController.saveReservation(reservationDTO);
+            //TODO hier email senden
         }
     }
 }
