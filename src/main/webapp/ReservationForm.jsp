@@ -53,7 +53,9 @@ background-attachment: fixed">
 
 
                     <!-- Anzahl der Gäste -->
-                    <div class="input-control">
+                    <p>Selected Arrival Date: ${sessionScope.arrivalDate}</p>
+                    <p>Selected Departure Date: ${sessionScope.departureDate}</p>
+                    <div class="input-control" style="margin-top: 50px">
                         <label for="people-input" class="bold">Number of guests:<br/></label>
                         <input class="sizebig" type="number" id="people-input" name="people-input" min="1" max="50"
                                value=${sessionScope.amountGuests}><br><br>
@@ -276,7 +278,6 @@ background-attachment: fixed">
 
 
                     <!-- Payment Method -->
-
                     <div class="input-control">
                         <label for="paymentmethod" class="bold"><h3>Payment method</h3> <br/></label>
                         <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px" onchange="creditCardSelected()">

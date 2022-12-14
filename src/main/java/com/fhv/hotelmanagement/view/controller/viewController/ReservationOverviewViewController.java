@@ -6,7 +6,6 @@ import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
-import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,6 +20,7 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -180,7 +180,7 @@ public class ReservationOverviewViewController implements Initializable {
         String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         departureDateText.setText(formattedDepartureDate);
 
-        if(reservationDTO.getBooking() == null){ //TODO: 3 tage vor geplantem check-in ist keine anzahlung notwendig
+        if(reservationDTO.getBooking() == null){ //TODO: 3 tage vor geplantem check-in ist keine anzahlung notwendig, wenn bis 3 tage vor check-in nicht angezahlt ist
             phStateText.setText("not confirmed");
         } else {
             phStateText.setText("confirmed");
@@ -200,17 +200,6 @@ public class ReservationOverviewViewController implements Initializable {
     }
 
     @FXML
-    public void stateComboboxAction(ActionEvent actionEvent){
-        if(stateComboBox.getValue().equals("all between")){
-            fromDateDatePicker.setDisable(false);
-            toDateDatePicker.setDisable(false);
-        } else {
-            fromDateDatePicker.setDisable(true);
-            toDateDatePicker.setDisable(true);
-        }
-    }
-
-    @FXML
     public void onFromDateDatePickerClicked(ActionEvent actionEvent){
         if(toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null){
             fillTable("all between");
@@ -224,6 +213,7 @@ public class ReservationOverviewViewController implements Initializable {
         }
     }
 
+    @FXML
     public void stateComboBoxAction(ActionEvent actionEvent) {
         if(stateComboBox.getValue().equals("all between")){
             fromDateDatePicker.setDisable(false);
@@ -231,6 +221,23 @@ public class ReservationOverviewViewController implements Initializable {
         } else {
             fromDateDatePicker.setDisable(true);
             toDateDatePicker.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void onRefreshButtonClicked(ActionEvent actionEvent) {
+        ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations();
+        for(ReservationDTO reservation : reservations) {
+            Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
+            int daysDiff = Math.abs(period.getDays());
+            if(!(daysDiff <= 3)){
+
+
+            } if(){
+                //days until checkin < 3 dann reservierung löschen
+                //TODO: reservierung löschen... sie hat nämlich automatisch eine buchung
+                //TODO: löschen von reservierung methode... nochmal nachdenken ob es richtig hier
+            }
         }
     }
 
@@ -248,4 +255,5 @@ public class ReservationOverviewViewController implements Initializable {
         phPhoneNrText.setText("");
         phPaymentMethodText.setText("");
     }
+
 }
