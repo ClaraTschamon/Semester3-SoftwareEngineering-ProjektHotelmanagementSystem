@@ -21,7 +21,7 @@
 
     <!-- Hier ist der Balken wo man Abreise/Anreise und die Anzahl der Personen eingeben kann-->
 
-    <form action="reservationVorlage.html" method="POST">
+    <form action="reservationVorlage.html" id="index" method="POST">
         <div class="boxforindex">
             <div>
                 <label class="arrivaldate" for="arrivalDate">Choose a arrival date: </label>
@@ -34,6 +34,7 @@
                 <input type="number" class="peoplefield" id="people-input" name="people-input"
                        value="<?php echo $guests; ?>">
                 <button type="submit" class="w3-hover-shadow, button">Submit</button>
+
             </div>
         </div>
     </form>
@@ -117,4 +118,5 @@
 
 
 </body>
+<script src="FormValidation1.js"></script>
 </html>

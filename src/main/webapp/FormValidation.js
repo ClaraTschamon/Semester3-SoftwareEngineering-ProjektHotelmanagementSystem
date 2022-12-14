@@ -79,7 +79,7 @@ const validateInputs = () =>{
     // document.write("abstand erste");
     // document.write(arrivalDate.valueOf());
     // document.write("Abstand hier")
-    // //document.write(firstName);
+    // document.write(firstName);
     // document.write(firstNameValue);
 
 
@@ -120,7 +120,7 @@ const validateInputs = () =>{
 
     if(firstNameValue === ''){
         setError(firstName, 'Required field');
-    } else if(!firstNameValue.match(/^([a-zA-Z -])*$/)) {
+    } else if(!firstNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
         setError(firstName, 'Incorrect input')
     } else {
         setSuccess(firstName);
@@ -128,7 +128,7 @@ const validateInputs = () =>{
 
     if(lastNameValue === ''){
         setError(lastName, 'Required field')
-    } else if(!lastNameValue.match(/^([a-zA-Z -])*$/)) {
+    } else if(!lastNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
         setError(lastName, 'Incorrect input')
     } else{
         setSuccess(lastName)
@@ -142,7 +142,7 @@ const validateInputs = () =>{
 
     if(streetValue === ''){
         setError(street, 'Required field');
-    } else if(!streetValue.match(/^([0-9a-zA-Z. /-])*$/)) {
+    } else if(!streetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
         setError(street, 'Incorrect input')
     } else{
         setSuccess(street);
@@ -150,7 +150,7 @@ const validateInputs = () =>{
 
     if (cityValue === '') {
         setError (city, 'Required field');
-    } else if(!cityValue.match(/^([a-zA-Z. /-])*$/)) {
+    } else if(!cityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
         setError(city, 'Incorrect input')
     } else {
         setSuccess (city);
@@ -158,7 +158,7 @@ const validateInputs = () =>{
 
     if (zipCodeValue === '') {
         setError (zipCode, 'Required field');
-    } else if(!zipCodeValue.match(/^([0-9a-zA-Z]{3,6})$/)) {
+    } else if(!zipCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
         setError(zipCode, 'Incorrect input')
     } else {
         setSuccess (zipCode);
