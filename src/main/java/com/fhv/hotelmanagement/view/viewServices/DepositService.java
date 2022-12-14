@@ -20,7 +20,7 @@ public class DepositService {
         StringBuilder data = new StringBuilder();
 
         while ((line = bufferedReader.readLine()) != null) {
-            System.out.println(line);
+//            System.out.println(line);
             data.append(line);
         }
 
@@ -31,25 +31,49 @@ public class DepositService {
         String reservationNumber = "";
         String date = "";
         String amount = "";
-        String IBAN = "";
-        String match = "";
+        String iban = "";
+
+//        Res#=12345#Date=01NOV2022#Amount=123.34;Date=01NOV2022#
+//        Res#=12346#Amount=50.0#IBAN=AT07123412341234123412;
 
         for(int i = 0; i<data.length();i++){
-            System.out.println(data.charAt(i));
             if(data.charAt(i)=='R'){
-                reservationNumber+=data.charAt(i+5);
-                reservationNumber+=data.charAt(i+6);
-                reservationNumber+=data.charAt(i+7);
-                reservationNumber+=data.charAt(i+8);
-                reservationNumber+=data.charAt(i+9);
+                i+=5;
+                int y = i+5;
+                while (i<y){
+                    reservationNumber+=data.charAt(i);
+                    i++;
+                }
+                System.out.println(reservationNumber);
             }
 
             if(data.charAt(i)=='D'){
-                date+=data.charAt(i+5);
-                date+=data.charAt(i+5);
-                date+=data.charAt(i+5);
-                date+=data.charAt(i+5);
-                date+=data.charAt(i+5);
+                i+=5;
+                int y = i+8;
+                while (i<y){
+                    date+=data.charAt(i);
+                    i++;
+                }
+                System.out.println(date);
+            }
+
+            if(data.charAt(i)=='A' && data.charAt(i+1)=='m'){
+                i+=7;
+                while (data.charAt(i)!='#' && data.charAt(i)!=';'){
+                    amount+=data.charAt(i);
+                    i++;
+                }
+                System.out.println(amount);
+            }
+
+            if(data.charAt(i)=='I'){
+                i+=5;
+                int y = i+22;
+                while (i<y){
+                    iban+=data.charAt(i);
+                    i++;
+                }
+                System.out.println(iban);
             }
 
         }
