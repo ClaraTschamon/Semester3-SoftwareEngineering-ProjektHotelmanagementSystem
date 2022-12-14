@@ -135,9 +135,9 @@ const validateInputs = () =>{
     }
 
     if(nationality.value === 'select'){
-        setError(country, 'Please select your Nationality')
+        setError(nationality, 'Please select your Nationality')
     }else{
-        setSuccess(country)
+        setSuccess(nationality)
     }
 
     if(streetValue === ''){
