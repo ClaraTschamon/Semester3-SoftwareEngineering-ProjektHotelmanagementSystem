@@ -32,4 +32,5 @@ const validateInputs = () => {
     else {
         hasError = false;
     }
-}
+}//nid überprüfen ob ein wert bei creditcard number, aonsonsten immer error bei bill, falsche kreditkarte setzt errror
+//

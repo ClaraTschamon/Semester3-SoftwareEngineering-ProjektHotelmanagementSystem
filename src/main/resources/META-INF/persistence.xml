@@ -12,7 +12,6 @@
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
 <!--            <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2" /> &lt;!&ndash; Datenbank name &ndash;&gt;-->
             <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:/Users/aigne/Documents/GitHub/Hotelmanagement/HotelmanagementDB.h2" /> <!-- Datenbank name -->
-            <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:/Users/clara/IdeaProjects/Hotelmanagement/HotelmanagementDB.h2" />
             <!--<property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:/Users/ninah/Desktop/FH Dornbirn/Hotelmanagement/HotelmanagementDB.h2" />--> <!-- Datenbank name -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="none" />-->
