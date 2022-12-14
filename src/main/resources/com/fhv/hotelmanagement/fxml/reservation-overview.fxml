@@ -46,6 +46,7 @@
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="confirmed" />
                             <String fx:value="not confirmed" />
+                            <String fx:value="all between" />
                             <String fx:value="all" />
                         </FXCollections>
                     </items>

@@ -7,6 +7,7 @@ import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ReservationFactory {
@@ -31,6 +32,30 @@ public class ReservationFactory {
             reservationDTOS.add(createReservationDTO(r, true, null));
         }
 
+        return reservationDTOS;
+    }
+
+    public static ArrayList<ReservationDTO> getAllReservationsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for(Reservation reservation : PersistenceFacade.getAllReservationsBetween(minDate, maxDate)){
+            reservationDTOS.add(createReservationDTO(reservation, true, null));
+        }
+        return reservationDTOS;
+    }
+
+    public static ArrayList<ReservationDTO> getNotConfirmedReservations(){
+        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for(Reservation reservation : PersistenceFacade.getNotConfirmedReservations()){
+            reservationDTOS.add(createReservationDTO(reservation, true, null));
+        }
+        return reservationDTOS;
+    }
+
+    public static ArrayList<ReservationDTO> getConfirmedReservations(){
+        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for(Reservation reservation : PersistenceFacade.getConfirmedReservations()){
+            reservationDTOS.add(createReservationDTO(reservation, true, null));
+        }
         return reservationDTOS;
     }
 
