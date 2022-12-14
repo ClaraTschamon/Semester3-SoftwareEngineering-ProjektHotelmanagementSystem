@@ -34,6 +34,7 @@ background-attachment: fixed">
     <div class="whitebackground">
         <!--zurückpfeil-->
         <div class="topbar">
+
             <div class="left">
                 <a href="index.html">
                     <img src="zurueckpfeil.png" id="back" alt="backArrow">
@@ -50,31 +51,6 @@ background-attachment: fixed">
                       name="registration"
                       method="POST">
 
-
-                    <!-- Anreise und Abreise Datum (Wieso in tabelle? damit es nebeneinander geht) -->
-                    <div class="input-control">
-                        <table id="date">
-                            <tr>
-                                <td>
-                                    <div class="input-control">
-                                        <label for="arrivalDate" class="bold">Choose a arrival date: <br/></label>
-                                        <input type="date" id="arrivalDate" name="arrivalDate"
-                                               value=${sessionScope.arrivalDate}>
-                                        <div class="error"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-control">
-                                        <label for="departureDate" style="margin-left: 50px" class="bold">Choose a departure
-                                        date:<br/> </label>
-                                        <input type="date" id="departureDate" name="departureDate"
-                                               value=${sessionScope.departureDate}>
-                                        <div class="error"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
 
                     <!-- Anzahl der Gäste -->
                     <div class="input-control">
@@ -303,7 +279,7 @@ background-attachment: fixed">
 
                     <div class="input-control">
                         <label for="paymentmethod" class="bold"><h3>Payment method</h3> <br/></label>
-                        <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px">
+                        <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px" onchange="creditCardSelected()">
                             <option value="select" selected>--Please select--</option>
                             <option value="Credit card">Credit card</option>
                             <option value="Bill">Bill</option>
@@ -340,9 +316,9 @@ background-attachment: fixed">
                     </table>
 
                     <h3>Billing Address</h3>
-                    <!-- Rechnungsadresse -->
+                    <!-- Rechnungsadresse_______________________________________________________________________________________________________________ -->
                     <table id="billingaddress1">
-                        <input type="checkbox" id="addressisbillingaddress" name="isBillingAddress" checked>
+                        <input type="checkbox" id="addressisbillingaddress" name="isBillingAddress" onchange="copyAddress()">
                         <lable for="addressisbillingaddress" style="margin-left: 10px">The billing address is the same
                             as the home address.
                         </lable>
