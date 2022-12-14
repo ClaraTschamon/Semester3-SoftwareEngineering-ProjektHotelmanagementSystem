@@ -12,8 +12,9 @@
         <li><img src="" alt=""></li>
         <li><a class="oben" href="#about">About</a></li>
         <li><a class="oben" href="#contact">Contact</a></li>
-        <li><a class="oben" href="reservationVorlage.html">Reservations</a></li>
-        <li><a class="active, oben" href="Index.html">Home</a></li>
+        <!--<li><a class="oben" href="reservationVorlage.html">Reservations</a></li>-->
+        <li><a class="oben" href="ReservationForm.jsp">Reservations</a></li>
+        <li><a class="active, oben" href="index.html">Home</a></li>
     </ul>
 
 
@@ -21,7 +22,11 @@
 
     <!-- Hier ist der Balken wo man Abreise/Anreise und die Anzahl der Personen eingeben kann-->
 
-    <form action="reservationVorlage.html" id="index" method="POST">
+    <!--<form action="reservationVorlage.html" method="POST">-->
+    <form action="Controller"
+          name="registration"
+          method="POST">
+
         <div class="boxforindex">
             <div>
                 <label class="arrivaldate" for="arrivalDate">Choose a arrival date: </label>
@@ -34,9 +39,9 @@
                 <input type="number" class="peoplefield" id="people-input" name="people-input"
                        value="<?php echo $guests; ?>">
                 <button type="submit" class="w3-hover-shadow, button">Submit</button>
-
             </div>
         </div>
+        <input type="hidden" name="dispatchto" value="selectDates">
     </form>
 </div>
 
@@ -118,5 +123,4 @@
 
 
 </body>
-<script src="FormValidation1.js"></script>
 </html>

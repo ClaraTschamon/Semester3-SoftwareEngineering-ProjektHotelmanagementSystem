@@ -45,3 +45,4 @@ testDB.h2.mv.db
 HotelmanagementDB.h2.mv.db
 HotelmanagementDB.h2.mv.db
 HotelmanagementDB.h2.mv.db
+src/main/resources/META-INF/persistence.xml

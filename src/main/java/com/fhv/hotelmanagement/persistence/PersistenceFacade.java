@@ -86,6 +86,10 @@ public class PersistenceFacade{
         return ReservedRoomDataMapper.getAll();
     }
 
+    public static ArrayList<ReservedRoom> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate){ //TODO: Testen
+        return ReservedRoomDataMapper.getReservedRoomsBetween(minDate, maxDate);
+    }
+
     public static ArrayList<BookedRoom> getBookedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
         return BookedRoomDataMapper.getBookedRoomsBetween(minDate, maxDate);
     }

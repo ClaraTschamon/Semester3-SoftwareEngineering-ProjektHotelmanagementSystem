@@ -92,15 +92,26 @@ public class ReservationFactory {
 
         ArrayList<ReservedRoomCategory> reservedRoomCategories = new ArrayList<>();
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
+        Reservation reservation;
 
-        Reservation reservation = new Reservation(reservationDTO.getNumber(), BookingFactory.createBooking(reservationDTO.getBooking(), true),
-                CustomerFactory.createCustomer(reservationDTO.getCustomer()),
-                reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
-                billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
-                billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
-                reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
-                reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
+        if(reservationDTO.getBooking() == null){ //neu
+            reservation = new Reservation(reservationDTO.getNumber(), null,
+                    CustomerFactory.createCustomer(reservationDTO.getCustomer()),
+                    reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
+                    billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
+                    billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
+                    reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
+                    reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
+        } else {
 
+            reservation = new Reservation(reservationDTO.getNumber(), BookingFactory.createBooking(reservationDTO.getBooking(), true),
+                    CustomerFactory.createCustomer(reservationDTO.getCustomer()),
+                    reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
+                    billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
+                    billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
+                    reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
+                    reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
+        }
         if(fillArrays){
             for(ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservationDTO.getReservedRoomCategories()){
                 reservedRoomCategories.add(ReservedRoomCategoryFactory.createReservedRoomCategory(reservedRoomCategoryDTO));
