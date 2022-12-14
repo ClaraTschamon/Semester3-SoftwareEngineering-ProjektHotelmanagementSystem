@@ -488,11 +488,6 @@ public class WalkIn1ViewController implements Initializable {
 
         searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) ->
                 searchDatabaseTextFieldFocusChanged(newValue));
-
-        //damit in validierung rot gemachtes datum wieder schwarz wird wenn neues Datum ausgewählt wird
-        departureDatePicker.setOnAction(action -> {
-            departureDatePicker.setStyle("-fx-text-inner-color: black");
-        });
     }
 
     private void searchDatabaseTextFieldChanged() {
@@ -571,6 +566,8 @@ public class WalkIn1ViewController implements Initializable {
     private void departureDatePickerOnAction() {
         roomProvider.refreshFreeRooms(departureDatePicker.getValue());
         refreshFreeRoomsInDropDowns();
+        //damit in validierung rot gemachtes datum wieder schwarz wird wenn neues Datum ausgewählt wird
+        departureDatePicker.setStyle("-fx-text-inner-color: black");
     }
 }
 
@@ -604,6 +601,7 @@ class RoomProvider{
     public void refreshFreeRooms(LocalDate maxDate) {
         freeRooms = DomainController.getAllRooms();
         ArrayList<RoomDTO> bookedRooms = new ArrayList<>();
+        ArrayList<RoomDTO> reservedRooms = new ArrayList<>();
         LocalDate today = LocalDate.now();
 
         for (BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(today, maxDate)) {
@@ -620,7 +618,25 @@ class RoomProvider{
             }
         }
 
+        for (ReservedRoomDTO reservedRoom : DomainController.getReservedRoomsBetween(today, maxDate)) {
+            LocalDate toDate = reservedRoom.getToDate();
+            LocalDate fromDate = reservedRoom.getFromDate();
+            RoomDTO room = reservedRoom.getRoom();
+            if (
+                    !(toDate.isEqual(today) || toDate.isBefore(today)) &&
+                            !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
+            ) {
+                if (!reservedRooms.contains(room)) {
+                    reservedRooms.add(room);
+                }
+            }
+        }
+
         for (RoomDTO room : bookedRooms) {
+            freeRooms.remove(room);
+        }
+
+        for (RoomDTO room : reservedRooms){
             freeRooms.remove(room);
         }
     }
