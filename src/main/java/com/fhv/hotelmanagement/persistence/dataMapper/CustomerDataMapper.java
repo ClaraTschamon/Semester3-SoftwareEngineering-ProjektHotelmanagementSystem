@@ -80,7 +80,7 @@ public class CustomerDataMapper{
         }
         for(Reservation r : customer.getReservations()){
             BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(r.getBooking(), customerEntity);
-            reservationEntities.add(ReservationDataMapper.createReservationEntity(r, bookingEntity, customerEntity));
+            reservationEntities.add(ReservationDataMapper.createReservationEntity(r, customerEntity));
         }
 
         return customerEntity;

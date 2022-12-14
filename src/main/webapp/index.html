@@ -23,7 +23,8 @@
     <!-- Hier ist der Balken wo man Abreise/Anreise und die Anzahl der Personen eingeben kann-->
 
     <!--<form action="reservationVorlage.html" method="POST">-->
-    <form action="Controller"
+    <form id = "form"
+          action="Controller"
           name="registration"
           method="POST">
 
@@ -34,10 +35,10 @@
                 <label class="people" for="people-input">Number of guests:</label>
             </div>
             <div>
-                <input class="arrivaldatefield" type="date" id="arrivalDate" name="arrivalDate">
-                <input class="departuredatefield" type="date" id="departureDate" name="departureDate">
+                <input class="arrivaldatefield" type="date" id="arrivalDate" name="arrivalDate" required>
+                <input class="departuredatefield" type="date" id="departureDate" name="departureDate" required>
                 <input type="number" class="peoplefield" id="people-input" name="people-input"
-                       value="<?php echo $guests; ?>">
+                       value="1" required>
                 <button type="submit" class="w3-hover-shadow, button">Submit</button>
             </div>
         </div>
@@ -115,7 +116,6 @@
         <td><img style="width: 800px" src="suite.png"></td>
     </tr>
 </table>
-
-
 </body>
+<script src="HomeFormValidation.js"></script>
 </html>

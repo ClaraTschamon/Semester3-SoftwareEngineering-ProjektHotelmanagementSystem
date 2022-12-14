@@ -1,5 +1,8 @@
 const form = document.getElementById('form');
 
+const arrivalDate = document.getElementById('arrivalDate');
+const departureDate = document.getElementById('departureDate');
+
 const board = document.getElementById('board');
 const fullBoard = document.getElementById('fullBoard');
 const halfBoard = document.getElementById('halfBoard');
@@ -18,16 +21,17 @@ const country = document.getElementById('country');
 const phoneNumber = document.getElementById('phoneNumber');
 const email = document.getElementById('email');
 
+
 let hasError = false;
 
 form.addEventListener('submit', e => {
     e.preventDefault();
     validateInputs();
 
-    if(!hasError){
+    if (!hasError) {
         form.submit();
     }
-    hasError=false
+    hasError = false
 });
 
 const setError = (element, message) => {
@@ -49,7 +53,7 @@ const setSuccess = element => {
     inputControl.classList.remove('error');
 };
 
-const validateInputs = () =>{
+const validateInputs = () => {
     //trim() removes all the whitespaces that the string has
     const firstNameValue = firstName.value.trim();
     const lastNameValue = lastName.value.trim();
@@ -62,97 +66,119 @@ const validateInputs = () =>{
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
 
+    var arrivalDateEntered = new Date(arrivalDate.value).getDate();
+    var departureDateEntered = new Date(departureDate.value).getDate();
+    var dateNow = new Date().getDate();
 
-   if(!(fullBoard.checked === true ||
+    if(arrivalDate.value === ""){
+        setError(arrivalDate, 'Required field');
+    } else if(!(arrivalDateEntered >= dateNow)){
+        setError(arrivalDate, 'Arrival date can not be before today!')
+    } else if(arrivalDateEntered > departureDateEntered) {
+        setError(arrivalDate, 'Arrival date has to be before the departure date!')
+    } else if(arrivalDateEntered === departureDateEntered) {
+        setError(arrivalDate, 'Arrival date and departure date can not be the same!')
+    }
+    else{
+        setSuccess(arrivalDate);
+    }
+
+    if(departureDate.value === ""){
+        setError(departureDate, 'Required field');
+    } else {
+        setSuccess(departureDate);
+    }
+
+    if (!(fullBoard.checked === true ||
         halfBoard.checked === true ||
         justBreakfast.checked === true ||
         noPackage.checked === true)) {
-       setError(board, 'Required field');
-   } else {
-       setSuccess(board);
-   }
+        setError(board, 'Required field');
+    } else {
+        setSuccess(board);
+    }
 
-    if(nationality.value === 'select') {
+    if (nationality.value === 'select') {
         setError(nationality, 'Required field');
     } else {
         setSuccess(nationality);
     }
 
-    if(firstNameValue === ''){
+    if (firstNameValue === '') {
         setError(firstName, 'Required field');
-    } else if(!firstNameValue.match(/^([a-zA-Z -])*$/)) {
+    } else if (!firstNameValue.match(/^([a-zA-Z -])*$/)) {
         setError(firstName, 'Incorrect input')
     } else {
         setSuccess(firstName);
     }
 
-    if(lastNameValue === ''){
+    if (lastNameValue === '') {
         setError(lastName, 'Required field')
-    } else if(!lastNameValue.match(/^([a-zA-Z -])*$/)) {
+    } else if (!lastNameValue.match(/^([a-zA-Z -])*$/)) {
         setError(lastName, 'Incorrect input')
-    } else{
+    } else {
         setSuccess(lastName)
     }
 
-    if(nationality.value === 'select'){
+    if (nationality.value === 'select') {
         setError(country, 'Please select your Nationality')
-    }else{
+    } else {
         setSuccess(country)
     }
 
-    if(streetValue === ''){
+    if (streetValue === '') {
         setError(street, 'Required field');
-    } else if(!streetValue.match(/^([0-9a-zA-Z /-])*$/)) {
+    } else if (!streetValue.match(/^([0-9a-zA-Z /-])*$/)) {
         setError(street, 'Incorrect input')
-    } else{
+    } else {
         setSuccess(street);
     }
 
     if (cityValue === '') {
-        setError (city, 'Required field');
-    } else if(!cityValue.match(/^([a-zA-Z /-])*$/)) {
+        setError(city, 'Required field');
+    } else if (!cityValue.match(/^([a-zA-Z /-])*$/)) {
         setError(city, 'Incorrect input')
     } else {
-        setSuccess (city);
+        setSuccess(city);
     }
 
     if (zipCodeValue === '') {
-        setError (zipCode, 'Required field');
-    } else if(!zipCodeValue.match(/^([0-9a-zA-Z]{3,6})$/)) {
+        setError(zipCode, 'Required field');
+    } else if (!zipCodeValue.match(/^([0-9a-zA-Z]{3,6})$/)) {
         setError(zipCode, 'Incorrect input')
     } else {
-        setSuccess (zipCode);
+        setSuccess(zipCode);
     }
 
     if (countryValue === '') {
-        setError (country, 'Required field');
-    } else if(!countryValue.match(/^([a-zA-ZöÖäÄüÜß -])*$/)) {
+        setError(country, 'Required field');
+    } else if (!countryValue.match(/^([a-zA-ZöÖäÄüÜß -])*$/)) {
         setError(country, 'Incorrect input')
     } else {
         setSuccess(country);
     }
 
     if (phoneNumberValue === '') {
-        setError (phoneNumber, 'Required field');
-    } else if(!phoneNumberValue.match(/^[+]?[0-9 /]{7,15}/)) {
+        setError(phoneNumber, 'Required field');
+    } else if (!phoneNumberValue.match(/^[+]?[0-9 /]{7,15}/)) {
         setError(phoneNumber, 'Incorrect input')
     } else {
-        setSuccess (phoneNumber);
+        setSuccess(phoneNumber);
     }
 
     if (houseNumberValue === '') {
         setError(houseNumber, 'Required field');
-    } else if(!phoneNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
+    } else if (!phoneNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
         setError(phoneNumber, 'Incorrect input')
     } else {
-        setSuccess (houseNumber);
+        setSuccess(houseNumber);
     }
 
-    if(emailValue === ''){
+    if (emailValue === '') {
         setError(email, 'Required field');
-    } else if(!emailValue.match(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][ÄäÖöÜüA-Za-z0-9-]+(\.[ÄäÖöÜüA-Za-z0-9-]+)*(\.[A-Za-z ]{2,})$/)) {
+    } else if (!emailValue.match(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][ÄäÖöÜüA-Za-z0-9-]+(\.[ÄäÖöÜüA-Za-z0-9-]+)*(\.[A-Za-z ]{2,})$/)) {
         setError(email, 'Incorrect input')
-    } else{
+    } else {
         setSuccess(email);
     }
 
