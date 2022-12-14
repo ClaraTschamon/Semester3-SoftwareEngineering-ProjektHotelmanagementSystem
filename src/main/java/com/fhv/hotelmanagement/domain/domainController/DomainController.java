@@ -66,12 +66,21 @@ public class DomainController {
 
     public static ReservationDTO getReservation(Long number){return ReservationFactory.getReservation(number);}
 
+    public static ArrayList<ReservationDTO> getAllReservations(){return ReservationFactory.getAllReservations();}
+
+    public static ArrayList<ReservationDTO> getAllReservationsBetween(LocalDate minDate, LocalDate maxDate){
+        return ReservationFactory.getAllReservationsBetween(minDate, maxDate);
+    }
+
+    public static ArrayList<ReservationDTO> getNotConfirmedReservations() {return ReservationFactory.getNotConfirmedReservations();}
+
+    public static ArrayList<ReservationDTO> getConfirmedReservations(){return ReservationFactory.getConfirmedReservations();}
+
     public static ArrayList<ReservedRoomDTO> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate) {
         return ReservedRoomFactory.getReservedRoomsBetween(minDate, maxDate);
     }
 
     public static Long saveReservation(ReservationDTO reservationDTO) throws ReservationIsInvalidException {return ReservationFactory.saveReservation(reservationDTO);}
 
-    public static ArrayList<ReservationDTO> getAllReservations(){return ReservationFactory.getAllReservations();}
 
 }

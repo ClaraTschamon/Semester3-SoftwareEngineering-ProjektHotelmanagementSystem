@@ -34,6 +34,7 @@ background-attachment: fixed">
     <div class="whitebackground">
         <!--zurückpfeil-->
         <div class="topbar">
+
             <div class="left">
                 <a href="index.html">
                     <img src="zurueckpfeil.png" id="back" alt="backArrow">
@@ -51,22 +52,6 @@ background-attachment: fixed">
                       method="POST">
 
 
-                    <!-- Anreise und Abreise Datum (Wieso in tabelle? damit es nebeneinander geht) -->
-                    <div class="input-control">
-                        <table id="date">
-                            <tr>
-                                <td><label for="arrivalDate" class="bold">Choose a arrival date: <br/></label>
-                                    <input type="date" id="arrivalDate" name="arrivalDate"
-                                           value=${sessionScope.arrivalDate}></td>
-                                <td><label for="departureDate" style="margin-left: 50px" class="bold">Choose a departure
-                                    date:<br/> </label>
-                                    <input type="date" id="departureDate" name="departureDate"
-                                           value=${sessionScope.departureDate}></td>
-                            </tr>
-                        </table>
-                        <div class="error"></div>
-                    </div>
-
                     <!-- Anzahl der Gäste -->
                     <div class="input-control">
                         <label for="people-input" class="bold">Number of guests:<br/></label>
@@ -82,7 +67,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="singleroom" class="bold">Single Room<br/></label>
-                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0"
+                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0" value="0"
                                            max=${sessionScope.maxSingleRooms}> <!--testen-->
                                     <div class="error"></div>
                                 </div>
@@ -91,7 +76,7 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="doubleroom" style="margin-left: 50px" class="bold">Double
                                         Room<br/></label>
-                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
+                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0" value="0"
                                            max=${sessionScope.maxDoubleRooms}>
                                     <div class="error"></div>
                                 </div>
@@ -104,7 +89,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="familyroom" class="bold">Family Room<br/></label>
-                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
+                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0" value="0"
                                            max=${sessionScope.maxFamilyRooms}>
                                     <div class="error"></div>
                                 </div>
@@ -112,7 +97,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
-                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0"
+                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0" value="0"
                                            max=${sessionScope.maxSuites}>
                                     <div class="error"></div>
                                 </div>
@@ -167,7 +152,7 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="lastName" style="margin-left: 50px" class="bold">Last Name <br/></label>
                                     <input class="name" name="lastname" id="lastName" type="text">
-                                    <div class="error"></div>
+                                    <div class="error" style="margin-left: 50px"></div>
                                 </div>
                             </td>
                         </tr>
@@ -184,15 +169,45 @@ background-attachment: fixed">
                     <div class="input-control">
                         <label for="nationality" class="bold">Nationality <br/></label>
                         <select name="Nationality" id="nationality" class="sizebig">
-                            <option value="select">--Please select--</option>
-                            <option value="Oesterreich">Österreich</option>
-                            <option value="Deutschland">Deutschland</option>
-                            <option value="Schweiz">Schweiz</option>
-                            <option value="andere">andere</option>
+                            <option value="" selected>--Please select--</option>
+                            <option value="select">Africa</option>
+                            <option value="select">Asia</option>
+                            <option value="select">Australia</option>
+                            <option value="select">Austria</option>
+                            <option value="select">Belgium</option>
+                            <option value="select">Bulgaria</option>
+                            <option value="select">Central America</option>
+                            <option value="select">Croatia</option>
+                            <option value="select">Cyprus</option>
+                            <option value="select">Czech Republic</option>
+                            <option value="select">Denmark</option>
+                            <option value="select">Estonia</option>
+                            <option value="select">Finnland</option>
+                            <option value="select">France</option>
+                            <option value="select">Germany</option>
+                            <option value="select">Greece</option>
+                            <option value="select">Hungary</option>
+                            <option value="select">Ireland</option>
+                            <option value="select">Italy</option>
+                            <option value="select">Latvia</option>
+                            <option value="select">Liechtenstein</option>
+                            <option value="select">Luxembourg</option>
+                            <option value="select">Malta</option>
+                            <option value="select">Netherlands</option>
+                            <option value="select">North America</option>
+                            <option value="select">Poland</option>
+                            <option value="select">Portugal</option>
+                            <option value="select">Romania</option>
+                            <option value="select">Slovakia</option>
+                            <option value="select">South America</option>
+                            <option value="select">Spain</option>
+                            <option value="select">Sweden</option>
+                            <option value="select">Switzerland</option>
                         </select>
                         <div class="error"></div>
                     </div>
 
+                    <h3>Home Address</h3>
                     <!-- Adresse -->
                     <table id="adress1">
                         <tr>
@@ -210,7 +225,7 @@ background-attachment: fixed">
                                     <label for="houseNumber" class="bold" style="margin-left: 50px">HNr.
                                         <br/></label>
                                     <input class="sizesmall" name="HouseNumber" id="houseNumber" type="text">
-                                    <div class="error"></div>
+                                    <div class="error" style="margin-left: 50px"></div>
                                 </div>
                             </td>
                         </tr>
@@ -232,7 +247,7 @@ background-attachment: fixed">
                                     <label for="zipCode" class="bold" style="margin-left: 50px">ZIP Code
                                         <br/></label>
                                     <input class="sizesmall" name="ZIPCode" id="zipCode" type="text">
-                                    <div class="error"></div>
+                                    <div class="error" style="margin-left: 50px"></div>
                                 </div>
                             </td>
                         </tr>
@@ -259,15 +274,120 @@ background-attachment: fixed">
                         <div class="error"></div>
                     </div>
 
-                    <!-- Buttons -->
-                    <button type="reset" class="reset">Reset</button>
-                    <input type="hidden" name="dispatchto" value="newReservation">
-                    <button type="submit" class="send">Send</button> <!--submit type damit enter taste auch submitted-->
+
+                    <!-- Payment Method -->
+
+                    <div class="input-control">
+                        <label for="paymentmethod" class="bold"><h3>Payment method</h3> <br/></label>
+                        <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px" onchange="creditCardSelected()">
+                            <option value="select" selected>--Please select--</option>
+                            <option value="Credit card">Credit card</option>
+                            <option value="Bill">Bill</option>
+                        </select>
+                        <div class="error"></div>
+                    </div>
+
+                    <!-- Creditcardnumber -->
+                    <div class="input-control">
+                        <label for="creditcardnumber" class="bold">Credit Card Number<br/></label>
+                        <input class="sizebig" name="CreditCardNumber" id="creditcardnumber" type="text">
+                        <div class="error"></div>
+                    </div>
+
+                    <table id="Creditcardinformation">
+                        <!-- Security Number / ABlaufdatum -->
+                        <td>
+                            <div class="input-control">
+                                <label for="securitynumber" class="bold">Security Number
+                                    <br/></label>
+                                <input class="sizesmall" name="SecurityNumber" id="securitynumber" type="text">
+                                <div class="error"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-control" style="margin-left: 50px">
+                                <label for="expirationdate" class="bold">Expariation Date
+                                    <br/></label>
+                                <input class="sizesmall" name="ExpirationDate" id="expirationdate" type="text">
+                                <div class="error"></div>
+                            </div>
+                        </td>
+                        </tr>
+                    </table>
+
+                    <h3>Billing Address</h3>
+                    <!-- Rechnungsadresse_______________________________________________________________________________________________________________ -->
+                    <table id="billingaddress1">
+                        <input type="checkbox" id="addressisbillingaddress" name="isBillingAddress" onchange="copyAddress()">
+                        <lable for="addressisbillingaddress" style="margin-left: 10px">The billing address is the same
+                            as the home address.
+                        </lable>
+                        <tr>
+                            <!-- Rechnungsstraße -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="billingstreet" class="bold">Street<br/></label>
+                                    <input class="sizebig" name="BillingStreet" id="billingstreet" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                            <!-- Rechnungs HNr. -->
+                            <td>
+                                <div class="input-control" style="margin-left: 50px">
+                                    <label for="billinghouseNumber" class="bold">HNr.
+                                        <br/></label>
+                                    <input class="sizesmall" name="BillingHouseNumber" id="billinghouseNumber"
+                                           type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table id="billingaddress2">
+                        <tr>
+                            <!-- Rechnungsstadt -->
+                            <td>
+                                <div class="input-control">
+                                    <label for="billingcity" class="bold">City<br/></label>
+                                    <input class="sizebig" name="BillingCity" id="billingcity" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                            <!-- Rechnungs PLZ -->
+                            <td>
+                                <div class="input-control" style="margin-left: 50px">
+                                    <label for="billingzipCode" class="bold">ZIP Code
+                                        <br/></label>
+                                    <input class="sizesmall" name="BillingZIPCode" id="billingzipCode" type="text">
+                                    <div class="error"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Rechnungsland -->
+                    <div class="input-control">
+                        <label for="billingcountry" class="bold">Country <br/></label>
+                        <input class="sizebig" name="BillingCountry" id="billingcountry" type="text">
+                        <div class="error"></div>
+                    </div>
+
+                    <label for="comment" class="bold">Comment <br/></label>
+                    <textarea id="comment" name="Comment" rows="4" cols="50"></textarea>
+
+                    <div style="margin-top: 30px">
+                        <!-- Buttons -->
+                        <button type="reset" class="reset">Reset</button>
+                        <input type="hidden" name="dispatchto" value="newReservation">
+                        <button type="submit" class="send">Send</button>
+                        <!--submit type damit enter taste auch submitted-->
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script src="FormValidation.js"></script>
+<script src="ReservationFormValidation.js"></script>
 </html>

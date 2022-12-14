@@ -106,7 +106,7 @@ public class BookingDataMapper {
 
 
         if(booking.getReservation() != null) {
-            reservationEntity = ReservationDataMapper.createReservationEntity(booking.getReservation(), bookingEntity, customerEntity); //Nullpointer Exception
+            reservationEntity = ReservationDataMapper.createReservationEntity(booking.getReservation(), customerEntity); //Nullpointer Exception
             bookingEntity.setReservation(reservationEntity);
             System.out.println(booking.getReservation().toString());
 

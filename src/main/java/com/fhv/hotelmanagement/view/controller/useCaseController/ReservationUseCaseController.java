@@ -23,10 +23,10 @@ public class ReservationUseCaseController {
 
     private int maxSingleRooms;
     private int maxDoubleRooms;
-    private int maxFamilyRomms;
+    private int maxFamilyRooms;
     private int maxSuites;
 
-    public ReservationUseCaseController(LocalDate arrivalDate, LocalDate departureDate) throws IOException {
+    public ReservationUseCaseController() throws IOException {
 
         reservationDTO = new ReservationDTO();
         customerDTO = new CustomerDTO();
@@ -35,12 +35,6 @@ public class ReservationUseCaseController {
         freeDoubleRooms = new ArrayList<>();
         freeFamilyRooms = new ArrayList<>();
         freeSuites = new ArrayList<>();
-        freeRooms = createFreeRoomsList(arrivalDate, departureDate);
-        createFreeRoomsLists2(freeRooms);
-        maxSingleRooms = freeSingleRooms.size();
-        maxDoubleRooms = freeDoubleRooms.size();
-        maxFamilyRomms = freeFamilyRooms.size();
-        maxSuites = freeSuites.size();
     }
 
     public ReservationDTO getReservationDTO() {
@@ -67,12 +61,23 @@ public class ReservationUseCaseController {
         return maxDoubleRooms;
     }
 
-    public int getMaxFamilyRomms() {
-        return maxFamilyRomms;
+    public int getMaxFamilyRooms() {
+        return maxFamilyRooms;
     }
 
     public int getMaxSuites() {
         return maxSuites;
+    }
+
+    public void calculateMaxCountRooms(LocalDate arrivalDate, LocalDate departureDate){
+        freeRooms = createFreeRoomsList(arrivalDate, departureDate);
+        createFreeRoomsLists2(freeRooms);
+
+
+        maxSingleRooms = freeSingleRooms.size();
+        maxDoubleRooms = freeDoubleRooms.size();
+        maxFamilyRooms = freeFamilyRooms.size();
+        maxSuites = freeSuites.size();
     }
 
     public ArrayList<RoomDTO> createFreeRoomsList(LocalDate minDate, LocalDate maxDate) {
@@ -99,10 +104,6 @@ public class ReservationUseCaseController {
             if(free){
                 freeRooms.add(roomDTO);
             }
-        }
-        //system out for controlling:
-        for(RoomDTO roomDTO : freeRooms){
-            System.out.println(roomDTO.getCategory() + " " + roomDTO.getNumber());
         }
 
         return freeRooms;
@@ -138,19 +139,19 @@ public class ReservationUseCaseController {
 
         //freie räume zuteilen...
         ArrayList<ReservedRoomDTO> reservedRooms = new ArrayList<>();
-        for (int i = 0; i <= countSingleRooms; i++) {
+        for (int i = 0; i < countSingleRooms; i++) {
             RoomDTO roomDTO = freeSingleRooms.get(i);
             reservedRooms.add(new ReservedRoomDTO(reservationDTO, roomDTO, arrivalDate, departureDate));
         }
-        for(int i = 0; i <= countDoubleRooms; i++){
+        for(int i = 0; i < countDoubleRooms; i++){
             RoomDTO roomDTO = freeDoubleRooms.get(i);
             reservedRooms.add(new ReservedRoomDTO(reservationDTO, roomDTO, arrivalDate, departureDate));
         }
-        for(int i = 0; i <= countFamilyRooms; i++){
+        for(int i = 0; i < countFamilyRooms; i++){
             RoomDTO roomDTO = freeFamilyRooms.get(i);
             reservedRooms.add(new ReservedRoomDTO(reservationDTO, roomDTO, arrivalDate, departureDate));
         }
-        for(int i = 0; i <= countSuites; i++){
+        for(int i = 0; i < countSuites; i++){
             RoomDTO roomDTO = freeSuites.get(i);
             reservedRooms.add(new ReservedRoomDTO(reservationDTO, roomDTO, arrivalDate, departureDate));
         }
@@ -195,6 +196,7 @@ public class ReservationUseCaseController {
             customerDTO.setNumber(customerNumber);
             reservationDTO.setCustomer(customerDTO);
             DomainController.saveReservation(reservationDTO);
+            //TODO hier email senden
         }
     }
 }

@@ -49,4 +49,9 @@ public class ReservedRoomDTO {
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
     }
+
+    @Override
+    public String toString(){
+        return String.valueOf(room.getNumber());
+    }
 }

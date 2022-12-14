@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,6 +26,8 @@ public class WebServlet extends HttpServlet {
     private HttpSession session;
     private ReservationUseCaseController useCaseController;
 
+    private LocalDate arrivalDate = null;
+    private LocalDate departureDate = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +37,7 @@ public class WebServlet extends HttpServlet {
         String page = "";
         RequestDispatcher dispatcher;
 
+
         if (request.getParameter("dispatchto") != null) {
             dispatchto = request.getParameter("dispatchto");
         }
@@ -40,18 +45,20 @@ public class WebServlet extends HttpServlet {
         switch (dispatchto) {
             case "newReservation":
                 if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController( //fehler hier
+                    useCaseController = new ReservationUseCaseController();
+                    useCaseController.calculateMaxCountRooms(
                             (LocalDate) session.getAttribute("arrivalDate"),
-                            (LocalDate) session.getAttribute("departureDate")); //wird evtl. nullpointer exception verursachen
+                            (LocalDate) session.getAttribute("departureDate")
+                    );
                 }
 
                 try {
                     saveData(request, response);
                 } catch (ReservationIsInvalidException | CustomerIsInvalidException e) {
-                    //page = "/ReservationErrorView.jsp";
-                    //dispatcher = application.getRequestDispatcher(page);
-                    //dispatcher.forward(request, response);
-                    throw new RuntimeException(e);
+                    page = "/ReservationErrorView.jsp";
+                    dispatcher = application.getRequestDispatcher(page);
+                    dispatcher.forward(request, response);
+                    System.out.println(e.getMessage());
                 }
 
                 page = "/ReservationSuccessView.jsp";
@@ -60,18 +67,19 @@ public class WebServlet extends HttpServlet {
                 break;
 
             case "selectDates":
-                LocalDate arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
-                LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
+                arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
+                departureDate = LocalDate.parse(request.getParameter("departureDate"));
                 if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController(arrivalDate, departureDate);
+                    useCaseController = new ReservationUseCaseController();
                 }
+                useCaseController.calculateMaxCountRooms(arrivalDate, departureDate);
                 int amountGuests = Integer.parseInt(request.getParameter("people-input"));
                 session.setAttribute("arrivalDate", arrivalDate);
                 session.setAttribute("departureDate", departureDate);
                 session.setAttribute("amountGuests", amountGuests);
                 session.setAttribute("maxSingleRooms", useCaseController.getMaxSingleRooms());
                 session.setAttribute("maxDoubleRooms", useCaseController.getMaxDoubleRooms());
-                session.setAttribute("maxFamilyRooms", useCaseController.getMaxFamilyRomms());
+                session.setAttribute("maxFamilyRooms", useCaseController.getMaxFamilyRooms());
                 session.setAttribute("maxSuites", useCaseController.getMaxSuites());
 
                 page = "/ReservationForm.jsp";
@@ -88,21 +96,24 @@ public class WebServlet extends HttpServlet {
 
         //get Attributes for Reservation
         LocalDateTime creationTimestamp = LocalDateTime.now();
-        LocalDate arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
-        LocalDate departureDate = LocalDate.parse(request.getParameter("departureDate"));
 
         //für Probe ob speichern möglich ist
-        String testStreet = "Test";
-        String testHouseNr = "1";
-        String testPostalCode = "1111";
-        String testCity = "Test";
-        String testCountry = "Test";
-        AddressDTO billingAddress = new AddressDTO(testStreet, testHouseNr, testPostalCode, testCity, testCountry);
-        String comment = null;
-        String paymentMethod = "Credit Card"; //null
-        String creditCardNumber = "1234 1234 1234 1234"; //null
-        String expirationDate = "12/22"; //null
-        String authorisationNumber = "123"; //null
+        String billingStreet = request.getParameter("BillingStreet");
+        String billingHouseNr = request.getParameter("BillingHouseNumber");
+        String billingPostalCode = request.getParameter("BillingZIPCode");
+        String billingCity = request.getParameter("BillingCity");
+        String billingCountry = request.getParameter("BillingCountry");
+        AddressDTO billingAddress = new AddressDTO(billingStreet, billingHouseNr, billingPostalCode, billingCity, billingCountry);
+        String comment = request.getParameter("Comment");
+        String paymentMethod = request.getParameter("Paymentmethod");
+        String creditCardNumber = null;
+        String expirationDate = null;
+        String authorisationNumber = null;
+        if(paymentMethod.equals("Credit card")){
+            creditCardNumber = request.getParameter("CreditCardNumber");
+            authorisationNumber = request.getParameter("SecurityNumber");
+            expirationDate = request.getParameter("ExpirationDate");
+        }
         BoardDTO board = getBoardByName(request.getParameter("Board"));
         Integer amountGuests = Integer.parseInt(request.getParameter("people-input"));
 
@@ -145,7 +156,7 @@ public class WebServlet extends HttpServlet {
         customerDTO.setFirstName(firstName);
         customerDTO.setLastName(lastName);
         customerDTO.setDateOfBirth(dateOfBirth);
-        customerDTO.setNationality(nationality);
+        customerDTO.setNationality("Austria"); //TODO
         customerDTO.setPhoneNumber(phoneNumber);
         customerDTO.setEmail(email);
         customerDTO.setAddress(customerAddressDTO);

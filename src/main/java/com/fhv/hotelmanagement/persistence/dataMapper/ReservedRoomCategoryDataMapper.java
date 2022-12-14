@@ -51,7 +51,7 @@ public class ReservedRoomCategoryDataMapper {
         Reservation reservation = reservedRoomCategory.getReservation();
         CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
         BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity);
-        return new ReservedRoomCategoryEntity(ReservationDataMapper.createReservationEntity(reservation, bookingEntity, customerEntity),
+        return new ReservedRoomCategoryEntity(ReservationDataMapper.createReservationEntity(reservation, customerEntity),
                 RoomCategoryDataMapper.createRoomCategoryEntity(reservedRoomCategory.getRoomCategory()),
                 reservedRoomCategory.getPricePerNight(), reservedRoomCategory.getAmount());
     }

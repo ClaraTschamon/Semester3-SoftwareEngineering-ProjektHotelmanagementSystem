@@ -42,7 +42,6 @@ public class BookingViewBean {
         }
 
         if(bookingDTO.getCheckInDatetime() != null && bookingDTO.getCheckOutDatetime() == null){
-
             //dann ist der status eingechecked
             checkedInImageView.setFitHeight(BUTTON_HEIGHT);
             checkedInImageView.setPreserveRatio(true);
@@ -89,7 +88,4 @@ public class BookingViewBean {
         return imageButton;
     }
 
-    public void setImageButton(Button imageButton) {
-        this.imageButton = imageButton;
-    }
 }

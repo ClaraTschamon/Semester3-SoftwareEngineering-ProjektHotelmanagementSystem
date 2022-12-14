@@ -70,7 +70,7 @@ public class ReservedRoomDataMapper {
         Reservation reservation = reservedRoom.getReservation();
         CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
         return new ReservedRoomEntity(
-                ReservationDataMapper.createReservationEntity(reservation, BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity), customerEntity),
+                ReservationDataMapper.createReservationEntity(reservation, customerEntity),
                 RoomDataMapper.createRoomEntity(reservedRoom.getRoom()),
                 reservedRoom.getFromDate(), reservedRoom.getToDate());
     }
