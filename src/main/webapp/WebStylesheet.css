@@ -198,6 +198,12 @@ form textarea {
     font-size: 14px;
 }
 
+input[disabled] {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
 .sizebig {
     width: 400px;
     height: 50px;
