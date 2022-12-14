@@ -42,6 +42,7 @@ CREATE TABLE customer(
     customer_city VARCHAR(255),
     customer_country VARCHAR(255),
     saved BOOLEAN
+
 );
 
 CREATE TABLE reservation(
@@ -66,6 +67,8 @@ CREATE TABLE reservation(
     price_per_night_for_board INTEGER,
     amount_guests INTEGER
 );
+
+
 
 CREATE TABLE booking(
     booking_number LONG PRIMARY KEY AUTO_INCREMENT,

@@ -243,7 +243,7 @@ const validateInputs = () => {
 
     if (countryValue === '') {
         setError(country, 'Required field');
-    } else if (!countryValue.match(/^([a-zA-ZöÖäÄüÜß -])*$/)) {
+    } else if (!countryValue.match(/^([öÖäÄüÜßa-zA-Z -])*$/)) {
         setError(country, 'Incorrect input')
     } else {
         setSuccess(country);
@@ -251,7 +251,7 @@ const validateInputs = () => {
 
     if (phoneNumberValue === '') {
         setError(phoneNumber, 'Required field');
-    } else if (!phoneNumberValue.match(/^[+]?[0-9 /]{7,15}/)) {
+    } else if (!phoneNumberValue.match(/^[+]?[0-9 /]{7,16}/)) {
         setError(phoneNumber, 'Incorrect input')
     } else {
         setSuccess(phoneNumber);
@@ -259,8 +259,8 @@ const validateInputs = () => {
 
     if (houseNumberValue === '') {
         setError(houseNumber, 'Required field');
-    } else if (!phoneNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
-        setError(phoneNumber, 'Incorrect input')
+    } else if (!houseNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
+        setError(houseNumber, 'Incorrect input')
     } else {
         setSuccess(houseNumber);
     }
