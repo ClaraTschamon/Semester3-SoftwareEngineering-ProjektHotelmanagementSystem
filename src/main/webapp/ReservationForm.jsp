@@ -82,7 +82,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="singleroom" class="bold">Single Room<br/></label>
-                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0"
+                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0" value="0"
                                            max=${sessionScope.maxSingleRooms}> <!--testen-->
                                     <div class="error"></div>
                                 </div>
@@ -91,7 +91,7 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="doubleroom" style="margin-left: 50px" class="bold">Double
                                         Room<br/></label>
-                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
+                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0" value="0"
                                            max=${sessionScope.maxDoubleRooms}>
                                     <div class="error"></div>
                                 </div>
@@ -104,7 +104,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="familyroom" class="bold">Family Room<br/></label>
-                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
+                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0" value="0"
                                            max=${sessionScope.maxFamilyRooms}>
                                     <div class="error"></div>
                                 </div>
@@ -112,7 +112,7 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
-                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0"
+                                    <input class="sizesmall" type="number" id="suite" name="suite" min="0" value="0"
                                            max=${sessionScope.maxSuites}>
                                     <div class="error"></div>
                                 </div>
