@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
@@ -29,6 +30,48 @@ public class ReservationDataMapper {
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(ReservationEntity r : entities){
             reservations.add(createReservation(r));
+        }
+        return reservations;
+    }
+
+    public static ArrayList<Reservation> getAllReservationsBetween(LocalDate minDate, LocalDate maxDate){
+        ArrayList<ReservationEntity> entities;
+        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
+                "SELECT reservation FROM ReservationEntity reservation " +
+                "WHERE (reservation.arrivalDate <= :minimumDate AND :minimumDate <= reservation.departureDate)" +
+                "OR (:minimumDate <= reservation.arrivalDate AND reservation.departureDate <= :maximumDate)")
+                .setParameter("minimumDate", minDate)
+                .setParameter("maximumDate", maxDate).getResultList();
+
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        for(ReservationEntity e : entities){
+            reservations.add(createReservation(e));
+        }
+        return reservations;
+    }
+
+    public static ArrayList<Reservation> getNotConfirmedReservations(){
+        ArrayList<ReservationEntity> entities;
+        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery(""+
+                "SELECT reservation FROM ReservationEntity reservation " +
+                "WHERE (reservation.booking IS NULL)");
+
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        for(ReservationEntity e : entities){
+            reservations.add(createReservation(e));
+        }
+        return reservations;
+    }
+
+    public static ArrayList<Reservation> getConfirmedReservations(){
+        ArrayList<ReservationEntity> entities;
+        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery(""+
+                "SELECT reservation FROM ReservationEntity reservation " +
+                "WHERE (reservation.booking IS NOT NULL)");
+
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        for(ReservationEntity e : entities){
+            reservations.add(createReservation(e));
         }
         return reservations;
     }

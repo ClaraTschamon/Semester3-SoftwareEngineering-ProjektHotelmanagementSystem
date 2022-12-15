@@ -337,7 +337,6 @@ const validateInputs = () => {
     } else {
         setSuccess(email);
     }
-
     return hasError;
 };
 
