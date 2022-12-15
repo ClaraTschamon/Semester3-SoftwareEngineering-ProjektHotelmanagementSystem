@@ -4,15 +4,20 @@ package com.fhv.hotelmanagement.view.controller.useCaseController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
+import com.fhv.hotelmanagement.services.EmailService.EmailInfo;
+import com.fhv.hotelmanagement.services.EmailService.EmailService;
 import com.fhv.hotelmanagement.view.DTOs.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ReservationUseCaseController {
+public class ReservationUseCaseController implements EmailService {
     private ReservationDTO reservationDTO;
     private CustomerDTO customerDTO;
     ArrayList<RoomDTO> freeRooms;
@@ -20,6 +25,15 @@ public class ReservationUseCaseController {
     ArrayList<RoomDTO> freeDoubleRooms;
     ArrayList<RoomDTO> freeFamilyRooms;
     ArrayList<RoomDTO> freeSuites;
+
+    private String message1 = "Hello, " +
+            "we recieved your reservation. " +
+            "Please make the deposit until 3 days before your arrival." +
+            "Greetings, the Sunway Team";
+
+    private String message2 = "Hello, " +
+            "we recieved your reservation. " +
+            "Greetings, the Sunway Team";
 
     private int maxSingleRooms;
     private int maxDoubleRooms;
@@ -196,7 +210,50 @@ public class ReservationUseCaseController {
             customerDTO.setNumber(customerNumber);
             reservationDTO.setCustomer(customerDTO);
             DomainController.saveReservation(reservationDTO);
-            //TODO hier email senden
+
+            //send email
+            EmailInfo emailInfo = new EmailInfo();
+            emailInfo.setFrom("sunway.hotel@email.com");
+            emailInfo.setTo(customerDTO.getEmail());
+            emailInfo.setCc(null);
+
+            Period period = Period.between(reservationDTO.getCreationTimestamp().toLocalDate(), reservationDTO.getArrivalDate());
+            int daysDiff = Math.abs(period.getDays());
+            if(!(daysDiff <= 3)){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
+                //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
+                period = Period.between(LocalDate.now(), reservationDTO.getArrivalDate());
+                daysDiff = Math.abs(period.getDays());
+                if(daysDiff < 3){
+                    emailInfo.setBody(message2);
+                } else {
+                    emailInfo.setBody(message1);
+                }
+            }
+
+            try{
+                sendMail(emailInfo);
+            } catch (FileNotFoundException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public boolean sendMail(EmailInfo emailInfo) throws FileNotFoundException {
+        //write to file
+        try(
+             FileInputStream reader = new FileInputStream(emailInfo.toString());
+
+             FileOutputStream writer = new FileOutputStream("src/main/java/com/fhv/hotelmanagement/view/viewServices/Emails.txt"))
+        {
+            int ch=0;
+            while((ch = reader.read()) != -1){
+                writer.write(ch);
+            }
+            return true;
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -116,6 +116,10 @@ public class ReservationOverviewViewController implements Initializable {
             reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
         } else if(state.equals("not confirmed")){
             reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations());
+            System.out.println("here");
+            for(ReservationDTO reservationDTO : reservationDTOs){
+                System.out.println(reservationDTO.getNumber());
+            }
         } else if(state.equals("all between")){
             LocalDate minDate = fromDateDatePicker.getValue();
             LocalDate maxDate = toDateDatePicker.getValue();
@@ -230,13 +234,14 @@ public class ReservationOverviewViewController implements Initializable {
         for(ReservationDTO reservation : reservations) {
             Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
-            if(!(daysDiff <= 3)){
-
-
-            } if(){
-                //days until checkin < 3 dann reservierung löschen
-                //TODO: reservierung löschen... sie hat nämlich automatisch eine buchung
-                //TODO: löschen von reservierung methode... nochmal nachdenken ob es richtig hier
+            if(!(daysDiff <= 3)){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
+                //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
+                period = Period.between(LocalDate.now(), reservation.getArrivalDate());
+                daysDiff = Math.abs(period.getDays());
+                if(daysDiff < 3){
+                    System.out.println("here");
+                    //reservierung löschen
+                }
             }
         }
     }

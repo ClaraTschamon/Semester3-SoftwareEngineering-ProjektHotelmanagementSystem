@@ -52,9 +52,9 @@ public class ReservationDataMapper {
 
     public static ArrayList<Reservation> getNotConfirmedReservations(){
         ArrayList<ReservationEntity> entities;
-        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery(""+
+        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
                 "SELECT reservation FROM ReservationEntity reservation " +
-                "WHERE (reservation.booking IS NULL)");
+                "WHERE (reservation.booking IS NULL)").getResultList();
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(ReservationEntity e : entities){
@@ -67,7 +67,7 @@ public class ReservationDataMapper {
         ArrayList<ReservationEntity> entities;
         entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery(""+
                 "SELECT reservation FROM ReservationEntity reservation " +
-                "WHERE (reservation.booking IS NOT NULL)");
+                "WHERE (reservation.booking IS NOT NULL)").getResultList();
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(ReservationEntity e : entities){
