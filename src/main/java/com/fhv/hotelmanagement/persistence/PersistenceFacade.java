@@ -27,8 +27,6 @@ public class PersistenceFacade{
         return BookingDataMapper.getAllBookingsBetween(minDate, maxDate);
     }
 
-    public static ArrayList<Reservation> getAllReservations(){return ReservationDataMapper.getAll();}
-
     public static Long insertBooking(Booking booking) {
         return BookingDataMapper.instance().insert(booking);
     }
@@ -40,6 +38,16 @@ public class PersistenceFacade{
     public static Optional<Reservation> getReservation(Long id){
         return ReservationDataMapper.instance().get(id);
     }
+
+    public static ArrayList<Reservation> getAllReservations(){return ReservationDataMapper.getAll();}
+
+    public static ArrayList<Reservation> getAllReservationsBetween(LocalDate minDate, LocalDate maxDate) {
+        return ReservationDataMapper.getAllReservationsBetween(minDate, maxDate);
+    }
+
+    public static ArrayList<Reservation> getNotConfirmedReservations(){return ReservationDataMapper.getNotConfirmedReservations();}
+
+    public static ArrayList<Reservation> getConfirmedReservations(){return ReservationDataMapper.getConfirmedReservations();}
 
     public static Long insertReservation(Reservation reservation) {return ReservationDataMapper.instance().insert(reservation);}
 

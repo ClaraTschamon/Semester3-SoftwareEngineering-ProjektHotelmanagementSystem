@@ -20,7 +20,11 @@ const zipCode = document.getElementById('zipCode');
 const country = document.getElementById('country');
 const phoneNumber = document.getElementById('phoneNumber');
 const email = document.getElementById('email');
-
+const billingStreet= document.getElementById('billingstreet');
+const billingHouseNumber = document.getElementById('billinghouseNumber');
+const billingCity = document.getElementById('billingcity');
+const billingZipCode = document.getElementById('billingzipCode');
+const billingCountry = document.getElementById('billingcountry');
 
 const arrivalDate = document.getElementById('arrivalDate');
 //const arrivalDate = document.getElementsByName('arrivalDate');
@@ -32,6 +36,10 @@ const doubleRoom = document.getElementById('doubleroom');
 const familyRoom = document.getElementById('familyroom');
 const suiteRoom = document.getElementById('suite');
 const dateOfBirth = document.getElementById('birthdate');
+const creditCard = document.getElementById('creditcardnumber');
+const securityNumber = document.getElementById('securitynumber');
+const expirationDate = document.getElementById('expirationdate');
+
 
 
 let hasError = false;
@@ -45,6 +53,53 @@ form.addEventListener('submit', e => {
     }
     hasError = false
 });
+
+function copyAddress() {
+    // Get the checkbox and the home and billing address input fields
+    const checkbox = document.getElementById('addressisbillingaddress');
+    const homeStreet = document.getElementById('street');
+    const homeHouseNumber = document.getElementById('houseNumber');
+    const homeCity = document.getElementById('city');
+    const homeZipCode = document.getElementById('zipCode');
+    const homecountry = document.getElementById('country');
+    const billingStreet = document.getElementById('billingstreet');
+    const billingHouseNumber = document.getElementById('billinghouseNumber');
+    const billingCity = document.getElementById('billingcity');
+    const billingZipCode = document.getElementById('billingzipCode');
+    const billingcountry=document.getElementById('billingcountry');
+
+    if (checkbox.checked) {
+        billingStreet.value = homeStreet.value;
+        billingHouseNumber.value = homeHouseNumber.value;
+        billingCity.value = homeCity.value;
+        billingZipCode.value = homeZipCode.value;
+        billingcountry.value = homecountry.value;
+    } else {
+        billingStreet.value="";
+        billingHouseNumber.value="";
+        billingCity.value="";
+        billingZipCode.value="";
+        billingcountry.value="";
+    }
+}
+
+function creditCardSelected(){
+    const paymentMethod = document.getElementById('paymentmethod');
+    const creditCardNumber = document.getElementById('creditcardnumber');
+    const securityNumber = document.getElementById('securitynumber');
+    const expirationDate = document.getElementById('expirationdate');
+
+    if (paymentMethod.value === 'Bill') {
+        creditCardNumber.disabled = true;
+        securityNumber.disabled = true;
+        expirationDate.disabled = true;
+    } else {
+        creditCardNumber.disabled = false;
+        securityNumber.disabled = false;
+        expirationDate.disabled = false;
+    }
+}
+
 
 const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -78,35 +133,20 @@ const validateInputs = () => {
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
     const arrivalDateValue = arrivalDate.valueOf();
+    const singleRoomValue = singleRoom.valueOf();
+    const doubleRoomValue = doubleRoom.valueOf();
+    const familyRoomValue = familyRoom.valueOf();
+    const suiteRoomValue = suiteRoom.valueOf();
+    const creditCardValue = creditCard.value.trim();
+    const securityNumberValue = securityNumber.value.trim();
+    const expirationDateValue = expirationDate.value.trim();
+    const billingStreetValue = billingStreet.value.trim();
+    const billingCityValue = billingCity.value.trim();
+    const billingHouseNumberValue = billingHouseNumber.value.trim();
+    const billingPostalCodeValue = billingZipCode.value.trim();
+    const billingCountryValue = billingCountry.value.trim();
 
 
-    // document.write(arrivalDateValue.valueOf());
-    // document.write("abstand erste");
-    // document.write(arrivalDate.valueOf());
-    // document.write("Abstand hier")
-    // //document.write(firstName);
-    // document.write(firstNameValue);
-
-
-    // var userdate = new Date(document.getElementById("arrivalDate").value).toJSON().slice(0,10);
-    // var today = new Date().toJSON().slice(0,10);
-    // if(arrivalDateValue < today){
-    //     setError(arrivalDate, 'Required field');
-    // } else {
-    //     setSuccess(arrivalDate);
-    // }
-
-    // if(new Date(arrivalDate).getDate() < todayDate.getDate()) {
-    //     setError(arrivalDate, 'Required field');
-    // } else {
-    //     setSuccess(arrivalDate);
-    // }
-
-    // if(departureDate < currentDate) {
-    //     setError(departureDate, 'Required field');
-    // } else {
-    //     setSuccess(departureDate);
-    // }
     var arrivalDateEntered = new Date(arrivalDate.value).getDate();
     var departureDateEntered = new Date(departureDate.value).getDate();
     var dateNow = new Date().getDate();
@@ -130,6 +170,23 @@ const validateInputs = () => {
         setSuccess(departureDate);
     }
 
+
+
+    if(singleRoomValue === 0 ||
+        doubleRoomValue === 0 ||
+        familyRoomValue === 0 ||
+        suiteRoomValue === 0) {
+        setError(singleRoom, 'Choose at least one room!');
+        setError(doubleRoom, 'Choose at least one room!');
+        setError(familyRoom, 'Choose at least one room!');
+        setError(suiteRoom, 'Choose at least one room!');
+    } else {
+        setSuccess(singleRoom);
+        setSuccess(doubleRoom);
+        setSuccess(familyRoom);
+        setSuccess(suiteRoom);
+    }
+
     if (!(fullBoard.checked === true ||
         halfBoard.checked === true ||
         justBreakfast.checked === true ||
@@ -145,9 +202,34 @@ const validateInputs = () => {
         setSuccess(nationality);
     }
 
+    if (creditCardValue === '') {
+        setError(creditCard, 'Required field');
+    } else if (!creditCardValue.match(/^([0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,})/) ||
+                !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,})/) ||
+                !creditCardValue.match(/^([0-9]{14,16}[ ]{0,})/) ||
+                !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,})/)) {
+        setError(creditCard, 'Incorrect Input');
+    } else {
+        setSuccess(creditCard);
+    }
+
+    if (securityNumberValue === '') {
+        setError(securityNumber, 'Required field');
+    } else if (!securityNumberValue.match(/^([ ]{0,}[0-9 ]{3,5}[ ]{0,})/)) {
+        setError(securityNumber, 'Incorrect input');
+    } else {
+        setSuccess(securityNumber);
+    }
+
+    // if (expirationDateValue === '') {
+    //     setError(expirationDate, 'Required field')
+    // } else if (!expirationDateValue.match(/^([ ]{0,}[0-9 ]{3,5}[ ]{0,})/)) {
+    //     setError(expirationDate, 'Incorrect input');
+    //} else if ()
+// continue hereeeeeeeeeeeeeeeeeeeeee
     if (firstNameValue === '') {
         setError(firstName, 'Required field');
-    } else if (!firstNameValue.match(/^([a-zA-Z -])*$/)) {
+    } else if(!firstNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
         setError(firstName, 'Incorrect input')
     } else {
         setSuccess(firstName);
@@ -155,22 +237,21 @@ const validateInputs = () => {
 
     if (lastNameValue === '') {
         setError(lastName, 'Required field')
-    } else if (!lastNameValue.match(/^([a-zA-Z -])*$/)) {
+    } else if(!lastNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
         setError(lastName, 'Incorrect input')
     } else {
         setSuccess(lastName)
     }
 
-    if (nationality.value === 'select') {
-        setError(country, 'Please select your Nationality')
-    } else {
-        setSuccess(country)
+    if(nationality.value === 'select'){
+        setError(nationality, 'Please select your Nationality')
+    }else{
+        setSuccess(nationality)
     }
 
     if (streetValue === '') {
         setError(street, 'Required field');
-    } else if(!streetValue.match(/^([0-9a-zA-Z. /-])*$/)) {
-    } else if (!streetValue.match(/^([0-9a-zA-Z /-])*$/)) {
+    } else if(!streetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
         setError(street, 'Incorrect input')
     } else {
         setSuccess(street);
@@ -178,17 +259,15 @@ const validateInputs = () => {
 
     if (cityValue === '') {
         setError (city, 'Required field');
-    } else if(!cityValue.match(/^([a-zA-Z. /-])*$/)) {
-        setError(city, 'Required field');
-    } else if (!cityValue.match(/^([a-zA-Z /-])*$/)) {
+    } else if(!cityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
         setError(city, 'Incorrect input')
     } else {
         setSuccess(city);
     }
 
     if (zipCodeValue === '') {
-        setError(zipCode, 'Required field');
-    } else if (!zipCodeValue.match(/^([0-9a-zA-Z]{3,6})$/)) {
+        setError (zipCode, 'Required field');
+    } else if(!zipCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
         setError(zipCode, 'Incorrect input')
     } else {
         setSuccess(zipCode);
@@ -196,15 +275,48 @@ const validateInputs = () => {
 
     if (countryValue === '') {
         setError(country, 'Required field');
-    } else if (!countryValue.match(/^([a-zA-ZöÖäÄüÜß -])*$/)) {
+    } else if (!countryValue.match(/^([öÖäÄüÜßa-zA-Z -])*$/)) {
         setError(country, 'Incorrect input')
     } else {
         setSuccess(country);
     }
 
+    if (billingStreetValue === '') {
+        setError(billingStreet, 'Required field');
+    } else if(!billingStreetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
+        setError(billingStreet, 'Incorrect input')
+    } else {
+        setSuccess(billingStreet);
+    }
+
+    if (billingCityValue === '') {
+        setError (billingCity, 'Required field');
+    } else if(!billingCityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
+        setError(billingCity, 'Incorrect input')
+    } else {
+        setSuccess(billingCity);
+    }
+
+    if (billingPostalCodeValue === '') {
+        setError (billingZipCode, 'Required field');
+    } else if(!billingPostalCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
+        setError(billingZipCode, 'Incorrect input')
+    } else {
+        setSuccess(billingZipCode);
+    }
+
+    if (billingCountryValue === '') {
+        setError(billingCountry, 'Required field');
+    } else if (!billingCountryValue.match(/^([öÖäÄüÜßa-zA-Z -])*$/)) {
+        setError(billingCountry, 'Incorrect input')
+    } else {
+        setSuccess(billingCountry);
+    }
+
+
     if (phoneNumberValue === '') {
         setError(phoneNumber, 'Required field');
-    } else if (!phoneNumberValue.match(/^[+]?[0-9 /]{7,15}/)) {
+    } else if (!phoneNumberValue.match(/^[+]?[0-9 /]{7,16}/)) {
         setError(phoneNumber, 'Incorrect input')
     } else {
         setSuccess(phoneNumber);
@@ -212,8 +324,8 @@ const validateInputs = () => {
 
     if (houseNumberValue === '') {
         setError(houseNumber, 'Required field');
-    } else if (!phoneNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
-        setError(phoneNumber, 'Incorrect input')
+    } else if (!houseNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
+        setError(houseNumber, 'Incorrect input')
     } else {
         setSuccess(houseNumber);
     }
@@ -225,6 +337,6 @@ const validateInputs = () => {
     } else {
         setSuccess(email);
     }
-
     return hasError;
 };
+
