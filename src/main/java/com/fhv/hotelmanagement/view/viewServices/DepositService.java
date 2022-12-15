@@ -50,8 +50,7 @@ public class DepositService {
         for(int i = 0; i<data.length();i++){
             if(data.charAt(i)=='R'){
                 i+=5;
-                int y = i+5;
-                while (i<y){
+                while (data.charAt(i)!='#' && data.charAt(i)!=';'){
                     reservationNumber+=data.charAt(i);
                     i++;
                 }
