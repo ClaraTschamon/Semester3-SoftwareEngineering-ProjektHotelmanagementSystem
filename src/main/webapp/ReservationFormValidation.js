@@ -24,6 +24,7 @@ const billingStreet= document.getElementById('billingstreet');
 const billingHouseNumber = document.getElementById('billinghouseNumber');
 const billingCity = document.getElementById('billingcity');
 const billingZipCode = document.getElementById('billingzipCode');
+const billingCountry = document.getElementById('billingcountry');
 
 const arrivalDate = document.getElementById('arrivalDate');
 //const arrivalDate = document.getElementsByName('arrivalDate');
@@ -35,6 +36,10 @@ const doubleRoom = document.getElementById('doubleroom');
 const familyRoom = document.getElementById('familyroom');
 const suiteRoom = document.getElementById('suite');
 const dateOfBirth = document.getElementById('birthdate');
+const creditCard = document.getElementById('creditcardnumber');
+const securityNumber = document.getElementById('securitynumber');
+const expirationDate = document.getElementById('expirationdate');
+
 
 
 let hasError = false;
@@ -128,35 +133,20 @@ const validateInputs = () => {
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
     const arrivalDateValue = arrivalDate.valueOf();
+    const singleRoomValue = singleRoom.valueOf();
+    const doubleRoomValue = doubleRoom.valueOf();
+    const familyRoomValue = familyRoom.valueOf();
+    const suiteRoomValue = suiteRoom.valueOf();
+    const creditCardValue = creditCard.value.trim();
+    const securityNumberValue = securityNumber.value.trim();
+    const expirationDateValue = expirationDate.value.trim();
+    const billingStreetValue = billingStreet.value.trim();
+    const billingCityValue = billingCity.value.trim();
+    const billingHouseNumberValue = billingHouseNumber.value.trim();
+    const billingPostalCodeValue = billingZipCode.value.trim();
+    const billingCountryValue = billingCountry.value.trim();
 
 
-    // document.write(arrivalDateValue.valueOf());
-    // document.write("abstand erste");
-    // document.write(arrivalDate.valueOf());
-    // document.write("Abstand hier")
-    // //document.write(firstName);
-    // document.write(firstNameValue);
-
-
-    // var userdate = new Date(document.getElementById("arrivalDate").value).toJSON().slice(0,10);
-    // var today = new Date().toJSON().slice(0,10);
-    // if(arrivalDateValue < today){
-    //     setError(arrivalDate, 'Required field');
-    // } else {
-    //     setSuccess(arrivalDate);
-    // }
-
-    // if(new Date(arrivalDate).getDate() < todayDate.getDate()) {
-    //     setError(arrivalDate, 'Required field');
-    // } else {
-    //     setSuccess(arrivalDate);
-    // }
-
-    // if(departureDate < currentDate) {
-    //     setError(departureDate, 'Required field');
-    // } else {
-    //     setSuccess(departureDate);
-    // }
     var arrivalDateEntered = new Date(arrivalDate.value).getDate();
     var departureDateEntered = new Date(departureDate.value).getDate();
     var dateNow = new Date().getDate();
@@ -180,6 +170,23 @@ const validateInputs = () => {
         setSuccess(departureDate);
     }
 
+
+
+    if(singleRoomValue === 0 ||
+        doubleRoomValue === 0 ||
+        familyRoomValue === 0 ||
+        suiteRoomValue === 0) {
+        setError(singleRoom, 'Choose at least one room!');
+        setError(doubleRoom, 'Choose at least one room!');
+        setError(familyRoom, 'Choose at least one room!');
+        setError(suiteRoom, 'Choose at least one room!');
+    } else {
+        setSuccess(singleRoom);
+        setSuccess(doubleRoom);
+        setSuccess(familyRoom);
+        setSuccess(suiteRoom);
+    }
+
     if (!(fullBoard.checked === true ||
         halfBoard.checked === true ||
         justBreakfast.checked === true ||
@@ -195,6 +202,31 @@ const validateInputs = () => {
         setSuccess(nationality);
     }
 
+    if (creditCardValue === '') {
+        setError(creditCard, 'Required field');
+    } else if (!creditCardValue.match(/^([0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,})/) ||
+                !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,})/) ||
+                !creditCardValue.match(/^([0-9]{14,16}[ ]{0,})/) ||
+                !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,})/)) {
+        setError(creditCard, 'Incorrect Input');
+    } else {
+        setSuccess(creditCard);
+    }
+
+    if (securityNumberValue === '') {
+        setError(securityNumber, 'Required field');
+    } else if (!securityNumberValue.match(/^([ ]{0,}[0-9 ]{3,5}[ ]{0,})/)) {
+        setError(securityNumber, 'Incorrect input');
+    } else {
+        setSuccess(securityNumber);
+    }
+
+    // if (expirationDateValue === '') {
+    //     setError(expirationDate, 'Required field')
+    // } else if (!expirationDateValue.match(/^([ ]{0,}[0-9 ]{3,5}[ ]{0,})/)) {
+    //     setError(expirationDate, 'Incorrect input');
+    //} else if ()
+// continue hereeeeeeeeeeeeeeeeeeeeee
     if (firstNameValue === '') {
         setError(firstName, 'Required field');
     } else if(!firstNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
@@ -248,6 +280,39 @@ const validateInputs = () => {
     } else {
         setSuccess(country);
     }
+
+    if (billingStreetValue === '') {
+        setError(billingStreet, 'Required field');
+    } else if(!billingStreetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
+        setError(billingStreet, 'Incorrect input')
+    } else {
+        setSuccess(billingStreet);
+    }
+
+    if (billingCityValue === '') {
+        setError (billingCity, 'Required field');
+    } else if(!billingCityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
+        setError(billingCity, 'Incorrect input')
+    } else {
+        setSuccess(billingCity);
+    }
+
+    if (billingPostalCodeValue === '') {
+        setError (billingZipCode, 'Required field');
+    } else if(!billingPostalCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
+        setError(billingZipCode, 'Incorrect input')
+    } else {
+        setSuccess(billingZipCode);
+    }
+
+    if (billingCountryValue === '') {
+        setError(billingCountry, 'Required field');
+    } else if (!billingCountryValue.match(/^([öÖäÄüÜßa-zA-Z -])*$/)) {
+        setError(billingCountry, 'Incorrect input')
+    } else {
+        setSuccess(billingCountry);
+    }
+
 
     if (phoneNumberValue === '') {
         setError(phoneNumber, 'Required field');
