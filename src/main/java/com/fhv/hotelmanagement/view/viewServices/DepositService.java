@@ -8,24 +8,10 @@ import java.util.HashMap;
 
 public class DepositService {
     private HashMap<String, DepositDTO> deposits = new HashMap<>();
-
-    public static void main(String[] args) throws IOException {
-        DepositService depositService = new DepositService();
-        depositService.parseData(depositService.convertData());
-//        Res#=12345#Date=01NOV2022#Amount=123.34;Date=01NOV2022#
-//        Res#=12346#Amount=50.0#IBAN=AT07123412341234123412;
-
-//        System.out.println(depositService.deposits.get("12345").getAmount());
-//        System.out.println(depositService.deposits.get("12345").getDate());
-//        System.out.println(depositService.deposits.get("12345").getIban());
-//        System.out.println(depositService.deposits.get("12346").getAmount());
-//        System.out.println(depositService.deposits.get("12346").getDate());
-//        System.out.println(depositService.deposits.get("12346").getIban());
-    }
+    private ArrayList<Long> reservierungsNummer = new ArrayList<>();
 
     public StringBuilder convertData() throws IOException {
         File file = new File("DatenBuchhaltung");
-       System.out.println(file.exists());
 
         FileInputStream fis = new FileInputStream(file);
         InputStreamReader inputStreamReader = new InputStreamReader(fis);
@@ -40,7 +26,7 @@ public class DepositService {
         return data;
     }
 
-    public void parseData(StringBuilder data){
+    public ArrayList<Long> parseData(StringBuilder data){
         String date = "";
         String amount = "";
         String iban = "";
@@ -53,7 +39,6 @@ public class DepositService {
                     reservationNumber+=data.charAt(i);
                     i++;
                 }
-                System.out.println(reservationNumber);
             }
 
             if(data.charAt(i)=='D'){
@@ -63,7 +48,6 @@ public class DepositService {
                     date+=data.charAt(i);
                     i++;
                 }
-                System.out.println(date);
             }
 
             if(data.charAt(i)=='A' && data.charAt(i+1)=='m'){
@@ -72,7 +56,6 @@ public class DepositService {
                     amount+=data.charAt(i);
                     i++;
                 }
-                System.out.println(amount);
             }
 
             if(data.charAt(i)=='I'){
@@ -82,16 +65,17 @@ public class DepositService {
                     iban+=data.charAt(i);
                     i++;
                 }
-                System.out.println(iban);
             }
 
             if(data.charAt(i)==';'){
                 deposits.put(reservationNumber, new DepositDTO(date,amount,iban, reservationNumber));
+                reservierungsNummer.add(Long.valueOf(reservationNumber));
                 date = "";
                 amount = "";
                 iban = "";
                 reservationNumber = "";
             }
         }
+        return reservierungsNummer;
     }
 }

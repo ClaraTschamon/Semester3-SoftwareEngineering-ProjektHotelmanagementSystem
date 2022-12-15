@@ -2,11 +2,15 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
+import com.fhv.hotelmanagement.domain.domainModel.Reservation;
+import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
+import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
+import com.fhv.hotelmanagement.view.viewServices.DepositService;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -76,6 +81,8 @@ public class ReservationOverviewViewController implements Initializable {
     private Text phRoomsText;
     @FXML
     private Text phReservationNumberText;
+    @FXML
+    private Button refreshDepositsButton;
 
     private ReservationOverviewUseCaseController useCaseController;
 
@@ -247,5 +254,28 @@ public class ReservationOverviewViewController implements Initializable {
         phCountryText.setText("");
         phPhoneNrText.setText("");
         phPaymentMethodText.setText("");
+    }
+
+    public void onRefreshButtonClicked(ActionEvent actionEvent){
+        DepositService depositService = new DepositService();
+        try {
+            ArrayList<Long> reservationNumbers = depositService.parseData(depositService.convertData());
+            for (Long l: reservationNumbers){
+                System.out.println(l);
+                ReservationDTO reservation = DomainController.getReservation(l);
+                //TODO bookedRoomCategories und bookedRooms nicht mehr null setzen
+                BookingDTO bookingDTO = new BookingDTO(reservation.getNumber(), reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
+                        reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
+                        reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
+                        reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
+                reservation.setBooking(bookingDTO);
+                System.out.println(reservation.getCustomer().getFirstName());
+                DomainController.saveReservation(reservation);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (ReservationIsInvalidException e) {
+            e.printStackTrace();
+        }
     }
 }
