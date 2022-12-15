@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -243,8 +245,7 @@ public class ReservationUseCaseController implements EmailService {
         //write to file
         try(
              FileInputStream reader = new FileInputStream(emailInfo.toString());
-
-             FileOutputStream writer = new FileOutputStream("src/main/java/com/fhv/hotelmanagement/view/viewServices/Emails.txt"))
+             FileOutputStream writer = new FileOutputStream("../../viewServices/Emails.txt"))
         {
             int ch=0;
             while((ch = reader.read()) != -1){
@@ -255,5 +256,20 @@ public class ReservationUseCaseController implements EmailService {
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        EmailInfo emailInfo = new EmailInfo();
+        emailInfo.setFrom("sunway.hotel@email.com");
+        emailInfo.setTo("maxmustermann@emial.com");
+        emailInfo.setCc(null);
+        emailInfo.setBody("djafklsdf");
+
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Emails.txt", true));
+        objectOutputStream.writeObject(emailInfo.toString());
+        objectOutputStream.write('\n');
+        objectOutputStream.flush();
+        objectOutputStream.close();
+
     }
 }
