@@ -12,7 +12,6 @@ public class DepositService {
     public static void main(String[] args) throws IOException {
         DepositService depositService = new DepositService();
         depositService.parseData(depositService.convertData());
-
 //        Res#=12345#Date=01NOV2022#Amount=123.34;Date=01NOV2022#
 //        Res#=12346#Amount=50.0#IBAN=AT07123412341234123412;
 
@@ -26,7 +25,7 @@ public class DepositService {
 
     public StringBuilder convertData() throws IOException {
         File file = new File("DatenBuchhaltung");
-        System.out.println(file.exists());
+       System.out.println(file.exists());
 
         FileInputStream fis = new FileInputStream(file);
         InputStreamReader inputStreamReader = new InputStreamReader(fis);
