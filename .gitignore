@@ -50,4 +50,3 @@ src/main/resources/META-INF/persistence.xml
 *.db
 HotelmanagementDB.h2.trace.db
 HotelmanagementDB.h2.mv.db
-src/main/resources/META-INF/persistence.xml
