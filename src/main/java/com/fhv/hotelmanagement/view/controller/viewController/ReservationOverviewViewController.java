@@ -2,15 +2,10 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.domain.domainModel.Reservation;
-import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
-import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
-import com.fhv.hotelmanagement.view.viewServices.DepositService;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,9 +18,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -81,8 +76,6 @@ public class ReservationOverviewViewController implements Initializable {
     private Text phRoomsText;
     @FXML
     private Text phReservationNumberText;
-    @FXML
-    private Button refreshDepositsButton;
 
     private ReservationOverviewUseCaseController useCaseController;
 
@@ -123,6 +116,10 @@ public class ReservationOverviewViewController implements Initializable {
             reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
         } else if(state.equals("not confirmed")){
             reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations());
+            System.out.println("here");
+            for(ReservationDTO reservationDTO : reservationDTOs){
+                System.out.println(reservationDTO.getNumber());
+            }
         } else if(state.equals("all between")){
             LocalDate minDate = fromDateDatePicker.getValue();
             LocalDate maxDate = toDateDatePicker.getValue();
@@ -187,7 +184,7 @@ public class ReservationOverviewViewController implements Initializable {
         String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         departureDateText.setText(formattedDepartureDate);
 
-        if(reservationDTO.getBooking() == null){ //TODO: 3 tage vor geplantem check-in ist keine anzahlung notwendig
+        if(reservationDTO.getBooking() == null){ //TODO: 3 tage vor geplantem check-in ist keine anzahlung notwendig, wenn bis 3 tage vor check-in nicht angezahlt ist
             phStateText.setText("not confirmed");
         } else {
             phStateText.setText("confirmed");
@@ -207,17 +204,6 @@ public class ReservationOverviewViewController implements Initializable {
     }
 
     @FXML
-    public void stateComboboxAction(ActionEvent actionEvent){
-        if(stateComboBox.getValue().equals("all between")){
-            fromDateDatePicker.setDisable(false);
-            toDateDatePicker.setDisable(false);
-        } else {
-            fromDateDatePicker.setDisable(true);
-            toDateDatePicker.setDisable(true);
-        }
-    }
-
-    @FXML
     public void onFromDateDatePickerClicked(ActionEvent actionEvent){
         if(toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null){
             fillTable("all between");
@@ -231,6 +217,7 @@ public class ReservationOverviewViewController implements Initializable {
         }
     }
 
+    @FXML
     public void stateComboBoxAction(ActionEvent actionEvent) {
         if(stateComboBox.getValue().equals("all between")){
             fromDateDatePicker.setDisable(false);
@@ -238,6 +225,24 @@ public class ReservationOverviewViewController implements Initializable {
         } else {
             fromDateDatePicker.setDisable(true);
             toDateDatePicker.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void onRefreshButtonClicked(ActionEvent actionEvent) {
+        ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations();
+        for(ReservationDTO reservation : reservations) {
+            Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
+            int daysDiff = Math.abs(period.getDays());
+            if(!(daysDiff <= 3)){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
+                //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
+                period = Period.between(LocalDate.now(), reservation.getArrivalDate());
+                daysDiff = Math.abs(period.getDays());
+                if(daysDiff < 3){
+                    System.out.println("here");
+                    //reservierung löschen
+                }
+            }
         }
     }
 
@@ -256,26 +261,4 @@ public class ReservationOverviewViewController implements Initializable {
         phPaymentMethodText.setText("");
     }
 
-    public void onRefreshButtonClicked(ActionEvent actionEvent){
-        DepositService depositService = new DepositService();
-        try {
-            ArrayList<Long> reservationNumbers = depositService.parseData(depositService.convertData());
-            for (Long l: reservationNumbers){
-                System.out.println(l);
-                ReservationDTO reservation = DomainController.getReservation(l);
-                //TODO bookedRoomCategories und bookedRooms nicht mehr null setzen
-                BookingDTO bookingDTO = new BookingDTO(reservation.getNumber(), reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
-                        reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
-                        reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
-                        reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
-                reservation.setBooking(bookingDTO);
-                System.out.println(reservation.getCustomer().getFirstName());
-                DomainController.saveReservation(reservation);
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch (ReservationIsInvalidException e) {
-            e.printStackTrace();
-        }
-    }
 }
