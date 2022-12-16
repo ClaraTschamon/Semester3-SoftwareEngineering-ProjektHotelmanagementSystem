@@ -113,13 +113,26 @@ public class ReservationOverviewViewController implements Initializable {
         if(state.equals("all")){
             reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
         } else if(state.equals("confirmed")){
-            reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
-        } else if(state.equals("not confirmed")){
-            reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations());
-            System.out.println("here");
-            for(ReservationDTO reservationDTO : reservationDTOs){
-                System.out.println(reservationDTO.getNumber());
+            //reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
+            ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
+            ArrayList<ReservationDTO> confirmedReservations = new ArrayList<>();
+            for(ReservationDTO reservationDTO : allreservationDTOs){
+                if(reservationDTO.getBooking() != null){
+                    confirmedReservations.add(reservationDTO);
+                }
             }
+            reservationDTOs = FXCollections.observableArrayList(confirmedReservations);
+
+        } else if(state.equals("not confirmed")){
+            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations());
+            ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
+            ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
+            for(ReservationDTO reservationDTO : allreservationDTOs){
+                if(reservationDTO.getBooking() == null){
+                    notConfirmedReservations.add(reservationDTO);
+                }
+            }
+            reservationDTOs = FXCollections.observableArrayList(notConfirmedReservations);
         } else if(state.equals("all between")){
             LocalDate minDate = fromDateDatePicker.getValue();
             LocalDate maxDate = toDateDatePicker.getValue();
@@ -184,7 +197,7 @@ public class ReservationOverviewViewController implements Initializable {
         String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         departureDateText.setText(formattedDepartureDate);
 
-        if(reservationDTO.getBooking() == null){ //TODO: 3 tage vor geplantem check-in ist keine anzahlung notwendig, wenn bis 3 tage vor check-in nicht angezahlt ist
+        if(reservationDTO.getBooking() == null){
             phStateText.setText("not confirmed");
         } else {
             phStateText.setText("confirmed");
@@ -230,17 +243,26 @@ public class ReservationOverviewViewController implements Initializable {
 
     @FXML
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations();
-        for(ReservationDTO reservation : reservations) {
+        //ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations();
+        ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservations();
+        //filter not confirmed reservations
+        ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
+        for(ReservationDTO reservationDTO : allReservationDTOs){
+            if(reservationDTO.getBooking() == null){
+                notConfirmedReservations.add(reservationDTO);
+            }
+        }
+
+        for(ReservationDTO reservation : notConfirmedReservations) {
             Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
-            if(!(daysDiff <= 3)){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
+            if(daysDiff > 3){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
                 //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
                 period = Period.between(LocalDate.now(), reservation.getArrivalDate());
                 daysDiff = Math.abs(period.getDays());
                 if(daysDiff < 3){
                     System.out.println("here");
-                    //reservierung löschen
+                    DomainController.deleteReservation(reservation);
                 }
             }
         }

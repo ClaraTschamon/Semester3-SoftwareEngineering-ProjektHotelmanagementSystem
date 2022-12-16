@@ -81,3 +81,8 @@ jlinkZip {
 }
 
 apply plugin: "org.hibernate.orm"
+
+war {
+    // copies a file to WEB-INF/web.xml
+    webXml = file('src/main/resources/WEB-INF/web.xml')
+}

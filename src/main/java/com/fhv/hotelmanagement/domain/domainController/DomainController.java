@@ -1,6 +1,7 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.domainController;
 
+import com.fhv.hotelmanagement.domain.domainModel.Reservation;
 import com.fhv.hotelmanagement.domain.exceptions.*;
 import com.fhv.hotelmanagement.domain.factory.*;
 import com.fhv.hotelmanagement.view.DTOs.*;
@@ -81,6 +82,10 @@ public class DomainController {
     }
 
     public static Long saveReservation(ReservationDTO reservationDTO) throws ReservationIsInvalidException {return ReservationFactory.saveReservation(reservationDTO);}
+
+    public static void deleteReservation(ReservationDTO reservationDTO){
+        ReservationFactory.deleteReservation(reservationDTO);
+    }
 
 
 }
