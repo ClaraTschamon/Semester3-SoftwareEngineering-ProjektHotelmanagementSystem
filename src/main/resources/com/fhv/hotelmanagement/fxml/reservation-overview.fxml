@@ -219,6 +219,12 @@
             </Button>
             <Button onAction="#onRefreshButtonClicked" layoutX="15.0" layoutY="600.0" mnemonicParsing="false" text="refresh deposits" />
             </children>
+            <Button layoutX="412.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Check-In" textFill="WHITE">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+            <Button onAction="#onRefreshButtonClicked" layoutX="15.0" layoutY="600.0" mnemonicParsing="false" text="refresh deposits" />
         </AnchorPane>
     </center>
 </BorderPane>
