@@ -219,10 +219,6 @@
             </Button>
             <Button onAction="#onRefreshButtonClicked" layoutX="15.0" layoutY="600.0" mnemonicParsing="false" text="refresh deposits" />
             </children>
-            <Button fx:id="refreshDepositsButton" layoutX="20.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="nextButton" stylesheets="@css.css" text="Refresh Deposits" textFill="WHITE" onAction="#onRefreshButtonClicked">
-                <font>
-                    <Font size="14.0" />
-                </font></Button>
         </AnchorPane>
     </center>
 </BorderPane>
