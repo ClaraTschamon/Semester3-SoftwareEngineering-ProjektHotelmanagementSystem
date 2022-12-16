@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
+import net.bytebuddy.agent.builder.AgentBuilder;
 
 import java.util.*;
 
@@ -53,6 +54,8 @@ public class PersistenceFacade{
 
     public static void storeReservation(Reservation reservation){ReservationDataMapper.instance().store(reservation);}
 
+    public static void deleteReservation(Reservation reservation){ReservationDataMapper.instance().delete(reservation);}
+
     @SuppressWarnings("rawtypes")
     public static Optional<Customer> getCustomer(Long id){
         return CustomerDataMapper.instance().get(id);
@@ -94,7 +97,7 @@ public class PersistenceFacade{
         return ReservedRoomDataMapper.getAll();
     }
 
-    public static ArrayList<ReservedRoom> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate){ //TODO: Testen
+    public static ArrayList<ReservedRoom> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate){
         return ReservedRoomDataMapper.getReservedRoomsBetween(minDate, maxDate);
     }
 
@@ -124,20 +127,28 @@ public class PersistenceFacade{
 
         ArrayList<ReservedRoomCategory> reservedRoomCategories = getAllReservedRoomCategories();
 
-        for (ReservedRoomCategory reservedRoomCategory:reservedRoomCategories) {
+        /*for (ReservedRoomCategory reservedRoomCategory:reservedRoomCategories) {
             System.out.println(reservedRoomCategory);
-        }
+        }*/
 
         //Testing out reservedRooms
 
-        ArrayList<ReservedRoom> reservedRooms = getAllReservedRooms();
 
-        for (ReservedRoom reservedRoom:reservedRooms) {
-            System.out.println(reservedRoom);
+        ArrayList<Reservation> reservations = getAllReservations();
+
+        /*for(Reservation reservation : reservations){
+            System.out.println(reservation.getBooking());
+        }*/
+
+        ArrayList<Reservation> reservations1 = getNotConfirmedReservations();
+        System.out.println(reservations1.size());
+        for(Reservation reservation : reservations1){
+            System.out.println(reservation.getBooking());
         }
 
-
-
+        //Reservation reservation = reservations.get(1);
+        //System.out.println(reservation.getNumber());
+        //deleteReservation(reservation);
 
     }
 }

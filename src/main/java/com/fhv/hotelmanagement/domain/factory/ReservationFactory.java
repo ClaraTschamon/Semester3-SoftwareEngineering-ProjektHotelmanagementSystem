@@ -82,6 +82,11 @@ public class ReservationFactory {
         return reservationNumber;
     }
 
+    public static void deleteReservation(ReservationDTO reservationDTO){
+        Reservation reservation = createReservation(reservationDTO, true);
+        PersistenceFacade.deleteReservation(reservation);
+    }
+
     protected static ReservationDTO createReservationDTO(Reservation reservation, boolean includeArrays, ReservedRoom allExcept){
         if(reservation == null){
             return null;
@@ -172,7 +177,7 @@ public class ReservationFactory {
 
     private static boolean checkPaymentMethod(ReservationDTO reservationDTO){
         if (StringValidator.checkString(reservationDTO.getPaymentMethod())) {
-            if (reservationDTO.getPaymentMethod().equals("Credit Card")) { //TODO: Passt das so?
+            if (reservationDTO.getPaymentMethod().equals("Credit Card")) {
                 return (StringValidator.checkString(reservationDTO.getCreditCardNumber())) &&
                         (StringValidator.checkString(reservationDTO.getExpirationDate()) && StringValidator.checkValidExpirationDate(reservationDTO.getExpirationDate())) &&
                         (StringValidator.checkString(reservationDTO.getAuthorisationNumber()));

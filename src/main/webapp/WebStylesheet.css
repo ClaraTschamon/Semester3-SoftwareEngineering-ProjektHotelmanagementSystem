@@ -12,13 +12,20 @@
 ul {
     list-style-type: none;
     overflow: hidden;
+    height: 60px;
+    margin-top: 20px;
     background-color: #21273d;
-    margin-top: -20px;
+}
+
+li img {
+    display: block;
+    margin-top: 10px;
+    vertical-align: middle;
 }
 
 .oben {
-    float: right;
-    border-right: 1px solid #bbb;
+  float: right;
+  border-right: 1px solid #bbb;
 }
 
 .last-child {
@@ -26,10 +33,10 @@ ul {
 }
 
 li a {
+  margin-top: 5px;
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
@@ -45,7 +52,6 @@ body {
     font-family: Arial;
 }
 
-
 .header {
     color: white;
     font-size: 100px;
@@ -53,21 +59,18 @@ body {
     margin-top: auto;
 }
 
-
 .boxforindex {
     background: #21273d;
     color: white;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: -50px;
+    margin-right: 125px;
     margin-top: 590px;
     padding: 20px;
-    align-items: center;
-    align-content: center;
     opacity: 1;
 }
 
-
 .arrivaldate {
+    align: center;
     margin-left: 350px;
 }
 
@@ -199,8 +202,7 @@ form textarea {
 }
 
 input[disabled] {
-    background-color: #ddd;
-    color: #aaa;
+    background-color: #dcdcdc;
     cursor: not-allowed;
 }
 
@@ -220,7 +222,7 @@ button.reset {
     opacity: 0.9;
     color: white;
     padding: 14px 20px;
-    margin-left: 8px 0;
+    margin-left: 8px;
     border: none;
     cursor: pointer;
     width: 150px;

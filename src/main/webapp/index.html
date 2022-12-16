@@ -8,26 +8,21 @@
 </head>
 <body>
 <div id="background">
-    <ul>
-        <li><img src="" alt=""></li>
-        <li><a class="oben" href="#about">About</a></li>
-        <li><a class="oben" href="#contact">Contact</a></li>
+    <ul style="margin-top: 0; height: 70px; background-color: #21273d;">
+        <li><a class="oben" style="font-size: 20px" href="#about">About</a></li>
+        <li><a class="oben" style="font-size: 20px" href="#contact">Contact</a></li>
         <!--<li><a class="oben" href="reservationVorlage.html">Reservations</a></li>-->
-        <li><a class="oben" href="ReservationForm.jsp">Reservations</a></li>
-        <li><a class="active, oben" href="index.html">Home</a></li>
+        <li><a class="oben" style="font-size: 20px" href="ReservationForm.jsp">Reservations</a></li>
+        <li><a class="active, oben" style="font-size: 20px" href="index.html">Home</a></li>
+        <li><img src="Logo.png" style="height: 50px;"></li>
     </ul>
-
 
     <h1 class="header">Hotel Sunway</h1>
 
     <!-- Hier ist der Balken wo man Abreise/Anreise und die Anzahl der Personen eingeben kann-->
 
     <!--<form action="reservationVorlage.html" method="POST">-->
-    <form id = "form"
-          action="Controller"
-          name="registration"
-          method="POST">
-
+    <form id="form" action="Controller" name="registration"  method="POST">
         <div class="boxforindex">
             <div>
                 <label class="arrivaldate" for="arrivalDate">Choose a arrival date: </label>
@@ -45,8 +40,6 @@
         <input type="hidden" name="dispatchto" value="selectDates">
     </form>
 </div>
-
-<!-- Hier sind die Zusammenfassungen der einzelnen Zimmer im moment noch nicht perfekt aber aus dem Internet-->
 
 <table class="a" id="singleroom" style="margin-left: 140px">
     <tr class="w3-hover-shadow">

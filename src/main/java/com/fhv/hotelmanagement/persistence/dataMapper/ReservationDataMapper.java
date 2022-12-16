@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 public class ReservationDataMapper {
@@ -51,10 +52,19 @@ public class ReservationDataMapper {
     }
 
     public static ArrayList<Reservation> getNotConfirmedReservations(){
-        ArrayList<ReservationEntity> entities;
-        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery(""+
+        List<ReservationEntity> entities;
+        /*entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
                 "SELECT reservation FROM ReservationEntity reservation " +
-                "WHERE (reservation.booking IS NULL)");
+                "WHERE reservation.booking =: param")
+                .setParameter("param", null).getResultList();
+         */
+        /*entities =  PersistenceManager.instance().entityManager.createQuery("" +
+                        "SELECT reservation FROM ReservationEntity reservation " +
+                        "WHERE reservation.booking IS NULL").getResultList();*/
+        entities =  PersistenceManager.instance().entityManager.createQuery("" +
+                "SELECT reservation FROM ReservationEntity reservation where reservation.booking IS NULL").getResultList();
+
+        System.out.println("size = " + entities.size());
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(ReservationEntity e : entities){
@@ -67,7 +77,7 @@ public class ReservationDataMapper {
         ArrayList<ReservationEntity> entities;
         entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery(""+
                 "SELECT reservation FROM ReservationEntity reservation " +
-                "WHERE (reservation.booking IS NOT NULL)");
+                "WHERE reservation.booking IS NOT NULL").getResultList();
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(ReservationEntity e : entities){
@@ -98,6 +108,17 @@ public class ReservationDataMapper {
 
         entityManager.getTransaction().begin();
         entityManager.merge(reservationEntity);
+        entityManager.getTransaction().commit();
+    }
+
+    public void delete (Reservation reservation){
+        CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
+        ReservationEntity reservationEntity = createReservationEntity(reservation, customerEntity);
+        var entityManager = PersistenceManager.instance().entityManager;
+
+
+        entityManager.getTransaction().begin();
+        entityManager.remove( entityManager.contains(reservationEntity) ? reservation : entityManager.merge(reservationEntity));
         entityManager.getTransaction().commit();
     }
 

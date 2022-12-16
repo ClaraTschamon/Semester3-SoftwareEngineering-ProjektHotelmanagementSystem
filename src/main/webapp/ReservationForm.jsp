@@ -22,7 +22,7 @@ background-attachment: fixed">
 <!-- Navbar-->
 
 <ul style="opacity: 0.9">
-    <li><img src="" alt=""></li>
+    <li><img src="Logo.png" alt="Logo"></li>
     <li><a class="oben" href="#about">About</a></li>
     <li><a class="oben" href="#contact">Contact</a></li>
     <li><a class="oben" href="ReservationForm.jsp">Reservations</a></li>
@@ -53,7 +53,9 @@ background-attachment: fixed">
 
 
                     <!-- Anzahl der Gäste -->
-                    <div class="input-control">
+                    <p>Selected Arrival Date: ${sessionScope.arrivalDate}</p>
+                    <p>Selected Departure Date: ${sessionScope.departureDate}</p>
+                    <div class="input-control" style="margin-top: 50px">
                         <label for="people-input" class="bold">Number of guests:<br/></label>
                         <input class="sizebig" type="number" id="people-input" name="people-input" min="1" max="50"
                                value=${sessionScope.amountGuests}><br><br>
@@ -67,7 +69,8 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="singleroom" class="bold">Single Room<br/></label>
-                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0" value="0"
+                                    <input class="sizesmall" type="number" id="singleroom" name="singleroom" min="0"
+                                           value="0"
                                            max=${sessionScope.maxSingleRooms}> <!--testen-->
                                     <div class="error"></div>
                                 </div>
@@ -76,7 +79,8 @@ background-attachment: fixed">
                                 <div class="input-control">
                                     <label for="doubleroom" style="margin-left: 50px" class="bold">Double
                                         Room<br/></label>
-                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0" value="0"
+                                    <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
+                                           value="0"
                                            max=${sessionScope.maxDoubleRooms}>
                                     <div class="error"></div>
                                 </div>
@@ -89,7 +93,8 @@ background-attachment: fixed">
                             <td>
                                 <div class="input-control">
                                     <label for="familyroom" class="bold">Family Room<br/></label>
-                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0" value="0"
+                                    <input class="sizesmall" type="number" id="familyroom" name="familyroom" min="0"
+                                           value="0"
                                            max=${sessionScope.maxFamilyRooms}>
                                     <div class="error"></div>
                                 </div>
@@ -276,10 +281,10 @@ background-attachment: fixed">
 
 
                     <!-- Payment Method -->
-
                     <div class="input-control">
                         <label for="paymentmethod" class="bold"><h3>Payment method</h3> <br/></label>
-                        <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px" onchange="creditCardSelected()">
+                        <select name="Paymentmethod" id="paymentmethod" class="sizebig" style="margin-top: -30px"
+                                onchange="creditCardSelected()">
                             <option value="select" selected>--Please select--</option>
                             <option value="Credit card">Credit card</option>
                             <option value="Bill">Bill</option>
@@ -290,7 +295,7 @@ background-attachment: fixed">
                     <!-- Creditcardnumber -->
                     <div class="input-control">
                         <label for="creditcardnumber" class="bold">Credit Card Number<br/></label>
-                        <input class="sizebig" name="CreditCardNumber" id="creditcardnumber" type="text">
+                        <input class="sizebig" name="CreditCardNumber" id="creditcardnumber" type="text" placeholder="1234 1234 1234 1234">
                         <div class="error"></div>
                     </div>
 
@@ -298,9 +303,8 @@ background-attachment: fixed">
                         <!-- Security Number / ABlaufdatum -->
                         <td>
                             <div class="input-control">
-                                <label for="securitynumber" class="bold">Security Number
-                                    <br/></label>
-                                <input class="sizesmall" name="SecurityNumber" id="securitynumber" type="text">
+                                <label for="securitynumber" class="bold">Security Number<br/></label>
+                                <input class="sizesmall" name="SecurityNumber" id="securitynumber" type="text" placeholder="123">
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -308,7 +312,7 @@ background-attachment: fixed">
                             <div class="input-control" style="margin-left: 50px">
                                 <label for="expirationdate" class="bold">Expariation Date
                                     <br/></label>
-                                <input class="sizesmall" name="ExpirationDate" id="expirationdate" type="text">
+                                <input class="sizesmall" name="ExpirationDate" id="expirationdate" type="text" placeholder="12/24">
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -318,7 +322,8 @@ background-attachment: fixed">
                     <h3>Billing Address</h3>
                     <!-- Rechnungsadresse_______________________________________________________________________________________________________________ -->
                     <table id="billingaddress1">
-                        <input type="checkbox" id="addressisbillingaddress" name="isBillingAddress" onchange="copyAddress()">
+                        <input type="checkbox" id="addressisbillingaddress" name="isBillingAddress"
+                               onchange="copyAddress()">
                         <lable for="addressisbillingaddress" style="margin-left: 10px">The billing address is the same
                             as the home address.
                         </lable>
@@ -374,7 +379,7 @@ background-attachment: fixed">
                     </div>
 
                     <label for="comment" class="bold">Comment <br/></label>
-                    <textarea id="comment" name="Comment" rows="4" cols="50"></textarea>
+                    <textarea id="comment" name="Comment" rows="4" cols="50" placeholder="optional"></textarea>
 
                     <div style="margin-top: 30px">
                         <!-- Buttons -->
