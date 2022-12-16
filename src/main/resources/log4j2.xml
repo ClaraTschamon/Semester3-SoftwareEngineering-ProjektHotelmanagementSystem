@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--Beispiel von Sonja Kopf-->
 <Configuration>
     <Appenders>
@@ -21,7 +22,6 @@
         </Root>
     </Loggers>
 </Configuration>
-
 
 
         <!--Beispiel von Studytonight.com-->
