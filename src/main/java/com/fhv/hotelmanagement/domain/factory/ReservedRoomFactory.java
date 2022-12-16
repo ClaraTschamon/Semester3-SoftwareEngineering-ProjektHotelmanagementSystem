@@ -39,7 +39,6 @@ public class ReservedRoomFactory {
 
     protected static boolean checkReservedRoom(ReservedRoomDTO reservedRoomDTO, boolean validateReservation){
         ReservationDTO reservationDTO = reservedRoomDTO.getReservation();
-        //TODO: sout debug only
 
        /* System.out.println( //debug only
                 ((!validateReservation) || (validateReservation && ReservationFactory.checkReservation(reservationDTO))) + " " +

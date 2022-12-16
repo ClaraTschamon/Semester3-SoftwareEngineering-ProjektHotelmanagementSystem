@@ -39,7 +39,8 @@ public class BookingDataMapper {
 
     public static ArrayList<Booking> getCurrentBookings() {
         ArrayList<BookingEntity> entities;
-        entities = (ArrayList<BookingEntity>) PersistenceManager.instance().entityManager.createQuery("SELECT booking FROM BookingEntity booking " +
+        entities = (ArrayList<BookingEntity>) PersistenceManager.instance().entityManager.createQuery("" +
+                "SELECT booking FROM BookingEntity booking " +
                 "WHERE booking.checkInDatetime IS NOT NULL AND booking.checkOutDatetime IS NULL").getResultList();
 
         ArrayList<Booking> bookings = new ArrayList<>();

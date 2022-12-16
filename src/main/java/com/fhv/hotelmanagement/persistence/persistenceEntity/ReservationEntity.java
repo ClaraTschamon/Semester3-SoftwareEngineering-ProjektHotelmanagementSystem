@@ -291,4 +291,3 @@ public class ReservationEntity {
         this.reservedRooms = reservedRooms;
     }
 }
-

@@ -218,31 +218,25 @@ public class ReservationUseCaseController implements EmailService {
 
             Period period = Period.between(reservationDTO.getCreationTimestamp().toLocalDate(), reservationDTO.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
-            if(!(daysDiff <= 3)){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
-                //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
-                period = Period.between(LocalDate.now(), reservationDTO.getArrivalDate());
-                daysDiff = Math.abs(period.getDays());
-                if(daysDiff < 3){
+            if(daysDiff <= 3){ //3 tage vor geplantem check-in ist keine anzahlung notwendiq
                     emailInfo.setBody(message2);
-                } else {
-                    emailInfo.setBody(message1);
-                }
+            } else {
+                emailInfo.setBody(message1);
             }
-            sendMail(emailInfo);
+            sendMail(emailInfo); //writes mail to file. Doesn't actually send email.
         }
     }
 
     @Override
     public void sendMail(EmailInfo emailInfo) {
-        //write to file
         try{
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Emails.txt", true));
-            objectOutputStream.write(LocalDateTime.now().toString().getBytes());
-            objectOutputStream.writeBytes(": ");
-            objectOutputStream.writeObject(emailInfo.toString());
-            objectOutputStream.write('\n');
-            objectOutputStream.flush();
-            objectOutputStream.close();
+            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+            dataOutputStream.writeUTF(LocalDateTime.now().toString());
+            dataOutputStream.writeUTF(": ");
+            dataOutputStream.writeUTF(emailInfo.toString());
+            dataOutputStream.write('\n');
+            dataOutputStream.flush();
+            dataOutputStream.close();
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -250,22 +244,21 @@ public class ReservationUseCaseController implements EmailService {
     }
 
     public static void main(String[] args) throws IOException {
+        /*
         EmailInfo emailInfo = new EmailInfo();
         emailInfo.setFrom("sunway.hotel@email.com");
-        emailInfo.setTo("maxmustermann@emial.com");
+        emailInfo.setTo("maxmustermann@email.com");
         emailInfo.setCc(null);
-        emailInfo.setBody("djafklsdf");
+        emailInfo.setBody("Beispieltext");
 
+        DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+        dataOutputStream.writeUTF(LocalDateTime.now().toString());
+        dataOutputStream.writeUTF(": ");
+        dataOutputStream.writeUTF(emailInfo.toString());
+        dataOutputStream.write('\n');
+        dataOutputStream.flush();
+        dataOutputStream.close();
 
-        /*
-
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Emails.txt", true));
-        objectOutputStream.writeBytes(LocalDateTime.now().toString());
-        objectOutputStream.writeBytes(": ");
-        objectOutputStream.writeObject(emailInfo.toString());
-        objectOutputStream.write('\n');
-        objectOutputStream.flush();
-        objectOutputStream.close();*/
-
+         */
     }
 }
