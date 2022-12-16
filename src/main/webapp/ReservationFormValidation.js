@@ -6,6 +6,7 @@ const halfBoard = document.getElementById('halfBoard');
 const justBreakfast = document.getElementById('justBreakfast');
 const noPackage = document.getElementById('noPackage');
 
+
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
 /*let nationality = document.querySelectorAll('input[name="Nationality"]');*/
