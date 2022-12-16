@@ -7,12 +7,8 @@ import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.services.EmailService.EmailInfo;
 import com.fhv.hotelmanagement.services.EmailService.EmailService;
 import com.fhv.hotelmanagement.view.DTOs.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -217,6 +213,7 @@ public class ReservationUseCaseController implements EmailService {
             EmailInfo emailInfo = new EmailInfo();
             emailInfo.setFrom("sunway.hotel@email.com");
             emailInfo.setTo(customerDTO.getEmail());
+            emailInfo.setSubject("Your Reservation");
             emailInfo.setCc(null);
 
             Period period = Period.between(reservationDTO.getCreationTimestamp().toLocalDate(), reservationDTO.getArrivalDate());
@@ -231,27 +228,21 @@ public class ReservationUseCaseController implements EmailService {
                     emailInfo.setBody(message1);
                 }
             }
-
-            try{
-                sendMail(emailInfo);
-            } catch (FileNotFoundException e){
-                System.out.println(e.getMessage());
-            }
+            sendMail(emailInfo);
         }
     }
 
     @Override
-    public boolean sendMail(EmailInfo emailInfo) throws FileNotFoundException {
+    public void sendMail(EmailInfo emailInfo) {
         //write to file
-        try(
-             FileInputStream reader = new FileInputStream(emailInfo.toString());
-             FileOutputStream writer = new FileOutputStream("../../viewServices/Emails.txt"))
-        {
-            int ch=0;
-            while((ch = reader.read()) != -1){
-                writer.write(ch);
-            }
-            return true;
+        try{
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Emails.txt", true));
+            objectOutputStream.write(LocalDateTime.now().toString().getBytes());
+            objectOutputStream.writeBytes(": ");
+            objectOutputStream.writeObject(emailInfo.toString());
+            objectOutputStream.write('\n');
+            objectOutputStream.flush();
+            objectOutputStream.close();
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -265,11 +256,16 @@ public class ReservationUseCaseController implements EmailService {
         emailInfo.setCc(null);
         emailInfo.setBody("djafklsdf");
 
+
+        /*
+
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("Emails.txt", true));
+        objectOutputStream.writeBytes(LocalDateTime.now().toString());
+        objectOutputStream.writeBytes(": ");
         objectOutputStream.writeObject(emailInfo.toString());
         objectOutputStream.write('\n');
         objectOutputStream.flush();
-        objectOutputStream.close();
+        objectOutputStream.close();*/
 
     }
 }

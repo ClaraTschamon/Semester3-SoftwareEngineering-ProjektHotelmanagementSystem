@@ -1,6 +1,8 @@
 package com.fhv.hotelmanagement.services.EmailService;
 
-public class EmailInfo {
+import java.io.Serializable;
+
+public class EmailInfo implements Serializable {
     private String from;
     private String to;
     private String cc;
