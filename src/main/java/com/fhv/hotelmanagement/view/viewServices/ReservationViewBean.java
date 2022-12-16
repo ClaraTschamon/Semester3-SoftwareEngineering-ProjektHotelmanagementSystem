@@ -18,7 +18,6 @@ public class ReservationViewBean {
     private LocalDate arrivalDate;
     private LocalDate departureDate;
     private ArrayList<Integer> roomNumbers = new ArrayList<Integer>();
-
     private static final double BUTTON_HEIGHT = 20;
     private Button imageButton;
     private ImageView confirmedImageView = new ImageView(new Image("com/fhv/hotelmanagement/fxml/Bilder/icons/confirmation.png"));
@@ -39,7 +38,7 @@ public class ReservationViewBean {
             this.roomNumbers.add(reservedRoomDTO.getRoom().getNumber());
         }
 
-        if(reservationDTO.getBooking() == null) { //wenn booking vorhanden ist, ist sie bestätigt.
+        if(reservationDTO.getBooking() == null) { //wenn booking vorhanden ist, ist sie bestätigt
             waitingImageView.setFitHeight(BUTTON_HEIGHT);
             waitingImageView.setPreserveRatio(true);
             imageButton.setGraphic(waitingImageView);
@@ -73,4 +72,6 @@ public class ReservationViewBean {
     public ArrayList<Integer> getRoomNumbers() {
         return roomNumbers;
     }
+
+    public Button getImageButton(){return imageButton;}
 }
