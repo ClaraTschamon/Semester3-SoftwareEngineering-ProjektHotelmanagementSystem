@@ -230,7 +230,8 @@ public class ReservationUseCaseController implements EmailService {
     @Override
     public void sendMail(EmailInfo emailInfo) {
         try{
-            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+//            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\samuel\\Documents\\GitHub\\Hotelmanagement\\Emails.txt", true));
             dataOutputStream.writeUTF(LocalDateTime.now().toString());
             dataOutputStream.writeUTF(": ");
             dataOutputStream.writeUTF(emailInfo.toString());
