@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
+import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.beans.value.ChangeListener;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -22,6 +24,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -74,9 +77,9 @@ public class CheckOut1ViewController implements Initializable {
     protected void fillData(){
         if (viewController.getUseCaseController().getBooking() != null) {
             BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
-            RoomDTO selectedRoom = bookingDTO.getBookedRooms().get(0).getRoom();
-            roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
-            roomComboBox.setValue(selectedRoom);
+            BookedRoomDTO bookedRoom = bookingDTO.getBookedRooms().get(0);
+            roomComboBox.setConverter(new BookedRoomConverter(allBookedRoomDTOs));
+            roomComboBox.setValue(bookedRoom);
             setTexts(bookingDTO);
 
             if (bookingDTO.getNumber() != null) {
@@ -102,27 +105,27 @@ public class CheckOut1ViewController implements Initializable {
         phPaymentMethodText.setText("");
         phTotalAmountText.setText("");
 
-        allBookedRoomDTOs = DomainController.getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
+        ArrayList<BookedRoomDTO> bookedRoomDTOS = DomainController.getBookedRoomsBetween(LocalDate.now(), LocalDate.now());
+        allBookedRoomDTOs = new ArrayList<>();
         currentBookingDTOs = new ArrayList<>();
         ArrayList<RoomDTO> rooms = new ArrayList<>();
 
-        for (BookedRoomDTO bookedRoom : allBookedRoomDTOs) {
+        for (BookedRoomDTO bookedRoom : bookedRoomDTOS) {
             BookingDTO bookingDTO = bookedRoom.getBooking();
             if (bookingDTO.getCheckOutDatetime() == null) {
                 currentBookingDTOs.add(bookingDTO);
-                rooms.add(bookedRoom.getRoom());
+                allBookedRoomDTOs.add(bookedRoom);
             }
         }
 
-        ObservableList<RoomDTO> roomDTOS = FXCollections.observableList(rooms);
-        roomComboBox.setConverter(new RoomNumberConverter(new RoomProvider()));
-        roomComboBox.getItems().addAll(roomDTOS);
+        roomComboBox.setConverter(new BookedRoomConverter(allBookedRoomDTOs));
+        roomComboBox.getItems().addAll(FXCollections.observableList(allBookedRoomDTOs));
 
         roomComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                RoomDTO selectedRoom = (RoomDTO) roomComboBox.getSelectionModel().getSelectedItem();
-                BookingDTO bookingDTO = getBookingFromRoom(selectedRoom);
+                BookedRoomDTO selectedBookedRoom = (BookedRoomDTO) roomComboBox.getSelectionModel().getSelectedItem();
+                BookingDTO bookingDTO = selectedBookedRoom.getBooking();
                 viewController.getUseCaseController().setBooking(bookingDTO);
                 setTexts(bookingDTO);
             }
@@ -153,16 +156,6 @@ public class CheckOut1ViewController implements Initializable {
 
         searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) ->
                 searchDatabaseTextFieldFocusChanged(newValue));
-    }
-
-    private BookingDTO getBookingFromRoom(RoomDTO room){
-        for(BookedRoomDTO bookedRoom : allBookedRoomDTOs){
-            if (bookedRoom.getRoom().equals(room)){
-                BookingDTO bookingDTO = bookedRoom.getBooking();
-                return bookingDTO;
-            }
-        }
-        return null;
     }
 
     private void setTexts(BookingDTO bookingDTO){
@@ -308,6 +301,46 @@ public class CheckOut1ViewController implements Initializable {
         } else {
             searching = false;
             contentPane.getChildren().remove(searchedDatabaseListView);
+        }
+    }
+}
+
+class BookedRoomConverter<T> extends StringConverter<BookedRoomDTO> {
+    ArrayList<BookedRoomDTO> bookedRoomDTOS;
+
+    public BookedRoomConverter(ArrayList<BookedRoomDTO> bookedRoomDTOS) {
+        this.bookedRoomDTOS = bookedRoomDTOS;
+    }
+
+    @Override
+    public String toString(BookedRoomDTO object) {
+        if (object == null) {
+            return null;
+        } else {
+            CustomerDTO customerDTO = object.getBooking().getCustomer();
+            return object.getRoom().getNumber() + " " +
+                    customerDTO.getLastName();
+        }
+    }
+
+    @Override
+    public BookedRoomDTO fromString(String string) {
+        String[] strings = string.split(" ");
+
+        if (strings.length == 0) {
+            return null;
+        } else {
+            int roomNumber = Integer.parseInt(strings[0]);
+            String lastName = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
+            for (BookedRoomDTO b : bookedRoomDTOS) {
+                if (
+                        b.getRoom().getNumber() == roomNumber &&
+                        b.getBooking().getCustomer().getLastName().equals(lastName)
+                ) {
+                    return b;
+                }
+            }
+            return null;
         }
     }
 }
