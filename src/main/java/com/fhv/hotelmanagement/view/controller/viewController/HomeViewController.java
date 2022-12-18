@@ -105,7 +105,18 @@ public class HomeViewController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    WalkInViewController walkInViewControllerController = new WalkInViewController();
+                    CheckInViewController checkInViewController = new CheckInViewController();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        anhandReservierungButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    CheckInViewController checkInViewController = new CheckInViewController(true);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

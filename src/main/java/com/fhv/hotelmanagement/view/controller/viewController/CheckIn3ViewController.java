@@ -16,8 +16,8 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 
-public class WalkIn3ViewController {
-    WalkInViewController viewController;
+public class CheckIn3ViewController {
+    CheckInViewController viewController;
 
     @FXML
     private TextField billingCountryTextField;
@@ -51,7 +51,7 @@ public class WalkIn3ViewController {
     -->This prevents false information to be saved (if the customer chooses to replace his address after going back to walk-In2*/
     private boolean billingAddressEqualsCustomerAddressBackButtonClick;
 
-    public void setController(WalkInViewController viewController) {
+    public void setController(CheckInViewController viewController) {
         this.viewController = viewController;
     }
 
@@ -148,7 +148,7 @@ public class WalkIn3ViewController {
     private void onBackButtonClickedPayment(ActionEvent e) {
         try {
             saveData();
-            viewController.loadWalkIn2();
+            viewController.loadCheckIn2();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

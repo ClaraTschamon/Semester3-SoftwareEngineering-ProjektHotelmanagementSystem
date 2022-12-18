@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class WalkIn2ViewController implements Initializable {
+public class CheckIn2ViewController implements Initializable {
 
     @FXML
     private AnchorPane contentPane;
@@ -56,10 +56,10 @@ public class WalkIn2ViewController implements Initializable {
     private TextField searchDatabaseTextField;
     private ListView<CustomerDTO> searchedCustomersListView;
     private boolean searching;
-    private WalkInViewController viewController;
+    private CheckInViewController viewController;
 
 
-    public void setController(WalkInViewController viewController) {
+    public void setController(CheckInViewController viewController) {
         this.viewController = viewController;
     }
 
@@ -81,7 +81,7 @@ public class WalkIn2ViewController implements Initializable {
 
         customer.setDateOfBirth(birthdayDatePicker.getValue());
         try {
-            viewController.loadWalkIn3();
+            viewController.loadCheckIn3();
         } catch (IOException e) {
             System.out.println("Error loading walk in 3: " + e.getMessage());
             MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
@@ -145,7 +145,7 @@ public class WalkIn2ViewController implements Initializable {
     private void onBackButtonClicked(ActionEvent e) {
         try {
             saveData();
-            viewController.loadWalkIn1();
+            viewController.loadCheckIn1();
         } catch (IOException exc) {
             System.out.println("Error clicking back button: " + exc.getMessage());
             MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
@@ -157,7 +157,7 @@ public class WalkIn2ViewController implements Initializable {
         try {
             if (validate()) {
                 saveData();
-                viewController.loadWalkIn3();
+                viewController.loadCheckIn3();
             }
         } catch (IOException exc) {
             System.out.println("Error clicking next button: " + exc.getMessage());
@@ -290,7 +290,7 @@ public class WalkIn2ViewController implements Initializable {
             TextFunction.setEventHandler(streetTextField);
         }
 
-        LocalDate dateOfBirth = birthdayDatePicker.getValue();
+        LocalDate dateOfBirth = birthdayDatePicker.getValue(); //TODO: von hand eingetragenes datum wird nicht upgedated
 
         if (StringValidator.calculateAge(dateOfBirth) >= 16) {
             birthdayIsValid = true;

@@ -12,7 +12,7 @@ public class TextFunction {
     }
 
     public static void setRequieredTextField(TextField textField) {
-        textField.setPromptText("Pflichtfeld");
+        textField.setPromptText("Required Field");
         textField.setStyle("-fx-prompt-text-fill: red");
     }
 
