@@ -130,8 +130,8 @@ VALUES (1,CURRENT_DATE, CURRENT_DATE + 3, 'Orsoyer Straße', '72', '38114', 'Bra
 INSERT INTO reservation(customer_number,ARRIVAL_DATE,  departure_date, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
 VALUES (2,CURRENT_DATE, CURRENT_DATE + 5,'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', 'hat seinen Hund dabei', 'Rechnung', null, '10/25', null, 'Full Board', 30, 1);
 
--- INSERT INTO reservation(customer_number,ARRIVAL_DATE, , departure_date, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
--- VALUES (3,CURRENT_DATE, CURRENT_DATE + 7,  'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Full Board', 30, 1);
+INSERT INTO reservation(customer_number,ARRIVAL_DATE, departure_date, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
+VALUES (3,CURRENT_DATE, CURRENT_DATE + 7,  'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Full Board', 30, 1);
 
 
 INSERT INTO booking(reservation_number, customer_number, ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
@@ -140,8 +140,8 @@ VALUES (1, 1,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 3, NULL, 'Orsoyer Stra
 INSERT INTO booking(reservation_number, customer_number,ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
 VALUES (2,2,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 5, NULL, 'Wuppermannstraße', '163a', '26901', 'Lorup', 'Deutschland', 'hat seinen Hund dabei', 'Rechnung', null, '10/25', null, 'Full Board', 30, 1);
 
--- INSERT INTO booking(customer_number,ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
--- VALUES (3,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Full Board', 30, 1);
+INSERT INTO booking(customer_number,ARRIVAL_DATE, check_in_datetime, departure_date, check_out_datetime, billing_street, billing_house_number, billing_postal_code, billing_city, billing_country, comment, payment_method, credit_card_number, expiration_date, authorisation_number, board_name, price_per_night_for_board, amount_guests)
+VALUES (1,CURRENT_DATE, CURRENT_TIME(), CURRENT_DATE + 7, NULL, 'Iserstraße', '87', '38114', 'Amelighausen', 'Schweiz', null, 'Kreditkarte','CH22 4324 6665 3256', '07/33', 'EXI 3849 SHH 3898', 'Full Board', 30, 1);
 
 
 INSERT INTO BOOKED_ROOM(booking_number,room_number, from_date, to_date)
