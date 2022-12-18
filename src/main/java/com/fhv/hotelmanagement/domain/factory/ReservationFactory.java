@@ -4,7 +4,6 @@ package com.fhv.hotelmanagement.domain.factory;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
-import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
@@ -12,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ReservationFactory {
+
     private static ArrayList<Reservation> reservations;
 
     public static ReservationDTO getReservation(Long number){
@@ -33,6 +33,7 @@ public class ReservationFactory {
         }
 
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+
 
         for (Reservation r: reservations){
             if(r.getBooking() != null) {

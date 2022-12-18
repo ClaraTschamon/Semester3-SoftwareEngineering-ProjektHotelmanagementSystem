@@ -273,12 +273,12 @@ public class ReservationOverviewViewController implements Initializable {
                 ReservationDTO reservation;
                 try{
                     reservation = DomainController.getReservation(l);
-                    if(reservation.getBooking() != null) {
+                    if(reservation.getBooking() == null) {
                         BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
                                 reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
                                 reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
                                 reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
-                        reservation.setBooking(bookingDTO);
+
 
 
                         ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
@@ -291,6 +291,7 @@ public class ReservationOverviewViewController implements Initializable {
                             bookedRoomCategoryDTO.setBooking(bookingDTO);
                             bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
                         }
+
 
                         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
 
@@ -305,14 +306,15 @@ public class ReservationOverviewViewController implements Initializable {
                         }
                         bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
                         bookingDTO.setBookedRooms(bookedRoomDTOS);
+                        reservation.setBooking(bookingDTO);
 
                         DomainController.saveReservation(reservation);
                         DomainController.saveBooking(bookingDTO);
-                        fillTable(currentState);
                     }
                 } catch (NoSuchElementException e){
                     System.out.println("There is no resevation with the number: " + l.toString());
                 }
+                fillTable(currentState);
             }
         } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();
