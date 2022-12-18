@@ -173,40 +173,40 @@ background-attachment: fixed">
                     <div class="input-control">
                         <label for="nationality" class="bold">Nationality <br/></label>
                         <select name="Nationality" id="nationality" class="sizebig">
-                            <option value="" selected>--Please select--</option>
-                            <option value="select">Africa</option>
-                            <option value="select">Asia</option>
-                            <option value="select">Australia</option>
-                            <option value="select">Austria</option>
-                            <option value="select">Belgium</option>
-                            <option value="select">Bulgaria</option>
-                            <option value="select">Central America</option>
-                            <option value="select">Croatia</option>
-                            <option value="select">Cyprus</option>
-                            <option value="select">Czech Republic</option>
-                            <option value="select">Denmark</option>
-                            <option value="select">Estonia</option>
-                            <option value="select">Finnland</option>
-                            <option value="select">France</option>
-                            <option value="select">Germany</option>
-                            <option value="select">Greece</option>
-                            <option value="select">Hungary</option>
-                            <option value="select">Ireland</option>
-                            <option value="select">Italy</option>
-                            <option value="select">Latvia</option>
-                            <option value="select">Liechtenstein</option>
-                            <option value="select">Luxembourg</option>
-                            <option value="select">Malta</option>
-                            <option value="select">Netherlands</option>
-                            <option value="select">North America</option>
-                            <option value="select">Poland</option>
-                            <option value="select">Portugal</option>
-                            <option value="select">Romania</option>
-                            <option value="select">Slovakia</option>
-                            <option value="select">South America</option>
-                            <option value="select">Spain</option>
-                            <option value="select">Sweden</option>
-                            <option value="select">Switzerland</option>
+                            <option value="select" selected>--Please select--</option>
+                            <option>Africa</option>
+                            <option>Asia</option>
+                            <option>Australia</option>
+                            <option>Austria</option>
+                            <option>Belgium</option>
+                            <option>Bulgaria</option>
+                            <option>Central America</option>
+                            <option>Croatia</option>
+                            <option>Cyprus</option>
+                            <option>Czech Republic</option>
+                            <option>Denmark</option>
+                            <option>Estonia</option>
+                            <option>Finnland</option>
+                            <option>France</option>
+                            <option>Germany</option>
+                            <option>Greece</option>
+                            <option>Hungary</option>
+                            <option>Ireland</option>
+                            <option>Italy</option>
+                            <option>Latvia</option>
+                            <option>Liechtenstein</option>
+                            <option>Luxembourg</option>
+                            <option>Malta</option>
+                            <option>Netherlands</option>
+                            <option>North America</option>
+                            <option>Poland</option>
+                            <option>Portugal</option>
+                            <option>Romania</option>
+                            <option>Slovakia</option>
+                            <option>South America</option>
+                            <option>Spain</option>
+                            <option>Sweden</option>
+                            <option >Switzerland</option>
                         </select>
                         <div class="error"></div>
                     </div>
