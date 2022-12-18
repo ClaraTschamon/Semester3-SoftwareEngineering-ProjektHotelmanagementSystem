@@ -8,13 +8,11 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.services.StringValidator;
-import com.fhv.hotelmanagement.services.TextFunction;
+import com.fhv.hotelmanagement.view.viewServices.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 

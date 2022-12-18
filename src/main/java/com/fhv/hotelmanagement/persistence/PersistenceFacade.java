@@ -111,21 +111,21 @@ public class PersistenceFacade{
 
         ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
         for(Reservation r : allReservations){
-            System.out.println(r.getBooking());
+            System.out.println(r.getNumber() + " " + r.getBooking());
         }
 
         System.out.println("\n");
         System.out.println("ReservationsWithBooking");
         ArrayList<Reservation> reservationsWithBooking = ReservationDataMapper.getConfirmedReservations();
         for(Reservation r : reservationsWithBooking){
-            System.out.println(r.getBooking());
+            System.out.println(r.getNumber() + " " + r.getBooking());
         }
 
         System.out.println("\n");
         System.out.println("ReservationsWithoutBooking");
         ArrayList<Reservation> reservationsWithoutBooking = ReservationDataMapper.getNotConfirmedReservations();
         for(Reservation r : reservationsWithoutBooking){
-            System.out.println(r);
+            System.out.println(r.getNumber() + " " + r.getBooking());
         }
     }
 }
