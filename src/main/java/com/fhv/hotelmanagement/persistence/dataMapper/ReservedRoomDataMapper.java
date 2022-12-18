@@ -2,6 +2,7 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 
 import com.fhv.hotelmanagement.domain.domainModel.Reservation;
 import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
+import com.fhv.hotelmanagement.persistence.persistenceEntity.BookingEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.CustomerEntity;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.ReservedRoomEntity;
 
@@ -69,10 +70,19 @@ public class ReservedRoomDataMapper {
     protected static ReservedRoomEntity createReservedRoomEntity(ReservedRoom reservedRoom) {
         Reservation reservation = reservedRoom.getReservation();
         CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
-        return new ReservedRoomEntity(
-                ReservationDataMapper.createReservationEntity(reservation, customerEntity),
-                RoomDataMapper.createRoomEntity(reservedRoom.getRoom()),
-                reservedRoom.getFromDate(), reservedRoom.getToDate());
+        if(reservation.getBooking() == null){
+            return new ReservedRoomEntity(
+                    ReservationDataMapper.createReservationEntity(reservation, null, customerEntity),
+                    RoomDataMapper.createRoomEntity(reservedRoom.getRoom()),
+                    reservedRoom.getFromDate(), reservedRoom.getToDate());
+        } else {
+            BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity);
+            return new ReservedRoomEntity(
+                    ReservationDataMapper.createReservationEntity(reservation, bookingEntity, customerEntity),
+                    RoomDataMapper.createRoomEntity(reservedRoom.getRoom()),
+                    reservedRoom.getFromDate(), reservedRoom.getToDate());
+        }
+
     }
 
     protected static ReservedRoom createReservedRoom(ReservedRoomEntity reservedRoomEntity, Reservation reservation) {

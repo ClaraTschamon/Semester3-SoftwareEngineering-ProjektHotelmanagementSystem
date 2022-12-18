@@ -4,6 +4,7 @@ package com.fhv.hotelmanagement.domain.factory;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
+import com.fhv.hotelmanagement.persistence.dataMapper.BookingDataMapper;
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
@@ -16,7 +17,12 @@ public class ReservationFactory {
     public static ReservationDTO getReservation(Long number){
         Reservation reservation = PersistenceFacade.getReservation(number).get();
         if(reservation != null){
-            return createReservationDTO(reservation, true, null);
+            if(reservation.getBooking() != null) {
+                BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservation.getBooking(), true, null);
+                return createReservationDTO(reservation, bookingDTO, true, null);
+            } else {
+                return createReservationDTO(reservation,null,true, null);
+            }
         }
         return null;
     }
@@ -29,7 +35,12 @@ public class ReservationFactory {
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
 
         for (Reservation r: reservations){
-            reservationDTOS.add(createReservationDTO(r, true, null));
+            if(r.getBooking() != null) {
+                BookingDTO bookingDTO = BookingFactory.createBookingDTO(r.getBooking(), true, null);
+                reservationDTOS.add(createReservationDTO(r, bookingDTO, true, null));
+            } else {
+                reservationDTOS.add(createReservationDTO(r, null,true, null));
+            }
         }
 
         return reservationDTOS;
@@ -38,7 +49,12 @@ public class ReservationFactory {
     public static ArrayList<ReservationDTO> getAllReservationsBetween(LocalDate minDate, LocalDate maxDate){
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
         for(Reservation reservation : PersistenceFacade.getAllReservationsBetween(minDate, maxDate)){
-            reservationDTOS.add(createReservationDTO(reservation, true, null));
+            if(reservation.getBooking() != null) {
+                BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservation.getBooking(), true, null);
+                reservationDTOS.add(createReservationDTO(reservation, bookingDTO, true, null));
+            } else {
+                reservationDTOS.add(createReservationDTO(reservation,null, true, null));
+            }
         }
         return reservationDTOS;
     }
@@ -46,7 +62,12 @@ public class ReservationFactory {
     public static ArrayList<ReservationDTO> getNotConfirmedReservations(){
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
         for(Reservation reservation : PersistenceFacade.getNotConfirmedReservations()){
-            reservationDTOS.add(createReservationDTO(reservation, true, null));
+            if(reservation.getBooking() != null) {
+                BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservation.getBooking(), true, null);
+                reservationDTOS.add(createReservationDTO(reservation, bookingDTO, true, null));
+            } else {
+                reservationDTOS.add(createReservationDTO(reservation,null, true, null));
+            }
         }
         return reservationDTOS;
     }
@@ -54,7 +75,12 @@ public class ReservationFactory {
     public static ArrayList<ReservationDTO> getConfirmedReservations(){
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
         for(Reservation reservation : PersistenceFacade.getConfirmedReservations()){
-            reservationDTOS.add(createReservationDTO(reservation, true, null));
+            if(reservation.getBooking() != null) {
+                BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservation.getBooking(), true, null);
+                reservationDTOS.add(createReservationDTO(reservation, bookingDTO, true, null));
+            } else {
+                reservationDTOS.add(createReservationDTO(reservation,null, true, null));
+            }
         }
         return reservationDTOS;
     }
@@ -87,7 +113,7 @@ public class ReservationFactory {
         PersistenceFacade.deleteReservation(reservation);
     }
 
-    protected static ReservationDTO createReservationDTO(Reservation reservation, boolean includeArrays, ReservedRoom allExcept){
+    protected static ReservationDTO createReservationDTO(Reservation reservation, BookingDTO bookingDTO ,boolean includeArrays, ReservedRoom allExcept){
         if(reservation == null){
             return null;
         }
@@ -102,17 +128,16 @@ public class ReservationFactory {
                 BoardFactory.createBoardDTO(reservation.getBoard()), reservation.getPricePerNightForBoard(),reservation.getComment(),
                 reservation.getAmountGuests(), reservedRoomCategoryDTOS, reservedRoomDTOS);
 
-        if(reservation.getBooking() != null) {
-            BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservation.getBooking(), true, null);
+        if(bookingDTO != null){
             reservationDTO.setBooking(bookingDTO);
         }
 
         if(includeArrays){
             for(ReservedRoomCategory reservedRoomCategory : reservation.getReservedRoomCategories()){
-                reservedRoomCategoryDTOS.add(ReservedRoomCategoryFactory.createReservedRoomCategoryDTO(reservedRoomCategory));
+                reservedRoomCategoryDTOS.add(ReservedRoomCategoryFactory.createReservedRoomCategoryDTO(reservedRoomCategory, reservationDTO));
             }
             for(ReservedRoom reservedRoom : reservation.getReservedRooms()){
-                reservedRoomDTOS.add(ReservedRoomFactory.createReservedRoomDTO(reservedRoom, false));
+                reservedRoomDTOS.add(ReservedRoomFactory.createReservedRoomDTO(reservedRoom, reservationDTO,false));
             }
         }
         return reservationDTO;

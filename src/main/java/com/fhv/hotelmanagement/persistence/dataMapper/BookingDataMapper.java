@@ -105,13 +105,11 @@ public class BookingDataMapper {
                 booking.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(booking.getBoard()), booking.getPricePerNightForBoard(),
                 booking.getAmountGuests(), bookedRoomCategoryEntities, bookedRoomEntities);
 
-
-        if(booking.getReservation() != null) {
-            reservationEntity = ReservationDataMapper.createReservationEntity(booking.getReservation(), customerEntity); //Nullpointer Exception
+        if(booking.getReservation() != null){
+            reservationEntity = ReservationDataMapper.createReservationEntity(booking.getReservation(), bookingEntity, customerEntity);
             bookingEntity.setReservation(reservationEntity);
-            System.out.println(booking.getReservation().toString());
-
         }
+
         for (BookedRoomCategory c : booking.getBookedRoomCategories()) {
             bookedRoomCategoryEntities.add(new BookedRoomCategoryEntity(bookingEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
                     c.getPricePerNight(), c.getAmount()));
@@ -123,6 +121,7 @@ public class BookingDataMapper {
 
         return bookingEntity;
     }
+
 
     protected static Booking createBooking(BookingEntity bookingEntity, Reservation reservation) {
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();

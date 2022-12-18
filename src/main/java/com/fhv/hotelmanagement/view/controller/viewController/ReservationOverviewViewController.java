@@ -115,18 +115,10 @@ public class ReservationOverviewViewController implements Initializable {
         if(state.equals("all")){
             reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
         } else if(state.equals("confirmed")){
-            //reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
-            ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
-            ArrayList<ReservationDTO> confirmedReservations = new ArrayList<>();
-            for(ReservationDTO reservationDTO : allreservationDTOs){
-                if(reservationDTO.getBooking() != null){
-                    confirmedReservations.add(reservationDTO);
-                }
-            }
-            reservationDTOs = FXCollections.observableArrayList(confirmedReservations);
+            reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
 
         } else if(state.equals("not confirmed")){
-            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations());
+            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
             ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
             ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
             for(ReservationDTO reservationDTO : allreservationDTOs){

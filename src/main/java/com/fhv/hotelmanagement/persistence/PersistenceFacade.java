@@ -109,46 +109,23 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-//        ArrayList<Booking> bookings = getAllBookings();
-//
-//        for (Booking booking:bookings) {
-//            System.out.println(booking);
-//        }
-
-        //Testing out reservations
-
-//        ArrayList<Reservation> reservations = getAllReservations();
-//
-//        for (Reservation reservation:reservations) {
-//            System.out.println(reservation);
-//        }
-
-        //Testing out reservedRoomCategories
-
-        ArrayList<ReservedRoomCategory> reservedRoomCategories = getAllReservedRoomCategories();
-
-        /*for (ReservedRoomCategory reservedRoomCategory:reservedRoomCategories) {
-            System.out.println(reservedRoomCategory);
-        }*/
-
-        //Testing out reservedRooms
-
-
-        ArrayList<Reservation> reservations = getAllReservations();
-
-        /*for(Reservation reservation : reservations){
-            System.out.println(reservation.getBooking());
-        }*/
-
-        ArrayList<Reservation> reservations1 = getNotConfirmedReservations();
-        System.out.println(reservations1.size());
-        for(Reservation reservation : reservations1){
-            System.out.println(reservation.getBooking());
+        ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
+        for(Reservation r : allReservations){
+            System.out.println(r.getBooking());
         }
 
-        //Reservation reservation = reservations.get(1);
-        //System.out.println(reservation.getNumber());
-        //deleteReservation(reservation);
+        System.out.println("\n");
+        System.out.println("ReservationsWithBooking");
+        ArrayList<Reservation> reservationsWithBooking = ReservationDataMapper.getConfirmedReservations();
+        for(Reservation r : reservationsWithBooking){
+            System.out.println(r.getBooking());
+        }
 
+        System.out.println("\n");
+        System.out.println("ReservationsWithoutBooking");
+        ArrayList<Reservation> reservationsWithoutBooking = ReservationDataMapper.getNotConfirmedReservations();
+        for(Reservation r : reservationsWithoutBooking){
+            System.out.println(r);
+        }
     }
 }

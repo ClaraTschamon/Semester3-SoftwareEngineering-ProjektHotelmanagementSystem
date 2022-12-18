@@ -3,6 +3,8 @@ package com.fhv.hotelmanagement.domain.factory;
 
 import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
+import com.fhv.hotelmanagement.persistence.dataMapper.ReservationDataMapper;
+import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservedRoomDTO;
 
@@ -14,20 +16,43 @@ public class ReservedRoomFactory {
     public static ArrayList<ReservedRoomDTO> getReservedRoomsBetween(LocalDate minDate, LocalDate maxDate){
         ArrayList<ReservedRoomDTO> reservedRoomDTOS = new ArrayList<>();
         for (ReservedRoom reservedRoom : PersistenceFacade.getReservedRoomsBetween(minDate, maxDate)){
-            reservedRoomDTOS.add(createReservedRoomDTO(reservedRoom, true));
+            BookingDTO bookingDTO = null;
+            ReservationDTO reservationDTO;
+            if(reservedRoom.getReservation().getBooking() != null){
+                bookingDTO = BookingFactory.createBookingDTO(reservedRoom.getReservation().getBooking(), true, null);
+                reservationDTO = ReservationFactory.createReservationDTO(reservedRoom.getReservation(), bookingDTO, true, reservedRoom);
+            } else {
+                reservationDTO = ReservationFactory.createReservationDTO(reservedRoom.getReservation(), bookingDTO, true, reservedRoom);
+            }
+            reservedRoomDTOS.add(createReservedRoomDTO(reservedRoom, reservationDTO,true));
         }
         return reservedRoomDTOS;
     }
 
-    protected static ReservedRoomDTO createReservedRoomDTO(ReservedRoom reservedRoom, boolean includeReservationArrays){
+    protected static ReservedRoomDTO createReservedRoomDTO(ReservedRoom reservedRoom, ReservationDTO reservationDTO, boolean includeReservationArrays){
         if(!includeReservationArrays){
-            return new ReservedRoomDTO(ReservationFactory.createReservationDTO(reservedRoom.getReservation(), false, null),
-                    RoomFactory.createRoomDTO(reservedRoom.getRoom()),
-                    reservedRoom.getFromDate(), reservedRoom.getToDate());
+            if(reservationDTO.getBooking() != null){
+                return new ReservedRoomDTO(reservationDTO,
+                        RoomFactory.createRoomDTO(reservedRoom.getRoom()),
+                        reservedRoom.getFromDate(), reservedRoom.getToDate());
+            } else {
+                return new ReservedRoomDTO(reservationDTO,
+                        RoomFactory.createRoomDTO(reservedRoom.getRoom()),
+                        reservedRoom.getFromDate(), reservedRoom.getToDate());
+            }
+
         } else {
-            return new ReservedRoomDTO(ReservationFactory.createReservationDTO(reservedRoom.getReservation(), true, reservedRoom),
-                    RoomFactory.createRoomDTO(reservedRoom.getRoom()),
-                    reservedRoom.getFromDate(), reservedRoom.getToDate());
+            if(reservedRoom.getReservation().getBooking() != null) {
+                BookingDTO bookingDTO = BookingFactory.createBookingDTO(reservedRoom.getReservation().getBooking(), true, null);
+                return new ReservedRoomDTO(ReservationFactory.createReservationDTO(reservedRoom.getReservation(), bookingDTO, true, reservedRoom),
+                        RoomFactory.createRoomDTO(reservedRoom.getRoom()),
+                        reservedRoom.getFromDate(), reservedRoom.getToDate());
+            } else {
+                return new ReservedRoomDTO(ReservationFactory.createReservationDTO(reservedRoom.getReservation(), null, true, reservedRoom),
+                        RoomFactory.createRoomDTO(reservedRoom.getRoom()),
+                        reservedRoom.getFromDate(), reservedRoom.getToDate());
+            }
+
         }
     }
 
