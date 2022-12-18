@@ -23,6 +23,16 @@ const billingHouseNumber = document.getElementById('billinghouseNumber');
 const billingCity = document.getElementById('billingcity');
 const billingZipCode = document.getElementById('billingzipCode');
 
+const arrivalDate = document.getElementById('arrivalDate')
+const singleRoom = document.getElementById('singleroom');
+const doubleRoom = document.getElementById('doubleroom');
+const familyRoom = document.getElementById('familyroom');
+const suiteRoom = document.getElementById('suite');
+const creditCard = document.getElementById('creditcardnumber');
+const securityNumber = document.getElementById('securitynumber');
+const expirationDate = document.getElementById('expirationdate');
+const billingCountry = document.getElementById('billingcountry');
+
 let hasError = false;
 
 form.addEventListener('submit', e => {
@@ -112,8 +122,9 @@ const validateInputs = () => {
     const phoneNumberValue = phoneNumber.value.trim();
     const emailValue = email.value.trim();
     const nationalityValue = nationality.value;
-    const arrivalDateValue = arrivalDate.valueOf();
-    const singleRoomValue = singleRoom.valueOf();
+
+    // const arrivalDateValue = arrivalDate.value.trim();
+    const singleRoomValue = singleRoom.value.trim();
     const doubleRoomValue = doubleRoom.valueOf();
     const familyRoomValue = familyRoom.valueOf();
     const suiteRoomValue = suiteRoom.valueOf();
@@ -127,28 +138,28 @@ const validateInputs = () => {
     const billingCountryValue = billingCountry.value.trim();
 
 
-    var arrivalDateEntered = new Date(arrivalDate.value).getDate();
-    var departureDateEntered = new Date(departureDate.value).getDate();
+    // var arrivalDateEntered = new Date(arrivalDate.value).getDate();
+    // var departureDateEntered = new Date(departureDate.value).getDate();
     var dateNow = new Date().getDate();
 
-    if(arrivalDate.value === ""){
-        setError(arrivalDate, 'Required field');
-    } else if(!(arrivalDateEntered >= dateNow)){
-        setError(arrivalDate, 'Arrival date can not be before today!')
-    } else if(arrivalDateEntered > departureDateEntered) {
-        setError(arrivalDate, 'Arrival date has to be before the departure date!')
-    } else if(arrivalDateEntered === departureDateEntered) {
-        setError(arrivalDate, 'Arrival date and departure date can not be the same!')
-    }
-    else{
-        setSuccess(arrivalDate);
-    }
+    // if(arrivalDate.value === ""){
+    //     setError(arrivalDate, 'Required field');
+    // } else if(!(arrivalDateEntered >= dateNow)){
+    //     setError(arrivalDate, 'Arrival date can not be before today!')
+    // } else if(arrivalDateEntered > departureDateEntered) {
+    //     setError(arrivalDate, 'Arrival date has to be before the departure date!')
+    // } else if(arrivalDateEntered === departureDateEntered) {
+    //     setError(arrivalDate, 'Arrival date and departure date can not be the same!')
+    // }
+    // else{
+    //     setSuccess(arrivalDate);
+    // }
 
-    if(departureDate.value === ""){
-        setError(departureDate, 'Required field');
-    } else {
-        setSuccess(departureDate);
-    }
+    // if(departureDate.value === ""){
+    //     setError(departureDate, 'Required field');
+    // } else {
+    //     setSuccess(departureDate);
+    // }
 
 
 
@@ -182,24 +193,24 @@ const validateInputs = () => {
         setSuccess(nationality);
     }
 
-    if (creditCardValue === '') {
-        setError(creditCard, 'Required field');
-    } else if (!creditCardValue.match(/^([0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,})/) ||
-        !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,})/) ||
-        !creditCardValue.match(/^([0-9]{14,16}[ ]{0,})/) ||
-        !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,})/)) {
-        setError(creditCard, 'Incorrect Input');
-    } else {
-        setSuccess(creditCard);
-    }
-
-    if (securityNumberValue === '') {
-        setError(securityNumber, 'Required field');
-    } else if (!securityNumberValue.match(/^([ ]{0,}[0-9 ]{3,5}[ ]{0,})/)) {
-        setError(securityNumber, 'Incorrect input');
-    } else {
-        setSuccess(securityNumber);
-    }
+    // if (creditCardValue === '') {
+    //     setError(creditCard, 'Required field');
+    // } else if (!creditCardValue.match(/^([0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ]{0,})/) ||
+    //     !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{4}[ ]{0,})/) ||
+    //     !creditCardValue.match(/^([0-9]{14,16}[ ]{0,})/) ||
+    //     !creditCardValue.match(/^([0-9]{4}[ ][0-9]{6}[ ][0-9]{5}[ ]{0,})/)) {
+    //     setError(creditCard, 'Incorrect Input');
+    // } else {
+    //     setSuccess(creditCard);
+    // }
+    //
+    // if (securityNumberValue === '') {
+    //     setError(securityNumber, 'Required field');
+    // } else if (!securityNumberValue.match(/^([ ]{0,}[0-9 ]{3,5}[ ]{0,})/)) {
+    //     setError(securityNumber, 'Incorrect input');
+    // } else {
+    //     setSuccess(securityNumber);
+    // }
 
     // if (expirationDateValue === '') {
     //     setError(expirationDate, 'Required field')
