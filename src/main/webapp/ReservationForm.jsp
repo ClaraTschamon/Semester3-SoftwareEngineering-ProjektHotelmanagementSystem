@@ -309,7 +309,7 @@ background-attachment: fixed">
                         </td>
                         <td>
                             <div class="input-control" style="margin-left: 50px">
-                                <label for="expirationdate" class="bold">Expariation Date
+                                <label for="expirationdate" class="bold">Expiration Date
                                     <br/></label>
                                 <input class="sizesmall" name="ExpirationDate" id="expirationdate" type="text" placeholder="12/24">
                                 <div class="error"></div>
