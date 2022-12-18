@@ -7,10 +7,7 @@ import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.services.StringValidator;
-import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -81,13 +78,19 @@ public class BookingFactory {
         ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
 
-        BookingDTO bookingDTO = new BookingDTO(booking.getNumber(), ReservationFactory.createReservationDTO(booking.getReservation(), true, null),
+        BookingDTO bookingDTO = new BookingDTO(booking.getNumber(), null,
                 CustomerFactory.createCustomerDTO(booking.getCustomer()), booking.getArrivalDate(),
                 booking.getCheckInDatetime(), booking.getDepartureDate(), booking.getCheckOutDatetime(),
                 AddressFactory.createAddressDTO(booking.getBillingAddress()), booking.getPaymentMethod(), booking.getCreditCardNumber(),
                 booking.getExpirationDate(), booking.getAuthorisationNumber(), BoardFactory.createBoardDTO(booking.getBoard()),
                 booking.getPricePerNightForBoard(), booking.getComment(), booking.getAmountGuests(),
                 bookedRoomCategoryDTOS, bookedRoomDTOS);
+
+        if(booking.getReservation() != null){
+            ReservationDTO reservationDTO = ReservationFactory.createReservationDTO(booking.getReservation(), bookingDTO, true, null);
+            bookingDTO.setReservation(reservationDTO);
+        }
+
         if (includeArrays) {
             for (BookedRoomCategory bookedRoomCategory : booking.getBookedRoomCategories()) {
                 bookedRoomCategoryDTOS.add(BookedRoomCategoryFactory.createBookedRoomCategoryDTO(bookedRoomCategory));

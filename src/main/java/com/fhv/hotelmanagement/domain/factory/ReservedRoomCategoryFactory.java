@@ -4,6 +4,7 @@ package com.fhv.hotelmanagement.domain.factory;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
 import com.fhv.hotelmanagement.domain.domainModel.ReservedRoomCategory;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
+import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservedRoomCategoryDTO;
 
@@ -13,10 +14,16 @@ public class ReservedRoomCategoryFactory {
 
     private static ArrayList<BookedRoomCategory> bookedRoomCategories;
 
-    protected static ReservedRoomCategoryDTO createReservedRoomCategoryDTO(ReservedRoomCategory reservedRoomCategory){
-        return new ReservedRoomCategoryDTO(ReservationFactory.createReservationDTO(reservedRoomCategory.getReservation(), false, null),
-                RoomCategoryFactory.createRoomCategoryDTO(reservedRoomCategory.getRoomCategory()), reservedRoomCategory.getPricePerNight(),
-                reservedRoomCategory.getAmount());
+    protected static ReservedRoomCategoryDTO createReservedRoomCategoryDTO(ReservedRoomCategory reservedRoomCategory, ReservationDTO reservationDTO){
+        if(reservationDTO.getBooking() != null){
+            return new ReservedRoomCategoryDTO(reservationDTO, RoomCategoryFactory.createRoomCategoryDTO(reservedRoomCategory.getRoomCategory()), reservedRoomCategory.getPricePerNight(),
+                    reservedRoomCategory.getAmount());
+
+        } else {
+            return new ReservedRoomCategoryDTO(reservationDTO,
+                    RoomCategoryFactory.createRoomCategoryDTO(reservedRoomCategory.getRoomCategory()), reservedRoomCategory.getPricePerNight(),
+                    reservedRoomCategory.getAmount());
+        }
     }
 
     protected static ReservedRoomCategory createReservedRoomCategory(ReservedRoomCategoryDTO reservedRoomCategoryDTO){
