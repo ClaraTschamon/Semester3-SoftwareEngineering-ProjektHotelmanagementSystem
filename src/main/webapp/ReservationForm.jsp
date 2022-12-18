@@ -5,7 +5,7 @@
   Time: 11:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
     <title>Make Reservation</title>
@@ -18,15 +18,14 @@
 background-image: url('Background.jpg');
 background-repeat: no-repeat;
 background-attachment: fixed">
-
 <!-- Navbar-->
-
-<ul style="opacity: 0.9">
-    <li><img src="Logo.png" alt="Logo"></li>
-    <li><a class="oben" href="#about">About</a></li>
-    <li><a class="oben" href="#contact">Contact</a></li>
-    <li><a class="oben" href="ReservationForm.jsp">Reservations</a></li>
-    <li><a class="active, oben" href="index.html">Home</a></li>
+<ul style="margin-top: 0; height: 70px; background-color: #21273d;">
+    <li><a class="oben" style="font-size: 20px" href="#about">About</a></li>
+    <li><a class="oben" style="font-size: 20px" href="#contact">Contact</a></li>
+    <!--<li><a class="oben" href="reservationVorlage.html">Reservations</a></li>-->
+    <li><a class="oben" style="font-size: 20px" href="ReservationForm.jsp">Reservations</a></li>
+    <li><a class="active, oben" style="font-size: 20px" href="index.html">Home</a></li>
+    <li><img src="Logo.png" style="height: 50px;"></li>
 </ul>
 
 <!-- Der weiße Hintergrund-->

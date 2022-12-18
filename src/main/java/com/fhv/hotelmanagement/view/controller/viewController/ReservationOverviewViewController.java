@@ -26,6 +26,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
 public class ReservationOverviewViewController implements Initializable {
@@ -79,6 +80,8 @@ public class ReservationOverviewViewController implements Initializable {
     @FXML
     private Text phReservationNumberText;
 
+    private String currentState = new String();
+
     private ReservationOverviewUseCaseController useCaseController;
 
     public ReservationOverviewViewController(){
@@ -111,12 +114,12 @@ public class ReservationOverviewViewController implements Initializable {
     }
 
     public void fillTable(String state){
+        currentState = state;
         ObservableList<ReservationDTO> reservationDTOs = FXCollections.observableArrayList();
         if(state.equals("all")){
             reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
         } else if(state.equals("confirmed")){
             reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
-
         } else if(state.equals("not confirmed")){
             //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
             ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
@@ -255,8 +258,9 @@ public class ReservationOverviewViewController implements Initializable {
                 period = Period.between(LocalDate.now(), reservation.getArrivalDate());
                 daysDiff = Math.abs(period.getDays());
                 if(daysDiff < 3){
-                    System.out.println("here");
+                    System.out.println("at delete reservation");
                     DomainController.deleteReservation(reservation);
+                    fillTable(currentState);
                 }
             }
         }
@@ -265,50 +269,54 @@ public class ReservationOverviewViewController implements Initializable {
         try {
             ArrayList<Long> reservationNumbers = depositService.parseData(depositService.convertData());
             for (Long l: reservationNumbers){
-                System.out.println(l);
-                ReservationDTO reservation = DomainController.getReservation(l);
 
-                BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
-                        reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
-                        reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
-                        reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
-                reservation.setBooking(bookingDTO);
+                ReservationDTO reservation;
+                try{
+                    reservation = DomainController.getReservation(l);
+                    if(reservation.getBooking() == null) {
+                        BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
+                                reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
+                                reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
+                                reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
 
-                ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
 
-                for (ReservedRoomCategoryDTO reservedRoomCategoryDTO: reservation.getReservedRoomCategories()) {
-                    BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
-                    bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
-                    bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
-                    bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
-                    bookedRoomCategoryDTO.setBooking(bookingDTO);
-                    bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+
+                        ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
+
+                        for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservation.getReservedRoomCategories()) {
+                            BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
+                            bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
+                            bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
+                            bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
+                            bookedRoomCategoryDTO.setBooking(bookingDTO);
+                            bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+                        }
+
+
+                        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+
+                        for (ReservedRoomDTO reservedRoomDTO : reservation.getReservedRooms()) {
+                            BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
+                            bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
+                            bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
+                            bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
+                            bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
+                            bookedRoomDTO.setBooking(bookingDTO);
+                            bookedRoomDTOS.add(bookedRoomDTO);
+                        }
+                        bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
+                        bookingDTO.setBookedRooms(bookedRoomDTOS);
+                        reservation.setBooking(bookingDTO);
+
+                        DomainController.saveReservation(reservation);
+                        DomainController.saveBooking(bookingDTO);
+                    }
+                } catch (NoSuchElementException e){
+                    System.out.println("There is no resevation with the number: " + l.toString());
                 }
-
-                ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
-
-                for (ReservedRoomDTO reservedRoomDTO: reservation.getReservedRooms()) {
-                    BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
-                    bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
-                    bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
-                    bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
-                    bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
-                    bookedRoomDTO.setBooking(bookingDTO);
-                    bookedRoomDTOS.add(bookedRoomDTO);
-                }
-                System.out.println(reservation.getCustomer().getFirstName());
-                bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
-                bookingDTO.setBookedRooms(bookedRoomDTOS);
-
-                phStateText.setText("confirmed");
-                DomainController.saveReservation(reservation);
-                DomainController.saveBooking(bookingDTO);
+                fillTable(currentState);
             }
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch (ReservationIsInvalidException e) {
-            e.printStackTrace();
-        } catch (BookingIsInvalidException e) {
+        } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();
         }
     }
@@ -327,5 +335,4 @@ public class ReservationOverviewViewController implements Initializable {
         phPhoneNrText.setText("");
         phPaymentMethodText.setText("");
     }
-
 }
