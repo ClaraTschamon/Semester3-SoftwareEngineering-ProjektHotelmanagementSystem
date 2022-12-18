@@ -2,9 +2,11 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.domain.domainModel.Reservation;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
+import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.viewServices.ApachePDFBoxServices;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.collections.FXCollections;
@@ -17,10 +19,13 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOut2ViewController {
+
 
     @FXML
     private TableView<BookedRoomCategoryDTO> bookedRoomsTable;
@@ -50,9 +55,11 @@ public class CheckOut2ViewController {
     public Text phTouristTaxText;
     @FXML
     public Text phTotalSumGrossText;
+    @FXML
+    public Text phDepositText;
 
     private final BigDecimal SALEXTAX = new BigDecimal("0.2");
-
+    private final BigDecimal DEPOSITCUT = new BigDecimal("0.15");
     private final BigDecimal TOURISTTAXPERNIGHT = new BigDecimal("1.5");
 
     private CheckOutViewController viewController;
@@ -155,8 +162,27 @@ public class CheckOut2ViewController {
 
         phTouristTaxText.setText(touristTax.setScale(2) + "€");
 
+        //deposit and total amount calculation
+        ReservationDTO reservation = viewController.getUseCaseController().getBooking().getReservation();
+        BigDecimal depositValue = new BigDecimal(0);
+        phDepositText.setText(depositValue.setScale(2)+"€");
+
         BigDecimal totalSumGross = totalSumNet.add(salesTax).add(touristTax);
 
+        if(reservation != null){
+            LocalDate creationTimestamp = reservation.getCreationTimestamp().toLocalDate();
+            Period period = Period.between(creationTimestamp, reservation.getArrivalDate());
+            int daysDiff = Math.abs(period.getDays());
+
+            //Verneinen sobald man es testen kann
+            if(!(daysDiff<=3)){
+                depositValue = totalSumGross.multiply(DEPOSITCUT);
+                phDepositText.setText(depositValue.setScale(2)+"€");
+                totalSumGross.subtract(depositValue);
+            }
+        }
+        System.out.println(reservation);
+        System.out.println(viewController.getUseCaseController().getBooking().getNumber());
         phTotalSumGrossText.setText(totalSumGross.setScale(2) + "€");
     }
 }

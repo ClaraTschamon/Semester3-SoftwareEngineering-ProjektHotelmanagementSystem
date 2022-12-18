@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class DepositService {
     private HashMap<String, DepositDTO> deposits = new HashMap<>();
-    private ArrayList<Long> reservierungsNummer = new ArrayList<>();
+    private ArrayList<Long> reservationNumber = new ArrayList<>();
 
     public StringBuilder convertData() throws IOException {
         File file = new File("DatenBuchhaltung");
@@ -32,50 +32,50 @@ public class DepositService {
         String iban = "";
         String reservationNumber = "";
 
-        for(int i = 0; i<data.length();i++){
-            if(data.charAt(i)=='R'){
-                i+=5;
+        for(int i = 0; i < data.length(); i++){
+            if(data.charAt(i) == 'R'){
+                i += 5; //ich würde nicht einfach überspringen sondern schauen ob das eingelesene wort auch wirklich dem erwarteten entspricht
                 while (data.charAt(i)!='#' && data.charAt(i)!=';'){
-                    reservationNumber+=data.charAt(i);
+                    reservationNumber += data.charAt(i);
                     i++;
                 }
             }
 
-            if(data.charAt(i)=='D'){
-                i+=5;
-                int y = i+9;
+            if(data.charAt(i) == 'D' ){
+                i += 5;
+                int y = i + 9;
                 while (i<y){
-                    date+=data.charAt(i);
+                    date += data.charAt(i);
                     i++;
                 }
             }
 
-            if(data.charAt(i)=='A' && data.charAt(i+1)=='m'){
-                i+=7;
+            if(data.charAt(i) == 'A' && data.charAt(i+1) == 'm'){
+                i += 7;
                 while (data.charAt(i)!='#' && data.charAt(i)!=';'){
-                    amount+=data.charAt(i);
+                    amount += data.charAt(i);
                     i++;
                 }
             }
 
             if(data.charAt(i)=='I'){
-                i+=5;
-                int y = i+22;
-                while (i<y){
-                    iban+=data.charAt(i);
+                i += 5;
+                int y = i + 22;
+                while (i < y){
+                    iban += data.charAt(i);
                     i++;
                 }
             }
 
             if(data.charAt(i)==';'){
-                deposits.put(reservationNumber, new DepositDTO(date,amount,iban, reservationNumber));
-                reservierungsNummer.add(Long.valueOf(reservationNumber));
+                deposits.put(reservationNumber, new DepositDTO(date, amount, iban, reservationNumber));
+                this.reservationNumber.add(Long.valueOf(reservationNumber));
                 date = "";
                 amount = "";
                 iban = "";
                 reservationNumber = "";
             }
         }
-        return reservierungsNummer;
+        return this.reservationNumber;
     }
 }

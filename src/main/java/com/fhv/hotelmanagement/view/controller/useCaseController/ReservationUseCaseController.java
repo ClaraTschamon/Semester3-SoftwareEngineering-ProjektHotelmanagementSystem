@@ -231,6 +231,7 @@ public class ReservationUseCaseController implements EmailService {
     public void sendMail(EmailInfo emailInfo) {
         try{
             DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+            //DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\samuel\\Documents\\GitHub\\Hotelmanagement\\Emails.txt", true));
             dataOutputStream.writeUTF(LocalDateTime.now().toString());
             dataOutputStream.writeUTF(": ");
             dataOutputStream.writeUTF(emailInfo.toString());
@@ -241,24 +242,5 @@ public class ReservationUseCaseController implements EmailService {
         catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        /*
-        EmailInfo emailInfo = new EmailInfo();
-        emailInfo.setFrom("sunway.hotel@email.com");
-        emailInfo.setTo("maxmustermann@email.com");
-        emailInfo.setCc(null);
-        emailInfo.setBody("Beispieltext");
-
-        DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
-        dataOutputStream.writeUTF(LocalDateTime.now().toString());
-        dataOutputStream.writeUTF(": ");
-        dataOutputStream.writeUTF(emailInfo.toString());
-        dataOutputStream.write('\n');
-        dataOutputStream.flush();
-        dataOutputStream.close();
-
-         */
     }
 }

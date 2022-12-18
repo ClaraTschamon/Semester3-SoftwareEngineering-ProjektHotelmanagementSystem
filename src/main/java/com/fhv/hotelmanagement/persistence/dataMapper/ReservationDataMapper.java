@@ -53,18 +53,15 @@ public class ReservationDataMapper {
 
     public static ArrayList<Reservation> getNotConfirmedReservations(){
         List<ReservationEntity> entities;
-        /*entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
+        entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
                 "SELECT reservation FROM ReservationEntity reservation " +
                 "WHERE reservation.booking =: param")
                 .setParameter("param", null).getResultList();
-         */
+
         /*entities =  PersistenceManager.instance().entityManager.createQuery("" +
                         "SELECT reservation FROM ReservationEntity reservation " +
                         "WHERE reservation.booking IS NULL").getResultList();*/
-        entities =  PersistenceManager.instance().entityManager.createQuery("" +
-                "SELECT reservation FROM ReservationEntity reservation where reservation.booking IS NULL").getResultList();
 
-        System.out.println("size = " + entities.size());
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         for(ReservationEntity e : entities){
@@ -88,7 +85,13 @@ public class ReservationDataMapper {
 
     public Long insert(Reservation reservation) {
         CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
-        ReservationEntity reservationEntity = createReservationEntity(reservation ,customerEntity);
+        ReservationEntity reservationEntity;
+        if(reservation.getBooking() == null) {
+            reservationEntity = createReservationEntity(reservation, null, customerEntity);
+        }else{
+            BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity);
+            reservationEntity = createReservationEntity(reservation, bookingEntity, customerEntity);
+        }
         var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
@@ -103,7 +106,13 @@ public class ReservationDataMapper {
 
     public void store(Reservation reservation){
         CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
-        ReservationEntity reservationEntity = createReservationEntity(reservation, customerEntity);
+        ReservationEntity reservationEntity;
+        if(reservation.getBooking() == null) {
+            reservationEntity = createReservationEntity(reservation, null, customerEntity);
+        }else{
+            BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity);
+            reservationEntity = createReservationEntity(reservation, bookingEntity, customerEntity);
+        }
         var entityManager = PersistenceManager.instance().entityManager;
 
         entityManager.getTransaction().begin();
@@ -113,7 +122,13 @@ public class ReservationDataMapper {
 
     public void delete (Reservation reservation){
         CustomerEntity customerEntity = CustomerDataMapper.createCustomerEntity(reservation.getCustomer());
-        ReservationEntity reservationEntity = createReservationEntity(reservation, customerEntity);
+        ReservationEntity reservationEntity;
+        if(reservation.getBooking() == null) {
+            reservationEntity = createReservationEntity(reservation, null, customerEntity);
+        }else{
+            BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity);
+            reservationEntity = createReservationEntity(reservation, bookingEntity, customerEntity);
+        }
         var entityManager = PersistenceManager.instance().entityManager;
 
 
@@ -122,23 +137,17 @@ public class ReservationDataMapper {
         entityManager.getTransaction().commit();
     }
 
-    protected static ReservationEntity createReservationEntity(Reservation reservation, CustomerEntity customerEntity) {
+    protected static ReservationEntity createReservationEntity(Reservation reservation, BookingEntity bookingEntity, CustomerEntity customerEntity) {
         Address address = reservation.getBillingAddress();
         HashSet<ReservedRoomCategoryEntity> reservedRoomCategoryEntities = new HashSet<>();
         HashSet<ReservedRoomEntity> reservedRoomEntities = new HashSet<>();
-        HashSet<BookingEntity> bookings = new HashSet<>();
 
-        ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), null, customerEntity, reservation.getCreationTimestamp(),
+        ReservationEntity reservationEntity = new ReservationEntity(reservation.getNumber(), bookingEntity, customerEntity, reservation.getCreationTimestamp(),
                 reservation.getArrivalDate(), reservation.getDepartureDate(), address.getStreet(), address.getHouseNumber(), address.getPostalCode(),
                 address.getCity(), address.getCountry(), reservation.getComment(), reservation.getPaymentMethod(), reservation.getCreditCardNumber(),
                 reservation.getExpirationDate(), reservation.getAuthorisationNumber(), BoardDataMapper.createBoardEntity(reservation.getBoard()), reservation.getPricePerNightForBoard(),
                 reservation.getAmountGuests(), reservedRoomCategoryEntities, reservedRoomEntities);
 
-        if(reservation.getBooking() != null) {
-            BookingEntity bookingEntity = BookingDataMapper.createBookingEntity(reservation.getBooking(), customerEntity);
-            reservationEntity.setBooking(bookingEntity);
-
-        }
 
         for (ReservedRoomCategory c : reservation.getReservedRoomCategories()) {
             reservedRoomCategoryEntities.add(new ReservedRoomCategoryEntity(reservationEntity, RoomCategoryDataMapper.createRoomCategoryEntity(c.getRoomCategory()),
