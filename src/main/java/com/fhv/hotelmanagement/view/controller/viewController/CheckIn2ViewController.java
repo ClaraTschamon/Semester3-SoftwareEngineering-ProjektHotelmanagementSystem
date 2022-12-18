@@ -290,7 +290,9 @@ public class CheckIn2ViewController implements Initializable {
             TextFunction.setEventHandler(streetTextField);
         }
 
-        LocalDate dateOfBirth = birthdayDatePicker.getValue(); //TODO: von hand eingetragenes datum wird nicht upgedated
+        birthdayDatePicker.setValue(birthdayDatePicker.getConverter()
+                .fromString(birthdayDatePicker.getEditor().getText())); //Update date if entered manually
+        LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
         if (StringValidator.calculateAge(dateOfBirth) >= 16) {
             birthdayIsValid = true;
@@ -448,5 +450,10 @@ public class CheckIn2ViewController implements Initializable {
             searching = false;
             contentPane.getChildren().remove(searchedCustomersListView);
         }
+    }
+
+    @FXML
+    private void birthdayDatePickerOnAction(ActionEvent actionEvent) {
+        birthdayDatePicker.setStyle("-fx-text-inner-color: black");
     }
 }

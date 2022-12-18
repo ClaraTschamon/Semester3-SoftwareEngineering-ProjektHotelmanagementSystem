@@ -82,7 +82,6 @@ public class ReservationNumberViewController {
                         throw new NoSuchElementException();
                     }
                 }
-                viewController.getUseCaseController().setReservation(reservationDTO);
                 viewController.getUseCaseController().setBooking(bookingDTO);
                 viewController.getUseCaseController().setCustomer(reservationDTO.getCustomer());
                 viewController.loadCheckIn1();

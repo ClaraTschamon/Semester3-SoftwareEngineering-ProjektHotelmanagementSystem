@@ -216,7 +216,7 @@ public class CheckIn1ViewController implements Initializable {
     }
 
     protected void fillData() {
-        if(viewController.isCheckIn()){
+        if(viewController.getIsCheckIn()){
             searchDatabaseTextField.setDisable(true);
             roomPriceDropDown.setDisable(true);
         }
@@ -299,7 +299,6 @@ public class CheckIn1ViewController implements Initializable {
         } else {
             amountGuestsSpinner.getValueFactory().setValue(1);
         }
-
         setCustomerInfo();
     }
 

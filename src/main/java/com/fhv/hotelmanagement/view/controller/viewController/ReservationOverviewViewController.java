@@ -80,11 +80,14 @@ public class ReservationOverviewViewController implements Initializable {
     @FXML
     private Text phReservationNumberText;
 
+    @FXML
+    private Button checkInButton;
+
     private String currentState = new String();
 
     private ReservationOverviewUseCaseController useCaseController;
 
-    public ReservationOverviewViewController(){
+    public ReservationOverviewViewController() {
         useCaseController = new ReservationOverviewUseCaseController();
     }
 
@@ -113,35 +116,35 @@ public class ReservationOverviewViewController implements Initializable {
         });
     }
 
-    public void fillTable(String state){
+    public void fillTable(String state) {
         currentState = state;
         ObservableList<ReservationDTO> reservationDTOs = FXCollections.observableArrayList();
-        if(state.equals("all")){
+        if (state.equals("all")) {
             reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
-        } else if(state.equals("confirmed")){
+        } else if (state.equals("confirmed")) {
             reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
-        } else if(state.equals("not confirmed")){
+        } else if (state.equals("not confirmed")) {
             //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
             ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
             ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
-            for(ReservationDTO reservationDTO : allreservationDTOs){
-                if(reservationDTO.getBooking() == null){
+            for (ReservationDTO reservationDTO : allreservationDTOs) {
+                if (reservationDTO.getBooking() == null) {
                     notConfirmedReservations.add(reservationDTO);
                 }
             }
             reservationDTOs = FXCollections.observableArrayList(notConfirmedReservations);
-        } else if(state.equals("all between")){
+        } else if (state.equals("all between")) {
             LocalDate minDate = fromDateDatePicker.getValue();
             LocalDate maxDate = toDateDatePicker.getValue();
             reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservationsBetween(minDate, maxDate));
         }
         ArrayList<ReservationViewBean> allReservationViewBeans = new ArrayList<>();
-        for(ReservationDTO reservationDTO : reservationDTOs){
+        for (ReservationDTO reservationDTO : reservationDTOs) {
             ReservationViewBean reservation = new ReservationViewBean(reservationDTO);
             allReservationViewBeans.add(reservation);
         }
         ObservableList<ReservationViewBean> allReservations = FXCollections.observableArrayList(allReservationViewBeans);
-        Comparator<ReservationViewBean> comparator = Comparator.comparing(ReservationViewBean :: getReservationNumber);
+        Comparator<ReservationViewBean> comparator = Comparator.comparing(ReservationViewBean::getReservationNumber);
         comparator = comparator.reversed();
         allReservations.sort(comparator);
 
@@ -155,7 +158,7 @@ public class ReservationOverviewViewController implements Initializable {
         stateCol.setStyle("-fx-alignment: CENTER");
         roomNrCol.setCellValueFactory(new PropertyValueFactory<ReservationViewBean, ArrayList<Integer>>("roomNumbers"));
 
-        if(allReservations.size() == 0){
+        if (allReservations.size() == 0) {
             reservationTableView.setPlaceholder(new Label("No reservations"));
             reservationTableView.getItems().clear();
             hidePlaceholderTexts();
@@ -163,25 +166,48 @@ public class ReservationOverviewViewController implements Initializable {
             reservationTableView.setItems(allReservations);
         }
 
-        if(reservationTableView.getSelectionModel().getTableView().getColumns().get(0) != null){
+        if (reservationTableView.getSelectionModel().getTableView().getColumns().get(0) != null) {
             reservationTableView.getSelectionModel().select(0); //per default erstes Item auswählen
             ReservationViewBean reservationViewBean = (ReservationViewBean) reservationTableView.getSelectionModel().getSelectedItem();
-            if(reservationViewBean != null){
+            if (reservationViewBean != null) {
                 setTexts(reservationViewBean.getReservationDTO());
             }
         }
 
         reservationTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if(reservationTableView.getSelectionModel().getSelectedItem() != null){
+            if (reservationTableView.getSelectionModel().getSelectedItem() != null) {
                 ReservationViewBean selectedItem = (ReservationViewBean) reservationTableView.getSelectionModel().getSelectedItem();
                 ReservationDTO reservationDTO = selectedItem.getReservationDTO();
                 setTexts(reservationDTO);
+
+                //disable check-in button if booking is not confirmed
+                Period period = Period.between(reservationDTO.getCreationTimestamp().toLocalDate(), reservationDTO.getArrivalDate());
+                int daysDiff = Math.abs(period.getDays());
+                if (daysDiff > 3) {
+                    if (reservationDTO.getBooking() == null) {
+                        checkInButton.setDisable(true); //disable
+                    } else if (reservationDTO.getBooking().getCheckInDatetime() != null) {
+                        checkInButton.setDisable(true); //disable
+                    } else {
+                        checkInButton.setDisable(false); //enable
+                    }
+                } else {
+                    if(reservationDTO.getBooking() != null){
+                        if(reservationDTO.getBooking().getCheckInDatetime() != null) {
+                            checkInButton.setDisable(true);
+                        } else {
+                            checkInButton.setDisable(false); //enable
+                        }
+                    } else {
+                        checkInButton.setDisable(false);
+                    }
+                }
             }
         });
 
     }
 
-    private void setTexts(ReservationDTO reservationDTO){
+    private void setTexts(ReservationDTO reservationDTO) {
         CustomerDTO customerDTO = reservationDTO.getCustomer();
         AddressDTO addressDTO = customerDTO.getAddress();
         phReservationNumberText.setText(String.valueOf(reservationDTO.getNumber()));
@@ -194,7 +220,7 @@ public class ReservationOverviewViewController implements Initializable {
         String formattedDepartureDate = departureDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         departureDateText.setText(formattedDepartureDate);
 
-        if(reservationDTO.getBooking() == null){
+        if (reservationDTO.getBooking() == null) {
             phStateText.setText("not confirmed");
         } else {
             phStateText.setText("confirmed");
@@ -214,22 +240,22 @@ public class ReservationOverviewViewController implements Initializable {
     }
 
     @FXML
-    public void onFromDateDatePickerClicked(ActionEvent actionEvent){
-        if(toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null){
+    public void onFromDateDatePickerClicked(ActionEvent actionEvent) {
+        if (toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null) {
             fillTable("all between");
         }
     }
 
     @FXML
     public void onToDateDatePickerClicked(ActionEvent actionEvent) {
-        if(toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null){
+        if (toDateDatePicker.getValue() != null && fromDateDatePicker.getValue() != null) {
             fillTable("all between");
         }
     }
 
     @FXML
     public void stateComboBoxAction(ActionEvent actionEvent) {
-        if(stateComboBox.getValue().equals("all between")){
+        if (stateComboBox.getValue().equals("all between")) {
             fromDateDatePicker.setDisable(false);
             toDateDatePicker.setDisable(false);
         } else {
@@ -244,20 +270,20 @@ public class ReservationOverviewViewController implements Initializable {
         ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservations();
         //filter not confirmed reservations
         ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
-        for(ReservationDTO reservationDTO : allReservationDTOs){
-            if(reservationDTO.getBooking() == null){
+        for (ReservationDTO reservationDTO : allReservationDTOs) {
+            if (reservationDTO.getBooking() == null) {
                 notConfirmedReservations.add(reservationDTO);
             }
         }
 
-        for(ReservationDTO reservation : notConfirmedReservations) {
+        for (ReservationDTO reservation : notConfirmedReservations) {
             Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
-            if(daysDiff > 3){ //3 tage vor geplantem check-in ist keine anzahlung notwendi
+            if (daysDiff > 3) { //3 tage vor geplantem check-in ist keine anzahlung notwendi
                 //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
                 period = Period.between(LocalDate.now(), reservation.getArrivalDate());
                 daysDiff = Math.abs(period.getDays());
-                if(daysDiff < 3){
+                if (daysDiff < 3) {
                     System.out.println("at delete reservation");
                     DomainController.deleteReservation(reservation);
                     fillTable(currentState);
@@ -268,50 +294,18 @@ public class ReservationOverviewViewController implements Initializable {
         DepositService depositService = new DepositService();
         try {
             ArrayList<Long> reservationNumbers = depositService.parseData(depositService.convertData());
-            for (Long l: reservationNumbers){
+            for (Long l : reservationNumbers) {
 
                 ReservationDTO reservation;
-                try{
+                try {
                     reservation = DomainController.getReservation(l);
-                    if(reservation.getBooking() == null) {
-                        BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
-                                reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
-                                reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
-                                reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
-
-
-
-                        ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
-
-                        for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservation.getReservedRoomCategories()) {
-                            BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
-                            bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
-                            bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
-                            bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
-                            bookedRoomCategoryDTO.setBooking(bookingDTO);
-                            bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
-                        }
-
-
-                        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
-
-                        for (ReservedRoomDTO reservedRoomDTO : reservation.getReservedRooms()) {
-                            BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
-                            bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
-                            bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
-                            bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
-                            bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
-                            bookedRoomDTO.setBooking(bookingDTO);
-                            bookedRoomDTOS.add(bookedRoomDTO);
-                        }
-                        bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
-                        bookingDTO.setBookedRooms(bookedRoomDTOS);
+                    if (reservation.getBooking() == null) {
+                        BookingDTO bookingDTO = createBookingDTO(reservation);
                         reservation.setBooking(bookingDTO);
-
                         DomainController.saveReservation(reservation);
                         DomainController.saveBooking(bookingDTO);
                     }
-                } catch (NoSuchElementException e){
+                } catch (NoSuchElementException e) {
                     System.out.println("There is no resevation with the number: " + l.toString());
                 }
                 fillTable(currentState);
@@ -321,7 +315,7 @@ public class ReservationOverviewViewController implements Initializable {
         }
     }
 
-    private void hidePlaceholderTexts(){
+    private void hidePlaceholderTexts() {
         phReservationNumberText.setText("");
         phStateText.setText("");
         phRoomsText.setText("");
@@ -334,5 +328,66 @@ public class ReservationOverviewViewController implements Initializable {
         phCountryText.setText("");
         phPhoneNrText.setText("");
         phPaymentMethodText.setText("");
+    }
+
+    private BookingDTO createBookingDTO(ReservationDTO reservationDTO){
+        BookingDTO bookingDTO = new BookingDTO(null, reservationDTO, reservationDTO.getCustomer(), reservationDTO.getArrivalDate(), null,
+                reservationDTO.getDepartureDate(), null, reservationDTO.getBillingAddress(), reservationDTO.getPaymentMethod(),
+                reservationDTO.getCreditCardNumber(), reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), reservationDTO.getBoard(),
+                reservationDTO.getPricePerNightForBoard(), reservationDTO.getComment(), reservationDTO.getAmountGuests(), null, null);
+
+
+        ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
+
+        for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservationDTO.getReservedRoomCategories()) {
+            BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
+            bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
+            bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
+            bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
+            bookedRoomCategoryDTO.setBooking(bookingDTO);
+            bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+        }
+
+
+        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+
+        for (ReservedRoomDTO reservedRoomDTO : reservationDTO.getReservedRooms()) {
+            BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
+            bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
+            bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
+            bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
+            bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
+            bookedRoomDTO.setBooking(bookingDTO);
+            bookedRoomDTOS.add(bookedRoomDTO);
+        }
+
+        bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
+        bookingDTO.setBookedRooms(bookedRoomDTOS);
+
+        return bookingDTO;
+    }
+
+    @FXML
+    private void onCheckInClicked(ActionEvent actionEvent) throws IOException {
+        CheckInViewController checkInViewController = new CheckInViewController();
+        ReservationViewBean selectedItem = (ReservationViewBean) reservationTableView.getSelectionModel().getSelectedItem();
+        if(selectedItem != null){
+            ReservationDTO reservationDTO = selectedItem.getReservationDTO();
+            if(reservationDTO.getBooking() == null){
+                BookingDTO bookingDTO = createBookingDTO(reservationDTO);
+                reservationDTO.setBooking(bookingDTO);
+                try{
+                    DomainController.saveReservation(reservationDTO);
+                    DomainController.saveBooking(bookingDTO);
+                } catch(ReservationIsInvalidException | BookingIsInvalidException e){
+                    e.printStackTrace();
+                }
+            }
+
+            checkInViewController.getUseCaseController().setBooking(reservationDTO.getBooking());
+            checkInViewController.getUseCaseController().setCustomer(reservationDTO.getCustomer());
+            checkInViewController.setIsCheckIn(true);
+            checkInViewController.loadCheckIn1();
+        }
     }
 }

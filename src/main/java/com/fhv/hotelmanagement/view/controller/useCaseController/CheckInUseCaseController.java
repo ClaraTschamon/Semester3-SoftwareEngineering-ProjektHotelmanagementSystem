@@ -13,12 +13,10 @@ import java.util.ArrayList;
 
 public class CheckInUseCaseController {
     BookingDTO booking;
-
     CustomerDTO customer;
     String roomPrice;
     boolean billingAddressEqualsCustomerAddress;
     ArrayList<CustomerDTO> customers;
-    ReservationDTO reservation;
 
     public CheckInUseCaseController() throws IOException {
         booking = new BookingDTO();
@@ -75,14 +73,6 @@ public class CheckInUseCaseController {
 
     public void setBillingAddressEqualsCustomerAddress(boolean billingAddressEqualsCustomerAddress) {
         this.billingAddressEqualsCustomerAddress = billingAddressEqualsCustomerAddress;
-    }
-
-    public ReservationDTO getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(ReservationDTO reservation) {
-        this.reservation = reservation;
     }
 
     public void setBooking(BookingDTO booking) {

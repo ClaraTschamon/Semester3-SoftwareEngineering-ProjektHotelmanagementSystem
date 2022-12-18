@@ -98,7 +98,11 @@ public class CheckInViewController {
         }
     }
 
-    public boolean isCheckIn() {
+    public boolean getIsCheckIn() {
         return isCheckIn;
+    }
+
+    public void setIsCheckIn(boolean checkIn) {
+        isCheckIn = checkIn;
     }
 }
