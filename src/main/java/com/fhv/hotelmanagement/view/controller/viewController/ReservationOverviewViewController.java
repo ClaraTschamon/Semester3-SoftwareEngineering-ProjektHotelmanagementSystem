@@ -271,49 +271,51 @@ public class ReservationOverviewViewController implements Initializable {
             for (Long l: reservationNumbers){
 
                 ReservationDTO reservation;
-                reservation = DomainController.getReservation(l);
-                if(reservation.getBooking() != null){
-                    BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
-                            reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
-                            reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
-                            reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
-                    reservation.setBooking(bookingDTO);
+                try{
+                    reservation = DomainController.getReservation(l);
+                    if(reservation.getBooking() != null) {
+                        BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
+                                reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
+                                reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
+                                reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
+                        reservation.setBooking(bookingDTO);
 
 
-                    ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
+                        ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
 
-                    for (ReservedRoomCategoryDTO reservedRoomCategoryDTO: reservation.getReservedRoomCategories()) {
-                        BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
-                        bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
-                        bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
-                        bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
-                        bookedRoomCategoryDTO.setBooking(bookingDTO);
-                        bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+                        for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservation.getReservedRoomCategories()) {
+                            BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
+                            bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
+                            bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
+                            bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
+                            bookedRoomCategoryDTO.setBooking(bookingDTO);
+                            bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+                        }
+
+                        ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+
+                        for (ReservedRoomDTO reservedRoomDTO : reservation.getReservedRooms()) {
+                            BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
+                            bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
+                            bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
+                            bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
+                            bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
+                            bookedRoomDTO.setBooking(bookingDTO);
+                            bookedRoomDTOS.add(bookedRoomDTO);
+                        }
+                        bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
+                        bookingDTO.setBookedRooms(bookedRoomDTOS);
+
+                        DomainController.saveReservation(reservation);
+                        DomainController.saveBooking(bookingDTO);
+                        fillTable(currentState);
                     }
-
-                    ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
-
-                    for (ReservedRoomDTO reservedRoomDTO: reservation.getReservedRooms()) {
-                        BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
-                        bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
-                        bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
-                        bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
-                        bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
-                        bookedRoomDTO.setBooking(bookingDTO);
-                        bookedRoomDTOS.add(bookedRoomDTO);
-                    }
-                    bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
-                    bookingDTO.setBookedRooms(bookedRoomDTOS);
-
-                    DomainController.saveReservation(reservation);
-                    DomainController.saveBooking(bookingDTO);
-                    fillTable(currentState);
+                } catch (NoSuchElementException e){
+                    System.out.println("There is no resevation with the number: " + l.toString());
                 }
             }
-        } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e){
+        } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();
-        } catch (NoSuchElementException e){
-            System.out.println("There is a wrong reservation number in the deposit document");
         }
     }
 
