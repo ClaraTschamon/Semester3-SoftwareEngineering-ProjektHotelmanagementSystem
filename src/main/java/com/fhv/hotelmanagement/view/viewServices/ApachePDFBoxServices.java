@@ -1,10 +1,7 @@
 package com.fhv.hotelmanagement.view.viewServices;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.controller.viewController.CheckOutViewController;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -17,7 +14,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -91,6 +90,22 @@ public class ApachePDFBoxServices {
 //                for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
 //                    rooms.append(bookedRoomDTO.getRoom().getNumber()).append(",");
 //                }
+
+                ReservationDTO reservation = bookingDTO.getReservation();
+                BigDecimal depositValue = new BigDecimal(0);
+                BigDecimal DEPOSITCUT = new BigDecimal("0.15");
+
+                if(reservation != null){
+                    LocalDate creationTimestamp = reservation.getCreationTimestamp().toLocalDate();
+                    Period period = Period.between(creationTimestamp, reservation.getArrivalDate());
+                    int daysDiff = Math.abs(period.getDays());
+
+                    //Verneinen sobald man es testen kann
+                    if(!(daysDiff<=3)){
+                        depositValue = totalSumGross.multiply(DEPOSITCUT);
+                        totalSumGross=totalSumGross.subtract(depositValue);
+                    }
+                }
 
                 //line in the pdf file
                 String spaceIng = " ";
@@ -278,8 +293,12 @@ public class ApachePDFBoxServices {
                 cont.showText(line21);
                 cont.newLine();
 
-                String line22 = dynamicStringDistance(40, 0) + "Tourist Tax:" + dynamicStringDistance(25, 12) + touristTax.setScale(2);
+                String line22 = dynamicStringDistance(40, 0) + "+Tourist Tax:" + dynamicStringDistance(25, 13) + touristTax.setScale(2);
                 cont.showText(line22);
+                cont.newLine();
+
+                String lineDeposit = dynamicStringDistance(40, 0) + "- Deposit:" + dynamicStringDistance(25, 10) + depositValue.setScale(2);
+                cont.showText(lineDeposit);
                 cont.newLine();
 
                 String spacing4 = dynamicStringDistance(40, 0) + "-----------------------------------";
