@@ -2,11 +2,9 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
+import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
-import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
 import com.fhv.hotelmanagement.view.viewServices.DepositService;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
@@ -277,18 +275,48 @@ public class ReservationOverviewViewController implements Initializable {
             for (Long l: reservationNumbers){
                 System.out.println(l);
                 ReservationDTO reservation = DomainController.getReservation(l);
-                //TODO bookedRoomCategories und bookedRooms nicht mehr null setzen
-                BookingDTO bookingDTO = new BookingDTO(reservation.getNumber(), reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
+
+                BookingDTO bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
                         reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
                         reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
                         reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
                 reservation.setBooking(bookingDTO);
+
+                ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
+
+                for (ReservedRoomCategoryDTO reservedRoomCategoryDTO: reservation.getReservedRoomCategories()) {
+                    BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
+                    bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
+                    bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
+                    bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
+                    bookedRoomCategoryDTO.setBooking(bookingDTO);
+                    bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+                }
+
+                ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+
+                for (ReservedRoomDTO reservedRoomDTO: reservation.getReservedRooms()) {
+                    BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
+                    bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
+                    bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
+                    bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
+                    bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
+                    bookedRoomDTO.setBooking(bookingDTO);
+                    bookedRoomDTOS.add(bookedRoomDTO);
+                }
                 System.out.println(reservation.getCustomer().getFirstName());
+                bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
+                bookingDTO.setBookedRooms(bookedRoomDTOS);
+
+                phStateText.setText("confirmed");
                 DomainController.saveReservation(reservation);
+                DomainController.saveBooking(bookingDTO);
             }
         } catch (IOException e){
             e.printStackTrace();
         } catch (ReservationIsInvalidException e) {
+            e.printStackTrace();
+        } catch (BookingIsInvalidException e) {
             e.printStackTrace();
         }
     }
