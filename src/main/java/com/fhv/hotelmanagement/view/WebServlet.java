@@ -156,7 +156,7 @@ public class WebServlet extends HttpServlet {
         customerDTO.setFirstName(firstName);
         customerDTO.setLastName(lastName);
         customerDTO.setDateOfBirth(dateOfBirth);
-        customerDTO.setNationality("Austria"); //TODO
+        customerDTO.setNationality(nationality); //TODO
         customerDTO.setPhoneNumber(phoneNumber);
         customerDTO.setEmail(email);
         customerDTO.setAddress(customerAddressDTO);

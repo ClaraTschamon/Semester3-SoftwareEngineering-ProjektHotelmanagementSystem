@@ -6,7 +6,7 @@ import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.view.controller.useCaseController.BookingOverviewUseCaseController;
+import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -80,10 +80,6 @@ public class BookingOverviewViewController implements Initializable {
     public Button checkOutButton;
     @FXML
     public Button checkInButton;
-    private BookingOverviewUseCaseController useCaseController;
-    public BookingOverviewViewController(){
-        useCaseController = new BookingOverviewUseCaseController();
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -175,16 +171,16 @@ public class BookingOverviewViewController implements Initializable {
 
                 //disable check-out button if state of booking is checked-out
                 if(bookingDTO.getCheckOutDatetime() == null){
-                    checkOutButton.setDisable(false);
+                    checkOutButton.setDisable(false); //enable
                 }else{
                     checkOutButton.setDisable(true);
                 }
 
                 //disable check-in button if booking is already checked-in
                 if(bookingDTO.getCheckInDatetime() == null){
-                    checkInButton.setDisable(false);
+                    checkInButton.setDisable(false); //enable
                 }else{
-                    checkInButton.setDisable(true);
+                    checkInButton.setDisable(true); //disable
                 }
             }
         });
@@ -263,6 +259,20 @@ public class BookingOverviewViewController implements Initializable {
      * Wenn check-out geklickt wird, wird die ausgewählte buchung an den checkOutUseCaseController
      * weiter gegeben. Dann wird der CheckOut geladen.
      */
+
+    @FXML
+    private void onCheckInClicked(ActionEvent actionEvent) throws IOException {
+        CheckInViewController checkInViewController = new CheckInViewController();
+        BookingViewBean selectedItem = (BookingViewBean) bookingTableView.getSelectionModel().getSelectedItem();
+        if(selectedItem != null){
+            BookingDTO bookingDTO = selectedItem.getBookingDTO();
+            checkInViewController.getUseCaseController().setBooking(bookingDTO);
+            checkInViewController.getUseCaseController().setCustomer(bookingDTO.getCustomer());
+            checkInViewController.setIsCheckIn(true);
+            checkInViewController.loadCheckIn1();
+        }
+    }
+
     @FXML
     public void onCheckedOutClicked(ActionEvent actionEvent) throws IOException {
         CheckOutViewController checkOutViewController = new CheckOutViewController();
@@ -288,4 +298,5 @@ public class BookingOverviewViewController implements Initializable {
         phPhoneNrText.setText("");
         phPaymentMethodText.setText("");
     }
+
 }

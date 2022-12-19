@@ -178,11 +178,9 @@ public class CheckOut2ViewController {
             if(!(daysDiff<=3)){
                 depositValue = totalSumGross.multiply(DEPOSITCUT);
                 phDepositText.setText(depositValue.setScale(2)+"€");
-                totalSumGross.subtract(depositValue);
+                totalSumGross= totalSumGross.subtract(depositValue);
             }
         }
-        System.out.println(reservation);
-        System.out.println(viewController.getUseCaseController().getBooking().getNumber());
         phTotalSumGrossText.setText(totalSumGross.setScale(2) + "€");
     }
 }

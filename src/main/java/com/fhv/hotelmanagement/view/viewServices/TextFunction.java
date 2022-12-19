@@ -1,5 +1,5 @@
 //Hotelmanagementsystem TeamA 2022/23
-package com.fhv.hotelmanagement.services;
+package com.fhv.hotelmanagement.view.viewServices;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
@@ -12,7 +12,7 @@ public class TextFunction {
     }
 
     public static void setRequieredTextField(TextField textField) {
-        textField.setPromptText("Pflichtfeld");
+        textField.setPromptText("Required Field");
         textField.setStyle("-fx-prompt-text-fill: red");
     }
 

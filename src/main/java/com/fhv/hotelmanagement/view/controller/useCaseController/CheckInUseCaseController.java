@@ -11,14 +11,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class WalkInUseCaseController {
+public class CheckInUseCaseController {
     BookingDTO booking;
     CustomerDTO customer;
     String roomPrice;
     boolean billingAddressEqualsCustomerAddress;
     ArrayList<CustomerDTO> customers;
 
-    public WalkInUseCaseController() throws IOException {
+    public CheckInUseCaseController() throws IOException {
         booking = new BookingDTO();
         customer = new CustomerDTO();
         booking.setCustomer(customer);
@@ -73,5 +73,9 @@ public class WalkInUseCaseController {
 
     public void setBillingAddressEqualsCustomerAddress(boolean billingAddressEqualsCustomerAddress) {
         this.billingAddressEqualsCustomerAddress = billingAddressEqualsCustomerAddress;
+    }
+
+    public void setBooking(BookingDTO booking) {
+        this.booking = booking;
     }
 }

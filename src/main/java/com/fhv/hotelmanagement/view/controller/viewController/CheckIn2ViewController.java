@@ -3,7 +3,7 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.services.StringValidator;
-import com.fhv.hotelmanagement.services.TextFunction;
+import com.fhv.hotelmanagement.view.viewServices.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
 
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
@@ -24,7 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class WalkIn2ViewController implements Initializable {
+public class CheckIn2ViewController implements Initializable {
 
     @FXML
     private AnchorPane contentPane;
@@ -56,10 +56,10 @@ public class WalkIn2ViewController implements Initializable {
     private TextField searchDatabaseTextField;
     private ListView<CustomerDTO> searchedCustomersListView;
     private boolean searching;
-    private WalkInViewController viewController;
+    private CheckInViewController viewController;
 
 
-    public void setController(WalkInViewController viewController) {
+    public void setController(CheckInViewController viewController) {
         this.viewController = viewController;
     }
 
@@ -81,7 +81,7 @@ public class WalkIn2ViewController implements Initializable {
 
         customer.setDateOfBirth(birthdayDatePicker.getValue());
         try {
-            viewController.loadWalkIn3();
+            viewController.loadCheckIn3();
         } catch (IOException e) {
             System.out.println("Error loading walk in 3: " + e.getMessage());
             MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
@@ -145,7 +145,7 @@ public class WalkIn2ViewController implements Initializable {
     private void onBackButtonClicked(ActionEvent e) {
         try {
             saveData();
-            viewController.loadWalkIn1();
+            viewController.loadCheckIn1();
         } catch (IOException exc) {
             System.out.println("Error clicking back button: " + exc.getMessage());
             MainApplication.getMainController().alert("Error loading next page, please try again.", WarningType.WARNING);
@@ -157,7 +157,7 @@ public class WalkIn2ViewController implements Initializable {
         try {
             if (validate()) {
                 saveData();
-                viewController.loadWalkIn3();
+                viewController.loadCheckIn3();
             }
         } catch (IOException exc) {
             System.out.println("Error clicking next button: " + exc.getMessage());
@@ -290,6 +290,8 @@ public class WalkIn2ViewController implements Initializable {
             TextFunction.setEventHandler(streetTextField);
         }
 
+        birthdayDatePicker.setValue(birthdayDatePicker.getConverter()
+                .fromString(birthdayDatePicker.getEditor().getText())); //Update date if entered manually
         LocalDate dateOfBirth = birthdayDatePicker.getValue();
 
         if (StringValidator.calculateAge(dateOfBirth) >= 16) {
@@ -448,5 +450,10 @@ public class WalkIn2ViewController implements Initializable {
             searching = false;
             contentPane.getChildren().remove(searchedCustomersListView);
         }
+    }
+
+    @FXML
+    private void birthdayDatePickerOnAction(ActionEvent actionEvent) {
+        birthdayDatePicker.setStyle("-fx-text-inner-color: black");
     }
 }

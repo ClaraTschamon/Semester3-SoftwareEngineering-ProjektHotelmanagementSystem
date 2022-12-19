@@ -233,7 +233,7 @@
                         <TableColumn fx:id="roomNrCol" prefWidth="143.42852783203125"/>
                     </columns>
                 </TableView>
-                <Button layoutX="412.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0"
+                <Button fx:id="checkInButton" onAction="#onCheckInClicked" layoutX="412.0" layoutY="600.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0"
                         styleClass="nextButton" stylesheets="@css.css" text="Check-In" textFill="WHITE">
                     <font>
                         <Font size="14.0"/>

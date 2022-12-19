@@ -27,7 +27,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-public class WalkIn1ViewController implements Initializable {
+public class CheckIn1ViewController implements Initializable {
 
     @FXML
     private TextField searchDatabaseTextField;
@@ -67,12 +67,12 @@ public class WalkIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
     private CheckComboBox<RoomDTO> suiteDropDown;
-    private WalkInViewController viewController;
+    private CheckInViewController viewController;
     private RoomProvider roomProvider;
     private ListView<CustomerDTO> searchedCustomersListView;
     private boolean searching;
 
-    public void setController(WalkInViewController viewController) {
+    public void setController(CheckInViewController viewController) {
         this.viewController = viewController;
     }
 
@@ -208,7 +208,7 @@ public class WalkIn1ViewController implements Initializable {
         try {
             if (validate()) {
                 saveData();
-                viewController.loadWalkIn2();
+                viewController.loadCheckIn2();
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -216,6 +216,11 @@ public class WalkIn1ViewController implements Initializable {
     }
 
     protected void fillData() {
+        if(viewController.getIsCheckIn()){
+            searchDatabaseTextField.setDisable(true);
+            roomPriceDropDown.setDisable(true);
+        }
+
         amountGuestsSpinner.setValueFactory(new SpinnerValueFactory<Integer>() {
             @Override
             public void decrement(int steps) {
@@ -294,7 +299,6 @@ public class WalkIn1ViewController implements Initializable {
         } else {
             amountGuestsSpinner.getValueFactory().setValue(1);
         }
-
         setCustomerInfo();
     }
 
