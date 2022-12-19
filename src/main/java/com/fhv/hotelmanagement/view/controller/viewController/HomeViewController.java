@@ -4,8 +4,10 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
+import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
+import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,10 +46,12 @@ public class HomeViewController implements Initializable {
     private TableColumn<BookingViewBean, String> nameColCheckOut;
     @FXML
     private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrColCheckOut;
-
-    public TableView checkInTodayTableView;
-    public TableColumn nameColCheckIn;
-    public TableColumn roomNrColCheckIn;
+    @FXML
+    private TableView<ReservationViewBean> checkInTodayTableView;
+    @FXML
+    private TableColumn<ReservationViewBean, String> nameColCheckIn;
+    @FXML
+    private TableColumn<ReservationViewBean, ArrayList<Integer>> roomNrColCheckIn;
     @FXML
     private NumberAxis yAxis;
     private static int totalSingleRooms;
@@ -132,7 +136,7 @@ public class HomeViewController implements Initializable {
         fillCheckInTodayTable();
     }
 
-    public void createBarChart() {
+    private void createBarChart() {
         ArrayList<RoomDTO> allRooms = DomainController.getAllRooms();
         //Count all Rooms
         if (totalSingleRooms == 0) {
@@ -202,8 +206,9 @@ public class HomeViewController implements Initializable {
         freeRoomsBarChart.setLegendSide(Side.RIGHT);
     }
 
-    public void fillCheckOutTodayTable() {
-        ArrayList<BookingDTO> allBookingDTOs = DomainController.getCurrentBookings(); //reicht das oder muss ich aus datenbank abfragen welche bookings heute ausgechecked werden?
+    private void fillCheckOutTodayTable() {
+        //ArrayList<BookingDTO> allBookingDTOs = DomainController.getCurrentBookings();
+        ArrayList<BookingDTO> allBookingDTOs = DomainController.getAllBookingsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<BookingViewBean> checkOutTodayBeans = new ArrayList<>();
 
         for (BookingDTO bookingDTO : allBookingDTOs) {
@@ -226,7 +231,25 @@ public class HomeViewController implements Initializable {
         }
     }
 
-    public void fillCheckInTodayTable() {
-        checkInTodayTableView.setPlaceholder(new Label("No check-ins today")); //wegen englisch video
+    private void fillCheckInTodayTable() {
+        ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservationsBetween(LocalDate.now(), LocalDate.now());
+        ArrayList<ReservationViewBean> checkInTodayBeans = new ArrayList<>();
+        for(ReservationDTO reservationDTO : allReservationDTOs){
+            if(reservationDTO.getArrivalDate().equals(LocalDate.now())){ //zur Sicherheit nochmal überprüfen
+                ReservationViewBean reservation = new ReservationViewBean(reservationDTO);
+                checkInTodayBeans.add(reservation);
+            }
+        }
+
+        ObservableList<ReservationViewBean> checkInTodayReservations = FXCollections.observableArrayList(checkInTodayBeans);
+        nameColCheckIn.setCellValueFactory(new PropertyValueFactory<ReservationViewBean, String>("lastName"));
+        roomNrColCheckIn.setCellValueFactory(new PropertyValueFactory<ReservationViewBean, ArrayList<Integer>>("roomNumbers"));
+
+        if(checkInTodayReservations.size() == 0){
+            checkInTodayTableView.setPlaceholder(new Label("No check-ins today"));
+            checkInTodayTableView.getItems().clear();
+        } else {
+            checkInTodayTableView.setItems(checkInTodayReservations);
+        }
     }
 }
