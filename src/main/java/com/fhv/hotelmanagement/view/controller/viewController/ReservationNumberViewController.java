@@ -95,7 +95,8 @@ public class ReservationNumberViewController {
         }
     }
 
-    public void onCancelButtonClicked(ActionEvent actionEvent) {
+    @FXML
+    private void onCancelButtonClicked(ActionEvent actionEvent) {
         try {
             viewController.cancel();
         } catch (IOException exc) {
