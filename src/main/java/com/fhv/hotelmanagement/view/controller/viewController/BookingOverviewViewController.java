@@ -284,6 +284,7 @@ public class BookingOverviewViewController implements Initializable {
         if(selectedItem != null){
             BookingDTO bookingDTO = selectedItem.getBookingDTO();
             checkOutViewController.getUseCaseController().setBooking(bookingDTO);
+            checkOutViewController.setIsFromBookingOverview(true);
             checkOutViewController.loadCheckOut1();
         }
     }
