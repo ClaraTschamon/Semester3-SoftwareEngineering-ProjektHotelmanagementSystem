@@ -14,7 +14,7 @@
             <children>
                 <AnchorPane prefHeight="40.0" prefWidth="960.0" style="-fx-background-color: #ebe9e9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Walk-In">
+                        <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check-In">
                             <font>
                                 <Font size="24.0" />
                             </font>

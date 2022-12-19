@@ -309,6 +309,10 @@ public class CheckIn2ViewController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        /*if(viewController.getIsCheckIn()){ //nullpointerException weil viewController null ist.
+            searchDatabaseTextField.setDisable(true);
+        }*/
+
         searching = false;
 
         ArrayList<String> items = new ArrayList<>();

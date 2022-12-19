@@ -29,7 +29,7 @@
                             </font>
                         </Text>
                         <Text fill="#888888" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Walk-In &gt; Create guest">
+                              text="Check-In &gt; Create guest">
                             <font>
                                 <Font size="24.0"/>
                             </font>

@@ -19,6 +19,7 @@ public class CheckInViewController {
     public CheckInViewController() throws IOException {
         useCaseController = new CheckInUseCaseController();
         searching = false;
+        isCheckIn = false;
         loadCheckIn1();
     }
 
