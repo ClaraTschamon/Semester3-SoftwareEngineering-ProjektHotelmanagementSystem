@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,14 +30,18 @@ public class WebServlet extends HttpServlet {
     private LocalDate arrivalDate = null;
     private LocalDate departureDate = null;
 
+    public void init(){
+        useCaseController = (ReservationUseCaseController) getServletContext().getAttribute("reservationUseCaseController");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         session = request.getSession();
         ServletContext application = getServletContext();
         String dispatchto = "";
         String page = "";
         RequestDispatcher dispatcher;
-
 
         if (request.getParameter("dispatchto") != null) {
             dispatchto = request.getParameter("dispatchto");
@@ -69,9 +74,9 @@ public class WebServlet extends HttpServlet {
             case "selectDates":
                 arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
                 departureDate = LocalDate.parse(request.getParameter("departureDate"));
-                if(useCaseController == null){
+                /*if(useCaseController == null){
                     useCaseController = new ReservationUseCaseController();
-                }
+                }*/
                 useCaseController.calculateMaxCountRooms(arrivalDate, departureDate);
                 int amountGuests = Integer.parseInt(request.getParameter("people-input"));
                 session.setAttribute("arrivalDate", arrivalDate);

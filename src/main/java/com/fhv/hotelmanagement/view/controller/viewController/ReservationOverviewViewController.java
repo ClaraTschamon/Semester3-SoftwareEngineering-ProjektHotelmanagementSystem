@@ -6,6 +6,7 @@ import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
+import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.viewServices.DepositService;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
@@ -51,6 +52,8 @@ public class ReservationOverviewViewController implements Initializable {
     private TableColumn<ReservationViewBean, Button> stateCol;
     @FXML
     private TableColumn<ReservationViewBean, ArrayList<Integer>> roomNrCol;
+    @FXML
+    public TableColumn<ReservationViewBean, Button> commentCol;
     @FXML
     private Text arrivalDateText;
     @FXML
@@ -157,6 +160,8 @@ public class ReservationOverviewViewController implements Initializable {
         stateCol.setCellValueFactory(new PropertyValueFactory<ReservationViewBean, Button>("imageButton"));
         stateCol.setStyle("-fx-alignment: CENTER");
         roomNrCol.setCellValueFactory(new PropertyValueFactory<ReservationViewBean, ArrayList<Integer>>("roomNumbers"));
+        commentCol.setCellValueFactory(new PropertyValueFactory<ReservationViewBean, Button>("commentButton"));
+        commentCol.setStyle("-fx-alignment: CENTER");
 
         if (allReservations.size() == 0) {
             reservationTableView.setPlaceholder(new Label("No reservations"));

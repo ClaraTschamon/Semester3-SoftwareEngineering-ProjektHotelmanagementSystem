@@ -117,7 +117,6 @@ public class ReservationUseCaseController implements EmailService {
                 freeRooms.add(roomDTO);
             }
         }
-
         return freeRooms;
     }
 

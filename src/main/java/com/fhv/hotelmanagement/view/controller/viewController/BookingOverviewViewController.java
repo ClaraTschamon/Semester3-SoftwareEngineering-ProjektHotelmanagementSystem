@@ -51,6 +51,8 @@ public class BookingOverviewViewController implements Initializable {
     @FXML
     private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrCol;
     @FXML
+    private TableColumn<BookingViewBean, Button> commentCol;
+    @FXML
     private Text arrivalDateText;
     @FXML
     private Text departureDateText;
@@ -146,6 +148,8 @@ public class BookingOverviewViewController implements Initializable {
         stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("imageButton"));
         stateCol.setStyle("-fx-alignment: CENTER");
         roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
+        commentCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("commentButton"));
+        commentCol.setStyle("-fx-alignment: CENTER");
 
         if(allBookings.size() == 0){
             bookingTableView.setPlaceholder(new Label("No bookings"));
