@@ -59,6 +59,9 @@ public class HomeViewController implements Initializable {
     private static int totalFamilyRooms;
     private static int totalSuites;
 
+    ArrayList<ReservationViewBean> checkInTodayBeans;
+    ArrayList<BookingViewBean> checkOutTodayBeans;
+
     private ImageView anhandReservierungImageView = new ImageView("com/fhv/hotelmanagement/fxml/Bilder/AnhandvonReservierungKlein.png");
     private ImageView walkInImageView = new ImageView("com/fhv/hotelmanagement/fxml/Bilder/Walk-In.png");
 
@@ -80,7 +83,6 @@ public class HomeViewController implements Initializable {
         choice.setLayoutX(100);
         choice.setLayoutY(100);
         choice.setStyle("-fx-background-color: #eeeeee; -fx-pref-height:450px; -fx-pref-width: 750px;");
-
 
         Button walkInButton = new Button("Walk-In Guest", walkInImageView);
         Button anhandReservierungButton = new Button("Based on reservations", anhandReservierungImageView);
@@ -131,9 +133,9 @@ public class HomeViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        checkInTodayBeans = fillCheckInTodayTable();
+        checkOutTodayBeans = fillCheckOutTodayTable();
         createBarChart();
-        fillCheckOutTodayTable();
-        fillCheckInTodayTable();
     }
 
     private void createBarChart() {
@@ -156,6 +158,7 @@ public class HomeViewController implements Initializable {
 
         //count all occupied Rooms
         ArrayList<BookingDTO> allCurrentBookingDTOs = DomainController.getCurrentBookings();
+
         int occupiedSingleRooms = 0;
         int occupiedDoubleRooms = 0;
         int occupiedFamilyRooms = 0;
@@ -180,6 +183,10 @@ public class HomeViewController implements Initializable {
                 }
             }
         }
+
+        //TODO: hier die checkOutTodays wegrechnen und die checkInToday dazu rechnen mit hilfe der checkOutTodayBeans und checkInTodayBeans
+
+
 
         XYChart.Series<String, Integer> totalRoomsSeries = new XYChart.Series();
         totalRoomsSeries.setName("total");
@@ -206,7 +213,7 @@ public class HomeViewController implements Initializable {
         freeRoomsBarChart.setLegendSide(Side.RIGHT);
     }
 
-    private void fillCheckOutTodayTable() {
+    private ArrayList<BookingViewBean> fillCheckOutTodayTable() {
         //ArrayList<BookingDTO> allBookingDTOs = DomainController.getCurrentBookings();
         ArrayList<BookingDTO> allBookingDTOs = DomainController.getAllBookingsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<BookingViewBean> checkOutTodayBeans = new ArrayList<>();
@@ -229,9 +236,11 @@ public class HomeViewController implements Initializable {
         } else {
             checkOutTodayTableView.setItems(checkOutTodayBookings);
         }
+
+        return checkOutTodayBeans;
     }
 
-    private void fillCheckInTodayTable() {
+    private ArrayList<ReservationViewBean> fillCheckInTodayTable() {
         ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservationsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<ReservationViewBean> checkInTodayBeans = new ArrayList<>();
         for(ReservationDTO reservationDTO : allReservationDTOs){
@@ -251,5 +260,6 @@ public class HomeViewController implements Initializable {
         } else {
             checkInTodayTableView.setItems(checkInTodayReservations);
         }
+        return checkInTodayBeans;
     }
 }
