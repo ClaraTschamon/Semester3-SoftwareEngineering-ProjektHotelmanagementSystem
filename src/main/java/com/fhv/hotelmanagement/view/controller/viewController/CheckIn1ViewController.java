@@ -1,8 +1,11 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.MainController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
+import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -631,11 +634,16 @@ public class CheckIn1ViewController implements Initializable {
         ReservationDTO selectedReservation = searchedReservationsListView.getSelectionModel().getSelectedItem();
         if(selectedReservation != null){
             searching = false;
-            viewController.getUseCaseController().setReservation(selectedReservation); //da passiert setBooking und setCustomer
-            setCustomerInfo();
-            contentPane.getChildren().remove(searchedCustomersListView);
-            departureDatePicker.requestFocus();
-            fillData();//neu
+            if(selectedReservation.getBooking() != null && selectedReservation.getBooking().getCheckInDatetime() != null){
+                MainApplication.getMainController().alert("This reservation is already checked-in", WarningType.ERROR);
+                searchReservationTextField.clear();
+            } else {
+                viewController.getUseCaseController().setReservation(selectedReservation); //da passiert setBooking und setCustomer
+                setCustomerInfo();
+                contentPane.getChildren().remove(searchedCustomersListView);
+                departureDatePicker.requestFocus();
+                fillData();
+            }
         }
     }
 
