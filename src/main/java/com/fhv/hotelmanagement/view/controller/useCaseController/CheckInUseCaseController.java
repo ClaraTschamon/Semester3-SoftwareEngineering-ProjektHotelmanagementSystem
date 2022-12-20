@@ -30,7 +30,7 @@ public class CheckInUseCaseController {
         //customer.setSaved(true);
         billingAddressEqualsCustomerAddress = true;
         customers = DomainController.getSavedCustomers();
-        reservations = DomainController.getAllReservationsBetween(LocalDate.now().minusDays(1), LocalDate.now().plusDays(1));
+        reservations = DomainController.getAllReservationsBetween(LocalDate.now().minusDays(1), LocalDate.now().plusDays(3));
     }
 
     public BookingDTO getBooking() {

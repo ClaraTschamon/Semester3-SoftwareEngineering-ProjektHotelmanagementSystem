@@ -19,6 +19,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.CheckModel;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -69,18 +70,18 @@ public class CheckIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
     private CheckComboBox<RoomDTO> suiteDropDown;
-    private CheckInViewController viewController;
+
+    public static CheckInViewController viewController; //für kommunikation mit RoomProvider
     private RoomProvider roomProvider;
     private ListView<CustomerDTO> searchedCustomersListView;
     private ListView<ReservationDTO> searchedReservationsListView;
     private boolean searching;
 
     public void setController(CheckInViewController viewController) {
-        this.viewController = viewController;
+        CheckIn1ViewController.viewController = viewController;
     }
 
     private boolean validate() {
-
         boolean departureDateIsValid = false;
         boolean counterRoomIsValid = false;
         boolean counterSingleRoomIsValid = false;
@@ -216,6 +217,9 @@ public class CheckIn1ViewController implements Initializable {
             searchDatabaseTextField.setDisable(true);
             searchDatabaseTextField.setVisible(false);
             roomPriceDropDown.setDisable(true);
+
+            roomProvider = new RoomProvider();
+
         } else {
             searchReservationTextField.setDisable(true);
             searchReservationTextField.setVisible(false);
@@ -267,6 +271,7 @@ public class CheckIn1ViewController implements Initializable {
                 }
             }
         }
+
         counterSingleRoom.setText(String.valueOf(amountBookedSingleRooms));
         counterDoubleRoom.setText(String.valueOf(amountBookedDoubleRooms));
         counterFamilyRoom.setText(String.valueOf(amountBookedFamilyRooms));
@@ -700,7 +705,6 @@ class RoomProvider {
     public void refreshFreeRooms(LocalDate maxDate) {
         freeRooms = DomainController.getAllRooms();
         ArrayList<RoomDTO> bookedRooms = new ArrayList<>();
-        ArrayList<RoomDTO> reservedRooms = new ArrayList<>();
         LocalDate today = LocalDate.now();
 
         for (BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(today, maxDate)) {
@@ -717,26 +721,32 @@ class RoomProvider {
             }
         }
 
-        for (ReservedRoomDTO reservedRoom : DomainController.getReservedRoomsBetween(today, maxDate)) {
-            LocalDate toDate = reservedRoom.getToDate();
-            LocalDate fromDate = reservedRoom.getFromDate();
-            RoomDTO room = reservedRoom.getRoom();
-            if (
-                    !(toDate.isEqual(today) || toDate.isBefore(today)) &&
-                            !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
-            ) {
-                if (!reservedRooms.contains(room)) {
-                    reservedRooms.add(room);
-                }
-            }
-        }
-
         for (RoomDTO room : bookedRooms) {
             freeRooms.remove(room);
         }
 
-        for (RoomDTO room : reservedRooms) {
-            freeRooms.remove(room);
+        if(!(CheckIn1ViewController.viewController == null) && (!CheckIn1ViewController.viewController.getIsCheckIn())) {
+            System.out.println(CheckIn1ViewController.viewController.getIsCheckIn());
+            ArrayList<RoomDTO> reservedRooms = new ArrayList<>();
+
+            //wenn es kein check-in ist müssen die räume berücksichtigt werden
+            for (ReservedRoomDTO reservedRoom : DomainController.getReservedRoomsBetween(today, maxDate)) {
+                LocalDate toDate = reservedRoom.getToDate();
+                LocalDate fromDate = reservedRoom.getFromDate();
+                RoomDTO room = reservedRoom.getRoom();
+                if (
+                        !(toDate.isEqual(today) || toDate.isBefore(today)) &&
+                                !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
+                ) {
+                    if (!reservedRooms.contains(room)) {
+                        reservedRooms.add(room);
+                    }
+                }
+            }
+
+            for (RoomDTO room : reservedRooms) {
+                freeRooms.remove(room);
+            }
         }
     }
 }
