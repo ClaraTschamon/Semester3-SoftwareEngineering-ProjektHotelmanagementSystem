@@ -51,6 +51,12 @@
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                     </opaqueInsets>
                 </TextField>
+                <TextField fx:id="searchReservationTextField" layoutX="60.0" layoutY="73.0" prefHeight="40.0"
+                           prefWidth="300.0" promptText="Search for name or reservationnumber...">
+                    <opaqueInsets>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
+                    </opaqueInsets>
+                </TextField>
                 <Text layoutX="60.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrival/Departure"
                       wrappingWidth="234.994140625">
                     <font>

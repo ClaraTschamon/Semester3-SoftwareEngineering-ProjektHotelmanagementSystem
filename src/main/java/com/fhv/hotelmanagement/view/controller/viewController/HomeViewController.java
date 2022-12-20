@@ -2,10 +2,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.collections.FXCollections;
@@ -34,7 +31,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 public class HomeViewController implements Initializable {
     @FXML
     private AnchorPane contentArea;
@@ -59,6 +55,9 @@ public class HomeViewController implements Initializable {
     private static int totalFamilyRooms;
     private static int totalSuites;
 
+    ArrayList<ReservationViewBean> checkInTodayBeans;
+    ArrayList<BookingViewBean> checkOutTodayBeans;
+
     private ImageView anhandReservierungImageView = new ImageView("com/fhv/hotelmanagement/fxml/Bilder/AnhandvonReservierungKlein.png");
     private ImageView walkInImageView = new ImageView("com/fhv/hotelmanagement/fxml/Bilder/Walk-In.png");
 
@@ -80,7 +79,6 @@ public class HomeViewController implements Initializable {
         choice.setLayoutX(100);
         choice.setLayoutY(100);
         choice.setStyle("-fx-background-color: #eeeeee; -fx-pref-height:450px; -fx-pref-width: 750px;");
-
 
         Button walkInButton = new Button("Walk-In Guest", walkInImageView);
         Button anhandReservierungButton = new Button("Based on reservations", anhandReservierungImageView);
@@ -131,9 +129,9 @@ public class HomeViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        checkInTodayBeans = fillCheckInTodayTable();
+        checkOutTodayBeans = fillCheckOutTodayTable();
         createBarChart();
-        fillCheckOutTodayTable();
-        fillCheckInTodayTable();
     }
 
     private void createBarChart() {
@@ -156,30 +154,64 @@ public class HomeViewController implements Initializable {
 
         //count all occupied Rooms
         ArrayList<BookingDTO> allCurrentBookingDTOs = DomainController.getCurrentBookings();
+
         int occupiedSingleRooms = 0;
         int occupiedDoubleRooms = 0;
         int occupiedFamilyRooms = 0;
         int occupiedSuites = 0;
 
         for (BookingDTO bookingDTO : allCurrentBookingDTOs) {
-            for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
-                String category = bookedRoomCategoryDTO.getRoomCategory().getName();
-                switch (category) {
-                    case "Single room":
-                        occupiedSingleRooms++;
-                        break;
-                    case "Double room":
-                        occupiedDoubleRooms++;
-                        break;
-                    case "Family room":
-                        occupiedFamilyRooms++;
-                        break;
-                    case "Suites":
-                        occupiedSuites++;
-                        break;
+            if(!bookingDTO.getDepartureDate().equals(LocalDate.now())){ //departure date today zimmer werden heute wieder frei. sollen nicht als besetzt angezeigt werden
+                for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
+                    String category = bookedRoomCategoryDTO.getRoomCategory().getName();
+                    switch (category) {
+                        case "Single room":
+                            occupiedSingleRooms++;
+                            break;
+                        case "Double room":
+                            occupiedDoubleRooms++;
+                            break;
+                        case "Family room":
+                            occupiedFamilyRooms++;
+                            break;
+                        case "Suites":
+                            occupiedSuites++;
+                            break;
+                    }
                 }
             }
         }
+
+        int checkInTodaySingleRooms = 0;
+        int checkInTodayDoubleRooms = 0;
+        int checkInTodayFamilyRooms = 0;
+        int checkInTodaySuites = 0;
+
+        for(ReservationViewBean checkInTodayBean : checkInTodayBeans){
+            if(checkInTodayBean.getArrivalDate().equals(LocalDate.now())){ //departure date today zimmer werden heute wieder frei. sollen nicht als besetzt angezeigt werden
+                for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : checkInTodayBean.getReservationDTO().getReservedRoomCategories()) {
+                    String category = reservedRoomCategoryDTO.getRoomCategory().getName();
+                    switch (category) {
+                        case "Single room":
+                            checkInTodaySingleRooms++;
+                            break;
+                        case "Double room":
+                            checkInTodayDoubleRooms++;
+                            break;
+                        case "Family room":
+                            checkInTodayFamilyRooms++;
+                            break;
+                        case "Suite":
+                            checkInTodaySuites++;
+                            break;
+                    }
+                }
+            }
+        }
+        occupiedSingleRooms = occupiedSingleRooms + checkInTodaySingleRooms;
+        occupiedDoubleRooms = occupiedDoubleRooms + checkInTodayDoubleRooms;
+        occupiedFamilyRooms = occupiedFamilyRooms + checkInTodayFamilyRooms;
+        occupiedSuites = occupiedSuites + checkInTodaySuites;
 
         XYChart.Series<String, Integer> totalRoomsSeries = new XYChart.Series();
         totalRoomsSeries.setName("total");
@@ -201,12 +233,11 @@ public class HomeViewController implements Initializable {
         freeRoomsSeries.getData().add(new XYChart.Data<>("Family Rooms", freeFamilyRooms));
         freeRoomsSeries.getData().add(new XYChart.Data<>("Suites", freeSuites));
 
-
         freeRoomsBarChart.getData().addAll(totalRoomsSeries, freeRoomsSeries);
         freeRoomsBarChart.setLegendSide(Side.RIGHT);
     }
 
-    private void fillCheckOutTodayTable() {
+    private ArrayList<BookingViewBean> fillCheckOutTodayTable() {
         //ArrayList<BookingDTO> allBookingDTOs = DomainController.getCurrentBookings();
         ArrayList<BookingDTO> allBookingDTOs = DomainController.getAllBookingsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<BookingViewBean> checkOutTodayBeans = new ArrayList<>();
@@ -229,9 +260,11 @@ public class HomeViewController implements Initializable {
         } else {
             checkOutTodayTableView.setItems(checkOutTodayBookings);
         }
+
+        return checkOutTodayBeans;
     }
 
-    private void fillCheckInTodayTable() {
+    private ArrayList<ReservationViewBean> fillCheckInTodayTable() {
         ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservationsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<ReservationViewBean> checkInTodayBeans = new ArrayList<>();
         for(ReservationDTO reservationDTO : allReservationDTOs){
@@ -251,5 +284,6 @@ public class HomeViewController implements Initializable {
         } else {
             checkInTodayTableView.setItems(checkInTodayReservations);
         }
+        return checkInTodayBeans;
     }
 }

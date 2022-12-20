@@ -24,14 +24,14 @@ public class ReservationUseCaseController implements EmailService {
     ArrayList<RoomDTO> freeFamilyRooms;
     ArrayList<RoomDTO> freeSuites;
 
-    private String message1 = "Hello, " +
+    private StringBuilder message1 = new StringBuilder("Hello, " +
             "we recieved your reservation. " +
             "Please make the deposit until 3 days before your arrival." +
-            "Greetings, the Sunway Team";
+            "Greetings, the Sunway Team");
 
-    private String message2 = "Hello, " +
+    private StringBuilder message2 = new StringBuilder("Hello, " +
             "we recieved your reservation. " +
-            "Greetings, the Sunway Team";
+            "Greetings, the Sunway Team");
 
     private int maxSingleRooms;
     private int maxDoubleRooms;
@@ -117,7 +117,6 @@ public class ReservationUseCaseController implements EmailService {
                 freeRooms.add(roomDTO);
             }
         }
-
         return freeRooms;
     }
 
@@ -207,7 +206,7 @@ public class ReservationUseCaseController implements EmailService {
             Long customerNumber = DomainController.saveCustomer(customerDTO);
             customerDTO.setNumber(customerNumber);
             reservationDTO.setCustomer(customerDTO);
-            DomainController.saveReservation(reservationDTO);
+            Long reservationNumber = DomainController.saveReservation(reservationDTO);
 
             //send email
             EmailInfo emailInfo = new EmailInfo();
@@ -219,9 +218,11 @@ public class ReservationUseCaseController implements EmailService {
             Period period = Period.between(reservationDTO.getCreationTimestamp().toLocalDate(), reservationDTO.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
             if(daysDiff <= 3){ //3 tage vor geplantem check-in ist keine anzahlung notwendiq
-                    emailInfo.setBody(message2);
+                    message2 = message2.append(". Your reservation number is: ").append(reservationNumber);
+                    emailInfo.setBody(message2.toString());
             } else {
-                emailInfo.setBody(message1);
+                message1 = message1.append(". Your reservation number is: ").append(reservationNumber);
+                emailInfo.setBody(message1.toString());
             }
             sendMail(emailInfo); //writes mail to file. Doesn't actually send email.
         }

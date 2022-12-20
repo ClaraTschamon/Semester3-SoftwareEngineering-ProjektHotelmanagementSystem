@@ -3,18 +3,18 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
@@ -32,13 +32,15 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CheckOut1ViewController implements Initializable {
     @FXML
+    private Text searchBookingText;
+    @FXML
+    private Text searchRoomText;
+    @FXML
     private ComboBox roomComboBox;
     @FXML
     public Text phRoomText;
     @FXML
-    public Text phFirstNameText;
-    @FXML
-    public Text phLastNameText;
+    public Text phNameText;
     @FXML
     public Text phNightsText;
     @FXML
@@ -67,7 +69,6 @@ public class CheckOut1ViewController implements Initializable {
     private ArrayList<BookingDTO> currentBookingDTOs;
     private boolean searching;
 
-
     private CheckOutViewController viewController;
 
     public void setController(CheckOutViewController viewController){
@@ -86,6 +87,14 @@ public class CheckOut1ViewController implements Initializable {
                 searchDatabaseTextField.setText("Booking: " + bookingDTO.getNumber());
             }
         }
+
+        if(viewController.getIsFromBookingOverview()){
+            searchDatabaseTextField.setDisable(true);
+            roomComboBox.setDisable(true);
+
+            searchBookingText.setFill(Color.rgb(154, 154, 154));
+            searchRoomText.setFill(Color.rgb(154, 154, 154));
+        }
     }
 
     @Override
@@ -94,8 +103,7 @@ public class CheckOut1ViewController implements Initializable {
 
         //hide Placeholder Text
         phRoomText.setText("");
-        phFirstNameText.setText("");
-        phLastNameText.setText("");
+        phNameText.setText("");
         phNightsText.setText("");
         phArrivalDateText.setText("");
         phDepartureDateText.setText("");
@@ -166,8 +174,7 @@ public class CheckOut1ViewController implements Initializable {
         }
         phRoomText.setText(rooms.toString());
 
-        phFirstNameText.setText(bookingDTO.getCustomer().getFirstName());
-        phLastNameText.setText(bookingDTO.getCustomer().getLastName());
+        phNameText.setText(bookingDTO.getCustomer().getFirstName() + " " + bookingDTO.getCustomer().getLastName());
 
         int nights = (int) DAYS.between(bookingDTO.getArrivalDate(), bookingDTO.getDepartureDate());
         phNightsText.setText(String.valueOf(nights));
@@ -226,11 +233,15 @@ public class CheckOut1ViewController implements Initializable {
 
     @FXML
     private void onNextButtonClicked(ActionEvent actionEvent) {
-        try {
-            viewController.loadCheckOut2();
-        } catch (IOException e) {
-            MainApplication.getMainController().alert("Could not switch page.", WarningType.WARNING);
-            System.out.println("Error clicking next button: " + e.getMessage());
+        if(!searchDatabaseTextField.getText().isEmpty() || !roomComboBox.getSelectionModel().isEmpty()) {
+            try {
+                viewController.loadCheckOut2();
+            } catch (IOException e) {
+                MainApplication.getMainController().alert("Could not switch page.", WarningType.WARNING);
+                System.out.println("Error clicking next button: " + e.getMessage());
+            }
+        } else {
+            MainApplication.getMainController().alert("Please select a booking to Check-Out.", WarningType.ERROR);
         }
     }
 
