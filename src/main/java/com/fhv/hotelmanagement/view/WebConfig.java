@@ -1,5 +1,7 @@
 package com.fhv.hotelmanagement.view;
 
+import com.fhv.hotelmanagement.services.EmailService.EmailInfo;
+import com.fhv.hotelmanagement.services.EmailService.EmailService;
 import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationUseCaseController;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
@@ -13,7 +15,8 @@ public class WebConfig implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         // Do your thing during webapp's startup.
         try {
-            ReservationUseCaseController reservationUseCaseController = new ReservationUseCaseController();
+            EmailService emailService = new EmailInfo();
+            ReservationUseCaseController reservationUseCaseController = new ReservationUseCaseController(emailService);
             ServletContext context = event.getServletContext();
             context.setAttribute("reservationUseCaseController", reservationUseCaseController);
         } catch (IOException e) {
