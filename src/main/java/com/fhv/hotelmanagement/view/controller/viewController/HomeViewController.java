@@ -31,7 +31,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 public class HomeViewController implements Initializable {
     @FXML
     private AnchorPane contentArea;
