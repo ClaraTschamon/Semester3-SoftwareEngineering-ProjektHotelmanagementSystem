@@ -1,8 +1,11 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.controller.viewController;
 
+import com.fhv.hotelmanagement.MainApplication;
+import com.fhv.hotelmanagement.MainController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
+import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,6 +22,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.CheckModel;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -31,6 +35,8 @@ public class CheckIn1ViewController implements Initializable {
 
     @FXML
     private TextField searchDatabaseTextField;
+    @FXML
+    public TextField searchReservationTextField;
     @FXML
     private RadioButton fullBoard;
     @FXML
@@ -67,17 +73,18 @@ public class CheckIn1ViewController implements Initializable {
     private CheckComboBox<RoomDTO> doubleRoomDropDown;
     private CheckComboBox<RoomDTO> familyRoomDropDown;
     private CheckComboBox<RoomDTO> suiteDropDown;
-    private CheckInViewController viewController;
+
+    public static CheckInViewController viewController; //für kommunikation mit RoomProvider
     private RoomProvider roomProvider;
     private ListView<CustomerDTO> searchedCustomersListView;
+    private ListView<ReservationDTO> searchedReservationsListView;
     private boolean searching;
 
     public void setController(CheckInViewController viewController) {
-        this.viewController = viewController;
+        CheckIn1ViewController.viewController = viewController;
     }
 
     private boolean validate() {
-
         boolean departureDateIsValid = false;
         boolean counterRoomIsValid = false;
         boolean counterSingleRoomIsValid = false;
@@ -99,29 +106,25 @@ public class CheckIn1ViewController implements Initializable {
 
         if (singleRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterSingleRoomIsValid = true;
-        }
-        else {
+        } else {
             setTextColorRed(counterSingleRoom);
         }
 
         if (doubleRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterDoubleRoomIsValid = true;
-        }
-        else {
+        } else {
             setTextColorRed(counterDoubleRoom);
         }
 
         if (familyRoomDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterFamilyRoomIsValid = true;
-        }
-        else {
+        } else {
             setTextColorRed(counterFamilyRoom);
         }
 
         if (suiteDropDown.getCheckModel().getCheckedItems().size() > 0) {
             counterSuiteRoomIsValid = true;
-        }
-        else {
+        } else {
             setTextColorRed(counterSuite);
         }
 
@@ -158,7 +161,6 @@ public class CheckIn1ViewController implements Initializable {
             amountGuestsIsValid = false;
             amountGuestsSpinner.setStyle("-fx-text-inner-color: red");
 
-
             amountGuestsSpinner.valueProperty().addListener(new ChangeListener<Integer>() {
                 @Override
                 public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
@@ -170,8 +172,7 @@ public class CheckIn1ViewController implements Initializable {
         if (departureDateIsValid && counterRoomIsValid &&
                 boardButtonIsValid && roomPriceDropDownIsValid && amountGuestsIsValid) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     private void setTextColorRed(Text text) {
@@ -188,8 +189,7 @@ public class CheckIn1ViewController implements Initializable {
     public boolean validateCheckOutDate(LocalDate dateOfToday, LocalDate dateOfCheckOut) {
         if (Period.between(dateOfToday, dateOfCheckOut).getDays() > 0) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -216,31 +216,38 @@ public class CheckIn1ViewController implements Initializable {
     }
 
     protected void fillData() {
-        if(viewController.getIsCheckIn()){
+        if (viewController.getIsCheckIn()) {
             searchDatabaseTextField.setDisable(true);
+            searchDatabaseTextField.setVisible(false);
             roomPriceDropDown.setDisable(true);
+
+            roomProvider = new RoomProvider();
+
+        } else {
+            searchReservationTextField.setDisable(true);
+            searchReservationTextField.setVisible(false);
+            roomPriceDropDown.setDisable(false);
         }
 
         amountGuestsSpinner.setValueFactory(new SpinnerValueFactory<Integer>() {
             @Override
             public void decrement(int steps) {
-                if (amountGuestsSpinner.getValue()-steps > 0) {
+                if (amountGuestsSpinner.getValue() - steps > 0) {
                     amountGuestsSpinner.getValueFactory().setValue(amountGuestsSpinner.getValue() - steps);
                 }
             }
 
             @Override
             public void increment(int steps) {
-                amountGuestsSpinner.getValueFactory().setValue(amountGuestsSpinner.getValue()+steps);
+                amountGuestsSpinner.getValueFactory().setValue(amountGuestsSpinner.getValue() + steps);
             }
         });
 
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
-        if(bookingDTO.getDepartureDate() != null){
+        if (bookingDTO.getDepartureDate() != null) {
             departureDatePicker.setValue(bookingDTO.getDepartureDate());
-        }
-        else{
+        } else {
             LocalDate defaultDepartureDate = LocalDate.now().plusDays(1);
             departureDatePicker.setValue(defaultDepartureDate);
         }
@@ -267,6 +274,7 @@ public class CheckIn1ViewController implements Initializable {
                 }
             }
         }
+
         counterSingleRoom.setText(String.valueOf(amountBookedSingleRooms));
         counterDoubleRoom.setText(String.valueOf(amountBookedDoubleRooms));
         counterFamilyRoom.setText(String.valueOf(amountBookedFamilyRooms));
@@ -320,7 +328,7 @@ public class CheckIn1ViewController implements Initializable {
         }
     }
 
-    protected void saveData(){
+    protected void saveData() {
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
         bookingDTO.setDepartureDate(departureDatePicker.getValue());
 
@@ -360,7 +368,7 @@ public class CheckIn1ViewController implements Initializable {
         if (bookedSingleRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Single room");
             BigDecimal price = roomCategoryDTO.getPricePerNight();
-            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")){
+            if (roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")) {
                 price = new BigDecimal(0);
             }
             bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedSingleRooms.size()));
@@ -368,7 +376,7 @@ public class CheckIn1ViewController implements Initializable {
         if (bookedDoubleRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Double room");
             BigDecimal price = roomCategoryDTO.getPricePerNight();
-            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")){
+            if (roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")) {
                 price = new BigDecimal(0);
             }
             bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedDoubleRooms.size()));
@@ -376,7 +384,7 @@ public class CheckIn1ViewController implements Initializable {
         if (bookedFamilyRooms.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Family room");
             BigDecimal price = roomCategoryDTO.getPricePerNight();
-            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")){
+            if (roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")) {
                 price = new BigDecimal(0);
             }
             bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedFamilyRooms.size()));
@@ -384,7 +392,7 @@ public class CheckIn1ViewController implements Initializable {
         if (bookedSuites.size() > 0) {
             RoomCategoryDTO roomCategoryDTO = roomCategories.get("Suite");
             BigDecimal price = roomCategoryDTO.getPricePerNight();
-            if(roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")){
+            if (roomPriceDropDown.getSelectionModel().getSelectedItem().equals("Price-0")) {
                 price = new BigDecimal(0);
             }
             bookedRoomCategories.add(new BookedRoomCategoryDTO(bookingDTO, roomCategoryDTO, price, bookedSuites.size()));
@@ -395,7 +403,7 @@ public class CheckIn1ViewController implements Initializable {
         bookingDTO.setAmountGuests(amountGuestsSpinner.getValue());
     }
 
-    private void refreshFreeRoomsInDropDowns () {
+    private void refreshFreeRoomsInDropDowns() {
         singleRoomDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Single room"));
         doubleRoomDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Double room"));
         familyRoomDropDown.getItems().setAll(roomProvider.getAllRoomsFromCategory("Family room"));
@@ -492,6 +500,37 @@ public class CheckIn1ViewController implements Initializable {
 
         searchDatabaseTextField.focusedProperty().addListener((observable, oldValue, newValue) ->
                 searchDatabaseTextFieldFocusChanged(newValue));
+
+        searchedReservationsListView = new ListView<>();
+        searchedReservationsListView.setStyle("-fx-border-radius: 8px;");
+        searchedReservationsListView.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(ReservationDTO item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getNumber() + " " + item.getCustomer().getFirstName() + " " + item.getCustomer().getLastName());
+                }
+            }
+        });
+        searchedReservationsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+                searchedReservationsListViewChanged());
+
+
+        //SearchReservation Text Field
+        searchReservationTextField.textProperty().
+
+                addListener((observable, oldValue, newValue) ->
+
+                        searchReservationTextFieldChanged());
+
+        searchReservationTextField.focusedProperty().
+
+                addListener((observable, oldValue, newValue) ->
+
+                        searchReservationTextFieldFocusChanged(newValue));
     }
 
     private void searchDatabaseTextFieldChanged() {
@@ -537,6 +576,49 @@ public class CheckIn1ViewController implements Initializable {
         }
     }
 
+    private void searchReservationTextFieldChanged() {
+        if (!searching) {
+            return;
+        }
+
+        String searchText = searchReservationTextField.getText().toLowerCase();
+
+        if (!searchedReservationsListView.getSelectionModel().getSelectedItems().isEmpty()) {
+            searchedReservationsListView.getSelectionModel().clearSelection();
+
+        } if (searchText == null || searchText.equals("")) {
+            contentPane.getChildren().remove(searchedReservationsListView);
+
+        } else {
+            ArrayList<ReservationDTO> searchedReservations = new ArrayList<>();
+            for (ReservationDTO r : viewController.getUseCaseController().getReservations()) {
+                long reservationNr = r.getNumber();
+                String firstName = r.getCustomer().getFirstName().toLowerCase();
+                String lastName = r.getCustomer().getLastName().toLowerCase();
+                String fullName = firstName.concat(" ").concat(lastName).concat(" ").concat(String.valueOf(reservationNr));
+                String reversedFullName = String.valueOf(reservationNr).concat(" ").concat(lastName).concat(" ").concat(firstName);
+                if (
+                        firstName.contains(searchText) ||
+                                lastName.contains(searchText) ||
+                                fullName.contains(searchText) ||
+                                reversedFullName.contains(searchText)
+                ) {
+                    searchedReservations.add(r);
+                }
+            }
+            searchedReservationsListView.setItems(FXCollections.observableArrayList(searchedReservations));
+
+            if (!contentPane.getChildren().contains(searchedReservationsListView)) {
+                searchedReservationsListView.setMinWidth(searchReservationTextField.getWidth());
+                searchedReservationsListView.setMaxWidth(searchReservationTextField.getWidth());
+                searchedReservationsListView.setMaxHeight(200);
+                searchedReservationsListView.setLayoutX(searchReservationTextField.getLayoutX());
+                searchedReservationsListView.setLayoutY(searchReservationTextField.getLayoutY() + searchReservationTextField.getHeight() + 4);
+                contentPane.getChildren().add(searchedReservationsListView);
+            }
+        }
+    }
+
     private void searchedCustomersListViewChanged() {
         CustomerDTO selectedCustomer = searchedCustomersListView.getSelectionModel().getSelectedItem();
         if (selectedCustomer != null) {
@@ -548,12 +630,38 @@ public class CheckIn1ViewController implements Initializable {
         }
     }
 
+    private void searchedReservationsListViewChanged(){
+        ReservationDTO selectedReservation = searchedReservationsListView.getSelectionModel().getSelectedItem();
+        if(selectedReservation != null){
+            searching = false;
+            if(selectedReservation.getBooking() != null && selectedReservation.getBooking().getCheckInDatetime() != null){
+                MainApplication.getMainController().alert("This reservation is already checked-in", WarningType.ERROR);
+                searchReservationTextField.clear();
+            } else {
+                viewController.getUseCaseController().setReservation(selectedReservation); //da passiert setBooking und setCustomer
+                setCustomerInfo();
+                contentPane.getChildren().remove(searchedCustomersListView);
+                departureDatePicker.requestFocus();
+                fillData();
+            }
+        }
+    }
+
     private void searchDatabaseTextFieldFocusChanged(boolean newValue) {
         if (newValue) {
             searching = true;
         } else {
             searching = false;
             contentPane.getChildren().remove(searchedCustomersListView);
+        }
+    }
+
+    private void searchReservationTextFieldFocusChanged(boolean newValue) {
+        if (newValue) {
+            searching = true;
+        } else {
+            searching = false;
+            contentPane.getChildren().remove(searchedReservationsListView);
         }
     }
 
@@ -575,7 +683,7 @@ public class CheckIn1ViewController implements Initializable {
     }
 }
 
-class RoomProvider{
+class RoomProvider {
     private ArrayList<RoomDTO> freeRooms;
 
     public RoomProvider() {
@@ -605,7 +713,6 @@ class RoomProvider{
     public void refreshFreeRooms(LocalDate maxDate) {
         freeRooms = DomainController.getAllRooms();
         ArrayList<RoomDTO> bookedRooms = new ArrayList<>();
-        ArrayList<RoomDTO> reservedRooms = new ArrayList<>();
         LocalDate today = LocalDate.now();
 
         for (BookedRoomDTO bookedRoom : DomainController.getBookedRoomsBetween(today, maxDate)) {
@@ -614,24 +721,10 @@ class RoomProvider{
             RoomDTO room = bookedRoom.getRoom();
             if (
                     !(toDate.isEqual(today) || toDate.isBefore(today)) &&
-                    !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
+                            !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
             ) {
                 if (!bookedRooms.contains(room)) {
                     bookedRooms.add(room);
-                }
-            }
-        }
-
-        for (ReservedRoomDTO reservedRoom : DomainController.getReservedRoomsBetween(today, maxDate)) {
-            LocalDate toDate = reservedRoom.getToDate();
-            LocalDate fromDate = reservedRoom.getFromDate();
-            RoomDTO room = reservedRoom.getRoom();
-            if (
-                    !(toDate.isEqual(today) || toDate.isBefore(today)) &&
-                            !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
-            ) {
-                if (!reservedRooms.contains(room)) {
-                    reservedRooms.add(room);
                 }
             }
         }
@@ -640,8 +733,28 @@ class RoomProvider{
             freeRooms.remove(room);
         }
 
-        for (RoomDTO room : reservedRooms){
-            freeRooms.remove(room);
+        if(!(CheckIn1ViewController.viewController == null) && (!CheckIn1ViewController.viewController.getIsCheckIn())) {
+            System.out.println(CheckIn1ViewController.viewController.getIsCheckIn());
+            ArrayList<RoomDTO> reservedRooms = new ArrayList<>();
+
+            //wenn es kein check-in ist müssen die räume berücksichtigt werden
+            for (ReservedRoomDTO reservedRoom : DomainController.getReservedRoomsBetween(today, maxDate)) {
+                LocalDate toDate = reservedRoom.getToDate();
+                LocalDate fromDate = reservedRoom.getFromDate();
+                RoomDTO room = reservedRoom.getRoom();
+                if (
+                        !(toDate.isEqual(today) || toDate.isBefore(today)) &&
+                                !(fromDate.isEqual(maxDate) || fromDate.isAfter(maxDate))
+                ) {
+                    if (!reservedRooms.contains(room)) {
+                        reservedRooms.add(room);
+                    }
+                }
+            }
+
+            for (RoomDTO room : reservedRooms) {
+                freeRooms.remove(room);
+            }
         }
     }
 }
@@ -650,7 +763,7 @@ class RoomProvider{
 class RoomNumberConverter<T> extends StringConverter<RoomDTO> {
     RoomProvider provider;
 
-    public RoomNumberConverter(RoomProvider provider){
+    public RoomNumberConverter(RoomProvider provider) {
         this.provider = provider;
     }
 

@@ -51,7 +51,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("org.hibernate:hibernate-core-jakarta:5.6.12.Final")
     implementation("com.h2database:h2:2.1.214")
-    implementation("org.controlsfx:controlsfx:11.1.2")
+    implementation('org.controlsfx:controlsfx:11.1.2')
     implementation('org.apache.logging.log4j:log4j-api:2.19.0')
     implementation('org.apache.logging.log4j:log4j-core:2.19.0')
 
@@ -82,7 +82,15 @@ jlinkZip {
 
 apply plugin: "org.hibernate.orm"
 
+
 war {
-    // copies a file to WEB-INF/web.xml
-    webXml = file('src/main/resources/WEB-INF/web.xml')
+// copies a file to WEB-INF/web.xml
+//webXml = file('src/main/resources/WEB-INF/web.xml')
+
+    webXml = file("src/main/webapp/WEB-INF/web.xml")
+    exclude '**/web.xml'
+    webInf {
+        from 'webapp'
+    }
+
 }

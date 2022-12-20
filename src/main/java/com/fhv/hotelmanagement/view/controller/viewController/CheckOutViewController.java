@@ -10,8 +10,12 @@ import java.io.IOException;
 public class CheckOutViewController {
     private CheckOutUseCaseController useCaseController;
 
+    private boolean isFromBookingOverview;
+
+    //wenn man über bookingOverview auf CheckOutButton klickt, sollen Suchfeld und dropdownliste disabled sein
     public CheckOutViewController() throws IOException {
         useCaseController = new CheckOutUseCaseController();
+        isFromBookingOverview = false;
         loadCheckOut1();
     }
 
@@ -31,5 +35,13 @@ public class CheckOutViewController {
         CheckOut2ViewController checkOut2ViewController = checkOut2Loader.getController();
         checkOut2ViewController.setController(this);
         checkOut2ViewController.fillData();
+    }
+
+    public boolean getIsFromBookingOverview() {
+        return isFromBookingOverview;
+    }
+
+    public void setIsFromBookingOverview(boolean isFromBookingOverview){
+        this.isFromBookingOverview = isFromBookingOverview;
     }
 }

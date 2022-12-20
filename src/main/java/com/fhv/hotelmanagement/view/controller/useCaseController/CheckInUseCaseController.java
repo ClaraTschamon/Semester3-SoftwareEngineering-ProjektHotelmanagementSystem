@@ -13,19 +13,24 @@ import java.util.ArrayList;
 
 public class CheckInUseCaseController {
     BookingDTO booking;
+    ReservationDTO reservation;
     CustomerDTO customer;
     String roomPrice;
     boolean billingAddressEqualsCustomerAddress;
     ArrayList<CustomerDTO> customers;
 
+    ArrayList<ReservationDTO> reservations;
+
     public CheckInUseCaseController() throws IOException {
         booking = new BookingDTO();
+        reservation = null;
         customer = new CustomerDTO();
         booking.setCustomer(customer);
         booking.setArrivalDate(LocalDate.now());
         //customer.setSaved(true);
         billingAddressEqualsCustomerAddress = true;
         customers = DomainController.getSavedCustomers();
+        reservations = DomainController.getAllReservationsBetween(LocalDate.now().minusDays(1), LocalDate.now().plusDays(3));
     }
 
     public BookingDTO getBooking() {
@@ -78,4 +83,54 @@ public class CheckInUseCaseController {
     public void setBooking(BookingDTO booking) {
         this.booking = booking;
     }
+
+    public ArrayList<ReservationDTO> getReservations() {
+        return reservations;
+    }
+
+    public void setReservation(ReservationDTO reservation){
+        this.reservation = reservation;
+
+        //Create booking element
+        BookingDTO bookingDTO = null;
+        if(reservation.getBooking() == null) {
+            bookingDTO = new BookingDTO(null, reservation, reservation.getCustomer(), reservation.getArrivalDate(), null,
+                    reservation.getDepartureDate(), null, reservation.getBillingAddress(), reservation.getPaymentMethod(),
+                    reservation.getCreditCardNumber(), reservation.getExpirationDate(), reservation.getAuthorisationNumber(), reservation.getBoard(),
+                    reservation.getPricePerNightForBoard(), reservation.getComment(), reservation.getAmountGuests(), null, null);
+
+
+            ArrayList<BookedRoomCategoryDTO> bookedRoomCategoryDTOS = new ArrayList<>();
+
+            for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : reservation.getReservedRoomCategories()) {
+                BookedRoomCategoryDTO bookedRoomCategoryDTO = new BookedRoomCategoryDTO();
+                bookedRoomCategoryDTO.setRoomCategory(reservedRoomCategoryDTO.getRoomCategory());
+                bookedRoomCategoryDTO.setAmount(reservedRoomCategoryDTO.getAmount());
+                bookedRoomCategoryDTO.setPricePerNight(reservedRoomCategoryDTO.getPricePerNight());
+                bookedRoomCategoryDTO.setBooking(bookingDTO);
+                bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
+            }
+
+            ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
+
+            for (ReservedRoomDTO reservedRoomDTO : reservation.getReservedRooms()) {
+                BookedRoomDTO bookedRoomDTO = new BookedRoomDTO();
+                bookedRoomDTO.setRoom(reservedRoomDTO.getRoom());
+                bookedRoomDTO.getRoom().setNumber(reservedRoomDTO.getRoom().getNumber());
+                bookedRoomDTO.setFromDate(reservedRoomDTO.getFromDate());
+                bookedRoomDTO.setToDate(reservedRoomDTO.getToDate());
+                bookedRoomDTO.setBooking(bookingDTO);
+                bookedRoomDTOS.add(bookedRoomDTO);
+            }
+
+            bookingDTO.setBookedRoomCategories(bookedRoomCategoryDTOS);
+            bookingDTO.setBookedRooms(bookedRoomDTOS);
+            bookingDTO.setReservation(reservation);
+            reservation.setBooking(bookingDTO);
+
+        }
+        setBooking(bookingDTO);
+        setCustomer(reservation.getCustomer());
+    }
+
 }

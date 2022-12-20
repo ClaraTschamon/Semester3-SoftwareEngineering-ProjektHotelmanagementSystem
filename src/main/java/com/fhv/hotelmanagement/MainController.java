@@ -113,7 +113,6 @@ public class MainController implements Initializable {
     public void onHomeClicked(ActionEvent actionEvent) {
         try{
             HomeViewController homeViewController = new HomeViewController();
-            //homeViewController.createBarChart();
             loadIntoContentArea("home");
         }catch (IOException e){
             System.out.println(e.getMessage());

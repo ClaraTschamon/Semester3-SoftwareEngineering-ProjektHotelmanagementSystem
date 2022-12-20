@@ -24,28 +24,16 @@ public class CheckInViewController {
     }
 
     public CheckInViewController(boolean isCheckIn) throws IOException {
-        if(isCheckIn){
+        if(isCheckIn) {
             this.isCheckIn = true;
-            useCaseController = new CheckInUseCaseController();
-            searching = false;
-            loadEnterReservationNumber();
-        } else {
-            useCaseController = new CheckInUseCaseController();
-            searching = false;
-            loadCheckIn1();
         }
+        useCaseController = new CheckInUseCaseController();
+        searching = false;
+        loadCheckIn1();
     }
 
     protected CheckInUseCaseController getUseCaseController() {
         return useCaseController;
-    }
-
-    public void loadEnterReservationNumber() throws IOException {
-        searching = false;
-        FXMLLoader checkIn1Loader = MainApplication.getMainController().loadIntoContentArea("enter-reservation-number");
-        ReservationNumberViewController checkIn1Controller = checkIn1Loader.getController();
-        checkIn1Controller.setController(this);
-        //checkIn1Controller.fillData();
     }
 
     public void loadCheckIn1() throws IOException {

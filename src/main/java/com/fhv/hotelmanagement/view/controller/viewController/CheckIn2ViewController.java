@@ -3,9 +3,8 @@ package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.services.StringValidator;
-import com.fhv.hotelmanagement.view.viewServices.TextFunction;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-
+import com.fhv.hotelmanagement.view.viewServices.TextFunction;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -89,6 +88,9 @@ public class CheckIn2ViewController implements Initializable {
     }
 
     protected void fillData() {
+        if(viewController.getIsCheckIn()){
+            searchDatabaseTextField.setDisable(true);
+        }
         CustomerDTO customer = viewController.getUseCaseController().getCustomer();
         String firstname = customer.getFirstName();
         firstNameTextField.setText(firstname);
@@ -309,9 +311,6 @@ public class CheckIn2ViewController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        /*if(viewController.getIsCheckIn()){ //nullpointerException weil viewController null ist.
-            searchDatabaseTextField.setDisable(true);
-        }*/
 
         searching = false;
 

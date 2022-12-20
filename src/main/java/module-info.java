@@ -8,6 +8,7 @@ module com.fhv.hotelmanagement {
     requires com.h2database;
     requires org.hibernate.commons.annotations;
     requires net.bytebuddy;
+
     requires org.controlsfx.controls;
     requires org.apache.logging.log4j;
     requires org.apache.logging.log4j.core;

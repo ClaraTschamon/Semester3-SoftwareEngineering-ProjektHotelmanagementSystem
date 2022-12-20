@@ -5,18 +5,19 @@
   http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--
+
+    <listener>
+        <listener-class>com.fhv.hotelmanagement.view.WebConfig</listener-class>
+    </listener>
+
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <jsp-file>/ReservationForm.jsp</jsp-file>
-        <load-on-startup>1</load-on-startup>
+        <servlet-name> ReservationForm </servlet-name>
+        <jsp-file> /ReservationForm.jsp </jsp-file>
+        <load-on-startup> 1 </load-on-startup>
     </servlet>
 
-
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <servlet-name>ReservationForm</servlet-name>
+        <url-pattern>/ReservationForm.jsp</url-pattern>
     </servlet-mapping>
-    -->
-
 </web-app>

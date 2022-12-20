@@ -51,6 +51,8 @@ public class BookingOverviewViewController implements Initializable {
     @FXML
     private TableColumn<BookingViewBean, ArrayList<Integer>> roomNrCol;
     @FXML
+    private TableColumn<BookingViewBean, Button> commentCol;
+    @FXML
     private Text arrivalDateText;
     @FXML
     private Text departureDateText;
@@ -92,6 +94,8 @@ public class BookingOverviewViewController implements Initializable {
         //disable DatePicker on default because default state is "checked-in"
         fromDateDatePicker.setDisable(true);
         toDateDatePicker.setDisable(true);
+        //disable CheckInButton on default to prevent mistakes
+        checkInButton.setDisable(true);
 
         //default state is set in .fxml to: 'checked-in'
         String state = stateComboBox.getSelectionModel().getSelectedItem().toString();
@@ -146,6 +150,8 @@ public class BookingOverviewViewController implements Initializable {
         stateCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("imageButton"));
         stateCol.setStyle("-fx-alignment: CENTER");
         roomNrCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, ArrayList<Integer>>("roomNumbers"));
+        commentCol.setCellValueFactory(new PropertyValueFactory<BookingViewBean, Button>("commentButton"));
+        commentCol.setStyle("-fx-alignment: CENTER");
 
         if(allBookings.size() == 0){
             bookingTableView.setPlaceholder(new Label("No bookings"));
@@ -280,6 +286,7 @@ public class BookingOverviewViewController implements Initializable {
         if(selectedItem != null){
             BookingDTO bookingDTO = selectedItem.getBookingDTO();
             checkOutViewController.getUseCaseController().setBooking(bookingDTO);
+            checkOutViewController.setIsFromBookingOverview(true);
             checkOutViewController.loadCheckOut1();
         }
     }

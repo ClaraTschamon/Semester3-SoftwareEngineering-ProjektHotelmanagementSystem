@@ -69,6 +69,7 @@ public class CheckIn3ViewController {
         if (bookingDTO.getPaymentMethod() != null) {
             String payment = bookingDTO.getPaymentMethod();
             paymentMethodComboBox.setValue(payment);
+            paymentMethodComboBoxOnAction();
         }
 
         AddressDTO addressDTO = viewController.getUseCaseController().getBooking().getBillingAddress();
