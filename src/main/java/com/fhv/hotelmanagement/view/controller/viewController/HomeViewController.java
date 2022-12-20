@@ -2,10 +2,7 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
-import com.fhv.hotelmanagement.view.DTOs.BookedRoomCategoryDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
-import com.fhv.hotelmanagement.view.DTOs.RoomDTO;
+import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.collections.FXCollections;
@@ -165,28 +162,57 @@ public class HomeViewController implements Initializable {
         int occupiedSuites = 0;
 
         for (BookingDTO bookingDTO : allCurrentBookingDTOs) {
-            for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
-                String category = bookedRoomCategoryDTO.getRoomCategory().getName();
-                switch (category) {
-                    case "Single room":
-                        occupiedSingleRooms++;
-                        break;
-                    case "Double room":
-                        occupiedDoubleRooms++;
-                        break;
-                    case "Family room":
-                        occupiedFamilyRooms++;
-                        break;
-                    case "Suites":
-                        occupiedSuites++;
-                        break;
+            if(!bookingDTO.getDepartureDate().equals(LocalDate.now())){ //departure date today zimmer werden heute wieder frei. sollen nicht als besetzt angezeigt werden
+                for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
+                    String category = bookedRoomCategoryDTO.getRoomCategory().getName();
+                    switch (category) {
+                        case "Single room":
+                            occupiedSingleRooms++;
+                            break;
+                        case "Double room":
+                            occupiedDoubleRooms++;
+                            break;
+                        case "Family room":
+                            occupiedFamilyRooms++;
+                            break;
+                        case "Suites":
+                            occupiedSuites++;
+                            break;
+                    }
                 }
             }
         }
 
-        //TODO: hier die checkOutTodays wegrechnen und die checkInToday dazu rechnen mit hilfe der checkOutTodayBeans und checkInTodayBeans
+        int checkInTodaySingleRooms = 0;
+        int checkInTodayDoubleRooms = 0;
+        int checkInTodayFamilyRooms = 0;
+        int checkInTodaySuites = 0;
 
-
+        for(ReservationViewBean checkInTodayBean : checkInTodayBeans){
+            if(checkInTodayBean.getArrivalDate().equals(LocalDate.now())){ //departure date today zimmer werden heute wieder frei. sollen nicht als besetzt angezeigt werden
+                for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : checkInTodayBean.getReservationDTO().getReservedRoomCategories()) {
+                    String category = reservedRoomCategoryDTO.getRoomCategory().getName();
+                    switch (category) {
+                        case "Single room":
+                            checkInTodaySingleRooms++;
+                            break;
+                        case "Double room":
+                            checkInTodayDoubleRooms++;
+                            break;
+                        case "Family room":
+                            checkInTodayFamilyRooms++;
+                            break;
+                        case "Suite":
+                            checkInTodaySuites++;
+                            break;
+                    }
+                }
+            }
+        }
+        occupiedSingleRooms = occupiedSingleRooms + checkInTodaySingleRooms;
+        occupiedDoubleRooms = occupiedDoubleRooms + checkInTodayDoubleRooms;
+        occupiedFamilyRooms = occupiedFamilyRooms + checkInTodayFamilyRooms;
+        occupiedSuites = occupiedSuites + checkInTodaySuites;
 
         XYChart.Series<String, Integer> totalRoomsSeries = new XYChart.Series();
         totalRoomsSeries.setName("total");
@@ -207,7 +233,6 @@ public class HomeViewController implements Initializable {
         freeRoomsSeries.getData().add(new XYChart.Data<>("Double Rooms", freeDoubleRooms));
         freeRoomsSeries.getData().add(new XYChart.Data<>("Family Rooms", freeFamilyRooms));
         freeRoomsSeries.getData().add(new XYChart.Data<>("Suites", freeSuites));
-
 
         freeRoomsBarChart.getData().addAll(totalRoomsSeries, freeRoomsSeries);
         freeRoomsBarChart.setLegendSide(Side.RIGHT);
