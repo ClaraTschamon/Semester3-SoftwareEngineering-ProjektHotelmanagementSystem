@@ -28,9 +28,9 @@ public class ReservationFactory {
     }
 
     public static ArrayList<ReservationDTO> getAllReservations(){
-        if(reservations==null){
+
             refreshReservations();
-        }
+
 
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
 
@@ -89,6 +89,7 @@ public class ReservationFactory {
     private static void refreshReservations() {
         reservations= new ArrayList<>();
         for(Reservation r : PersistenceFacade.getAllReservations()){
+            System.out.println("test");
             reservations.add(r);
         }
     }

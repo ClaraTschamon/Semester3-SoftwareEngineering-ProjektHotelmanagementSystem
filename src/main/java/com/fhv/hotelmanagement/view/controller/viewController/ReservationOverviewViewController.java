@@ -124,24 +124,33 @@ public class ReservationOverviewViewController implements Initializable {
     public void fillTable(String state) {
         currentState = state;
         ObservableList<ReservationDTO> reservationDTOs = FXCollections.observableArrayList();
-        if (state.equals("all")) {
-            reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
-        } else if (state.equals("confirmed")) {
-            reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
-        } else if (state.equals("not confirmed")) {
-            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
-            ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
-            ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
-            for (ReservationDTO reservationDTO : allreservationDTOs) {
-                if (reservationDTO.getBooking() == null) {
-                    notConfirmedReservations.add(reservationDTO);
+        System.out.println(state);
+        switch (state) {
+            case "all":
+                System.out.println("is it here"+state);
+                //Fehler befindet sich hier
+                reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
+                System.out.println("or is it here"+state);
+                break;
+            case "confirmed":
+                reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
+                break;
+            case "not confirmed":
+                //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
+                ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
+                ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
+                for (ReservationDTO reservationDTO : allreservationDTOs) {
+                    if (reservationDTO.getBooking() == null) {
+                        notConfirmedReservations.add(reservationDTO);
+                    }
                 }
-            }
-            reservationDTOs = FXCollections.observableArrayList(notConfirmedReservations);
-        } else if (state.equals("all between")) {
-            LocalDate minDate = fromDateDatePicker.getValue();
-            LocalDate maxDate = toDateDatePicker.getValue();
-            reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservationsBetween(minDate, maxDate));
+                reservationDTOs = FXCollections.observableArrayList(notConfirmedReservations);
+                break;
+            case "all between":
+                LocalDate minDate = fromDateDatePicker.getValue();
+                LocalDate maxDate = toDateDatePicker.getValue();
+                reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservationsBetween(minDate, maxDate));
+                break;
         }
         ArrayList<ReservationViewBean> allReservationViewBeans = new ArrayList<>();
         for (ReservationDTO reservationDTO : reservationDTOs) {
@@ -309,14 +318,15 @@ public class ReservationOverviewViewController implements Initializable {
                     if (reservation.getBooking() == null) {
                         BookingDTO bookingDTO = createBookingDTO(reservation);
                         reservation.setBooking(bookingDTO);
+                        bookingDTO.setReservation(reservation);
                         DomainController.saveReservation(reservation);
                         DomainController.saveBooking(bookingDTO);
                     }
                 } catch (NoSuchElementException e) {
                     System.out.println("There is no resevation with the number: " + l.toString());
                 }
-                fillTable(currentState);
             }
+            fillTable(currentState);
         } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();
         }
