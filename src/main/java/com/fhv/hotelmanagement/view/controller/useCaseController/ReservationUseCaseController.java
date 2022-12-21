@@ -4,8 +4,8 @@ package com.fhv.hotelmanagement.view.controller.useCaseController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
-import com.fhv.hotelmanagement.services.EmailService.EmailInfo;
-import com.fhv.hotelmanagement.services.EmailService.EmailService;
+import com.fhv.hotelmanagement.services.EmailService.Email;
+import com.fhv.hotelmanagement.services.EmailService.IEmailService;
 import com.fhv.hotelmanagement.view.DTOs.*;
 
 import java.io.*;
@@ -38,9 +38,9 @@ public class ReservationUseCaseController {
     private int maxFamilyRooms;
     private int maxSuites;
 
-    private EmailService emailService;
+    private IEmailService emailService;
 
-    public ReservationUseCaseController(EmailService email_service) throws IOException {
+    public ReservationUseCaseController(IEmailService email_service) throws IOException {
 
         reservationDTO = new ReservationDTO();
         customerDTO = new CustomerDTO();
@@ -212,7 +212,7 @@ public class ReservationUseCaseController {
             Long reservationNumber = DomainController.saveReservation(reservationDTO);
 
             //send email
-            EmailInfo emailInfo = new EmailInfo();
+            Email emailInfo = new Email();
             emailInfo.setFrom("sunway.hotel@email.com");
             emailInfo.setTo(customerDTO.getEmail());
             emailInfo.setSubject("Your Reservation");
