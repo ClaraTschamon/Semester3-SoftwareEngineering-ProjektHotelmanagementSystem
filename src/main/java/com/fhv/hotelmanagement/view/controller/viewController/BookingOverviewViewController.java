@@ -94,6 +94,8 @@ public class BookingOverviewViewController implements Initializable {
         //disable DatePicker on default because default state is "checked-in"
         fromDateDatePicker.setDisable(true);
         toDateDatePicker.setDisable(true);
+        //disable CheckInButton on default to prevent mistakes
+        checkInButton.setDisable(true);
 
         //default state is set in .fxml to: 'checked-in'
         String state = stateComboBox.getSelectionModel().getSelectedItem().toString();
