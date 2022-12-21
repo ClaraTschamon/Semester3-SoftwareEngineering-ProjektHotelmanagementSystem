@@ -81,6 +81,7 @@ public class CheckOut1ViewController implements Initializable {
             BookedRoomDTO bookedRoom = bookingDTO.getBookedRooms().get(0);
             roomComboBox.setConverter(new BookedRoomConverter(allBookedRoomDTOs));
             roomComboBox.setValue(bookedRoom);
+            viewController.getUseCaseController().setBooking(bookingDTO);
             setTexts(bookingDTO);
 
             if (bookingDTO.getNumber() != null) {
@@ -190,7 +191,11 @@ public class CheckOut1ViewController implements Initializable {
         phPersonNrText.setText(String.valueOf(bookingDTO.getAmountGuests()));
         phBoardText.setText(bookingDTO.getBoard().getName());
 
-        if(Objects.equals(bookingDTO.getBookedRoomCategories().get(0).getPricePerNight(), new BigDecimal(0))){
+        ArrayList<BookedRoomCategoryDTO> pickedBookedRoomCategories = bookingDTO.getBookedRoomCategories();
+        if (
+                pickedBookedRoomCategories.size() > 0 &&
+                Objects.equals(pickedBookedRoomCategories.get(0).getPricePerNight(), new BigDecimal(0))
+        ){
             phRoomPriceText.setText("Price-0");
         }
         else{
