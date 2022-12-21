@@ -9,9 +9,8 @@ import java.util.Optional;
 
 public class BoardDataMapper {
 
-    private BoardDataMapper(){}
-
     private static BoardDataMapper _instance = new BoardDataMapper();
+    private BoardDataMapper(){}
 
     public static BoardDataMapper instance(){
         return _instance;

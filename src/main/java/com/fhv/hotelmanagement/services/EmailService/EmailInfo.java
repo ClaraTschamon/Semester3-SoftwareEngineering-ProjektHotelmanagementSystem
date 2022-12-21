@@ -1,8 +1,12 @@
 package com.fhv.hotelmanagement.services.EmailService;
 
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-public class EmailInfo implements Serializable {
+public class EmailInfo implements EmailService {
     private String from;
     private String to;
     private String cc;
@@ -49,6 +53,26 @@ public class EmailInfo implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    @Override
+    public void sendMail(EmailInfo emailInfo) {
+        //hier muss es ein emailservice objekt sein
+        //überall wo ich emailservice anspreche darf ich nur mit interface reden
+        //emailService als globale variable als attribut wahrscheinlich im controller gespeichert
+        try{
+            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+            //DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\samuel\\Documents\\GitHub\\Hotelmanagement\\Emails.txt", true));
+            dataOutputStream.writeUTF(LocalDateTime.now().toString());
+            dataOutputStream.writeUTF(": ");
+            dataOutputStream.writeUTF(emailInfo.toString());
+            dataOutputStream.write('\n');
+            dataOutputStream.flush();
+            dataOutputStream.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
