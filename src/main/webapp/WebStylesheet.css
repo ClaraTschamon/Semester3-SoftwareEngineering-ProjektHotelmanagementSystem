@@ -228,6 +228,9 @@ button.reset {
     cursor: pointer;
     width: 150px;
 }
+button.reset:hover{
+    background-color: #5b1b29;
+}
 
 button.send {
     background-color: #21273d;
@@ -239,6 +242,11 @@ button.send {
     cursor: pointer;
     width: 150px;
 }
+
+button.send:hover{
+    background-color: #06070b;
+}
+
 
 
 #date input[name="arrivalDate"] {

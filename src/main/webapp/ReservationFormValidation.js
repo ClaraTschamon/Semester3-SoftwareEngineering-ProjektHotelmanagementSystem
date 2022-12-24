@@ -18,16 +18,12 @@ const zipCode = document.getElementById('zipCode');
 const country = document.getElementById('country');
 const phoneNumber = document.getElementById('phoneNumber');
 const email = document.getElementById('email');
-const billingStreet= document.getElementById('billingstreet');
+const billingStreet = document.getElementById('billingstreet');
 const billingHouseNumber = document.getElementById('billinghouseNumber');
 const billingCity = document.getElementById('billingcity');
 const billingZipCode = document.getElementById('billingzipCode');
 
 const arrivalDate = document.getElementById('arrivalDate')
-const singleRoom = document.getElementById('singleroom');
-const doubleRoom = document.getElementById('doubleroom');
-const familyRoom = document.getElementById('familyroom');
-const suiteRoom = document.getElementById('suite');
 const creditCard = document.getElementById('creditcardnumber');
 const securityNumber = document.getElementById('securitynumber');
 const expirationDate = document.getElementById('expirationdate');
@@ -57,7 +53,7 @@ function copyAddress() {
     const billingHouseNumber = document.getElementById('billinghouseNumber');
     const billingCity = document.getElementById('billingcity');
     const billingZipCode = document.getElementById('billingzipCode');
-    const billingcountry=document.getElementById('billingcountry');
+    const billingcountry = document.getElementById('billingcountry');
 
     if (checkbox.checked) {
         billingStreet.value = homeStreet.value;
@@ -66,15 +62,15 @@ function copyAddress() {
         billingZipCode.value = homeZipCode.value;
         billingcountry.value = homecountry.value;
     } else {
-        billingStreet.value="";
-        billingHouseNumber.value="";
-        billingCity.value="";
-        billingZipCode.value="";
-        billingcountry.value="";
+        billingStreet.value = "";
+        billingHouseNumber.value = "";
+        billingCity.value = "";
+        billingZipCode.value = "";
+        billingcountry.value = "";
     }
 }
 
-function creditCardSelected(){
+function creditCardSelected() {
     const paymentMethod = document.getElementById('paymentmethod');
     const creditCardNumber = document.getElementById('creditcardnumber');
     const securityNumber = document.getElementById('securitynumber');
@@ -161,22 +157,89 @@ const validateInputs = () => {
     //     setSuccess(departureDate);
     // }
 
+    const singleRoomInput = document.querySelector('#singleroom');
+    const doubleRoomInput = document.querySelector('#doubleroom');
+    const familyRoomInput = document.querySelector('#familyroom');
+    const suiteInput = document.querySelector('#suite');
 
-
-    if(singleRoomValue === 0 ||
-        doubleRoomValue === 0 ||
-        familyRoomValue === 0 ||
-        suiteRoomValue === 0) {
+    if (singleRoomInput.value === "0" || doubleRoomInput.value === "0" || familyRoomInput.value === "0" || suiteInput.value === "0") {
         setError(singleRoom, 'Choose at least one room!');
         setError(doubleRoom, 'Choose at least one room!');
         setError(familyRoom, 'Choose at least one room!');
         setError(suiteRoom, 'Choose at least one room!');
+        event.preventDefault();
     } else {
         setSuccess(singleRoom);
         setSuccess(doubleRoom);
         setSuccess(familyRoom);
         setSuccess(suiteRoom);
     }
+
+    const guestsInput = document.querySelector('#guests');
+
+    const singleRooms = Number(document.querySelector('#singleroom').value);
+    const doubleRooms = Number(document.querySelector('#doubleroom').value);
+    const familyRooms = Number(document.querySelector('#familyroom').value);
+    const suites = Number(document.querySelector('#suite').value);
+
+    const maxCapacity = singleRooms * 1 + doubleRooms * 2 + familyRooms * 4 + suites * 4;
+
+    if (Number(guestsInput.value) > maxCapacity) {
+        guestsInput.classList.add('invalid');
+        document.querySelector('.error').innerHTML = 'Number of guests exceeds maximum capacity of selected rooms';
+        event.preventDefault();
+    } else {
+        guestsInput.classList.remove('invalid');
+    }
+
+
+    //validierung für ablaufdatum
+    const today = new Date();
+    const expirationDateString = new Date(Date.parse(expirationDateValue));
+
+    var expire = document.getElementById('expirationdate').value;
+    if (expire === '') {
+        setError(expirationDate, 'Requiered field');
+    } else if (!expire.match(/^(0[1-9]|1[0-2])\/[0-9]{2}$/)) {
+        setError(expirationDate, 'wrong format');
+    } else {
+        // get current year and month
+        var d = new Date();
+        var currentYear = d.getFullYear();
+        var currentMonth = d.getMonth() + 1;
+        // get parts of the expiration date
+        var parts = expire.split('/');
+        var year = parseInt(parts[1], 10) + 2000;
+        var month = parseInt(parts[0], 10);
+        // compare the dates
+        if (expirationDateString < today) {
+            setError(expirationDate, 'expire date has passed');
+        } else {
+            setSuccess(expirationDate);
+        }
+    }
+
+//kreditkarte
+    if (creditCardValue === '') {
+        setError(creditCard, 'Required field');
+    } else if (!(creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}$)/) ||
+        creditCardValue.match(/(^[ ]{0,}[0-9]{14,16}[ ]{0,}$)/) ||
+        creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{6}[ ]{0,}[0-9]{4}[ ]{0,}$)/) ||
+        creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{6}[ ]{0,}[0-9]{5}[ ]{0,}$)/))) {
+        setError(creditCard, 'Incorrect Input');
+    } else {
+        setSuccess(creditCard);
+    }
+
+//sicherheitsnummer
+    if (securityNumberValue === '') {
+        setError(securityNumber, 'Required field');
+    } else if (!securityNumberValue.match(/^[ ]{0,}[0-9]{3,5}[ ]{0,}$/)) {
+        setError(securityNumber, 'Incorrect input');
+    } else {
+        setSuccess(securityNumber);
+    }
+
 
     if (!(fullBoard.checked === true ||
         halfBoard.checked === true ||
@@ -192,6 +255,7 @@ const validateInputs = () => {
     } else {
         setSuccess(nationality);
     }
+
 
     // if (creditCardValue === '') {
     //     setError(creditCard, 'Required field');
@@ -220,7 +284,7 @@ const validateInputs = () => {
 // continue hereeeeeeeeeeeeeeeeeeeeee
     if (firstNameValue === '') {
         setError(firstName, 'Required field');
-    } else if(!firstNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
+    } else if (!firstNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
         setError(firstName, 'Incorrect input')
     } else {
         setSuccess(firstName);
@@ -228,37 +292,37 @@ const validateInputs = () => {
 
     if (lastNameValue === '') {
         setError(lastName, 'Required field')
-    } else if(!lastNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
+    } else if (!lastNameValue.match(/^([ÄäÖöÜüßa-zA-Z -])*$/)) {
         setError(lastName, 'Incorrect input')
     } else {
         setSuccess(lastName)
     }
 
-    if(nationality.value === 'select'){
+    if (nationality.value === 'select') {
         setError(nationality, 'Please select your Nationality')
-    }else{
+    } else {
         setSuccess(nationality)
     }
 
     if (streetValue === '') {
         setError(street, 'Required field');
-    } else if(!streetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
+    } else if (!streetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
         setError(street, 'Incorrect input')
     } else {
         setSuccess(street);
     }
 
     if (cityValue === '') {
-        setError (city, 'Required field');
-    } else if(!cityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
+        setError(city, 'Required field');
+    } else if (!cityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
         setError(city, 'Incorrect input')
     } else {
         setSuccess(city);
     }
 
     if (zipCodeValue === '') {
-        setError (zipCode, 'Required field');
-    } else if(!zipCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
+        setError(zipCode, 'Required field');
+    } else if (!zipCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
         setError(zipCode, 'Incorrect input')
     } else {
         setSuccess(zipCode);
@@ -274,23 +338,23 @@ const validateInputs = () => {
 
     if (billingStreetValue === '') {
         setError(billingStreet, 'Required field');
-    } else if(!billingStreetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
+    } else if (!billingStreetValue.match(/^([ÄäÖöÜüß0-9a-zA-Z. /-])*$/)) {
         setError(billingStreet, 'Incorrect input')
     } else {
         setSuccess(billingStreet);
     }
 
     if (billingCityValue === '') {
-        setError (billingCity, 'Required field');
-    } else if(!billingCityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
+        setError(billingCity, 'Required field');
+    } else if (!billingCityValue.match(/^([ÄäÖöÜüßa-zA-Z. /-])*$/)) {
         setError(billingCity, 'Incorrect input')
     } else {
         setSuccess(billingCity);
     }
 
     if (billingPostalCodeValue === '') {
-        setError (billingZipCode, 'Required field');
-    } else if(!billingPostalCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
+        setError(billingZipCode, 'Required field');
+    } else if (!billingPostalCodeValue.match(/^([ÄäÖöÜüß0-9a-zA-Z]{3,6})$/)) {
         setError(billingZipCode, 'Incorrect input')
     } else {
         setSuccess(billingZipCode);
