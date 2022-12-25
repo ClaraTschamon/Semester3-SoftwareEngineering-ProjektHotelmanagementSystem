@@ -13,8 +13,8 @@
 <!--            <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:\Users\samuel\Documents\GitHub\Hotelmanagement\HotelmanagementDB.h2" />-->
             <!--<property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:D:\FHV_Informatik\Semester_3\Software_Engineering\Projekt\HotelmanagementDB.h2" />-->
             <!--<property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:\Users\clara\IdeaProjects\Hotelmanagement\HotelmanagementDB.h2" />-->
-            <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:D:\FHV_Informatik\Semester_3\Software_Engineering\Projekt\HotelmanagementDB.h2" />
-<!--            <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:/Users/ninah/Desktop/FH Dornbirn/Hotelmanagement/HotelmanagementDB.h2" /> &lt;!&ndash; Datenbank name &ndash;&gt;-->
+            <!--            <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:D:\FHV_Informatik\Semester_3\Software_Engineering\Projekt\HotelmanagementDB.h2" />-->
+                        <property name="jakarta.persistence.jdbc.url"    value="jdbc:h2:C:/Users/ninah/Desktop/FH Dornbirn/Hotelmanagement/HotelmanagementDB.h2" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="none" />-->
             <property name="show_sql" value="true"/>
