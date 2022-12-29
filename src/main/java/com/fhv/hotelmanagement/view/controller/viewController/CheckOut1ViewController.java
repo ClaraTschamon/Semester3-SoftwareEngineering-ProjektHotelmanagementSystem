@@ -78,12 +78,11 @@ public class CheckOut1ViewController implements Initializable {
     protected void fillData(){
         if (viewController.getUseCaseController().getBooking() != null) {
             BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
-            if(bookingDTO.getBookedRooms().size()!=0){
-                BookedRoomDTO bookedRoom = bookingDTO.getBookedRooms().get(0);
-                roomComboBox.setConverter(new BookedRoomConverter(allBookedRoomDTOs));
-                roomComboBox.setValue(bookedRoom);
-                setTexts(bookingDTO);
-            }
+            BookedRoomDTO bookedRoom = bookingDTO.getBookedRooms().get(0);
+            roomComboBox.setConverter(new BookedRoomConverter(allBookedRoomDTOs));
+            roomComboBox.setValue(bookedRoom);
+            viewController.getUseCaseController().setBooking(bookingDTO);
+            setTexts(bookingDTO);
 
             if (bookingDTO.getNumber() != null) {
                 searchDatabaseTextField.setText("Booking: " + bookingDTO.getNumber());
@@ -192,14 +191,17 @@ public class CheckOut1ViewController implements Initializable {
         phPersonNrText.setText(String.valueOf(bookingDTO.getAmountGuests()));
         phBoardText.setText(bookingDTO.getBoard().getName());
 
-        if(bookingDTO.getBookedRoomCategories().size()!=0){
-            if(Objects.equals(bookingDTO.getBookedRoomCategories().get(0).getPricePerNight(), new BigDecimal(0))){
-                phRoomPriceText.setText("Price-0");
-            }
-            else{
-                phRoomPriceText.setText("Standard price");
-            }
+        ArrayList<BookedRoomCategoryDTO> pickedBookedRoomCategories = bookingDTO.getBookedRoomCategories();
+        if (
+                pickedBookedRoomCategories.size() > 0 &&
+                Objects.equals(pickedBookedRoomCategories.get(0).getPricePerNight(), new BigDecimal(0))
+        ){
+            phRoomPriceText.setText("Price-0");
         }
+        else{
+            phRoomPriceText.setText("Standard price");
+        }
+
         phPaymentMethodText.setText(bookingDTO.getPaymentMethod());
         BigDecimal price = calculateTotalPrice(bookingDTO, bookedRoomDTOs);
         phTotalAmountText.setText(price + " €");

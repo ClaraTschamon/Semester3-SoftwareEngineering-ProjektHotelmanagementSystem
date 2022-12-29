@@ -5,7 +5,7 @@
   Time: 11:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
     <title>Make Reservation</title>
@@ -84,6 +84,11 @@ background-attachment: fixed">
                                     <div class="error"></div>
                                 </div>
                             </td>
+                            <td>
+                                <div class="input-control sizebig bold" style="margin-left: 50px">
+                                    <p>Here you can select the rooms<br> that are free in this time period.</p>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                     <!-- zweite Zeile der Zimmer -->
@@ -106,7 +111,10 @@ background-attachment: fixed">
                                     <div class="error"></div>
                                 </div>
                             </td>
+
                         </tr>
+
+
                     </table>
 
                     <!-- Board -->
@@ -206,7 +214,7 @@ background-attachment: fixed">
                             <option>South America</option>
                             <option>Spain</option>
                             <option>Sweden</option>
-                            <option >Switzerland</option>
+                            <option>Switzerland</option>
                         </select>
                         <div class="error"></div>
                     </div>
@@ -273,8 +281,8 @@ background-attachment: fixed">
 
                     <!-- Email -->
                     <div class="input-control">
-                        <label for="email" class="bold">E-Mail Address <br/> </label>
-                        <input class="sizebig" name="Email Address" id="email" type="text">
+                        <label for="email" class="bold">Email Address <br/></label>
+                        <input class="sizebig" name="EmailAddress" id="email" type="text">
                         <div class="error"></div>
                     </div>
 
@@ -294,7 +302,8 @@ background-attachment: fixed">
                     <!-- Creditcardnumber -->
                     <div class="input-control">
                         <label for="creditcardnumber" class="bold">Credit Card Number<br/></label>
-                        <input class="sizebig" name="CreditCardNumber" id="creditcardnumber" type="text" placeholder="1234 1234 1234 1234">
+                        <input class="sizebig" name="CreditCardNumber" id="creditcardnumber" type="text"
+                               placeholder="1234 1234 1234 1234">
                         <div class="error"></div>
                     </div>
 
@@ -303,7 +312,8 @@ background-attachment: fixed">
                         <td>
                             <div class="input-control">
                                 <label for="securitynumber" class="bold">Security Number<br/></label>
-                                <input class="sizesmall" name="SecurityNumber" id="securitynumber" type="text" placeholder="123">
+                                <input class="sizesmall" name="SecurityNumber" id="securitynumber" type="text"
+                                       placeholder="123">
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -311,7 +321,8 @@ background-attachment: fixed">
                             <div class="input-control" style="margin-left: 50px">
                                 <label for="expirationdate" class="bold">Expiration Date
                                     <br/></label>
-                                <input class="sizesmall" name="ExpirationDate" id="expirationdate" type="text" placeholder="12/24">
+                                <input class="sizesmall" name="ExpirationDate" id="expirationdate" type="text"
+                                       placeholder="12/24">
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -384,7 +395,7 @@ background-attachment: fixed">
                         <!-- Buttons -->
                         <button type="reset" class="reset">Reset</button>
                         <input type="hidden" name="dispatchto" value="newReservation">
-                        <button type="submit" class="send">Send</button>
+                        <button type="submit" class="send" onclick="checkAge()">Send</button>
                         <!--submit type damit enter taste auch submitted-->
                     </div>
                 </form>

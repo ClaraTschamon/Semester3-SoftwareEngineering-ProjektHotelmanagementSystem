@@ -15,7 +15,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ReservationUseCaseController implements EmailService {
+public class ReservationUseCaseController {
     private ReservationDTO reservationDTO;
     private CustomerDTO customerDTO;
     ArrayList<RoomDTO> freeRooms;
@@ -38,7 +38,9 @@ public class ReservationUseCaseController implements EmailService {
     private int maxFamilyRooms;
     private int maxSuites;
 
-    public ReservationUseCaseController() throws IOException {
+    private EmailService emailService;
+
+    public ReservationUseCaseController(EmailService email_service) throws IOException {
 
         reservationDTO = new ReservationDTO();
         customerDTO = new CustomerDTO();
@@ -47,6 +49,7 @@ public class ReservationUseCaseController implements EmailService {
         freeDoubleRooms = new ArrayList<>();
         freeFamilyRooms = new ArrayList<>();
         freeSuites = new ArrayList<>();
+        emailService = email_service;
     }
 
     public ReservationDTO getReservationDTO() {
@@ -196,6 +199,8 @@ public class ReservationUseCaseController implements EmailService {
         reservationDTO.setReservedRoomCategories(reservedRoomCategories);
     }
 
+
+
     public void save() throws CustomerIsInvalidException, ReservationIsInvalidException {
         if (reservationDTO != null && customerDTO != null) {
             reservationDTO.setPricePerNightForBoard(reservationDTO.getBoard().getPricePerNight()); //nullpointer exception
@@ -222,26 +227,7 @@ public class ReservationUseCaseController implements EmailService {
                 message1 = message1.append(". Your reservation number is: ").append(reservationNumber);
                 emailInfo.setBody(message1.toString());
             }
-            sendMail(emailInfo); //writes mail to file. Doesn't actually send email.
-        }
-    }
-
-    @Override
-    public void sendMail(EmailInfo emailInfo) {
-        try{
-//            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
-            //DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\samuel\\Documents\\GitHub\\Hotelmanagement\\Emails.txt", true));
-            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\samue\\Documents\\GitHub\\Hotelmanagement\\Emails.txt", true));
-
-            dataOutputStream.writeUTF(LocalDateTime.now().toString());
-            dataOutputStream.writeUTF(": ");
-            dataOutputStream.writeUTF(emailInfo.toString());
-            dataOutputStream.write('\n');
-            dataOutputStream.flush();
-            dataOutputStream.close();
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
+            emailService.sendMail(emailInfo); //writes mail to file. Doesn't actually send email.
         }
     }
 }

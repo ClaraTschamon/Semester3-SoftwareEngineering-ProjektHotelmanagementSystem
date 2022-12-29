@@ -3,6 +3,8 @@ package com.fhv.hotelmanagement.view;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
+import com.fhv.hotelmanagement.services.EmailService.EmailInfo;
+import com.fhv.hotelmanagement.services.EmailService.EmailService;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BoardDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
@@ -50,7 +52,8 @@ public class WebServlet extends HttpServlet {
         switch (dispatchto) {
             case "newReservation":
                 if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController();
+                    EmailService emailService = new EmailInfo();
+                    useCaseController = new ReservationUseCaseController(emailService);
                     useCaseController.calculateMaxCountRooms(
                             (LocalDate) session.getAttribute("arrivalDate"),
                             (LocalDate) session.getAttribute("departureDate")
