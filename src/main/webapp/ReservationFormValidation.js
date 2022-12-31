@@ -148,7 +148,7 @@ const validateInputs = () => {
     const billingCountryValue = billingCountry.value.trim();
 
 
-    /*
+
     const singleRoomInput = document.querySelector('#singleroom');
     const doubleRoomInput = document.querySelector('#doubleroom');
     const familyRoomInput = document.querySelector('#familyroom');
@@ -176,19 +176,26 @@ const validateInputs = () => {
         setSuccess(suites);
     }
 
-    const guestsInput = document.querySelector('#guests');
+//Rooms
+    const peopleInput = document.getElementById('people-input');
+    const singleRoom = document.getElementById('singleroom');
+    const doubleRoom = document.getElementById('doubleroom');
+    const familyRoom = document.getElementById('familyroom');
+    const suiteRoom = document.getElementById('suite');
+    //----------------------------------------------------------------
+    const peopleInputValue = peopleInput.value.trim();
+    const singleRoomValue = singleRoom.value.trim();
+    const doubleRoomValue = doubleRoom.value.trim();
+    const familyRoomValue = familyRoom.value.trim();
+    const suiteRoomValue = suiteRoom.value.trim();
+    //----------------------------------------------------------------
 
-
-    const maxCapacity = singleRooms + doubleRooms * 2 + familyRooms * 4 + suites * 4;
-
-    if (Number(guestsInput.value) > maxCapacity) {
-        guestsInput.classList.add('invalid');
-        document.querySelector('.error').innerHTML = 'Number of guests exceeds maximum capacity of selected rooms';
-        event.preventDefault();
+    if (peopleInputValue > 0 &&
+        peopleInputValue - singleRoomValue - (doubleRoomValue * 2) - (familyRoomValue * 4) - (suiteRoomValue * 4) <= 0) {
+        setSuccess(peopleInput);
     } else {
-        guestsInput.classList.remove('invalid');
-    }*/
-
+        setError(peopleInput, 'Room size doesnt match with the amount of guests')
+    }
 
 //firstname
     if (firstNameValue === '') {
