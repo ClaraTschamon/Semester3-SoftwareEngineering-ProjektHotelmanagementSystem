@@ -148,7 +148,8 @@ const validateInputs = () => {
     const billingCountryValue = billingCountry.value.trim();
 
 
-
+/*
+//Nina
     const singleRoomInput = document.querySelector('#singleroom');
     const doubleRoomInput = document.querySelector('#doubleroom');
     const familyRoomInput = document.querySelector('#familyroom');
@@ -176,6 +177,7 @@ const validateInputs = () => {
         setSuccess(suites);
     }
 
+//Dominik
 //Rooms
     const peopleInput = document.getElementById('people-input');
     const singleRoom = document.getElementById('singleroom');
@@ -195,7 +197,7 @@ const validateInputs = () => {
         setSuccess(peopleInput);
     } else {
         setError(peopleInput, 'Room size doesnt match with the amount of guests')
-    }
+    }*/
 
 //firstname
     if (firstNameValue === '') {
@@ -216,16 +218,17 @@ const validateInputs = () => {
     }
 //birthday
 
-
+//Nationalität
+    /*
     //Wenn --please select-- dann soll anderes ausgewählt werden NATIONALITY
     if (nationalitySelect.value === 'select') {
         // Wenn ja, rufe setError auf, um eine Fehlermeldung anzuzeigen
-        setError(nationalitySelect, 'Please select a payment method');
+        setError(nationalitySelect, 'Please select a Nationality method');
     } else {
         // Wenn nicht, entferne die Klassen "error" und "success" vom Elternelement und füge die Klasse "success" hinzu
         inputControl.classList.remove('error');
         inputControl.classList.add('success');
-    }
+    }*/
 
 
 //street
@@ -290,7 +293,22 @@ const validateInputs = () => {
         setSuccess(email);
     }
 
+//Payment
 
+/*
+//Versuch 1
+    var paymentMethod = document.getElementById("paymentmethod");
+    var errorDiv = paymentMethod.nextElementSibling;
+
+    if (paymentMethod.value === "select") {
+        paymentMethod.style.borderColor = "red";
+        errorDiv.innerHTML = "Bitte auswählen";
+    } else {
+        paymentMethod.style.borderColor = "";
+        errorDiv.innerHTML = "";
+    }
+}
+//Versuch 2
     //Wenn --please select-- dann soll anderes ausgewählt werden
     if (paymentMethodSelect.value === 'select') {
         // Wenn ja, rufe setError auf, um eine Fehlermeldung anzuzeigen
@@ -299,7 +317,8 @@ const validateInputs = () => {
         // Wenn nicht, entferne die Klassen "error" und "success" vom Elternelement und füge die Klasse "success" hinzu
         inputControl.classList.remove('error');
         inputControl.classList.add('success');
-    }
+    }*/
+
 //kreditkartenummer
     if (creditCardValue === '') {
         setError(creditCard, 'Required field');
