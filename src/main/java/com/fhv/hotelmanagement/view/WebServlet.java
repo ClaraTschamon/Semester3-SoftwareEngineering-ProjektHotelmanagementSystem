@@ -141,7 +141,7 @@ public class WebServlet extends HttpServlet {
         LocalDate dateOfBirth = LocalDate.parse(request.getParameter("birthdate"));
         String nationality = request.getParameter("Nationality");
         String phoneNumber = request.getParameter("PhoneNumber");
-        String email = request.getParameter("Email Address");
+        String email = request.getParameter("EmailAddress");
 
         //get Attributes for Customer's living Address
         String street = request.getParameter("Street");
