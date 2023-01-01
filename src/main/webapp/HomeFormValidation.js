@@ -2,7 +2,7 @@ const form = document.getElementById('form');
 
 const arrivalDate = document.getElementById('arrivalDate');
 const departureDate = document.getElementById('departureDate');
-/*
+
 let hasError = false;
 
 form.addEventListener('submit', e => {
@@ -30,4 +30,4 @@ const validateInputs = () => {
     } else {
         hasError = false;
     }
-}*/
+}

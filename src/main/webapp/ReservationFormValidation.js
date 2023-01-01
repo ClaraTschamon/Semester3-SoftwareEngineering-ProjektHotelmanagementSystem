@@ -29,6 +29,13 @@ const securityNumber = document.getElementById('securitynumber');
 const expirationDate = document.getElementById('expirationdate');
 const billingCountry = document.getElementById('billingcountry');
 
+const singleRoom = document.getElementById('singleroom');
+const doubleRoom = document.getElementById('doubleroom');
+const familyRoom = document.getElementById('familyroom');
+const suite = document.getElementById('suite')
+
+const peopleInput = document.getElementById('people-input');
+
 let hasError = false;
 
 form.addEventListener('submit', e => {
@@ -148,56 +155,52 @@ const validateInputs = () => {
     const billingCountryValue = billingCountry.value.trim();
 
 
-/*
+
 //Nina
+    /*
     const singleRoomInput = document.querySelector('#singleroom');
     const doubleRoomInput = document.querySelector('#doubleroom');
     const familyRoomInput = document.querySelector('#familyroom');
     const suiteInput = document.querySelector('#suite');
 
+     */
+
+    /*
     const singleRooms = Number(document.querySelector('#singleroom').value);
     const doubleRooms = Number(document.querySelector('#doubleroom').value);
     const familyRooms = Number(document.querySelector('#familyroom').value);
     const suites = Number(document.querySelector('#suite').value);
 
-    const paymentMethodSelect = document.querySelector('#paymentmethod');
-    const nationalitySelect = document.querySelector('#nationality');
+     */
 
-
-    if (singleRoomInput.value === "0" && doubleRoomInput.value === "0" && familyRoomInput.value === "0" && suiteInput.value === "0") {
-        setError(singleRooms, 'Choose at least one room!');
-        setError(doubleRooms, 'Choose at least one room!');
-        setError(familyRooms, 'Choose at least one room!');
-        setError(suites, 'Choose at least one room!');
-        event.preventDefault();
-    } else {
-        setSuccess(singleRooms);
-        setSuccess(doubleRooms);
-        setSuccess(familyRooms);
-        setSuccess(suites);
-    }
-
-//Dominik
-//Rooms
-    const peopleInput = document.getElementById('people-input');
-    const singleRoom = document.getElementById('singleroom');
-    const doubleRoom = document.getElementById('doubleroom');
-    const familyRoom = document.getElementById('familyroom');
-    const suiteRoom = document.getElementById('suite');
-    //----------------------------------------------------------------
-    const peopleInputValue = peopleInput.value.trim();
     const singleRoomValue = singleRoom.value.trim();
     const doubleRoomValue = doubleRoom.value.trim();
     const familyRoomValue = familyRoom.value.trim();
-    const suiteRoomValue = suiteRoom.value.trim();
-    //----------------------------------------------------------------
+    const suiteValue = suite.value.trim();
+    const peopleInputValue = peopleInput.value.trim();
+
+    //const paymentMethodSelect = document.querySelector('#paymentmethod');
+    //const nationalitySelect = document.querySelector('#nationality');
+
+    if (singleRoomValue === "0" && doubleRoomValue === "0" && familyRoomValue === "0" && suiteValue === "0") {
+        setError(singleRoom, 'Choose at least one room!');
+        setError(doubleRoom, 'Choose at least one room!');
+        setError(familyRoom, 'Choose at least one room!');
+        setError(suite, 'Choose at least one room!');
+    } else {
+        setSuccess(singleRoom);
+        setSuccess(doubleRoom);
+        setSuccess(familyRoom);
+        setSuccess(suite);
+    }
 
     if (peopleInputValue > 0 &&
-        peopleInputValue - singleRoomValue - (doubleRoomValue * 2) - (familyRoomValue * 4) - (suiteRoomValue * 4) <= 0) {
+        peopleInputValue - singleRoomValue - (doubleRoomValue * 2) - (familyRoomValue * 4) - (suiteValue * 4) <= 0) {
         setSuccess(peopleInput);
     } else {
         setError(peopleInput, 'Room size doesnt match with the amount of guests')
-    }*/
+    }
+
 
 //firstname
     if (firstNameValue === '') {
@@ -216,7 +219,11 @@ const validateInputs = () => {
     } else {
         setSuccess(lastName)
     }
+
 //birthday
+
+
+
 
 //Nationalität
     /*
