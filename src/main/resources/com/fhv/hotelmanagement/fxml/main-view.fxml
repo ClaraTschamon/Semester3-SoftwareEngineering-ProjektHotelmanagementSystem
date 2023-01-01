@@ -26,7 +26,8 @@
                     </graphic>
                 </Button>
                 <Pane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
-                <Button onAction="#onReservationsClicked" contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="140.0"
+                <Button onAction="#onReservationsClicked" contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0"
+                        prefWidth="140.0"
                         styleClass="mainviewbutton" stylesheets="@css.css" text="Reservations" textFill="#9a9a9a">
                     <graphic>
                         <ImageView fitHeight="80.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
