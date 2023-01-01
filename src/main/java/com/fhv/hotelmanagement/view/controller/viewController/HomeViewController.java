@@ -162,8 +162,8 @@ public class HomeViewController implements Initializable {
 
         for (BookingDTO bookingDTO : allCurrentBookingDTOs) {
             if(!bookingDTO.getDepartureDate().equals(LocalDate.now())){ //departure date today zimmer werden heute wieder frei. sollen nicht als besetzt angezeigt werden
-                for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
-                    String category = bookedRoomCategoryDTO.getRoomCategory().getName();
+                for(BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()) {
+                    String category = bookedRoomDTO.getRoom().getCategory().getName();
                     switch (category) {
                         case "Single room":
                             occupiedSingleRooms++;
@@ -174,7 +174,7 @@ public class HomeViewController implements Initializable {
                         case "Family room":
                             occupiedFamilyRooms++;
                             break;
-                        case "Suites":
+                        case "Suite":
                             occupiedSuites++;
                             break;
                     }
@@ -189,8 +189,8 @@ public class HomeViewController implements Initializable {
 
         for(ReservationViewBean checkInTodayBean : checkInTodayBeans){
             if(checkInTodayBean.getArrivalDate().equals(LocalDate.now())){ //departure date today zimmer werden heute wieder frei. sollen nicht als besetzt angezeigt werden
-                for (ReservedRoomCategoryDTO reservedRoomCategoryDTO : checkInTodayBean.getReservationDTO().getReservedRoomCategories()) {
-                    String category = reservedRoomCategoryDTO.getRoomCategory().getName();
+                for(ReservedRoomDTO reservedRoomDTO : checkInTodayBean.getReservationDTO().getReservedRooms()) {
+                    String category = reservedRoomDTO.getRoom().getCategory().getName();
                     switch (category) {
                         case "Single room":
                             checkInTodaySingleRooms++;
