@@ -81,7 +81,7 @@ background-attachment: fixed">
                                     <input class="sizesmall" type="number" id="doubleroom" name="doubleroom" min="0"
                                            value="0"
                                            max=${sessionScope.maxDoubleRooms}>
-                                    <div class="error"></div>
+                                    <div class="error" style="margin-left: 50px"></div>
                                 </div>
                             </td>
                             <td>
@@ -108,7 +108,7 @@ background-attachment: fixed">
                                     <label for="suite" style="margin-left: 50px" class="bold">Suite <br/></label>
                                     <input class="sizesmall" type="number" id="suite" name="suite" min="0" value="0"
                                            max=${sessionScope.maxSuites}>
-                                    <div class="error"></div>
+                                    <div class="error" style="margin-left: 50px"></div>
                                 </div>
                             </td>
 
@@ -395,7 +395,7 @@ background-attachment: fixed">
                         <!-- Buttons -->
                         <button type="reset" class="reset">Reset</button>
                         <input type="hidden" name="dispatchto" value="newReservation">
-                        <button type="submit" class="send" onclick="checkAge()">Send</button>
+                        <button type="submit" class="send">Send</button>
                         <!--submit type damit enter taste auch submitted-->
                     </div>
                 </form>
