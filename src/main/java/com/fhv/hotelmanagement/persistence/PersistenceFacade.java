@@ -4,6 +4,11 @@ package com.fhv.hotelmanagement.persistence;
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
 import net.bytebuddy.agent.builder.AgentBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.LoggerConfig;
 
 import java.util.*;
 
@@ -11,6 +16,8 @@ import java.time.LocalDate;
 
 //Broker == Mapper
 public class PersistenceFacade{
+
+    private static final Logger logger = LogManager.getLogger();
 
     public static ArrayList<Board> getAllBoards() {
         return BoardDataMapper.getAll();
@@ -29,10 +36,18 @@ public class PersistenceFacade{
     }
 
     public static Long insertBooking(Booking booking) {
+        /*LoggerContext ctx = (LoggerContext) LogManager.getContext();
+        Configuration config = ctx.getConfiguration();
+        System.out.println(config);
+        LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
+        loggerConfig.addAppender(config.getAppender("FileAppender"), null, null);
+        ctx.updateLoggers();*/
+        logger.info("Booking was inserted");
         return BookingDataMapper.instance().insert(booking);
     }
 
     public static void storeBooking(Booking booking) {
+        logger.info("Booking was inserted");
         BookingDataMapper.instance().store(booking);
     }
 
@@ -64,10 +79,12 @@ public class PersistenceFacade{
     public static ArrayList<Customer> getSavedCustomers(){ return CustomerDataMapper.getSavedCustomers();}
 
     public static Long insertCustomer(Customer customer) {
+        logger.info("Customer was inserted");
         return CustomerDataMapper.instance().insert(customer);
     }
 
     public static void storeCustomer(Customer customer) {
+        logger.info("Customer was stored");
         CustomerDataMapper.instance().store(customer);
     }
 
