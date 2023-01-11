@@ -30,20 +30,21 @@ background-attachment: fixed">
 
 <!-- Der weiße Hintergrund-->
 <div style="float: left">
-    <div class="whitebackground">
+    <div class="whitebackground" style="height: 100%; margin-top: -25px">
         <!--zurückpfeil-->
         <div class="topbar">
 
             <div class="left">
                 <a href="index.html">
                     <img src="zurueckpfeil.png" id="back" alt="backArrow">
+                    <h2>Back to home</h2>
                 </a>
             </div>
         </div>
 
         <!-- Überschrift -->
-        <div class="centerContent">
-            <h1>The reservation was successfully!</h1>
+        <div class="centerContent" style="margin-top: 100px">
+            <h1 style="margin-left: 50px">The reservation was successfully!</h1>
 
         </div>
     </div>
