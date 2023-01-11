@@ -30,4 +30,3 @@ const validateInputs = () => {
         hasError = false;
     }
 }
-
