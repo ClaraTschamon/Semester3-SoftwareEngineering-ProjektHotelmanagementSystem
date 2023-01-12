@@ -3,13 +3,8 @@ package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
-import jakarta.persistence.EntityManager;
-import net.bytebuddy.agent.builder.AgentBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.LoggerConfig;
 
 import java.util.*;
 
@@ -43,12 +38,13 @@ public class PersistenceFacade{
         LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
         loggerConfig.addAppender(config.getAppender("FileAppender"), null, null);
         ctx.updateLoggers();*/
-        logger.info("Booking was inserted");
-        return BookingDataMapper.instance().insert(booking);
+        long number = BookingDataMapper.instance().insert(booking);
+        logger.info("Booking with number " + number + " was inserted.");
+        return number;
     }
 
     public static void storeBooking(Booking booking) {
-        logger.info("Booking was inserted");
+        logger.info("Booking with number " + booking.getNumber() + " was stored.");
         BookingDataMapper.instance().store(booking);
     }
 
@@ -66,9 +62,16 @@ public class PersistenceFacade{
 
     public static ArrayList<Reservation> getConfirmedReservations(){return ReservationDataMapper.getConfirmedReservations();}
 
-    public static Long insertReservation(Reservation reservation) {return ReservationDataMapper.instance().insert(reservation);}
+    public static Long insertReservation(Reservation reservation) {
+        long number = ReservationDataMapper.instance().insert(reservation);
+        logger.info("Reservation with number" + number + " was inserted.");
+        return number;
+    }
 
-    public static void storeReservation(Reservation reservation){ReservationDataMapper.instance().store(reservation);}
+    public static void storeReservation(Reservation reservation){
+        logger.info("Reservation with number " + reservation.getNumber() + " was stored.");
+        ReservationDataMapper.instance().store(reservation);
+    }
 
     public static void deleteReservation(Reservation reservation){ReservationDataMapper.instance().delete(reservation);}
 
@@ -80,16 +83,21 @@ public class PersistenceFacade{
     public static ArrayList<Customer> getSavedCustomers(){ return CustomerDataMapper.getSavedCustomers();}
 
     public static Long insertCustomer(Customer customer) {
-        logger.info("Customer was inserted");
-        return CustomerDataMapper.instance().insert(customer);
+        long number = CustomerDataMapper.instance().insert(customer);
+        logger.info("Customer with number " + number + " was inserted.");
+        return number;
     }
 
     public static void storeCustomer(Customer customer) {
-        logger.info("Customer was stored");
+        logger.info("Customer with number " + customer.getNumber() + " was stored.");
         CustomerDataMapper.instance().store(customer);
     }
 
-    public static Long insertInvoice(Invoice invoice) { return InvoiceDataMapper.instance().insert(invoice); }
+    public static Long insertInvoice(Invoice invoice) {
+        long number = InvoiceDataMapper.instance().insert(invoice);
+        logger.info("Invoice with number " + invoice.getNumber() + " was created.");
+        return  number;
+    }
     public static ArrayList<RoomCategory> getAllRoomCategories() {
         return RoomCategoryDataMapper.getAll();
     }

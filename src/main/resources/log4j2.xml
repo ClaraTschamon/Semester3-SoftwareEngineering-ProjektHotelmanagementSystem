@@ -5,7 +5,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
-        <File name="FileAppender" fileName="Logs/system-${date:yyyyMMdd}.log" immediateFlush="false" append="true">
+        <File name="FileAppender" fileName="Logs/system-${date:yyyy-MM-dd}.log" immediateFlush="true" append="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
@@ -16,6 +16,14 @@
         </Logger>
 
         <Logger name="org.hibernate.SQL" level="warn" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="org.hibernate.dialect.H2Dialect" level="warn" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="javafx.fxml.FXMLLoader" level="error" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
 

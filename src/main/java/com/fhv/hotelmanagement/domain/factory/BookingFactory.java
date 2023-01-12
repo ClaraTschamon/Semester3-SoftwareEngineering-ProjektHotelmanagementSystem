@@ -118,10 +118,6 @@ public class BookingFactory {
                 BoardFactory.createBoard(bookingDTO.getBoard()), bookingDTO.getPricePerNightForBoard(), bookingDTO.getAmountGuests(),
                 bookedRoomCategories, bookedRooms);
 
-        /*if(reservation != null){
-            booking.setReservation(reservation);
-        }*/
-
         if (fillArrays) {
             for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
                 bookedRoomCategories.add(BookedRoomCategoryFactory.createBookedRoomCategory(bookedRoomCategoryDTO));

@@ -154,7 +154,7 @@ public class ReservationFactory {
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
         Reservation reservation;
 
-        //if(reservationDTO.getBooking() == null){ //neu
+        //if(reservationDTO.getBooking() == null){
             reservation = new Reservation(reservationDTO.getNumber(), null,
                     CustomerFactory.createCustomer(reservationDTO.getCustomer()),
                     reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
