@@ -1,5 +1,6 @@
 package com.fhv.hotelmanagement.view.viewServices;
 
+import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservedRoomDTO;
 import javafx.geometry.Insets;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class ReservationViewBean {
     private ReservationDTO reservationDTO;
+    private BookingDTO bookingDTO;
     private long reservationNumber;
     private String lastName;
     private LocalDate arrivalDate;
@@ -30,6 +32,7 @@ public class ReservationViewBean {
 
     public ReservationViewBean (ReservationDTO reservationDTO) {
         this.reservationDTO = reservationDTO;
+        this.bookingDTO = reservationDTO.getBooking();
         this.reservationNumber = reservationDTO.getNumber();
         this.lastName = reservationDTO.getCustomer().getLastName();
         this.arrivalDate = reservationDTO.getArrivalDate();
@@ -50,7 +53,7 @@ public class ReservationViewBean {
             this.roomNumbers.add(reservedRoomDTO.getRoom().getNumber());
         }
 
-        if(reservationDTO.getBooking() == null) { //wenn booking vorhanden ist, ist sie bestätigt
+        if(bookingDTO == null) { //wenn booking vorhanden ist, ist sie bestätigt
             waitingImageView.setFitHeight(BUTTON_HEIGHT);
             waitingImageView.setPreserveRatio(true);
             imageButton.setGraphic(waitingImageView);

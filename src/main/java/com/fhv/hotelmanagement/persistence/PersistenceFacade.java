@@ -3,6 +3,7 @@ package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
+import jakarta.persistence.EntityManager;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -126,7 +127,7 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-        ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
+        /*ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
         for(Reservation r : allReservations){
             System.out.println(r.getNumber() + " " + r.getBooking());
         }
@@ -143,6 +144,6 @@ public class PersistenceFacade{
         ArrayList<Reservation> reservationsWithoutBooking = ReservationDataMapper.getNotConfirmedReservations();
         for(Reservation r : reservationsWithoutBooking){
             System.out.println(r.getNumber() + " " + r.getBooking());
-        }
+        }*/
     }
 }

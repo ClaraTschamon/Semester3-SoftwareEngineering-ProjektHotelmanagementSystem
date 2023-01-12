@@ -21,6 +21,12 @@
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
+            <!--
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
+            <property name="hibernate.cache.use_query_cache" value="false"/>
+            <property name="hibernate.cache.use_structured_entries" value="false"/>
+            <property name="hibernate.cache.use_minimal_puts" value="false"/>
+            -->
         </properties>
     </persistence-unit>
 </persistence>

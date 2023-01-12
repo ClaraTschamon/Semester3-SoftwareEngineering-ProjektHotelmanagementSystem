@@ -28,9 +28,9 @@ public class ReservationFactory {
     }
 
     public static ArrayList<ReservationDTO> getAllReservations(){
-        if(reservations==null){
-            refreshReservations();
-        }
+        //if(reservations==null){
+        refreshReservations();
+        //}
 
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
 
@@ -173,7 +173,7 @@ public class ReservationFactory {
                     reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
         }*/
 
-        if(reservation.getBooking() != null) {
+        if(reservationDTO.getBooking() != null) {
             Booking booking = BookingFactory.createBooking(reservationDTO.getBooking(), true);
             reservation.setBooking(booking);
         }

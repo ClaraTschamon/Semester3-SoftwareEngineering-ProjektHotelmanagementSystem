@@ -4,6 +4,7 @@ package com.fhv.hotelmanagement.domain.factory;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
+import com.fhv.hotelmanagement.domain.domainModel.Reservation;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.services.StringValidator;
@@ -116,6 +117,10 @@ public class BookingFactory {
                 bookingDTO.getCreditCardNumber(), bookingDTO.getExpirationDate(), bookingDTO.getAuthorisationNumber(),
                 BoardFactory.createBoard(bookingDTO.getBoard()), bookingDTO.getPricePerNightForBoard(), bookingDTO.getAmountGuests(),
                 bookedRoomCategories, bookedRooms);
+
+        /*if(reservation != null){
+            booking.setReservation(reservation);
+        }*/
 
         if (fillArrays) {
             for (BookedRoomCategoryDTO bookedRoomCategoryDTO : bookingDTO.getBookedRoomCategories()) {
