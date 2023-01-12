@@ -32,12 +32,6 @@ public class PersistenceFacade{
     }
 
     public static Long insertBooking(Booking booking) {
-        /*LoggerContext ctx = (LoggerContext) LogManager.getContext();
-        Configuration config = ctx.getConfiguration();
-        System.out.println(config);
-        LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
-        loggerConfig.addAppender(config.getAppender("FileAppender"), null, null);
-        ctx.updateLoggers();*/
         long number = BookingDataMapper.instance().insert(booking);
         logger.info("Booking with number " + number + " was inserted.");
         return number;

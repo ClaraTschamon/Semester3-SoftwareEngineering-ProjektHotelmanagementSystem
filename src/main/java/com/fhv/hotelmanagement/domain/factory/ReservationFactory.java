@@ -174,7 +174,7 @@ public class ReservationFactory {
         }*/
 
         if(reservationDTO.getBooking() != null) {
-            Booking booking = BookingFactory.createBooking(reservationDTO.getBooking(), true);
+            Booking booking = BookingFactory.createBooking(reservationDTO.getBooking(), reservation,false);
             reservation.setBooking(booking);
         }
         if(fillArrays){

@@ -76,6 +76,10 @@ public class BookingDTO {
         return number;
     }
 
+    public void setNumber(long number){
+        this.number = number;
+    }
+
     public ReservationDTO getReservation() {
         return reservation;
     }

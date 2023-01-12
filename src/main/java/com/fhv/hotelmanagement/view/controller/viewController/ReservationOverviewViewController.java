@@ -306,9 +306,10 @@ public class ReservationOverviewViewController implements Initializable {
                     reservation = DomainController.getReservation(l);
                     if (reservation.getBooking() == null) {
                         BookingDTO bookingDTO = createBookingDTO(reservation);
+                        long number = DomainController.saveBooking(bookingDTO);
+                        bookingDTO.setNumber(number);
                         reservation.setBooking(bookingDTO);
-                        DomainController.saveReservation(reservation); //eventuell flush??
-                        DomainController.saveBooking(bookingDTO);
+                        DomainController.saveReservation(reservation);
                         fillTable(currentState);
                     }
                 } catch (NoSuchElementException e) {

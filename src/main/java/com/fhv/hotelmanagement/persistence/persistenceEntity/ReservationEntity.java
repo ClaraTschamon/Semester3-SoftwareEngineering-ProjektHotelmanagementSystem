@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Cacheable(value = false) //TODO: löschen
 @Entity
 @Table(name = "reservation")
 public class ReservationEntity {

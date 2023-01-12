@@ -63,7 +63,7 @@ public class BookingFactory {
     public static Long saveBooking(BookingDTO bookingDTO) throws BookingIsInvalidException {
         Long bookingNumber = bookingDTO.getNumber();
         if (checkBooking(bookingDTO)) {
-            Booking booking = createBooking(bookingDTO, true);
+            Booking booking = createBooking(bookingDTO, ReservationFactory.createReservation(bookingDTO.getReservation(), true),true);
             if (bookingNumber == null) {
                 bookingNumber = PersistenceFacade.insertBooking(booking);
             } else {
@@ -103,13 +103,13 @@ public class BookingFactory {
         return bookingDTO;
     }
 
-    protected static Booking createBooking(BookingDTO bookingDTO, boolean fillArrays) {
+    protected static Booking createBooking(BookingDTO bookingDTO, Reservation reservation, boolean fillArrays) {
         AddressDTO billingAddress = bookingDTO.getBillingAddress();
 
         ArrayList<BookedRoomCategory> bookedRoomCategories = new ArrayList<>();
         ArrayList<BookedRoom> bookedRooms = new ArrayList<>();
 
-        Booking booking = new Booking(bookingDTO.getNumber(), ReservationFactory.createReservation(bookingDTO.getReservation(), true),
+        Booking booking = new Booking(bookingDTO.getNumber(), reservation,
                 CustomerFactory.createCustomer(bookingDTO.getCustomer()), bookingDTO.getArrivalDate(),
                 bookingDTO.getCheckInDatetime(), bookingDTO.getDepartureDate(), bookingDTO.getCheckOutDatetime(),
                 billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(),
