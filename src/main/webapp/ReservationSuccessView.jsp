@@ -44,7 +44,7 @@ background-attachment: fixed">
 
         <!-- Überschrift -->
         <div class="centerContent" style="margin-top: 100px">
-            <h1 style="margin-left: 50px">The reservation was successfully!</h1>
+            <h1 style="margin-left: 50px">The reservation was saved successfully!</h1>
 
         </div>
     </div>
