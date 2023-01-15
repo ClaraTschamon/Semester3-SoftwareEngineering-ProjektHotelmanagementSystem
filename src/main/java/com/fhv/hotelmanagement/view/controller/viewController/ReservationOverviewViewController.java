@@ -286,11 +286,12 @@ public class ReservationOverviewViewController implements Initializable {
         for (ReservationDTO reservation : notConfirmedReservations) {
             Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
-            if (daysDiff > 3) { //3 tage vor geplantem check-in ist keine anzahlung notwendig
+            if (daysDiff > 3) { //3 tage vor geplantem check-in ist keine anzahlung notwendi
                 //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
                 period = Period.between(LocalDate.now(), reservation.getArrivalDate());
                 daysDiff = Math.abs(period.getDays());
                 if (daysDiff < 3) {
+                    System.out.println("at delete reservation");
                     DomainController.deleteReservation(reservation);
                     fillTable(currentState);
                 }
@@ -301,21 +302,20 @@ public class ReservationOverviewViewController implements Initializable {
         try {
             ArrayList<Long> reservationNumbers = depositService.parseData(depositService.convertData());
             for (Long l : reservationNumbers) {
+
                 ReservationDTO reservation;
                 try {
                     reservation = DomainController.getReservation(l);
                     if (reservation.getBooking() == null) {
                         BookingDTO bookingDTO = createBookingDTO(reservation);
-                        long number = DomainController.saveBooking(bookingDTO);
-                        bookingDTO.setNumber(number);
                         reservation.setBooking(bookingDTO);
                         DomainController.saveReservation(reservation);
-                        fillTable(currentState);
+                        DomainController.saveBooking(bookingDTO);
                     }
                 } catch (NoSuchElementException e) {
                     System.out.println("There is no resevation with the number: " + l.toString());
                 }
-                //fillTable(currentState);
+                fillTable(currentState);
             }
         } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();
@@ -337,7 +337,7 @@ public class ReservationOverviewViewController implements Initializable {
         phPaymentMethodText.setText("");
     }
 
-    private BookingDTO createBookingDTO(ReservationDTO reservationDTO){ //gehört in BookingFactory... createBookingDTOFromReservation
+    private BookingDTO createBookingDTO(ReservationDTO reservationDTO){
         BookingDTO bookingDTO = new BookingDTO(null, reservationDTO, reservationDTO.getCustomer(), reservationDTO.getArrivalDate(), null,
                 reservationDTO.getDepartureDate(), null, reservationDTO.getBillingAddress(), reservationDTO.getPaymentMethod(),
                 reservationDTO.getCreditCardNumber(), reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), reservationDTO.getBoard(),
@@ -354,6 +354,7 @@ public class ReservationOverviewViewController implements Initializable {
             bookedRoomCategoryDTO.setBooking(bookingDTO);
             bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
         }
+
 
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
 

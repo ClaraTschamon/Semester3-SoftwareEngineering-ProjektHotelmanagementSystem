@@ -32,7 +32,7 @@ public class BookedRoomFactory {
     }
 
     protected static BookedRoom createBookedRoom(BookedRoomDTO bookedRoomDTO) {
-        return new BookedRoom(BookingFactory.createBooking(bookedRoomDTO.getBooking(), ReservationFactory.createReservation(bookedRoomDTO.getBooking().getReservation(), true), false),
+        return new BookedRoom(BookingFactory.createBooking(bookedRoomDTO.getBooking(), false),
                 RoomFactory.createRoom(bookedRoomDTO.getRoom()),
                 bookedRoomDTO.getFromDate(), bookedRoomDTO.getToDate());
     }

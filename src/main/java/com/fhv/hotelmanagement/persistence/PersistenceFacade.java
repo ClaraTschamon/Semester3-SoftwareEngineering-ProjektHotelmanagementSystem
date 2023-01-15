@@ -3,8 +3,7 @@ package com.fhv.hotelmanagement.persistence;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.dataMapper.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.bytebuddy.agent.builder.AgentBuilder;
 
 import java.util.*;
 
@@ -12,8 +11,6 @@ import java.time.LocalDate;
 
 //Broker == Mapper
 public class PersistenceFacade{
-
-    private static final Logger logger = LogManager.getLogger();
 
     public static ArrayList<Board> getAllBoards() {
         return BoardDataMapper.getAll();
@@ -32,13 +29,10 @@ public class PersistenceFacade{
     }
 
     public static Long insertBooking(Booking booking) {
-        long number = BookingDataMapper.instance().insert(booking);
-        logger.info("Booking with number " + number + " was inserted.");
-        return number;
+        return BookingDataMapper.instance().insert(booking);
     }
 
     public static void storeBooking(Booking booking) {
-        logger.info("Booking with number " + booking.getNumber() + " was stored.");
         BookingDataMapper.instance().store(booking);
     }
 
@@ -56,16 +50,9 @@ public class PersistenceFacade{
 
     public static ArrayList<Reservation> getConfirmedReservations(){return ReservationDataMapper.getConfirmedReservations();}
 
-    public static Long insertReservation(Reservation reservation) {
-        long number = ReservationDataMapper.instance().insert(reservation);
-        logger.info("Reservation with number" + number + " was inserted.");
-        return number;
-    }
+    public static Long insertReservation(Reservation reservation) {return ReservationDataMapper.instance().insert(reservation);}
 
-    public static void storeReservation(Reservation reservation){
-        logger.info("Reservation with number " + reservation.getNumber() + " was stored.");
-        ReservationDataMapper.instance().store(reservation);
-    }
+    public static void storeReservation(Reservation reservation){ReservationDataMapper.instance().store(reservation);}
 
     public static void deleteReservation(Reservation reservation){ReservationDataMapper.instance().delete(reservation);}
 
@@ -77,21 +64,14 @@ public class PersistenceFacade{
     public static ArrayList<Customer> getSavedCustomers(){ return CustomerDataMapper.getSavedCustomers();}
 
     public static Long insertCustomer(Customer customer) {
-        long number = CustomerDataMapper.instance().insert(customer);
-        logger.info("Customer with number " + number + " was inserted.");
-        return number;
+        return CustomerDataMapper.instance().insert(customer);
     }
 
     public static void storeCustomer(Customer customer) {
-        logger.info("Customer with number " + customer.getNumber() + " was stored.");
         CustomerDataMapper.instance().store(customer);
     }
 
-    public static Long insertInvoice(Invoice invoice) {
-        long number = InvoiceDataMapper.instance().insert(invoice);
-        logger.info("Invoice with number " + invoice.getNumber() + " was created.");
-        return  number;
-    }
+    public static Long insertInvoice(Invoice invoice) { return InvoiceDataMapper.instance().insert(invoice); }
     public static ArrayList<RoomCategory> getAllRoomCategories() {
         return RoomCategoryDataMapper.getAll();
     }
@@ -129,7 +109,7 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-        /*ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
+        ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
         for(Reservation r : allReservations){
             System.out.println(r.getNumber() + " " + r.getBooking());
         }
@@ -146,6 +126,6 @@ public class PersistenceFacade{
         ArrayList<Reservation> reservationsWithoutBooking = ReservationDataMapper.getNotConfirmedReservations();
         for(Reservation r : reservationsWithoutBooking){
             System.out.println(r.getNumber() + " " + r.getBooking());
-        }*/
+        }
     }
 }

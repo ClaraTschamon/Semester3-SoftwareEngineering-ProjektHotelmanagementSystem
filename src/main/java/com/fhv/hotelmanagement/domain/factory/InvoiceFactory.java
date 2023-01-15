@@ -24,7 +24,7 @@ public class InvoiceFactory {
         if (fillArrays) {
             invoicedRoomCategories = InvoicedRoomCategoryFactory.createInvoicedRoomCategories(invoiceDTO.getInvoicedRoomCategories());
         }
-        return new Invoice(invoiceDTO.getNumber(), BookingFactory.createBooking(invoiceDTO.getBooking(), ReservationFactory.createReservation(invoiceDTO.getBooking().getReservation(), true), false),
+        return new Invoice(invoiceDTO.getNumber(), BookingFactory.createBooking(invoiceDTO.getBooking(), false),
                 BoardFactory.createBoard(invoiceDTO.getBoard()), invoiceDTO.getPricePerNightForBoard(), invoiceDTO.getFromDate(),
                 invoiceDTO.getToDate(), invoicedRoomCategories);
 

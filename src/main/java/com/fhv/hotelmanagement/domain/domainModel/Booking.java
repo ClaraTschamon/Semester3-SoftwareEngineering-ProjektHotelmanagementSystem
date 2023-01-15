@@ -1,9 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.domainModel;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +9,7 @@ import java.util.ArrayList;
 public class Booking {
 
     private Long number;
+
     private Reservation reservation;
     private Customer customer;
     private LocalDate arrivalDate;
