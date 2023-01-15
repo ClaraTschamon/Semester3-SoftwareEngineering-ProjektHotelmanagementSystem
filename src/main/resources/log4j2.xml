@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--Beispiel von Sonja Kopf-->
 <Configuration>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
+        <File name="FileAppender" fileName="Logs/system-${date:yyyy-MM-dd}.log" immediateFlush="true" append="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
     </Appenders>
 
     <Loggers>
@@ -17,54 +19,17 @@
             <AppenderRef ref="Console" />
         </Logger>
 
-        <Root level="error">
+        <Logger name="org.hibernate.dialect.H2Dialect" level="warn" additivity="false">
             <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="javafx.fxml.FXMLLoader" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="FileAppender" />
         </Root>
     </Loggers>
 </Configuration>
-
-
-        <!--Beispiel von Studytonight.com-->
-        <!--
-        <Configuration status="WARN">
-
-           <Appenders>
-               <Console name="LogToConsole" target="SYSTEM_OUT">
-                   <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n"/>
-               </Console>
-           </Appenders>
-
-            <Loggers>
-                <Logger name="com.fhv.hotelmanagement" level="debug" additivity="false">
-                    <AppenderRef ref="LogToConsole"/>
-                </Logger>
-                <Root level="error">
-                    <AppenderRef ref="LogToConsole"/>
-                </Root>
-            </Loggers>
-
-        </Configuration>
-        -->
-
-
-
-        <!--Beispiel von StudyTonight.com-->
-        <!--
-        <Configuration status="WARN">
-            <Appenders>
-                <File name="LogToFile" fileName="logs/app.log">
-                    <PatternLayout>
-                        <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
-                    </PatternLayout>
-                </File>
-            </Appenders>
-            <Loggers>
-                <Logger name="com.fhv.hotelmanagement" level="debug" additivity="false">
-                    <AppenderRef ref="LogToFile"/>
-                </Logger>
-                <Root level="error">
-                    <AppenderRef ref="LogToFile"/>
-                </Root>
-            </Loggers>
-        </Configuration>
-        -->
