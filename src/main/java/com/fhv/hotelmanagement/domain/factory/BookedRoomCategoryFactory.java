@@ -38,7 +38,7 @@ public class BookedRoomCategoryFactory {
     }
 
     protected static BookedRoomCategory createBookedRoomCategory(BookedRoomCategoryDTO bookedRoomCategoryDTO) {
-        return new BookedRoomCategory(BookingFactory.createBooking(bookedRoomCategoryDTO.getBooking(), ReservationFactory.createReservation(bookedRoomCategoryDTO.getBooking().getReservation(), true), false),
+        return new BookedRoomCategory(BookingFactory.createBooking(bookedRoomCategoryDTO.getBooking(), false),
                 RoomCategoryFactory.createRoomCategory(bookedRoomCategoryDTO.getRoomCategory()), bookedRoomCategoryDTO.getPricePerNight(),
                 bookedRoomCategoryDTO.getAmount());
     }

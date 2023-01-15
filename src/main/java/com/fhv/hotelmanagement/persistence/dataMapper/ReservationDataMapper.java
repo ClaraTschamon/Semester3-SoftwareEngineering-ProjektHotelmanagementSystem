@@ -2,8 +2,6 @@ package com.fhv.hotelmanagement.persistence.dataMapper;
 
 import com.fhv.hotelmanagement.domain.domainModel.*;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.*;
-import jakarta.persistence.EntityManager;
-import org.h2.engine.Session;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,9 +36,6 @@ public class ReservationDataMapper {
     }
 
     public static ArrayList<Reservation> getAllReservationsBetween(LocalDate minDate, LocalDate maxDate){
-        /*EntityManager entityManager = PersistenceManager.instance().entityManager;
-        entityManager.getEntityManagerFactory().getCache().evictAll();*///TODO: LÖschen
-
         ArrayList<ReservationEntity> entities;
         entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
                 "SELECT reservation FROM ReservationEntity reservation " +
@@ -97,6 +92,7 @@ public class ReservationDataMapper {
             reservationEntity = createReservationEntity(reservation, bookingEntity, customerEntity);
         }
         var entityManager = PersistenceManager.instance().entityManager;
+
         entityManager.getTransaction().begin();
         entityManager.persist(reservationEntity);
         entityManager.getTransaction().commit();
