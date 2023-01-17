@@ -16,15 +16,14 @@ form.addEventListener('submit', e => {
 });
 
 const validateInputs = () => {
-
     const arrivalDateEntered = new Date(arrivalDate.value).getTime();
     const departureDateEntered = new Date(departureDate.value).getTime();
     const dateNow = new Date().getTime();
 
-    if(!(arrivalDateEntered < dateNow)) {
+    if (arrivalDateEntered < dateNow) {
         hasError = true;
-        alert("Arrival date can not be before today!")
-    } else if  (arrivalDateEntered >= departureDateEntered) {
+        alert("Arrival date can not be in the past!");
+    } else if (arrivalDateEntered >= departureDateEntered) {
         hasError = true;
         alert("Arrival date has to be before the departure date!");
     } else {

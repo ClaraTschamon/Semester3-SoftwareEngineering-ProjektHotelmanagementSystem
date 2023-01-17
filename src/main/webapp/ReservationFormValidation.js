@@ -7,9 +7,12 @@ const halfBoard = document.getElementById('halfBoard');
 const justBreakfast = document.getElementById('justBreakfast');
 const noPackage = document.getElementById('noPackage');
 
-
 const firstName = document.getElementById('firstName');
 const lastName = document.getElementById('lastName');
+
+const birthdateInput = document.getElementById('birthdate');
+
+
 const nationality = document.getElementById('nationality');
 const street = document.getElementById('street');
 const houseNumber = document.getElementById('houseNumber');
@@ -23,11 +26,19 @@ const billingHouseNumber = document.getElementById('billinghouseNumber');
 const billingCity = document.getElementById('billingcity');
 const billingZipCode = document.getElementById('billingzipCode');
 
-const arrivalDate = document.getElementById('arrivalDate')
-const creditCard = document.getElementById('creditcardnumber');
+const arrivalDate = document.getElementById('arrivalDate');
+const paymentMethod = document.getElementById('paymentmethod');
+const creditCardNumber = document.getElementById('creditcardnumber');
 const securityNumber = document.getElementById('securitynumber');
 const expirationDate = document.getElementById('expirationdate');
 const billingCountry = document.getElementById('billingcountry');
+
+const singleRoom = document.getElementById('singleroom');
+const doubleRoom = document.getElementById('doubleroom');
+const familyRoom = document.getElementById('familyroom');
+const suite = document.getElementById('suite')
+
+const peopleInput = document.getElementById('people-input');
 
 let hasError = false;
 
@@ -91,12 +102,7 @@ function copyAddress() {
 }
 
 function creditCardSelected() {
-    const paymentMethod = document.getElementById('paymentmethod');
-    const creditCardNumber = document.getElementById('creditcardnumber');
-    const securityNumber = document.getElementById('securitynumber');
-    const expirationDate = document.getElementById('expirationdate');
-
-    if (paymentMethod.value === 'Bill') {
+    if (paymentMethod.value.trim() === 'Bill') {
         creditCardNumber.disabled = true;
         securityNumber.disabled = true;
         expirationDate.disabled = true;
@@ -108,29 +114,11 @@ function creditCardSelected() {
 }
 
 
-function checkAge() {
-    const birthdate = document.getElementById("birthdate").value;
-
-    if (!birthdate) {
-        setError(document.getElementById("birthdate"), "Please enter a valid birthdate.");
-        return;
-    }
-
-
-    const birthdateObject = new Date(birthdate);
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthdateObject.getFullYear();
-
-    if (age < 18) {
-        setError(document.getElementById("birthdate"), "Please enter a date of birth that is over 18 years old.");
-    }
-}
-
-
 const validateInputs = () => {
     //trim() removes all the whitespaces that the string has
     const firstNameValue = firstName.value.trim();
     const lastNameValue = lastName.value.trim();
+    //const birthdateValue = birthdate.value.trim();
     const streetValue = street.value.trim();
     const houseNumberValue = houseNumber.value.trim();
     const cityValue = city.value.trim();
@@ -138,7 +126,7 @@ const validateInputs = () => {
     const countryValue = country.value.trim();
     const phoneNumberValue = phoneNumber.value.trim();
     const emailValue = email.value.trim();
-    const creditCardValue = creditCard.value.trim();
+    const creditCardValue = creditCardNumber.value.trim();
     const securityNumberValue = securityNumber.value.trim();
     const expirationDateValue = expirationDate.value.trim();
     const billingStreetValue = billingStreet.value.trim();
@@ -147,47 +135,35 @@ const validateInputs = () => {
     const billingHouseNumberValue = billingHouseNumber.value.trim();
     const billingCountryValue = billingCountry.value.trim();
 
+    const singleRoomValue = singleRoom.value.trim();
+    const doubleRoomValue = doubleRoom.value.trim();
+    const familyRoomValue = familyRoom.value.trim();
+    const suiteValue = suite.value.trim();
+    const peopleInputValue = peopleInput.value.trim();
 
-    /*
-    const singleRoomInput = document.querySelector('#singleroom');
-    const doubleRoomInput = document.querySelector('#doubleroom');
-    const familyRoomInput = document.querySelector('#familyroom');
-    const suiteInput = document.querySelector('#suite');
-
-    const singleRooms = Number(document.querySelector('#singleroom').value);
-    const doubleRooms = Number(document.querySelector('#doubleroom').value);
-    const familyRooms = Number(document.querySelector('#familyroom').value);
-    const suites = Number(document.querySelector('#suite').value);
-
-    const paymentMethodSelect = document.querySelector('#paymentmethod');
-    const nationalitySelect = document.querySelector('#nationality');
-
-
-    if (singleRoomInput.value === "0" && doubleRoomInput.value === "0" && familyRoomInput.value === "0" && suiteInput.value === "0") {
-        setError(singleRooms, 'Choose at least one room!');
-        setError(doubleRooms, 'Choose at least one room!');
-        setError(familyRooms, 'Choose at least one room!');
-        setError(suites, 'Choose at least one room!');
-        event.preventDefault();
+    if (singleRoomValue === "0" && doubleRoomValue === "0" && familyRoomValue === "0" && suiteValue === "0") {
+        setError(singleRoom, 'Choose at least one room!');
+        setError(doubleRoom, 'Choose at least one room!');
+        setError(familyRoom, 'Choose at least one room!');
+        setError(suite, 'Choose at least one room!');
     } else {
-        setSuccess(singleRooms);
-        setSuccess(doubleRooms);
-        setSuccess(familyRooms);
-        setSuccess(suites);
+        setSuccess(singleRoom);
+        setSuccess(doubleRoom);
+        setSuccess(familyRoom);
+        setSuccess(suite);
     }
 
-    const guestsInput = document.querySelector('#guests');
-
-
-    const maxCapacity = singleRooms + doubleRooms * 2 + familyRooms * 4 + suites * 4;
-
-    if (Number(guestsInput.value) > maxCapacity) {
-        guestsInput.classList.add('invalid');
-        document.querySelector('.error').innerHTML = 'Number of guests exceeds maximum capacity of selected rooms';
-        event.preventDefault();
+    if (peopleInputValue > 0 && peopleInputValue - singleRoomValue - (doubleRoomValue * 2) - (familyRoomValue * 4) - (suiteValue * 4) <= 0) {
+        setSuccess(peopleInput);
     } else {
-        guestsInput.classList.remove('invalid');
-    }*/
+        setError(peopleInput, 'Room size doesnt match with the amount of guests')
+    }
+
+    if (!(fullBoard.checked === true || halfBoard.checked === true || justBreakfast.checked === true || noPackage.checked === true)) {
+        setError(board, 'Required field');
+    } else {
+        setSuccess(board);
+    }
 
 
 //firstname
@@ -207,17 +183,33 @@ const validateInputs = () => {
     } else {
         setSuccess(lastName)
     }
+
 //birthday
+    const birthdate = birthdateInput.value;
+    const birthdateObject = new Date(birthdate);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthdateObject.getFullYear();
 
 
-    //Wenn --please select-- dann soll anderes ausgewählt werden NATIONALITY
-    if (nationalitySelect.value === 'select') {
-        // Wenn ja, rufe setError auf, um eine Fehlermeldung anzuzeigen
-        setError(nationalitySelect, 'Please select a payment method');
+    if (!birthdate) {
+        setError(birthdateInput, "Please enter a valid birthdate.");
     } else {
-        // Wenn nicht, entferne die Klassen "error" und "success" vom Elternelement und füge die Klasse "success" hinzu
-        inputControl.classList.remove('error');
-        inputControl.classList.add('success');
+        if (age < 16) {
+            setError(birthdateInput, "Please enter an age over 16.");
+        } else {
+            setSuccess(birthdateInput);
+        }
+    }
+
+
+
+
+
+//Nationalität
+    if (nationality.value === 'select') {
+        setError(nationality, 'Please select a Nationality method');
+    } else {
+        setSuccess(nationality)
     }
 
 
@@ -283,50 +275,37 @@ const validateInputs = () => {
         setSuccess(email);
     }
 
+//Payment
 
-    //Wenn --please select-- dann soll anderes ausgewählt werden
-    if (paymentMethodSelect.value === 'select') {
+    if (paymentMethod.value.trim() === 'select') {
         // Wenn ja, rufe setError auf, um eine Fehlermeldung anzuzeigen
-        setError(paymentMethodSelect, 'Please select a payment method');
+        setError(paymentMethod, 'Please select a payment method');
     } else {
         // Wenn nicht, entferne die Klassen "error" und "success" vom Elternelement und füge die Klasse "success" hinzu
-        inputControl.classList.remove('error');
-        inputControl.classList.add('success');
+        setSuccess(paymentMethod)
     }
+
+
 //kreditkartenummer
-    if (creditCardValue === '') {
-        setError(creditCard, 'Required field');
-    } else if (!(creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}$)/) ||
-        creditCardValue.match(/(^[ ]{0,}[0-9]{14,16}[ ]{0,}$)/) ||
-        creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{6}[ ]{0,}[0-9]{4}[ ]{0,}$)/) ||
-        creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{6}[ ]{0,}[0-9]{5}[ ]{0,}$)/))) {
-        setError(creditCard, 'Incorrect Input');
-    } else {
-        setSuccess(creditCard);
+    if (!paymentMethod.value.trim() === 'Bill') {
+        if (creditCardValue === '') {
+            setError(creditCardNumber, 'Required field');
+        } else if (!(creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{4}[ ]{0,}$)/) || creditCardValue.match(/(^[ ]{0,}[0-9]{14,16}[ ]{0,}$)/) || creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{6}[ ]{0,}[0-9]{4}[ ]{0,}$)/) || creditCardValue.match(/(^[ ]{0,}[0-9]{4}[ ]{0,}[0-9]{6}[ ]{0,}[0-9]{5}[ ]{0,}$)/))) {
+            setError(creditCardNumber, 'Incorrect Input');
+        } else {
+            setSuccess(creditCardNumber);
+        }
     }
 
 //sicherheitsnummer
-    if (securityNumberValue === '') {
-        setError(securityNumber, 'Required field');
-    } else if (!securityNumberValue.match(/^''{*}[0-9]{3,5}''{*}$/)) {
-        setError(securityNumber, 'Incorrect input');
-    } else {
-        setSuccess(securityNumber);
-    }
-
-    if (!(fullBoard.checked === true ||
-        halfBoard.checked === true ||
-        justBreakfast.checked === true ||
-        noPackage.checked === true)) {
-        setError(board, 'Required field');
-    } else {
-        setSuccess(board);
-    }
-
-    if (nationality.value === 'select') {
-        setError(nationality, 'Required field');
-    } else {
-        setSuccess(nationality);
+    if (!paymentMethod.value.trim() === 'Bill') {
+        if (securityNumberValue === '') {
+            setError(securityNumber, 'Required field');
+        } else if (!securityNumberValue.match(/^''{*}[0-9]{3,5}''{*}$/)) {
+            setError(securityNumber, 'Incorrect input');
+        } else {
+            setSuccess(securityNumber);
+        }
     }
 
 
@@ -335,24 +314,26 @@ const validateInputs = () => {
     const expirationDateString = new Date(Date.parse(expirationDateValue));
 
     const expire = document.getElementById('expirationdate').value;
-    if (expire === '') {
-        setError(expirationDate, 'Requiered field');
-    } else if (!expire.match(/^(0[1-9]|1[0-2])\/[0-9]{2}$/)) {
-        setError(expirationDate, 'wrong format');
-    } else {
-        // get current year and month
-        const d = new Date();
-        const currentYear = d.getFullYear();
-        const currentMonth = d.getMonth() + 1;
-        // get parts of the expiration date
-        const parts = expire.split('/');
-        const year = parseInt(parts[1], 10) + 2000;
-        const month = parseInt(parts[0], 10);
-        // compare the dates
-        if (expirationDateString < today) {
-            setError(expirationDate, 'expire date has passed');
+    if (!paymentMethod.value.trim() === 'Bill') {
+        if (expire === '') {
+            setError(expirationDate, 'Requiered field');
+        } else if (!expire.match(/^(0[1-9]|1[0-2])\/[0-9]{2}$/)) {
+            setError(expirationDate, 'wrong format');
         } else {
-            setSuccess(expirationDate);
+            // get current year and month
+            const d = new Date();
+            const currentYear = d.getFullYear();
+            const currentMonth = d.getMonth() + 1;
+            // get parts of the expiration date
+            const parts = expire.split('/');
+            const year = parseInt(parts[1], 10) + 2000;
+            const month = parseInt(parts[0], 10);
+            // compare the dates
+            if (expirationDateString < today) {
+                setError(expirationDate, 'expire date has passed');
+            } else {
+                setSuccess(expirationDate);
+            }
         }
     }
 
@@ -364,6 +345,15 @@ const validateInputs = () => {
         setError(billingStreet, 'Incorrect input')
     } else {
         setSuccess(billingStreet);
+    }
+
+//billinghousenumber
+    if (billingHouseNumberValue === '') {
+        setError(billingHouseNumber, 'Required field');
+    } else if (!billingHouseNumberValue.match(/^([a-zA-Z0-9_]){1,5}/)) {
+        setError(billingHouseNumber, 'Incorrect input')
+    } else {
+        setSuccess(billingHouseNumber);
     }
 
 //billingcity
@@ -383,6 +373,7 @@ const validateInputs = () => {
     } else {
         setSuccess(billingZipCode);
     }
+
 
 //billingCountry
     if (billingCountryValue === '') {
