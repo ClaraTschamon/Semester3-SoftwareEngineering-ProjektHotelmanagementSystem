@@ -28,8 +28,8 @@ public class CheckOutUseCaseController {
 
             for (BookedRoomDTO bookedRoomDTO : booking.getBookedRooms()) {
                 if (bookedRoomDTO.getFromDate().isAfter(today)) {
-                    bookedRoomDTO.setFromDate(null);
-                    bookedRoomDTO.setToDate(null);
+                    //bookedRoomDTO.setFromDate(null);
+                    //bookedRoomDTO.setToDate(null);
                 } else if (bookedRoomDTO.getToDate().isAfter(today)) {
                     bookedRoomDTO.setToDate(today);
                 }
