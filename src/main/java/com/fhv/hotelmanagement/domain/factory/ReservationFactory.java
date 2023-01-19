@@ -28,8 +28,8 @@ public class ReservationFactory {
     }
 
     public static ArrayList<ReservationDTO> getAllReservations(){
-        //if(reservations==null){
-        refreshReservations();
+        //if(reservations==null){ //TODO probieren wieder auskommentieren
+            refreshReservations();
         //}
 
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
