@@ -8,9 +8,7 @@ import com.fhv.hotelmanagement.domain.exceptions.CustomerIsInvalidException;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.services.StringValidator;
 import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
-import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

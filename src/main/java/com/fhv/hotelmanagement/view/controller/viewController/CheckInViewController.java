@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class CheckInViewController {
     private CheckInUseCaseController useCaseController;
     private boolean searching;
-    private boolean isCheckIn; //also anhand von reservierung mit Reservierung
+    private boolean isCheckIn;
 
     public CheckInViewController() throws IOException {
         useCaseController = new CheckInUseCaseController();

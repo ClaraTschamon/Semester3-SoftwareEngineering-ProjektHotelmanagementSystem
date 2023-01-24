@@ -1,11 +1,9 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.dataMapper;
 
-import com.fhv.hotelmanagement.domain.domainModel.BookedRoom;
 import com.fhv.hotelmanagement.domain.domainModel.BookedRoomCategory;
 import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomCategoryEntity;
-import com.fhv.hotelmanagement.persistence.persistenceEntity.BookedRoomEntity;
 
 import java.util.ArrayList;
 import java.util.Optional;

@@ -73,7 +73,7 @@ public class HomeViewController implements Initializable {
     }
 
 
-    public void choice() throws FileNotFoundException {
+    public void choice() {
 
         AnchorPane choice = new AnchorPane();
         choice.setLayoutX(100);
@@ -238,7 +238,6 @@ public class HomeViewController implements Initializable {
     }
 
     private ArrayList<BookingViewBean> fillCheckOutTodayTable() {
-        //ArrayList<BookingDTO> allBookingDTOs = DomainController.getCurrentBookings();
         ArrayList<BookingDTO> allBookingDTOs = DomainController.getAllBookingsBetween(LocalDate.now(), LocalDate.now());
         ArrayList<BookingViewBean> checkOutTodayBeans = new ArrayList<>();
 

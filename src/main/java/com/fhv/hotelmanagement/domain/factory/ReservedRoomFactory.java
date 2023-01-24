@@ -3,7 +3,6 @@ package com.fhv.hotelmanagement.domain.factory;
 
 import com.fhv.hotelmanagement.domain.domainModel.ReservedRoom;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
-import com.fhv.hotelmanagement.persistence.dataMapper.ReservationDataMapper;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservationDTO;
 import com.fhv.hotelmanagement.view.DTOs.ReservedRoomDTO;

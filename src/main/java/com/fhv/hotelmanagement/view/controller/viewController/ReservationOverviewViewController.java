@@ -5,8 +5,6 @@ import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.*;
-import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
-import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.viewServices.DepositService;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
@@ -88,10 +86,8 @@ public class ReservationOverviewViewController implements Initializable {
 
     private String currentState = new String();
 
-    private ReservationOverviewUseCaseController useCaseController;
 
     public ReservationOverviewViewController() {
-        useCaseController = new ReservationOverviewUseCaseController();
     }
 
     @Override
@@ -124,33 +120,24 @@ public class ReservationOverviewViewController implements Initializable {
     public void fillTable(String state) {
         currentState = state;
         ObservableList<ReservationDTO> reservationDTOs = FXCollections.observableArrayList();
-        System.out.println(state);
-        switch (state) {
-            case "all":
-                System.out.println("is it here"+state);
-                //Fehler befindet sich hier
-                reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
-                System.out.println("or is it here"+state);
-                break;
-            case "confirmed":
-                reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
-                break;
-            case "not confirmed":
-                //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
-                ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
-                ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
-                for (ReservationDTO reservationDTO : allreservationDTOs) {
-                    if (reservationDTO.getBooking() == null) {
-                        notConfirmedReservations.add(reservationDTO);
-                    }
+        if (state.equals("all")) {
+            reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
+        } else if (state.equals("confirmed")) {
+            reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
+        } else if (state.equals("not confirmed")) {
+            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO fixing in ReservationDataMapper
+            ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
+            ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
+            for (ReservationDTO reservationDTO : allreservationDTOs) {
+                if (reservationDTO.getBooking() == null) {
+                    notConfirmedReservations.add(reservationDTO);
                 }
-                reservationDTOs = FXCollections.observableArrayList(notConfirmedReservations);
-                break;
-            case "all between":
-                LocalDate minDate = fromDateDatePicker.getValue();
-                LocalDate maxDate = toDateDatePicker.getValue();
-                reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservationsBetween(minDate, maxDate));
-                break;
+            }
+            reservationDTOs = FXCollections.observableArrayList(notConfirmedReservations);
+        } else if (state.equals("all between")) {
+            LocalDate minDate = fromDateDatePicker.getValue();
+            LocalDate maxDate = toDateDatePicker.getValue();
+            reservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservationsBetween(minDate, maxDate));
         }
         ArrayList<ReservationViewBean> allReservationViewBeans = new ArrayList<>();
         for (ReservationDTO reservationDTO : reservationDTOs) {
@@ -251,7 +238,6 @@ public class ReservationOverviewViewController implements Initializable {
         phCityText.setText(addressDTO.getCity());
         phCountryText.setText(addressDTO.getCountry());
         phPhoneNrText.setText(customerDTO.getPhoneNumber());
-        //TODO: eventuell email addresse dazu?
         phPaymentMethodText.setText(reservationDTO.getPaymentMethod());
     }
 
@@ -282,7 +268,7 @@ public class ReservationOverviewViewController implements Initializable {
 
     @FXML
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        //ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations();
+        //ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations(); //TODO fixing in ReservationDataMapper
         ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservations();
         //filter not confirmed reservations
         ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
@@ -295,12 +281,11 @@ public class ReservationOverviewViewController implements Initializable {
         for (ReservationDTO reservation : notConfirmedReservations) {
             Period period = Period.between(reservation.getCreationTimestamp().toLocalDate(), reservation.getArrivalDate());
             int daysDiff = Math.abs(period.getDays());
-            if (daysDiff > 3) { //3 tage vor geplantem check-in ist keine anzahlung notwendi
+            if (daysDiff > 3) { //3 tage vor geplantem check-in ist keine anzahlung notwendig
                 //wenn zeit bis einchecken <= 3 tage ist wird reservierung gelöscht
                 period = Period.between(LocalDate.now(), reservation.getArrivalDate());
                 daysDiff = Math.abs(period.getDays());
                 if (daysDiff < 3) {
-                    System.out.println("at delete reservation");
                     DomainController.deleteReservation(reservation);
                     fillTable(currentState);
                 }
@@ -311,22 +296,21 @@ public class ReservationOverviewViewController implements Initializable {
         try {
             ArrayList<Long> reservationNumbers = depositService.parseData(depositService.convertData());
             for (Long l : reservationNumbers) {
-
                 ReservationDTO reservation;
                 try {
                     reservation = DomainController.getReservation(l);
                     if (reservation.getBooking() == null) {
                         BookingDTO bookingDTO = createBookingDTO(reservation);
+                        long number = DomainController.saveBooking(bookingDTO);
+                        bookingDTO.setNumber(number);
                         reservation.setBooking(bookingDTO);
-                        bookingDTO.setReservation(reservation);
                         DomainController.saveReservation(reservation);
-                        DomainController.saveBooking(bookingDTO);
+                        fillTable(currentState);
                     }
                 } catch (NoSuchElementException e) {
                     System.out.println("There is no resevation with the number: " + l.toString());
                 }
             }
-            fillTable(currentState);
         } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();
         }
@@ -347,7 +331,7 @@ public class ReservationOverviewViewController implements Initializable {
         phPaymentMethodText.setText("");
     }
 
-    private BookingDTO createBookingDTO(ReservationDTO reservationDTO){
+    private BookingDTO createBookingDTO(ReservationDTO reservationDTO){ //gehört in BookingFactory... createBookingDTOFromReservation
         BookingDTO bookingDTO = new BookingDTO(null, reservationDTO, reservationDTO.getCustomer(), reservationDTO.getArrivalDate(), null,
                 reservationDTO.getDepartureDate(), null, reservationDTO.getBillingAddress(), reservationDTO.getPaymentMethod(),
                 reservationDTO.getCreditCardNumber(), reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), reservationDTO.getBoard(),
@@ -364,7 +348,6 @@ public class ReservationOverviewViewController implements Initializable {
             bookedRoomCategoryDTO.setBooking(bookingDTO);
             bookedRoomCategoryDTOS.add(bookedRoomCategoryDTO);
         }
-
 
         ArrayList<BookedRoomDTO> bookedRoomDTOS = new ArrayList<>();
 

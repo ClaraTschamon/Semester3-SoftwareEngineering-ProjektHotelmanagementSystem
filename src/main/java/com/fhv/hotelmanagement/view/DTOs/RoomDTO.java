@@ -30,10 +30,6 @@ public class RoomDTO {
         return category;
     }
 
-    public void setCategory(RoomCategoryDTO category){
-        this.category = category;
-    }
-
     public boolean getIsFree(){
         return  isFree;
     }

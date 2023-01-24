@@ -1,11 +1,7 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.DTOs;
 
-import com.fhv.hotelmanagement.domain.domainModel.Reservation;
-import com.fhv.hotelmanagement.domain.domainModel.Room;
-import com.fhv.hotelmanagement.domain.domainModel.RoomCategory;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class ReservedRoomCategoryDTO {
     private ReservationDTO reservation;

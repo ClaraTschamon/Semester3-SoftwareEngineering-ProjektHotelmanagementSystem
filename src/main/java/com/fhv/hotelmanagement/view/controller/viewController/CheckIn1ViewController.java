@@ -2,7 +2,6 @@
 package com.fhv.hotelmanagement.view.controller.viewController;
 
 import com.fhv.hotelmanagement.MainApplication;
-import com.fhv.hotelmanagement.MainController;
 import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.viewServices.WarningType;
@@ -22,7 +21,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.CheckModel;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -342,7 +340,7 @@ public class CheckIn1ViewController implements Initializable {
             bookingDTO.setPricePerNightForBoard(null);
         }
 
-        // save booked rooms (TODO save other prices)
+        // save booked rooms
         ArrayList<RoomDTO> bookedSingleRooms = new ArrayList<>(singleRoomDropDown.getCheckModel().getCheckedItems());
         ArrayList<RoomDTO> bookedDoubleRooms = new ArrayList<>(doubleRoomDropDown.getCheckModel().getCheckedItems());
         ArrayList<RoomDTO> bookedFamilyRooms = new ArrayList<>(familyRoomDropDown.getCheckModel().getCheckedItems());

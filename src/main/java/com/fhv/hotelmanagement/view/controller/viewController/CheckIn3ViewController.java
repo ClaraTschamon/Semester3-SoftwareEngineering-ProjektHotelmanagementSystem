@@ -1,9 +1,4 @@
 //Hotelmanagementsystem TeamA 2022/23
-/**Created by
- * Date:
- * Time:
- * Project Name:
- */
 
 package com.fhv.hotelmanagement.view.controller.viewController;
 
@@ -45,11 +40,6 @@ public class CheckIn3ViewController {
     private Label checkInForLabel;
     @FXML
     private Label roomNumbersLabel;
-
-
-    /*if you go back after you clicked the "billingAddressEqualsCustomerAddressButton" it will delete the filled in customer bill address
-    -->This prevents false information to be saved (if the customer chooses to replace his address after going back to walk-In2*/
-    private boolean billingAddressEqualsCustomerAddressBackButtonClick;
 
     public void setController(CheckInViewController viewController) {
         this.viewController = viewController;

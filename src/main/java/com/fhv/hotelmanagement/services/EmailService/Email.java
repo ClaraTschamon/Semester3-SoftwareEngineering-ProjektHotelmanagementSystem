@@ -1,3 +1,4 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.services.EmailService;
 
 import java.io.DataOutputStream;
@@ -56,13 +57,11 @@ public class Email implements IEmailService {
 
     @Override
     public void sendMail(Email email) {
-        //hier muss es ein emailservice objekt sein
-        //überall wo ich emailservice anspreche darf ich nur mit interface reden
-        //emailService als globale variable als attribut wahrscheinlich im controller gespeichert
         try{
-            //DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
+            /*absoluter Pfad angeben weil es Tomcat sonst nicht findet!*/
+            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\clara\\IdeaProjects\\Hotelmanagement\\Emails.txt", true));
             //DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\samuel\\Documents\\GitHub\\Hotelmanagement\\Emails.txt", true));
-            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\ninah\\FH Dornbirn\\Hotelmanagement\\Emails.txt", true));
+            //DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream("C:\\Users\\ninah\\FH Dornbirn\\Hotelmanagement\\Emails.txt", true));
             dataOutputStream.writeUTF(LocalDateTime.now().toString());
             dataOutputStream.writeUTF(": ");
             dataOutputStream.writeUTF(email.toString());

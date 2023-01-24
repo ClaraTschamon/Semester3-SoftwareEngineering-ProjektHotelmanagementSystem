@@ -60,8 +60,6 @@ public class ReservedRoomCategoryDataMapper {
                     RoomCategoryDataMapper.createRoomCategoryEntity(reservedRoomCategory.getRoomCategory()),
                     reservedRoomCategory.getPricePerNight(), reservedRoomCategory.getAmount());
         }
-
-
     }
 
     protected static ReservedRoomCategory createReservedRoomCategory(ReservedRoomCategoryEntity reservedRoomCategoryEntity, Reservation reservation) {

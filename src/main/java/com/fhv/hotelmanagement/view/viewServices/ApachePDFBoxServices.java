@@ -1,20 +1,17 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.viewServices;
 
-import com.fhv.hotelmanagement.MainApplication;
 import com.fhv.hotelmanagement.view.DTOs.*;
 import com.fhv.hotelmanagement.view.controller.viewController.CheckOutViewController;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -27,28 +24,14 @@ public class ApachePDFBoxServices {
 
         BookingDTO bookingDTO = viewController.getUseCaseController().getBooking();
 
-//        String DEST = "src/main/resources/com/fhv/hotelmanagement/pdf/Rechnung" + bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf";
-
         String DEST=("Rechnung"+bookingDTO.getNumber() + bookingDTO.getCustomer().getFirstName() + bookingDTO.getCustomer().getLastName() + ".pdf");
-
-//        String watermarkSrc="src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/watermarkFinal.png";
-//        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/RealWatermark.png";
-//        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/evenBetterFinalVersionWatermark.png";
-//        String watermarkSrc = "src/main/resources/com/fhv/hotelmanagement/pdf/Watermarks/final20Plus.png";
-//
-//        String iconSrc = "src/main/resources/com/fhv/hotelmanagement/fxml/Bilder/SunwayohneHintergrund2.png";
 
         try (PDDocument doc = new PDDocument()) {
 
             PDPage myPage = new PDPage();
             doc.addPage(myPage);
 
-//            PDImageXObject watermark = PDImageXObject.createFromFile(watermarkSrc, doc);
-//            PDImageXObject icon = PDImageXObject.createFromFile(iconSrc, doc);
-
             try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
-//                cont.drawImage(watermark, 70,250);
-//                cont.drawImage(icon, 10, 680);
                 cont.beginText();
                 cont.setFont(PDType1Font.COURIER, 12);
                 cont.setLeading(14.5f);
@@ -86,10 +69,6 @@ public class ApachePDFBoxServices {
                 BigDecimal totalSumGross = totalSumNet.add(salesTax).add(touristTax);
 
                 StringBuilder rooms = new StringBuilder();
-//                ArrayList<BookedRoomDTO> bookedRoomDTOs = bookingDTO.getBookedRooms();
-//                for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
-//                    rooms.append(bookedRoomDTO.getRoom().getNumber()).append(",");
-//                }
 
                 ReservationDTO reservation = bookingDTO.getReservation();
                 BigDecimal depositValue = new BigDecimal(0);
@@ -164,7 +143,6 @@ public class ApachePDFBoxServices {
                 cont.showText(line02);
                 cont.newLine();
 
-                //schrieben mi a i erklärs euch denn koa kommentar kann des erklära LG. Samuel Jäger
                 ArrayList<BookedRoomCategoryDTO> parsedArrayList = new ArrayList<>();
 
                 for (int i = 0; i < bookingDTO.getBookedRoomCategories().size(); i++) {
@@ -251,10 +229,6 @@ public class ApachePDFBoxServices {
                 String packages = bookingDTO.getBoard().getName();
                 String packagecost = String.valueOf(bookingDTO.getBoard().getPricePerNight());
 
-//                if (rooms.length() > 10) {
-//                    rooms = dynamicRoomNumbers(rooms, 10);
-//                }
-
                 rooms.append(bookingDTO.getBookedRooms().get(0).getBooking().getAmountGuests());
 
                 String line11 = rooms + "" + dynamicStringDistance(20, rooms.length()) + packages + dynamicStringDistance(20, packages.length()) + packagecost + ",-" + dynamicStringDistance(20, packagecost.length() + 2);
@@ -314,8 +288,6 @@ public class ApachePDFBoxServices {
             doc.save(DEST);
             File pdf = new File(DEST);
             Desktop.getDesktop().open(pdf);
-            //infinite booking hack
-//            String easteregg = String.valueOf(bookingDTO.getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0).getBooking().getBookedRooms().get(0));
         } catch (IOException e) {
             e.printStackTrace();
         }

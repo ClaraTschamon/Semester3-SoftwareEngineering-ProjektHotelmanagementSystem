@@ -51,12 +51,8 @@ public class ReservationDataMapper {
         return reservations;
     }
 
-    public static ArrayList<Reservation> getNotConfirmedReservations(){
+    public static ArrayList<Reservation> getNotConfirmedReservations(){ //TODO funktioniert aus unerklärlichen gründen nicht
         List<ReservationEntity> entities;
-        /*entities = (ArrayList<ReservationEntity>) PersistenceManager.instance().entityManager.createQuery("" +
-                "SELECT reservation FROM ReservationEntity reservation " +
-                "WHERE reservation.booking =: param")
-                .setParameter("param", null).getResultList();*/
 
         entities =  PersistenceManager.instance().entityManager.createQuery("" +
                         "SELECT reservation FROM ReservationEntity reservation " +

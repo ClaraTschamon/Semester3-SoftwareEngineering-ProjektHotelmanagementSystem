@@ -202,10 +202,7 @@ const validateInputs = () => {
     }
 
 
-
-
-
-//Nationalität
+//nationality
     if (nationality.value === 'select') {
         setError(nationality, 'Please select a Nationality method');
     } else {
@@ -239,6 +236,8 @@ const validateInputs = () => {
     } else {
         setSuccess(city);
     }
+
+
 //zipcode
     if (zipCodeValue === '') {
         setError(zipCode, 'Required field');
@@ -247,6 +246,8 @@ const validateInputs = () => {
     } else {
         setSuccess(zipCode);
     }
+
+
 //country
     if (countryValue === '') {
         setError(country, 'Required field');
@@ -255,6 +256,7 @@ const validateInputs = () => {
     } else {
         setSuccess(country);
     }
+
 
 //phonenumber
     if (phoneNumberValue === '') {

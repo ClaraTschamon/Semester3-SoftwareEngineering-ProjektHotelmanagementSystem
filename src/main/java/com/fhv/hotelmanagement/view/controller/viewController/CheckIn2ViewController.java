@@ -199,7 +199,7 @@ public class CheckIn2ViewController implements Initializable {
         boolean postalCodeIsValid = false;
         boolean countryIsValid = false;
         boolean birthdayIsValid = false;
-        //warum alles außer zahlen?
+
         if (!StringValidator.checkString(firstNameTextField.getText())) {
             TextFunction.setRequieredTextField(firstNameTextField);
         } else if (StringValidator.checkRegex(firstNameTextField.getText(), "[^0-9]+$")) {
@@ -217,11 +217,6 @@ public class CheckIn2ViewController implements Initializable {
             TextFunction.setTextFieldColor(lastNameTextField, "red");
             TextFunction.setEventHandler(lastNameTextField);
         }
-
-        /*
-        if (nationalityComboBox.getSelectionModel().getSelectedItem() != null) {
-             nationalityIsValid = true;
-        }*/
 
         if (!nationalityComboBox.getSelectionModel().getSelectedItem().equals("")) {
             nationalityIsValid = true;

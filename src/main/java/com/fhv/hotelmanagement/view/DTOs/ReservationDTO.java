@@ -1,8 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view.DTOs;
 
-import com.fhv.hotelmanagement.domain.domainModel.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -74,9 +74,6 @@ public class WebServlet extends HttpServlet {
             case "selectDates":
                 arrivalDate = LocalDate.parse(request.getParameter("arrivalDate"));
                 departureDate = LocalDate.parse(request.getParameter("departureDate"));
-                /*if(useCaseController == null){
-                    useCaseController = new ReservationUseCaseController();
-                }*/
                 useCaseController.calculateMaxCountRooms(arrivalDate, departureDate);
                 int amountGuests = Integer.parseInt(request.getParameter("people-input"));
                 session.setAttribute("arrivalDate", arrivalDate);
@@ -161,7 +158,7 @@ public class WebServlet extends HttpServlet {
         customerDTO.setFirstName(firstName);
         customerDTO.setLastName(lastName);
         customerDTO.setDateOfBirth(dateOfBirth);
-        customerDTO.setNationality(nationality); //TODO
+        customerDTO.setNationality(nationality);
         customerDTO.setPhoneNumber(phoneNumber);
         customerDTO.setEmail(email);
         customerDTO.setAddress(customerAddressDTO);
@@ -190,5 +187,4 @@ public class WebServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-
 }

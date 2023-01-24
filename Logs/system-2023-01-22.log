@@ -1,0 +1,20 @@
+2023-01-22 15:27:58.625 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:28:41.939 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:31:41.065 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:32:18.055 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:32:26.954 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:32:34.562 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:33:11.088 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:34:31.842 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:38:34.227 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:39:22.073 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:42:04.016 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:44:38.818 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 15:47:50.773 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 1 was inserted.
+2023-01-22 15:47:50.818 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 1 was inserted.
+2023-01-22 15:50:38.864 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 2 was inserted.
+2023-01-22 15:50:38.895 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 2 was inserted.
+2023-01-22 15:53:48.243 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 3 was inserted.
+2023-01-22 15:53:48.263 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 3 was inserted.
+2023-01-22 16:04:20.887 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-22 16:11:41.274 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
