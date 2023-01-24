@@ -10,15 +10,15 @@
 - Clara Tschamon
 
 ## Technologien
-• Gradle,
-• JavaFX,
-• ControlsFX für CheckCombobBox und SearchableComboBox
-• Hibernate,
-• H2 Database,
-• Log4j,
-• Apache PDF Box,
-• Jakarta Servlets,
-• Tomcat 10.0.27
+- Gradle,
+- JavaFX,
+- ControlsFX für CheckCombobBox und SearchableComboBox
+- Hibernate,
+- H2 Database,
+- Log4j,
+- Apache PDF Box,
+- Jakarta Servlets,
+- Tomcat 10.0.27
 
 ## Inhalt von Dokument: "Dokumenation Team A":
 1. Vision
