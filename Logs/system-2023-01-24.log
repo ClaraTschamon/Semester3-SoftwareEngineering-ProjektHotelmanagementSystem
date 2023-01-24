@@ -12,3 +12,36 @@
 2023-01-24 06:48:29.228 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 38 was inserted.
 2023-01-24 06:48:44.795 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 38 was stored.
 2023-01-24 06:48:44.819 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Invoice with number null was created.
+2023-01-24 11:32:08.604 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 11:38:47.989 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 1 was stored.
+2023-01-24 11:38:48.095 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 39 was inserted.
+2023-01-24 11:39:34.764 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 39 was stored.
+2023-01-24 11:39:34.788 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Invoice with was created.
+2023-01-24 11:46:11.843 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 11:48:11.726 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 4 was stored.
+2023-01-24 11:48:11.778 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 5 was stored.
+2023-01-24 11:48:13.110 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 4 was stored.
+2023-01-24 11:48:13.165 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 5 was stored.
+2023-01-24 11:48:16.337 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 4 was stored.
+2023-01-24 11:48:16.382 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 5 was stored.
+2023-01-24 12:20:33.506 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:21:06.768 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:21:51.269 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Reservation with number 161 was stored.
+2023-01-24 12:22:02.378 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Reservation with number 161 was stored.
+2023-01-24 12:24:32.671 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:24:49.942 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Reservation with number 97 was stored.
+2023-01-24 12:25:12.491 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Reservation with number 2 was stored.
+2023-01-24 12:28:48.263 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 293 was inserted.
+2023-01-24 12:28:48.291 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 40 was inserted.
+2023-01-24 12:36:13.975 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:38:51.603 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:41:25.938 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 1 was inserted.
+2023-01-24 12:41:25.983 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 1 was inserted.
+2023-01-24 12:43:40.122 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 2 was inserted.
+2023-01-24 12:43:40.137 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 2 was inserted.
+2023-01-24 12:50:05.206 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:51:36.765 [JavaFX Application Thread] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-01-24 12:54:10.998 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Customer with number 35 was inserted.
+2023-01-24 12:54:11.042 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 3 was inserted.
+2023-01-24 12:54:23.743 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Booking with number 3 was stored.
+2023-01-24 12:54:23.768 [JavaFX Application Thread] INFO  com.fhv.hotelmanagement.persistence.PersistenceFacade - Invoice with was created.
