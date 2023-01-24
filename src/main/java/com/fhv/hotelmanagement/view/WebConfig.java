@@ -1,3 +1,4 @@
+//Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.view;
 
 import com.fhv.hotelmanagement.services.EmailService.Email;
@@ -13,7 +14,7 @@ import java.io.IOException;
 @WebListener
 public class WebConfig implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
-        // Do your thing during webapp's startup.
+        // During webapp's startup.
         try {
             IEmailService emailService = new Email();
             ReservationUseCaseController reservationUseCaseController = new ReservationUseCaseController(emailService);

@@ -6,7 +6,6 @@ import com.fhv.hotelmanagement.view.DTOs.AddressDTO;
 import com.fhv.hotelmanagement.view.DTOs.BookingDTO;
 import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.DTOs.CustomerDTO;
-import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -88,12 +87,15 @@ public class BookingOverviewViewController implements Initializable {
         //hide weekNumbers in DatePicker
         fromDateDatePicker.setShowWeekNumbers(false);
         toDateDatePicker.setShowWeekNumbers(false);
+
         //set default Value on DatePicker
         fromDateDatePicker.setValue(LocalDate.now());
         toDateDatePicker.setValue(LocalDate.now().plusDays(1));
+
         //disable DatePicker on default because default state is "checked-in"
         fromDateDatePicker.setDisable(true);
         toDateDatePicker.setDisable(true);
+
         //disable CheckInButton on default to prevent mistakes
         checkInButton.setDisable(true);
 
@@ -265,7 +267,6 @@ public class BookingOverviewViewController implements Initializable {
      * Wenn check-out geklickt wird, wird die ausgewählte buchung an den checkOutUseCaseController
      * weiter gegeben. Dann wird der CheckOut geladen.
      */
-
     @FXML
     private void onCheckInClicked(ActionEvent actionEvent) throws IOException {
         CheckInViewController checkInViewController = new CheckInViewController();
@@ -305,5 +306,4 @@ public class BookingOverviewViewController implements Initializable {
         phPhoneNrText.setText("");
         phPaymentMethodText.setText("");
     }
-
 }

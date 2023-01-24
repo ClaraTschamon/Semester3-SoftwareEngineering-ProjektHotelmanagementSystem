@@ -1,13 +1,11 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.persistence.persistenceEntity;
 
-import com.fhv.hotelmanagement.domain.domainModel.Booking;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity

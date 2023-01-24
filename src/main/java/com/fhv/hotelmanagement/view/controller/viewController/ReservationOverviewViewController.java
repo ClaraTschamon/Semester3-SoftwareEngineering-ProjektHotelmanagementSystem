@@ -5,8 +5,6 @@ import com.fhv.hotelmanagement.domain.domainController.DomainController;
 import com.fhv.hotelmanagement.domain.exceptions.BookingIsInvalidException;
 import com.fhv.hotelmanagement.domain.exceptions.ReservationIsInvalidException;
 import com.fhv.hotelmanagement.view.DTOs.*;
-import com.fhv.hotelmanagement.view.controller.useCaseController.ReservationOverviewUseCaseController;
-import com.fhv.hotelmanagement.view.viewServices.BookingViewBean;
 import com.fhv.hotelmanagement.view.viewServices.DepositService;
 import com.fhv.hotelmanagement.view.viewServices.ReservationViewBean;
 import javafx.beans.value.ChangeListener;
@@ -88,10 +86,8 @@ public class ReservationOverviewViewController implements Initializable {
 
     private String currentState = new String();
 
-    private ReservationOverviewUseCaseController useCaseController;
 
     public ReservationOverviewViewController() {
-        useCaseController = new ReservationOverviewUseCaseController();
     }
 
     @Override
@@ -129,7 +125,7 @@ public class ReservationOverviewViewController implements Initializable {
         } else if (state.equals("confirmed")) {
             reservationDTOs = FXCollections.observableArrayList(DomainController.getConfirmedReservations());
         } else if (state.equals("not confirmed")) {
-            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO funktioniert noch nicht
+            //reservationDTOs = FXCollections.observableArrayList(DomainController.getNotConfirmedReservations()); //TODO fixing in ReservationDataMapper
             ObservableList<ReservationDTO> allreservationDTOs = FXCollections.observableArrayList(DomainController.getAllReservations());
             ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
             for (ReservationDTO reservationDTO : allreservationDTOs) {
@@ -242,7 +238,6 @@ public class ReservationOverviewViewController implements Initializable {
         phCityText.setText(addressDTO.getCity());
         phCountryText.setText(addressDTO.getCountry());
         phPhoneNrText.setText(customerDTO.getPhoneNumber());
-        //TODO: eventuell email addresse dazu?
         phPaymentMethodText.setText(reservationDTO.getPaymentMethod());
     }
 
@@ -273,7 +268,7 @@ public class ReservationOverviewViewController implements Initializable {
 
     @FXML
     public void onRefreshButtonClicked(ActionEvent actionEvent) {
-        //ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations();
+        //ArrayList<ReservationDTO> reservations = DomainController.getNotConfirmedReservations(); //TODO fixing in ReservationDataMapper
         ArrayList<ReservationDTO> allReservationDTOs = DomainController.getAllReservations();
         //filter not confirmed reservations
         ArrayList<ReservationDTO> notConfirmedReservations = new ArrayList<>();
@@ -315,7 +310,6 @@ public class ReservationOverviewViewController implements Initializable {
                 } catch (NoSuchElementException e) {
                     System.out.println("There is no resevation with the number: " + l.toString());
                 }
-                //fillTable(currentState);
             }
         } catch (IOException | ReservationIsInvalidException | BookingIsInvalidException e) {
             e.printStackTrace();

@@ -27,10 +27,7 @@ public class CheckOutUseCaseController {
             booking.setCheckOutDatetime(LocalDateTime.now());
 
             for (BookedRoomDTO bookedRoomDTO : booking.getBookedRooms()) {
-                if (bookedRoomDTO.getFromDate().isAfter(today)) {
-                    //bookedRoomDTO.setFromDate(null);
-                    //bookedRoomDTO.setToDate(null);
-                } else if (bookedRoomDTO.getToDate().isAfter(today)) {
+                if (bookedRoomDTO.getToDate().isAfter(today)) {
                     bookedRoomDTO.setToDate(today);
                 }
             }

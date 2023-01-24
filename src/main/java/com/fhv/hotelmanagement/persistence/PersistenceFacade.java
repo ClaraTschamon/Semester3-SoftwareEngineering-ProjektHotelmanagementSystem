@@ -89,7 +89,7 @@ public class PersistenceFacade{
 
     public static Long insertInvoice(Invoice invoice) {
         long number = InvoiceDataMapper.instance().insert(invoice);
-        logger.info("Invoice with number " + invoice.getNumber() + " was created.");
+        logger.info("Invoice with was created.");
         return  number;
     }
     public static ArrayList<RoomCategory> getAllRoomCategories() {
@@ -129,23 +129,5 @@ public class PersistenceFacade{
 
     public static void main(String[] args) {
 
-        /*ArrayList<Reservation> allReservations = ReservationDataMapper.getAll();
-        for(Reservation r : allReservations){
-            System.out.println(r.getNumber() + " " + r.getBooking());
-        }
-
-        System.out.println("\n");
-        System.out.println("ReservationsWithBooking");
-        ArrayList<Reservation> reservationsWithBooking = ReservationDataMapper.getConfirmedReservations();
-        for(Reservation r : reservationsWithBooking){
-            System.out.println(r.getNumber() + " " + r.getBooking());
-        }
-
-        System.out.println("\n");
-        System.out.println("ReservationsWithoutBooking");
-        ArrayList<Reservation> reservationsWithoutBooking = ReservationDataMapper.getNotConfirmedReservations();
-        for(Reservation r : reservationsWithoutBooking){
-            System.out.println(r.getNumber() + " " + r.getBooking());
-        }*/
     }
 }

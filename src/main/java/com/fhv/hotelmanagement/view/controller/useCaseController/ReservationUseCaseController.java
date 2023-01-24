@@ -41,7 +41,6 @@ public class ReservationUseCaseController {
     private IEmailService emailService;
 
     public ReservationUseCaseController(IEmailService email_service) throws IOException {
-
         reservationDTO = new ReservationDTO();
         customerDTO = new CustomerDTO();
         reservationDTO.setCustomer(customerDTO);
@@ -87,7 +86,6 @@ public class ReservationUseCaseController {
     public void calculateMaxCountRooms(LocalDate arrivalDate, LocalDate departureDate){
         freeRooms = createFreeRoomsList(arrivalDate, departureDate);
         createFreeRoomsLists2(freeRooms);
-
 
         maxSingleRooms = freeSingleRooms.size();
         maxDoubleRooms = freeDoubleRooms.size();
@@ -228,6 +226,17 @@ public class ReservationUseCaseController {
                 emailInfo.setBody(message1.toString());
             }
             emailService.sendMail(emailInfo); //writes mail to file. Doesn't actually send email.
+            resetReservation();
         }
+    }
+
+    private void resetReservation() {
+        reservationDTO = new ReservationDTO();
+        customerDTO = new CustomerDTO();
+        reservationDTO.setCustomer(customerDTO);
+        freeSingleRooms = new ArrayList<>();
+        freeDoubleRooms = new ArrayList<>();
+        freeFamilyRooms = new ArrayList<>();
+        freeSuites = new ArrayList<>();
     }
 }

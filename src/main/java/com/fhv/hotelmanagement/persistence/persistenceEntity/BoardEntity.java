@@ -33,7 +33,6 @@ public class BoardEntity {
         this.name = name;
     }
 
-
     public BigDecimal getPricePerNight() {
         return pricePerNight;
     }

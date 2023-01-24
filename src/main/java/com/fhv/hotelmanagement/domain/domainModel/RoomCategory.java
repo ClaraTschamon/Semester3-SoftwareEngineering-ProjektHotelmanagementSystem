@@ -2,7 +2,6 @@
 package com.fhv.hotelmanagement.domain.domainModel;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public class RoomCategory {
     private String name;

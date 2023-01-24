@@ -12,7 +12,6 @@ public class CheckOutViewController {
 
     private boolean isFromBookingOverview;
 
-    //wenn man über bookingOverview auf CheckOutButton klickt, sollen Suchfeld und dropdownliste disabled sein
     public CheckOutViewController() throws IOException {
         useCaseController = new CheckOutUseCaseController();
         isFromBookingOverview = false;

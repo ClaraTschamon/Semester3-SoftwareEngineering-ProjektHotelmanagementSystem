@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ReservationFactory {
-
     private static ArrayList<Reservation> reservations;
 
     public static ReservationDTO getReservation(Long number){
@@ -28,12 +27,10 @@ public class ReservationFactory {
     }
 
     public static ArrayList<ReservationDTO> getAllReservations(){
-        //if(reservations==null){ //TODO probieren wieder auskommentieren
-            refreshReservations();
-        //}
+
+        refreshReservations();
 
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
-
 
         for (Reservation r: reservations){
             if(r.getBooking() != null) {
@@ -154,24 +151,13 @@ public class ReservationFactory {
         ArrayList<ReservedRoom> reservedRooms = new ArrayList<>();
         Reservation reservation;
 
-        //if(reservationDTO.getBooking() == null){
-            reservation = new Reservation(reservationDTO.getNumber(), null,
-                    CustomerFactory.createCustomer(reservationDTO.getCustomer()),
-                    reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
-                    billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
-                    billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
-                    reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
-                    reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
-        /*} else {
-
-            reservation = new Reservation(reservationDTO.getNumber(), BookingFactory.createBooking(reservationDTO.getBooking(), true),
-                    CustomerFactory.createCustomer(reservationDTO.getCustomer()),
-                    reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
-                    billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
-                    billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
-                    reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
-                    reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
-        }*/
+        reservation = new Reservation(reservationDTO.getNumber(), null,
+                CustomerFactory.createCustomer(reservationDTO.getCustomer()),
+                reservationDTO.getCreationTimestamp(), reservationDTO.getArrivalDate(), reservationDTO.getDepartureDate(),
+                billingAddress.getStreet(), billingAddress.getHouseNumber(), billingAddress.getPostalCode(), billingAddress.getCity(),
+                billingAddress.getCountry(), reservationDTO.getComment(), reservationDTO.getPaymentMethod(), reservationDTO.getCreditCardNumber(),
+                reservationDTO.getExpirationDate(), reservationDTO.getAuthorisationNumber(), BoardFactory.createBoard(reservationDTO.getBoard()),
+                reservationDTO.getPricePerNightForBoard(), reservationDTO.getAmountGuests(), reservedRoomCategories, reservedRooms);
 
         if(reservationDTO.getBooking() != null) {
             Booking booking = BookingFactory.createBooking(reservationDTO.getBooking(), reservation,false);

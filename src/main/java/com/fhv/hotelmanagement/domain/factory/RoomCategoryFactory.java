@@ -5,7 +5,6 @@ import com.fhv.hotelmanagement.domain.domainModel.RoomCategory;
 import com.fhv.hotelmanagement.persistence.PersistenceFacade;
 import com.fhv.hotelmanagement.view.DTOs.RoomCategoryDTO;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RoomCategoryFactory {

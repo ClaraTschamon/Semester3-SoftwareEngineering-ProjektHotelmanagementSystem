@@ -31,6 +31,6 @@ public class InvoiceFactory {
     }
 
     public static boolean checkInvoice(InvoiceDTO invoiceDTO) {
-        return true; // TODO
+        return true; //TODO
     }
 }

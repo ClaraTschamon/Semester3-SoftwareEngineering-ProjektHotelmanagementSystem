@@ -27,7 +27,6 @@ public class CheckInUseCaseController {
         customer = new CustomerDTO();
         booking.setCustomer(customer);
         booking.setArrivalDate(LocalDate.now());
-        //customer.setSaved(true);
         billingAddressEqualsCustomerAddress = true;
         customers = DomainController.getSavedCustomers();
         reservations = DomainController.getAllReservationsBetween(LocalDate.now().minusDays(1), LocalDate.now().plusDays(3));

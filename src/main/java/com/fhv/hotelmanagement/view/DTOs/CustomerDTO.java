@@ -2,7 +2,6 @@
 package com.fhv.hotelmanagement.view.DTOs;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class CustomerDTO {
 
@@ -113,5 +112,4 @@ public class CustomerDTO {
     public void setSaved(Boolean saved) {
         this.saved = saved;
     }
-
 }

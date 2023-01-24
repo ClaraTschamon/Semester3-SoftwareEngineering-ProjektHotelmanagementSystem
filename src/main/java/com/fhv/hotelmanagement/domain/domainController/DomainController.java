@@ -1,7 +1,6 @@
 //Hotelmanagementsystem TeamA 2022/23
 package com.fhv.hotelmanagement.domain.domainController;
 
-import com.fhv.hotelmanagement.domain.domainModel.Reservation;
 import com.fhv.hotelmanagement.domain.exceptions.*;
 import com.fhv.hotelmanagement.domain.factory.*;
 import com.fhv.hotelmanagement.view.DTOs.*;
@@ -9,7 +8,6 @@ import com.fhv.hotelmanagement.view.DTOs.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class DomainController {
 
@@ -73,7 +71,7 @@ public class DomainController {
         return ReservationFactory.getAllReservationsBetween(minDate, maxDate);
     }
 
-    public static ArrayList<ReservationDTO> getNotConfirmedReservations() {return ReservationFactory.getNotConfirmedReservations();}
+    //public static ArrayList<ReservationDTO> getNotConfirmedReservations() {return ReservationFactory.getNotConfirmedReservations();} //TODO: in ReservationDataMapper fixen
 
     public static ArrayList<ReservationDTO> getConfirmedReservations(){return ReservationFactory.getConfirmedReservations();}
 
@@ -86,6 +84,4 @@ public class DomainController {
     public static void deleteReservation(ReservationDTO reservationDTO){
         ReservationFactory.deleteReservation(reservationDTO);
     }
-
-
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19"
+            prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fhv.hotelmanagement.MainController">
     <left>
         <VBox prefHeight="792.0" prefWidth="140.0" style="-fx-background-color: #21273D;" BorderPane.alignment="CENTER">

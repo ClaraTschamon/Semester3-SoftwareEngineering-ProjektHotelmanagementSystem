@@ -148,7 +148,6 @@ public class BookingFactory {
 //                                || (BoardFactory.checkBoard(bookingDTO.getBoard()) && bookingDTO.getPricePerNightForBoard() != null && bookingDTO.getPricePerNightForBoard().intValue() >= 0))
 //        );
         return (bookingDTO != null) && checkReservation(bookingDTO) &&
-                //(ReservationFactory.checkReservation(bookingDTO.getReservation())) &&
                 (CustomerFactory.checkCustomer(bookingDTO.getCustomer())) &&
                 (bookingDTO.getArrivalDate() != null) &&
                 (bookingDTO.getDepartureDate() != null) &&
