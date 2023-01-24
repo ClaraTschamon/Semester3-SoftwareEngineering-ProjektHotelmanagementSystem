@@ -9,6 +9,14 @@
 - Ida Mazinger,
 - Clara Tschamon
 
+## Architektur
+#### generell: Layered Architecture
+![image](https://user-images.githubusercontent.com/103147059/214224982-39d09219-ca84-46d8-8177-7a3a00ccd110.png)
+
+#### Email Mock Dependency Injection
+![image](https://user-images.githubusercontent.com/103147059/214225033-93e0120a-db9f-404c-8221-36483dfaea74.png)
+
+
 ## Technologien
 - Gradle,
 - JavaFX,
