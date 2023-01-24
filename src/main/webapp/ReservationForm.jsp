@@ -172,7 +172,7 @@ background-attachment: fixed">
 
                     <!-- Geburtsdatum -->
                     <div class="input-control">
-                        <label for="birthdate" class="bold">Choose your birthday:<br/></label>
+                        <label for="birthdate" class="bold">Choose your date of birth<br/></label>
                         <input type="date" id="birthdate" name="birthdate" class="sizebig">
                         <div class="error"></div>
                     </div>
