@@ -1,6 +1,6 @@
 # Hotelmanagement Team A
 
-## Lehrveranstaltung: Software Engineering und Agiles Software Projektmanagement an der FH Vorarlberg
+## Lehrveranstaltungen: Software Engineering und Agiles Software Projektmanagement an der FH Vorarlberg
 
 ## Teammitglieder:
 - Dominik Aigner,
@@ -11,7 +11,8 @@
 
 ## Architektur
 #### generell: Layered Architecture
-![image](https://user-images.githubusercontent.com/103147059/214224982-39d09219-ca84-46d8-8177-7a3a00ccd110.png)
+![image](https://user-images.githubusercontent.com/103147059/214611163-1c8e52c1-f6c3-4ff1-bad5-a982ab9411c9.png)
+
 
 #### Email Mock Dependency Injection
 ![image](https://user-images.githubusercontent.com/103147059/214225033-93e0120a-db9f-404c-8221-36483dfaea74.png)
@@ -28,7 +29,7 @@
 - Jakarta Servlets,
 - Tomcat 10.0.27
 
-## Inhalt von Dokument: "Dokumenation Team A":
+## Inhalt von Dokument: "Dokumenation Team A"
 1. Vision
 2. Projektablauf
 3. Architektur
@@ -38,3 +39,5 @@
 2. Was noch fehlt & Lessons learned…
 3. Anleitung zur Erweiterbarkeit
 4. Teamarbeit, Zeitaufwand, Schwierigkeiten
+
+## Persönlicher Review in Dokument: ProjectReportClaraTschamon
