@@ -9,6 +9,7 @@
 - Ida Mazinger,
 - Clara Tschamon
 
+
 ## Architektur
 #### generell: Layered Architecture
 ![image](https://user-images.githubusercontent.com/103147059/214611163-1c8e52c1-f6c3-4ff1-bad5-a982ab9411c9.png)
@@ -41,3 +42,9 @@
 4. Teamarbeit, Zeitaufwand, Schwierigkeiten
 
 ## Persönlicher Review in Dokument: ProjectReportClaraTschamon
+
+## Screenshots
+![image](https://user-images.githubusercontent.com/103147059/214613872-7a4687f2-d76c-4f2d-9507-06317855d3e2.png)
+![image](https://user-images.githubusercontent.com/103147059/214614320-6f9abce9-df8f-44b7-ad4d-b4aeabaece0d.png)
+![image](https://user-images.githubusercontent.com/103147059/214614133-6b047a32-4372-4401-822f-ff723225f16e.png)
+
